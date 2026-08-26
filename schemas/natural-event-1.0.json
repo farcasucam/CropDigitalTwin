@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agri-digital-twin.local/schemas/natural-event-1.0.json",
+  "title": "Natural event data",
+  "type": "object",
+  "required": ["type", "start_time", "duration_seconds", "parameters"],
+  "properties": {
+    "type": {"type": "string", "enum": ["rain", "heatwave", "frost", "wind", "solar_radiation", "temperature_override", "humidity_override"]},
+    "start_time": {"type": "string", "format": "date-time"},
+    "duration_seconds": {"type": "integer", "minimum": 0},
+    "parameters": {"type": "object"}
+  },
+  "additionalProperties": true
+}

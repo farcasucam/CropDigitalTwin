@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agri-digital-twin.local/schemas/actuator-command-1.0.json",
+  "title": "Actuator command data",
+  "type": "object",
+  "required": ["target", "command", "value", "source"],
+  "properties": {
+    "target": {"type": "string", "enum": ["shade", "windows", "hvac", "irrigation"]},
+    "command": {"type": "string", "minLength": 1},
+    "value": {"type": "number"},
+    "source": {"type": "string", "minLength": 1}
+  },
+  "additionalProperties": true
+}

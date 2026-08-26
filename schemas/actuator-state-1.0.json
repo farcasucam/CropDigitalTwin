@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agri-digital-twin.local/schemas/actuator-state-1.0.json",
+  "title": "Actuator state data",
+  "type": "object",
+  "required": ["actuator", "commanded_value", "actual_value", "enabled", "failed"],
+  "properties": {
+    "actuator": {"type": "string", "enum": ["shade", "windows", "hvac", "irrigation"]},
+    "commanded_value": {"type": "number"},
+    "actual_value": {"type": "number"},
+    "enabled": {"type": "boolean"},
+    "failed": {"type": "boolean"}
+  },
+  "additionalProperties": true
+}

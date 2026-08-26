@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agri-digital-twin.local/schemas/semantic-context-packet-1.0.json",
+  "title": "SemanticContextPacket",
+  "type": "object",
+  "required": ["schema_version", "simulation_id", "plot_id", "simulation_time", "severity", "facts", "derived_metrics", "events", "actuator_observations", "crop_assessment", "causal_chain", "narrative", "evidence_refs"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "simulation_id": {"type": "string", "minLength": 1},
+    "plot_id": {"type": "string", "minLength": 1},
+    "simulation_time": {"type": "string", "minLength": 1},
+    "severity": {"type": "string", "enum": ["info", "warning", "critical"]},
+    "facts": {"type": "array"},
+    "derived_metrics": {"type": "array"},
+    "events": {"type": "array"},
+    "actuator_observations": {"type": "array"},
+    "crop_assessment": {"type": "object"},
+    "causal_chain": {"type": "array"},
+    "narrative": {"type": "string"},
+    "evidence_refs": {"type": "array"}
+  },
+  "additionalProperties": true
+}

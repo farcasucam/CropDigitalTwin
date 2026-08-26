@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agri-digital-twin.local/schemas/message-envelope-1.0.json",
+  "title": "MessageEnvelope",
+  "type": "object",
+  "required": ["schema_version", "message_id", "correlation_id", "simulation_id", "plot_id", "timestamp", "simulation_time", "type", "source", "data"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "message_id": {"type": "string", "format": "uuid"},
+    "correlation_id": {"type": "string", "format": "uuid"},
+    "simulation_id": {"type": "string", "minLength": 1},
+    "plot_id": {"type": "string", "minLength": 1},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "simulation_time": {"type": "string", "minLength": 1},
+    "type": {"type": "string", "minLength": 1},
+    "source": {"type": "string", "minLength": 1},
+    "data": {"type": "object"}
+  },
+  "additionalProperties": true
+}

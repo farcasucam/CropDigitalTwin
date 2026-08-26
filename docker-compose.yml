@@ -1,0 +1,29 @@
+services:
+  mqtt:
+    build:
+      context: ./docker/mosquitto
+      dockerfile: Dockerfile
+
+    container_name: agri-mqtt
+
+    restart: unless-stopped
+
+    ports:
+      - "1883:1883"
+
+    volumes:
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_log:/mosquitto/log
+
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - mosquitto_pub -h localhost -p 1883 -t healthcheck -m ok
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+volumes:
+  mosquitto_data:
+  mosquitto_log:

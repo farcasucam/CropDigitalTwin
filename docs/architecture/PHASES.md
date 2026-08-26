@@ -1,0 +1,31 @@
+# Plan de Implementación por Fases
+
+| Fase | Resultado | No avanzar hasta |
+|---|---|---|
+| 0 | Contratos + estructura + Docker MQTT | tests/imports OK |
+| 1 | Clock + scheduler | tests de tiempo OK |
+| 2 | Weather | series reproducibles |
+| 3 | Física | causalidad física OK |
+| 4 | Crop | stress/growth OK |
+| 5 | Actuators + Controller | comandos y estados separados |
+| 6 | Eventos + escenarios | replay reproducible |
+| 7 | Storage | histórico consultable |
+| 8 | Semantic Engine | packets trazables |
+| 9 | Backend | API/WebSocket funcional |
+| 10 | Frontend | dashboard/control funcional |
+| 11 | Experiments | comparación A/B |
+| 12 | Hardening | integración completa |
+
+## Orden obligatorio de implementación
+
+No desarrollar primero la UI y luego adaptar el dominio.
+
+Primero:
+1. dominio;
+2. contratos;
+3. motor;
+4. MQTT;
+5. API;
+6. UI.
+
+El frontend consume contratos existentes.

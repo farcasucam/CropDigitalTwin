@@ -1,0 +1,1 @@
+"""Infrastructure adapters kept separate from the domain."""

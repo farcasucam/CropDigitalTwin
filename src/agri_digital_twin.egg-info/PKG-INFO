@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: agri-digital-twin
+Version: 0.1.0
+Summary: Agricultural Digital Twin - Phase 0 contracts and foundations
+Requires-Python: >=3.11
+Requires-Dist: jsonschema<5,>=4.23
+Requires-Dist: paho-mqtt<3,>=2.1
+Provides-Extra: dev
+Requires-Dist: pytest<9,>=8.3; extra == "dev"

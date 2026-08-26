@@ -1,0 +1,60 @@
+# Gemelo Digital Agrícola
+
+La Fase 0 está implementada: modelos de dominio puros, contratos JSON versionados, catálogo y puerto MQTT, configuración, logging y broker Mosquitto local. Las fases de simulación, clima, física, cultivo, control y frontend aún no están implementadas.
+
+## Requisitos
+
+- Python 3.11+
+- Docker Compose (opcional, para Mosquitto)
+
+## Desarrollo
+
+```powershell
+python -m pip install -e ".[dev]"
+python -m pytest
+docker compose up -d mosquitto
+```
+
+Los schemas JSON están en `schemas/`. La configuración local está en `config/app.json`. Las decisiones de la Fase 0 se documentan en `docs/architecture/DECISIONS.md`.
+
+## Especificación
+
+Este directorio también contiene la especificación de requisitos para el prototipo funcional.
+
+## Documentos principales
+
+- `architecture/ARCHITECTURE_REQUIREMENTS.md`: especificación maestra y desarrollo por fases.
+- `architecture/DOMAIN_MODEL.md`: modelo de dominio y límites de responsabilidad.
+- `architecture/EVENTS_AND_CAUSALITY.md`: causalidad, eventos y dinámica de simulación.
+- `components/simulation-engine.md`: reloj, scheduler y motor de simulación.
+- `components/weather-engine.md`: clima y perturbaciones naturales.
+- `components/physical-model.md`: modelo físico exterior/invernadero/suelo.
+- `components/crop-engine.md`: cultivo, fenología, estrés y crecimiento.
+- `components/actuators.md`: actuadores artificiales.
+- `components/controllers.md`: controladores automático/manual.
+- `components/mqtt.md`: mensajería y contratos MQTT.
+- `components/storage.md`: persistencia, histórico y métricas.
+- `components/enrichment-engine.md`: Motor de Enriquecimiento y Serialización Semántica.
+- `components/frontend.md`: frontend web en tiempo real y control.
+- `components/backend-api.md`: API HTTP/WebSocket del backend.
+- `components/observability.md`: logging, health, métricas y trazabilidad.
+- `data_contracts/MESSAGE_SCHEMAS.md`: contratos JSON.
+- `mqtt/TOPICS.md`: catálogo de topics.
+- `docker/MOSQUITTO.md`: broker MQTT.
+- `docker/docker-compose.yml`: infraestructura local MVP.
+
+## Regla de implementación
+
+El modelo de código debe implementar las fases en orden y no saltar a IA, MPC, modelos agronómicos avanzados o bases de datos distribuidas antes de que el núcleo determinista, los contratos y los tests estén funcionando.
+
+La especificación conserva la separación fundamental:
+
+`evento/dato externo -> modelo físico -> estado -> cultivo -> evaluación/control -> comando -> actuador -> modelo físico`.
+
+El controlador nunca escribe directamente una temperatura, humedad o VWC resultante.
+
+
+
+Ejecución MQTT:
+ docker compose ps   
+ docker compose up -d

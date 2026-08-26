@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "logging": {
+    "level": "INFO"
+  },
+  "mqtt": {
+    "host": "localhost",
+    "port": 1883,
+    "keepalive_seconds": 60,
+    "telemetry_qos": 0,
+    "command_qos": 1
+  }
+}
