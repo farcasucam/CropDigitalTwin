@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
 
+import pytest
 from jsonschema import Draft202012Validator, FormatChecker
 
 from agri_twin.contracts import MessageEnvelope
@@ -31,6 +32,36 @@ def test_envelope_rejects_unknown_schema_version() -> None:
         assert "Unsupported schema version" in str(exc)
     else:
         raise AssertionError("An unsupported version must be rejected")
+
+
+def test_envelope_parser_rejects_missing_required_fields() -> None:
+    envelope = MessageEnvelope(
+        simulation_id="sim-001",
+        plot_id="plot-001",
+        simulation_time="2026-08-27T08:00:00",
+        type="weather",
+        source="test",
+        data={},
+    ).to_dict()
+    del envelope["message_id"]
+
+    with pytest.raises(ValueError, match="message_id"):
+        MessageEnvelope.from_dict(envelope)
+
+
+def test_envelope_parser_rejects_malformed_required_fields() -> None:
+    envelope = MessageEnvelope(
+        simulation_id="sim-001",
+        plot_id="plot-001",
+        simulation_time="2026-08-27T08:00:00",
+        type="weather",
+        source="test",
+        data={},
+    ).to_dict()
+    envelope["message_id"] = "not-a-uuid"
+
+    with pytest.raises(ValueError, match="UUID"):
+        MessageEnvelope.from_dict(envelope)
 
 
 def test_all_documented_phase_zero_schemas_are_valid_json_schemas() -> None:

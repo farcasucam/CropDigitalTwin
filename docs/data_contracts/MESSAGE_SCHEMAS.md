@@ -100,3 +100,18 @@ Todos los mensajes:
 ## Compatibilidad
 
 Los consumidores deben ignorar campos desconocidos y validar `schema_version`.
+
+## Simulation Clock
+
+Los controles usan el envelope común en `agri/simulation/control`. Los
+comandos válidos son `start`, `pause`, `resume`, `reset` y `set_speed` con un
+campo `speed` positivo.
+
+`agri/simulation/time` publica `simulation_time` en ISO 8601 y `state`.
+`agri/simulation/status` publica esos campos y `speed`; los errores añaden un
+objeto `error` con `code` y `message`.
+
+Los payloads se definen en `schemas/simulation-control-1.0.json`,
+`schemas/simulation-time-1.0.json` y `schemas/simulation-status-1.0.json`.
+Estos schemas validan únicamente `data`; el envelope completo se valida con
+`MessageEnvelope.from_dict()` y `message-envelope-1.0.json`.

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agri-digital-twin.local/schemas/simulation-control-1.0.json",
+  "title": "SimulationControl",
+  "type": "object",
+  "oneOf": [
+    {
+      "properties": {"command": {"enum": ["start", "pause", "resume", "reset"]}},
+      "required": ["command"],
+      "additionalProperties": false
+    },
+    {
+      "properties": {
+        "command": {"const": "set_speed"},
+        "speed": {"type": "number", "exclusiveMinimum": 0}
+      },
+      "required": ["command", "speed"],
+      "additionalProperties": false
+    }
+  ]
+}

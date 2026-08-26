@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agri-digital-twin.local/schemas/simulation-status-1.0.json",
+  "title": "SimulationStatus",
+  "type": "object",
+  "required": ["state", "simulation_time", "speed"],
+  "properties": {
+    "state": {"enum": ["STOPPED", "RUNNING", "PAUSED"]},
+    "simulation_time": {"type": "string", "minLength": 1},
+    "speed": {"type": "number", "exclusiveMinimum": 0},
+    "error": {
+      "type": "object",
+      "required": ["code", "message"],
+      "properties": {
+        "code": {"type": "string", "minLength": 1},
+        "message": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

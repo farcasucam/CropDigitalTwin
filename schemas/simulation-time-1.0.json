@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agri-digital-twin.local/schemas/simulation-time-1.0.json",
+  "title": "SimulationTime",
+  "type": "object",
+  "required": ["simulation_time", "state"],
+  "properties": {
+    "simulation_time": {"type": "string", "minLength": 1},
+    "state": {"enum": ["STOPPED", "RUNNING", "PAUSED"]}
+  },
+  "additionalProperties": false
+}
