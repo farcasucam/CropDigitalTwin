@@ -53,6 +53,40 @@ def test_profiles_are_continuous_and_weather_state_stays_in_range() -> None:
     assert 0 <= after.wind_direction_deg < 360
 
 
+def test_final_radiation_is_exactly_zero_at_and_during_night_boundaries() -> None:
+    engine = WeatherEngine(WeatherConfiguration())
+    times = (
+        datetime(2026, 8, 27, 5, 0, tzinfo=timezone.utc),
+        datetime(2026, 8, 27, 5, 59, 59, tzinfo=timezone.utc),
+        datetime(2026, 8, 27, 6, 0, tzinfo=timezone.utc),
+        datetime(2026, 8, 27, 18, 0, tzinfo=timezone.utc),
+        datetime(2026, 8, 27, 18, 0, 1, tzinfo=timezone.utc),
+        datetime(2026, 8, 27, 23, 0, tzinfo=timezone.utc),
+    )
+
+    assert all(engine.generate(moment).solar_radiation_w_m2 == 0.0 for moment in times)
+
+
+def test_radiation_enters_day_after_sunrise_and_exits_before_sunset() -> None:
+    engine = WeatherEngine(WeatherConfiguration())
+    just_after_sunrise = engine.generate(datetime(2026, 8, 27, 6, 0, 1, tzinfo=timezone.utc))
+    just_before_sunset = engine.generate(datetime(2026, 8, 27, 17, 59, 59, tzinfo=timezone.utc))
+
+    assert just_after_sunrise.solar_radiation_w_m2 > 0
+    assert just_before_sunset.solar_radiation_w_m2 >= 0
+
+
+def test_night_boundary_radiation_is_deterministic_and_day_anomaly_still_applies() -> None:
+    engine = WeatherEngine(WeatherConfiguration())
+    sunset = datetime(2026, 8, 27, 18, 0, tzinfo=timezone.utc)
+    assert engine.generate(sunset).solar_radiation_w_m2 == engine.generate(sunset).solar_radiation_w_m2 == 0.0
+
+    engine.add_perturbation(event("radiation", WeatherEventType.RADIATION_ANOMALY, {"radiation_multiplier": 2}, start=T0))
+    daytime = engine.generate(T0)
+    baseline = WeatherEngine(WeatherConfiguration()).generate(T0)
+    assert daytime.solar_radiation_w_m2 == pytest.approx(baseline.solar_radiation_w_m2 * 2)
+
+
 def test_baseline_respects_nominal_temperature_and_radiation_limits() -> None:
     configuration = WeatherConfiguration(
         temperature=TemperatureConfiguration(variability_c=0),

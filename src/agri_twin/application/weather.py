@@ -62,6 +62,8 @@ class WeatherEngine:
         temperature, radiation, humidity, wind_speed, wind_direction = self._apply_events(
             events, temperature, radiation, humidity, wind_speed, wind_direction
         )
+        if self._is_night(instant):
+            radiation = 0.0
         return WeatherState(
             temperature_c=temperature,
             relative_humidity_pct=humidity,
@@ -128,6 +130,11 @@ class WeatherEngine:
 
     def _radiation_variability(self, instant: datetime) -> float:
         return self._wave(instant, 2.0) * self._configuration.radiation.variability_w_m2
+
+    def _is_night(self, instant: datetime) -> bool:
+        config = self._configuration.radiation
+        hour = instant.hour + instant.minute / 60 + instant.second / 3600
+        return hour <= config.sunrise_hour or hour >= config.sunset_hour
 
     def _baseline_humidity(self, instant: datetime) -> float:
         config = self._configuration.humidity
