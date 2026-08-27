@@ -13,6 +13,7 @@ from agri_twin.application.scheduler import (
     SimulationScheduler,
     SimulationSchedulerValueError,
 )
+from agri_twin.application.weather import WeatherEngine
 
 __all__ = [
     "ClockSource",
@@ -24,4 +25,5 @@ __all__ = [
     "SimulationClockValueError",
     "SimulationScheduler",
     "SimulationSchedulerValueError",
+    "WeatherEngine",
 ]

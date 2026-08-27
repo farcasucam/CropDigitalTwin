@@ -9,6 +9,18 @@ from agri_twin.domain.models import (
     SoilState,
     WeatherState,
 )
+from agri_twin.domain.weather import (
+    HumidityConfiguration,
+    PressureConfiguration,
+    RadiationConfiguration,
+    TemperatureConfiguration,
+    WeatherConfiguration,
+    WeatherEngineValueError,
+    WeatherEventType,
+    WeatherPerturbation,
+    WeatherSimulationConfiguration,
+    WindConfiguration,
+)
 
 __all__ = [
     "ActuatorState",
@@ -18,4 +30,14 @@ __all__ = [
     "SimulationState",
     "SoilState",
     "WeatherState",
+    "HumidityConfiguration",
+    "PressureConfiguration",
+    "RadiationConfiguration",
+    "TemperatureConfiguration",
+    "WeatherConfiguration",
+    "WeatherEngineValueError",
+    "WeatherEventType",
+    "WeatherPerturbation",
+    "WeatherSimulationConfiguration",
+    "WindConfiguration",
 ]

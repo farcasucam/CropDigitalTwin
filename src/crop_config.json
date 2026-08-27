@@ -1,0 +1,299 @@
+{
+  "default_crop": "tomato",
+  "crops": {
+    "tomato": {
+      "crop_type": "Tomato (Solanaceae - Solanum lycopersicum)",
+      "location": "Smart Greenhouse / Open Field",
+      "stages": {
+        "establishment": {
+          "stage_name": "Establishment & Rooting",
+          "months": ["March", "April"],
+          "stress_thresholds": { "min_temp_c": 14.0, "max_temp_c": 28.0, "critical_heat_c": 32.0, "critical_frost_c": 2.0 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.5, "optimal_max_kpa": 1.0, "stress_max_kpa": 1.4 },
+          "vwc_thresholds": { "field_capacity": 0.32, "optimal_min": 0.24, "moderate_min": 0.18, "wilting_point": 0.10 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 650.0, "photoinhibition_w_m2": 800.0 },
+          "irrigation": { "preventive_hours_before_peak": 2, "shading_reduction_pct": 20, "target_vwc_after_irrigation": 0.30 }
+        },
+        "vegetative_growth": {
+          "stage_name": "Vegetative Growth & Flowering",
+          "months": ["May", "June"],
+          "stress_thresholds": { "min_temp_c": 12.0, "max_temp_c": 30.0, "critical_heat_c": 34.0, "critical_frost_c": 0.0 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.7, "optimal_max_kpa": 1.2, "stress_max_kpa": 1.6 },
+          "vwc_thresholds": { "field_capacity": 0.32, "optimal_min": 0.22, "moderate_min": 0.16, "wilting_point": 0.10 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 800.0, "photoinhibition_w_m2": 900.0 },
+          "irrigation": { "preventive_hours_before_peak": 3, "shading_reduction_pct": 25, "target_vwc_after_irrigation": 0.30 }
+        },
+        "yield_maturation": {
+          "stage_name": "Fruit Sizing & Ripening",
+          "months": ["July", "August", "September"],
+          "stress_thresholds": { "min_temp_c": 12.0, "max_temp_c": 32.0, "critical_heat_c": 35.0, "critical_frost_c": 0.0 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.8, "optimal_max_kpa": 1.3, "stress_max_kpa": 1.8 },
+          "vwc_thresholds": { "field_capacity": 0.32, "optimal_min": 0.22, "moderate_min": 0.16, "wilting_point": 0.10 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 850.0, "photoinhibition_w_m2": 950.0 },
+          "irrigation": { "preventive_hours_before_peak": 4, "shading_reduction_pct": 30, "target_vwc_after_irrigation": 0.30 }
+        },
+        "post_harvest_dormancy": {
+          "stage_name": "Final Harvest & Senescence",
+          "months": ["October", "November"],
+          "stress_thresholds": { "min_temp_c": 8.0, "max_temp_c": 25.0, "critical_heat_c": 30.0, "critical_frost_c": -1.0 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.5, "optimal_max_kpa": 1.1, "stress_max_kpa": 1.5 },
+          "vwc_thresholds": { "field_capacity": 0.32, "optimal_min": 0.18, "moderate_min": 0.14, "wilting_point": 0.10 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 600.0, "photoinhibition_w_m2": 750.0 },
+          "irrigation": { "preventive_hours_before_peak": 2, "shading_reduction_pct": 0, "target_vwc_after_irrigation": 0.26 }
+        }
+      }
+    },
+    "lettuce": {
+      "crop_type": "Lettuce (Asteraceae - Lactuca sativa)",
+      "location": "Protected Cultivation / Open Field",
+      "stages": {
+        "establishment": {
+          "stage_name": "Germination & Establishment",
+          "months": ["September", "October"],
+          "stress_thresholds": { "min_temp_c": 10.0, "max_temp_c": 24.0, "critical_heat_c": 28.0, "critical_frost_c": 0.0 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.4, "optimal_max_kpa": 0.8, "stress_max_kpa": 1.2 },
+          "vwc_thresholds": { "field_capacity": 0.30, "optimal_min": 0.25, "moderate_min": 0.20, "wilting_point": 0.12 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 500.0, "photoinhibition_w_m2": 650.0 },
+          "irrigation": { "preventive_hours_before_peak": 2, "shading_reduction_pct": 20, "target_vwc_after_irrigation": 0.29 }
+        },
+        "vegetative_growth": {
+          "stage_name": "Foliar Development & Head Formation",
+          "months": ["November", "December", "January"],
+          "stress_thresholds": { "min_temp_c": 6.0, "max_temp_c": 22.0, "critical_heat_c": 26.0, "critical_frost_c": -2.0 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.4, "optimal_max_kpa": 0.9, "stress_max_kpa": 1.3 },
+          "vwc_thresholds": { "field_capacity": 0.30, "optimal_min": 0.24, "moderate_min": 0.18, "wilting_point": 0.12 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 550.0, "photoinhibition_w_m2": 700.0 },
+          "irrigation": { "preventive_hours_before_peak": 2, "shading_reduction_pct": 10, "target_vwc_after_irrigation": 0.28 }
+        },
+        "yield_maturation": {
+          "stage_name": "Maturation & Harvest",
+          "months": ["February", "March", "April"],
+          "stress_thresholds": { "min_temp_c": 8.0, "max_temp_c": 25.0, "critical_heat_c": 30.0, "critical_frost_c": -1.0 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.5, "optimal_max_kpa": 1.0, "stress_max_kpa": 1.4 },
+          "vwc_thresholds": { "field_capacity": 0.30, "optimal_min": 0.23, "moderate_min": 0.17, "wilting_point": 0.12 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 600.0, "photoinhibition_w_m2": 750.0 },
+          "irrigation": { "preventive_hours_before_peak": 2, "shading_reduction_pct": 20, "target_vwc_after_irrigation": 0.28 }
+        },
+        "post_harvest_dormancy": {
+          "stage_name": "Post-Harvest Soil Rest",
+          "months": ["May", "June", "July", "August"],
+          "stress_thresholds": { "min_temp_c": 5.0, "max_temp_c": 35.0, "critical_heat_c": 40.0, "critical_frost_c": -5.0 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.3, "optimal_max_kpa": 1.5, "stress_max_kpa": 2.5 },
+          "vwc_thresholds": { "field_capacity": 0.30, "optimal_min": 0.15, "moderate_min": 0.10, "wilting_point": 0.10 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 800.0, "photoinhibition_w_m2": 1000.0 },
+          "irrigation": { "preventive_hours_before_peak": 0, "shading_reduction_pct": 0, "target_vwc_after_irrigation": 0.18 }
+        }
+      }
+    },
+    "pepper": {
+      "crop_type": "Pepper (Solanaceae - Capsicum annuum)",
+      "location": "Greenhouse / Open Field",
+      "stages": {
+        "establishment": {
+          "stage_name": "Transplant & Establishment",
+          "months": ["April", "May"],
+          "stress_thresholds": { "min_temp_c": 14.0, "max_temp_c": 28.0, "critical_heat_c": 32.0, "critical_frost_c": 2.0 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.6, "optimal_max_kpa": 1.1, "stress_max_kpa": 1.5 },
+          "vwc_thresholds": { "field_capacity": 0.32, "optimal_min": 0.24, "moderate_min": 0.18, "wilting_point": 0.11 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 700.0, "photoinhibition_w_m2": 850.0 },
+          "irrigation": { "preventive_hours_before_peak": 2, "shading_reduction_pct": 20, "target_vwc_after_irrigation": 0.30 }
+        },
+        "vegetative_growth": {
+          "stage_name": "Flowering & Fruit Set",
+          "months": ["June"],
+          "stress_thresholds": { "min_temp_c": 12.0, "max_temp_c": 29.0, "critical_heat_c": 33.0, "critical_frost_c": 0.0 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.7, "optimal_max_kpa": 1.2, "stress_max_kpa": 1.6 },
+          "vwc_thresholds": { "field_capacity": 0.32, "optimal_min": 0.23, "moderate_min": 0.17, "wilting_point": 0.11 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 750.0, "photoinhibition_w_m2": 880.0 },
+          "irrigation": { "preventive_hours_before_peak": 3, "shading_reduction_pct": 25, "target_vwc_after_irrigation": 0.30 }
+        },
+        "yield_maturation": {
+          "stage_name": "Fruit Sizing & Ripening",
+          "months": ["July", "August", "September"],
+          "stress_thresholds": { "min_temp_c": 10.0, "max_temp_c": 30.0, "critical_heat_c": 34.0, "critical_frost_c": 0.0 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.8, "optimal_max_kpa": 1.3, "stress_max_kpa": 1.7 },
+          "vwc_thresholds": { "field_capacity": 0.32, "optimal_min": 0.23, "moderate_min": 0.17, "wilting_point": 0.11 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 750.0, "photoinhibition_w_m2": 900.0 },
+          "irrigation": { "preventive_hours_before_peak": 3, "shading_reduction_pct": 25, "target_vwc_after_irrigation": 0.30 }
+        },
+        "post_harvest_dormancy": {
+          "stage_name": "Final Harvest & Crop Removal",
+          "months": ["October", "November"],
+          "stress_thresholds": { "min_temp_c": 8.0, "max_temp_c": 24.0, "critical_heat_c": 28.0, "critical_frost_c": -1.0 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.5, "optimal_max_kpa": 1.1, "stress_max_kpa": 1.5 },
+          "vwc_thresholds": { "field_capacity": 0.32, "optimal_min": 0.18, "moderate_min": 0.14, "wilting_point": 0.11 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 600.0, "photoinhibition_w_m2": 750.0 },
+          "irrigation": { "preventive_hours_before_peak": 1, "shading_reduction_pct": 0, "target_vwc_after_irrigation": 0.24 }
+        }
+      }
+    },
+    "grape": {
+      "crop_type": "Grapevine (Vitaceae - Vitis vinifera)",
+      "location": "Trellised Vineyard",
+      "stages": {
+        "establishment": {
+          "stage_name": "Budburst & Early Growth",
+          "months": ["March", "April", "May"],
+          "stress_thresholds": { "min_temp_c": 10.0, "max_temp_c": 28.0, "critical_heat_c": 32.0, "critical_frost_c": -1.0 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.7, "optimal_max_kpa": 1.3, "stress_max_kpa": 1.8 },
+          "vwc_thresholds": { "field_capacity": 0.28, "optimal_min": 0.21, "moderate_min": 0.15, "wilting_point": 0.09 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 800.0, "photoinhibition_w_m2": 950.0 },
+          "irrigation": { "preventive_hours_before_peak": 2, "shading_reduction_pct": 0, "target_vwc_after_irrigation": 0.27 }
+        },
+        "vegetative_growth": {
+          "stage_name": "Flowering & Fruit Set",
+          "months": ["June", "July"],
+          "stress_thresholds": { "min_temp_c": 12.0, "max_temp_c": 33.0, "critical_heat_c": 36.0, "critical_frost_c": 0.0 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.9, "optimal_max_kpa": 1.6, "stress_max_kpa": 2.2 },
+          "vwc_thresholds": { "field_capacity": 0.28, "optimal_min": 0.20, "moderate_min": 0.14, "wilting_point": 0.09 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 880.0, "photoinhibition_w_m2": 1000.0 },
+          "irrigation": { "preventive_hours_before_peak": 3, "shading_reduction_pct": 5, "target_vwc_after_irrigation": 0.26 }
+        },
+        "yield_maturation": {
+          "stage_name": "Veraison & Harvest",
+          "months": ["August", "September"],
+          "stress_thresholds": { "min_temp_c": 10.0, "max_temp_c": 35.0, "critical_heat_c": 38.0, "critical_frost_c": -1.5 },
+          "vpd_thresholds": { "optimal_min_kpa": 1.0, "optimal_max_kpa": 1.8, "stress_max_kpa": 2.5 },
+          "vwc_thresholds": { "field_capacity": 0.28, "optimal_min": 0.18, "moderate_min": 0.13, "wilting_point": 0.09 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 900.0, "photoinhibition_w_m2": 1050.0 },
+          "irrigation": { "preventive_hours_before_peak": 4, "shading_reduction_pct": 10, "target_vwc_after_irrigation": 0.25 }
+        },
+        "post_harvest_dormancy": {
+          "stage_name": "Post-Harvest & Winter Dormancy",
+          "months": ["October", "November", "December", "January", "February"],
+          "stress_thresholds": { "min_temp_c": -5.0, "max_temp_c": 22.0, "critical_heat_c": 28.0, "critical_frost_c": -10.0 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.3, "optimal_max_kpa": 1.0, "stress_max_kpa": 1.5 },
+          "vwc_thresholds": { "field_capacity": 0.28, "optimal_min": 0.15, "moderate_min": 0.11, "wilting_point": 0.09 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 600.0, "photoinhibition_w_m2": 800.0 },
+          "irrigation": { "preventive_hours_before_peak": 0, "shading_reduction_pct": 0, "target_vwc_after_irrigation": 0.20 }
+        }
+      }
+    },
+    "peach": {
+      "crop_type": "Peach / Nectarine (Rosaceae - Prunus persica)",
+      "location": "Stone Fruit Orchard",
+      "stages": {
+        "establishment": {
+          "stage_name": "Flowering & Fruit Set",
+          "months": ["March", "April"],
+          "stress_thresholds": { "min_temp_c": 8.0, "max_temp_c": 26.0, "critical_heat_c": 30.0, "critical_frost_c": -2.0 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.6, "optimal_max_kpa": 1.2, "stress_max_kpa": 1.7 },
+          "vwc_thresholds": { "field_capacity": 0.30, "optimal_min": 0.24, "moderate_min": 0.18, "wilting_point": 0.10 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 750.0, "photoinhibition_w_m2": 900.0 },
+          "irrigation": { "preventive_hours_before_peak": 2, "shading_reduction_pct": 0, "target_vwc_after_irrigation": 0.29 }
+        },
+        "vegetative_growth": {
+          "stage_name": "Pit Hardening & Shoot Growth",
+          "months": ["May"],
+          "stress_thresholds": { "min_temp_c": 8.0, "max_temp_c": 30.0, "critical_heat_c": 34.0, "critical_frost_c": 0.0 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.7, "optimal_max_kpa": 1.4, "stress_max_kpa": 2.0 },
+          "vwc_thresholds": { "field_capacity": 0.30, "optimal_min": 0.23, "moderate_min": 0.17, "wilting_point": 0.10 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 800.0, "photoinhibition_w_m2": 950.0 },
+          "irrigation": { "preventive_hours_before_peak": 3, "shading_reduction_pct": 10, "target_vwc_after_irrigation": 0.28 }
+        },
+        "yield_maturation": {
+          "stage_name": "Fruit Sizing & Ripening (Phase III)",
+          "months": ["June", "July"],
+          "stress_thresholds": { "min_temp_c": 8.0, "max_temp_c": 33.0, "critical_heat_c": 36.0, "critical_frost_c": 0.0 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.9, "optimal_max_kpa": 1.5, "stress_max_kpa": 2.2 },
+          "vwc_thresholds": { "field_capacity": 0.30, "optimal_min": 0.22, "moderate_min": 0.16, "wilting_point": 0.10 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 850.0, "photoinhibition_w_m2": 1000.0 },
+          "irrigation": { "preventive_hours_before_peak": 3, "shading_reduction_pct": 15, "target_vwc_after_irrigation": 0.28 }
+        },
+        "post_harvest_dormancy": {
+          "stage_name": "Post-Harvest Reserves & Winter Dormancy",
+          "months": ["August", "September", "October", "November", "December", "January", "February"],
+          "stress_thresholds": { "min_temp_c": -8.0, "max_temp_c": 22.0, "critical_heat_c": 28.0, "critical_frost_c": -12.0 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.3, "optimal_max_kpa": 1.2, "stress_max_kpa": 1.8 },
+          "vwc_thresholds": { "field_capacity": 0.30, "optimal_min": 0.16, "moderate_min": 0.12, "wilting_point": 0.10 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 600.0, "photoinhibition_w_m2": 800.0 },
+          "irrigation": { "preventive_hours_before_peak": 0, "shading_reduction_pct": 0, "target_vwc_after_irrigation": 0.22 }
+        }
+      }
+    },
+    "plum": {
+      "crop_type": "Plum (Rosaceae - Prunus domestica / P. salicina)",
+      "location": "Stone Fruit Orchard",
+      "stages": {
+        "establishment": {
+          "stage_name": "Flowering & Fruit Set",
+          "months": ["March", "April"],
+          "stress_thresholds": { "min_temp_c": 7.0, "max_temp_c": 25.0, "critical_heat_c": 29.0, "critical_frost_c": -2.5 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.6, "optimal_max_kpa": 1.2, "stress_max_kpa": 1.6 },
+          "vwc_thresholds": { "field_capacity": 0.31, "optimal_min": 0.24, "moderate_min": 0.18, "wilting_point": 0.11 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 750.0, "photoinhibition_w_m2": 900.0 },
+          "irrigation": { "preventive_hours_before_peak": 2, "shading_reduction_pct": 0, "target_vwc_after_irrigation": 0.29 }
+        },
+        "vegetative_growth": {
+          "stage_name": "Shoot Growth & Fruit Sizing",
+          "months": ["May", "June"],
+          "stress_thresholds": { "min_temp_c": 7.0, "max_temp_c": 30.0, "critical_heat_c": 34.0, "critical_frost_c": 0.0 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.7, "optimal_max_kpa": 1.4, "stress_max_kpa": 1.9 },
+          "vwc_thresholds": { "field_capacity": 0.31, "optimal_min": 0.23, "moderate_min": 0.17, "wilting_point": 0.11 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 800.0, "photoinhibition_w_m2": 950.0 },
+          "irrigation": { "preventive_hours_before_peak": 3, "shading_reduction_pct": 10, "target_vwc_after_irrigation": 0.29 }
+        },
+        "yield_maturation": {
+          "stage_name": "Maturation & Harvest",
+          "months": ["July", "August"],
+          "stress_thresholds": { "min_temp_c": 7.0, "max_temp_c": 32.0, "critical_heat_c": 36.0, "critical_frost_c": 0.0 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.8, "optimal_max_kpa": 1.5, "stress_max_kpa": 2.1 },
+          "vwc_thresholds": { "field_capacity": 0.31, "optimal_min": 0.22, "moderate_min": 0.16, "wilting_point": 0.11 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 850.0, "photoinhibition_w_m2": 980.0 },
+          "irrigation": { "preventive_hours_before_peak": 3, "shading_reduction_pct": 15, "target_vwc_after_irrigation": 0.28 }
+        },
+        "post_harvest_dormancy": {
+          "stage_name": "Post-Harvest & Winter Dormancy",
+          "months": ["September", "October", "November", "December", "January", "February"],
+          "stress_thresholds": { "min_temp_c": -8.0, "max_temp_c": 20.0, "critical_heat_c": 25.0, "critical_frost_c": -12.0 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.3, "optimal_max_kpa": 0.9, "stress_max_kpa": 1.4 },
+          "vwc_thresholds": { "field_capacity": 0.31, "optimal_min": 0.16, "moderate_min": 0.12, "wilting_point": 0.11 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 550.0, "photoinhibition_w_m2": 750.0 },
+          "irrigation": { "preventive_hours_before_peak": 0, "shading_reduction_pct": 0, "target_vwc_after_irrigation": 0.21 }
+        }
+      }
+    },
+    "apple": {
+      "crop_type": "Apple (Rosaceae - Malus domestica)",
+      "location": "Pome Fruit Orchard",
+      "stages": {
+        "establishment": {
+          "stage_name": "Flowering & Fruit Set",
+          "months": ["April", "May"],
+          "stress_thresholds": { "min_temp_c": 6.0, "max_temp_c": 24.0, "critical_heat_c": 28.0, "critical_frost_c": -2.5 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.6, "optimal_max_kpa": 1.2, "stress_max_kpa": 1.6 },
+          "vwc_thresholds": { "field_capacity": 0.33, "optimal_min": 0.26, "moderate_min": 0.20, "wilting_point": 0.12 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 750.0, "photoinhibition_w_m2": 900.0 },
+          "irrigation": { "preventive_hours_before_peak": 2, "shading_reduction_pct": 0, "target_vwc_after_irrigation": 0.31 }
+        },
+        "vegetative_growth": {
+          "stage_name": "Canopy & Early Fruit Growth",
+          "months": ["June"],
+          "stress_thresholds": { "min_temp_c": 6.0, "max_temp_c": 28.0, "critical_heat_c": 32.0, "critical_frost_c": 0.0 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.7, "optimal_max_kpa": 1.3, "stress_max_kpa": 1.8 },
+          "vwc_thresholds": { "field_capacity": 0.33, "optimal_min": 0.25, "moderate_min": 0.19, "wilting_point": 0.12 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 800.0, "photoinhibition_w_m2": 950.0 },
+          "irrigation": { "preventive_hours_before_peak": 3, "shading_reduction_pct": 10, "target_vwc_after_irrigation": 0.31 }
+        },
+        "yield_maturation": {
+          "stage_name": "Fruit Sizing, Maturation & Harvest",
+          "months": ["July", "August", "September", "October"],
+          "stress_thresholds": { "min_temp_c": 4.0, "max_temp_c": 30.0, "critical_heat_c": 35.0, "critical_frost_c": -3.0 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.7, "optimal_max_kpa": 1.4, "stress_max_kpa": 2.0 },
+          "vwc_thresholds": { "field_capacity": 0.33, "optimal_min": 0.23, "moderate_min": 0.17, "wilting_point": 0.12 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 850.0, "photoinhibition_w_m2": 1000.0 },
+          "irrigation": { "preventive_hours_before_peak": 3, "shading_reduction_pct": 15, "target_vwc_after_irrigation": 0.30 }
+        },
+        "post_harvest_dormancy": {
+          "stage_name": "Winter Dormancy",
+          "months": ["November", "December", "January", "February", "March"],
+          "stress_thresholds": { "min_temp_c": -10.0, "max_temp_c": 16.0, "critical_heat_c": 20.0, "critical_frost_c": -15.0 },
+          "vpd_thresholds": { "optimal_min_kpa": 0.3, "optimal_max_kpa": 0.8, "stress_max_kpa": 1.3 },
+          "vwc_thresholds": { "field_capacity": 0.33, "optimal_min": 0.16, "moderate_min": 0.12, "wilting_point": 0.12 },
+          "solar_radiation_thresholds": { "optimal_max_w_m2": 500.0, "photoinhibition_w_m2": 700.0 },
+          "irrigation": { "preventive_hours_before_peak": 0, "shading_reduction_pct": 0, "target_vwc_after_irrigation": 0.22 }
+        }
+      }
+    }
+  }
+}

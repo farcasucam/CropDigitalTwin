@@ -8,7 +8,7 @@
     "type": {"type": "string", "enum": ["rain", "heatwave", "frost", "wind", "solar_radiation", "temperature_override", "humidity_override"]},
     "start_time": {"type": "string", "format": "date-time"},
     "duration_seconds": {"type": "integer", "minimum": 0},
-    "parameters": {"type": "object"}
+    "parameters": {"type": "object", "additionalProperties": true}
   },
   "additionalProperties": true
 }

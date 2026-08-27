@@ -9,7 +9,7 @@
     "relative_humidity_pct": {"type": "number", "minimum": 0, "maximum": 100},
     "solar_radiation_w_m2": {"type": "number", "minimum": 0},
     "wind_speed_m_s": {"type": "number", "minimum": 0},
-    "wind_direction_deg": {"type": "number", "minimum": 0, "maximum": 360},
+    "wind_direction_deg": {"type": "number", "minimum": 0, "exclusiveMaximum": 360},
     "rain_rate_mm_h": {"type": "number", "minimum": 0},
     "pressure_hpa": {"type": "number"}
   },

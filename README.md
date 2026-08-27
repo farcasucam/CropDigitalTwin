@@ -1,6 +1,6 @@
 # Gemelo Digital Agrícola
 
-La Fase 0 está implementada: modelos de dominio puros, contratos JSON versionados, catálogo y puerto MQTT, configuración, logging y broker Mosquitto local. La Fase 1 y su hardening 1.1 están implementados; la Fase 2 de clima, así como física, cultivo, control y frontend, todavía no están implementados.
+La Fase 0 está implementada: modelos de dominio puros, contratos JSON versionados, catálogo y puerto MQTT, configuración, logging y broker Mosquitto local. La Fase 1 y su hardening 1.1 están implementados. La Fase 2 de meteorología exterior también está implementada, con límites separados para baseline, variabilidad normal e invariantes físicos. La Fase 3 de física, así como cultivo, control y frontend, todavía no están implementados.
 
 La Fase 1 añade un `SimulationClock` determinista y un `SimulationScheduler`.
 El clock recibe un `initial_time` explícito, permite `start`, `pause`,

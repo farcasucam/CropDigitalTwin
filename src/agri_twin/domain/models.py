@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass, field
 
 
@@ -38,8 +39,15 @@ class WeatherState:
     pressure_hpa: float
 
     def __post_init__(self) -> None:
+        for name in (
+            "temperature_c", "relative_humidity_pct", "solar_radiation_w_m2",
+            "wind_speed_m_s", "wind_direction_deg", "rain_rate_mm_h", "pressure_hpa",
+        ):
+            if not math.isfinite(getattr(self, name)):
+                raise ValueError(f"{name} must be finite")
         _in_range("relative_humidity_pct", self.relative_humidity_pct, 0, 100)
-        _in_range("wind_direction_deg", self.wind_direction_deg, 0, 360)
+        if not 0 <= self.wind_direction_deg < 360:
+            raise ValueError("wind_direction_deg must be in [0, 360)")
         if min(self.solar_radiation_w_m2, self.wind_speed_m_s, self.rain_rate_mm_h) < 0:
             raise ValueError("radiation, wind speed and rain rate cannot be negative")
 

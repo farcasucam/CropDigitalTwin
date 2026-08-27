@@ -1,0 +1,72 @@
+{
+  "plots": [
+    {
+      "id": "plot_14705",
+      "name": "i.14705_R0551-CiruelaSuplum26_14705",
+      "farm_name": "ACHO",
+      "plot_code": "S22-S23-S26-S28-SR-C-2",
+      "crop_key": "plum",
+      "crop_variety": "Suplum 26",
+      "area_ha": 6.053,
+      "coordinates": {
+        "latitude": 38.25130770201682,
+        "longitude": -1.4368665045230333
+      },
+      "current_stage": "yield_maturation",
+      "irrigation_type": "drip",
+      "soil_type": "clay_loam",
+      "station_id": "ST-PLUM-01"
+    },
+    {
+      "id": "plot_12010",
+      "name": "i.12010_R0120-TomateRaf_12010",
+      "farm_name": "EL_MIRADOR",
+      "plot_code": "T01-T04-GH",
+      "crop_key": "tomato",
+      "crop_variety": "RAF",
+      "area_ha": 3.25,
+      "coordinates": {
+        "latitude": 37.89215,
+        "longitude": -0.87123
+      },
+      "current_stage": "vegetative_growth",
+      "irrigation_type": "drip_hydroponic",
+      "soil_type": "sandy_loam",
+      "station_id": "ST-TOM-02"
+    },
+    {
+      "id": "plot_30412",
+      "name": "i.30412_R0890-UvaMonastrell_30412",
+      "farm_name": "LA_PURISIMA",
+      "plot_code": "V12-V15-TRELLIS",
+      "crop_key": "grape",
+      "crop_variety": "Monastrell",
+      "area_ha": 12.4,
+      "coordinates": {
+        "latitude": 38.61452,
+        "longitude": -1.11892
+      },
+      "current_stage": "yield_maturation",
+      "irrigation_type": "subsurface_drip",
+      "soil_type": "calcareous_loam",
+      "station_id": "ST-GRP-01"
+    },
+    {
+      "id": "plot_40811",
+      "name": "i.40811_R0331-PimientoLamuyo_40811",
+      "farm_name": "CAMPO_VERDE",
+      "plot_code": "P05-P08-GH2",
+      "crop_key": "pepper",
+      "crop_variety": "Lamuyo",
+      "area_ha": 4.18,
+      "coordinates": {
+        "latitude": 37.7812,
+        "longitude": -0.95431
+      },
+      "current_stage": "establishment",
+      "irrigation_type": "drip",
+      "soil_type": "sandy_loam",
+      "station_id": "ST-PEP-01"
+    }
+  ]
+}

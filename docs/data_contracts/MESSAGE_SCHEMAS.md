@@ -115,3 +115,10 @@ Los payloads se definen en `schemas/simulation-control-1.0.json`,
 `schemas/simulation-time-1.0.json` y `schemas/simulation-status-1.0.json`.
 Estos schemas validan únicamente `data`; el envelope completo se valida con
 `MessageEnvelope.from_dict()` y `message-envelope-1.0.json`.
+
+## Exterior Weather
+
+`agri/environment/weather` usa `weather-1.0.json` como payload dentro del
+envelope común. `agri/environment/events` usa `natural-event-1.0.json` para
+eventos meteorológicos. El campo `simulation_time` se serializa como ISO-8601
+con timezone, por ejemplo `2026-08-27T08:00:00+00:00`.
