@@ -259,6 +259,46 @@ def download_weather_dataset_from_config(
     return WeatherDatasetResult(csv_path, metadata_path, request_count, cached)
 
 
+def create_weather_provider_from_config(
+    config_path: str | Path,
+    *,
+    dataset_output_path: str | Path | None = None,
+    start_date: date | str | None = None,
+    end_date: date | str | None = None,
+    engine: Any | None = None,
+) -> WeatherProvider:
+    """Create the configured provider, acquiring Open-Meteo data when selected.
+
+    Open-Meteo acquisition is explicit at this boundary; loading configuration
+    alone never performs network I/O. The resulting Open-Meteo provider is the
+    same validated CSV provider used by the offline simulation path.
+    """
+    configuration = load_weather_source_configuration(config_path)
+    if configuration.provider == "csv":
+        return create_offline_weather_provider(configuration)
+    if configuration.provider == "synthetic":
+        if engine is None:
+            raise WeatherConfigurationError(
+                "synthetic provider requires an existing WeatherEngine"
+            )
+        from agri_twin.application.providers import SyntheticWeatherProvider
+
+        return SyntheticWeatherProvider(engine)
+    if dataset_output_path is None:
+        raise WeatherConfigurationError(
+            "open_meteo provider requires dataset_output_path"
+        )
+    result = download_weather_dataset_from_config(
+        config_path,
+        dataset_output_path,
+        start_date,
+        end_date,
+    )
+    from agri_twin.infrastructure.csv_weather import CsvWeatherProvider
+
+    return CsvWeatherProvider(result.csv_path)
+
+
 def _coerce_date(value: date | str | None) -> date | None:
     if value is None:
         return None
