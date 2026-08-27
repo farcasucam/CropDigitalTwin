@@ -1,5 +1,5 @@
 import json
-from datetime import date
+from datetime import date, datetime, timezone
 
 import pytest
 
@@ -49,7 +49,7 @@ def test_open_meteo_factory_downloads_then_returns_csv_provider(tmp_path, monkey
         start_date=date(2026, 8, 27),
         end_date=date(2026, 8, 27),
     )
-    assert provider.get(date(2026, 8, 27)).temperature_c == 20
+    assert provider.get(datetime(2026, 8, 27, tzinfo=timezone.utc)).temperature_c == 20
 
 
 def test_open_meteo_factory_requires_output_path(tmp_path):
