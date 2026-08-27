@@ -3,6 +3,43 @@
   "logging": {
     "level": "INFO"
   },
+  "weather": {
+    "provider": "synthetic",
+    "dataset": {
+      "path": null
+    }
+  },
+  "open_meteo": {
+    "enabled": false,
+    "endpoint": "https://api.open-meteo.com/v1/forecast",
+    "api": {
+      "mode": "public",
+      "key_env": "OPEN_METEO_API_KEY"
+    },
+    "location": {
+      "latitude": 40.0,
+      "longitude": -3.0,
+      "elevation": null
+    },
+    "timezone": "UTC",
+    "model": "auto",
+    "units": {
+      "temperature": "celsius",
+      "wind_speed": "ms",
+      "precipitation": "mm"
+    },
+    "request": {
+      "timeout_seconds": 30
+    },
+    "cache": {
+      "enabled": true,
+      "force_refresh": false,
+      "directory": "data/weather"
+    },
+    "acquisition": {
+      "chunk_days": 7
+    }
+  },
   "mqtt": {
     "host": "localhost",
     "port": 1883,

@@ -14,6 +14,24 @@ from agri_twin.application.scheduler import (
     SimulationSchedulerValueError,
 )
 from agri_twin.application.weather import WeatherEngine
+from agri_twin.application.providers import (
+    ScenarioWeatherProvider,
+    SyntheticWeatherProvider,
+    WeatherProvider,
+    WeatherProviderError,
+    WeatherTimestampNotAvailable,
+)
+from agri_twin.application.weather_configuration import (
+    OpenMeteoSourceConfiguration,
+    WeatherDatasetResult,
+    WeatherConfigurationError,
+    WeatherSourceConfiguration,
+    create_offline_weather_provider,
+    load_weather_source_configuration,
+    build_open_meteo_client,
+    build_open_meteo_request,
+    download_weather_dataset_from_config,
+)
 
 __all__ = [
     "ClockSource",
@@ -26,4 +44,18 @@ __all__ = [
     "SimulationScheduler",
     "SimulationSchedulerValueError",
     "WeatherEngine",
+    "ScenarioWeatherProvider",
+    "SyntheticWeatherProvider",
+    "WeatherProvider",
+    "WeatherProviderError",
+    "WeatherTimestampNotAvailable",
+    "WeatherConfigurationError",
+    "OpenMeteoSourceConfiguration",
+    "WeatherDatasetResult",
+    "WeatherSourceConfiguration",
+    "create_offline_weather_provider",
+    "load_weather_source_configuration",
+    "build_open_meteo_client",
+    "build_open_meteo_request",
+    "download_weather_dataset_from_config",
 ]

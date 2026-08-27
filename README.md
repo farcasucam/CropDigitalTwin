@@ -7,6 +7,15 @@ El clock recibe un `initial_time` explícito, permite `start`, `pause`,
 `resume`, `reset`, `set_speed` y `advance`, y puede integrarse mediante los
 topics MQTT de simulación sin necesitar MQTT para sus tests.
 
+La integración de fuentes meteorológicas está documentada en
+`docs/components/weather-providers.md`: Open-Meteo se usa únicamente para
+descargas explícitas y las simulaciones posteriores consumen CSV local sin
+conexión de red.
+
+La configuración de fuente se carga con `load_weather_source_configuration()`.
+Puede seleccionar `synthetic` o `csv`; `open_meteo` prepara una adquisición
+explícita, pero nunca descarga durante el arranque o la simulación.
+
 ## Requisitos
 
 - Python 3.11+
