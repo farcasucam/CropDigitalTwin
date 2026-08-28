@@ -143,6 +143,12 @@ class OpenMeteoClient:
         self._temperature_unit = temperature_unit
         self._wind_speed_unit = wind_speed_unit
         self._precipitation_unit = precipitation_unit
+        self._request_count = 0
+
+    @property
+    def request_count(self) -> int:
+        """Number of successful HTTP requests made by the latest download."""
+        return self._request_count
 
     def download(
         self,
@@ -153,15 +159,22 @@ class OpenMeteoClient:
         force_refresh: bool = False,
     ) -> Path:
         self._validate_request(request)
+        self._request_count = 0
         output = Path(output_csv)
         metadata_file = Path(metadata_path) if metadata_path else output.with_suffix(".metadata.json")
         if use_cache and not force_refresh:
             from agri_twin.infrastructure.weather_cache import WeatherCache
-            cache = WeatherCache(output, metadata_file, endpoint=self._endpoint(request.api))
+            cache = WeatherCache(
+                output,
+                metadata_file,
+                endpoint=self._endpoint(request.api),
+                authentication_mode=self._auth.mode,
+                temperature_unit=self._temperature_unit,
+                wind_speed_unit=self._wind_speed_unit,
+                precipitation_unit=self._precipitation_unit,
+            )
             if cache.is_compatible(request):
                 return output
-            if output.exists() or metadata_file.exists():
-                raise WeatherRangeNotAvailable("local dataset is incompatible; use force_refresh explicitly")
 
         rows: list[dict[str, Any]] = []
         responses: list[Mapping[str, Any]] = []
@@ -179,11 +192,12 @@ class OpenMeteoClient:
                 chunk_days=None,
             )
             response = self._request(chunk_request)
+            self._request_count += 1
             responses.append(response)
             rows.extend(self._normalize_response(response, chunk_request))
         rows = self._merge_rows(rows)
         self._validate_rows(rows, request)
-        metadata = self._metadata(responses[-1], request, len(responses))
+        metadata = self._metadata(responses[-1], request, self._request_count)
         self._write_dataset_atomically(output, metadata_file, rows, metadata)
         return output
 
@@ -376,6 +390,7 @@ class OpenMeteoClient:
             "model_returned": response.get("model"),
             "latitude": request.latitude,
             "longitude": request.longitude,
+            "elevation_requested": request.elevation,
             "elevation": request.elevation if request.elevation is not None else response.get("elevation"),
             "timezone": "UTC",
             "start_date": request.start_date.isoformat(),

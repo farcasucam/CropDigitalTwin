@@ -243,6 +243,10 @@ def download_weather_dataset_from_config(
             csv_path,
             metadata_path,
             endpoint=settings.endpoint,
+            authentication_mode=settings.authentication_mode,
+            temperature_unit=settings.temperature_unit,
+            wind_speed_unit=settings.wind_speed_unit,
+            precipitation_unit=settings.precipitation_unit,
         ).is_compatible(request)
     client.download(
         request,
@@ -251,11 +255,7 @@ def download_weather_dataset_from_config(
         use_cache=settings.cache_enabled,
         force_refresh=settings.force_refresh,
     )
-    try:
-        metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
-        request_count = int(metadata.get("request_count", 0))
-    except (OSError, json.JSONDecodeError, TypeError, ValueError) as exc:
-        raise WeatherConfigurationError("download metadata is invalid") from exc
+    request_count = client.request_count
     return WeatherDatasetResult(csv_path, metadata_path, request_count, cached)
 
 

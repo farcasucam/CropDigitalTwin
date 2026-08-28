@@ -4,13 +4,13 @@
     "level": "INFO"
   },
   "weather": {
-    "provider": "synthetic",
+    "provider": "open_meteo", 
     "dataset": {
       "path": null
     }
   },
   "open_meteo": {
-    "enabled": false,
+    "enabled": true,
     "endpoint": "https://api.open-meteo.com/v1/forecast",
     "api": {
       "mode": "public",

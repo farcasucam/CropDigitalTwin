@@ -1,4 +1,5 @@
 import json
+from dataclasses import replace
 from datetime import date, datetime, timedelta, timezone
 
 import pytest
@@ -167,7 +168,8 @@ def test_cache_compatibility_avoids_download(tmp_path):
     output.write_text("data", encoding="utf-8")
     metadata = output.with_suffix(".metadata.json")
     metadata.write_text(json.dumps({
-        "source": "open-meteo", "api": "historical", "model_requested": "auto",
+        "source": "open-meteo", "provider": "open-meteo", "api": "historical",
+        "authentication_mode": "public", "model_requested": "auto",
         "latitude": 40.0, "longitude": -3.0, "elevation": None, "timezone": "UTC",
         "start_date": "2026-08-27", "end_date": "2026-08-28", "resolution": "hourly",
         "variables": list(request().variables), "wind_speed_unit": "ms",
@@ -185,16 +187,19 @@ def test_download_cache_hit_uses_zero_http_and_force_refresh_downloads(tmp_path)
 
     client.download(request(), output)
     assert len(transport.calls) == 1
+    assert client.request_count == 1
 
     offline_client = OpenMeteoClient(transport=FakeTransport({}))
     offline_client.download(request(), output, use_cache=True)
     assert len(offline_client._transport.calls) == 0
+    assert offline_client.request_count == 0
 
     client.download(request(), output, use_cache=True, force_refresh=True)
     assert len(transport.calls) == 2
+    assert client.request_count == 1
 
 
-def test_incompatible_cache_requires_explicit_refresh(tmp_path):
+def test_incompatible_cache_is_replaced_without_explicit_refresh(tmp_path):
     output = tmp_path / "weather.csv"
     transport = FakeTransport(response())
     client = OpenMeteoClient(transport=transport)
@@ -207,8 +212,54 @@ def test_incompatible_cache_requires_explicit_refresh(tmp_path):
         end_date=request().end_date,
         variables=request().variables,
     )
-    with pytest.raises(WeatherRangeNotAvailable):
-        client.download(incompatible, output, use_cache=True)
+    client.download(incompatible, output, use_cache=True)
+    assert len(transport.calls) == 2
+    assert client.request_count == 1
+
+
+@pytest.mark.parametrize(
+    "changes",
+    [
+        {"latitude": 41.0},
+        {"model": "gfs_seamless"},
+        {"variables": tuple(reversed(request().variables))},
+    ],
+)
+def test_cache_identity_changes_are_misses(tmp_path, changes):
+    output = tmp_path / "weather.csv"
+    transport = FakeTransport(response())
+    client = OpenMeteoClient(transport=transport)
+
+    client.download(request(), output)
+    client.download(replace(request(), **changes), output, use_cache=True)
+
+    assert len(transport.calls) == 2
+    assert client.request_count == 1
+
+
+def test_cache_identity_includes_endpoint_authentication_and_units(tmp_path):
+    output = tmp_path / "weather.csv"
+    metadata = output.with_suffix(".metadata.json")
+    output.write_text("data", encoding="utf-8")
+    metadata.write_text(json.dumps({
+        "source": "open-meteo", "provider": "open-meteo", "api": "historical",
+        "authentication_mode": "public", "model_requested": "auto",
+        "latitude": 40.0, "longitude": -3.0, "elevation_requested": None,
+        "elevation": 650, "timezone": "UTC", "start_date": "2026-08-27",
+        "end_date": "2026-08-28", "resolution": "hourly",
+        "variables": list(request().variables), "wind_speed_unit": "ms",
+        "temperature_unit": "celsius", "precipitation_unit": "mm",
+        "endpoint": "https://archive-api.open-meteo.com/v1/archive",
+        "units": {"wind_speed": "ms", "temperature": "celsius", "precipitation": "mm"},
+    }), encoding="utf-8")
+
+    assert not WeatherCache(
+        output, endpoint="https://other.example/weather"
+    ).is_compatible(request())
+    assert not WeatherCache(output, authentication_mode="customer").is_compatible(request())
+    assert not WeatherCache(output, temperature_unit="fahrenheit").is_compatible(request())
+    assert not WeatherCache(output, wind_speed_unit="mph").is_compatible(request())
+    assert not WeatherCache(output, precipitation_unit="inch").is_compatible(request())
 
 
 def test_long_range_can_be_partitioned_without_duplicates_or_gaps(tmp_path):
@@ -227,4 +278,5 @@ def test_long_range_can_be_partitioned_without_duplicates_or_gaps(tmp_path):
     client.download(chunked, output)
 
     assert len(transport.calls) == 2
+    assert client.request_count == 2
     assert len(output.read_text(encoding="utf-8").splitlines()) == 49

@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import pytest
 
@@ -84,9 +84,11 @@ def test_download_from_config_orchestrates_client_and_reports_result(tmp_path, m
     }), encoding="utf-8")
 
     class FakeClient:
+        request_count = 2
+
         def download(self, request, output_csv, metadata_path, use_cache, force_refresh):
             output_csv.write_text("csv", encoding="utf-8")
-            metadata_path.write_text(json.dumps({"request_count": 2}), encoding="utf-8")
+            metadata_path.write_text(json.dumps({"request_count": 99}), encoding="utf-8")
 
     monkeypatch.setattr(
         "agri_twin.application.weather_configuration.build_open_meteo_client",
@@ -101,6 +103,78 @@ def test_download_from_config_orchestrates_client_and_reports_result(tmp_path, m
     assert result.metadata_path.exists()
     assert result.request_count == 2
     assert result.cached is False
+
+
+def test_download_result_counts_current_http_requests_across_cache_and_refresh(tmp_path, monkeypatch):
+    config_path = tmp_path / "app.json"
+    output = tmp_path / "forecast.csv"
+    config = {
+        "weather": {"provider": "open_meteo"},
+        "open_meteo": {
+            "enabled": True,
+            "api": "historical",
+            "endpoint": "https://archive-api.open-meteo.com/v1/archive",
+            "cache": {"enabled": True},
+            "acquisition": {"chunk_days": 1},
+        },
+    }
+    config_path.write_text(json.dumps(config), encoding="utf-8")
+
+    class ChunkTransport:
+        def __init__(self):
+            self.call_count = 0
+
+        def get(self, url, params):
+            self.call_count += 1
+            start = datetime.fromisoformat(params["start_date"])
+            end = datetime.fromisoformat(params["end_date"])
+            times = []
+            current = start
+            while current <= end + timedelta(hours=23):
+                times.append(current.strftime("%Y-%m-%dT%H:%M"))
+                current += timedelta(hours=1)
+            values = {
+                "time": times,
+                "temperature_2m": [20] * len(times),
+                "relative_humidity_2m": [50] * len(times),
+                "shortwave_radiation": [100] * len(times),
+                "wind_speed_10m": [2] * len(times),
+                "wind_direction_10m": [180] * len(times),
+                "rain": [0] * len(times),
+                "surface_pressure": [1012] * len(times),
+            }
+            return json.dumps({"model": "gfs", "hourly": values}).encode()
+
+    from agri_twin.infrastructure import OpenMeteoClient
+
+    transport = ChunkTransport()
+    monkeypatch.setattr(
+        "agri_twin.application.weather_configuration.build_open_meteo_client",
+        lambda settings: OpenMeteoClient(transport=transport),
+    )
+
+    first = download_weather_dataset_from_config(
+        config_path, output, "2026-08-27", "2026-08-28"
+    )
+    assert first.cached is False
+    assert first.request_count == 2
+    assert transport.call_count == 2
+
+    second = download_weather_dataset_from_config(
+        config_path, output, "2026-08-27", "2026-08-28"
+    )
+    assert second.cached is True
+    assert second.request_count == 0
+    assert transport.call_count == 2
+
+    config["open_meteo"]["cache"]["force_refresh"] = True
+    config_path.write_text(json.dumps(config), encoding="utf-8")
+    refreshed = download_weather_dataset_from_config(
+        config_path, output, "2026-08-27", "2026-08-28"
+    )
+    assert refreshed.cached is False
+    assert refreshed.request_count == 2
+    assert transport.call_count == 4
 
 
 def test_download_from_config_rejects_non_open_meteo_provider(tmp_path):

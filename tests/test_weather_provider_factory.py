@@ -30,6 +30,8 @@ def test_open_meteo_factory_downloads_then_returns_csv_provider(tmp_path, monkey
     _config(config, "open_meteo")
 
     class FakeClient:
+        request_count = 1
+
         def download(self, request, output_csv, metadata_path, use_cache, force_refresh):
             output_csv.write_text(
                 "timestamp,temperature_c,relative_humidity_pct,solar_radiation_w_m2,wind_speed_m_s,wind_direction_deg,rain_rate_mm_h,pressure_hpa\n"

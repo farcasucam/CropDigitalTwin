@@ -15,10 +15,18 @@ class WeatherCache:
         csv_path: str | Path,
         metadata_path: str | Path | None = None,
         endpoint: str | None = None,
+        authentication_mode: str = "public",
+        temperature_unit: str = "celsius",
+        wind_speed_unit: str = "ms",
+        precipitation_unit: str = "mm",
     ) -> None:
         self.csv_path = Path(csv_path)
         self.metadata_path = Path(metadata_path) if metadata_path else self.csv_path.with_suffix(".metadata.json")
         self.endpoint = endpoint
+        self.authentication_mode = authentication_mode
+        self.temperature_unit = temperature_unit
+        self.wind_speed_unit = wind_speed_unit
+        self.precipitation_unit = precipitation_unit
 
     def is_compatible(self, request: OpenMeteoRequest) -> bool:
         if not self.csv_path.is_file() or not self.metadata_path.is_file():
@@ -34,26 +42,25 @@ class WeatherCache:
         )
         return (
             metadata.get("source") == "open-meteo"
+            and metadata.get("provider") == "open-meteo"
             and metadata.get("api") == request.api.value
             and metadata.get("endpoint") == expected_endpoint
+            and metadata.get("authentication_mode") == self.authentication_mode
             and metadata.get("model_requested") == request.model
             and metadata.get("latitude") == request.latitude
             and metadata.get("longitude") == request.longitude
-            and (
-                request.elevation is None
-                or metadata.get("elevation") == request.elevation
-            )
+            and metadata.get("elevation_requested", metadata.get("elevation")) == request.elevation
             and metadata.get("timezone") == request.timezone
             and metadata.get("start_date") == request.start_date.isoformat()
             and metadata.get("end_date") == request.end_date.isoformat()
             and metadata.get("resolution") == "hourly"
             and metadata.get("variables") == list(request.variables)
-            and metadata.get("wind_speed_unit") == "ms"
-            and metadata.get("temperature_unit") == "celsius"
-            and metadata.get("precipitation_unit") == "mm"
+            and metadata.get("wind_speed_unit") == self.wind_speed_unit
+            and metadata.get("temperature_unit") == self.temperature_unit
+            and metadata.get("precipitation_unit") == self.precipitation_unit
             and metadata.get("units") == {
-                "wind_speed": "ms",
-                "temperature": "celsius",
-                "precipitation": "mm",
+                "wind_speed": self.wind_speed_unit,
+                "temperature": self.temperature_unit,
+                "precipitation": self.precipitation_unit,
             }
         )
