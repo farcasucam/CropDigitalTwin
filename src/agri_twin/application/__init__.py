@@ -18,6 +18,12 @@ from agri_twin.application.plot_weather import (
     build_crop_digital_twin_state,
     download_weather_for_plot,
 )
+from agri_twin.application.physical import (
+    OpenFieldPhysicalModel,
+    PhysicalEnvironmentModel,
+    PhysicalEnvironmentResult,
+    PhysicalModelError,
+)
 from agri_twin.application.providers import (
     ScenarioWeatherProvider,
     SyntheticWeatherProvider,
@@ -51,6 +57,10 @@ __all__ = [
     "WeatherEngine",
     "download_weather_for_plot",
     "build_crop_digital_twin_state",
+    "OpenFieldPhysicalModel",
+    "PhysicalEnvironmentModel",
+    "PhysicalEnvironmentResult",
+    "PhysicalModelError",
     "ScenarioWeatherProvider",
     "SyntheticWeatherProvider",
     "WeatherProvider",

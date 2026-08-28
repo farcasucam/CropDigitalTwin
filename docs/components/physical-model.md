@@ -4,6 +4,17 @@
 
 Calcular consecuencias físicas a partir de ambiente, estado y actuadores.
 
+## MVP actual
+
+`OpenFieldPhysicalModel` implementa la primera capacidad ejecutable de esta
+fase: calcula presión de vapor de saturación, presión real, VPD, carga térmica,
+transpiración estimada y un proxy de evapotranspiración. También actualiza
+`SoilState` con lluvia, riego, evaporación y transpiración durante el timestep.
+Es un modelo determinista y desacoplado de red. `WeatherEngine` y los providers
+siguen siendo responsables de producir `WeatherState`; el modelo físico solo
+consume ese estado. Los modelos de invernadero, ventilación, humedad/CO2,
+actuadores y un modelo agronómico avanzado siguen pendientes.
+
 ## Submodelos
 
 ### RadiationModel

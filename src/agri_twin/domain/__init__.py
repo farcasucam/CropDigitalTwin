@@ -6,6 +6,7 @@ from agri_twin.domain.crop import (
     CropDefinition,
     CropStageDefinition,
 )
+from agri_twin.domain.crop_engine import CropEngine, CropEngineError
 from agri_twin.domain.digital_twin import CropDigitalTwinState
 from agri_twin.domain.farm import (
     FarmConfigRepository,
@@ -58,6 +59,8 @@ __all__ = [
     "CropConfigurationError",
     "CropDefinition",
     "CropStageDefinition",
+    "CropEngine",
+    "CropEngineError",
     "CropDigitalTwinState",
     "FarmConfigRepository",
     "FarmConfigurationError",

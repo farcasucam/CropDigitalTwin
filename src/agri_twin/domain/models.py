@@ -95,6 +95,19 @@ class CropState:
         if self.biomass < 0 or self.leaf_area_index < 0 or self.cumulative_stress < 0:
             raise ValueError("crop aggregate values cannot be negative")
 
+    @property
+    def environmental_stress(self) -> float:
+        """MVP environmental stress represented by the configured VPD index."""
+        return self.vpd_stress
+
+    @property
+    def total_stress(self) -> float:
+        return self.cumulative_stress
+
+    @property
+    def growth_factor(self) -> float:
+        return 1.0 - self.cumulative_stress
+
 
 @dataclass(frozen=True, slots=True)
 class ActuatorState:

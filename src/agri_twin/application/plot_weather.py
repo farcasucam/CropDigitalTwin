@@ -15,6 +15,8 @@ from agri_twin.application.weather_configuration import (
     load_weather_source_configuration,
 )
 from agri_twin.domain.crop import CropConfigRepository
+from agri_twin.domain.crop_engine import CropEngine
+from agri_twin.domain.models import CropState
 from agri_twin.domain.digital_twin import CropDigitalTwinState
 from agri_twin.domain.farm import FarmConfigRepository
 from agri_twin.infrastructure.csv_weather import CsvWeatherProvider
@@ -81,6 +83,7 @@ def build_crop_digital_twin_state(
     crop_config_path: str | Path,
     csv_path: str | Path,
     timestamp: datetime,
+    crop_state: CropState | None = None,
 ) -> CropDigitalTwinState:
     """Build the initial plot/crop state from an already acquired local dataset."""
     plot = FarmConfigRepository(farm_config_path).get_plot(plot_id)
@@ -95,6 +98,7 @@ def build_crop_digital_twin_state(
         timestamp=timestamp,
         weather_state=weather,
         agronomic_state={"soil_type": plot.soil_type, "irrigation_type": plot.irrigation_type},
+        crop_state=crop_state,
     )
 
 

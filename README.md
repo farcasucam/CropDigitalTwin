@@ -40,6 +40,16 @@ cultivo, etapa y `WeatherState`; los umbrales no se copian al estado dinámico.
 La aceptación manual se ejecuta con `python -u manual_phase2_acceptance_test.py`
 y usa un directorio temporal para sus datasets.
 
+## Fase 3: modelo físico MVP
+
+`OpenFieldPhysicalModel` transforma un `WeatherState` y un `SoilState` en
+variables ambientales derivadas (incluido VPD) y en el siguiente estado de
+agua del suelo. El modelo es determinista, no conoce HTTP y permite aplicar
+lluvia y riego mediante un balance causal simplificado. Se valida con
+`python -u manual_phase3_acceptance_test.py` y funciona sobre un CSV local.
+El modelo de invernadero, CO2, actuadores y crecimiento del cultivo quedan
+para fases posteriores.
+
 ## Requisitos
 
 - Python 3.11+

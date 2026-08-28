@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Any, Mapping
 
-from agri_twin.domain.models import WeatherState
+from agri_twin.domain.models import CropState, WeatherState
 
 
 @dataclass(frozen=True, slots=True)
@@ -18,6 +18,7 @@ class CropDigitalTwinState:
     timestamp: datetime
     weather_state: WeatherState
     agronomic_state: Mapping[str, Any]
+    crop_state: CropState | None = None
 
     @property
     def initial_stage(self) -> str:
