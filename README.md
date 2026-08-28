@@ -16,6 +16,24 @@ La configuración de fuente se carga con `load_weather_source_configuration()`.
 Puede seleccionar `synthetic` o `csv`; `open_meteo` prepara una adquisición
 explícita, pero nunca descarga durante el arranque o la simulación.
 
+## Fase 4: Crop Engine MVP
+
+`CropEngine` calcula estrés térmico, hídrico y de VPD a partir de la etapa del
+cultivo y sus thresholds en `src/crop_config.json`. `cumulative_stress` es la
+media del estrés actual y `growth_factor = 1 - cumulative_stress`.
+`development_index` y `biomass` son proxies deterministas dependientes del
+tiempo simulado, no magnitudes calibradas. La auditoría se ejecuta con
+`python -u manual_phase4_1_acceptance_test.py`; los campos de meses, radiación,
+riego y nombre de etapa se cargan, pero permanecen pendientes de semántica
+agronómica adicional.
+
+## Fase 4.2: evolución temporal
+
+`CropEngine.advance(...)` evoluciona explícitamente un `CropState` mediante
+`dt_seconds` simulado, manteniendo la evaluación de estrés y los proxies de
+biomasa/desarrollo deterministas. El JSON actual no define GDD, temperatura
+base, duraciones ni transiciones, por lo que no se inventan cambios de etapa.
+
 ## Fase 2: parcela y cultivo
 
 La configuración técnica permanece en `config/app.json`. Las parcelas y su

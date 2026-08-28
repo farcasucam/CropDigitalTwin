@@ -88,6 +88,20 @@ def test_high_vpd_increases_environmental_stress():
     assert high.environmental_stress > low.environmental_stress
 
 
+def test_current_stress_and_growth_recover_after_conditions_improve():
+    engine = CropEngine()
+    crop = CropConfigRepository(CROP).get_crop("plum")
+    stage = crop.resolve_stage("yield_maturation")
+    soil = SoilState(0.25, 20, 0.35, 0.10, 0, 0.25)
+    extreme_weather = weather(temperature_c=40, relative_humidity_pct=10)
+    normal_weather = weather()
+    stressed = engine.evaluate(crop, stage, extreme_weather, environment(extreme_weather), soil, T0)
+    recovered = engine.evaluate(crop, stage, normal_weather, environment(normal_weather), soil, T0, previous=stressed)
+
+    assert recovered.total_stress < stressed.total_stress
+    assert recovered.growth_factor > stressed.growth_factor
+
+
 def test_crop_engine_rejects_unknown_stage_and_naive_timestamp():
     crop = CropConfigRepository(CROP).get_crop("plum")
     engine = CropEngine()
@@ -96,6 +110,15 @@ def test_crop_engine_rejects_unknown_stage_and_naive_timestamp():
         engine.evaluate(crop, "missing", weather(), environment(weather()), soil, T0)
     with pytest.raises(CropEngineError):
         engine.evaluate(crop, "yield_maturation", weather(), environment(weather()), soil, datetime(2026, 8, 28, 12))
+
+
+def test_crop_engine_rejects_stage_from_another_crop():
+    crops = CropConfigRepository(CROP)
+    engine = CropEngine()
+    soil = SoilState(0.25, 20, 0.35, 0.10, 0, 0.25)
+    foreign_stage = crops.get_crop("tomato").resolve_stage("yield_maturation")
+    with pytest.raises(CropEngineError):
+        engine.evaluate(crops.get_crop("plum"), foreign_stage, weather(), environment(weather()), soil, T0)
 
 
 def test_csv_to_weather_engine_to_physical_to_crop_engine_is_offline():
@@ -111,3 +134,53 @@ def test_csv_to_weather_engine_to_physical_to_crop_engine_is_offline():
     assert crop_state.development_stage == plot.current_stage
     assert crop_state.biomass >= 0
     assert 0 <= crop_state.total_stress <= 1
+
+
+def test_advance_is_explicit_deterministic_and_preserves_stage():
+    crops = CropConfigRepository(CROP)
+    crop = crops.get_crop("plum")
+    stage = crop.resolve_stage("yield_maturation")
+    soil = SoilState(0.25, 20, 0.35, 0.10, 0, 0.25)
+    current_weather = weather()
+    environment_state = environment(current_weather)
+    engine = CropEngine()
+    initial = engine.evaluate(crop, stage, current_weather, environment_state, soil, T0)
+
+    unchanged = engine.advance(crop, stage, initial, current_weather, environment_state, soil, T0, 0)
+    first = engine.advance(crop, stage, initial, current_weather, environment_state, soil, T0, 3600)
+    second = engine.advance(crop, stage, initial, current_weather, environment_state, soil, T0, 3600)
+
+    assert unchanged == initial
+    assert first == second
+    assert first.development_stage == "yield_maturation"
+    assert first.development_index > initial.development_index
+    assert first.biomass >= initial.biomass
+
+
+def test_advance_rejects_negative_dt():
+    crops = CropConfigRepository(CROP)
+    crop = crops.get_crop("plum")
+    stage = crop.resolve_stage("yield_maturation")
+    soil = SoilState(0.25, 20, 0.35, 0.10, 0, 0.25)
+    current_weather = weather()
+    initial = CropEngine().evaluate(crop, stage, current_weather, environment(current_weather), soil, T0)
+
+    with pytest.raises(CropEngineError):
+        CropEngine().advance(crop, stage, initial, current_weather, environment(current_weather), soil, T0, -1)
+
+
+def test_stage_thresholds_affect_temporal_growth_without_confusing_stress_and_development():
+    crops = CropConfigRepository(CROP)
+    crop = crops.get_crop("plum")
+    soil = SoilState(0.25, 20, 0.35, 0.10, 0, 0.25)
+    favorable = weather(temperature_c=24, relative_humidity_pct=80)
+    excessive = weather(temperature_c=40, relative_humidity_pct=10)
+    engine = CropEngine()
+    stage = crop.resolve_stage("yield_maturation")
+    favorable_initial = engine.evaluate(crop, stage, favorable, environment(favorable), soil, T0)
+    excessive_initial = engine.evaluate(crop, stage, excessive, environment(excessive), soil, T0)
+    favorable_final = engine.advance(crop, stage, favorable_initial, favorable, environment(favorable), soil, T0, 86400)
+    excessive_final = engine.advance(crop, stage, excessive_initial, excessive, environment(excessive), soil, T0, 86400)
+
+    assert favorable_final.development_index > excessive_final.development_index
+    assert favorable_final.biomass > excessive_final.biomass

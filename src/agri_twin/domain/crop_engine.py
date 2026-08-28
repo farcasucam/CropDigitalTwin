@@ -39,7 +39,7 @@ class CropEngine:
         if not math.isfinite(timestep_seconds) or timestep_seconds < 0:
             raise CropEngineError("timestep_seconds must be finite and non-negative")
         resolved_stage = crop.resolve_stage(stage) if isinstance(stage, str) else stage
-        if resolved_stage.stage_key not in crop.stages:
+        if crop.stages.get(resolved_stage.stage_key) != resolved_stage:
             raise CropEngineError("stage does not belong to crop")
         parameters = resolved_stage.parameters
         thermal = self._thermal_stress(weather.temperature_c, parameters["stress_thresholds"])
@@ -51,7 +51,6 @@ class CropEngine:
         progress = min(1.0, previous_index + timestep_seconds / (86400.0 * 30.0) * growth)
         previous_biomass = previous.biomass if previous else 0.0
         biomass = previous_biomass + timestep_seconds / 86400.0 * growth
-        previous_cumulative = previous.cumulative_stress if previous else 0.0
         return CropState(
             biomass=biomass,
             leaf_area_index=previous.leaf_area_index if previous else 0.0,
@@ -59,8 +58,42 @@ class CropEngine:
             water_stress=water,
             temperature_stress=thermal,
             vpd_stress=vpd,
-            cumulative_stress=max(previous_cumulative, total),
+            cumulative_stress=total,
             development_index=progress,
+        )
+
+    def advance(
+        self,
+        crop: CropDefinition,
+        stage: CropStageDefinition | str,
+        crop_state: CropState,
+        weather: WeatherState,
+        environment: DerivedEnvironmentState,
+        soil: SoilState,
+        timestamp: datetime,
+        dt_seconds: float,
+    ) -> CropState:
+        """Advance an explicit crop state by simulated time.
+
+        The current configuration has no GDD, duration, or transition
+        thresholds, so stage identity remains unchanged. Progress and biomass
+        use the existing bounded MVP proxy and depend only on ``dt_seconds``.
+        """
+        if not isinstance(crop_state, CropState):
+            raise CropEngineError("crop_state must be a CropState")
+        if not math.isfinite(dt_seconds) or dt_seconds < 0:
+            raise CropEngineError("dt_seconds must be finite and non-negative")
+        if dt_seconds == 0:
+            return crop_state
+        return self.evaluate(
+            crop,
+            stage,
+            weather,
+            environment,
+            soil,
+            timestamp,
+            timestep_seconds=dt_seconds,
+            previous=crop_state,
         )
 
     @staticmethod
