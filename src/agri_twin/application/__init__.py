@@ -14,6 +14,10 @@ from agri_twin.application.scheduler import (
     SimulationSchedulerValueError,
 )
 from agri_twin.application.weather import WeatherEngine
+from agri_twin.application.plot_weather import (
+    build_crop_digital_twin_state,
+    download_weather_for_plot,
+)
 from agri_twin.application.providers import (
     ScenarioWeatherProvider,
     SyntheticWeatherProvider,
@@ -45,6 +49,8 @@ __all__ = [
     "SimulationScheduler",
     "SimulationSchedulerValueError",
     "WeatherEngine",
+    "download_weather_for_plot",
+    "build_crop_digital_twin_state",
     "ScenarioWeatherProvider",
     "SyntheticWeatherProvider",
     "WeatherProvider",

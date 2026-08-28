@@ -16,6 +16,30 @@ La configuración de fuente se carga con `load_weather_source_configuration()`.
 Puede seleccionar `synthetic` o `csv`; `open_meteo` prepara una adquisición
 explícita, pero nunca descarga durante el arranque o la simulación.
 
+## Fase 2: parcela y cultivo
+
+La configuración técnica permanece en `config/app.json`. Las parcelas y su
+ubicación se definen en `src/farm_config.json`, y las definiciones
+agronómicas, etapas y umbrales en `src/crop_config.json`. La operación
+`download_weather_for_plot()` resuelve la parcela y el cultivo, construye el
+request con las coordenadas de la parcela y adquiere el CSV explícitamente:
+
+```python
+from agri_twin.application import download_weather_for_plot
+
+result = download_weather_for_plot(
+	"plot_14705", "src/farm_config.json", "src/crop_config.json",
+	"config/app.json", "data/weather/plot_14705.csv",
+	"2026-08-28", "2026-08-28",
+)
+```
+
+Después, `CsvWeatherProvider` permite ejecutar la simulación sin Internet.
+`build_crop_digital_twin_state()` prepara el estado inicial de parcela,
+cultivo, etapa y `WeatherState`; los umbrales no se copian al estado dinámico.
+La aceptación manual se ejecuta con `python -u manual_phase2_acceptance_test.py`
+y usa un directorio temporal para sus datasets.
+
 ## Requisitos
 
 - Python 3.11+

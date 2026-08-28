@@ -157,6 +157,7 @@ class OpenMeteoClient:
         metadata_path: str | Path | None = None,
         use_cache: bool = False,
         force_refresh: bool = False,
+        metadata_context: Mapping[str, Any] | None = None,
     ) -> Path:
         self._validate_request(request)
         self._request_count = 0
@@ -198,6 +199,8 @@ class OpenMeteoClient:
         rows = self._merge_rows(rows)
         self._validate_rows(rows, request)
         metadata = self._metadata(responses[-1], request, self._request_count)
+        if metadata_context:
+            metadata.update(metadata_context)
         self._write_dataset_atomically(output, metadata_file, rows, metadata)
         return output
 

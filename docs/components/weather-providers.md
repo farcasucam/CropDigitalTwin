@@ -22,6 +22,26 @@ Open-Meteo -> OpenMeteoClient.download() -> CSV + metadata -> CsvWeatherProvider
 `WeatherProvider.get()` no realiza HTTP. La simulación con CSV funciona
 completamente offline.
 
+## Parcela y cultivo
+
+`src/farm_config.json` es la fuente de identidad, ubicación, suelo, riego,
+variedad y etapa inicial de cada parcela. `src/crop_config.json` es el catálogo
+de definiciones agronómicas y sus etapas. `FarmConfigRepository` y
+`CropConfigRepository` cargan y validan ambos archivos sin hacer HTTP.
+
+La adquisición por parcela se realiza explícitamente con
+`download_weather_for_plot()`. El servicio resuelve `plot_id`, valida su
+`crop_key` y `current_stage`, y construye el `OpenMeteoRequest` con las
+coordenadas de `Plot`; `app.json` solo proporciona la configuración técnica.
+La metadata incluye parcela, cultivo, variedad y etapa inicial. La identidad
+de cache sigue incluyendo las coordenadas, por lo que dos parcelas no
+comparten silenciosamente un dataset.
+
+```text
+FarmConfigRepository -> Plot -> CropConfigRepository -> CropDefinition
+    -> OpenMeteoClient -> CSV -> CsvWeatherProvider -> WeatherState
+```
+
 La fuente de simulación se selecciona con `weather.provider` en
 `config/app.json`: `synthetic` mantiene el comportamiento anterior y `csv`
 requiere `weather.dataset.path`. `open_meteo` solo prepara la adquisición; no

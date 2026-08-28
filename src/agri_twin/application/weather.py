@@ -6,6 +6,7 @@ import hashlib
 import math
 from datetime import datetime
 from threading import RLock
+from typing import Any
 
 from agri_twin.domain.models import WeatherState
 from agri_twin.domain.weather import (
@@ -18,8 +19,9 @@ from agri_twin.domain.weather import (
 
 
 class WeatherEngine:
-    def __init__(self, configuration: WeatherConfiguration) -> None:
+    def __init__(self, configuration: WeatherConfiguration, provider: Any | None = None) -> None:
         self._configuration = configuration
+        self._provider = provider
         self._seed = configuration.simulation.seed
         self._events: dict[str, WeatherPerturbation] = {}
         self._lock = RLock()
@@ -40,6 +42,25 @@ class WeatherEngine:
                     (event for event in self._events.values() if event.is_active(instant)),
                     key=lambda event: (-event.priority, event.start_time, event.event_id),
                 )
+            )
+        if self._provider is not None:
+            state = self._provider.get(instant)
+            temperature, radiation, humidity, wind_speed, wind_direction = self._apply_events(
+                events,
+                state.temperature_c,
+                state.solar_radiation_w_m2,
+                state.relative_humidity_pct,
+                state.wind_speed_m_s,
+                state.wind_direction_deg,
+            )
+            return WeatherState(
+                temperature_c=temperature,
+                relative_humidity_pct=humidity,
+                solar_radiation_w_m2=radiation,
+                wind_speed_m_s=max(0.0, wind_speed),
+                wind_direction_deg=wind_direction % 360,
+                rain_rate_mm_h=max(state.rain_rate_mm_h, self._rain(events)),
+                pressure_hpa=state.pressure_hpa,
             )
         temperature = self._baseline_temperature(instant) + self._temperature_variability(instant)
         radiation = self._baseline_radiation(instant) + self._radiation_variability(instant)

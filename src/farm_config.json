@@ -10,7 +10,8 @@
       "area_ha": 6.053,
       "coordinates": {
         "latitude": 38.25130770201682,
-        "longitude": -1.4368665045230333
+        "longitude": -1.4368665045230333,
+        "elevation_m": null
       },
       "current_stage": "yield_maturation",
       "irrigation_type": "drip",
@@ -27,7 +28,8 @@
       "area_ha": 3.25,
       "coordinates": {
         "latitude": 37.89215,
-        "longitude": -0.87123
+        "longitude": -0.87123,
+        "elevation_m": null
       },
       "current_stage": "vegetative_growth",
       "irrigation_type": "drip_hydroponic",
@@ -44,7 +46,8 @@
       "area_ha": 12.4,
       "coordinates": {
         "latitude": 38.61452,
-        "longitude": -1.11892
+        "longitude": -1.11892,
+        "elevation_m": null
       },
       "current_stage": "yield_maturation",
       "irrigation_type": "subsurface_drip",
@@ -61,7 +64,8 @@
       "area_ha": 4.18,
       "coordinates": {
         "latitude": 37.7812,
-        "longitude": -0.95431
+        "longitude": -0.95431,
+        "elevation_m": null
       },
       "current_stage": "establishment",
       "irrigation_type": "drip",

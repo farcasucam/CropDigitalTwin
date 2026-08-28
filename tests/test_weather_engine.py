@@ -3,6 +3,7 @@ from datetime import datetime, timedelta, timezone
 import pytest
 
 from agri_twin.application import SimulationClock, SimulationScheduler, WeatherEngine
+from agri_twin.infrastructure import CsvWeatherProvider
 from agri_twin.domain import (
     WeatherConfiguration,
     WeatherEngineValueError,
@@ -38,6 +39,23 @@ def test_generate_is_repeatable_and_independent_of_call_history() -> None:
     first = engine.generate(T0)
     engine.generate(T0 + timedelta(hours=1))
     assert engine.generate(T0) == first
+    assert engine.generate(T0) == engine.generate(T0)
+
+def test_weather_engine_can_consume_csv_provider_without_http(tmp_path, monkeypatch) -> None:
+    csv_path = tmp_path / "weather.csv"
+    csv_path.write_text(
+        "timestamp,temperature_c,relative_humidity_pct,solar_radiation_w_m2,wind_speed_m_s,wind_direction_deg,rain_rate_mm_h,pressure_hpa\n"
+        "2026-08-27T08:00:00+00:00,21,55,400,3,90,0.2,1008\n"
+        "2026-08-27T09:00:00+00:00,22,56,500,4,100,0.3,1009\n",
+        encoding="utf-8",
+    )
+    provider = CsvWeatherProvider(csv_path)
+    engine = WeatherEngine(WeatherConfiguration(), provider=provider)
+
+    monkeypatch.setattr("agri_twin.infrastructure.open_meteo.urlopen", lambda *args, **kwargs: (_ for _ in ()).throw(AssertionError("HTTP must not be used")))
+
+    assert engine.generate(T0) == provider.get(T0)
+    assert engine.generate(T0 + timedelta(hours=1)) == provider.get(T0 + timedelta(hours=1))
     assert engine.generate(T0) == engine.generate(T0)
 
 

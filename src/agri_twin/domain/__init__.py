@@ -1,5 +1,19 @@
 """Pure domain models. This package has no infrastructure dependencies."""
 
+from agri_twin.domain.crop import (
+    CropConfigRepository,
+    CropConfigurationError,
+    CropDefinition,
+    CropStageDefinition,
+)
+from agri_twin.domain.digital_twin import CropDigitalTwinState
+from agri_twin.domain.farm import (
+    FarmConfigRepository,
+    FarmConfigurationError,
+    Plot as FarmPlot,
+    PlotLocation,
+)
+
 from agri_twin.domain.models import (
     ActuatorState,
     CropState,
@@ -40,4 +54,13 @@ __all__ = [
     "WeatherPerturbation",
     "WeatherSimulationConfiguration",
     "WindConfiguration",
+    "CropConfigRepository",
+    "CropConfigurationError",
+    "CropDefinition",
+    "CropStageDefinition",
+    "CropDigitalTwinState",
+    "FarmConfigRepository",
+    "FarmConfigurationError",
+    "FarmPlot",
+    "PlotLocation",
 ]
