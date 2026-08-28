@@ -34,6 +34,12 @@ agronómica adicional.
 biomasa/desarrollo deterministas. El JSON actual no define GDD, temperatura
 base, duraciones ni transiciones, por lo que no se inventan cambios de etapa.
 
+La auditoría de configuración de Fase 4.3 se ejecuta con
+`python -u manual_phase4_3_config_audit.py`. En este repositorio
+`config/crop_config.json` es una plantilla vacía y `src/crop_config.json` es el
+catálogo efectivo que usa el loader; el auditor informa ambas rutas y valida
+el catálogo efectivo sin modificar ningún JSON.
+
 ## Fase 2: parcela y cultivo
 
 La configuración técnica permanece en `config/app.json`. Las parcelas y su

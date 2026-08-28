@@ -81,3 +81,10 @@ El JSON actual no contiene grados-día, temperatura base de desarrollo,
 duraciones ni umbrales de transición. Por eso esta fase no inventa una
 fenología GDD ni transiciones entre stages: `development_stage` permanece en
 la etapa configurada hasta que exista una especificación parametrizada.
+
+La configuración fenológica futura será opcional y validable, pero permanece
+inactiva mientras no existan datos agronómicos por cultivo y etapa. El
+contrato preparado admite métodos `gdd`, `calendar` o `external`, etapas en
+orden explícito y valores `null` para datos aún no suministrados. No ejecuta
+transiciones. La auditoría también distingue la plantilla vacía
+`config/crop_config.json` del catálogo efectivo `src/crop_config.json`.

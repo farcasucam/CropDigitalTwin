@@ -7,6 +7,10 @@ from agri_twin.domain.crop import (
     CropStageDefinition,
 )
 from agri_twin.domain.crop_engine import CropEngine, CropEngineError
+from agri_twin.domain.phenology_configuration import (
+    PhenologyConfigurationError,
+    validate_phenology_configuration,
+)
 from agri_twin.domain.digital_twin import CropDigitalTwinState
 from agri_twin.domain.farm import (
     FarmConfigRepository,
@@ -61,6 +65,8 @@ __all__ = [
     "CropStageDefinition",
     "CropEngine",
     "CropEngineError",
+    "PhenologyConfigurationError",
+    "validate_phenology_configuration",
     "CropDigitalTwinState",
     "FarmConfigRepository",
     "FarmConfigurationError",
