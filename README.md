@@ -40,6 +40,12 @@ La auditoría de configuración de Fase 4.3 se ejecuta con
 catálogo efectivo que usa el loader; el auditor informa ambas rutas y valida
 el catálogo efectivo sin modificar ningún JSON.
 
+La Fase 4.4 prepara sin activar la fenología: el contrato opcional valida
+`method`, etapas ordenadas, `source` y `calibration_status`. La tabla maestra
+está en `docs/phenology-parameters.md`. El catálogo actual no contiene Tbase,
+GDD, chilling, biofix, duraciones ni reglas de transición; todos esos valores
+siguen pendientes de datos agronómicos trazables.
+
 ## Fase 2: parcela y cultivo
 
 La configuración técnica permanece en `config/app.json`. Las parcelas y su

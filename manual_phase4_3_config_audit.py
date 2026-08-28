@@ -77,6 +77,19 @@ def schema_audit() -> str:
     raise AssertionError("duplicate stages accepted")
 
 
+def future_metadata_audit() -> str:
+    validate_phenology_configuration({
+        "method": "gdd",
+        "base_temperature_c": None,
+        "upper_temperature_c": None,
+        "biofix": None,
+        "calibration_status": "CALIBRATION_REQUIRED",
+        "source": {"reference": "method-reference", "type": "technical_reference"},
+        "stages": [{"stage_key": "establishment", "gdd_to_next": None}],
+    })
+    return "future parameters support source traceability and calibration status"
+
+
 def references_check() -> str:
     farm = FarmConfigRepository(existing_path(FARM_CANDIDATES))
     crops = CropConfigRepository(effective_crop_path())
@@ -115,6 +128,7 @@ def main() -> int:
     run_check("JSON configuration", config_check, results)
     run_check("Phenology parameter audit", phenology_audit, results)
     run_check("Optional phenology schema", schema_audit, results)
+    run_check("Traceability and calibration metadata", future_metadata_audit, results)
     run_check("Farm -> Crop -> Stage references", references_check, results)
     run_check("No HTTP and no app mutation", no_http_or_mutation, results)
     run_check("Reproducibility", reproducibility_check, results)

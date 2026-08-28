@@ -88,3 +88,8 @@ contrato preparado admite métodos `gdd`, `calendar` o `external`, etapas en
 orden explícito y valores `null` para datos aún no suministrados. No ejecuta
 transiciones. La auditoría también distingue la plantilla vacía
 `config/crop_config.json` del catálogo efectivo `src/crop_config.json`.
+
+La Fase 4.4 prepara sin activar la fenología. El contrato opcional valida
+método, etapas ordenadas, trazabilidad de fuente y estado de calibración,
+pero no ejecuta GDD, chilling ni transiciones automáticas. Los parámetros
+agronómicos necesarios todavía deben suministrarse por cultivo/cultivar.

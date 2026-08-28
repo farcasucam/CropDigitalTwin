@@ -57,3 +57,20 @@ def test_current_config_has_no_active_phenology_values():
 def test_optional_phenology_does_not_change_current_crop_configuration():
     repository = __import__("agri_twin.domain", fromlist=["CropConfigRepository"]).CropConfigRepository("src/crop_config.json")
     assert repository.get_crop("plum").resolve_stage("yield_maturation").stage_key == "yield_maturation"
+
+
+def test_active_phenology_requires_traceable_source_and_valid_status():
+    payload = valid_config()
+    payload["calibration_status"] = "CALIBRATION_REQUIRED"
+    payload["source"] = {"reference": "https://example.invalid/reference", "type": "scientific_publication"}
+    validate_phenology_configuration(payload)
+
+    active = valid_config()
+    active["stages"][0]["gdd_to_next"] = 100
+    with pytest.raises(PhenologyConfigurationError, match="source"):
+        validate_phenology_configuration(active)
+
+    invalid_status = valid_config()
+    invalid_status["calibration_status"] = "GUESS"
+    with pytest.raises(PhenologyConfigurationError, match="calibration_status"):
+        validate_phenology_configuration(invalid_status)
