@@ -19,15 +19,15 @@ catalog and no automatic transition is active.
 
 ## Master table
 
-| Crop | Transition method | Tbase | Tupper | Biofix | Chilling | GDD/GDH targets | Source | Confidence | Status |
+| Crop | Transition method | Tbase (°C) | Tupper (°C) | Biofix | Chilling (hours/portions) | GDD/GDH targets (°C·day/°C·hour) | Units declared | Source | Confidence | Status |
 |---|---|---:|---:|---|---|---|---|---|---|
-| tomato | GDD candidate | null | null | null | not applicable/not assessed | null | Penn State Extension, [Understanding Growing Degree Days](https://extension.psu.edu/understanding-growing-degree-days) | General method only | CALIBRATION_REQUIRED |
-| lettuce | GDD candidate | null | null | null | not applicable/not assessed | null | Penn State Extension, [Understanding Growing Degree Days](https://extension.psu.edu/understanding-growing-degree-days) | General method only | CALIBRATION_REQUIRED |
-| pepper | GDD candidate | null | null | null | not applicable/not assessed | null | Penn State Extension, [Understanding Growing Degree Days](https://extension.psu.edu/understanding-growing-degree-days) | General method only | CALIBRATION_REQUIRED |
-| grape | Cultivar-specific forcing candidate | null | null | null | cultivar/site dependent | null | Penn State Extension, [Understanding Growing Degree Days](https://extension.psu.edu/understanding-growing-degree-days) | General method only | CALIBRATION_REQUIRED |
-| peach | Chilling then forcing candidate | null | null | null | null | null | Penn State Extension, [Understanding Growing Degree Days](https://extension.psu.edu/understanding-growing-degree-days) | No crop/cultivar value established | CALIBRATION_REQUIRED |
-| plum | Chilling then forcing candidate | null | null | null | null | null | Penn State Extension, [Understanding Growing Degree Days](https://extension.psu.edu/understanding-growing-degree-days) | No crop/cultivar value established | CALIBRATION_REQUIRED |
-| apple | Chilling then forcing candidate | null | null | null | null | null | Penn State Extension, [Understanding Growing Degree Days](https://extension.psu.edu/understanding-growing-degree-days) | No crop/cultivar value established | CALIBRATION_REQUIRED |
+| tomato | GDD candidate | null | null | null | not applicable/not assessed | null | Tbase °C; GDD °C·day | Penn State Extension, [Understanding Growing Degree Days](https://extension.psu.edu/understanding-growing-degree-days) | General method only | CALIBRATION_REQUIRED |
+| lettuce | GDD candidate | null | null | null | not applicable/not assessed | null | Tbase °C; GDD °C·day | Penn State Extension, [Understanding Growing Degree Days](https://extension.psu.edu/understanding-growing-degree-days) | General method only | CALIBRATION_REQUIRED |
+| pepper | GDD candidate | null | null | null | not applicable/not assessed | null | Tbase °C; GDD °C·day | Penn State Extension, [Understanding Growing Degree Days](https://extension.psu.edu/understanding-growing-degree-days) | General method only | CALIBRATION_REQUIRED |
+| grape | Cultivar-specific forcing candidate | null | null | null | cultivar/site dependent | null | Tbase °C; forcing GDD °C·day; chilling hours/portions | Penn State Extension, [Understanding Growing Degree Days](https://extension.psu.edu/understanding-growing-degree-days) | General method only | CALIBRATION_REQUIRED |
+| peach | Chilling then forcing candidate | null | null | null | null | null | Tbase °C; chilling hours/portions; forcing GDD °C·day | Penn State Extension, [Understanding Growing Degree Days](https://extension.psu.edu/understanding-growing-degree-days) | No crop/cultivar value established | CALIBRATION_REQUIRED |
+| plum | Chilling then forcing candidate | null | null | null | null | null | Tbase °C; chilling hours/portions; forcing GDD °C·day | Penn State Extension, [Understanding Growing Degree Days](https://extension.psu.edu/understanding-growing-degree-days) | No crop/cultivar value established | CALIBRATION_REQUIRED |
+| apple | Chilling then forcing candidate | null | null | null | null | null | Tbase °C; chilling hours/portions; forcing GDD °C·day | Penn State Extension, [Understanding Growing Degree Days](https://extension.psu.edu/understanding-growing-degree-days) | No crop/cultivar value established | CALIBRATION_REQUIRED |
 
 The cited source supports the general method: GDD uses a crop/pest-specific base
 temperature and may use an upper cutoff. It does not justify transition targets
