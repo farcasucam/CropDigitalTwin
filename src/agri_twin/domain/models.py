@@ -146,6 +146,8 @@ class CropGrowthState:
     chilling_hours: float = 0.0
     dormancy_released: bool = True
     phenology_model: str = "UNSET"
+    nutrient_reserve_kg_ha: float = 200.0
+    nutrient_available_kg_ha: float = 200.0
 
     def __post_init__(self) -> None:
         if self.simulation_time.tzinfo is None:
@@ -166,6 +168,7 @@ class CropGrowthState:
             "biomass_fruit", "leaf_area_index", "root_depth_m", "accumulated_stress",
             "yield_estimate",
             "gdd_accumulated", "chilling_hours",
+            "nutrient_reserve_kg_ha", "nutrient_available_kg_ha",
         ):
             value = getattr(self, name)
             if not math.isfinite(value) or value < 0:
@@ -177,6 +180,8 @@ class CropGrowthState:
             raise ValueError("harvest_ready requires maturity_index of 1")
         if not self.phenology_model:
             raise ValueError("phenology_model must be set")
+        if self.nutrient_available_kg_ha > self.nutrient_reserve_kg_ha:
+            raise ValueError("nutrient availability cannot exceed reserve")
 
     def advance(self, simulation_time: datetime, dt_seconds: float) -> "CropGrowthState":
         """Return this persistent state at a later SimulationClock instant.

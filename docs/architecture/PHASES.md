@@ -12,6 +12,7 @@
 | 4.7.3 | Phenology, chilling and maturity engine | calibrated crop/variety profiles remain pending |
 | 4.7.4 | Radiation, LAI and biomass engine | water, nutrient and climate limitation models remain pending |
 | 4.7.5 | Simplified crop water balance | soil calibration and controller policy remain pending |
+| 4.7.6 | Simplified nutrient availability | field nutrient data and calibration remain pending |
 | 5 | Actuators + Controller | comandos y estados separados |
 | 6 | Eventos + escenarios | replay reproducible |
 | 7 | Storage | histórico consultable |

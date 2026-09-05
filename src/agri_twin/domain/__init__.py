@@ -39,6 +39,13 @@ from agri_twin.domain.water_balance import (
     WaterBalanceError,
     WaterBalanceResult,
 )
+from agri_twin.domain.nutrient_balance import (
+    FertilizationRequest,
+    NutrientBalanceEngine,
+    NutrientBalanceError,
+    NutrientBalanceResult,
+    NutrientProfile,
+)
 
 from agri_twin.domain.models import (
     ActuatorState,
@@ -108,4 +115,9 @@ __all__ = [
     "WaterBalanceEngine",
     "WaterBalanceError",
     "WaterBalanceResult",
+    "FertilizationRequest",
+    "NutrientBalanceEngine",
+    "NutrientBalanceError",
+    "NutrientBalanceResult",
+    "NutrientProfile",
 ]

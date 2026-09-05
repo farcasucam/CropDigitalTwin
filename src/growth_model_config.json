@@ -42,5 +42,31 @@
     "shading": {"available": null, "unit": "fraction_0_to_1", "capacity": null, "evidence_status": "PENDING_SITE_INVENTORY"},
     "misting": {"available": null, "unit": "L_h-1", "capacity": null, "evidence_status": "PENDING_SITE_INVENTORY"},
     "co2": {"available": null, "unit": "kg_h-1", "capacity": null, "evidence_status": "PENDING_SITE_INVENTORY"}
+  },
+  "nutrient_model": {
+    "activation_status": "CONTRACT_ONLY",
+    "evidence_status": "ENGINEERING_APPROXIMATION",
+    "requires_calibration": true,
+    "primary_nutrient": "N",
+    "baseline_reserve_unit": "kg_N_ha-1",
+    "baseline_reserve_kg_ha": 200.0,
+    "extraction_unit": "kg_N_kg_DM-1",
+    "extraction_kg_per_kg_biomass": 0.02,
+    "stage_factor_unit": "relative_factor_0_to_1_plus",
+    "stage_factor": {
+      "establishment": 0.7,
+      "vegetative_growth": 1.0,
+      "yield_maturation": 1.1,
+      "post_harvest_dormancy": 0.3
+    },
+    "crop_profiles": {
+      "tomato": null,
+      "lettuce": null,
+      "pepper": null,
+      "grape": null,
+      "peach": null,
+      "plum": null,
+      "apple": null
+    }
   }
 }
