@@ -18,10 +18,15 @@ from agri_twin.domain.farm import (
     Plot as FarmPlot,
     PlotLocation,
 )
+from agri_twin.domain.growth_configuration import (
+    GrowthModelConfigurationError,
+    GrowthModelConfigurationRepository,
+)
 
 from agri_twin.domain.models import (
     ActuatorState,
     CropState,
+    CropGrowthState,
     DerivedEnvironmentState,
     Plot,
     SimulationState,
@@ -44,6 +49,7 @@ from agri_twin.domain.weather import (
 __all__ = [
     "ActuatorState",
     "CropState",
+    "CropGrowthState",
     "DerivedEnvironmentState",
     "Plot",
     "SimulationState",
@@ -72,4 +78,6 @@ __all__ = [
     "FarmConfigurationError",
     "FarmPlot",
     "PlotLocation",
+    "GrowthModelConfigurationError",
+    "GrowthModelConfigurationRepository",
 ]

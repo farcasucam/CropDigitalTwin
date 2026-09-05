@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "activation_status": "CONTRACT_ONLY",
+  "crop_parameter_contract": {
+    "thermal_base_temperature_c": {"unit": "degC", "reasonable_range": [-10.0, 30.0], "default_value": null, "evidence_status": "CALIBRATION_REQUIRED", "crop_specific": true, "variety_specific": true, "plot_specific": false, "requires_calibration": true},
+    "thermal_upper_temperature_c": {"unit": "degC", "reasonable_range": [20.0, 50.0], "default_value": null, "evidence_status": "CALIBRATION_REQUIRED", "crop_specific": true, "variety_specific": true, "plot_specific": false, "requires_calibration": true},
+    "chilling_requirement": {"unit": "chill_portions_or_hours", "reasonable_range": [0.0, null], "default_value": null, "evidence_status": "CALIBRATION_REQUIRED", "crop_specific": true, "variety_specific": true, "plot_specific": false, "requires_calibration": true},
+    "gdd_to_next_stage": {"unit": "degC_day", "reasonable_range": [0.0, null], "default_value": null, "evidence_status": "CALIBRATION_REQUIRED", "crop_specific": true, "variety_specific": true, "plot_specific": true, "requires_calibration": true},
+    "vpd_response": {"unit": "relative_factor_0_to_1", "reasonable_range": [0.0, 1.0], "default_value": null, "evidence_status": "CALIBRATION_REQUIRED", "crop_specific": true, "variety_specific": false, "plot_specific": false, "requires_calibration": true},
+    "radiation_response": {"unit": "relative_factor_0_to_1", "reasonable_range": [0.0, 1.0], "default_value": null, "evidence_status": "CALIBRATION_REQUIRED", "crop_specific": true, "variety_specific": false, "plot_specific": false, "requires_calibration": true},
+    "lai_max": {"unit": "m2_leaf_m-2_ground", "reasonable_range": [0.0, 15.0], "default_value": null, "evidence_status": "CALIBRATION_REQUIRED", "crop_specific": true, "variety_specific": true, "plot_specific": true, "requires_calibration": true},
+    "rue": {"unit": "g_biomass_MJ-1_PAR", "reasonable_range": [0.0, 10.0], "default_value": null, "evidence_status": "CALIBRATION_REQUIRED", "crop_specific": true, "variety_specific": true, "plot_specific": true, "requires_calibration": true},
+    "biomass_partitioning": {"unit": "fraction_0_to_1", "reasonable_range": [0.0, 1.0], "default_value": null, "evidence_status": "CALIBRATION_REQUIRED", "crop_specific": true, "variety_specific": true, "plot_specific": true, "requires_calibration": true},
+    "root_depth_m": {"unit": "m", "reasonable_range": [0.0, 5.0], "default_value": null, "evidence_status": "CALIBRATION_REQUIRED", "crop_specific": true, "variety_specific": true, "plot_specific": true, "requires_calibration": true},
+    "maturity_response": {"unit": "relative_factor_0_to_1", "reasonable_range": [0.0, 1.0], "default_value": null, "evidence_status": "CALIBRATION_REQUIRED", "crop_specific": true, "variety_specific": true, "plot_specific": true, "requires_calibration": true}
+  },
+  "crop_profiles": {
+    "tomato": {"phenology_evidence": "src/crop_phenology.csv", "parameter_values": null},
+    "lettuce": {"phenology_evidence": "src/crop_phenology.csv", "parameter_values": null},
+    "pepper": {"phenology_evidence": "src/crop_phenology.csv", "parameter_values": null},
+    "grape": {"phenology_evidence": "src/crop_phenology.csv", "parameter_values": null},
+    "peach": {"phenology_evidence": "src/crop_phenology.csv", "parameter_values": null},
+    "plum": {"phenology_evidence": "src/crop_phenology.csv", "parameter_values": null},
+    "apple": {"phenology_evidence": "src/crop_phenology.csv", "parameter_values": null}
+  },
+  "soil_profiles": {
+    "sandy_loam": {"field_capacity_vwc": 0.23, "wilting_point_vwc": 0.10, "available_water_capacity_mm_m": 130.0, "rooting_depth_m": null, "infiltration_mm_h": null, "drainage_mm_h": null, "source": "engineering_approximation", "requires_calibration": true},
+    "clay_loam": {"field_capacity_vwc": 0.32, "wilting_point_vwc": 0.15, "available_water_capacity_mm_m": 170.0, "rooting_depth_m": null, "infiltration_mm_h": null, "drainage_mm_h": null, "source": "engineering_approximation", "requires_calibration": true},
+    "calcareous_loam": {"field_capacity_vwc": 0.27, "wilting_point_vwc": 0.12, "available_water_capacity_mm_m": 150.0, "rooting_depth_m": null, "infiltration_mm_h": null, "drainage_mm_h": null, "source": "engineering_approximation", "requires_calibration": true}
+  },
+  "environment_profiles": {
+    "outdoor": {"floor_area_m2": null, "volume_m3": null, "solar_transmission_fraction": 1.0, "thermal_mass_kJ_K-1": null, "ventilation_air_changes_h-1": null, "cover_type": null, "shading_fraction": null, "heat_loss_W_K-1": null, "evidence_status": "PENDING_SITE_INVENTORY", "requires_calibration": true},
+    "passive_greenhouse": {"floor_area_m2": null, "volume_m3": null, "solar_transmission_fraction": null, "thermal_mass_kJ_K-1": null, "ventilation_air_changes_h-1": null, "cover_type": null, "shading_fraction": null, "heat_loss_W_K-1": null, "evidence_status": "PENDING_SITE_INVENTORY", "requires_calibration": true},
+    "actuated_greenhouse": {"floor_area_m2": null, "volume_m3": null, "solar_transmission_fraction": null, "thermal_mass_kJ_K-1": null, "ventilation_air_changes_h-1": null, "cover_type": null, "shading_fraction": null, "heat_loss_W_K-1": null, "evidence_status": "PENDING_SITE_INVENTORY", "requires_calibration": true}
+  },
+  "actuator_contract": {
+    "irrigation": {"available": null, "unit": "mm_h", "capacity": null, "evidence_status": "PENDING_SITE_INVENTORY"},
+    "heating": {"available": null, "unit": "kW", "capacity": null, "evidence_status": "PENDING_SITE_INVENTORY"},
+    "cooling": {"available": null, "unit": "kW", "capacity": null, "evidence_status": "PENDING_SITE_INVENTORY"},
+    "hvac": {"available": null, "unit": "kW", "capacity": null, "evidence_status": "PENDING_SITE_INVENTORY"},
+    "ventilation": {"available": null, "unit": "air_changes_h-1", "capacity": null, "evidence_status": "PENDING_SITE_INVENTORY"},
+    "shading": {"available": null, "unit": "fraction_0_to_1", "capacity": null, "evidence_status": "PENDING_SITE_INVENTORY"},
+    "misting": {"available": null, "unit": "L_h-1", "capacity": null, "evidence_status": "PENDING_SITE_INVENTORY"},
+    "co2": {"available": null, "unit": "kg_h-1", "capacity": null, "evidence_status": "PENDING_SITE_INVENTORY"}
+  }
+}

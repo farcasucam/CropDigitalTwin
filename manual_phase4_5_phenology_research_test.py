@@ -51,12 +51,13 @@ def proposal_traceability() -> str:
     text = DOC.read_text(encoding="utf-8")
     normalized = text.lower()
     require("penn state extension" in normalized and "https://extension.psu.edu/understanding-growing-degree-days" in normalized, "method source missing")
-    rows = {line.split("|")[1].strip().lower(): line.lower() for line in text.splitlines() if line.startswith("|") and not line.startswith("| Crop") and "---" not in line}
+    matrix_section = text.split("## Phase 4.7")[0]
+    rows = {line.split("|")[1].strip().lower(): line.lower() for line in matrix_section.splitlines() if line.startswith("|") and not line.startswith("| Crop") and "---" not in line}
     for crop, (method, unit, status, cultivar_dependent) in PROPOSALS.items():
         row = rows.get(crop)
         require(row and method.lower() in row and unit.lower() in row and status.lower() in row, f"incomplete proposal row: {crop}")
         if cultivar_dependent:
-            require("cultivar" in text.lower(), f"cultivar dependency missing: {crop}")
+            require("cultivar" in matrix_section.lower(), f"cultivar dependency missing: {crop}")
     return "method source, units and calibration status are documented"
 
 

@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass, field
+from dataclasses import asdict, dataclass, field
+from datetime import datetime, timedelta
 
 
 def _in_range(name: str, value: float, minimum: float, maximum: float) -> None:
@@ -107,6 +108,88 @@ class CropState:
     @property
     def growth_factor(self) -> float:
         return 1.0 - self.cumulative_stress
+
+
+@dataclass(frozen=True, slots=True)
+class CropGrowthState:
+    """Persistent crop state at an explicit SimulationClock instant.
+
+    This contract deliberately stores no autonomous crop dynamics. A later
+    growth engine will derive state changes from weather and an explicit dt.
+    """
+
+    simulation_time: datetime
+    crop_key: str
+    variety: str
+    current_stage: str
+    phenology_progress: float = 0.0
+    biomass_total: float = 0.0
+    biomass_leaf: float = 0.0
+    biomass_stem: float = 0.0
+    biomass_root: float = 0.0
+    biomass_fruit: float = 0.0
+    leaf_area_index: float = 0.0
+    root_depth_m: float = 0.0
+    soil_water_vwc: float = 0.0
+    nutrient_status: float = 1.0
+    water_stress: float = 0.0
+    heat_stress: float = 0.0
+    cold_stress: float = 0.0
+    vpd_stress: float = 0.0
+    radiation_stress: float = 0.0
+    frost_damage: float = 0.0
+    accumulated_stress: float = 0.0
+    maturity_index: float = 0.0
+    yield_estimate: float = 0.0
+    harvest_ready: bool = False
+
+    def __post_init__(self) -> None:
+        if self.simulation_time.tzinfo is None:
+            raise ValueError("simulation_time must be timezone-aware")
+        if not self.crop_key or not self.variety or not self.current_stage:
+            raise ValueError("crop_key, variety and current_stage must be set")
+        for name in (
+            "phenology_progress", "soil_water_vwc", "nutrient_status", "water_stress",
+            "heat_stress", "cold_stress", "vpd_stress", "radiation_stress",
+            "frost_damage", "maturity_index",
+        ):
+            value = getattr(self, name)
+            if not math.isfinite(value):
+                raise ValueError(f"{name} must be finite")
+            _in_range(name, value, 0.0, 1.0)
+        for name in (
+            "biomass_total", "biomass_leaf", "biomass_stem", "biomass_root",
+            "biomass_fruit", "leaf_area_index", "root_depth_m", "accumulated_stress",
+            "yield_estimate",
+        ):
+            value = getattr(self, name)
+            if not math.isfinite(value) or value < 0:
+                raise ValueError(f"{name} must be finite and non-negative")
+        partitioned_biomass = self.biomass_leaf + self.biomass_stem + self.biomass_root + self.biomass_fruit
+        if not math.isclose(self.biomass_total, partitioned_biomass, rel_tol=1e-9, abs_tol=1e-12):
+            raise ValueError("biomass_total must equal partitioned biomass")
+        if self.harvest_ready and self.maturity_index < 1.0:
+            raise ValueError("harvest_ready requires maturity_index of 1")
+
+    def advance(self, simulation_time: datetime, dt_seconds: float) -> "CropGrowthState":
+        """Return this persistent state at a later SimulationClock instant.
+
+        ``simulation_time`` and ``dt_seconds`` are supplied by the caller's
+        SimulationClock/Scheduler. No real-time clock or crop dynamics run here.
+        """
+        if simulation_time.tzinfo is None:
+            raise ValueError("simulation_time must be timezone-aware")
+        if not math.isfinite(dt_seconds) or dt_seconds < 0:
+            raise ValueError("dt_seconds must be finite and non-negative")
+        if simulation_time != self.simulation_time + timedelta(seconds=dt_seconds):
+            raise ValueError("simulation_time must advance by dt_seconds")
+        return CropGrowthState(**(self.to_dict() | {"simulation_time": simulation_time}))
+
+    def to_dict(self) -> dict[str, object]:
+        """Return a JSON-ready representation using ISO 8601 simulation time."""
+        payload = asdict(self)
+        payload["simulation_time"] = self.simulation_time.isoformat()
+        return payload
 
 
 @dataclass(frozen=True, slots=True)

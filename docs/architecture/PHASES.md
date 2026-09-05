@@ -7,6 +7,8 @@
 | 2 | Weather | series reproducibles |
 | 3 | Física | causalidad física OK |
 | 4 | Crop | stress/growth OK |
+| 4.7.1 | Growth-model configuration contract | calibrated values and activation remain pending |
+| 4.7.2 | Persistent crop growth state | deterministic dynamics remain pending |
 | 5 | Actuators + Controller | comandos y estados separados |
 | 6 | Eventos + escenarios | replay reproducible |
 | 7 | Storage | histórico consultable |
