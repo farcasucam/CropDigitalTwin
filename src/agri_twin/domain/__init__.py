@@ -28,6 +28,11 @@ from agri_twin.domain.phenology import (
     PhenologyEvidenceLevel,
     PhenologyProfile,
 )
+from agri_twin.domain.radiation_growth import (
+    RadiationGrowthEngine,
+    RadiationGrowthError,
+    RadiationGrowthProfile,
+)
 
 from agri_twin.domain.models import (
     ActuatorState,
@@ -90,4 +95,7 @@ __all__ = [
     "PhenologyError",
     "PhenologyEvidenceLevel",
     "PhenologyProfile",
+    "RadiationGrowthEngine",
+    "RadiationGrowthError",
+    "RadiationGrowthProfile",
 ]
