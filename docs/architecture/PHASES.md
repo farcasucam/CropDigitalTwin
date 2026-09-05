@@ -16,6 +16,7 @@
 | 4.7.7 | Climate stress, extreme events and accumulated damage | crop/plot calibration remains pending |
 | 4.7.8 | Greenhouse microclimate and actuators | site inventory and actuator calibration remain pending |
 | 4.7.9 | Integrated plant digital twin | end-to-end calibration and scenario validation remain pending |
+| 5.1 | Scientific parameter audit and traceability | calibration and validation remain pending |
 | 5 | Actuators + Controller | comandos y estados separados |
 | 6 | Eventos + escenarios | replay reproducible |
 | 7 | Storage | histórico consultable |

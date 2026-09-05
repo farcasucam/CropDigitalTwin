@@ -60,6 +60,12 @@ from agri_twin.domain.greenhouse import (
     GreenhouseModelError,
     GreenhouseProfile,
 )
+from agri_twin.domain.parameter_audit import (
+    ParameterAudit,
+    ParameterAuditError,
+    ParameterRecord,
+    ParameterRegistry,
+)
 
 from agri_twin.domain.models import (
     ActuatorState,
@@ -144,4 +150,8 @@ __all__ = [
     "GreenhouseMicroclimateState",
     "GreenhouseModelError",
     "GreenhouseProfile",
+    "ParameterAudit",
+    "ParameterAuditError",
+    "ParameterRecord",
+    "ParameterRegistry",
 ]
