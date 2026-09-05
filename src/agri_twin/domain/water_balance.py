@@ -100,8 +100,7 @@ class WaterBalanceEngine:
             drainage = min(drainage, soil.drainage_rate * hours)
         storage = min(capacity, max(0.0, storage_before_drainage - drainage))
         next_vwc = soil.wilting_point + storage / (depth * 1000.0)
-        stress_reference = crop.soil_water_vwc if crop else soil.vwc_m3_m3
-        stress = self._water_stress(next_vwc, soil.wilting_point, soil.field_capacity, stress_reference)
+        stress = self._water_stress(next_vwc, soil.wilting_point, soil.field_capacity)
         next_soil = SoilState(next_vwc, weather.temperature_c, soil.field_capacity, soil.wilting_point, soil.drainage_rate, storage)
         return WaterBalanceResult(next_soil, stress, et0, evaporation, transpiration, drainage, irrigation_applied, precipitation, storage)
 
@@ -127,8 +126,7 @@ class WaterBalanceEngine:
         return max(0.0, 0.0023 * (weather.temperature_c + 17.8) * math.sqrt(temperature_range) * solar_mj)
 
     @staticmethod
-    def _water_stress(vwc: float, wilting_point: float, field_capacity: float, previous_vwc: float) -> float:
+    def _water_stress(vwc: float, wilting_point: float, field_capacity: float) -> float:
         denominator = max(field_capacity - wilting_point, 1e-12)
         current_relative = (vwc - wilting_point) / denominator
-        previous_relative = (previous_vwc - wilting_point) / denominator
-        return min(1.0, max(0.0, 1.0 - min(current_relative, previous_relative)))
+        return min(1.0, max(0.0, 1.0 - current_relative))

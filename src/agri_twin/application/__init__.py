@@ -14,6 +14,11 @@ from agri_twin.application.scheduler import (
     SimulationSchedulerValueError,
 )
 from agri_twin.application.weather import WeatherEngine
+from agri_twin.application.orchestrator import (
+    CropDigitalTwinOrchestrator,
+    CropSimulationError,
+    CropSimulationSnapshot,
+)
 from agri_twin.application.plot_weather import (
     build_crop_digital_twin_state,
     download_weather_for_plot,
@@ -55,6 +60,9 @@ __all__ = [
     "SimulationScheduler",
     "SimulationSchedulerValueError",
     "WeatherEngine",
+    "CropDigitalTwinOrchestrator",
+    "CropSimulationError",
+    "CropSimulationSnapshot",
     "download_weather_for_plot",
     "build_crop_digital_twin_state",
     "OpenFieldPhysicalModel",
