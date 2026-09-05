@@ -33,6 +33,12 @@ from agri_twin.domain.radiation_growth import (
     RadiationGrowthError,
     RadiationGrowthProfile,
 )
+from agri_twin.domain.water_balance import (
+    IrrigationRequest,
+    WaterBalanceEngine,
+    WaterBalanceError,
+    WaterBalanceResult,
+)
 
 from agri_twin.domain.models import (
     ActuatorState,
@@ -98,4 +104,8 @@ __all__ = [
     "RadiationGrowthEngine",
     "RadiationGrowthError",
     "RadiationGrowthProfile",
+    "IrrigationRequest",
+    "WaterBalanceEngine",
+    "WaterBalanceError",
+    "WaterBalanceResult",
 ]
