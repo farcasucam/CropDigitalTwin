@@ -148,6 +148,11 @@ class CropGrowthState:
     phenology_model: str = "UNSET"
     nutrient_reserve_kg_ha: float = 200.0
     nutrient_available_kg_ha: float = 200.0
+    frost_exposure_hours: float = 0.0
+    frost_intensity_c: float = 0.0
+    heat_exposure_hours: float = 0.0
+    heat_damage: float = 0.0
+    irreversible_damage: float = 0.0
 
     def __post_init__(self) -> None:
         if self.simulation_time.tzinfo is None:
@@ -169,6 +174,7 @@ class CropGrowthState:
             "yield_estimate",
             "gdd_accumulated", "chilling_hours",
             "nutrient_reserve_kg_ha", "nutrient_available_kg_ha",
+            "frost_exposure_hours", "frost_intensity_c", "heat_exposure_hours",
         ):
             value = getattr(self, name)
             if not math.isfinite(value) or value < 0:
@@ -182,6 +188,8 @@ class CropGrowthState:
             raise ValueError("phenology_model must be set")
         if self.nutrient_available_kg_ha > self.nutrient_reserve_kg_ha:
             raise ValueError("nutrient availability cannot exceed reserve")
+        for name in ("heat_damage", "irreversible_damage"):
+            _in_range(name, getattr(self, name), 0.0, 1.0)
 
     def advance(self, simulation_time: datetime, dt_seconds: float) -> "CropGrowthState":
         """Return this persistent state at a later SimulationClock instant.

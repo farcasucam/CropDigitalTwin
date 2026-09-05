@@ -46,6 +46,12 @@ from agri_twin.domain.nutrient_balance import (
     NutrientBalanceResult,
     NutrientProfile,
 )
+from agri_twin.domain.climate_stress import (
+    ClimateStressEngine,
+    ClimateStressError,
+    ClimateStressProfile,
+    ClimateStressResult,
+)
 
 from agri_twin.domain.models import (
     ActuatorState,
@@ -120,4 +126,8 @@ __all__ = [
     "NutrientBalanceError",
     "NutrientBalanceResult",
     "NutrientProfile",
+    "ClimateStressEngine",
+    "ClimateStressError",
+    "ClimateStressProfile",
+    "ClimateStressResult",
 ]
