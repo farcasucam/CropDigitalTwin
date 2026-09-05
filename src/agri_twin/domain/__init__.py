@@ -52,6 +52,14 @@ from agri_twin.domain.climate_stress import (
     ClimateStressProfile,
     ClimateStressResult,
 )
+from agri_twin.domain.greenhouse import (
+    ActuatorControl,
+    GreenhouseMicroclimateEngine,
+    GreenhouseMicroclimateResult,
+    GreenhouseMicroclimateState,
+    GreenhouseModelError,
+    GreenhouseProfile,
+)
 
 from agri_twin.domain.models import (
     ActuatorState,
@@ -130,4 +138,10 @@ __all__ = [
     "ClimateStressError",
     "ClimateStressProfile",
     "ClimateStressResult",
+    "ActuatorControl",
+    "GreenhouseMicroclimateEngine",
+    "GreenhouseMicroclimateResult",
+    "GreenhouseMicroclimateState",
+    "GreenhouseModelError",
+    "GreenhouseProfile",
 ]
