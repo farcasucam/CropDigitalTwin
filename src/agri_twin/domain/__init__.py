@@ -22,6 +22,12 @@ from agri_twin.domain.growth_configuration import (
     GrowthModelConfigurationError,
     GrowthModelConfigurationRepository,
 )
+from agri_twin.domain.phenology import (
+    PhenologyEngine,
+    PhenologyError,
+    PhenologyEvidenceLevel,
+    PhenologyProfile,
+)
 
 from agri_twin.domain.models import (
     ActuatorState,
@@ -80,4 +86,8 @@ __all__ = [
     "PlotLocation",
     "GrowthModelConfigurationError",
     "GrowthModelConfigurationRepository",
+    "PhenologyEngine",
+    "PhenologyError",
+    "PhenologyEvidenceLevel",
+    "PhenologyProfile",
 ]

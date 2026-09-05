@@ -142,6 +142,10 @@ class CropGrowthState:
     maturity_index: float = 0.0
     yield_estimate: float = 0.0
     harvest_ready: bool = False
+    gdd_accumulated: float = 0.0
+    chilling_hours: float = 0.0
+    dormancy_released: bool = True
+    phenology_model: str = "UNSET"
 
     def __post_init__(self) -> None:
         if self.simulation_time.tzinfo is None:
@@ -161,6 +165,7 @@ class CropGrowthState:
             "biomass_total", "biomass_leaf", "biomass_stem", "biomass_root",
             "biomass_fruit", "leaf_area_index", "root_depth_m", "accumulated_stress",
             "yield_estimate",
+            "gdd_accumulated", "chilling_hours",
         ):
             value = getattr(self, name)
             if not math.isfinite(value) or value < 0:
@@ -170,6 +175,8 @@ class CropGrowthState:
             raise ValueError("biomass_total must equal partitioned biomass")
         if self.harvest_ready and self.maturity_index < 1.0:
             raise ValueError("harvest_ready requires maturity_index of 1")
+        if not self.phenology_model:
+            raise ValueError("phenology_model must be set")
 
     def advance(self, simulation_time: datetime, dt_seconds: float) -> "CropGrowthState":
         """Return this persistent state at a later SimulationClock instant.

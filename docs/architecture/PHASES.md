@@ -9,6 +9,7 @@
 | 4 | Crop | stress/growth OK |
 | 4.7.1 | Growth-model configuration contract | calibrated values and activation remain pending |
 | 4.7.2 | Persistent crop growth state | deterministic dynamics remain pending |
+| 4.7.3 | Phenology, chilling and maturity engine | calibrated crop/variety profiles remain pending |
 | 5 | Actuators + Controller | comandos y estados separados |
 | 6 | Eventos + escenarios | replay reproducible |
 | 7 | Storage | histórico consultable |
