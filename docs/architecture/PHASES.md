@@ -19,6 +19,7 @@
 | 5.1 | Scientific parameter audit and traceability | calibration and validation remain pending |
 | 5.2 | Calibration framework and predictive-model boundary | scientific datasets and calibration remain pending |
 | 5.3 | Scientific validation, metrics and benchmarking | independent observations remain pending |
+| 5.4 | Reproducible agronomic scenarios | scenarios are synthetic and not scientific validation |
 | 5 | Actuators + Controller | comandos y estados separados |
 | 6 | Eventos + escenarios | replay reproducible |
 | 7 | Storage | histórico consultable |
