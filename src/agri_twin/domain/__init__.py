@@ -112,6 +112,7 @@ from agri_twin.domain.crop_calibration import (
     build_protocol,
     synthetic_calibration_report,
 )
+from agri_twin.domain.crop_growth import CropGrowthEngine, CropGrowthError, CropGrowthInput, CropGrowthResult
 
 from agri_twin.domain.models import (
     ActuatorState,
@@ -240,4 +241,8 @@ __all__ = [
     "audit_observations",
     "build_protocol",
     "synthetic_calibration_report",
+    "CropGrowthEngine",
+    "CropGrowthError",
+    "CropGrowthInput",
+    "CropGrowthResult",
 ]
