@@ -87,6 +87,18 @@ from agri_twin.domain.calibration import (
     SimulationPoint,
     VariableMetrics,
 )
+from agri_twin.domain.validation import (
+    AlignmentPolicy,
+    BenchmarkEngine,
+    BenchmarkResult,
+    PersistenceBaseline,
+    ValidationCase,
+    ValidationComparator,
+    ValidationEngine,
+    ValidationError,
+    ValidationResult,
+    ValidationStatus,
+)
 
 from agri_twin.domain.models import (
     ActuatorState,
@@ -194,4 +206,14 @@ __all__ = [
     "PredictionModel",
     "SimulationPoint",
     "VariableMetrics",
+    "AlignmentPolicy",
+    "BenchmarkEngine",
+    "BenchmarkResult",
+    "PersistenceBaseline",
+    "ValidationCase",
+    "ValidationComparator",
+    "ValidationEngine",
+    "ValidationError",
+    "ValidationResult",
+    "ValidationStatus",
 ]
