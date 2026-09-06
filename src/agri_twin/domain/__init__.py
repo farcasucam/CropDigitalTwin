@@ -99,6 +99,19 @@ from agri_twin.domain.validation import (
     ValidationResult,
     ValidationStatus,
 )
+from agri_twin.domain.crop_calibration import (
+    CalibrationLevel,
+    CalibrationPriority,
+    CalibrabilityRecord,
+    CropCalibrationError,
+    CropCalibrationProtocol,
+    CropCalibrationReport,
+    ObservationAudit,
+    ScientificStatus,
+    audit_observations,
+    build_protocol,
+    synthetic_calibration_report,
+)
 
 from agri_twin.domain.models import (
     ActuatorState,
@@ -216,4 +229,15 @@ __all__ = [
     "ValidationError",
     "ValidationResult",
     "ValidationStatus",
+    "CalibrationLevel",
+    "CalibrationPriority",
+    "CalibrabilityRecord",
+    "CropCalibrationError",
+    "CropCalibrationProtocol",
+    "CropCalibrationReport",
+    "ObservationAudit",
+    "ScientificStatus",
+    "audit_observations",
+    "build_protocol",
+    "synthetic_calibration_report",
 ]
