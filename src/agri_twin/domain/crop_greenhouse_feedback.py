@@ -97,19 +97,18 @@ class CropGreenhouseFeedbackConfiguration:
     co2_molar_mass_ratio: float = 44.0 / 12.0
     air_density_kg_m3: float = 1.2
     air_volume_m3: float = 1000.0
-    vpd_reference_kpa: float = 1.0
 
     def __post_init__(self) -> None:
         if not isinstance(self.max_iterations, int) or self.max_iterations <= 0:
             raise CropGreenhouseFeedbackError("max_iterations must be a positive integer")
-        for name in ("tolerance_temperature_c", "tolerance_relative_humidity_pct", "tolerance_co2_ppm", "latent_heat_j_kg", "sensible_heat_transfer_w_m2_k", "leaf_air_delta_per_intercepted_w_m2", "co2_carbon_fraction", "co2_molar_mass_ratio", "air_density_kg_m3", "air_volume_m3", "vpd_reference_kpa"):
+        for name in ("tolerance_temperature_c", "tolerance_relative_humidity_pct", "tolerance_co2_ppm", "latent_heat_j_kg", "sensible_heat_transfer_w_m2_k", "leaf_air_delta_per_intercepted_w_m2", "co2_carbon_fraction", "co2_molar_mass_ratio", "air_density_kg_m3", "air_volume_m3"):
             value = getattr(self, name)
             if not math.isfinite(value) or value < 0:
                 raise CropGreenhouseFeedbackError(f"{name} must be finite and non-negative")
         if not 0 < self.relaxation_alpha <= 1:
             raise CropGreenhouseFeedbackError("relaxation_alpha must be in (0, 1]")
-        if self.co2_carbon_fraction > 1 or self.vpd_reference_kpa == 0:
-            raise CropGreenhouseFeedbackError("feedback configuration fraction or VPD reference is invalid")
+        if self.co2_carbon_fraction > 1:
+            raise CropGreenhouseFeedbackError("feedback configuration fraction is invalid")
 
 
 class CropPhysicalExchangeModel:
@@ -133,9 +132,8 @@ class CropPhysicalExchangeModel:
             water_result = self.water.advance(soil, weather, dt_seconds, crop)
             hours = dt_seconds / 3600.0
             base_rate = water_result.transpiration_mm / max(hours, 1e-12)
-            vpd_multiplier = min(3.0, max(0.0, microclimate.vpd_kpa / self.configuration.vpd_reference_kpa))
-            transpiration = base_rate * (0.5 + 0.5 * vpd_multiplier)
-            origin = "WaterBalanceEngine plus engineering VPD response"
+            transpiration = base_rate
+            origin = "WaterBalanceEngine; no second VPD correction"
         else:
             canopy = min(1.0, max(0.0, growth.state.leaf_area_index / 3.0))
             transpiration = max(0.0, (microclimate.vpd_kpa * 0.15 + microclimate.solar_radiation_w_m2 * 0.00005) * canopy)
@@ -174,6 +172,7 @@ class CropGreenhouseFeedbackLoop:
             raise CropGreenhouseFeedbackError("simulation_time must be timezone-aware")
         zero_feedback = CropMicroclimateFeedback()
         current = self.greenhouse.step(weather, greenhouse_configuration, actuators, zero_feedback, dt_seconds)
+        initial = current
         last_exchange = self.exchange.calculate(crop, self._grow(crop, weather, current, dt_seconds, time), current, weather, dt_seconds, soil)
         last_growth = self._grow(crop, weather, current, dt_seconds, time)
         error = math.inf
@@ -182,7 +181,7 @@ class CropGreenhouseFeedbackLoop:
         for iteration in range(1, self.configuration.max_iterations + 1):
             last_growth = self._grow(crop, weather, current, dt_seconds, time)
             last_exchange = self.exchange.calculate(crop, last_growth, current, weather, dt_seconds, soil)
-            calculated = self.greenhouse.step(weather, greenhouse_configuration, actuators, last_exchange.to_feedback(), dt_seconds)
+            calculated = self.greenhouse.step(weather, greenhouse_configuration, actuators, last_exchange.to_feedback(), dt_seconds, prior=current if iteration == 1 else initial)
             next_state = self._relax(current, calculated)
             error = max(
                 abs(next_state.temperature_c - current.temperature_c) / self.configuration.tolerance_temperature_c,

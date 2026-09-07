@@ -26,6 +26,15 @@ the same `dt_seconds` and do not advance time.
 
 No direct `biomass -> temperature` relationship is introduced.
 
+| Channel | Unit | Producer | Consumer/sign | Temporal meaning |
+|---|---|---|---|---|
+| transpiration | `mm h-1` | exchange / `WaterBalanceEngine` | humidity balance, positive vapor | rate over timestep |
+| latent heat | `W m-2` | exchange model | thermal balance, negative cooling | flux over timestep |
+| sensible heat | `W m-2` | exchange model | thermal balance, positive crop-to-air heat | flux over timestep |
+| CO2 uptake | `ppm timestep-1` | exchange from growth | CO2 balance, negative | one external timestep |
+| intercepted radiation | `W m-2` | exchange / crop growth | crop exchange | rate |
+| LAI | `m2 m-2` | `CropGrowthEngine` | exchange geometry | candidate state |
+
 ## Exchanges and units
 
 `PhysicalRate` carries a value, unit, origin, and optional uncertainty.
@@ -41,10 +50,12 @@ No direct `biomass -> temperature` relationship is introduced.
 ### Transpiration
 
 With soil, the implementation starts from `WaterBalanceEngine.transpiration_mm`
-and converts the interval total to a rate. It applies an explicit engineering
-VPD response multiplier bounded at three times the configured reference VPD:
-
-`T_rate = T_water_balance * (0.5 + 0.5 * VPD / VPD_reference)`
+and converts the interval total to a rate. No second VPD multiplier is applied.
+The audit of `WaterBalanceEngine` shows that its current transpiration depends
+on radiation-derived ET0, LAI/canopy factor, crop stage, timestep and soil
+storage; it does not currently model VPD. The feedback layer therefore does
+not pretend to add a calibrated VPD response and records the origin as
+`WaterBalanceEngine; no second VPD correction`.
 
 Without soil, it uses the existing simplified demand shape:
 
@@ -76,6 +87,17 @@ where `h_c = 5 W m-2 K-1` and
 This is a transparent approximation pending leaf-temperature and canopy-energy
 observations; it is not a fitted biological equation.
 
+The simplified balance uses `thermal_exchange_area_m2=1 m2` as an explicit
+engineering normalization because the existing `thermal_mass_kj_k` is a
+whole-zone value while exchange inputs are fluxes. A site-specific canopy or
+floor area must replace this default before scientific use.
+
+In `SimplifiedGreenhouseModel`, the signed crop term is
+`Q_crop = (sensible_heat_w_m2 - latent_heat_w_m2) * thermal_exchange_area_m2`.
+The temperature contribution is `Q_crop * dt / (thermal_mass_kj_k * 1000)`:
+positive sensible heat warms the air and positive latent heat cools it. The
+same transpiration rate adds vapor to the bounded humidity balance.
+
 ### CO2
 
 CO2 uptake is derived from positive `CropGrowthResult.actual_growth_g_m2`, a
@@ -87,6 +109,11 @@ and the configured greenhouse air volume:
 This is a concentration decrement proxy for one external timestep. It is not a
 photosynthesis calibration and is marked pending calibration. The default air
 volume is `1000 m3`, matching the existing greenhouse engineering default.
+The simplified greenhouse carries the result dynamically:
+`CO2_candidate = CO2_previous + supply + ventilation_fraction * (420 - CO2_previous) - uptake`.
+Thus uptake is not recomputed against baseline on every iteration; the first
+call of a timestep uses the previous microclimate state, and fixed-point
+iterations all use the same timestep-start state.
 
 ## Iteration, relaxation, and non-convergence
 
@@ -108,12 +135,16 @@ When `max_iterations` is reached, the result explicitly contains
 microclimate/crop/feedback state. No non-converged result is labelled
 converged.
 
+The fixed-point never commits crop growth or soil water during an iteration.
+Each exchange evaluation receives the original timestep-start crop and soil
+state. Only the returned candidate is available for the caller to commit.
+
 ## Parameters and scientific status
 
-Existing growth and water model outputs are model-derived. The VPD multiplier,
-leaf heat-transfer coefficient, leaf-air proxy, carbon fraction, air density,
-air volume, and default relaxation are engineering defaults. No parameter is
-presented as calibrated. Experimental greenhouse, leaf-temperature,
+Existing growth and water model outputs are model-derived. The leaf heat-
+transfer coefficient, leaf-air proxy, carbon fraction, air density, air volume,
+thermal exchange area, latent heat constant, and default relaxation are
+engineering defaults. No parameter is presented as calibrated. Experimental greenhouse, leaf-temperature,
 transpiration, gas-exchange, and CO2 observations remain required for
 calibration and validation.
 
@@ -129,9 +160,9 @@ python -m pytest tests/test_crop_greenhouse_feedback.py
 python manual_phase5_7_4_crop_greenhouse_feedback_test.py
 ```
 
-The manual test uses tomato RAF and prints initial/final microclimate,
-iterations, convergence, transpiration, latent/sensible heat, and CO2 uptake
-for radiation, shading, and high-VPD scenarios. It is synthetic and does not
+The manual test uses tomato RAF and prints initial/final microclimate, CO2
+supply, iterations, convergence error, transpiration, latent/sensible heat, and
+CO2 uptake for radiation, shading, and high-VPD scenarios. It is synthetic and does not
 claim calibration or experimental validation.
 
 Comparison benchmarks, systematic Simplified-versus-EnergyPlus studies,

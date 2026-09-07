@@ -26,12 +26,13 @@ class GreenhouseConfiguration:
     orientation_deg: float = 180.0
     shading_fraction: float = 0.0
     co2_ppm_baseline: float = 420.0
+    thermal_exchange_area_m2: float = 1.0
     mode: str = "passive_greenhouse"
 
     def __post_init__(self) -> None:
         if self.mode not in {"outdoor", "passive_greenhouse", "actuated_greenhouse"}:
             raise GreenhouseModelError("greenhouse mode is invalid")
-        if not 0 < self.volume_m3 <= 100000 or self.thermal_mass_kj_k <= 0 or self.heat_loss_w_k < 0:
+        if not 0 < self.volume_m3 <= 100000 or self.thermal_mass_kj_k <= 0 or self.heat_loss_w_k < 0 or self.thermal_exchange_area_m2 <= 0:
             raise GreenhouseModelError("greenhouse configuration values are invalid")
         if not 0 < self.solar_transmission <= 1:
             raise GreenhouseModelError("solar_transmission must be in (0, 1]")
@@ -246,6 +247,7 @@ class GreenhousePhysicalModel(ABC):
         actuators: GreenhouseActuatorState,
         crop_feedback: CropMicroclimateFeedback,
         dt_seconds: float,
+        prior: MicroclimateState | None = None,
     ) -> MicroclimateState:
         raise NotImplementedError
 
@@ -317,10 +319,11 @@ class SimplifiedGreenhouseModel(GreenhousePhysicalModel):
         actuators: GreenhouseActuatorState | Mapping[str, Any] | None = None,
         crop_feedback: CropMicroclimateFeedback | None = None,
         dt_seconds: float = 3600.0,
+        prior: MicroclimateState | None = None,
         **legacy: Any,
     ) -> MicroclimateState | GreenhouseMicroclimateResult:
         mode = legacy.pop("mode", None)
-        prior = legacy.pop("prior", self._state)
+        prior = prior if prior is not None else legacy.pop("prior", self._state)
         legacy_actuators = legacy.pop("actuators", None)
 
         positional = list(args)
@@ -368,6 +371,7 @@ class SimplifiedGreenhouseModel(GreenhousePhysicalModel):
                 orientation_deg=cfg.orientation_deg,
                 shading_fraction=cfg.shading_fraction,
                 co2_ppm_baseline=cfg.co2_ppm_baseline,
+                thermal_exchange_area_m2=cfg.thermal_exchange_area_m2,
                 mode=str(mode),
             )
         if not isinstance(cfg, GreenhouseConfiguration):
@@ -414,23 +418,27 @@ class SimplifiedGreenhouseModel(GreenhousePhysicalModel):
         indoor_radiation = weather.solar_radiation_w_m2 * transmission
         par = max(0.0, indoor_radiation * 2.04)
         delta_t = weather.temperature_c - 20.0
+        crop_heat_w = (crop_feedback.sensible_heat_w_m2 - crop_feedback.latent_heat_w_m2) * config.thermal_exchange_area_m2
         thermal_gain = indoor_radiation * 0.004 + actuators.heating_kw * 10.0 - actuators.cooling_kw * 10.0 - config.heat_loss_w_k * max(-10.0, min(10.0, delta_t)) / 100.0
         ventilation_ratio = min(1.0, ventilation / max(profile.ventilation_ach, 1e-6))
         base_temperature = weather.temperature_c + thermal_gain / max(config.volume_m3 / 10.0, 1.0) * (dt_seconds / 3600.0)
         previous_temperature = prior.temperature_c if prior is not None else weather.temperature_c
         temperature = weather.temperature_c + (previous_temperature - weather.temperature_c) * (1.0 - ventilation_ratio)
         temperature += (base_temperature - weather.temperature_c) * 0.25
-        temperature = temperature - crop_feedback.sensible_heat_w_m2 * 0.01
+        temperature += (crop_heat_w / max(config.thermal_mass_kj_k * 1000.0, 1.0)) * dt_seconds
 
-        humidity = weather.relative_humidity_pct + max(0.0, crop_feedback.transpiration_mm_h * 5.0) - ventilation_ratio * 10.0 - actuators.misting_mm_h * 1.5
+        humidity_change = (crop_feedback.transpiration_mm_h - actuators.misting_mm_h) * dt_seconds / max(config.volume_m3, 1.0) * 4.0
         previous_humidity = prior.relative_humidity_pct if prior is not None else weather.relative_humidity_pct
         humidity = weather.relative_humidity_pct + (previous_humidity - weather.relative_humidity_pct) * (1.0 - ventilation_ratio)
-        humidity = min(100.0, max(0.0, humidity + (weather.relative_humidity_pct - humidity) * 0.25))
+        humidity = min(100.0, max(0.0, humidity + humidity_change - ventilation_ratio * 10.0))
 
         saturation = 0.6108 * math.exp(17.27 * temperature / (temperature + 237.3))
         vapor = saturation * humidity / 100.0
-        vpd = max(0.0, saturation - vapor) / 10.0
-        co2 = config.co2_ppm_baseline + actuators.co2_supply_ppm - crop_feedback.co2_uptake_ppm
+        vpd = max(0.0, saturation - vapor)
+        previous_co2 = prior.co2_ppm if prior is not None else config.co2_ppm_baseline
+        outdoor_co2 = 420.0
+        co2_exchange = ventilation_ratio * (outdoor_co2 - previous_co2)
+        co2 = previous_co2 + actuators.co2_supply_ppm + co2_exchange - crop_feedback.co2_uptake_ppm
         return MicroclimateState(
             air_temperature_c=temperature,
             relative_humidity_pct=humidity,
@@ -482,6 +490,8 @@ class GreenhouseMicroclimateEngine(SimplifiedGreenhouseModel):
         actuators: Mapping[str, ActuatorControl | ActuatorState] | None = None,
         prior: GreenhouseMicroclimateState | None = None,
     ) -> GreenhouseMicroclimateResult:
+        if prior is None:
+            self._state = None
         cfg = GreenhouseConfiguration(mode=mode)
         controls = self._normalize_actuators(actuators)
         feedback = CropMicroclimateFeedback(leaf_area_index=crop.leaf_area_index)

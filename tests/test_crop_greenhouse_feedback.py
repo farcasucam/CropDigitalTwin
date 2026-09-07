@@ -16,6 +16,7 @@ from agri_twin.domain import (
     SimplifiedGreenhouseModel,
     SoilState,
     WeatherState,
+    CropMicroclimateFeedback,
 )
 from agri_twin.infrastructure.energyplus_greenhouse import (
     EnergyPlusAvailability,
@@ -54,8 +55,8 @@ def test_transpiration_has_units_origin_and_responds_to_vpd():
     model = CropPhysicalExchangeModel()
     low_vpd = MicroclimateState(25, 90, 0.0, co2_ppm=420, vpd_kpa=0.3, pressure_hpa=1012, solar_radiation_w_m2=500, par_umol_m2_s=1000)
     high_vpd = MicroclimateState(35, 20, 0.0, co2_ppm=420, vpd_kpa=2.5, pressure_hpa=1012, solar_radiation_w_m2=500, par_umol_m2_s=1000)
-    low = model.calculate(state, growth_for(state, low_vpd), low_vpd, weather(), 3600, soil())
-    high = model.calculate(state, growth_for(state, high_vpd), high_vpd, weather(), 3600, soil())
+    low = model.calculate(state, growth_for(state, low_vpd), low_vpd, weather(), 3600)
+    high = model.calculate(state, growth_for(state, high_vpd), high_vpd, weather(), 3600)
     assert high.transpiration_rate.value > low.transpiration_rate.value
     assert high.transpiration_rate.unit == "mm h-1"
     assert high.transpiration_rate.origin
@@ -103,6 +104,13 @@ def test_higher_radiation_increases_growth_potential_and_interception():
     high = loop.step(crop(), weather(solar_radiation_w_m2=900), GreenhouseConfiguration(), GreenhouseActuatorState(), 3600)
     assert high.crop_growth.potential_growth_g_m2 > low.crop_growth.potential_growth_g_m2
     assert high.feedback.intercepted_radiation_w_m2 > low.feedback.intercepted_radiation_w_m2
+
+
+def test_microclimate_changes_crop_growth_factor_through_environment():
+    favorable = CropGreenhouseFeedbackLoop(SimplifiedGreenhouseModel()).step(crop(), weather(temperature_c=24, relative_humidity_pct=80), GreenhouseConfiguration(), GreenhouseActuatorState(), 3600)
+    stressful = CropGreenhouseFeedbackLoop(SimplifiedGreenhouseModel()).step(crop(), weather(temperature_c=40, relative_humidity_pct=10), GreenhouseConfiguration(), GreenhouseActuatorState(), 3600)
+    assert stressful.crop_growth.vpd_factor < favorable.crop_growth.vpd_factor
+    assert stressful.crop_growth.actual_growth_g_m2 < favorable.crop_growth.actual_growth_g_m2
 
 
 def test_shading_and_ventilation_change_the_feedback_path():
@@ -154,6 +162,58 @@ def test_feedback_state_has_no_nan_or_invalid_humidity_co2():
     assert 0 <= result.microclimate.relative_humidity_pct <= 100
     assert result.microclimate.co2_ppm >= 0
     assert all(value == value and abs(value) != float("inf") for value in (result.microclimate.temperature_c, result.feedback.transpiration_mm_h, result.feedback.latent_heat_w_m2, result.feedback.co2_uptake_ppm))
+
+
+def test_co2_uptake_is_dynamic_and_does_not_reset_to_baseline():
+    model = SimplifiedGreenhouseModel()
+    configuration = GreenhouseConfiguration(co2_ppm_baseline=450)
+    feedback = CropMicroclimateFeedback(co2_uptake_ppm=10)
+    first = model.step(weather(), configuration, GreenhouseActuatorState(), feedback, 3600)
+    second = model.step(weather(), configuration, GreenhouseActuatorState(), feedback, 3600)
+    supplied = SimplifiedGreenhouseModel().step(weather(), configuration, GreenhouseActuatorState(co2_supply_ppm=20), CropMicroclimateFeedback(), 3600)
+    assert first.co2_ppm == pytest.approx(440)
+    assert second.co2_ppm == pytest.approx(430)
+    assert supplied.co2_ppm > configuration.co2_ppm_baseline
+
+
+def test_co2_volume_changes_uptake_concentration_effect():
+    micro = MicroclimateState(28, 60, 0, co2_ppm=420, pressure_hpa=1012, solar_radiation_w_m2=700, par_umol_m2_s=1400)
+    growth = growth_for(crop(), micro)
+    small = CropPhysicalExchangeModel(CropGreenhouseFeedbackConfiguration(air_volume_m3=500)).calculate(crop(), growth, micro, weather(), 3600)
+    large = CropPhysicalExchangeModel(CropGreenhouseFeedbackConfiguration(air_volume_m3=2000)).calculate(crop(), growth, micro, weather(), 3600)
+    assert small.co2_uptake.value > large.co2_uptake.value
+
+
+def test_latent_and_sensible_heat_have_effective_signed_temperature_terms():
+    model = SimplifiedGreenhouseModel()
+    configuration = GreenhouseConfiguration(thermal_exchange_area_m2=1)
+    neutral = model.step(weather(), configuration, GreenhouseActuatorState(), CropMicroclimateFeedback(), 3600)
+    latent = model.step(weather(), configuration, GreenhouseActuatorState(), CropMicroclimateFeedback(latent_heat_w_m2=200), 3600, prior=neutral)
+    sensible = model.step(weather(), configuration, GreenhouseActuatorState(), CropMicroclimateFeedback(sensible_heat_w_m2=20), 3600, prior=neutral)
+    assert latent.temperature_c < neutral.temperature_c
+    assert sensible.temperature_c > neutral.temperature_c
+
+
+def test_water_exchange_is_repeatable_from_same_timestep_state():
+    state = crop()
+    micro = MicroclimateState(28, 60, 0, co2_ppm=420, pressure_hpa=1012, solar_radiation_w_m2=700, par_umol_m2_s=1400)
+    model = CropPhysicalExchangeModel()
+    growth = growth_for(state, micro)
+    first = model.calculate(state, growth, micro, weather(), 3600, soil())
+    second = model.calculate(state, growth, micro, weather(), 3600, soil())
+    assert first == second
+
+
+def test_fixed_point_uses_same_external_timestep_for_iteration_counts():
+    results = []
+    for count in (1, 2, 8):
+        result = CropGreenhouseFeedbackLoop(
+            SimplifiedGreenhouseModel(),
+            configuration=CropGreenhouseFeedbackConfiguration(max_iterations=count),
+        ).step(crop(), weather(), GreenhouseConfiguration(), GreenhouseActuatorState(), 3600, soil())
+        results.append(result)
+    assert all(result.convergence.iterations <= count for result, count in zip(results, (1, 2, 8)))
+    assert all(result.crop_growth.state.simulation_time == T0 for result in results)
 
 
 def test_same_loop_contract_is_compatible_with_energyplus_backend_boundary():

@@ -201,7 +201,7 @@ class EnergyPlusGreenhouseModel(GreenhousePhysicalModel):
     def availability(self) -> EnergyPlusAvailability:
         return self._availability
 
-    def step(self, weather: WeatherState, configuration: GreenhouseConfiguration, actuators: GreenhouseActuatorState, crop_feedback: CropMicroclimateFeedback, dt_seconds: float) -> MicroclimateState:
+    def step(self, weather: WeatherState, configuration: GreenhouseConfiguration, actuators: GreenhouseActuatorState, crop_feedback: CropMicroclimateFeedback, dt_seconds: float, prior: MicroclimateState | None = None) -> MicroclimateState:
         del crop_feedback
         if not isinstance(configuration, GreenhouseConfiguration) or not isinstance(actuators, GreenhouseActuatorState):
             raise GreenhouseModelError("EnergyPlus backend requires greenhouse configuration and actuator state")
@@ -239,7 +239,7 @@ class EnergyPlusGreenhouseModel(GreenhousePhysicalModel):
         cooling = cls._required(variables, "cooling_energy_j") / dt_seconds / 1000.0
         co2 = cls._required(variables, "co2_ppm")
         saturation = 0.6108 * pow(2.718281828459045, 17.27 * temperature / (temperature + 237.3))
-        vpd = max(0.0, saturation * (1.0 - humidity / 100.0)) / 10.0
+        vpd = max(0.0, saturation * (1.0 - humidity / 100.0))
         return MicroclimateState(
             air_temperature_c=temperature,
             relative_humidity_pct=humidity,

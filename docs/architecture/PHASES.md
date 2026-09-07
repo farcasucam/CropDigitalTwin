@@ -25,7 +25,7 @@
 | 5.7.1 | Greenhouse physical model and simplified microclimate contract | common contract and simplified backend implemented; EnergyPlus remains deferred |
 | 5.7.2 | Optional eppy greenhouse variants | reproducible IDF variants only; EnergyPlus runtime remains deferred |
 | 5.7.3 | Optional EnergyPlus greenhouse backend | Python API adapter and explicit unavailable state; crop feedback remains deferred |
-| 5.7.4 | Crop-greenhouse microclimate feedback | bounded physical exchange loop; calibration and systematic backend comparison remain deferred |
+| 5.7.4 | Crop-greenhouse microclimate feedback | bounded physical exchange loop with audited CO2, thermal and water balances; calibration and systematic backend comparison remain deferred |
 | 5 | Actuators + Controller | comandos y estados separados |
 | 6 | Eventos + escenarios | replay reproducible |
 | 7 | Storage | histórico consultable |

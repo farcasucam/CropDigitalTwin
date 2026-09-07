@@ -35,8 +35,10 @@ def run_case(name: str, weather: WeatherState, actuators: GreenhouseActuatorStat
     result = loop.step(crop, weather, GreenhouseConfiguration(), actuators, 3600, soil)
     print(f"[{name}]")
     print(f"initial_temperature_c={initial.temperature_c:.3f} initial_vpd_kpa={initial.vpd_kpa:.3f} initial_co2_ppm={initial.co2_ppm:.3f}")
+    print(f"co2_supply_ppm={actuators.co2_supply_ppm:.3f}")
+    print(f"temperature_without_feedback_c={initial.temperature_c:.3f} temperature_with_feedback_c={result.microclimate.temperature_c:.3f}")
     print(f"iterations={result.convergence.iterations} converged={result.convergence.converged} error={result.convergence.final_error:.6f}")
-    print(f"feedback_transpiration_mm_h={result.feedback.transpiration_mm_h:.6f} latent_heat_w_m2={result.feedback.latent_heat_w_m2:.6f} sensible_heat_w_m2={result.feedback.sensible_heat_w_m2:.6f} co2_uptake_ppm={result.feedback.co2_uptake_ppm:.6f}")
+    print(f"transpiration_mm_h={result.feedback.transpiration_mm_h:.6f} latent_heat_w_m2={result.feedback.latent_heat_w_m2:.6f} sensible_heat_w_m2={result.feedback.sensible_heat_w_m2:.6f} co2_uptake_ppm={result.feedback.co2_uptake_ppm:.6f}")
     print(f"final_temperature_c={result.microclimate.temperature_c:.3f} final_vpd_kpa={result.microclimate.vpd_kpa:.3f} final_co2_ppm={result.microclimate.co2_ppm:.3f}")
 
 
