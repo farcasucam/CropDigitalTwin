@@ -1,0 +1,253 @@
+Version,
+  23.1;                  !- Version Identifier
+
+Building,
+  Greenhouse Template,   !- Name
+  0,                      !- North Axis {deg}
+  City,                   !- Terrain
+  0.04,                   !- Loads Convergence Tolerance Value
+  0.4,                    !- Temperature Convergence Tolerance Value {deltaC}
+  FullExterior,           !- Solar Distribution
+  25;                     !- Maximum Number of Warmup Days
+
+SimulationControl,
+  No,                     !- Do Zone Sizing Calculation
+  No,                     !- Do System Sizing Calculation
+  No,                     !- Do Plant Sizing Calculation
+  No,                     !- Run Simulation for Sizing Periods
+  Yes;                    !- Run Simulation for Weather File Run Periods
+
+Timestep,
+  4;
+
+RunPeriod,
+  Annual Run Period,      !- Name
+  1,                      !- Begin Month
+  1,                      !- Begin Day of Month
+  12,                     !- End Month
+  31,                     !- End Day of Month
+  Tuesday,                !- Day of Week for Start Day
+  Yes,                     !- Use Weather File Holidays and Special Days
+  Yes,                     !- Use Weather File Daylight Saving Period
+  No,                      !- Apply Weekend Holiday Rule
+  Yes,                     !- Use Weather File Rain Indicators
+  Yes;                     !- Use Weather File Snow Indicators
+
+Site:Location,
+  Simplified Greenhouse,  !- Name
+  41.39,                  !- Latitude {deg}
+  2.17,                   !- Longitude {deg}
+  1.0,                    !- Time Zone {hr}
+  10.0;                   !- Elevation {m}
+
+GlobalGeometryRules,
+  UpperLeftCorner,         !- Starting Vertex Position
+  CounterClockWise,        !- Vertex Entry Direction
+  World;                   !- Coordinate System
+
+Zone,
+  Greenhouse Zone,         !- Name
+  0,                       !- Direction of Relative North {deg}
+  0, 0, 0,                 !- X,Y,Z Origin {m}
+  1,                       !- Type
+  1,                       !- Multiplier
+  autocalculate,           !- Ceiling Height {m}
+  autocalculate;           !- Volume {m3}
+
+Material,
+  Greenhouse Floor,        !- Name
+  MediumSmooth,            !- Roughness
+  0.20,                    !- Thickness {m}
+  1.40,                    !- Conductivity {W/m-K}
+  1800,                    !- Density {kg/m3}
+  800,                     !- Specific Heat {J/kg-K}
+  0.90,                    !- Thermal Absorptance
+  0.70,                    !- Solar Absorptance
+  0.70;                    !- Visible Absorptance
+
+WindowMaterial:SimpleGlazingSystem,
+  Greenhouse Glazing,      !- Name
+  2.7,                     !- U-Factor {W/m2-K}
+  0.70,                    !- Solar Heat Gain Coefficient
+  0.78;                    !- Visible Transmittance
+
+Construction,
+  Greenhouse Glazing Construction, !- Name
+  Greenhouse Glazing;      !- Outside Layer
+
+BuildingSurface:Detailed,
+  Greenhouse Floor,        !- Name
+  Floor,                   !- Surface Type
+  Greenhouse Floor,        !- Construction Name
+  Greenhouse Zone,         !- Zone Name
+  Ground,                  !- Outside Boundary Condition
+  ,                        !- Outside Boundary Condition Object
+  NoSun,                   !- Sun Exposure
+  NoWind,                  !- Wind Exposure
+  0.0,                     !- View Factor to Ground
+  4,                       !- Number of Vertices
+  0, 0, 0,                 !- Vertex 1 {m}
+  10, 0, 0,                !- Vertex 2 {m}
+  10, 8, 0,                !- Vertex 3 {m}
+  0, 8, 0;                 !- Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  Greenhouse Roof,         !- Name
+  Roof,                    !- Surface Type
+  Greenhouse Glazing Construction, !- Construction Name
+  Greenhouse Zone,         !- Zone Name
+  Outdoors,                !- Outside Boundary Condition
+  ,                        !- Outside Boundary Condition Object
+  SunExposed,              !- Sun Exposure
+  WindExposed,             !- Wind Exposure
+  0.5,                     !- View Factor to Ground
+  4,                       !- Number of Vertices
+  0, 0, 4,                 !- Vertex 1 {m}
+  0, 8, 4,                 !- Vertex 2 {m}
+  10, 8, 4,                 !- Vertex 3 {m}
+  10, 0, 4;                 !- Vertex 4 {m}
+
+BuildingSurface:Detailed,
+  Greenhouse South Wall,   !- Name
+  Wall,                    !- Surface Type
+  Greenhouse Glazing Construction, !- Construction Name
+  Greenhouse Zone,         !- Zone Name
+  Outdoors,                !- Outside Boundary Condition
+  ,                        !- Outside Boundary Condition Object
+  SunExposed,              !- Sun Exposure
+  WindExposed,             !- Wind Exposure
+  0.5,                     !- View Factor to Ground
+  4,                       !- Number of Vertices
+  0, 0, 0,                 !- Vertex 1 {m}
+  10, 0, 0,                !- Vertex 2 {m}
+  10, 0, 4,                !- Vertex 3 {m}
+  0, 0, 4;                 !- Vertex 4 {m}
+
+FenestrationSurface:Detailed,
+  Greenhouse South Window, !- Name
+  Window,                  !- Surface Type
+  Greenhouse Glazing Construction, !- Construction Name
+  Greenhouse South Wall,   !- Building Surface Name
+  ,                        !- Outside Boundary Condition Object
+  1,                       !- View Factor to Ground
+  4,                       !- Number of Vertices
+  1, 0, 1,                 !- Vertex 1 {m}
+  9, 0, 1,                 !- Vertex 2 {m}
+  9, 0, 3,                 !- Vertex 3 {m}
+  1, 0, 3;                 !- Vertex 4 {m}
+
+ZoneInfiltration:DesignFlowRate,
+  Greenhouse Infiltration, !- Name
+  Greenhouse Zone,         !- Zone or ZoneList Name
+  Always On,               !- Schedule Name
+  AirChanges/Hour,         !- Design Flow Rate Calculation Method
+  ,                        !- Design Flow Rate {m3/s}
+  ,                        !- Flow Rate per Floor Area {m3/s-m2}
+  0.2,                     !- Air Changes per Hour {1/hr}
+  0.0, 0.0, 0.0, 0.0;      !- Coefficients
+
+ZoneVentilation:DesignFlowRate,
+  Greenhouse Natural Ventilation, !- Name
+  Greenhouse Zone,         !- Zone or ZoneList Name
+  Always On,               !- Schedule Name
+  AirChanges/Hour,         !- Design Flow Rate Calculation Method
+  ,                        !- Design Flow Rate {m3/s}
+  ,                        !- Flow Rate per Floor Area {m3/s-m2}
+  3.0,                     !- Air Changes per Hour {1/hr}
+  0.0, 0.0, 0.0, 0.0,      !- Coefficients
+  -100, 100, 0, -100, 100; !- Temperature limits
+
+ScheduleTypeLimits,
+  Fraction,                !- Name
+  0.0,                     !- Lower Limit Value
+  1.0,                     !- Upper Limit Value
+  Continuous;              !- Numeric Type
+
+Schedule:Constant,
+  Always On,               !- Name
+  Fraction,                !- Schedule Type Limits Name
+  1.0;                     !- Hourly Value
+
+Schedule:Constant,
+  Greenhouse Shade Fraction, !- Name
+  Fraction,                !- Schedule Type Limits Name
+  0.0;                     !- Hourly Value
+
+WindowShadingControl,
+  Greenhouse Shading,      !- Name
+  Greenhouse South Window, !- Fenestration Surface 1 Name
+  InteriorShade,           !- Shading Type
+  ,                        !- Construction with Shading Name
+  OnIfHighSolarOnWindow,   !- Shading Control Type
+  Greenhouse Shade Fraction, !- Schedule Name
+  No,                       !- Setpoint {W/m2}
+  No,                       !- Shading Control Is Scheduled
+  ,                        !- Type of Slat Angle Control for Blinds
+  ,                        !- Slat Width {m}
+  ,                        !- Slat Separation {m}
+  ,                        !- Slat Angle {deg}
+  ,                        !- Outside Layer
+  ;                        !- Inside Layer
+
+ZoneHVAC:IdealLoadsAirSystem,
+  Greenhouse Ideal Loads,  !- Name
+  Greenhouse Zone,         !- Zone Name
+  ,                        !- System Availability Schedule Name
+  45.0,                    !- Maximum Heating Supply Air Temperature {C}
+  0.015,                   !- Maximum Heating Supply Air Humidity Ratio {kgWater/kgDryAir}
+  12.0,                    !- Minimum Cooling Supply Air Temperature {C}
+  0.009,                   !- Minimum Cooling Supply Air Humidity Ratio {kgWater/kgDryAir}
+  NoLimit,                 !- Heating Limit
+  ,                        !- Maximum Heating Air Flow Rate {m3/s}
+  NoLimit,                 !- Cooling Limit
+  ,                        !- Maximum Cooling Air Flow Rate {m3/s}
+  NoOutdoorAir,            !- Dehumidification Control Type
+  0.0,                     !- Cooling Sensible Heat Ratio
+  None,                    !- Humidification Control Type
+  0.0,                     !- Humidification Setpoint {kgWater/kgDryAir}
+  0.0,                     !- Outdoor Air Flow Rate per Person {m3/s-person}
+  0.0,                     !- Outdoor Air Flow Rate per Zone Floor Area {m3/s-m2}
+  0.0,                     !- Outdoor Air Flow Rate per Zone {m3/s}
+  0.0,                     !- Outdoor Air Flow Rate per Zone ACH {1/hr}
+  None,                    !- Demand Controlled Ventilation Type
+  No;                      !- Outdoor Air Economizer Type
+
+Output:Variable,
+  Greenhouse Zone,         !- Key Value
+  Zone Air Temperature,    !- Variable Name
+  Hourly;                  !- Reporting Frequency
+
+Output:Variable,
+  Greenhouse Zone,          !- Key Value
+  Zone Ideal Loads Supply Air Total Heating Energy, !- Variable Name
+  Timestep;                 !- Reporting Frequency
+
+Output:Variable,
+  Greenhouse Zone,          !- Key Value
+  Zone Ideal Loads Supply Air Total Cooling Energy, !- Variable Name
+  Timestep;                 !- Reporting Frequency
+
+Output:Variable,
+  Greenhouse Zone,         !- Key Value
+  Zone Air Relative Humidity, !- Variable Name
+  Hourly;                  !- Reporting Frequency
+
+Output:Variable,
+  Greenhouse Zone,         !- Key Value
+  Zone Air CO2 Concentration, !- Variable Name
+  Hourly;                  !- Reporting Frequency
+
+Output:Variable,
+  Greenhouse South Window,  !- Key Value
+  Surface Window Transmitted Solar Radiation Rate, !- Variable Name
+  Hourly;                  !- Reporting Frequency
+
+Output:Variable,
+  Greenhouse Zone,          !- Key Value
+  Zone Infiltration Air Change Rate, !- Variable Name
+  Hourly;                   !- Reporting Frequency
+
+Output:Variable,
+  Greenhouse Natural Ventilation, !- Key Value
+  Zone Ventilation Air Change Rate, !- Variable Name
+  Hourly;
