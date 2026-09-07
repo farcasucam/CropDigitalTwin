@@ -119,6 +119,16 @@ from agri_twin.domain.crop_calibration import (
     synthetic_calibration_report,
 )
 from agri_twin.domain.crop_growth import CropGrowthEngine, CropGrowthError, CropGrowthInput, CropGrowthResult
+from agri_twin.domain.crop_greenhouse_feedback import (
+    CropGreenhouseFeedbackConfiguration,
+    CropGreenhouseFeedbackError,
+    CropGreenhouseFeedbackLoop,
+    CropGreenhouseStepResult,
+    CropPhysicalExchange,
+    CropPhysicalExchangeModel,
+    FeedbackConvergence,
+    PhysicalRate,
+)
 
 from agri_twin.domain.models import (
     ActuatorState,
@@ -257,4 +267,12 @@ __all__ = [
     "CropGrowthError",
     "CropGrowthInput",
     "CropGrowthResult",
+    "CropGreenhouseFeedbackConfiguration",
+    "CropGreenhouseFeedbackError",
+    "CropGreenhouseFeedbackLoop",
+    "CropGreenhouseStepResult",
+    "CropPhysicalExchange",
+    "CropPhysicalExchangeModel",
+    "FeedbackConvergence",
+    "PhysicalRate",
 ]
