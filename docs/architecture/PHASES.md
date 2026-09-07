@@ -22,6 +22,7 @@
 | 5.4 | Reproducible agronomic scenarios | scenarios are synthetic and not scientific validation |
 | 5.5 | Crop and variety calibration protocol | no local agronomic observations; all protocols are INSUFFICIENT_DATA |
 | 5.6 | Crop growth, biomass and LAI engine | mechanistic simplified model; not calibrated |
+| 5.7.1 | Greenhouse physical model and simplified microclimate contract | common contract and simplified backend implemented; EnergyPlus remains deferred |
 | 5 | Actuators + Controller | comandos y estados separados |
 | 6 | Eventos + escenarios | replay reproducible |
 | 7 | Storage | histórico consultable |
