@@ -205,7 +205,22 @@ class ParameterRegistry:
 
     @classmethod
     def _code_defaults(cls) -> list[ParameterRecord]:
-        constants = [("radiation.par_fraction", "PAR fraction of shortwave", "fraction", 0.48, "radiation_growth.py:PAR_FRACTION_OF_SHORTWAVE"), ("radiation.extinction_coefficient", "Beer-Lambert extinction coefficient", "dimensionless", 0.6, "radiation_growth.py:APPROXIMATE_RADIATION_PROFILES"), ("radiation.rue", "radiation use efficiency", "g_DM_MJ_PAR-1", 2.0, "radiation_growth.py:APPROXIMATE_RADIATION_PROFILES"), ("radiation.sla", "specific leaf area", "m2_g_DM-1", 0.02, "radiation_growth.py:APPROXIMATE_RADIATION_PROFILES"), ("greenhouse.cover_transmission", "default greenhouse transmission", "fraction", 0.78, "greenhouse.py:PROFILES"), ("water.et_temperature_range", "ET approximation temperature range", "degC", 10.0, "water_balance.py:_et0_mm")]
+        constants = [
+            ("radiation.par_fraction", "PAR fraction of shortwave", "fraction", 0.48, "radiation_growth.py:PAR_FRACTION_OF_SHORTWAVE"),
+            ("radiation.extinction_coefficient", "Beer-Lambert extinction coefficient", "dimensionless", 0.6, "radiation_growth.py:APPROXIMATE_RADIATION_PROFILES"),
+            ("radiation.rue", "radiation use efficiency", "g_DM_MJ_PAR-1", 2.0, "radiation_growth.py:APPROXIMATE_RADIATION_PROFILES"),
+            ("radiation.sla", "specific leaf area", "m2_g_DM-1", 0.02, "radiation_growth.py:APPROXIMATE_RADIATION_PROFILES"),
+            ("greenhouse.cover_transmission", "default greenhouse transmission", "fraction", 0.78, "greenhouse.py:PROFILES"),
+            ("greenhouse.thermal_exchange_area", "feedback thermal exchange normalization", "m2", 1.0, "greenhouse.py:GreenhouseConfiguration"),
+            ("feedback.latent_heat_vaporization", "latent heat of vaporization", "J_kg-1", 2450000.0, "crop_greenhouse_feedback.py:CropGreenhouseFeedbackConfiguration"),
+            ("feedback.sensible_heat_transfer", "leaf-air sensible heat coefficient", "W_m-2_K-1", 5.0, "crop_greenhouse_feedback.py:CropGreenhouseFeedbackConfiguration"),
+            ("feedback.leaf_air_delta", "radiation to leaf-air delta proxy", "K_m2_W-1", 0.002, "crop_greenhouse_feedback.py:CropGreenhouseFeedbackConfiguration"),
+            ("feedback.co2_carbon_fraction", "dry matter carbon fraction", "fraction", 0.45, "crop_greenhouse_feedback.py:CropGreenhouseFeedbackConfiguration"),
+            ("feedback.air_density", "greenhouse air density", "kg_m-3", 1.2, "crop_greenhouse_feedback.py:CropGreenhouseFeedbackConfiguration"),
+            ("feedback.air_volume", "greenhouse air volume", "m3", 1000.0, "crop_greenhouse_feedback.py:CropGreenhouseFeedbackConfiguration"),
+            ("feedback.relaxation_alpha", "fixed-point relaxation factor", "fraction", 0.4, "crop_greenhouse_feedback.py:CropGreenhouseFeedbackConfiguration"),
+            ("water.et_temperature_range", "ET approximation temperature range", "degC", 10.0, "water_balance.py:_et0_mm"),
+        ]
         return [cls._record(parameter_id, name, "Hardcoded engineering baseline", "engineering_default", "runtime_code", None, None, None, unit, value, 0, None, "engineering_default", None, detail, "none", "low", "candidate_for_calibration", True, "radiation, biomass, site and climate observations", "must not be presented as biological validation") for parameter_id, name, unit, value, detail in constants]
 
     def audit(self) -> ParameterAudit:

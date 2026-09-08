@@ -50,6 +50,15 @@ class Observation:
     quality: str = "unknown"
     resolution: ObservationResolution = ObservationResolution.INSTANT
     observation_type: str = "continuous"
+    dataset_id: str | None = None
+    source_type: str = "measured_data"
+    plot_id: str | None = None
+    crop: str | None = None
+    variety: str | None = None
+    environment: str = "UNKNOWN"
+    measurement_method: str | None = None
+    unit_original: str | None = None
+    duration_seconds: float | None = None
 
     def __post_init__(self) -> None:
         if self.timestamp.tzinfo is None or not self.variable or not self.unit:
@@ -58,6 +67,8 @@ class Observation:
             raise CalibrationError("observation uncertainty must be non-negative")
         if self.resolution == ObservationResolution.EVENT and self.observation_type != "event":
             raise CalibrationError("event resolution requires event observation_type")
+        if self.duration_seconds is not None and (not math.isfinite(self.duration_seconds) or self.duration_seconds < 0):
+            raise CalibrationError("observation duration must be finite and non-negative")
 
 
 @dataclass(frozen=True, slots=True)
@@ -65,10 +76,16 @@ class ObservationDataset:
     name: str
     role: DatasetRole
     observations: tuple[Observation, ...]
+    source: str = "unknown"
+    source_type: str = "unknown"
+    original_filename: str | None = None
+    imported_at: datetime | None = None
 
     def __post_init__(self) -> None:
         if not self.name or not self.observations:
             raise CalibrationError("dataset name and observations are required")
+        if self.imported_at is not None and self.imported_at.tzinfo is None:
+            raise CalibrationError("dataset imported_at must be timezone-aware")
 
 
 @dataclass(frozen=True, slots=True)

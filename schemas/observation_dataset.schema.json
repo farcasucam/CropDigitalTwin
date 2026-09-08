@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CropDigitalTwin real observation row",
+  "type": "object",
+  "required": ["timestamp", "variable", "value", "unit", "source"],
+  "properties": {
+    "timestamp": {"type": "string", "format": "date-time"},
+    "variable": {"type": "string", "minLength": 1},
+    "value": {},
+    "unit": {"type": "string", "minLength": 1},
+    "source": {"type": "string", "minLength": 1},
+    "uncertainty": {"type": ["number", "null"], "minimum": 0},
+    "quality": {"type": "string"},
+    "resolution": {"enum": ["instant", "hourly", "subhourly", "daily", "weekly", "event"]},
+    "plot_id": {"type": ["string", "null"]},
+    "crop": {"type": ["string", "null"]},
+    "variety": {"type": ["string", "null"]},
+    "environment": {"enum": ["OUTDOOR", "GREENHOUSE", "UNKNOWN"]},
+    "measurement_method": {"type": ["string", "null"]},
+    "duration_seconds": {"type": ["number", "null"], "minimum": 0}
+  },
+  "additionalProperties": true
+}

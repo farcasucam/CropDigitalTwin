@@ -26,6 +26,8 @@
 | 5.7.2 | Optional eppy greenhouse variants | reproducible IDF variants only; EnergyPlus runtime remains deferred |
 | 5.7.3 | Optional EnergyPlus greenhouse backend | Python API adapter and explicit unavailable state; crop feedback remains deferred |
 | 5.7.4 | Crop-greenhouse microclimate feedback | bounded physical exchange loop with audited CO2, thermal and water balances; calibration and systematic backend comparison remain deferred |
+| 5.x audit | Transversal scientific and architectural audit of Phases 5.1-5.7.4 | architecture and traceability audited; model remains mechanistic simplified and not calibrated or experimentally validated |
+| 5.8 | Real observation data readiness and ingestion | ingestion pipeline ready; real data availability, calibration and experimental validation remain unclaimed |
 | 5 | Actuators + Controller | comandos y estados separados |
 | 6 | Eventos + escenarios | replay reproducible |
 | 7 | Storage | histórico consultable |
