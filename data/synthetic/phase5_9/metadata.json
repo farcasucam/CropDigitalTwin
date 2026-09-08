@@ -1,0 +1,10 @@
+{
+  "dataset": "phase5_9_synthetic_reference",
+  "observation_policy": "software_testing_and_demonstration_only",
+  "observation_source": "SYNTHETIC_TEST",
+  "real_agronomic_data": false,
+  "seed": 5901,
+  "simulation_end": "2026-12-31T23:00:00+00:00",
+  "simulation_start": "2026-01-01T00:00:00+00:00",
+  "weather_source": "SYNTHETIC"
+}

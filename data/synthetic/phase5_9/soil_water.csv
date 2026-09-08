@@ -1,0 +1,247 @@
+crop,crop_cycle_id,dataset,environment,measurement_method,plot_id,quality,source,source_type,timestamp,unit,value,variable,variety
+lettuce,lettuce_001,soil_water,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-01-15T09:00:00+00:00,m3/m3,0.265,soil_water_content,
+lettuce,lettuce_001,soil_water,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-01-22T09:00:00+00:00,m3/m3,0.282,soil_water_content,
+lettuce,lettuce_001,soil_water,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-01-29T09:00:00+00:00,m3/m3,0.29,soil_water_content,
+lettuce,lettuce_001,soil_water,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-05T09:00:00+00:00,m3/m3,0.287,soil_water_content,
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-05T09:00:00+00:00,m3/m3,0.252,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-05T09:00:00+00:00,m3/m3,0.252,soil_water_content,
+lettuce,lettuce_001,soil_water,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-12T09:00:00+00:00,m3/m3,0.273,soil_water_content,
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-12T09:00:00+00:00,m3/m3,0.256,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-12T09:00:00+00:00,m3/m3,0.256,soil_water_content,
+tomato,tomato_12010_2026,soil_water,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-19T09:00:00+00:00,m3/m3,0.253,soil_water_content,RAF
+lettuce,lettuce_001,soil_water,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-19T09:00:00+00:00,m3/m3,0.253,soil_water_content,
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-19T09:00:00+00:00,m3/m3,0.259,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-19T09:00:00+00:00,m3/m3,0.259,soil_water_content,
+tomato,tomato_12010_2026,soil_water,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-26T09:00:00+00:00,m3/m3,0.259,soil_water_content,RAF
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-26T09:00:00+00:00,m3/m3,0.263,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-26T09:00:00+00:00,m3/m3,0.263,soil_water_content,
+tomato,tomato_12010_2026,soil_water,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,m3/m3,0.264,soil_water_content,RAF
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,m3/m3,0.253,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,m3/m3,0.252,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,m3/m3,0.252,soil_water_content,Suplum 26
+lettuce,lettuce_002,soil_water,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,m3/m3,0.262,soil_water_content,
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,m3/m3,0.266,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,m3/m3,0.266,soil_water_content,
+tomato,tomato_12010_2026,soil_water,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,m3/m3,0.269,soil_water_content,RAF
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,m3/m3,0.257,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,m3/m3,0.256,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,m3/m3,0.256,soil_water_content,Suplum 26
+lettuce,lettuce_002,soil_water,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,m3/m3,0.28,soil_water_content,
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,m3/m3,0.269,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,m3/m3,0.269,soil_water_content,
+tomato,tomato_12010_2026,soil_water,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,m3/m3,0.274,soil_water_content,RAF
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,m3/m3,0.262,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,m3/m3,0.259,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,m3/m3,0.259,soil_water_content,Suplum 26
+lettuce,lettuce_002,soil_water,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,m3/m3,0.29,soil_water_content,
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,m3/m3,0.273,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,m3/m3,0.273,soil_water_content,
+tomato,tomato_12010_2026,soil_water,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,m3/m3,0.278,soil_water_content,RAF
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,m3/m3,0.266,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,m3/m3,0.263,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,m3/m3,0.263,soil_water_content,Suplum 26
+lettuce,lettuce_002,soil_water,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,m3/m3,0.287,soil_water_content,
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,m3/m3,0.275,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,m3/m3,0.275,soil_water_content,
+tomato,tomato_12010_2026,soil_water,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,m3/m3,0.282,soil_water_content,RAF
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,m3/m3,0.27,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,m3/m3,0.266,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,m3/m3,0.266,soil_water_content,Suplum 26
+lettuce,lettuce_002,soil_water,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,m3/m3,0.274,soil_water_content,
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,m3/m3,0.278,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,m3/m3,0.278,soil_water_content,
+tomato,tomato_12010_2026,soil_water,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,m3/m3,0.285,soil_water_content,RAF
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,m3/m3,0.274,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,m3/m3,0.27,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,m3/m3,0.27,soil_water_content,Suplum 26
+lettuce,lettuce_002,soil_water,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,m3/m3,0.253,soil_water_content,
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,m3/m3,0.281,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,m3/m3,0.281,soil_water_content,
+tomato,tomato_12010_2026,soil_water,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-16T09:00:00+00:00,m3/m3,0.288,soil_water_content,RAF
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-16T09:00:00+00:00,m3/m3,0.277,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-16T09:00:00+00:00,m3/m3,0.273,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-16T09:00:00+00:00,m3/m3,0.273,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-16T09:00:00+00:00,m3/m3,0.283,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-16T09:00:00+00:00,m3/m3,0.283,soil_water_content,
+tomato,tomato_12010_2026,soil_water,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-23T09:00:00+00:00,m3/m3,0.289,soil_water_content,RAF
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-23T09:00:00+00:00,m3/m3,0.28,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-23T09:00:00+00:00,m3/m3,0.276,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-23T09:00:00+00:00,m3/m3,0.276,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-23T09:00:00+00:00,m3/m3,0.285,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-23T09:00:00+00:00,m3/m3,0.285,soil_water_content,
+tomato,tomato_12010_2026,soil_water,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-30T09:00:00+00:00,m3/m3,0.29,soil_water_content,RAF
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-30T09:00:00+00:00,m3/m3,0.283,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-30T09:00:00+00:00,m3/m3,0.278,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-30T09:00:00+00:00,m3/m3,0.278,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-30T09:00:00+00:00,m3/m3,0.286,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-30T09:00:00+00:00,m3/m3,0.286,soil_water_content,
+tomato,tomato_12010_2026,soil_water,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-07T09:00:00+00:00,m3/m3,0.29,soil_water_content,RAF
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-07T09:00:00+00:00,m3/m3,0.285,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-07T09:00:00+00:00,m3/m3,0.281,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-07T09:00:00+00:00,m3/m3,0.281,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-07T09:00:00+00:00,m3/m3,0.288,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-07T09:00:00+00:00,m3/m3,0.288,soil_water_content,
+tomato,tomato_12010_2026,soil_water,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-14T09:00:00+00:00,m3/m3,0.289,soil_water_content,RAF
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-14T09:00:00+00:00,m3/m3,0.287,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-14T09:00:00+00:00,m3/m3,0.283,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-14T09:00:00+00:00,m3/m3,0.283,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-14T09:00:00+00:00,m3/m3,0.289,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-14T09:00:00+00:00,m3/m3,0.289,soil_water_content,
+tomato,tomato_12010_2026,soil_water,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-21T09:00:00+00:00,m3/m3,0.288,soil_water_content,RAF
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-21T09:00:00+00:00,m3/m3,0.289,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-21T09:00:00+00:00,m3/m3,0.285,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-21T09:00:00+00:00,m3/m3,0.285,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-21T09:00:00+00:00,m3/m3,0.29,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-21T09:00:00+00:00,m3/m3,0.29,soil_water_content,
+tomato,tomato_12010_2026,soil_water,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-28T09:00:00+00:00,m3/m3,0.285,soil_water_content,RAF
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-28T09:00:00+00:00,m3/m3,0.29,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-28T09:00:00+00:00,m3/m3,0.287,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-28T09:00:00+00:00,m3/m3,0.287,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-28T09:00:00+00:00,m3/m3,0.29,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-28T09:00:00+00:00,m3/m3,0.29,soil_water_content,
+tomato,tomato_12010_2026,soil_water,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-04T09:00:00+00:00,m3/m3,0.282,soil_water_content,RAF
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-04T09:00:00+00:00,m3/m3,0.29,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-04T09:00:00+00:00,m3/m3,0.288,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-04T09:00:00+00:00,m3/m3,0.288,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-04T09:00:00+00:00,m3/m3,0.29,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-04T09:00:00+00:00,m3/m3,0.29,soil_water_content,
+tomato,tomato_12010_2026,soil_water,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-11T09:00:00+00:00,m3/m3,0.278,soil_water_content,RAF
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-11T09:00:00+00:00,m3/m3,0.29,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-11T09:00:00+00:00,m3/m3,0.289,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-11T09:00:00+00:00,m3/m3,0.289,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-11T09:00:00+00:00,m3/m3,0.29,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-11T09:00:00+00:00,m3/m3,0.29,soil_water_content,
+tomato,tomato_12010_2026,soil_water,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-18T09:00:00+00:00,m3/m3,0.274,soil_water_content,RAF
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-18T09:00:00+00:00,m3/m3,0.289,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-18T09:00:00+00:00,m3/m3,0.29,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-18T09:00:00+00:00,m3/m3,0.29,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-18T09:00:00+00:00,m3/m3,0.289,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-18T09:00:00+00:00,m3/m3,0.289,soil_water_content,
+tomato,tomato_12010_2026,soil_water,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-25T09:00:00+00:00,m3/m3,0.269,soil_water_content,RAF
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-25T09:00:00+00:00,m3/m3,0.288,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-25T09:00:00+00:00,m3/m3,0.29,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-25T09:00:00+00:00,m3/m3,0.29,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-25T09:00:00+00:00,m3/m3,0.288,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-25T09:00:00+00:00,m3/m3,0.288,soil_water_content,
+tomato,tomato_12010_2026,soil_water,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-02T09:00:00+00:00,m3/m3,0.264,soil_water_content,RAF
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-02T09:00:00+00:00,m3/m3,0.286,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-02T09:00:00+00:00,m3/m3,0.29,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-02T09:00:00+00:00,m3/m3,0.29,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-02T09:00:00+00:00,m3/m3,0.287,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-02T09:00:00+00:00,m3/m3,0.287,soil_water_content,
+tomato,tomato_12010_2026,soil_water,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-09T09:00:00+00:00,m3/m3,0.259,soil_water_content,RAF
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-09T09:00:00+00:00,m3/m3,0.284,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-09T09:00:00+00:00,m3/m3,0.29,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-09T09:00:00+00:00,m3/m3,0.29,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-09T09:00:00+00:00,m3/m3,0.285,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-09T09:00:00+00:00,m3/m3,0.285,soil_water_content,
+tomato,tomato_12010_2026,soil_water,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-16T09:00:00+00:00,m3/m3,0.253,soil_water_content,RAF
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-16T09:00:00+00:00,m3/m3,0.282,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-16T09:00:00+00:00,m3/m3,0.289,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-16T09:00:00+00:00,m3/m3,0.289,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-16T09:00:00+00:00,m3/m3,0.283,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-16T09:00:00+00:00,m3/m3,0.283,soil_water_content,
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-23T09:00:00+00:00,m3/m3,0.279,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-23T09:00:00+00:00,m3/m3,0.288,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-23T09:00:00+00:00,m3/m3,0.288,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-23T09:00:00+00:00,m3/m3,0.281,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-23T09:00:00+00:00,m3/m3,0.281,soil_water_content,
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-30T09:00:00+00:00,m3/m3,0.275,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-30T09:00:00+00:00,m3/m3,0.287,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-30T09:00:00+00:00,m3/m3,0.287,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-30T09:00:00+00:00,m3/m3,0.279,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-30T09:00:00+00:00,m3/m3,0.279,soil_water_content,
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-06T09:00:00+00:00,m3/m3,0.272,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-06T09:00:00+00:00,m3/m3,0.285,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-06T09:00:00+00:00,m3/m3,0.285,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-06T09:00:00+00:00,m3/m3,0.276,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-06T09:00:00+00:00,m3/m3,0.276,soil_water_content,
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-13T09:00:00+00:00,m3/m3,0.268,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-13T09:00:00+00:00,m3/m3,0.283,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-13T09:00:00+00:00,m3/m3,0.283,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-13T09:00:00+00:00,m3/m3,0.273,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-13T09:00:00+00:00,m3/m3,0.273,soil_water_content,
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-20T09:00:00+00:00,m3/m3,0.263,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-20T09:00:00+00:00,m3/m3,0.281,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-20T09:00:00+00:00,m3/m3,0.281,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-20T09:00:00+00:00,m3/m3,0.27,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-20T09:00:00+00:00,m3/m3,0.27,soil_water_content,
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-27T09:00:00+00:00,m3/m3,0.259,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-27T09:00:00+00:00,m3/m3,0.279,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-27T09:00:00+00:00,m3/m3,0.279,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-27T09:00:00+00:00,m3/m3,0.267,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-27T09:00:00+00:00,m3/m3,0.267,soil_water_content,
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-03T09:00:00+00:00,m3/m3,0.255,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-03T09:00:00+00:00,m3/m3,0.276,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-03T09:00:00+00:00,m3/m3,0.276,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-03T09:00:00+00:00,m3/m3,0.264,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-03T09:00:00+00:00,m3/m3,0.264,soil_water_content,
+pepper,pepper_40811_2026,soil_water,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-10T09:00:00+00:00,m3/m3,0.25,soil_water_content,Lamuyo
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-10T09:00:00+00:00,m3/m3,0.273,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-10T09:00:00+00:00,m3/m3,0.273,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-10T09:00:00+00:00,m3/m3,0.26,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-10T09:00:00+00:00,m3/m3,0.26,soil_water_content,
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-17T09:00:00+00:00,m3/m3,0.27,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-17T09:00:00+00:00,m3/m3,0.27,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-17T09:00:00+00:00,m3/m3,0.257,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-17T09:00:00+00:00,m3/m3,0.257,soil_water_content,
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-24T09:00:00+00:00,m3/m3,0.267,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-24T09:00:00+00:00,m3/m3,0.267,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-24T09:00:00+00:00,m3/m3,0.253,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-24T09:00:00+00:00,m3/m3,0.253,soil_water_content,
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-01T09:00:00+00:00,m3/m3,0.263,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-01T09:00:00+00:00,m3/m3,0.263,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-01T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-01T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-08T09:00:00+00:00,m3/m3,0.26,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-08T09:00:00+00:00,m3/m3,0.26,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-08T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-08T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-15T09:00:00+00:00,m3/m3,0.256,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-15T09:00:00+00:00,m3/m3,0.256,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-15T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-15T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-22T09:00:00+00:00,m3/m3,0.253,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-22T09:00:00+00:00,m3/m3,0.253,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-22T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-22T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-29T09:00:00+00:00,m3/m3,0.25,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-29T09:00:00+00:00,m3/m3,0.25,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-29T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-29T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-05T09:00:00+00:00,m3/m3,0.25,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-05T09:00:00+00:00,m3/m3,0.25,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-05T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-05T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-12T09:00:00+00:00,m3/m3,0.25,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-12T09:00:00+00:00,m3/m3,0.25,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-12T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-12T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-19T09:00:00+00:00,m3/m3,0.25,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-19T09:00:00+00:00,m3/m3,0.25,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-19T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-19T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-26T09:00:00+00:00,m3/m3,0.25,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-26T09:00:00+00:00,m3/m3,0.25,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-26T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-26T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-03T09:00:00+00:00,m3/m3,0.25,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-03T09:00:00+00:00,m3/m3,0.25,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-03T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-03T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-10T09:00:00+00:00,m3/m3,0.25,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-10T09:00:00+00:00,m3/m3,0.25,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-10T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-10T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-17T09:00:00+00:00,m3/m3,0.25,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-17T09:00:00+00:00,m3/m3,0.25,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-17T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-17T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-24T09:00:00+00:00,m3/m3,0.25,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-24T09:00:00+00:00,m3/m3,0.25,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-24T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-24T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+grape,grape_30412_2026,soil_water,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-31T09:00:00+00:00,m3/m3,0.25,soil_water_content,Monastrell
+plum,plum_14705_2026,soil_water,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-31T09:00:00+00:00,m3/m3,0.25,soil_water_content,Suplum 26
+peach,peach_plot_61200_2026,soil_water,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-31T09:00:00+00:00,m3/m3,0.25,soil_water_content,
+apple,apple_plot_72300_2026,soil_water,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-31T09:00:00+00:00,m3/m3,0.25,soil_water_content,

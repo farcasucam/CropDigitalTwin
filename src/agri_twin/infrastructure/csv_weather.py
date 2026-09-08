@@ -23,6 +23,9 @@ COLUMNS = (
 
 
 class CsvWeatherProvider:
+    source = "REAL_WORLD"
+    forcing_type = "SIMULATION_FORCING"
+
     def __init__(self, path: str | Path) -> None:
         self._path = Path(path)
         self._states: dict[datetime, WeatherState] = {}

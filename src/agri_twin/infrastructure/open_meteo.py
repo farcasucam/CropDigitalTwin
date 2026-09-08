@@ -113,6 +113,9 @@ DEFAULT_VARIABLES = (
 
 
 class OpenMeteoClient:
+    source = "OPEN_METEO"
+    forcing_type = "SIMULATION_FORCING"
+
     def __init__(
         self,
         transport: HttpTransport | None = None,

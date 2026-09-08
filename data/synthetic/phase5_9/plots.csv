@@ -1,0 +1,8 @@
+plot_id,crop,variety,campaign,environment,surface_m2,soil_type,irrigation_type,latitude,longitude
+plot_12010,tomato,RAF,2026,greenhouse,500.0,loam,drip,,
+plot_40811,pepper,Lamuyo,2026,outdoor,2500.0,loam,drip,,
+plot_30412,grape,Monastrell,2026,outdoor,1800.0,loam,drip,,
+plot_14705,plum,Suplum 26,2026,outdoor,1200.0,loam,drip,,
+plot_20500,lettuce,,2026,greenhouse,300.0,loam,drip,,
+plot_61200,peach,,2026,outdoor,1600.0,loam,drip,,
+plot_72300,apple,,2026,outdoor,1700.0,loam,drip,,

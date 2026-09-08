@@ -130,7 +130,8 @@ class CropCalibrationProtocol:
 def audit_observations(root: str | Path, crop: str, variety: str | None, plot: str | None) -> ObservationAudit:
     root = Path(root)
     files = tuple(sorted(str(path.relative_to(root)) for path in (root / "data").rglob("*") if path.is_file())) if (root / "data").exists() else ()
-    agronomic = tuple(path for path in files if any(token in path.lower() for token in ("lai", "biomass", "phenology", "yield", "vwc", "irrigation", "fertil")))
+    evidence_files = tuple(path for path in files if not any(prefix in path.replace("\\", "/") for prefix in ("data/synthetic/", "data/templates/")))
+    agronomic = tuple(path for path in evidence_files if any(token in path.lower() for token in ("lai", "biomass", "phenology", "yield", "vwc", "irrigation", "fertil")))
     if not agronomic:
         return ObservationAudit(crop, variety, plot, files, 0, (), ScientificStatus.INSUFFICIENT_DATA, ("no field LAI, biomass, phenology, VWC, irrigation, fertilizer, stress or yield observations found", "weather CSV is forcing data, not crop observation data", "crop_phenology.csv contains external evidence, not local observations"))
     return ObservationAudit(crop, variety, plot, files, 0, (), ScientificStatus.INSUFFICIENT_DATA, ("observation parser is not configured for a verified field dataset",))

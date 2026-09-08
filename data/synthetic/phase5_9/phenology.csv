@@ -1,0 +1,235 @@
+crop,crop_cycle_id,dataset,environment,measurement_method,observation_type,plot_id,quality,resolution,source,source_type,timestamp,unit,value,variable,variety
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-02-05T09:00:00+00:00,date,2026-02-05,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-02-05T09:00:00+00:00,date,2026-02-05,maturity,
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-02-12T09:00:00+00:00,date,2026-02-12,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-02-12T09:00:00+00:00,date,2026-02-12,maturity,
+tomato,tomato_12010_2026,phenology,GREENHOUSE,synthetic_model,event,plot_12010,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-02-19T09:00:00+00:00,date,2026-02-19,maturity,RAF
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-02-19T09:00:00+00:00,date,2026-02-19,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-02-19T09:00:00+00:00,date,2026-02-19,maturity,
+tomato,tomato_12010_2026,phenology,GREENHOUSE,synthetic_model,event,plot_12010,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-02-26T09:00:00+00:00,date,2026-02-26,maturity,RAF
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-02-26T09:00:00+00:00,date,2026-02-26,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-02-26T09:00:00+00:00,date,2026-02-26,maturity,
+tomato,tomato_12010_2026,phenology,GREENHOUSE,synthetic_model,event,plot_12010,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,date,2026-03-05,maturity,RAF
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,date,2026-03-05,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,date,2026-03-05,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,date,2026-03-05,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,date,2026-03-05,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,date,2026-03-05,maturity,
+tomato,tomato_12010_2026,phenology,GREENHOUSE,synthetic_model,event,plot_12010,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,date,2026-03-12,maturity,RAF
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,date,2026-03-12,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,date,2026-03-12,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,date,2026-03-12,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,date,2026-03-12,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,date,2026-03-12,maturity,
+tomato,tomato_12010_2026,phenology,GREENHOUSE,synthetic_model,event,plot_12010,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,date,2026-03-19,maturity,RAF
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,date,2026-03-19,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,date,2026-03-19,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,date,2026-03-19,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,date,2026-03-19,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,date,2026-03-19,maturity,
+tomato,tomato_12010_2026,phenology,GREENHOUSE,synthetic_model,event,plot_12010,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,date,2026-03-26,maturity,RAF
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,date,2026-03-26,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,date,2026-03-26,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,date,2026-03-26,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,date,2026-03-26,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,date,2026-03-26,maturity,
+tomato,tomato_12010_2026,phenology,GREENHOUSE,synthetic_model,event,plot_12010,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,date,2026-04-02,maturity,RAF
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,date,2026-04-02,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,date,2026-04-02,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,date,2026-04-02,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,date,2026-04-02,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,date,2026-04-02,maturity,
+tomato,tomato_12010_2026,phenology,GREENHOUSE,synthetic_model,event,plot_12010,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,date,2026-04-09,maturity,RAF
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,date,2026-04-09,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,date,2026-04-09,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,date,2026-04-09,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,date,2026-04-09,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,date,2026-04-09,maturity,
+tomato,tomato_12010_2026,phenology,GREENHOUSE,synthetic_model,event,plot_12010,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-16T09:00:00+00:00,date,2026-04-16,maturity,RAF
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-16T09:00:00+00:00,date,2026-04-16,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-16T09:00:00+00:00,date,2026-04-16,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-16T09:00:00+00:00,date,2026-04-16,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-16T09:00:00+00:00,date,2026-04-16,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-16T09:00:00+00:00,date,2026-04-16,maturity,
+tomato,tomato_12010_2026,phenology,GREENHOUSE,synthetic_model,event,plot_12010,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-23T09:00:00+00:00,date,2026-04-23,maturity,RAF
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-23T09:00:00+00:00,date,2026-04-23,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-23T09:00:00+00:00,date,2026-04-23,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-23T09:00:00+00:00,date,2026-04-23,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-23T09:00:00+00:00,date,2026-04-23,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-23T09:00:00+00:00,date,2026-04-23,maturity,
+tomato,tomato_12010_2026,phenology,GREENHOUSE,synthetic_model,event,plot_12010,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-30T09:00:00+00:00,date,2026-04-30,maturity,RAF
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-30T09:00:00+00:00,date,2026-04-30,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-30T09:00:00+00:00,date,2026-04-30,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-30T09:00:00+00:00,date,2026-04-30,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-30T09:00:00+00:00,date,2026-04-30,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-04-30T09:00:00+00:00,date,2026-04-30,maturity,
+tomato,tomato_12010_2026,phenology,GREENHOUSE,synthetic_model,event,plot_12010,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-05-07T09:00:00+00:00,date,2026-05-07,maturity,RAF
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-05-07T09:00:00+00:00,date,2026-05-07,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-05-07T09:00:00+00:00,date,2026-05-07,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-05-07T09:00:00+00:00,date,2026-05-07,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-05-07T09:00:00+00:00,date,2026-05-07,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-05-07T09:00:00+00:00,date,2026-05-07,maturity,
+tomato,tomato_12010_2026,phenology,GREENHOUSE,synthetic_model,event,plot_12010,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-05-14T09:00:00+00:00,date,2026-05-14,maturity,RAF
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-05-14T09:00:00+00:00,date,2026-05-14,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-05-14T09:00:00+00:00,date,2026-05-14,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-05-14T09:00:00+00:00,date,2026-05-14,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-05-14T09:00:00+00:00,date,2026-05-14,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-05-14T09:00:00+00:00,date,2026-05-14,maturity,
+tomato,tomato_12010_2026,phenology,GREENHOUSE,synthetic_model,event,plot_12010,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-05-21T09:00:00+00:00,date,2026-05-21,maturity,RAF
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-05-21T09:00:00+00:00,date,2026-05-21,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-05-21T09:00:00+00:00,date,2026-05-21,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-05-21T09:00:00+00:00,date,2026-05-21,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-05-21T09:00:00+00:00,date,2026-05-21,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-05-21T09:00:00+00:00,date,2026-05-21,maturity,
+tomato,tomato_12010_2026,phenology,GREENHOUSE,synthetic_model,event,plot_12010,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-05-28T09:00:00+00:00,date,2026-05-28,maturity,RAF
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-05-28T09:00:00+00:00,date,2026-05-28,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-05-28T09:00:00+00:00,date,2026-05-28,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-05-28T09:00:00+00:00,date,2026-05-28,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-05-28T09:00:00+00:00,date,2026-05-28,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-05-28T09:00:00+00:00,date,2026-05-28,maturity,
+tomato,tomato_12010_2026,phenology,GREENHOUSE,synthetic_model,event,plot_12010,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-06-04T09:00:00+00:00,date,2026-06-04,maturity,RAF
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-06-04T09:00:00+00:00,date,2026-06-04,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-06-04T09:00:00+00:00,date,2026-06-04,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-06-04T09:00:00+00:00,date,2026-06-04,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-06-04T09:00:00+00:00,date,2026-06-04,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-06-04T09:00:00+00:00,date,2026-06-04,maturity,
+tomato,tomato_12010_2026,phenology,GREENHOUSE,synthetic_model,event,plot_12010,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-06-11T09:00:00+00:00,date,2026-06-11,maturity,RAF
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-06-11T09:00:00+00:00,date,2026-06-11,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-06-11T09:00:00+00:00,date,2026-06-11,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-06-11T09:00:00+00:00,date,2026-06-11,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-06-11T09:00:00+00:00,date,2026-06-11,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-06-11T09:00:00+00:00,date,2026-06-11,maturity,
+tomato,tomato_12010_2026,phenology,GREENHOUSE,synthetic_model,event,plot_12010,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-06-18T09:00:00+00:00,date,2026-06-18,maturity,RAF
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-06-18T09:00:00+00:00,date,2026-06-18,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-06-18T09:00:00+00:00,date,2026-06-18,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-06-18T09:00:00+00:00,date,2026-06-18,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-06-18T09:00:00+00:00,date,2026-06-18,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-06-18T09:00:00+00:00,date,2026-06-18,maturity,
+tomato,tomato_12010_2026,phenology,GREENHOUSE,synthetic_model,event,plot_12010,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-06-25T09:00:00+00:00,date,2026-06-25,maturity,RAF
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-06-25T09:00:00+00:00,date,2026-06-25,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-06-25T09:00:00+00:00,date,2026-06-25,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-06-25T09:00:00+00:00,date,2026-06-25,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-06-25T09:00:00+00:00,date,2026-06-25,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-06-25T09:00:00+00:00,date,2026-06-25,maturity,
+tomato,tomato_12010_2026,phenology,GREENHOUSE,synthetic_model,event,plot_12010,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-02T09:00:00+00:00,date,2026-07-02,maturity,RAF
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-02T09:00:00+00:00,date,2026-07-02,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-02T09:00:00+00:00,date,2026-07-02,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-02T09:00:00+00:00,date,2026-07-02,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-02T09:00:00+00:00,date,2026-07-02,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-02T09:00:00+00:00,date,2026-07-02,maturity,
+tomato,tomato_12010_2026,phenology,GREENHOUSE,synthetic_model,event,plot_12010,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-09T09:00:00+00:00,date,2026-07-09,maturity,RAF
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-09T09:00:00+00:00,date,2026-07-09,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-09T09:00:00+00:00,date,2026-07-09,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-09T09:00:00+00:00,date,2026-07-09,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-09T09:00:00+00:00,date,2026-07-09,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-09T09:00:00+00:00,date,2026-07-09,maturity,
+tomato,tomato_12010_2026,phenology,GREENHOUSE,synthetic_model,event,plot_12010,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-16T09:00:00+00:00,date,2026-07-16,maturity,RAF
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-16T09:00:00+00:00,date,2026-07-16,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-16T09:00:00+00:00,date,2026-07-16,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-16T09:00:00+00:00,date,2026-07-16,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-16T09:00:00+00:00,date,2026-07-16,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-16T09:00:00+00:00,date,2026-07-16,maturity,
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-23T09:00:00+00:00,date,2026-07-23,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-23T09:00:00+00:00,date,2026-07-23,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-23T09:00:00+00:00,date,2026-07-23,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-23T09:00:00+00:00,date,2026-07-23,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-23T09:00:00+00:00,date,2026-07-23,maturity,
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-30T09:00:00+00:00,date,2026-07-30,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-30T09:00:00+00:00,date,2026-07-30,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-30T09:00:00+00:00,date,2026-07-30,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-30T09:00:00+00:00,date,2026-07-30,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-07-30T09:00:00+00:00,date,2026-07-30,maturity,
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-08-06T09:00:00+00:00,date,2026-08-06,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-08-06T09:00:00+00:00,date,2026-08-06,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-08-06T09:00:00+00:00,date,2026-08-06,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-08-06T09:00:00+00:00,date,2026-08-06,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-08-06T09:00:00+00:00,date,2026-08-06,maturity,
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-08-13T09:00:00+00:00,date,2026-08-13,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-08-13T09:00:00+00:00,date,2026-08-13,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-08-13T09:00:00+00:00,date,2026-08-13,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-08-13T09:00:00+00:00,date,2026-08-13,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-08-13T09:00:00+00:00,date,2026-08-13,maturity,
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-08-20T09:00:00+00:00,date,2026-08-20,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-08-20T09:00:00+00:00,date,2026-08-20,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-08-20T09:00:00+00:00,date,2026-08-20,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-08-20T09:00:00+00:00,date,2026-08-20,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-08-20T09:00:00+00:00,date,2026-08-20,maturity,
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-08-27T09:00:00+00:00,date,2026-08-27,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-08-27T09:00:00+00:00,date,2026-08-27,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-08-27T09:00:00+00:00,date,2026-08-27,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-08-27T09:00:00+00:00,date,2026-08-27,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-08-27T09:00:00+00:00,date,2026-08-27,maturity,
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-09-03T09:00:00+00:00,date,2026-09-03,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-09-03T09:00:00+00:00,date,2026-09-03,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-09-03T09:00:00+00:00,date,2026-09-03,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-09-03T09:00:00+00:00,date,2026-09-03,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-09-03T09:00:00+00:00,date,2026-09-03,maturity,
+pepper,pepper_40811_2026,phenology,OUTDOOR,synthetic_model,event,plot_40811,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-09-10T09:00:00+00:00,date,2026-09-10,maturity,Lamuyo
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-09-10T09:00:00+00:00,date,2026-09-10,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-09-10T09:00:00+00:00,date,2026-09-10,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-09-10T09:00:00+00:00,date,2026-09-10,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-09-10T09:00:00+00:00,date,2026-09-10,maturity,
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-09-17T09:00:00+00:00,date,2026-09-17,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-09-17T09:00:00+00:00,date,2026-09-17,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-09-17T09:00:00+00:00,date,2026-09-17,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-09-17T09:00:00+00:00,date,2026-09-17,maturity,
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-09-24T09:00:00+00:00,date,2026-09-24,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-09-24T09:00:00+00:00,date,2026-09-24,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-09-24T09:00:00+00:00,date,2026-09-24,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-09-24T09:00:00+00:00,date,2026-09-24,maturity,
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-10-01T09:00:00+00:00,date,2026-10-01,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-10-01T09:00:00+00:00,date,2026-10-01,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-10-01T09:00:00+00:00,date,2026-10-01,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-10-01T09:00:00+00:00,date,2026-10-01,maturity,
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-10-08T09:00:00+00:00,date,2026-10-08,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-10-08T09:00:00+00:00,date,2026-10-08,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-10-08T09:00:00+00:00,date,2026-10-08,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-10-08T09:00:00+00:00,date,2026-10-08,maturity,
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-10-15T09:00:00+00:00,date,2026-10-15,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-10-15T09:00:00+00:00,date,2026-10-15,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-10-15T09:00:00+00:00,date,2026-10-15,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-10-15T09:00:00+00:00,date,2026-10-15,maturity,
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-10-22T09:00:00+00:00,date,2026-10-22,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-10-22T09:00:00+00:00,date,2026-10-22,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-10-22T09:00:00+00:00,date,2026-10-22,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-10-22T09:00:00+00:00,date,2026-10-22,maturity,
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-10-29T09:00:00+00:00,date,2026-10-29,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-10-29T09:00:00+00:00,date,2026-10-29,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-10-29T09:00:00+00:00,date,2026-10-29,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-10-29T09:00:00+00:00,date,2026-10-29,maturity,
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-11-05T09:00:00+00:00,date,2026-11-05,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-11-05T09:00:00+00:00,date,2026-11-05,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-11-05T09:00:00+00:00,date,2026-11-05,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-11-05T09:00:00+00:00,date,2026-11-05,maturity,
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-11-12T09:00:00+00:00,date,2026-11-12,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-11-12T09:00:00+00:00,date,2026-11-12,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-11-12T09:00:00+00:00,date,2026-11-12,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-11-12T09:00:00+00:00,date,2026-11-12,maturity,
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-11-19T09:00:00+00:00,date,2026-11-19,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-11-19T09:00:00+00:00,date,2026-11-19,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-11-19T09:00:00+00:00,date,2026-11-19,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-11-19T09:00:00+00:00,date,2026-11-19,maturity,
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-11-26T09:00:00+00:00,date,2026-11-26,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-11-26T09:00:00+00:00,date,2026-11-26,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-11-26T09:00:00+00:00,date,2026-11-26,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-11-26T09:00:00+00:00,date,2026-11-26,maturity,
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-12-03T09:00:00+00:00,date,2026-12-03,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-12-03T09:00:00+00:00,date,2026-12-03,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-12-03T09:00:00+00:00,date,2026-12-03,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-12-03T09:00:00+00:00,date,2026-12-03,maturity,
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-12-10T09:00:00+00:00,date,2026-12-10,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-12-10T09:00:00+00:00,date,2026-12-10,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-12-10T09:00:00+00:00,date,2026-12-10,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-12-10T09:00:00+00:00,date,2026-12-10,maturity,
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-12-17T09:00:00+00:00,date,2026-12-17,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-12-17T09:00:00+00:00,date,2026-12-17,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-12-17T09:00:00+00:00,date,2026-12-17,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-12-17T09:00:00+00:00,date,2026-12-17,maturity,
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-12-24T09:00:00+00:00,date,2026-12-24,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-12-24T09:00:00+00:00,date,2026-12-24,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-12-24T09:00:00+00:00,date,2026-12-24,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-12-24T09:00:00+00:00,date,2026-12-24,maturity,
+grape,grape_30412_2026,phenology,OUTDOOR,synthetic_model,event,plot_30412,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-12-31T09:00:00+00:00,date,2026-12-31,maturity,Monastrell
+plum,plum_14705_2026,phenology,OUTDOOR,synthetic_model,event,plot_14705,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-12-31T09:00:00+00:00,date,2026-12-31,maturity,Suplum 26
+peach,peach_plot_61200_2026,phenology,OUTDOOR,synthetic_model,event,plot_61200,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-12-31T09:00:00+00:00,date,2026-12-31,maturity,
+apple,apple_plot_72300_2026,phenology,OUTDOOR,synthetic_model,event,plot_72300,VALID,event,SYNTHETIC_TEST,synthetic_test_data,2026-12-31T09:00:00+00:00,date,2026-12-31,maturity,

@@ -26,6 +26,9 @@ class WeatherTimestampNotAvailable(WeatherProviderError):
 class SyntheticWeatherProvider:
     """Provider facade that delegates all generation to WeatherEngine."""
 
+    source = "SYNTHETIC"
+    forcing_type = "SIMULATION_FORCING"
+
     def __init__(self, engine: WeatherEngine) -> None:
         self._engine = engine
 
@@ -44,6 +47,9 @@ class SyntheticWeatherProvider:
 
 class ScenarioWeatherProvider:
     """Apply immutable perturbations to any base weather provider."""
+
+    source = "USER_SCENARIO"
+    forcing_type = "SIMULATION_FORCING"
 
     def __init__(self, base_provider: WeatherProvider) -> None:
         self._base_provider = base_provider

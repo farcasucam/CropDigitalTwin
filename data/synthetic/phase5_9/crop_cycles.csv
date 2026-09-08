@@ -1,0 +1,9 @@
+crop_cycle_id,plot_id,crop,variety,planting_date,transplant_date,initial_phase,expected_harvest_date,actual_harvest_start,actual_harvest_end,cycle_type,perennial
+tomato_12010_2026,plot_12010,tomato,RAF,2026-02-15,2026-02-15,PLANTED,2026-07-20,2026-07-20,2026-07-20,annual,False
+pepper_40811_2026,plot_40811,pepper,Lamuyo,2026-03-01,2026-03-15,PLANTED,2026-07-12,2026-07-12,2026-09-10,annual,False
+grape_30412_2026,plot_30412,grape,Monastrell,,,DORMANCY,2026-08-01,2026-08-01,2026-11-15,perennial,True
+plum_14705_2026,plot_14705,plum,Suplum 26,,,DORMANCY,2026-07-15,2026-07-15,2026-08-30,perennial,True
+lettuce_001,plot_20500,lettuce,,2026-01-10,,PLANTED,2026-02-20,2026-02-20,2026-02-20,short_cycle,False
+lettuce_002,plot_20500,lettuce,,2026-03-01,,PLANTED,2026-04-10,2026-04-10,2026-04-10,short_cycle,False
+peach_plot_61200_2026,plot_61200,peach,,2026-02-01,,DORMANCY,2026-08-15,2026-08-15,2026-09-30,perennial,True
+apple_plot_72300_2026,plot_72300,apple,,2026-02-01,,DORMANCY,2026-08-15,2026-08-15,2026-09-30,perennial,True

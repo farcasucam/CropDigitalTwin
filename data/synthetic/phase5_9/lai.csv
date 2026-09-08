@@ -1,0 +1,247 @@
+crop,crop_cycle_id,dataset,environment,measurement_method,plot_id,quality,source,source_type,timestamp,unit,value,variable,variety
+lettuce,lettuce_001,lai,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-01-15T09:00:00+00:00,m2/m2,1.421,lai,
+lettuce,lettuce_001,lai,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-01-22T09:00:00+00:00,m2/m2,2.686,lai,
+lettuce,lettuce_001,lai,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-01-29T09:00:00+00:00,m2/m2,3.28,lai,
+lettuce,lettuce_001,lai,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-05T09:00:00+00:00,m2/m2,3.038,lai,
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-05T09:00:00+00:00,m2/m2,0.456,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-05T09:00:00+00:00,m2/m2,0.456,lai,
+lettuce,lettuce_001,lai,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-12T09:00:00+00:00,m2/m2,2.026,lai,
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-12T09:00:00+00:00,m2/m2,0.729,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-12T09:00:00+00:00,m2/m2,0.729,lai,
+tomato,tomato_12010_2026,lai,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-19T09:00:00+00:00,m2/m2,0.543,lai,RAF
+lettuce,lettuce_001,lai,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-19T09:00:00+00:00,m2/m2,0.53,lai,
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-19T09:00:00+00:00,m2/m2,0.997,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-19T09:00:00+00:00,m2/m2,0.997,lai,
+tomato,tomato_12010_2026,lai,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-26T09:00:00+00:00,m2/m2,0.963,lai,RAF
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-26T09:00:00+00:00,m2/m2,1.26,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-26T09:00:00+00:00,m2/m2,1.26,lai,
+tomato,tomato_12010_2026,lai,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,m2/m2,1.37,lai,RAF
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,m2/m2,0.495,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,m2/m2,0.457,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,m2/m2,0.457,lai,Suplum 26
+lettuce,lettuce_002,lai,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,m2/m2,1.227,lai,
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,m2/m2,1.515,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,m2/m2,1.515,lai,
+tomato,tomato_12010_2026,lai,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,m2/m2,1.756,lai,RAF
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,m2/m2,0.834,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,m2/m2,0.73,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,m2/m2,0.73,lai,Suplum 26
+lettuce,lettuce_002,lai,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,m2/m2,2.581,lai,
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,m2/m2,1.76,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,m2/m2,1.76,lai,
+tomato,tomato_12010_2026,lai,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,m2/m2,2.112,lai,RAF
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,m2/m2,1.166,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,m2/m2,1.0,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,m2/m2,1.0,lai,Suplum 26
+lettuce,lettuce_002,lai,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,m2/m2,3.263,lai,
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,m2/m2,1.993,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,m2/m2,1.993,lai,
+tomato,tomato_12010_2026,lai,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,m2/m2,2.432,lai,RAF
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,m2/m2,1.487,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,m2/m2,1.264,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,m2/m2,1.264,lai,Suplum 26
+lettuce,lettuce_002,lai,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,m2/m2,3.072,lai,
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,m2/m2,2.212,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,m2/m2,2.212,lai,
+tomato,tomato_12010_2026,lai,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,m2/m2,2.709,lai,RAF
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,m2/m2,1.793,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,m2/m2,1.52,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,m2/m2,1.52,lai,Suplum 26
+lettuce,lettuce_002,lai,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,m2/m2,2.063,lai,
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,m2/m2,2.414,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,m2/m2,2.414,lai,
+tomato,tomato_12010_2026,lai,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,m2/m2,2.938,lai,RAF
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,m2/m2,2.079,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,m2/m2,1.766,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,m2/m2,1.766,lai,Suplum 26
+lettuce,lettuce_002,lai,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,m2/m2,0.535,lai,
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,m2/m2,2.6,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,m2/m2,2.6,lai,
+tomato,tomato_12010_2026,lai,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-16T09:00:00+00:00,m2/m2,3.113,lai,RAF
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-16T09:00:00+00:00,m2/m2,2.342,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-16T09:00:00+00:00,m2/m2,1.999,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-16T09:00:00+00:00,m2/m2,1.999,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-16T09:00:00+00:00,m2/m2,2.766,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-16T09:00:00+00:00,m2/m2,2.766,lai,
+tomato,tomato_12010_2026,lai,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-23T09:00:00+00:00,m2/m2,3.232,lai,RAF
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-23T09:00:00+00:00,m2/m2,2.579,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-23T09:00:00+00:00,m2/m2,2.218,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-23T09:00:00+00:00,m2/m2,2.218,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-23T09:00:00+00:00,m2/m2,2.911,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-23T09:00:00+00:00,m2/m2,2.911,lai,
+tomato,tomato_12010_2026,lai,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-30T09:00:00+00:00,m2/m2,3.292,lai,RAF
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-30T09:00:00+00:00,m2/m2,2.786,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-30T09:00:00+00:00,m2/m2,2.421,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-30T09:00:00+00:00,m2/m2,2.421,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-30T09:00:00+00:00,m2/m2,3.035,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-30T09:00:00+00:00,m2/m2,3.035,lai,
+tomato,tomato_12010_2026,lai,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-07T09:00:00+00:00,m2/m2,3.292,lai,RAF
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-07T09:00:00+00:00,m2/m2,2.961,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-07T09:00:00+00:00,m2/m2,2.607,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-07T09:00:00+00:00,m2/m2,2.607,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-07T09:00:00+00:00,m2/m2,3.136,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-07T09:00:00+00:00,m2/m2,3.136,lai,
+tomato,tomato_12010_2026,lai,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-14T09:00:00+00:00,m2/m2,3.232,lai,RAF
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-14T09:00:00+00:00,m2/m2,3.101,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-14T09:00:00+00:00,m2/m2,2.772,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-14T09:00:00+00:00,m2/m2,2.772,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-14T09:00:00+00:00,m2/m2,3.213,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-14T09:00:00+00:00,m2/m2,3.213,lai,
+tomato,tomato_12010_2026,lai,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-21T09:00:00+00:00,m2/m2,3.113,lai,RAF
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-21T09:00:00+00:00,m2/m2,3.205,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-21T09:00:00+00:00,m2/m2,2.917,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-21T09:00:00+00:00,m2/m2,2.917,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-21T09:00:00+00:00,m2/m2,3.266,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-21T09:00:00+00:00,m2/m2,3.266,lai,
+tomato,tomato_12010_2026,lai,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-28T09:00:00+00:00,m2/m2,2.938,lai,RAF
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-28T09:00:00+00:00,m2/m2,3.271,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-28T09:00:00+00:00,m2/m2,3.041,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-28T09:00:00+00:00,m2/m2,3.041,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-28T09:00:00+00:00,m2/m2,3.295,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-28T09:00:00+00:00,m2/m2,3.295,lai,
+tomato,tomato_12010_2026,lai,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-04T09:00:00+00:00,m2/m2,2.709,lai,RAF
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-04T09:00:00+00:00,m2/m2,3.299,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-04T09:00:00+00:00,m2/m2,3.141,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-04T09:00:00+00:00,m2/m2,3.141,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-04T09:00:00+00:00,m2/m2,3.298,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-04T09:00:00+00:00,m2/m2,3.298,lai,
+tomato,tomato_12010_2026,lai,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-11T09:00:00+00:00,m2/m2,2.432,lai,RAF
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-11T09:00:00+00:00,m2/m2,3.288,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-11T09:00:00+00:00,m2/m2,3.217,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-11T09:00:00+00:00,m2/m2,3.217,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-11T09:00:00+00:00,m2/m2,3.277,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-11T09:00:00+00:00,m2/m2,3.277,lai,
+tomato,tomato_12010_2026,lai,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-18T09:00:00+00:00,m2/m2,2.112,lai,RAF
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-18T09:00:00+00:00,m2/m2,3.238,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-18T09:00:00+00:00,m2/m2,3.269,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-18T09:00:00+00:00,m2/m2,3.269,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-18T09:00:00+00:00,m2/m2,3.231,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-18T09:00:00+00:00,m2/m2,3.231,lai,
+tomato,tomato_12010_2026,lai,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-25T09:00:00+00:00,m2/m2,1.756,lai,RAF
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-25T09:00:00+00:00,m2/m2,3.15,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-25T09:00:00+00:00,m2/m2,3.296,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-25T09:00:00+00:00,m2/m2,3.296,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-25T09:00:00+00:00,m2/m2,3.16,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-25T09:00:00+00:00,m2/m2,3.16,lai,
+tomato,tomato_12010_2026,lai,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-02T09:00:00+00:00,m2/m2,1.37,lai,RAF
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-02T09:00:00+00:00,m2/m2,3.025,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-02T09:00:00+00:00,m2/m2,3.298,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-02T09:00:00+00:00,m2/m2,3.298,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-02T09:00:00+00:00,m2/m2,3.066,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-02T09:00:00+00:00,m2/m2,3.066,lai,
+tomato,tomato_12010_2026,lai,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-09T09:00:00+00:00,m2/m2,0.963,lai,RAF
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-09T09:00:00+00:00,m2/m2,2.865,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-09T09:00:00+00:00,m2/m2,3.274,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-09T09:00:00+00:00,m2/m2,3.274,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-09T09:00:00+00:00,m2/m2,2.949,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-09T09:00:00+00:00,m2/m2,2.949,lai,
+tomato,tomato_12010_2026,lai,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-16T09:00:00+00:00,m2/m2,0.543,lai,RAF
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-16T09:00:00+00:00,m2/m2,2.671,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-16T09:00:00+00:00,m2/m2,3.226,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-16T09:00:00+00:00,m2/m2,3.226,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-16T09:00:00+00:00,m2/m2,2.809,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-16T09:00:00+00:00,m2/m2,2.809,lai,
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-23T09:00:00+00:00,m2/m2,2.447,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-23T09:00:00+00:00,m2/m2,3.153,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-23T09:00:00+00:00,m2/m2,3.153,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-23T09:00:00+00:00,m2/m2,2.649,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-23T09:00:00+00:00,m2/m2,2.649,lai,
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-30T09:00:00+00:00,m2/m2,2.195,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-30T09:00:00+00:00,m2/m2,3.056,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-30T09:00:00+00:00,m2/m2,3.056,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-30T09:00:00+00:00,m2/m2,2.469,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-30T09:00:00+00:00,m2/m2,2.469,lai,
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-06T09:00:00+00:00,m2/m2,1.918,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-06T09:00:00+00:00,m2/m2,2.936,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-06T09:00:00+00:00,m2/m2,2.936,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-06T09:00:00+00:00,m2/m2,2.271,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-06T09:00:00+00:00,m2/m2,2.271,lai,
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-13T09:00:00+00:00,m2/m2,1.62,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-13T09:00:00+00:00,m2/m2,2.794,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-13T09:00:00+00:00,m2/m2,2.794,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-13T09:00:00+00:00,m2/m2,2.057,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-13T09:00:00+00:00,m2/m2,2.057,lai,
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-20T09:00:00+00:00,m2/m2,1.306,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-20T09:00:00+00:00,m2/m2,2.631,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-20T09:00:00+00:00,m2/m2,2.631,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-20T09:00:00+00:00,m2/m2,1.828,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-20T09:00:00+00:00,m2/m2,1.828,lai,
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-27T09:00:00+00:00,m2/m2,0.978,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-27T09:00:00+00:00,m2/m2,2.449,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-27T09:00:00+00:00,m2/m2,2.449,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-27T09:00:00+00:00,m2/m2,1.587,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-27T09:00:00+00:00,m2/m2,1.587,lai,
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-03T09:00:00+00:00,m2/m2,0.641,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-03T09:00:00+00:00,m2/m2,2.248,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-03T09:00:00+00:00,m2/m2,2.248,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-03T09:00:00+00:00,m2/m2,1.334,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-03T09:00:00+00:00,m2/m2,1.334,lai,
+pepper,pepper_40811_2026,lai,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-10T09:00:00+00:00,m2/m2,0.3,lai,Lamuyo
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-10T09:00:00+00:00,m2/m2,2.031,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-10T09:00:00+00:00,m2/m2,2.031,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-10T09:00:00+00:00,m2/m2,1.073,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-10T09:00:00+00:00,m2/m2,1.073,lai,
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-17T09:00:00+00:00,m2/m2,1.8,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-17T09:00:00+00:00,m2/m2,1.8,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-17T09:00:00+00:00,m2/m2,0.806,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-17T09:00:00+00:00,m2/m2,0.806,lai,
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-24T09:00:00+00:00,m2/m2,1.556,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-24T09:00:00+00:00,m2/m2,1.556,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-24T09:00:00+00:00,m2/m2,0.534,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-24T09:00:00+00:00,m2/m2,0.534,lai,
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-01T09:00:00+00:00,m2/m2,1.301,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-01T09:00:00+00:00,m2/m2,1.301,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-01T09:00:00+00:00,m2/m2,0.3,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-01T09:00:00+00:00,m2/m2,0.3,lai,
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-08T09:00:00+00:00,m2/m2,1.038,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-08T09:00:00+00:00,m2/m2,1.038,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-08T09:00:00+00:00,m2/m2,0.3,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-08T09:00:00+00:00,m2/m2,0.3,lai,
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-15T09:00:00+00:00,m2/m2,0.769,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-15T09:00:00+00:00,m2/m2,0.769,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-15T09:00:00+00:00,m2/m2,0.3,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-15T09:00:00+00:00,m2/m2,0.3,lai,
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-22T09:00:00+00:00,m2/m2,0.496,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-22T09:00:00+00:00,m2/m2,0.496,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-22T09:00:00+00:00,m2/m2,0.3,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-22T09:00:00+00:00,m2/m2,0.3,lai,
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-29T09:00:00+00:00,m2/m2,0.3,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-29T09:00:00+00:00,m2/m2,0.3,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-29T09:00:00+00:00,m2/m2,0.3,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-29T09:00:00+00:00,m2/m2,0.3,lai,
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-05T09:00:00+00:00,m2/m2,0.3,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-05T09:00:00+00:00,m2/m2,0.3,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-05T09:00:00+00:00,m2/m2,0.3,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-05T09:00:00+00:00,m2/m2,0.3,lai,
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-12T09:00:00+00:00,m2/m2,0.3,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-12T09:00:00+00:00,m2/m2,0.3,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-12T09:00:00+00:00,m2/m2,0.3,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-12T09:00:00+00:00,m2/m2,0.3,lai,
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-19T09:00:00+00:00,m2/m2,0.3,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-19T09:00:00+00:00,m2/m2,0.3,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-19T09:00:00+00:00,m2/m2,0.3,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-19T09:00:00+00:00,m2/m2,0.3,lai,
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-26T09:00:00+00:00,m2/m2,0.3,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-26T09:00:00+00:00,m2/m2,0.3,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-26T09:00:00+00:00,m2/m2,0.3,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-26T09:00:00+00:00,m2/m2,0.3,lai,
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-03T09:00:00+00:00,m2/m2,0.3,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-03T09:00:00+00:00,m2/m2,0.3,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-03T09:00:00+00:00,m2/m2,0.3,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-03T09:00:00+00:00,m2/m2,0.3,lai,
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-10T09:00:00+00:00,m2/m2,0.3,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-10T09:00:00+00:00,m2/m2,0.3,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-10T09:00:00+00:00,m2/m2,0.3,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-10T09:00:00+00:00,m2/m2,0.3,lai,
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-17T09:00:00+00:00,m2/m2,0.3,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-17T09:00:00+00:00,m2/m2,0.3,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-17T09:00:00+00:00,m2/m2,0.3,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-17T09:00:00+00:00,m2/m2,0.3,lai,
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-24T09:00:00+00:00,m2/m2,0.3,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-24T09:00:00+00:00,m2/m2,0.3,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-24T09:00:00+00:00,m2/m2,0.3,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-24T09:00:00+00:00,m2/m2,0.3,lai,
+grape,grape_30412_2026,lai,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-31T09:00:00+00:00,m2/m2,0.3,lai,Monastrell
+plum,plum_14705_2026,lai,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-31T09:00:00+00:00,m2/m2,0.3,lai,Suplum 26
+peach,peach_plot_61200_2026,lai,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-31T09:00:00+00:00,m2/m2,0.3,lai,
+apple,apple_plot_72300_2026,lai,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-31T09:00:00+00:00,m2/m2,0.3,lai,

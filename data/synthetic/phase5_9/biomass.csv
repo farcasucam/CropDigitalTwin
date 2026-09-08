@@ -1,0 +1,247 @@
+crop,crop_cycle_id,dataset,environment,measurement_method,plot_id,quality,source,source_type,timestamp,unit,value,variable,variety
+lettuce,lettuce_001,biomass,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-01-15T09:00:00+00:00,g/m2,105.852,biomass,
+lettuce,lettuce_001,biomass,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-01-22T09:00:00+00:00,g/m2,208.045,biomass,
+lettuce,lettuce_001,biomass,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-01-29T09:00:00+00:00,g/m2,302.258,biomass,
+lettuce,lettuce_001,biomass,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-05T09:00:00+00:00,g/m2,389.373,biomass,
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-05T09:00:00+00:00,g/m2,39.863,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-05T09:00:00+00:00,g/m2,40.688,biomass,
+lettuce,lettuce_001,biomass,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-12T09:00:00+00:00,g/m2,467.329,biomass,
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-12T09:00:00+00:00,g/m2,57.828,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-12T09:00:00+00:00,g/m2,57.677,biomass,
+tomato,tomato_12010_2026,biomass,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-19T09:00:00+00:00,g/m2,47.108,biomass,RAF
+lettuce,lettuce_001,biomass,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-19T09:00:00+00:00,g/m2,541.388,biomass,
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-19T09:00:00+00:00,g/m2,77.017,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-19T09:00:00+00:00,g/m2,78.595,biomass,
+tomato,tomato_12010_2026,biomass,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-26T09:00:00+00:00,g/m2,77.068,biomass,RAF
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-26T09:00:00+00:00,g/m2,94.056,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-02-26T09:00:00+00:00,g/m2,94.252,biomass,
+tomato,tomato_12010_2026,biomass,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,g/m2,102.651,biomass,RAF
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,g/m2,41.677,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,g/m2,40.833,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,g/m2,41.484,biomass,Suplum 26
+lettuce,lettuce_002,biomass,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,g/m2,92.369,biomass,
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,g/m2,115.267,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-05T09:00:00+00:00,g/m2,115.913,biomass,
+tomato,tomato_12010_2026,biomass,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,g/m2,132.133,biomass,RAF
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,g/m2,68.27,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,g/m2,61.422,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,g/m2,61.058,biomass,Suplum 26
+lettuce,lettuce_002,biomass,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,g/m2,199.617,biomass,
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,g/m2,133.728,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-12T09:00:00+00:00,g/m2,132.524,biomass,
+tomato,tomato_12010_2026,biomass,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,g/m2,157.784,biomass,RAF
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,g/m2,88.469,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,g/m2,77.992,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,g/m2,79.375,biomass,Suplum 26
+lettuce,lettuce_002,biomass,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,g/m2,297.694,biomass,
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,g/m2,149.319,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-19T09:00:00+00:00,g/m2,150.276,biomass,
+tomato,tomato_12010_2026,biomass,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,g/m2,184.531,biomass,RAF
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,g/m2,112.622,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,g/m2,97.178,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,g/m2,94.441,biomass,Suplum 26
+lettuce,lettuce_002,biomass,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,g/m2,386.616,biomass,
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,g/m2,167.028,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-03-26T09:00:00+00:00,g/m2,166.783,biomass,
+tomato,tomato_12010_2026,biomass,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,g/m2,212.93,biomass,RAF
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,g/m2,132.515,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,g/m2,113.0,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,g/m2,114.646,biomass,Suplum 26
+lettuce,lettuce_002,biomass,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,g/m2,467.299,biomass,
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,g/m2,182.707,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-02T09:00:00+00:00,g/m2,185.681,biomass,
+tomato,tomato_12010_2026,biomass,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,g/m2,236.436,biomass,RAF
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,g/m2,154.335,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,g/m2,132.465,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,g/m2,134.119,biomass,Suplum 26
+lettuce,lettuce_002,biomass,GREENHOUSE,synthetic_model,plot_20500,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,g/m2,539.791,biomass,
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,g/m2,200.216,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-09T09:00:00+00:00,g/m2,201.014,biomass,
+tomato,tomato_12010_2026,biomass,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-16T09:00:00+00:00,g/m2,262.433,biomass,RAF
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-16T09:00:00+00:00,g/m2,179.436,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-16T09:00:00+00:00,g/m2,148.472,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-16T09:00:00+00:00,g/m2,151.631,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-16T09:00:00+00:00,g/m2,215.86,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-16T09:00:00+00:00,g/m2,218.874,biomass,
+tomato,tomato_12010_2026,biomass,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-23T09:00:00+00:00,g/m2,287.2,biomass,RAF
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-23T09:00:00+00:00,g/m2,199.215,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-23T09:00:00+00:00,g/m2,167.651,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-23T09:00:00+00:00,g/m2,167.941,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-23T09:00:00+00:00,g/m2,232.429,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-23T09:00:00+00:00,g/m2,233.021,biomass,
+tomato,tomato_12010_2026,biomass,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-30T09:00:00+00:00,g/m2,311.808,biomass,RAF
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-30T09:00:00+00:00,g/m2,221.308,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-30T09:00:00+00:00,g/m2,183.852,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-30T09:00:00+00:00,g/m2,183.292,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-30T09:00:00+00:00,g/m2,250.555,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-04-30T09:00:00+00:00,g/m2,248.697,biomass,
+tomato,tomato_12010_2026,biomass,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-07T09:00:00+00:00,g/m2,332.748,biomass,RAF
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-07T09:00:00+00:00,g/m2,240.241,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-07T09:00:00+00:00,g/m2,200.869,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-07T09:00:00+00:00,g/m2,199.71,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-07T09:00:00+00:00,g/m2,265.91,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-07T09:00:00+00:00,g/m2,266.031,biomass,
+tomato,tomato_12010_2026,biomass,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-14T09:00:00+00:00,g/m2,357.404,biomass,RAF
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-14T09:00:00+00:00,g/m2,259.097,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-14T09:00:00+00:00,g/m2,217.95,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-14T09:00:00+00:00,g/m2,219.089,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-14T09:00:00+00:00,g/m2,282.708,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-14T09:00:00+00:00,g/m2,280.411,biomass,
+tomato,tomato_12010_2026,biomass,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-21T09:00:00+00:00,g/m2,380.449,biomass,RAF
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-21T09:00:00+00:00,g/m2,279.243,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-21T09:00:00+00:00,g/m2,232.927,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-21T09:00:00+00:00,g/m2,235.124,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-21T09:00:00+00:00,g/m2,296.393,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-21T09:00:00+00:00,g/m2,298.243,biomass,
+tomato,tomato_12010_2026,biomass,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-28T09:00:00+00:00,g/m2,401.108,biomass,RAF
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-28T09:00:00+00:00,g/m2,298.278,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-28T09:00:00+00:00,g/m2,249.846,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-28T09:00:00+00:00,g/m2,251.662,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-28T09:00:00+00:00,g/m2,313.714,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-05-28T09:00:00+00:00,g/m2,312.884,biomass,
+tomato,tomato_12010_2026,biomass,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-04T09:00:00+00:00,g/m2,421.272,biomass,RAF
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-04T09:00:00+00:00,g/m2,318.049,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-04T09:00:00+00:00,g/m2,266.429,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-04T09:00:00+00:00,g/m2,266.389,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-04T09:00:00+00:00,g/m2,328.174,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-04T09:00:00+00:00,g/m2,329.376,biomass,
+tomato,tomato_12010_2026,biomass,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-11T09:00:00+00:00,g/m2,444.033,biomass,RAF
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-11T09:00:00+00:00,g/m2,335.354,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-11T09:00:00+00:00,g/m2,283.104,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-11T09:00:00+00:00,g/m2,282.687,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-11T09:00:00+00:00,g/m2,344.136,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-11T09:00:00+00:00,g/m2,342.623,biomass,
+tomato,tomato_12010_2026,biomass,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-18T09:00:00+00:00,g/m2,465.835,biomass,RAF
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-18T09:00:00+00:00,g/m2,354.081,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-18T09:00:00+00:00,g/m2,298.989,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-18T09:00:00+00:00,g/m2,297.832,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-18T09:00:00+00:00,g/m2,357.739,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-18T09:00:00+00:00,g/m2,357.73,biomass,
+tomato,tomato_12010_2026,biomass,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-25T09:00:00+00:00,g/m2,483.819,biomass,RAF
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-25T09:00:00+00:00,g/m2,372.561,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-25T09:00:00+00:00,g/m2,315.188,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-25T09:00:00+00:00,g/m2,315.565,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-25T09:00:00+00:00,g/m2,373.226,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-06-25T09:00:00+00:00,g/m2,370.821,biomass,
+tomato,tomato_12010_2026,biomass,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-02T09:00:00+00:00,g/m2,501.856,biomass,RAF
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-02T09:00:00+00:00,g/m2,392.314,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-02T09:00:00+00:00,g/m2,329.91,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-02T09:00:00+00:00,g/m2,329.891,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-02T09:00:00+00:00,g/m2,385.876,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-02T09:00:00+00:00,g/m2,386.3,biomass,
+tomato,tomato_12010_2026,biomass,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-09T09:00:00+00:00,g/m2,522.964,biomass,RAF
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-09T09:00:00+00:00,g/m2,410.432,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-09T09:00:00+00:00,g/m2,343.876,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-09T09:00:00+00:00,g/m2,344.537,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-09T09:00:00+00:00,g/m2,398.533,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-09T09:00:00+00:00,g/m2,401.017,biomass,
+tomato,tomato_12010_2026,biomass,GREENHOUSE,synthetic_model,plot_12010,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-16T09:00:00+00:00,g/m2,539.075,biomass,RAF
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-16T09:00:00+00:00,g/m2,426.625,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-16T09:00:00+00:00,g/m2,360.363,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-16T09:00:00+00:00,g/m2,359.558,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-16T09:00:00+00:00,g/m2,415.662,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-16T09:00:00+00:00,g/m2,415.835,biomass,
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-23T09:00:00+00:00,g/m2,443.376,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-23T09:00:00+00:00,g/m2,372.459,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-23T09:00:00+00:00,g/m2,374.283,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-23T09:00:00+00:00,g/m2,429.656,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-23T09:00:00+00:00,g/m2,427.256,biomass,
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-30T09:00:00+00:00,g/m2,458.563,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-30T09:00:00+00:00,g/m2,388.087,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-30T09:00:00+00:00,g/m2,386.246,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-30T09:00:00+00:00,g/m2,441.758,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-07-30T09:00:00+00:00,g/m2,439.249,biomass,
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-06T09:00:00+00:00,g/m2,476.487,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-06T09:00:00+00:00,g/m2,399.999,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-06T09:00:00+00:00,g/m2,403.505,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-06T09:00:00+00:00,g/m2,452.301,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-06T09:00:00+00:00,g/m2,455.505,biomass,
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-13T09:00:00+00:00,g/m2,492.436,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-13T09:00:00+00:00,g/m2,415.489,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-13T09:00:00+00:00,g/m2,413.519,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-13T09:00:00+00:00,g/m2,467.568,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-13T09:00:00+00:00,g/m2,468.809,biomass,
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-20T09:00:00+00:00,g/m2,504.875,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-20T09:00:00+00:00,g/m2,430.711,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-20T09:00:00+00:00,g/m2,427.204,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-20T09:00:00+00:00,g/m2,480.933,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-20T09:00:00+00:00,g/m2,478.644,biomass,
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-27T09:00:00+00:00,g/m2,522.003,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-27T09:00:00+00:00,g/m2,442.278,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-27T09:00:00+00:00,g/m2,442.621,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-27T09:00:00+00:00,g/m2,490.867,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-08-27T09:00:00+00:00,g/m2,490.571,biomass,
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-03T09:00:00+00:00,g/m2,536.8,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-03T09:00:00+00:00,g/m2,456.155,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-03T09:00:00+00:00,g/m2,456.431,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-03T09:00:00+00:00,g/m2,505.782,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-03T09:00:00+00:00,g/m2,504.978,biomass,
+pepper,pepper_40811_2026,biomass,OUTDOOR,synthetic_model,plot_40811,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-10T09:00:00+00:00,g/m2,550.504,biomass,Lamuyo
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-10T09:00:00+00:00,g/m2,469.937,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-10T09:00:00+00:00,g/m2,470.322,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-10T09:00:00+00:00,g/m2,515.263,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-10T09:00:00+00:00,g/m2,518.178,biomass,
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-17T09:00:00+00:00,g/m2,482.214,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-17T09:00:00+00:00,g/m2,480.472,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-17T09:00:00+00:00,g/m2,530.393,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-17T09:00:00+00:00,g/m2,529.946,biomass,
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-24T09:00:00+00:00,g/m2,492.73,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-24T09:00:00+00:00,g/m2,492.887,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-24T09:00:00+00:00,g/m2,538.825,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-09-24T09:00:00+00:00,g/m2,539.362,biomass,
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-01T09:00:00+00:00,g/m2,508.189,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-01T09:00:00+00:00,g/m2,508.105,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-01T09:00:00+00:00,g/m2,551.9,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-01T09:00:00+00:00,g/m2,549.812,biomass,
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-08T09:00:00+00:00,g/m2,517.912,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-08T09:00:00+00:00,g/m2,520.212,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-08T09:00:00+00:00,g/m2,548.507,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-08T09:00:00+00:00,g/m2,548.222,biomass,
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-15T09:00:00+00:00,g/m2,531.501,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-15T09:00:00+00:00,g/m2,531.32,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-15T09:00:00+00:00,g/m2,551.128,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-15T09:00:00+00:00,g/m2,548.063,biomass,
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-22T09:00:00+00:00,g/m2,542.388,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-22T09:00:00+00:00,g/m2,543.57,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-22T09:00:00+00:00,g/m2,550.552,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-22T09:00:00+00:00,g/m2,550.315,biomass,
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-29T09:00:00+00:00,g/m2,551.637,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-29T09:00:00+00:00,g/m2,548.797,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-29T09:00:00+00:00,g/m2,548.922,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-10-29T09:00:00+00:00,g/m2,551.475,biomass,
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-05T09:00:00+00:00,g/m2,551.084,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-05T09:00:00+00:00,g/m2,549.532,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-05T09:00:00+00:00,g/m2,548.99,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-05T09:00:00+00:00,g/m2,549.455,biomass,
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-12T09:00:00+00:00,g/m2,549.479,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-12T09:00:00+00:00,g/m2,551.307,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-12T09:00:00+00:00,g/m2,549.119,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-12T09:00:00+00:00,g/m2,549.727,biomass,
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-19T09:00:00+00:00,g/m2,550.129,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-19T09:00:00+00:00,g/m2,551.688,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-19T09:00:00+00:00,g/m2,551.472,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-19T09:00:00+00:00,g/m2,548.866,biomass,
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-26T09:00:00+00:00,g/m2,550.597,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-26T09:00:00+00:00,g/m2,549.416,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-26T09:00:00+00:00,g/m2,548.804,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-11-26T09:00:00+00:00,g/m2,548.034,biomass,
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-03T09:00:00+00:00,g/m2,551.078,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-03T09:00:00+00:00,g/m2,548.709,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-03T09:00:00+00:00,g/m2,548.957,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-03T09:00:00+00:00,g/m2,549.867,biomass,
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-10T09:00:00+00:00,g/m2,548.399,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-10T09:00:00+00:00,g/m2,549.413,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-10T09:00:00+00:00,g/m2,551.869,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-10T09:00:00+00:00,g/m2,551.584,biomass,
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-17T09:00:00+00:00,g/m2,550.233,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-17T09:00:00+00:00,g/m2,550.848,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-17T09:00:00+00:00,g/m2,548.925,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-17T09:00:00+00:00,g/m2,551.024,biomass,
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-24T09:00:00+00:00,g/m2,550.684,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-24T09:00:00+00:00,g/m2,550.617,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-24T09:00:00+00:00,g/m2,551.105,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-24T09:00:00+00:00,g/m2,550.617,biomass,
+grape,grape_30412_2026,biomass,OUTDOOR,synthetic_model,plot_30412,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-31T09:00:00+00:00,g/m2,550.386,biomass,Monastrell
+plum,plum_14705_2026,biomass,OUTDOOR,synthetic_model,plot_14705,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-31T09:00:00+00:00,g/m2,548.447,biomass,Suplum 26
+peach,peach_plot_61200_2026,biomass,OUTDOOR,synthetic_model,plot_61200,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-31T09:00:00+00:00,g/m2,548.496,biomass,
+apple,apple_plot_72300_2026,biomass,OUTDOOR,synthetic_model,plot_72300,VALID,SYNTHETIC_TEST,synthetic_test_data,2026-12-31T09:00:00+00:00,g/m2,549.035,biomass,

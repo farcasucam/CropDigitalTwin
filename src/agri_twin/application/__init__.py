@@ -48,6 +48,13 @@ from agri_twin.application.providers import (
     WeatherProviderError,
     WeatherTimestampNotAvailable,
 )
+from agri_twin.application.synthetic_dataset import (
+    SyntheticCropCycle,
+    SyntheticDatasetError,
+    SyntheticPlot,
+    SyntheticReferenceDataset,
+    SyntheticReferenceDatasetGenerator,
+)
 from agri_twin.application.weather_configuration import (
     OpenMeteoSourceConfiguration,
     WeatherDatasetResult,
@@ -96,6 +103,11 @@ __all__ = [
     "WeatherProvider",
     "WeatherProviderError",
     "WeatherTimestampNotAvailable",
+    "SyntheticCropCycle",
+    "SyntheticDatasetError",
+    "SyntheticPlot",
+    "SyntheticReferenceDataset",
+    "SyntheticReferenceDatasetGenerator",
     "WeatherConfigurationError",
     "OpenMeteoSourceConfiguration",
     "WeatherDatasetResult",
