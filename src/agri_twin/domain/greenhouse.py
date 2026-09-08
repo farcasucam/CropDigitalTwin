@@ -42,6 +42,7 @@ class GreenhouseConfiguration:
 
 @dataclass(frozen=True, slots=True)
 class GreenhouseActuatorState:
+    """Actuator inputs; CO2 supply is a concentration increment per timestep."""
     heating_kw: float = 0.0
     cooling_kw: float = 0.0
     ventilation_ach: float = 0.0
@@ -62,6 +63,7 @@ class GreenhouseActuatorState:
 
 @dataclass(frozen=True, slots=True)
 class CropMicroclimateFeedback:
+    """Crop exchange inputs; CO2 uptake is a concentration decrement per timestep."""
     leaf_area_index: float = 0.0
     transpiration_mm_h: float = 0.0
     intercepted_radiation_w_m2: float = 0.0

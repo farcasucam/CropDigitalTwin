@@ -3,6 +3,7 @@
 from datetime import datetime, timezone
 
 from agri_twin.domain import (
+    CropGreenhouseFeedbackConfiguration,
     CropGreenhouseFeedbackLoop,
     CropMicroclimateFeedback,
     CropGrowthState,
@@ -47,6 +48,20 @@ def main() -> int:
     run_case("radiation", WeatherState(solar_radiation_w_m2=800, **common), GreenhouseActuatorState())
     run_case("shaded", WeatherState(solar_radiation_w_m2=800, **common), GreenhouseActuatorState(shading_fraction=0.7))
     run_case("high_vpd", WeatherState(solar_radiation_w_m2=800, relative_humidity_pct=25, **{key: value for key, value in common.items() if key != "relative_humidity_pct"}), GreenhouseActuatorState())
+    model = SimplifiedGreenhouseModel()
+    configuration = GreenhouseConfiguration(co2_ppm_baseline=450)
+    no_uptake = model.step(WeatherState(solar_radiation_w_m2=800, **common), configuration, GreenhouseActuatorState(), CropMicroclimateFeedback(), 3600)
+    uptake = model.step(WeatherState(solar_radiation_w_m2=800, **common), configuration, GreenhouseActuatorState(), CropMicroclimateFeedback(co2_uptake_ppm=10), 3600, prior=no_uptake)
+    print("[co2_and_thermal_audit]")
+    print(f"co2_previous_ppm={no_uptake.co2_ppm:.3f} co2_supply_ppm=0.000 co2_uptake_ppm=10.000 co2_final_ppm={uptake.co2_ppm:.3f}")
+    neutral = model.step(WeatherState(solar_radiation_w_m2=800, **common), configuration, GreenhouseActuatorState(), CropMicroclimateFeedback(), 3600)
+    latent = model.step(WeatherState(solar_radiation_w_m2=800, **common), configuration, GreenhouseActuatorState(), CropMicroclimateFeedback(latent_heat_w_m2=200), 3600, prior=neutral)
+    sensible = model.step(WeatherState(solar_radiation_w_m2=800, **common), configuration, GreenhouseActuatorState(), CropMicroclimateFeedback(sensible_heat_w_m2=20), 3600, prior=neutral)
+    print(f"temperature_neutral_c={neutral.temperature_c:.3f} temperature_latent_c={latent.temperature_c:.3f} temperature_sensible_c={sensible.temperature_c:.3f}")
+    repeat_a = CropGreenhouseFeedbackLoop(SimplifiedGreenhouseModel()).step(CropGrowthState(simulation_time=T0, crop_key="tomato", variety="RAF", current_stage="vegetative_growth", biomass_total=50, biomass_leaf=50, leaf_area_index=2.0, root_depth_m=0.5, soil_water_vwc=0.25), WeatherState(solar_radiation_w_m2=800, **common), GreenhouseConfiguration(), GreenhouseActuatorState(), 3600)
+    repeat_b = CropGreenhouseFeedbackLoop(SimplifiedGreenhouseModel()).step(CropGrowthState(simulation_time=T0, crop_key="tomato", variety="RAF", current_stage="vegetative_growth", biomass_total=50, biomass_leaf=50, leaf_area_index=2.0, root_depth_m=0.5, soil_water_vwc=0.25), WeatherState(solar_radiation_w_m2=800, **common), GreenhouseConfiguration(), GreenhouseActuatorState(), 3600)
+    non_converged = CropGreenhouseFeedbackLoop(SimplifiedGreenhouseModel(), configuration=CropGreenhouseFeedbackConfiguration(max_iterations=1, tolerance_temperature_c=1e-12, tolerance_relative_humidity_pct=1e-12, tolerance_co2_ppm=1e-12)).step(CropGrowthState(simulation_time=T0, crop_key="tomato", variety="RAF", current_stage="vegetative_growth", biomass_total=50, biomass_leaf=50, leaf_area_index=2.0, root_depth_m=0.5, soil_water_vwc=0.25), WeatherState(solar_radiation_w_m2=800, **common), GreenhouseConfiguration(), GreenhouseActuatorState(), 3600)
+    print(f"same_timestep_deterministic={repeat_a == repeat_b} non_converged={not non_converged.convergence.converged} non_convergence_error={non_converged.convergence.final_error:.6f}")
     return 0
 
 

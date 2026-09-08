@@ -1,4 +1,5 @@
 from datetime import datetime, timezone
+import math
 
 import pytest
 
@@ -50,16 +51,20 @@ def growth_for(state, micro=None, dt=3600):
     return CropGrowthEngine().advance(state, CropGrowthInput(weather(temperature_c=micro.temperature_c, relative_humidity_pct=micro.relative_humidity_pct, solar_radiation_w_m2=micro.solar_radiation_w_m2), dt))
 
 
-def test_transpiration_has_units_origin_and_responds_to_vpd():
+def test_transpiration_units_and_traceability_without_second_vpd_correction():
     state = crop()
     model = CropPhysicalExchangeModel()
-    low_vpd = MicroclimateState(25, 90, 0.0, co2_ppm=420, vpd_kpa=0.3, pressure_hpa=1012, solar_radiation_w_m2=500, par_umol_m2_s=1000)
-    high_vpd = MicroclimateState(35, 20, 0.0, co2_ppm=420, vpd_kpa=2.5, pressure_hpa=1012, solar_radiation_w_m2=500, par_umol_m2_s=1000)
-    low = model.calculate(state, growth_for(state, low_vpd), low_vpd, weather(), 3600)
-    high = model.calculate(state, growth_for(state, high_vpd), high_vpd, weather(), 3600)
-    assert high.transpiration_rate.value > low.transpiration_rate.value
-    assert high.transpiration_rate.unit == "mm h-1"
-    assert high.transpiration_rate.origin
+    common = dict(temperature_c=28, relative_humidity_pct=60, solar_radiation_w_m2=500, pressure_hpa=1012, par_umol_m2_s=1000)
+    low_vpd = MicroclimateState(vpd_or_radiation=0.0, co2_ppm=420, vpd_kpa=0.3, **common)
+    high_vpd = MicroclimateState(vpd_or_radiation=0.0, co2_ppm=420, vpd_kpa=2.5, **common)
+    low = model.calculate(state, growth_for(state, low_vpd), low_vpd, weather(), 3600, soil())
+    high = model.calculate(state, growth_for(state, high_vpd), high_vpd, weather(), 3600, soil())
+    assert low.transpiration_rate.value == pytest.approx(high.transpiration_rate.value)
+    assert math.isfinite(low.transpiration_rate.value)
+    assert low.transpiration_rate.value >= 0
+    assert low.transpiration_rate.unit == "mm h-1"
+    assert "WaterBalanceEngine" in low.transpiration_rate.origin
+    assert "no second VPD correction" in low.transpiration_rate.origin
 
 
 def test_latent_heat_units_follow_water_vaporization():

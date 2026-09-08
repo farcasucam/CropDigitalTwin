@@ -96,7 +96,11 @@ In `SimplifiedGreenhouseModel`, the signed crop term is
 `Q_crop = (sensible_heat_w_m2 - latent_heat_w_m2) * thermal_exchange_area_m2`.
 The temperature contribution is `Q_crop * dt / (thermal_mass_kj_k * 1000)`:
 positive sensible heat warms the air and positive latent heat cools it. The
-same transpiration rate adds vapor to the bounded humidity balance.
+same transpiration rate adds vapor to the bounded humidity balance. That
+humidity conversion is an engineering approximation, not a complete
+psychrometric mass balance: it scales the `mm h-1` rate by timestep and zone
+volume, then bounds relative humidity. It is intentionally traceable and
+monotonic for the simplified backend, and remains pending site calibration.
 
 ### CO2
 
@@ -113,7 +117,10 @@ The simplified greenhouse carries the result dynamically:
 `CO2_candidate = CO2_previous + supply + ventilation_fraction * (420 - CO2_previous) - uptake`.
 Thus uptake is not recomputed against baseline on every iteration; the first
 call of a timestep uses the previous microclimate state, and fixed-point
-iterations all use the same timestep-start state.
+iterations all use the same timestep-start state. `co2_supply_ppm` and
+`co2_uptake_ppm` are concentration increments/decrements for one external
+timestep, not absolute concentrations and not mass flow rates. The ventilation
+term is a simplified exchange with outdoor 420 ppm.
 
 ## Iteration, relaxation, and non-convergence
 
@@ -150,8 +157,8 @@ calibration and validation.
 
 ## Tests and manual scenario
 
-Focused tests cover exchange units, radiation/VPD/LAI/shading/ventilation
-responses, CO2, convergence, non-convergence, relaxation, physical bounds,
+Focused tests cover exchange units, radiation, isolated VPD semantics, LAI,
+shading and ventilation responses, CO2, convergence, non-convergence, relaxation, physical bounds,
 determinism, `SimulationClock`, `SimulationScheduler`, the simplified backend,
 and the EnergyPlus backend contract without requiring EnergyPlus.
 
