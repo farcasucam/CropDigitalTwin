@@ -31,6 +31,7 @@
 | 5.9 | Synthetic simulation reference data and agricultural technician templates | synthetic data is for software testing only; real agronomic data, calibration and experimental validation remain unclaimed |
 | 5.10 | Temporal crop-cycle execution and multi-plot simulation | single SimulationClock/Scheduler; synthetic software tests only; calibration and experimental validation remain unclaimed |
 | 5.11 | Temporal TwinState management, multi-plot snapshots and in-memory history | twin state and temporal queries ready; no database, calibration or experimental validation |
+| 5.12 | Temporal TwinState to Observation alignment and comparison | temporal alignment and comparison ready; no calibration, data assimilation or experimental validation |
 | 5 | Actuators + Controller | comandos y estados separados |
 | 6 | Eventos + escenarios | replay reproducible |
 | 7 | Storage | histórico consultable |

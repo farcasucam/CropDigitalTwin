@@ -59,6 +59,7 @@ class Observation:
     measurement_method: str | None = None
     unit_original: str | None = None
     duration_seconds: float | None = None
+    cycle_id: str | None = None
 
     def __post_init__(self) -> None:
         if self.timestamp.tzinfo is None or not self.variable or not self.unit:

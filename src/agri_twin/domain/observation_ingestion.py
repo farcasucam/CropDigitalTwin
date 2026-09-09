@@ -234,6 +234,7 @@ def _row_to_observation(row: Mapping[str, Any], dataset_id: str, source: str, so
             crop=row.get("crop") or None, variety=row.get("variety") or None,
             environment=str(row.get("environment", Environment.UNKNOWN)), measurement_method=row.get("measurement_method") or None,
             unit_original=str(row["unit"]), duration_seconds=float(row["duration_seconds"]) if row.get("duration_seconds") not in (None, "") else None,
+            cycle_id=row.get("cycle_id") or row.get("crop_cycle_id") or None,
         )
         return observation, None
     except (ValueError, TypeError, ObservationIngestionError) as exc:

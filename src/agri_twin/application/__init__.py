@@ -70,6 +70,16 @@ from agri_twin.application.twin_state import (
     TwinStateError,
     TwinStateRepository,
 )
+from agri_twin.application.twin_alignment import (
+    AlignmentResult,
+    AlignmentStatus,
+    ComparisonDataset,
+    ComparisonResult,
+    CycleResolution,
+    TemporalAlignment,
+    compare_dataset,
+    compare_observation,
+)
 from agri_twin.application.weather_configuration import (
     OpenMeteoSourceConfiguration,
     WeatherDatasetResult,
@@ -134,6 +144,14 @@ __all__ = [
     "TwinStateConflict",
     "TwinStateError",
     "TwinStateRepository",
+    "AlignmentResult",
+    "AlignmentStatus",
+    "ComparisonDataset",
+    "ComparisonResult",
+    "CycleResolution",
+    "TemporalAlignment",
+    "compare_dataset",
+    "compare_observation",
     "WeatherConfigurationError",
     "OpenMeteoSourceConfiguration",
     "WeatherDatasetResult",
