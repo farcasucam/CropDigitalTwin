@@ -62,6 +62,14 @@ from agri_twin.application.multi_plot import (
     MultiPlotSimulationResult,
     PlotSimulationResult,
 )
+from agri_twin.application.twin_state import (
+    InMemoryTwinStateRepository,
+    TwinSnapshot,
+    TwinState,
+    TwinStateConflict,
+    TwinStateError,
+    TwinStateRepository,
+)
 from agri_twin.application.weather_configuration import (
     OpenMeteoSourceConfiguration,
     WeatherDatasetResult,
@@ -120,6 +128,12 @@ __all__ = [
     "MultiPlotSimulation",
     "MultiPlotSimulationResult",
     "PlotSimulationResult",
+    "InMemoryTwinStateRepository",
+    "TwinSnapshot",
+    "TwinState",
+    "TwinStateConflict",
+    "TwinStateError",
+    "TwinStateRepository",
     "WeatherConfigurationError",
     "OpenMeteoSourceConfiguration",
     "WeatherDatasetResult",
