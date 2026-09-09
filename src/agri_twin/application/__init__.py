@@ -80,6 +80,13 @@ from agri_twin.application.twin_alignment import (
     compare_dataset,
     compare_observation,
 )
+from agri_twin.application.error_diagnostics import (
+    ErrorDiagnostics,
+    MetricSummary,
+    OutlierReport,
+    QualityCounts,
+    diagnose,
+)
 from agri_twin.application.weather_configuration import (
     OpenMeteoSourceConfiguration,
     WeatherDatasetResult,
@@ -152,6 +159,11 @@ __all__ = [
     "TemporalAlignment",
     "compare_dataset",
     "compare_observation",
+    "ErrorDiagnostics",
+    "MetricSummary",
+    "OutlierReport",
+    "QualityCounts",
+    "diagnose",
     "WeatherConfigurationError",
     "OpenMeteoSourceConfiguration",
     "WeatherDatasetResult",

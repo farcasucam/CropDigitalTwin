@@ -67,6 +67,7 @@ class ComparisonResult:
     observed_provenance: str
     simulation_provenance: str
     phenological_stage: str | None = None
+    environment: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -97,6 +98,7 @@ class ComparisonResult:
             "observed_provenance": self.observed_provenance,
             "simulation_provenance": self.simulation_provenance,
             "phenological_stage": self.phenological_stage,
+            "environment": self.environment,
         }
 
 
@@ -208,7 +210,7 @@ def compare_observation(repository: TwinStateRepository, observation: Observatio
     if normalized_unit != simulated_unit:
         return _empty_result(replace(match, status=AlignmentStatus.UNIT_ERROR, reason=f"simulation unit is {simulated_unit}, observation unit is {normalized_unit}"), observation)
     residual = float(simulated_value) - observed_value
-    return ComparisonResult(match, observation.variable, state.crop, state.variety, observed_value, normalized_unit, simulated_value, simulated_unit, residual, abs(residual), observation.uncertainty, observation.quality, observation.source, state.state_provenance, state.phenological_stage)
+    return ComparisonResult(match, observation.variable, state.crop, state.variety, observed_value, normalized_unit, simulated_value, simulated_unit, residual, abs(residual), observation.uncertainty, observation.quality, observation.source, state.state_provenance, state.phenological_stage, observation.environment)
 
 
 def compare_dataset(repository: TwinStateRepository, dataset: ObservationDataset | Iterable[Observation], alignment: TemporalAlignment = TemporalAlignment()) -> ComparisonDataset:
@@ -221,7 +223,7 @@ def compare_dataset(repository: TwinStateRepository, dataset: ObservationDataset
 
 
 def _empty_result(alignment: AlignmentResult, observation: Observation) -> ComparisonResult:
-    return ComparisonResult(alignment, observation.variable, observation.crop, observation.variety, observation.value, observation.unit, None, None, None, None, observation.uncertainty, observation.quality, observation.source, "SIMULATION")
+    return ComparisonResult(alignment, observation.variable, observation.crop, observation.variety, observation.value, observation.unit, None, None, None, None, observation.uncertainty, observation.quality, observation.source, "SIMULATION", None, observation.environment)
 
 
 def _utc(value: datetime) -> datetime:
