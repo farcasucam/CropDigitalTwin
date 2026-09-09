@@ -29,6 +29,7 @@
 | 5.x audit | Transversal scientific and architectural audit of Phases 5.1-5.7.4 | architecture and traceability audited; model remains mechanistic simplified and not calibrated or experimentally validated |
 | 5.8 | Real observation data readiness and ingestion | ingestion pipeline ready; real data availability, calibration and experimental validation remain unclaimed |
 | 5.9 | Synthetic simulation reference data and agricultural technician templates | synthetic data is for software testing only; real agronomic data, calibration and experimental validation remain unclaimed |
+| 5.10 | Temporal crop-cycle execution and multi-plot simulation | single SimulationClock/Scheduler; synthetic software tests only; calibration and experimental validation remain unclaimed |
 | 5 | Actuators + Controller | comandos y estados separados |
 | 6 | Eventos + escenarios | replay reproducible |
 | 7 | Storage | histórico consultable |

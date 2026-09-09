@@ -55,6 +55,13 @@ from agri_twin.application.synthetic_dataset import (
     SyntheticReferenceDataset,
     SyntheticReferenceDatasetGenerator,
 )
+from agri_twin.application.multi_plot import (
+    CropCycleState,
+    CropCycleStatus,
+    MultiPlotSimulation,
+    MultiPlotSimulationResult,
+    PlotSimulationResult,
+)
 from agri_twin.application.weather_configuration import (
     OpenMeteoSourceConfiguration,
     WeatherDatasetResult,
@@ -108,6 +115,11 @@ __all__ = [
     "SyntheticPlot",
     "SyntheticReferenceDataset",
     "SyntheticReferenceDatasetGenerator",
+    "CropCycleState",
+    "CropCycleStatus",
+    "MultiPlotSimulation",
+    "MultiPlotSimulationResult",
+    "PlotSimulationResult",
     "WeatherConfigurationError",
     "OpenMeteoSourceConfiguration",
     "WeatherDatasetResult",
