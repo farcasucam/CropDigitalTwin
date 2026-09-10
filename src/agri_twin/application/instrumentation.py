@@ -15,12 +15,54 @@ from agri_twin.domain.observation_ingestion import QualityFlag
 
 
 class AcquisitionError(ValueError):
-    """Raised for invalid simulated acquisition configuration."""
+    """Raised for invalid acquisition configuration."""
+
+
+class AcquisitionConnectionStatus(StrEnum):
+    NOT_CONFIGURED = "NOT_CONFIGURED"
+    NOT_CONNECTED = "NOT_CONNECTED"
+    NOT_AVAILABLE = "NOT_AVAILABLE"
+    ONLINE = "ONLINE"
 
 
 class AcquisitionSourceType(StrEnum):
     SYNTHETIC = "synthetic"
     MEASURED = "measured"
+
+
+@dataclass(frozen=True, slots=True)
+class ExternalAcquisitionPayload:
+    timestamp: datetime | None
+    variable: str
+    value: float | str | None
+    unit: str
+    instrument_id: str
+    device_id: str
+    plot_id: str | None = None
+    cycle_id: str | None = None
+    crop: str | None = None
+    variety: str | None = None
+    environment: str = "UNKNOWN"
+    phenological_stage: str | None = None
+    quality: str = "VALID"
+    source_metadata: str = "external_payload"
+    source_type: str = "measured"
+    measurement_method: str | None = None
+    sensor_identifier: str | None = None
+    clock_source: str = "external"
+    timezone: str = "UTC"
+    raw_timestamp: datetime | None = None
+    normalized_timestamp: datetime | None = None
+    external_quality: str | None = None
+    device_status: str = "UNKNOWN"
+
+    def normalized_datetime(self) -> datetime:
+        chosen = self.timestamp or self.raw_timestamp or self.normalized_timestamp
+        if chosen is None:
+            raise ValueError("missing timestamp")
+        if chosen.tzinfo is None:
+            raise ValueError("timestamp must include timezone")
+        return chosen.astimezone(timezone.utc)
 
 
 @dataclass(frozen=True, slots=True)
@@ -177,4 +219,121 @@ class SimulatedAcquisitionBackend:
         return round(values.get(variable, random_source.random()), 6)
 
 
-__all__ = ["AcquisitionBackend", "AcquisitionError", "AcquisitionFaults", "AcquisitionRecord", "AcquisitionSourceType", "InstrumentationSpecification", "SimulatedAcquisitionBackend"]
+@dataclass(frozen=True, slots=True)
+class FakeExternalSensorSource:
+    """Deterministic test double for a future real external source. It never connects to hardware."""
+
+    seed: int = 0
+
+    def payload(
+        self,
+        *,
+        timestamp: datetime | None,
+        variable: str,
+        value: float | str | None,
+        unit: str,
+        instrument_id: str,
+        device_id: str,
+        plot_id: str | None = None,
+        cycle_id: str | None = None,
+        crop: str | None = None,
+        variety: str | None = None,
+        environment: str = "UNKNOWN",
+        phenological_stage: str | None = None,
+        quality: str = "VALID",
+        source_metadata: str = "fake_external_sensor_source",
+        device_status: str = "UNKNOWN",
+        timezone_name: str = "UTC",
+        sensor_identifier: str | None = None,
+    ) -> ExternalAcquisitionPayload:
+        finalized = timestamp if timestamp is not None else datetime(1970, 1, 1, 0, tzinfo=timezone.utc)
+        if finalized.tzinfo is None:
+            raise ValueError("timestamp must include timezone")
+        return ExternalAcquisitionPayload(
+            timestamp=finalized,
+            variable=variable,
+            value=value,
+            unit=unit,
+            instrument_id=instrument_id,
+            device_id=device_id,
+            plot_id=plot_id,
+            cycle_id=cycle_id,
+            crop=crop,
+            variety=variety,
+            environment=environment,
+            phenological_stage=phenological_stage,
+            quality=quality,
+            source_metadata=source_metadata,
+            source_type="measured",
+            measurement_method="external_sensor_payload",
+            sensor_identifier=sensor_identifier or f"sensor-{instrument_id}",
+            clock_source="external",
+            timezone=timezone_name,
+            raw_timestamp=finalized,
+            normalized_timestamp=finalized.astimezone(timezone.utc),
+            external_quality=quality,
+            device_status=device_status,
+        )
+
+
+class RealAcquisitionAdapter:
+    """Minimal future-real adapter contract. It is a pure translator, not a driver."""
+
+    backend_name = "FutureRealAcquisitionAdapter"
+
+    def __init__(self, *, status: AcquisitionConnectionStatus = AcquisitionConnectionStatus.NOT_CONFIGURED, available: bool = False) -> None:
+        self.status = status
+        self._available = available
+
+    def is_available(self) -> bool:
+        return self._available if self.status == AcquisitionConnectionStatus.ONLINE else False
+
+    @property
+    def connection_status(self) -> AcquisitionConnectionStatus:
+        return self.status
+
+    def adapt(self, payload: ExternalAcquisitionPayload, *, specification: InstrumentationSpecification | None = None) -> AcquisitionRecord:
+        if payload.variable in (None, ""):
+            raise ValueError("missing variable")
+        if payload.unit in (None, ""):
+            raise ValueError("missing unit")
+        if payload.instrument_id in (None, ""):
+            raise ValueError("missing instrument_id")
+        if payload.device_id in (None, ""):
+            raise ValueError("missing device_id")
+        timestamp = payload.normalized_datetime()
+        variable = payload.variable or (specification.variable if specification else payload.variable)
+        unit = payload.unit or (specification.normalized_unit if specification and specification.normalized_unit else specification.unit if specification and specification.unit else payload.unit)
+        provenance = payload.source_metadata or "real_acquisition_adapter"
+        quality = QualityFlag(str(payload.quality or "VALID").upper())
+        return AcquisitionRecord(
+            acquisition_id=f"real-{payload.instrument_id}-{int(timestamp.timestamp())}",
+            instrument_id=payload.instrument_id,
+            device_id=payload.device_id,
+            timestamp=timestamp,
+            timezone=payload.timezone or "UTC",
+            clock_source=payload.clock_source or "external",
+            variable=variable,
+            value=payload.value,
+            unit=unit,
+            plot_id=payload.plot_id or (specification.plot_id if specification else None),
+            cycle_id=payload.cycle_id or (specification.cycle_id if specification else None),
+            crop=payload.crop or (specification.crop if specification else None),
+            variety=payload.variety or (specification.variety if specification else None),
+            environment=(payload.environment or (specification.environment if specification else "UNKNOWN")).upper(),
+            phenological_stage=payload.phenological_stage or (specification.phenological_stage if specification else None),
+            quality=quality,
+            provenance=provenance,
+            source_type=AcquisitionSourceType.MEASURED,
+            backend=self.backend_name,
+            configuration=f"spec:{specification.instrument_id if specification else 'none'}|source:{payload.source_metadata}",
+        )
+
+
+class FutureRealAcquisitionAdapter(RealAcquisitionAdapter):
+    """Backward-compatible alias for the future real-source adapter contract."""
+
+    backend_name = "FutureRealAcquisitionAdapter"
+
+
+__all__ = ["AcquisitionBackend", "AcquisitionConnectionStatus", "AcquisitionError", "AcquisitionFaults", "AcquisitionRecord", "AcquisitionSourceType", "ExternalAcquisitionPayload", "FakeExternalSensorSource", "FutureRealAcquisitionAdapter", "InstrumentationSpecification", "RealAcquisitionAdapter", "SimulatedAcquisitionBackend"]

@@ -102,11 +102,16 @@ from agri_twin.application.observation_plan import (
 )
 from agri_twin.application.instrumentation import (
     AcquisitionBackend,
+    AcquisitionConnectionStatus,
     AcquisitionError,
     AcquisitionFaults,
     AcquisitionRecord,
     AcquisitionSourceType,
+    ExternalAcquisitionPayload,
+    FakeExternalSensorSource,
+    FutureRealAcquisitionAdapter,
     InstrumentationSpecification,
+    RealAcquisitionAdapter,
     SimulatedAcquisitionBackend,
 )
 from agri_twin.application.weather_configuration import (
@@ -196,11 +201,16 @@ __all__ = [
     "PlanStatus",
     "RequirementSource",
     "AcquisitionBackend",
+    "AcquisitionConnectionStatus",
     "AcquisitionError",
     "AcquisitionFaults",
     "AcquisitionRecord",
     "AcquisitionSourceType",
+    "ExternalAcquisitionPayload",
+    "FakeExternalSensorSource",
+    "FutureRealAcquisitionAdapter",
     "InstrumentationSpecification",
+    "RealAcquisitionAdapter",
     "SimulatedAcquisitionBackend",
     "WeatherConfigurationError",
     "OpenMeteoSourceConfiguration",
