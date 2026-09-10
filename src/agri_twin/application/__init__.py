@@ -93,6 +93,13 @@ from agri_twin.application.parameter_identifiability import (
     ParameterIdentifiability,
     ParameterIdentifiabilityAnalyzer,
 )
+from agri_twin.application.observation_plan import (
+    ExperimentalObservationPlan,
+    ObservationPlanItem,
+    PlanPriority,
+    PlanStatus,
+    RequirementSource,
+)
 from agri_twin.application.weather_configuration import (
     OpenMeteoSourceConfiguration,
     WeatherDatasetResult,
@@ -174,6 +181,11 @@ __all__ = [
     "IdentifiabilityStatus",
     "ParameterIdentifiability",
     "ParameterIdentifiabilityAnalyzer",
+    "ExperimentalObservationPlan",
+    "ObservationPlanItem",
+    "PlanPriority",
+    "PlanStatus",
+    "RequirementSource",
     "WeatherConfigurationError",
     "OpenMeteoSourceConfiguration",
     "WeatherDatasetResult",
