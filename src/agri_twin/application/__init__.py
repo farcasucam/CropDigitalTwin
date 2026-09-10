@@ -126,6 +126,18 @@ from agri_twin.application.weather_configuration import (
     build_open_meteo_request,
     download_weather_dataset_from_config,
 )
+from agri_twin.application.synthetic_campaign import (
+    CampaignConfiguration,
+    CampaignCropSpec,
+    CampaignQualityReport,
+    CampaignResult,
+    DEFAULT_VARIABLES,
+    SyntheticCampaignError,
+    SyntheticObservationCampaign,
+    VARIABLE_TWIN_FIELDS,
+    campaigns_are_deterministic,
+    default_campaign_crops,
+)
 
 __all__ = [
     "ClockSource",
@@ -222,4 +234,14 @@ __all__ = [
     "build_open_meteo_client",
     "build_open_meteo_request",
     "download_weather_dataset_from_config",
+    "CampaignConfiguration",
+    "CampaignCropSpec",
+    "CampaignQualityReport",
+    "CampaignResult",
+    "DEFAULT_VARIABLES",
+    "SyntheticCampaignError",
+    "SyntheticObservationCampaign",
+    "VARIABLE_TWIN_FIELDS",
+    "campaigns_are_deterministic",
+    "default_campaign_crops",
 ]

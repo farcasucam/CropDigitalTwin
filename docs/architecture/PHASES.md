@@ -37,6 +37,7 @@
 | 5.15 | Experimental observation plan and data acquisition design | campaign designed but not executed; real agronomic data unavailable, calibration not performed, experimental validation not claimed |
 | 5.16 | Modular instrumentation readiness and simulated acquisition backend | simulated acquisition only; real sensor deployment, calibration and experimental validation remain unexecuted |
 | 5.17 | Real acquisition adapter contract and external source substitution | synthetic and future-real sources share the same `AcquisitionRecord`; no real sensor connection, hardware dependency, calibration or validation claimed |
+| 5.18 | Synthetic observation campaign & scientific pipeline qualification | end-to-end synthetic campaign orchestrating 5.8-5.17 components; software pipeline qualified, calibration not performed, data assimilation not implemented, experimental validation not claimed |
 | 5 | Actuators + Controller | comandos y estados separados |
 | 6 | Eventos + escenarios | replay reproducible |
 | 7 | Storage | histórico consultable |
