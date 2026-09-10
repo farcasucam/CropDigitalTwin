@@ -247,14 +247,17 @@ def ingest_rows(rows: Iterable[Mapping[str, Any]], *, dataset_id: str, role: Dat
         raise ObservationIngestionError("forcing data cannot be ingested as agronomic observations")
     observations: list[Observation] = []
     qc: list[ObservationQC] = []
-    seen: set[tuple[str | None, str, datetime]] = set()
+    # Identity includes cycle_id (Phase 5.19 audit): two concurrent cycles on the same plot
+    # (e.g. lettuce cycle_1/cycle_2) are distinct observations, not duplicates. Datasets without
+    # cycle_id keep their previous behaviour because cycle_id is then None for every observation.
+    seen: set[tuple[str | None, str | None, str, datetime]] = set()
     for row_number, row in enumerate(rows, start=2):
         observation, issue = _row_to_observation(row, dataset_id, source, source_type, row_number)
         if issue:
             qc.append(issue)
             continue
         assert observation is not None
-        key = (observation.plot_id, observation.variable, observation.timestamp)
+        key = (observation.plot_id, observation.cycle_id, observation.variable, observation.timestamp)
         if key in seen:
             qc.append(ObservationQC(row_number, QualityFlag.DUPLICATE, f"duplicate observation key: {key}", observation.variable))
             continue

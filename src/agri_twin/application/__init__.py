@@ -138,6 +138,19 @@ from agri_twin.application.synthetic_campaign import (
     campaigns_are_deterministic,
     default_campaign_crops,
 )
+from agri_twin.application.real_data_integration import (
+    CalibrationReadinessGate,
+    CalibrationReadinessRecord,
+    RealDataAssessment,
+    RealDataIntegrationError,
+    RealDataQualityReport,
+    RealDatasetManifest,
+    THRESHOLD_POLICY,
+    assess_calibration_readiness,
+    assess_real_dataset,
+    build_quality_report,
+    plot_registration_status,
+)
 
 __all__ = [
     "ClockSource",
@@ -244,4 +257,15 @@ __all__ = [
     "VARIABLE_TWIN_FIELDS",
     "campaigns_are_deterministic",
     "default_campaign_crops",
+    "CalibrationReadinessGate",
+    "CalibrationReadinessRecord",
+    "RealDataAssessment",
+    "RealDataIntegrationError",
+    "RealDataQualityReport",
+    "RealDatasetManifest",
+    "THRESHOLD_POLICY",
+    "assess_calibration_readiness",
+    "assess_real_dataset",
+    "build_quality_report",
+    "plot_registration_status",
 ]

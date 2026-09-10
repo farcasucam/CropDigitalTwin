@@ -38,6 +38,7 @@
 | 5.16 | Modular instrumentation readiness and simulated acquisition backend | simulated acquisition only; real sensor deployment, calibration and experimental validation remain unexecuted |
 | 5.17 | Real acquisition adapter contract and external source substitution | synthetic and future-real sources share the same `AcquisitionRecord`; no real sensor connection, hardware dependency, calibration or validation claimed |
 | 5.18 | Synthetic observation campaign & scientific pipeline qualification | end-to-end synthetic campaign orchestrating 5.8-5.17 components; software pipeline qualified, calibration not performed, data assimilation not implemented, experimental validation not claimed |
+| 5.19 | Real agronomic data integration & calibration readiness | first real-data-ready ingestion/manifest/quality-report/readiness-gate layer; `ObservationIngestion` deduplication now keys on `(plot_id, cycle_id, variable, timestamp)`; calibration readiness assessed but not performed, data assimilation not implemented, experimental validation not claimed |
 | 5 | Actuators + Controller | comandos y estados separados |
 | 6 | Eventos + escenarios | replay reproducible |
 | 7 | Storage | histórico consultable |
