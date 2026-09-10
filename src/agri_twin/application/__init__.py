@@ -100,6 +100,15 @@ from agri_twin.application.observation_plan import (
     PlanStatus,
     RequirementSource,
 )
+from agri_twin.application.instrumentation import (
+    AcquisitionBackend,
+    AcquisitionError,
+    AcquisitionFaults,
+    AcquisitionRecord,
+    AcquisitionSourceType,
+    InstrumentationSpecification,
+    SimulatedAcquisitionBackend,
+)
 from agri_twin.application.weather_configuration import (
     OpenMeteoSourceConfiguration,
     WeatherDatasetResult,
@@ -186,6 +195,13 @@ __all__ = [
     "PlanPriority",
     "PlanStatus",
     "RequirementSource",
+    "AcquisitionBackend",
+    "AcquisitionError",
+    "AcquisitionFaults",
+    "AcquisitionRecord",
+    "AcquisitionSourceType",
+    "InstrumentationSpecification",
+    "SimulatedAcquisitionBackend",
     "WeatherConfigurationError",
     "OpenMeteoSourceConfiguration",
     "WeatherDatasetResult",

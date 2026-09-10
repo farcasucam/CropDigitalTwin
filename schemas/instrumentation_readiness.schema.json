@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crop-digital-twin.local/schemas/instrumentation_readiness.schema.json",
+  "title": "Instrumentation readiness specification",
+  "type": "object",
+  "required": ["instrument_id", "device_id", "observable", "variable", "clock_source", "calibration_status", "status"],
+  "properties": {
+    "instrument_id": {"type": "string", "minLength": 1},
+    "device_id": {"type": "string", "minLength": 1},
+    "observable": {"type": "string", "minLength": 1},
+    "variable": {"type": "string", "minLength": 1},
+    "unit": {"type": ["string", "null"]},
+    "normalized_unit": {"type": ["string", "null"]},
+    "clock_source": {"const": "SimulationClock"},
+    "calibration_status": {"type": "string"},
+    "status": {"type": "string"},
+    "parameter_ids": {"type": "array", "items": {"type": "string"}},
+    "environment": {"type": "string"},
+    "sampling_interval": {"type": "string"}
+  }
+}
