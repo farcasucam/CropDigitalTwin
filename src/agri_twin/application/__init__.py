@@ -162,6 +162,14 @@ from agri_twin.application.scientific_readiness import (
     SyntheticBenchmarkSuite,
     evaluate_scientific_readiness,
 )
+from agri_twin.application.synthetic_real_data import (
+    AgronomicDatasetManifest,
+    AgronomicDatasetProvider,
+    ParameterSensitivityAnalyzer,
+    ParameterSensitivityResult,
+    RealAgronomicDatasetProvider,
+    SyntheticAgronomicDatasetProvider,
+)
 
 __all__ = [
     "ClockSource",
@@ -288,4 +296,10 @@ __all__ = [
     "SyntheticBenchmarkResult",
     "SyntheticBenchmarkSuite",
     "evaluate_scientific_readiness",
+    "AgronomicDatasetManifest",
+    "AgronomicDatasetProvider",
+    "ParameterSensitivityAnalyzer",
+    "ParameterSensitivityResult",
+    "SyntheticAgronomicDatasetProvider",
+    "RealAgronomicDatasetProvider",
 ]

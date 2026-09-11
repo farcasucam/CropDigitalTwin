@@ -1,0 +1,73 @@
+{
+  "created_at_simulation_context": "SimulationClock(2026-01-01T00:00:00+00:00)",
+  "crop_scope": [
+    "apple",
+    "grape",
+    "lettuce",
+    "peach",
+    "pepper",
+    "plum",
+    "tomato"
+  ],
+  "cycle_scope": [
+    "cycle_1",
+    "cycle_2",
+    "cycle_apple_1",
+    "cycle_grape_1",
+    "cycle_peach_1",
+    "cycle_pepper_1",
+    "cycle_plum_1",
+    "cycle_tomato_1"
+  ],
+  "dataset_id": "synthetic_real_data_substitute",
+  "dataset_name": "synthetic_real_data_substitute",
+  "dataset_version": "1.0",
+  "environment_scope": [
+    "GREENHOUSE",
+    "OUTDOOR"
+  ],
+  "plot_scope": [
+    "plot_12010",
+    "plot_14705",
+    "plot_20500",
+    "plot_30412",
+    "plot_40811",
+    "plot_61200"
+  ],
+  "provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
+  "quality_policy": "VALID/MISSING/INVALID/DUPLICATE/OUT_OF_RANGE/UNIT_ERROR; synthetic only; no measured-data claim",
+  "source_type": "synthetic",
+  "substitution_ready": true,
+  "synthetic": true,
+  "timezone": "UTC",
+  "units": {
+    "air_temperature": "degC",
+    "biomass": "g_m-2",
+    "co2": "ppm",
+    "fruit_weight": "g",
+    "lai": "m2_m-2",
+    "relative_humidity": "%",
+    "soil_water_content": "m3_m-3",
+    "solar_radiation": "W_m-2",
+    "vpd": "kPa",
+    "yield": "kg_m-2"
+  },
+  "variables": [
+    "air_temperature",
+    "biomass",
+    "co2",
+    "fruit_weight",
+    "lai",
+    "relative_humidity",
+    "soil_water_content",
+    "solar_radiation",
+    "vpd",
+    "yield"
+  ],
+  "variety_scope": [
+    "Lamuyo",
+    "Monastrell",
+    "RAF",
+    "Suplum 26"
+  ]
+}

@@ -40,6 +40,7 @@
 | 5.18 | Synthetic observation campaign & scientific pipeline qualification | end-to-end synthetic campaign orchestrating 5.8-5.17 components; software pipeline qualified, calibration not performed, data assimilation not implemented, experimental validation not claimed |
 | 5.19 | Real agronomic data integration & calibration readiness | first real-data-ready ingestion/manifest/quality-report/readiness-gate layer; `ObservationIngestion` deduplication now keys on `(plot_id, cycle_id, variable, timestamp)`; calibration readiness assessed but not performed, data assimilation not implemented, experimental validation not claimed |
 | 5.20 | Scientific readiness gate & synthetic benchmarking | global software/data/scientific-validation readiness report plus ten deterministic synthetic software benchmarks; software ready, real agronomic data not verified, calibration blocked/not performed, data assimilation not implemented, experimental validation not claimed |
+| 5.21 | Synthetic real-data substitute & scientific sensitivity framework | deterministic synthetic real-data substitute preserving the common observation contract, future real-data substitution path, and one-at-a-time parameter sensitivity analysis without calibration or experimental validation |
 | 5 | Actuators + Controller | comandos y estados separados |
 | 6 | Eventos + escenarios | replay reproducible |
 | 7 | Storage | histórico consultable |

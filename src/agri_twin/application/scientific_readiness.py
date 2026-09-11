@@ -135,6 +135,38 @@ class ScientificReadinessEvaluation:
     report: ScientificReadinessReport
     campaign: CampaignResult
 
+    @property
+    def overall_status(self) -> ScientificReadinessStatus:
+        return self.report.overall_status
+
+    @property
+    def software_readiness(self) -> ScientificReadinessStatus:
+        return self.report.software_readiness
+
+    @property
+    def data_readiness(self) -> ScientificReadinessStatus:
+        return self.report.data_readiness
+
+    @property
+    def scientific_validation_status(self) -> ScientificReadinessStatus:
+        return self.report.scientific_validation_status
+
+    @property
+    def real_data_available(self) -> bool:
+        return self.report.real_data_available
+
+    @property
+    def real_agronomic_data_verified(self) -> bool:
+        return self.report.real_agronomic_data_verified
+
+    @property
+    def calibration_status(self) -> str:
+        return self.report.calibration_status
+
+    @property
+    def assimilation_status(self) -> str:
+        return self.report.assimilation_status
+
 
 class SyntheticBenchmarkSuite:
     """Formal software benchmarks; successful synthetic results are not validation."""
