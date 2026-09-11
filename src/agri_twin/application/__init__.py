@@ -151,6 +151,17 @@ from agri_twin.application.real_data_integration import (
     build_quality_report,
     plot_registration_status,
 )
+from agri_twin.application.scientific_readiness import (
+    ComponentReadiness,
+    EvidenceType,
+    ScientificReadinessEvaluation,
+    ScientificReadinessGate,
+    ScientificReadinessReport,
+    ScientificReadinessStatus,
+    SyntheticBenchmarkResult,
+    SyntheticBenchmarkSuite,
+    evaluate_scientific_readiness,
+)
 
 __all__ = [
     "ClockSource",
@@ -268,4 +279,13 @@ __all__ = [
     "assess_real_dataset",
     "build_quality_report",
     "plot_registration_status",
+    "ComponentReadiness",
+    "EvidenceType",
+    "ScientificReadinessEvaluation",
+    "ScientificReadinessGate",
+    "ScientificReadinessReport",
+    "ScientificReadinessStatus",
+    "SyntheticBenchmarkResult",
+    "SyntheticBenchmarkSuite",
+    "evaluate_scientific_readiness",
 ]
