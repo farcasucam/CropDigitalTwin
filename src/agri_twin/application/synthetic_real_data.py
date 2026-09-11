@@ -68,118 +68,12 @@ class AgronomicDatasetProvider(Protocol):
     def load(self, *, role: DatasetRole = DatasetRole.TEST) -> ObservationDataset: ...
 
 
-@dataclass(frozen=True, slots=True)
-class ParameterSensitivityResult:
-    parameter_id: str
-    name: str
-    crop: str | None
-    variety: str | None
-    baseline_value: float
-    perturbation_percent: float
-    baseline_output: float
-    perturbed_output: float
-    absolute_change: float
-    relative_change: float
-    normalized_sensitivity: float
-    observable: str
-    confounders: tuple[str, ...]
-    scientific_interpretation: str
-    provenance: str = "SIMULATED_REAL_DATA_SUBSTITUTE"
-
-    def to_dict(self) -> dict[str, Any]:
-        return {
-            "parameter_id": self.parameter_id,
-            "name": self.name,
-            "crop": self.crop,
-            "variety": self.variety,
-            "baseline_value": self.baseline_value,
-            "perturbation_percent": self.perturbation_percent,
-            "baseline_output": self.baseline_output,
-            "perturbed_output": self.perturbed_output,
-            "absolute_change": self.absolute_change,
-            "relative_change": self.relative_change,
-            "normalized_sensitivity": self.normalized_sensitivity,
-            "observable": self.observable,
-            "confounders": list(self.confounders),
-            "scientific_interpretation": self.scientific_interpretation,
-            "provenance": self.provenance,
-        }
-
-
-class ParameterSensitivityAnalyzer:
-    """Deterministic one-at-a-time sensitivity analysis for registry parameters.
-
-    This is not calibration. It only quantifies how a parameter perturbation changes
-    a model output under a fixed synthetic dataset contract.
-    """
-
-    def __init__(self, registry: ParameterRegistry, *, root: str | Path | None = None, perturbation_percent: float = 10.0) -> None:
-        self.registry = registry
-        self.root = Path(root) if root is not None else None
-        self.perturbation_percent = float(perturbation_percent)
-
-    def analyze_parameter(self, parameter_id: str, *, crop: str | None = None, variety: str | None = None, observable: str | None = None, perturbation_percent: float | None = None) -> ParameterSensitivityResult:
-        record = self.registry.get(parameter_id)
-        if record is None:
-            raise KeyError(f"unknown parameter_id: {parameter_id}")
-        baseline = float(record.value if record.value is not None else record.minimum if record.minimum is not None else 0.0)
-        percent = self.perturbation_percent if perturbation_percent is None else float(perturbation_percent)
-        perturbed = baseline * (1.0 + percent / 100.0)
-        baseline_output = max(abs(baseline), 1e-9)
-        perturbed_output = max(abs(perturbed), 1e-9)
-        absolute_change = abs(perturbed_output - baseline_output)
-        relative_change = 0.0 if baseline_output == 0 else abs(absolute_change / baseline_output)
-        normalized_sensitivity = 0.0 if abs(percent) == 0 else relative_change / abs(percent / 100.0)
-        target_observable = observable or self._default_observable(parameter_id)
-        confounders = self._confounders(parameter_id)
-        interpretation = (
-            "synthetic one-at-a-time sensitivity demonstrates directional model response; "
-            "it does not establish calibrated fit or scientific validation"
-        )
-        return ParameterSensitivityResult(
-            parameter_id=parameter_id,
-            name=record.name,
-            crop=crop or record.crop,
-            variety=variety or record.variety,
-            baseline_value=baseline,
-            perturbation_percent=percent,
-            baseline_output=baseline_output,
-            perturbed_output=perturbed_output,
-            absolute_change=absolute_change,
-            relative_change=relative_change,
-            normalized_sensitivity=normalized_sensitivity,
-            observable=target_observable,
-            confounders=tuple(confounders),
-            scientific_interpretation=interpretation,
-        )
-
-    @staticmethod
-    def _default_observable(parameter_id: str) -> str:
-        key = parameter_id.lower()
-        if "rue" in key or "radiation" in key:
-            return "biomass"
-        if "gdd" in key or "temp" in key or "thermal" in key:
-            return "phenology"
-        if "water" in key or "soil" in key or "irrigation" in key:
-            return "soil_water_content"
-        if "vpd" in key or "humidity" in key:
-            return "vpd"
-        return "lai"
-
-    def _confounders(self, parameter_id: str) -> tuple[str, ...]:
-        key = parameter_id.lower()
-        confounders: list[str] = []
-        if "rue" in key or "sla" in key:
-            confounders.append("radiation_interception")
-        if "temp" in key or "gdd" in key or "thermal" in key:
-            confounders.append("phenology")
-        if "soil" in key or "water" in key or "irrigation" in key:
-            confounders.append("water_stress")
-        if "vpd" in key or "humidity" in key:
-            confounders.append("vpd")
-        if not confounders:
-            confounders.append("growth_scaling")
-        return tuple(sorted(set(confounders)))
+from agri_twin.application.sensitivity import (
+    ParameterSensitivityAnalyzer,
+    ParameterSensitivityResult,
+    SensitivityReport,
+    SensitivityResult,
+)
 
 
 class SyntheticAgronomicDatasetProvider:
@@ -456,6 +350,8 @@ __all__ = [
     "AgronomicDatasetProvider",
     "ParameterSensitivityAnalyzer",
     "ParameterSensitivityResult",
+    "SensitivityReport",
+    "SensitivityResult",
     "SyntheticAgronomicDatasetProvider",
     "RealAgronomicDatasetProvider",
 ]

@@ -36,6 +36,9 @@ class ScientificReadinessStatus(StrEnum):
     INSUFFICIENT_DATA = "INSUFFICIENT_DATA"
     NOT_APPLICABLE = "NOT_APPLICABLE"
     SCIENTIFIC_VALIDATION_REQUIRED = "SCIENTIFIC_VALIDATION_REQUIRED"
+    SENSITIVITY_NOT_RUN = "SENSITIVITY_NOT_RUN"
+    SENSITIVITY_READY = "SENSITIVITY_READY"
+    SYNTHETIC_SENSITIVITY_QUALIFIED = "SYNTHETIC_SENSITIVITY_QUALIFIED"
 
 
 class EvidenceType(StrEnum):
@@ -101,6 +104,7 @@ class ScientificReadinessReport:
     evidence: tuple[str, ...]
     limitations: tuple[str, ...]
     generated_from: str
+    sensitivity_status: str = "SYNTHETIC_SENSITIVITY_QUALIFIED"
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -108,6 +112,7 @@ class ScientificReadinessReport:
             "software_readiness": self.software_readiness.value,
             "data_readiness": self.data_readiness.value,
             "scientific_validation_status": self.scientific_validation_status.value,
+            "sensitivity_status": self.sensitivity_status,
             "real_data_available": self.real_data_available,
             "real_agronomic_data_verified": self.real_agronomic_data_verified,
             "calibration_status": self.calibration_status,
