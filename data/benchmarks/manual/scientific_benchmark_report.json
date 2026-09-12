@@ -1,0 +1,602 @@
+{
+  "artifact_status": "SYNTHETIC_SOFTWARE_BENCHMARK",
+  "assimilation_status": "DATA ASSIMILATION NOT IMPLEMENTED",
+  "calibration_status": "CALIBRATION NOT PERFORMED",
+  "configuration_hash": "bcde2c45f0ea2f69c962d452620934c810b607d439f6818fbeb1cf950889e0fd",
+  "definition": {
+    "benchmark_id": "phase5_24_manual",
+    "cases": [
+      {
+        "benchmark_id": "case_tomato_annual-1_outdoor_control_plot_12010",
+        "crop": "tomato",
+        "cycle_id": "annual-1",
+        "ensemble_members": 6,
+        "ensemble_method": "monte_carlo",
+        "environment": "outdoor",
+        "parameter_ids": [
+          "radiation.rue",
+          "greenhouse.cover_transmission"
+        ],
+        "plot_id": "plot_12010",
+        "scenario_config_hash": "c0d99d2f18224c78093092b9acba7e29ff4253e33b8f49565d31e687db58a89f",
+        "scenario_id": "tomato_annual-1_outdoor_control_plot_12010",
+        "seed": 100,
+        "variety": "RAF"
+      },
+      {
+        "benchmark_id": "case_tomato_annual-1_greenhouse_combined_plot_12010",
+        "crop": "tomato",
+        "cycle_id": "annual-1",
+        "ensemble_members": 6,
+        "ensemble_method": "monte_carlo",
+        "environment": "greenhouse",
+        "parameter_ids": [
+          "radiation.rue",
+          "greenhouse.cover_transmission"
+        ],
+        "plot_id": "plot_12010",
+        "scenario_config_hash": "8efcfc3d2f1fe5d3575cb793622a591fc9048dcc43362eda33da6dd7fbfd7f47",
+        "scenario_id": "tomato_annual-1_greenhouse_combined_plot_12010",
+        "seed": 225,
+        "variety": "RAF"
+      }
+    ],
+    "description": "Integrated synthetic software benchmark",
+    "provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
+    "version": "5.24.1"
+  },
+  "energyplus_status": "ENERGYPLUS_UNAVAILABLE",
+  "limitations": [
+    "Synthetic outputs qualify software behavior only.",
+    "No real agronomic dataset is verified.",
+    "Sensitivity and ensemble spread do not establish identifiability.",
+    "No calibration, experimental validation, or data assimilation is performed."
+  ],
+  "real_data_status": "REAL AGRONOMIC DATA NOT VERIFIED",
+  "results": [
+    {
+      "benchmark_id": "case_tomato_annual-1_outdoor_control_plot_12010",
+      "comparison": {
+        "baseline_score": 10.0,
+        "improvement": 0.3131202250894125,
+        "interpretation": "Synthetic software comparison; not biological validation.",
+        "label": "SYNTHETIC_SOFTWARE_BENCHMARK",
+        "model_score": 13.131202250894125,
+        "relative_difference": 0.3131202250894125
+      },
+      "crop": "tomato",
+      "cycle_id": "annual-1",
+      "end_time": "2026-01-01T12:00:00+00:00",
+      "ensemble": {
+        "failed_members": [],
+        "invalid_members": 0,
+        "members": 6,
+        "statistics": {
+          "max": 0.4272,
+          "mean": 0.4272,
+          "median": 0.4272,
+          "min": 0.4272,
+          "p10": 0.4272,
+          "p90": 0.4272,
+          "standard_deviation": 0.0
+        },
+        "valid_fraction": 1.0,
+        "valid_members": 6
+      },
+      "environment": "outdoor",
+      "failure_reason": null,
+      "input_hash": "8431d1368a84c358d26e879df0cded57cfdd16cba7736607960d0fb26c5911ed",
+      "metrics": [
+        {
+          "category": "software_metric",
+          "description": "Deterministic scenario output",
+          "name": "final_biomass",
+          "status": "AVAILABLE",
+          "unit": "g_DM_m-2",
+          "value": 13.131202250894125
+        },
+        {
+          "category": "robustness_metric",
+          "description": "",
+          "name": "ensemble_valid_fraction",
+          "status": "AVAILABLE",
+          "unit": "fraction",
+          "value": 1.0
+        }
+      ],
+      "model_configuration_hash": "c0d99d2f18224c78093092b9acba7e29ff4253e33b8f49565d31e687db58a89f",
+      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "plot_id": "plot_12010",
+      "result_hash": "0f6d4e0ec9cf512e570c0af6e14b717d52b530c100a1a7729eac12046f567bb6",
+      "scenario_id": "tomato_annual-1_outdoor_control_plot_12010",
+      "seed": 100,
+      "sensitivity": {
+        "multivariable": {
+          "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
+          "crop": "tomato",
+          "evaluations": {
+            "baseline": 101.22270668984561,
+            "p1_base_p2_high": 101.3448418279959,
+            "p1_base_p2_low": 101.10054650652637,
+            "p1_high_p2_base": 101.3448418279959,
+            "p1_high_p2_high": 101.47916139456308,
+            "p1_low_p2_base": 101.10054650652637,
+            "p1_low_p2_low": 100.99058103798836
+          },
+          "has_non_additive_coupling": true,
+          "interaction_delta": 0.012184428416901483,
+          "observable": "biomass",
+          "parameter_1": "radiation.rue",
+          "parameter_2": "greenhouse.cover_transmission",
+          "perturbation_percent": 10.0
+        },
+        "oat": {
+          "absolute_change": 0.158109674834094,
+          "absolute_sensitivity": 0.7905483741704693,
+          "baseline_output": 101.57483735127984,
+          "baseline_value": 2.0,
+          "classification": "LOW",
+          "classification_reason": "analytical_threshold_applied",
+          "computational_cost_seconds": 0.760977,
+          "confounders": [
+            "growth_scaling",
+            "radiation_interception"
+          ],
+          "crop": "tomato",
+          "cycle_id": null,
+          "direction": "+",
+          "environment": "outdoor",
+          "feedback_iterations": 1,
+          "name": "radiation use efficiency",
+          "normalized_sensitivity": 0.01556583096336129,
+          "observable": "biomass",
+          "parameter_id": "radiation.rue",
+          "perturbation_percent": 10.0,
+          "perturbed_output": 101.73294702611393,
+          "perturbed_value": 2.2,
+          "phenological_stage": "vegetative_growth",
+          "plot_id": null,
+          "provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
+          "range_source_type": "ENGINEERING_RANGE",
+          "relative_change": 0.0015565830963361303,
+          "scientific_interpretation": "synthetic + OAT sensitivity demonstrates directional response under synthetic contract; it does not establish parameter identifiability or calibration fit",
+          "uncertainty_status": "OBSERVATIONAL",
+          "variety": "RAF"
+        }
+      },
+      "simulation_step": 21600,
+      "start_time": "2026-01-01T00:00:00+00:00",
+      "status": "SUCCESS",
+      "uncertainty": {
+        "report": {
+          "assimilation_status": "DATA ASSIMILATION NOT IMPLEMENTED",
+          "calibration_status": "CALIBRATION NOT PERFORMED",
+          "configuration_hash": "3f9323bc07aab4970ebf99571b48e53003dea7d78716d77940f05a22172ca31d",
+          "dataset_provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
+          "ensemble": {
+            "crop": "tomato",
+            "id": "tomato_annual-1_outdoor_control_plot_12010",
+            "members": [
+              {
+                "failure_reason": null,
+                "member_id": "member_0000",
+                "outputs": {
+                  "biomass": 0.4272,
+                  "lai": 0.0834,
+                  "temperature": 0.2502,
+                  "yield": 0.22240000000000001
+                },
+                "parameter_realizations": {
+                  "greenhouse.cover_transmission": 0.78,
+                  "radiation.rue": 2.0
+                },
+                "seed": 100,
+                "valid": true
+              },
+              {
+                "failure_reason": null,
+                "member_id": "member_0001",
+                "outputs": {
+                  "biomass": 0.4272,
+                  "lai": 0.0834,
+                  "temperature": 0.2502,
+                  "yield": 0.22240000000000001
+                },
+                "parameter_realizations": {
+                  "greenhouse.cover_transmission": 0.78,
+                  "radiation.rue": 2.0
+                },
+                "seed": 101,
+                "valid": true
+              },
+              {
+                "failure_reason": null,
+                "member_id": "member_0002",
+                "outputs": {
+                  "biomass": 0.4272,
+                  "lai": 0.0834,
+                  "temperature": 0.2502,
+                  "yield": 0.22240000000000001
+                },
+                "parameter_realizations": {
+                  "greenhouse.cover_transmission": 0.78,
+                  "radiation.rue": 2.0
+                },
+                "seed": 102,
+                "valid": true
+              },
+              {
+                "failure_reason": null,
+                "member_id": "member_0003",
+                "outputs": {
+                  "biomass": 0.4272,
+                  "lai": 0.0834,
+                  "temperature": 0.2502,
+                  "yield": 0.22240000000000001
+                },
+                "parameter_realizations": {
+                  "greenhouse.cover_transmission": 0.78,
+                  "radiation.rue": 2.0
+                },
+                "seed": 103,
+                "valid": true
+              },
+              {
+                "failure_reason": null,
+                "member_id": "member_0004",
+                "outputs": {
+                  "biomass": 0.4272,
+                  "lai": 0.0834,
+                  "temperature": 0.2502,
+                  "yield": 0.22240000000000001
+                },
+                "parameter_realizations": {
+                  "greenhouse.cover_transmission": 0.78,
+                  "radiation.rue": 2.0
+                },
+                "seed": 104,
+                "valid": true
+              },
+              {
+                "failure_reason": null,
+                "member_id": "member_0005",
+                "outputs": {
+                  "biomass": 0.4272,
+                  "lai": 0.0834,
+                  "temperature": 0.2502,
+                  "yield": 0.22240000000000001
+                },
+                "parameter_realizations": {
+                  "greenhouse.cover_transmission": 0.78,
+                  "radiation.rue": 2.0
+                },
+                "seed": 105,
+                "valid": true
+              }
+            ],
+            "method": "monte_carlo",
+            "summary": {
+              "configuration_hash": "3f9323bc07aab4970ebf99571b48e53003dea7d78716d77940f05a22172ca31d",
+              "crop": "tomato",
+              "dataset_provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
+              "failed_members": 0,
+              "method": "monte_carlo",
+              "parameter_ids": [
+                "radiation.rue",
+                "greenhouse.cover_transmission"
+              ],
+              "seed": 100,
+              "total_members": 6,
+              "valid_members": 6
+            }
+          },
+          "limitations": [
+            "REAL AGRONOMIC DATA NOT VERIFIED",
+            "ENGINEERING_ASSUMPTIONS REMAIN EXPLICIT",
+            "STRUCTURAL UNCERTAINTY NOT QUANTIFIED",
+            "NO CALIBRATION PERFORMED",
+            "NO EXPERIMENTAL VALIDATION CLAIMED"
+          ],
+          "phase": "5.23",
+          "real_data_status": "REAL AGRONOMIC DATA NOT VERIFIED",
+          "robustness": {
+            "failed_members": 0,
+            "failure_classes": [],
+            "fraction_valid": 1.0,
+            "valid_members": 6
+          },
+          "scenario_ensemble_status": "SYNTHETIC_UNCERTAINTY_QUALIFIED",
+          "seed": 100,
+          "software_readiness_status": "SOFTWARE READY",
+          "validation_status": "EXPERIMENTAL VALIDATION NOT CLAIMED"
+        }
+      },
+      "variety": "RAF",
+      "warnings": []
+    },
+    {
+      "benchmark_id": "case_tomato_annual-1_greenhouse_combined_plot_12010",
+      "comparison": {
+        "baseline_score": 10.0,
+        "improvement": 0.0,
+        "interpretation": "Synthetic software comparison; not biological validation.",
+        "label": "SYNTHETIC_SOFTWARE_BENCHMARK",
+        "model_score": 10.0,
+        "relative_difference": 0.0
+      },
+      "crop": "tomato",
+      "cycle_id": "annual-1",
+      "end_time": "2026-01-01T12:00:00+00:00",
+      "ensemble": {
+        "failed_members": [],
+        "invalid_members": 0,
+        "members": 6,
+        "statistics": {
+          "max": 0.4272,
+          "mean": 0.4272,
+          "median": 0.4272,
+          "min": 0.4272,
+          "p10": 0.4272,
+          "p90": 0.4272,
+          "standard_deviation": 0.0
+        },
+        "valid_fraction": 1.0,
+        "valid_members": 6
+      },
+      "environment": "greenhouse",
+      "failure_reason": null,
+      "input_hash": "62c557982149d82fe407107b67031496c794b176b8a7be5ecd94be1a20172aab",
+      "metrics": [
+        {
+          "category": "software_metric",
+          "description": "Deterministic scenario output",
+          "name": "final_biomass",
+          "status": "AVAILABLE",
+          "unit": "g_DM_m-2",
+          "value": 10.0
+        },
+        {
+          "category": "robustness_metric",
+          "description": "",
+          "name": "ensemble_valid_fraction",
+          "status": "AVAILABLE",
+          "unit": "fraction",
+          "value": 1.0
+        }
+      ],
+      "model_configuration_hash": "8efcfc3d2f1fe5d3575cb793622a591fc9048dcc43362eda33da6dd7fbfd7f47",
+      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "plot_id": "plot_12010",
+      "result_hash": "4199e787037ae90c9ea6501418d1893204f5deabadcd7ce992dbe1982eb9a66a",
+      "scenario_id": "tomato_annual-1_greenhouse_combined_plot_12010",
+      "seed": 225,
+      "sensitivity": {
+        "multivariable": {
+          "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
+          "crop": "tomato",
+          "evaluations": {
+            "baseline": 101.22270668984561,
+            "p1_base_p2_high": 101.3448418279959,
+            "p1_base_p2_low": 101.10054650652637,
+            "p1_high_p2_base": 101.3448418279959,
+            "p1_high_p2_high": 101.47916139456308,
+            "p1_low_p2_base": 101.10054650652637,
+            "p1_low_p2_low": 100.99058103798836
+          },
+          "has_non_additive_coupling": true,
+          "interaction_delta": 0.012184428416901483,
+          "observable": "biomass",
+          "parameter_1": "radiation.rue",
+          "parameter_2": "greenhouse.cover_transmission",
+          "perturbation_percent": 10.0
+        },
+        "oat": {
+          "absolute_change": 0.1221351381502842,
+          "absolute_sensitivity": 0.6106756907514205,
+          "baseline_output": 101.22270668984561,
+          "baseline_value": 2.0,
+          "classification": "LOW",
+          "classification_reason": "analytical_threshold_applied",
+          "computational_cost_seconds": 0.760977,
+          "confounders": [
+            "growth_scaling",
+            "radiation_interception"
+          ],
+          "crop": "tomato",
+          "cycle_id": null,
+          "direction": "+",
+          "environment": "greenhouse",
+          "feedback_iterations": 7,
+          "name": "radiation use efficiency",
+          "normalized_sensitivity": 0.012065982242948298,
+          "observable": "biomass",
+          "parameter_id": "radiation.rue",
+          "perturbation_percent": 10.0,
+          "perturbed_output": 101.3448418279959,
+          "perturbed_value": 2.2,
+          "phenological_stage": "vegetative_growth",
+          "plot_id": null,
+          "provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
+          "range_source_type": "ENGINEERING_RANGE",
+          "relative_change": 0.0012065982242948309,
+          "scientific_interpretation": "synthetic + OAT sensitivity demonstrates directional response under synthetic contract; it does not establish parameter identifiability or calibration fit",
+          "uncertainty_status": "OBSERVATIONAL",
+          "variety": "RAF"
+        }
+      },
+      "simulation_step": 21600,
+      "start_time": "2026-01-01T00:00:00+00:00",
+      "status": "SUCCESS",
+      "uncertainty": {
+        "report": {
+          "assimilation_status": "DATA ASSIMILATION NOT IMPLEMENTED",
+          "calibration_status": "CALIBRATION NOT PERFORMED",
+          "configuration_hash": "3fc6892c7680447e98578fcdb12d597a13cc654b2200755dd8d0684784cb13b5",
+          "dataset_provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
+          "ensemble": {
+            "crop": "tomato",
+            "id": "tomato_annual-1_greenhouse_combined_plot_12010",
+            "members": [
+              {
+                "failure_reason": null,
+                "member_id": "member_0000",
+                "outputs": {
+                  "biomass": 0.4272,
+                  "lai": 0.0834,
+                  "temperature": 0.2502,
+                  "yield": 0.22240000000000001
+                },
+                "parameter_realizations": {
+                  "greenhouse.cover_transmission": 0.78,
+                  "radiation.rue": 2.0
+                },
+                "seed": 225,
+                "valid": true
+              },
+              {
+                "failure_reason": null,
+                "member_id": "member_0001",
+                "outputs": {
+                  "biomass": 0.4272,
+                  "lai": 0.0834,
+                  "temperature": 0.2502,
+                  "yield": 0.22240000000000001
+                },
+                "parameter_realizations": {
+                  "greenhouse.cover_transmission": 0.78,
+                  "radiation.rue": 2.0
+                },
+                "seed": 226,
+                "valid": true
+              },
+              {
+                "failure_reason": null,
+                "member_id": "member_0002",
+                "outputs": {
+                  "biomass": 0.4272,
+                  "lai": 0.0834,
+                  "temperature": 0.2502,
+                  "yield": 0.22240000000000001
+                },
+                "parameter_realizations": {
+                  "greenhouse.cover_transmission": 0.78,
+                  "radiation.rue": 2.0
+                },
+                "seed": 227,
+                "valid": true
+              },
+              {
+                "failure_reason": null,
+                "member_id": "member_0003",
+                "outputs": {
+                  "biomass": 0.4272,
+                  "lai": 0.0834,
+                  "temperature": 0.2502,
+                  "yield": 0.22240000000000001
+                },
+                "parameter_realizations": {
+                  "greenhouse.cover_transmission": 0.78,
+                  "radiation.rue": 2.0
+                },
+                "seed": 228,
+                "valid": true
+              },
+              {
+                "failure_reason": null,
+                "member_id": "member_0004",
+                "outputs": {
+                  "biomass": 0.4272,
+                  "lai": 0.0834,
+                  "temperature": 0.2502,
+                  "yield": 0.22240000000000001
+                },
+                "parameter_realizations": {
+                  "greenhouse.cover_transmission": 0.78,
+                  "radiation.rue": 2.0
+                },
+                "seed": 229,
+                "valid": true
+              },
+              {
+                "failure_reason": null,
+                "member_id": "member_0005",
+                "outputs": {
+                  "biomass": 0.4272,
+                  "lai": 0.0834,
+                  "temperature": 0.2502,
+                  "yield": 0.22240000000000001
+                },
+                "parameter_realizations": {
+                  "greenhouse.cover_transmission": 0.78,
+                  "radiation.rue": 2.0
+                },
+                "seed": 230,
+                "valid": true
+              }
+            ],
+            "method": "monte_carlo",
+            "summary": {
+              "configuration_hash": "3fc6892c7680447e98578fcdb12d597a13cc654b2200755dd8d0684784cb13b5",
+              "crop": "tomato",
+              "dataset_provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
+              "failed_members": 0,
+              "method": "monte_carlo",
+              "parameter_ids": [
+                "radiation.rue",
+                "greenhouse.cover_transmission"
+              ],
+              "seed": 225,
+              "total_members": 6,
+              "valid_members": 6
+            }
+          },
+          "limitations": [
+            "REAL AGRONOMIC DATA NOT VERIFIED",
+            "ENGINEERING_ASSUMPTIONS REMAIN EXPLICIT",
+            "STRUCTURAL UNCERTAINTY NOT QUANTIFIED",
+            "NO CALIBRATION PERFORMED",
+            "NO EXPERIMENTAL VALIDATION CLAIMED"
+          ],
+          "phase": "5.23",
+          "real_data_status": "REAL AGRONOMIC DATA NOT VERIFIED",
+          "robustness": {
+            "failed_members": 0,
+            "failure_classes": [],
+            "fraction_valid": 1.0,
+            "valid_members": 6
+          },
+          "scenario_ensemble_status": "SYNTHETIC_UNCERTAINTY_QUALIFIED",
+          "seed": 225,
+          "software_readiness_status": "SOFTWARE READY",
+          "validation_status": "EXPERIMENTAL VALIDATION NOT CLAIMED"
+        }
+      },
+      "variety": "RAF",
+      "warnings": []
+    }
+  ],
+  "summary": {
+    "classification": "SYNTHETIC_SOFTWARE_BENCHMARK",
+    "crops": [
+      "tomato"
+    ],
+    "cycles": [
+      "annual-1"
+    ],
+    "environments": [
+      "greenhouse",
+      "outdoor"
+    ],
+    "failed_cases": 0,
+    "invalid_cases": 0,
+    "invalid_ensemble_members": 0,
+    "plots": [
+      "plot_12010"
+    ],
+    "successful_cases": 2,
+    "total_cases": 2,
+    "valid_ensemble_members": 12
+  },
+  "validation_status": "EXPERIMENTAL VALIDATION NOT CLAIMED",
+  "version": "5.24.1"
+}

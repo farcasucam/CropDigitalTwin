@@ -191,6 +191,18 @@ from agri_twin.application.uncertainty_ensemble import (
     UncertaintyDistribution,
     UncertaintySource,
 )
+from agri_twin.application.scientific_benchmark import (
+    BenchmarkCase,
+    BenchmarkComparison,
+    BenchmarkDefinition,
+    BenchmarkMetric,
+    BenchmarkRun,
+    BenchmarkStatus,
+    BenchmarkSummary,
+    MetricCategory,
+    ScientificBenchmarkReport,
+    ScientificBenchmarkSuite,
+)
 
 __all__ = [
     "ClockSource",
@@ -340,4 +352,14 @@ __all__ = [
     "UncertaintyDefinition",
     "UncertaintyDistribution",
     "UncertaintySource",
+    "BenchmarkCase",
+    "BenchmarkComparison",
+    "BenchmarkDefinition",
+    "BenchmarkMetric",
+    "BenchmarkRun",
+    "BenchmarkStatus",
+    "BenchmarkSummary",
+    "MetricCategory",
+    "ScientificBenchmarkReport",
+    "ScientificBenchmarkSuite",
 ]
