@@ -183,6 +183,14 @@ from agri_twin.application.synthetic_real_data import (
     RealAgronomicDatasetProvider,
     SyntheticAgronomicDatasetProvider,
 )
+from agri_twin.application.uncertainty_ensemble import (
+    EnsembleMember,
+    ScenarioEnsemble,
+    ScenarioEnsembleGenerator,
+    UncertaintyDefinition,
+    UncertaintyDistribution,
+    UncertaintySource,
+)
 
 __all__ = [
     "ClockSource",
@@ -326,4 +334,10 @@ __all__ = [
     "RealAgronomicDatasetProvider",
     "UncertaintyPropagationResult",
     "UncertaintyStatus",
+    "EnsembleMember",
+    "ScenarioEnsemble",
+    "ScenarioEnsembleGenerator",
+    "UncertaintyDefinition",
+    "UncertaintyDistribution",
+    "UncertaintySource",
 ]

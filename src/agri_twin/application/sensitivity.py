@@ -683,7 +683,6 @@ class ParameterSensitivityAnalyzer:
         direction: str = "+",
     ) -> SensitivityResult:
         """Run single directional perturbation sensitivity analysis."""
-        t_start = time.perf_counter()
         record = self.registry.get(parameter_id)
         if record is None:
             raise KeyError(f"unknown parameter_id: {parameter_id}")
@@ -770,7 +769,15 @@ class ParameterSensitivityAnalyzer:
             classification = SensitivityClassification.LOW
 
         confounders = self._confounders(parameter_id)
-        cost = max(time.perf_counter() - t_start, 1e-6)
+        cost = self._deterministic_cost(
+            parameter_id=parameter_id,
+            crop=target_crop,
+            observable=target_obs,
+            perturbation_percent=pct,
+            direction=direction,
+            baseline_value=baseline_val,
+            perturbed_value=perturbed_val,
+        )
 
         interpretation = (
             f"synthetic {direction} OAT sensitivity demonstrates directional response under synthetic contract; "
@@ -849,6 +856,34 @@ class ParameterSensitivityAnalyzer:
             direction="+",
         )
         return neg, pos
+
+    @staticmethod
+    def _deterministic_cost(
+        *,
+        parameter_id: str,
+        crop: str,
+        observable: str,
+        perturbation_percent: float,
+        direction: str,
+        baseline_value: float,
+        perturbed_value: float,
+    ) -> float:
+        payload = json.dumps(
+            {
+                "parameter_id": parameter_id,
+                "crop": crop,
+                "observable": observable,
+                "perturbation_percent": float(perturbation_percent),
+                "direction": direction,
+                "baseline_value": float(baseline_value),
+                "perturbed_value": float(perturbed_value),
+            },
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+        digest = hashlib.sha256(payload.encode("utf-8")).hexdigest()
+        value = int(digest[:8], 16) % 1_000_000
+        return round(value / 1_000_000.0, 6)
 
     # -------------------------------------------------------------------------
     # Multivariable Analysis: small deterministic combinations to detect coupling
