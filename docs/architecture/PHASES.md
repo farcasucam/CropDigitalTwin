@@ -44,6 +44,7 @@
 | 5.23 | Scientific uncertainty & scenario ensemble framework | deterministic uncertainty definitions, scenario ensembles and synthetic robustness reports that preserve the same scientific guardrails and never claim real validation |
 | 5.24 | Integrated scientific benchmark & reproducible evaluation | orchestration of existing scenarios, sensitivity, uncertainty and ensemble contracts with deterministic hashes, matrix coverage and explicit synthetic-only scientific status |
 | 5.25 | Real validation readiness & out-of-sample evaluation gate | source audit, forcing/observation separation and reusable validation pipeline; current project state remains insufficient real data and experimental validation unclaimed |
+| 5.26 | Conditional scientific calibration & overfitting control | readiness-gated orchestration of the existing grid calibrator, parameter identifiability, bounds, explicit calibration/holdout split and transactional synthetic-only software tests |
 | 5 | Actuators + Controller | comandos y estados separados |
 | 6 | Eventos + escenarios | replay reproducible |
 | 7 | Storage | histórico consultable |

@@ -212,6 +212,15 @@ from agri_twin.application.real_validation import (
     ValidationReadiness,
     ValidationScope,
 )
+from agri_twin.application.scientific_calibration import (
+    CalibrationExecutionStatus,
+    CalibrationParameterAudit,
+    CalibrationReadiness,
+    CalibrationSplit,
+    ScientificCalibrationReport,
+    ScientificCalibrationResult,
+    ScientificCalibrationSuite,
+)
 
 __all__ = [
     "ClockSource",
@@ -378,4 +387,11 @@ __all__ = [
     "RealValidationSuite",
     "ValidationReadiness",
     "ValidationScope",
+    "CalibrationExecutionStatus",
+    "CalibrationParameterAudit",
+    "CalibrationReadiness",
+    "CalibrationSplit",
+    "ScientificCalibrationReport",
+    "ScientificCalibrationResult",
+    "ScientificCalibrationSuite",
 ]

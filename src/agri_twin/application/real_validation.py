@@ -33,6 +33,7 @@ class DataSourceClassification(StrEnum):
     SIMULATED_REAL_DATA_SUBSTITUTE = "SIMULATED_REAL_DATA_SUBSTITUTE"
     FORCING = "FORCING"
     LITERATURE = "LITERATURE"
+    TEMPLATE = "TEMPLATE"
     UNKNOWN = "UNKNOWN"
 
 
@@ -177,6 +178,7 @@ class RealValidationSuite:
             path for path in self.root.rglob("*")
             if path.is_file() and path.suffix.lower() in {".csv", ".xlsx", ".json", ".txt", ".parquet"}
             and ".venv" not in path.parts and "__pycache__" not in path.parts and ".git" not in path.parts
+            and not {"calibration", "validation", "benchmarks"}.intersection(path.relative_to(self.root).parts[:2])
         )
         audits: list[DataSourceAudit] = []
         for path in files:
@@ -211,7 +213,7 @@ class RealValidationSuite:
             source_type = "synthetic_test_data"
             evidence.append("synthetic path or explicit synthetic test metadata")
         elif "/templates/" in f"/{lower}" or lower.startswith("templates/"):
-            classification = DataSourceClassification.UNKNOWN
+            classification = DataSourceClassification.TEMPLATE
             source_type = "template"
             evidence.append("template contract, not an observation dataset")
         elif "phenology" in lower and ("doi" in text or "literature" in text or "source_id" in text):
