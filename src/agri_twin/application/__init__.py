@@ -203,6 +203,15 @@ from agri_twin.application.scientific_benchmark import (
     ScientificBenchmarkReport,
     ScientificBenchmarkSuite,
 )
+from agri_twin.application.real_validation import (
+    DataSourceAudit,
+    DataSourceClassification,
+    RealValidationReport,
+    RealValidationResult,
+    RealValidationSuite,
+    ValidationReadiness,
+    ValidationScope,
+)
 
 __all__ = [
     "ClockSource",
@@ -362,4 +371,11 @@ __all__ = [
     "MetricCategory",
     "ScientificBenchmarkReport",
     "ScientificBenchmarkSuite",
+    "DataSourceAudit",
+    "DataSourceClassification",
+    "RealValidationReport",
+    "RealValidationResult",
+    "RealValidationSuite",
+    "ValidationReadiness",
+    "ValidationScope",
 ]

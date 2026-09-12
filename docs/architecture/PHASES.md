@@ -43,6 +43,7 @@
 | 5.21 | Synthetic real-data substitute & scientific sensitivity framework | deterministic synthetic real-data substitute preserving the common observation contract, future real-data substitution path, and one-at-a-time parameter sensitivity analysis without calibration or experimental validation |
 | 5.23 | Scientific uncertainty & scenario ensemble framework | deterministic uncertainty definitions, scenario ensembles and synthetic robustness reports that preserve the same scientific guardrails and never claim real validation |
 | 5.24 | Integrated scientific benchmark & reproducible evaluation | orchestration of existing scenarios, sensitivity, uncertainty and ensemble contracts with deterministic hashes, matrix coverage and explicit synthetic-only scientific status |
+| 5.25 | Real validation readiness & out-of-sample evaluation gate | source audit, forcing/observation separation and reusable validation pipeline; current project state remains insufficient real data and experimental validation unclaimed |
 | 5 | Actuators + Controller | comandos y estados separados |
 | 6 | Eventos + escenarios | replay reproducible |
 | 7 | Storage | histórico consultable |
