@@ -1,0 +1,614 @@
+{
+  "baseline_metrics": [],
+  "calibrated_metrics": [],
+  "calibrated_parameters": [],
+  "calibration_dataset": null,
+  "calibration_performed": false,
+  "calibration_report_hash": "04bbeb9fe7842972f82025a9cef3337d13247c2b3ed22160ddbb7cf30c16b8b5",
+  "configuration_hash": "7bc4ac53e3aa06845324d5c573e7e0aa93d7ff3a31cbb6c8fa8ac4ed33cdf522",
+  "data_leakage": false,
+  "data_quality": "NOT_AVAILABLE",
+  "delta_metrics": [],
+  "global_diagnostics": {},
+  "independence": {
+    "basis": [
+      "cycle_id",
+      "temporal_holdout"
+    ],
+    "calibration_observation_ids": [
+      "calibration:0:2026-01-01T00:00:00+00:00:biomass"
+    ],
+    "duplicate_timestamps": [],
+    "independent": true,
+    "overlap": [],
+    "split_method": "explicit_independent_dataset",
+    "split_reason": "independent datasets supplied",
+    "validation_observation_ids": [
+      "validation:0:2026-01-02T00:00:00+00:00:biomass"
+    ]
+  },
+  "limitations": [
+    "Synthetic and simulated substitute sources are not independent scientific validation data.",
+    "No validation claim is made."
+  ],
+  "multilevel_diagnostics": {},
+  "overfit_diagnostics": {},
+  "phase": "5.27.1",
+  "real_data_verified": false,
+  "real_verified_sources": [],
+  "sources_audited": [
+    {
+      "classification": "FORCING",
+      "evidence": [
+        "weather or forecast forcing metadata"
+      ],
+      "notes": [
+        "not eligible as independent crop-response observation"
+      ],
+      "path": "config/app.json",
+      "source_type": "forcing",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "config/crop_config.json",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "FORCING",
+      "evidence": [
+        "weather or forecast forcing metadata"
+      ],
+      "notes": [
+        "not eligible as independent crop-response observation"
+      ],
+      "path": "config/weather_config.json",
+      "source_type": "forcing",
+      "variables": []
+    },
+    {
+      "classification": "SIMULATED_REAL_DATA_SUBSTITUTE",
+      "evidence": [
+        "explicit synthetic real-data substitute provenance"
+      ],
+      "notes": [],
+      "path": "data/sensitivity/synthetic_sensitivity_report.json",
+      "source_type": "synthetic",
+      "variables": []
+    },
+    {
+      "classification": "SYNTHETIC",
+      "evidence": [
+        "synthetic path or explicit synthetic test metadata"
+      ],
+      "notes": [],
+      "path": "data/synthetic/phase5_9/biomass.csv",
+      "source_type": "synthetic_test_data",
+      "variables": []
+    },
+    {
+      "classification": "SYNTHETIC",
+      "evidence": [
+        "synthetic path or explicit synthetic test metadata"
+      ],
+      "notes": [],
+      "path": "data/synthetic/phase5_9/crop_cycles.csv",
+      "source_type": "synthetic_test_data",
+      "variables": []
+    },
+    {
+      "classification": "SYNTHETIC",
+      "evidence": [
+        "synthetic path or explicit synthetic test metadata"
+      ],
+      "notes": [],
+      "path": "data/synthetic/phase5_9/fruit_growth.csv",
+      "source_type": "synthetic_test_data",
+      "variables": []
+    },
+    {
+      "classification": "SYNTHETIC",
+      "evidence": [
+        "synthetic path or explicit synthetic test metadata"
+      ],
+      "notes": [],
+      "path": "data/synthetic/phase5_9/harvest.csv",
+      "source_type": "synthetic_test_data",
+      "variables": []
+    },
+    {
+      "classification": "SYNTHETIC",
+      "evidence": [
+        "synthetic path or explicit synthetic test metadata"
+      ],
+      "notes": [],
+      "path": "data/synthetic/phase5_9/irrigation.csv",
+      "source_type": "synthetic_test_data",
+      "variables": []
+    },
+    {
+      "classification": "SYNTHETIC",
+      "evidence": [
+        "synthetic path or explicit synthetic test metadata"
+      ],
+      "notes": [],
+      "path": "data/synthetic/phase5_9/lai.csv",
+      "source_type": "synthetic_test_data",
+      "variables": []
+    },
+    {
+      "classification": "SYNTHETIC",
+      "evidence": [
+        "synthetic path or explicit synthetic test metadata"
+      ],
+      "notes": [],
+      "path": "data/synthetic/phase5_9/metadata.json",
+      "source_type": "synthetic_test_data",
+      "variables": []
+    },
+    {
+      "classification": "SYNTHETIC",
+      "evidence": [
+        "synthetic path or explicit synthetic test metadata"
+      ],
+      "notes": [],
+      "path": "data/synthetic/phase5_9/microclimate.csv",
+      "source_type": "synthetic_test_data",
+      "variables": []
+    },
+    {
+      "classification": "SYNTHETIC",
+      "evidence": [
+        "synthetic path or explicit synthetic test metadata"
+      ],
+      "notes": [],
+      "path": "data/synthetic/phase5_9/phenology.csv",
+      "source_type": "synthetic_test_data",
+      "variables": []
+    },
+    {
+      "classification": "SYNTHETIC",
+      "evidence": [
+        "synthetic path or explicit synthetic test metadata"
+      ],
+      "notes": [],
+      "path": "data/synthetic/phase5_9/plots.csv",
+      "source_type": "synthetic_test_data",
+      "variables": []
+    },
+    {
+      "classification": "SYNTHETIC",
+      "evidence": [
+        "synthetic path or explicit synthetic test metadata"
+      ],
+      "notes": [],
+      "path": "data/synthetic/phase5_9/soil_water.csv",
+      "source_type": "synthetic_test_data",
+      "variables": []
+    },
+    {
+      "classification": "SYNTHETIC",
+      "evidence": [
+        "synthetic path or explicit synthetic test metadata"
+      ],
+      "notes": [],
+      "path": "data/synthetic/phase5_9/weather.csv",
+      "source_type": "synthetic_test_data",
+      "variables": []
+    },
+    {
+      "classification": "SIMULATED_REAL_DATA_SUBSTITUTE",
+      "evidence": [
+        "explicit synthetic real-data substitute provenance"
+      ],
+      "notes": [],
+      "path": "data/synthetic_real_substitute/manifest.json",
+      "source_type": "synthetic",
+      "variables": [
+        "air_temperature",
+        "biomass",
+        "co2",
+        "fruit_weight",
+        "lai",
+        "relative_humidity",
+        "soil_water_content",
+        "solar_radiation",
+        "vpd",
+        "yield"
+      ]
+    },
+    {
+      "classification": "SIMULATED_REAL_DATA_SUBSTITUTE",
+      "evidence": [
+        "explicit synthetic real-data substitute provenance"
+      ],
+      "notes": [],
+      "path": "data/synthetic_real_substitute/observations.csv",
+      "source_type": "synthetic",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/biomass.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/crop_cycles.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/fruit_growth.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/harvest.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/instrumentation_specification.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/irrigation.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/lai.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/microclimate.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/observation_campaign.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/phenology.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/plots.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/soil_water.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/weather.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "FORCING",
+      "evidence": [
+        "weather or forecast forcing metadata"
+      ],
+      "notes": [
+        "not eligible as independent crop-response observation"
+      ],
+      "path": "data/weather/manual_forecast.csv",
+      "source_type": "forcing",
+      "variables": []
+    },
+    {
+      "classification": "FORCING",
+      "evidence": [
+        "weather or forecast forcing metadata"
+      ],
+      "notes": [
+        "not eligible as independent crop-response observation"
+      ],
+      "path": "data/weather/manual_forecast.metadata.json",
+      "source_type": "forcing",
+      "variables": [
+        "rain",
+        "relative_humidity_2m",
+        "shortwave_radiation",
+        "surface_pressure",
+        "temperature_2m",
+        "wind_direction_10m",
+        "wind_speed_10m"
+      ]
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "schemas/actuator-command-1.0.json",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "schemas/actuator-state-1.0.json",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "schemas/instrumentation_readiness.schema.json",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "schemas/message-envelope-1.0.json",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "schemas/natural-event-1.0.json",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "REAL_UNVERIFIED",
+      "evidence": [
+        "observation-like metadata without sufficient provenance"
+      ],
+      "notes": [
+        "origin/context/evidence not sufficient for REAL_VERIFIED"
+      ],
+      "path": "schemas/observation_campaign_plan.schema.json",
+      "source_type": "unverified_observation",
+      "variables": []
+    },
+    {
+      "classification": "REAL_UNVERIFIED",
+      "evidence": [
+        "observation-like metadata without sufficient provenance"
+      ],
+      "notes": [
+        "origin/context/evidence not sufficient for REAL_VERIFIED"
+      ],
+      "path": "schemas/observation_dataset.schema.json",
+      "source_type": "unverified_observation",
+      "variables": []
+    },
+    {
+      "classification": "REAL_UNVERIFIED",
+      "evidence": [
+        "observation-like metadata without sufficient provenance"
+      ],
+      "notes": [
+        "origin/context/evidence not sufficient for REAL_VERIFIED"
+      ],
+      "path": "schemas/semantic-context-packet-1.0.json",
+      "source_type": "unverified_observation",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "schemas/simulation-control-1.0.json",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "schemas/simulation-status-1.0.json",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "schemas/simulation-time-1.0.json",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "FORCING",
+      "evidence": [
+        "weather or forecast forcing metadata"
+      ],
+      "notes": [
+        "not eligible as independent crop-response observation"
+      ],
+      "path": "schemas/weather-1.0.json",
+      "source_type": "forcing",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "src/agri_digital_twin.egg-info/dependency_links.txt",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "src/agri_digital_twin.egg-info/requires.txt",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "src/agri_digital_twin.egg-info/SOURCES.txt",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "src/agri_digital_twin.egg-info/top_level.txt",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "src/crop_config.json",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "LITERATURE",
+      "evidence": [
+        "literature/evidence fields present"
+      ],
+      "notes": [],
+      "path": "src/crop_phenology.csv",
+      "source_type": "literature",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "src/farm_config.json",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "src/growth_model_config.json",
+      "source_type": "unknown",
+      "variables": []
+    }
+  ],
+  "status": "INSUFFICIENT_REAL_DATA",
+  "uncertainty": {},
+  "validation_dataset": "validation",
+  "validation_performed": false,
+  "warnings": [
+    "VALIDATION NOT PERFORMED",
+    "INSUFFICIENT REAL DATA"
+  ]
+}
