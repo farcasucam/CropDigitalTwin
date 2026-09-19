@@ -230,6 +230,23 @@ from agri_twin.application.post_calibration_validation import (
     ValidationIndependence,
     ValidationMetric,
 )
+from agri_twin.application.transferability_robustness import (
+    GeneralizationEvaluationResult,
+    OverfitDiagnosticStatus,
+    RobustnessDimension,
+    RobustnessEvaluationResult,
+    TransferabilityCase,
+    TransferabilityDimension,
+    TransferabilityExecutionStatus,
+    TransferabilityLevel,
+    TransferabilityMatrix,
+    TransferabilityResult,
+    TransferabilityRobustnessReport,
+    TransferabilityRobustnessSuite,
+    TransferabilityStatus,
+    TransferContext,
+)
+
 
 __all__ = [
     "ClockSource",
@@ -410,4 +427,18 @@ __all__ = [
     "ValidationExecutionStatus",
     "ValidationIndependence",
     "ValidationMetric",
+    "GeneralizationEvaluationResult",
+    "OverfitDiagnosticStatus",
+    "RobustnessDimension",
+    "RobustnessEvaluationResult",
+    "TransferabilityCase",
+    "TransferabilityDimension",
+    "TransferabilityExecutionStatus",
+    "TransferabilityLevel",
+    "TransferabilityMatrix",
+    "TransferabilityResult",
+    "TransferabilityRobustnessReport",
+    "TransferabilityRobustnessSuite",
+    "TransferabilityStatus",
+    "TransferContext",
 ]

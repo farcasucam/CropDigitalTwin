@@ -1,0 +1,1514 @@
+{
+  "baseline_results": [],
+  "calibrated_results": [],
+  "calibration_performed": false,
+  "configuration_hash": "c334218adf3e7c4689f0f0e3f66a83ff4b966cf153304cd22a18c528584dff6e",
+  "context_dependence": {
+    "label": "NOT_DETECTED",
+    "signal": false,
+    "status": "SOFTWARE_TEST_ONLY"
+  },
+  "ensemble_summary": {
+    "ensemble_members": 10,
+    "provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
+    "status": "QUALIFIED_SYNTHETIC"
+  },
+  "global_metrics": {},
+  "independence": true,
+  "leakage": false,
+  "limitations": [
+    "Synthetic and simulated substitute sources cannot demonstrate biological generalization or transferability.",
+    "No experimental transferability or biological robustness claim is made.",
+    "Real agronomic validation requires verified real observations."
+  ],
+  "multilevel_metrics": {},
+  "overfit_diagnostics": {
+    "label": "NOT_DETECTED",
+    "signal": false,
+    "status": "SOFTWARE_TEST_ONLY"
+  },
+  "phase": "5.28.1",
+  "real_data_verified": false,
+  "real_verified_sources": [],
+  "robustness_cases": [
+    {
+      "case_id": "extreme_heat_55c",
+      "convergence": true,
+      "description": "Air temperature 55C heat stress",
+      "diagnostics": {
+        "iterations": 8.0
+      },
+      "dimension": "STRESS_SCENARIOS",
+      "passed": true,
+      "physical_bounds_valid": true,
+      "software_stability": true,
+      "warnings": []
+    },
+    {
+      "case_id": "extreme_frost_minus10c",
+      "convergence": true,
+      "description": "Air temperature -10C severe frost",
+      "diagnostics": {
+        "iterations": 2.0
+      },
+      "dimension": "STRESS_SCENARIOS",
+      "passed": true,
+      "physical_bounds_valid": true,
+      "software_stability": true,
+      "warnings": []
+    },
+    {
+      "case_id": "zero_solar_night",
+      "convergence": true,
+      "description": "Solar radiation 0 W/m2 nighttime",
+      "diagnostics": {
+        "iterations": 1.0
+      },
+      "dimension": "STRESS_SCENARIOS",
+      "passed": true,
+      "physical_bounds_valid": true,
+      "software_stability": true,
+      "warnings": []
+    },
+    {
+      "case_id": "extreme_solar_1500w",
+      "convergence": true,
+      "description": "Solar radiation 1500 W/m2 extreme irradiance",
+      "diagnostics": {
+        "iterations": 9.0
+      },
+      "dimension": "STRESS_SCENARIOS",
+      "passed": true,
+      "physical_bounds_valid": true,
+      "software_stability": true,
+      "warnings": []
+    },
+    {
+      "case_id": "arid_high_vpd",
+      "convergence": true,
+      "description": "Hot and dry: 40C and 10% RH",
+      "diagnostics": {
+        "iterations": 7.0
+      },
+      "dimension": "STRESS_SCENARIOS",
+      "passed": true,
+      "physical_bounds_valid": true,
+      "software_stability": true,
+      "warnings": []
+    },
+    {
+      "case_id": "saturated_rh_100pct",
+      "convergence": true,
+      "description": "Saturated air: 20C and 100% RH",
+      "diagnostics": {
+        "iterations": 3.0
+      },
+      "dimension": "STRESS_SCENARIOS",
+      "passed": true,
+      "physical_bounds_valid": true,
+      "software_stability": true,
+      "warnings": []
+    },
+    {
+      "case_id": "wilting_point_soil",
+      "convergence": true,
+      "description": "Soil water at wilting point (VWC 0.10)",
+      "diagnostics": {
+        "iterations": 7.0
+      },
+      "dimension": "STRESS_SCENARIOS",
+      "passed": true,
+      "physical_bounds_valid": true,
+      "software_stability": true,
+      "warnings": []
+    },
+    {
+      "case_id": "extreme_ventilation_30ach",
+      "convergence": true,
+      "description": "Ventilation 30 ACH",
+      "diagnostics": {
+        "iterations": 7.0
+      },
+      "dimension": "STRESS_SCENARIOS",
+      "passed": true,
+      "physical_bounds_valid": true,
+      "software_stability": true,
+      "warnings": []
+    },
+    {
+      "case_id": "high_co2_1200ppm",
+      "convergence": true,
+      "description": "CO2 enrichment 1200 ppm",
+      "diagnostics": {
+        "iterations": 7.0
+      },
+      "dimension": "STRESS_SCENARIOS",
+      "passed": true,
+      "physical_bounds_valid": true,
+      "software_stability": true,
+      "warnings": []
+    },
+    {
+      "case_id": "heavy_shading_80pct",
+      "convergence": true,
+      "description": "Shading curtain 80% deployment",
+      "diagnostics": {
+        "iterations": 7.0
+      },
+      "dimension": "STRESS_SCENARIOS",
+      "passed": true,
+      "physical_bounds_valid": true,
+      "software_stability": true,
+      "warnings": []
+    },
+    {
+      "case_id": "monotonicity_radiation",
+      "convergence": true,
+      "description": "Radiation monotonicity check (100 -> 500 -> 900 W/m2)",
+      "diagnostics": {
+        "iterations": 7.0
+      },
+      "dimension": "STRESS_SCENARIOS",
+      "passed": true,
+      "physical_bounds_valid": true,
+      "software_stability": true,
+      "warnings": []
+    },
+    {
+      "case_id": "monotonicity_extinction",
+      "convergence": true,
+      "description": "Extinction coefficient check (k=0.3 -> 0.6 -> 0.9)",
+      "diagnostics": {
+        "iterations": 7.0
+      },
+      "dimension": "STRESS_SCENARIOS",
+      "passed": true,
+      "physical_bounds_valid": true,
+      "software_stability": true,
+      "warnings": []
+    }
+  ],
+  "robustness_dimensions": [
+    "STRESS_SCENARIOS"
+  ],
+  "sources_audited": [
+    {
+      "classification": "FORCING",
+      "evidence": [
+        "weather or forecast forcing metadata"
+      ],
+      "notes": [
+        "not eligible as independent crop-response observation"
+      ],
+      "path": "config/app.json",
+      "source_type": "forcing",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "config/crop_config.json",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "FORCING",
+      "evidence": [
+        "weather or forecast forcing metadata"
+      ],
+      "notes": [
+        "not eligible as independent crop-response observation"
+      ],
+      "path": "config/weather_config.json",
+      "source_type": "forcing",
+      "variables": []
+    },
+    {
+      "classification": "SIMULATED_REAL_DATA_SUBSTITUTE",
+      "evidence": [
+        "explicit synthetic real-data substitute provenance"
+      ],
+      "notes": [],
+      "path": "data/sensitivity/synthetic_sensitivity_report.json",
+      "source_type": "synthetic",
+      "variables": []
+    },
+    {
+      "classification": "SYNTHETIC",
+      "evidence": [
+        "synthetic path or explicit synthetic test metadata"
+      ],
+      "notes": [],
+      "path": "data/synthetic/phase5_9/biomass.csv",
+      "source_type": "synthetic_test_data",
+      "variables": []
+    },
+    {
+      "classification": "SYNTHETIC",
+      "evidence": [
+        "synthetic path or explicit synthetic test metadata"
+      ],
+      "notes": [],
+      "path": "data/synthetic/phase5_9/crop_cycles.csv",
+      "source_type": "synthetic_test_data",
+      "variables": []
+    },
+    {
+      "classification": "SYNTHETIC",
+      "evidence": [
+        "synthetic path or explicit synthetic test metadata"
+      ],
+      "notes": [],
+      "path": "data/synthetic/phase5_9/fruit_growth.csv",
+      "source_type": "synthetic_test_data",
+      "variables": []
+    },
+    {
+      "classification": "SYNTHETIC",
+      "evidence": [
+        "synthetic path or explicit synthetic test metadata"
+      ],
+      "notes": [],
+      "path": "data/synthetic/phase5_9/harvest.csv",
+      "source_type": "synthetic_test_data",
+      "variables": []
+    },
+    {
+      "classification": "SYNTHETIC",
+      "evidence": [
+        "synthetic path or explicit synthetic test metadata"
+      ],
+      "notes": [],
+      "path": "data/synthetic/phase5_9/irrigation.csv",
+      "source_type": "synthetic_test_data",
+      "variables": []
+    },
+    {
+      "classification": "SYNTHETIC",
+      "evidence": [
+        "synthetic path or explicit synthetic test metadata"
+      ],
+      "notes": [],
+      "path": "data/synthetic/phase5_9/lai.csv",
+      "source_type": "synthetic_test_data",
+      "variables": []
+    },
+    {
+      "classification": "SYNTHETIC",
+      "evidence": [
+        "synthetic path or explicit synthetic test metadata"
+      ],
+      "notes": [],
+      "path": "data/synthetic/phase5_9/metadata.json",
+      "source_type": "synthetic_test_data",
+      "variables": []
+    },
+    {
+      "classification": "SYNTHETIC",
+      "evidence": [
+        "synthetic path or explicit synthetic test metadata"
+      ],
+      "notes": [],
+      "path": "data/synthetic/phase5_9/microclimate.csv",
+      "source_type": "synthetic_test_data",
+      "variables": []
+    },
+    {
+      "classification": "SYNTHETIC",
+      "evidence": [
+        "synthetic path or explicit synthetic test metadata"
+      ],
+      "notes": [],
+      "path": "data/synthetic/phase5_9/phenology.csv",
+      "source_type": "synthetic_test_data",
+      "variables": []
+    },
+    {
+      "classification": "SYNTHETIC",
+      "evidence": [
+        "synthetic path or explicit synthetic test metadata"
+      ],
+      "notes": [],
+      "path": "data/synthetic/phase5_9/plots.csv",
+      "source_type": "synthetic_test_data",
+      "variables": []
+    },
+    {
+      "classification": "SYNTHETIC",
+      "evidence": [
+        "synthetic path or explicit synthetic test metadata"
+      ],
+      "notes": [],
+      "path": "data/synthetic/phase5_9/soil_water.csv",
+      "source_type": "synthetic_test_data",
+      "variables": []
+    },
+    {
+      "classification": "SYNTHETIC",
+      "evidence": [
+        "synthetic path or explicit synthetic test metadata"
+      ],
+      "notes": [],
+      "path": "data/synthetic/phase5_9/weather.csv",
+      "source_type": "synthetic_test_data",
+      "variables": []
+    },
+    {
+      "classification": "SIMULATED_REAL_DATA_SUBSTITUTE",
+      "evidence": [
+        "explicit synthetic real-data substitute provenance"
+      ],
+      "notes": [],
+      "path": "data/synthetic_real_substitute/manifest.json",
+      "source_type": "synthetic",
+      "variables": [
+        "air_temperature",
+        "biomass",
+        "co2",
+        "fruit_weight",
+        "lai",
+        "relative_humidity",
+        "soil_water_content",
+        "solar_radiation",
+        "vpd",
+        "yield"
+      ]
+    },
+    {
+      "classification": "SIMULATED_REAL_DATA_SUBSTITUTE",
+      "evidence": [
+        "explicit synthetic real-data substitute provenance"
+      ],
+      "notes": [],
+      "path": "data/synthetic_real_substitute/observations.csv",
+      "source_type": "synthetic",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/biomass.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/crop_cycles.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/fruit_growth.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/harvest.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/instrumentation_specification.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/irrigation.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/lai.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/microclimate.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/observation_campaign.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/phenology.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/plots.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/soil_water.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "TEMPLATE",
+      "evidence": [
+        "template contract, not an observation dataset"
+      ],
+      "notes": [],
+      "path": "data/templates/agricultural/weather.csv",
+      "source_type": "template",
+      "variables": []
+    },
+    {
+      "classification": "SIMULATED_REAL_DATA_SUBSTITUTE",
+      "evidence": [
+        "explicit synthetic real-data substitute provenance"
+      ],
+      "notes": [],
+      "path": "data/transferability/transferability_robustness_report.json",
+      "source_type": "synthetic",
+      "variables": []
+    },
+    {
+      "classification": "FORCING",
+      "evidence": [
+        "weather or forecast forcing metadata"
+      ],
+      "notes": [
+        "not eligible as independent crop-response observation"
+      ],
+      "path": "data/weather/manual_forecast.csv",
+      "source_type": "forcing",
+      "variables": []
+    },
+    {
+      "classification": "FORCING",
+      "evidence": [
+        "weather or forecast forcing metadata"
+      ],
+      "notes": [
+        "not eligible as independent crop-response observation"
+      ],
+      "path": "data/weather/manual_forecast.metadata.json",
+      "source_type": "forcing",
+      "variables": [
+        "rain",
+        "relative_humidity_2m",
+        "shortwave_radiation",
+        "surface_pressure",
+        "temperature_2m",
+        "wind_direction_10m",
+        "wind_speed_10m"
+      ]
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "schemas/actuator-command-1.0.json",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "schemas/actuator-state-1.0.json",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "schemas/instrumentation_readiness.schema.json",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "schemas/message-envelope-1.0.json",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "schemas/natural-event-1.0.json",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "REAL_UNVERIFIED",
+      "evidence": [
+        "observation-like metadata without sufficient provenance"
+      ],
+      "notes": [
+        "origin/context/evidence not sufficient for REAL_VERIFIED"
+      ],
+      "path": "schemas/observation_campaign_plan.schema.json",
+      "source_type": "unverified_observation",
+      "variables": []
+    },
+    {
+      "classification": "REAL_UNVERIFIED",
+      "evidence": [
+        "observation-like metadata without sufficient provenance"
+      ],
+      "notes": [
+        "origin/context/evidence not sufficient for REAL_VERIFIED"
+      ],
+      "path": "schemas/observation_dataset.schema.json",
+      "source_type": "unverified_observation",
+      "variables": []
+    },
+    {
+      "classification": "REAL_UNVERIFIED",
+      "evidence": [
+        "observation-like metadata without sufficient provenance"
+      ],
+      "notes": [
+        "origin/context/evidence not sufficient for REAL_VERIFIED"
+      ],
+      "path": "schemas/semantic-context-packet-1.0.json",
+      "source_type": "unverified_observation",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "schemas/simulation-control-1.0.json",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "schemas/simulation-status-1.0.json",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "schemas/simulation-time-1.0.json",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "FORCING",
+      "evidence": [
+        "weather or forecast forcing metadata"
+      ],
+      "notes": [
+        "not eligible as independent crop-response observation"
+      ],
+      "path": "schemas/weather-1.0.json",
+      "source_type": "forcing",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "src/agri_digital_twin.egg-info/dependency_links.txt",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "src/agri_digital_twin.egg-info/requires.txt",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "src/agri_digital_twin.egg-info/SOURCES.txt",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "src/agri_digital_twin.egg-info/top_level.txt",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "src/crop_config.json",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "LITERATURE",
+      "evidence": [
+        "literature/evidence fields present"
+      ],
+      "notes": [],
+      "path": "src/crop_phenology.csv",
+      "source_type": "literature",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "src/farm_config.json",
+      "source_type": "unknown",
+      "variables": []
+    },
+    {
+      "classification": "UNKNOWN",
+      "evidence": [],
+      "notes": [
+        "configuration or non-observation file"
+      ],
+      "path": "src/growth_model_config.json",
+      "source_type": "unknown",
+      "variables": []
+    }
+  ],
+  "status": "INSUFFICIENT_DATA",
+  "transferability_cases": [
+    {
+      "case_id": "case_01_cycle_transfer",
+      "data_source": "synthetic_test_data",
+      "dimension": "TEMPORAL_CYCLE",
+      "independence": {
+        "basis": [
+          "temporal_cycle"
+        ],
+        "calibration_observation_ids": [
+          "src_case_01_cycle_transfer:0:2026-01-01T00:00:00+00:00:biomass"
+        ],
+        "duplicate_timestamps": [],
+        "independent": true,
+        "overlap": [],
+        "split_method": "explicit_independent_dataset",
+        "split_reason": "independent datasets supplied",
+        "validation_observation_ids": [
+          "tgt_case_01_cycle_transfer:0:2026-01-02T00:00:00+00:00:biomass"
+        ]
+      },
+      "level": "LEVEL_1_NEW_TIME_CYCLE",
+      "notes": [],
+      "source_context": {
+        "crop": "tomato",
+        "cycle_id": "cycle_2026_A",
+        "environment": "GREENHOUSE",
+        "management": null,
+        "phenological_stage": null,
+        "plot_id": "plot_12010",
+        "variety": "RAF",
+        "weather_regime": null
+      },
+      "target_context": {
+        "crop": "tomato",
+        "cycle_id": "cycle_2026_B",
+        "environment": "GREENHOUSE",
+        "management": null,
+        "phenological_stage": null,
+        "plot_id": "plot_12010",
+        "variety": "RAF",
+        "weather_regime": null
+      }
+    },
+    {
+      "case_id": "case_02_plot_transfer",
+      "data_source": "synthetic_test_data",
+      "dimension": "SPATIAL_PLOT",
+      "independence": {
+        "basis": [
+          "spatial_plot"
+        ],
+        "calibration_observation_ids": [
+          "src_case_02_plot_transfer:0:2026-01-01T00:00:00+00:00:biomass"
+        ],
+        "duplicate_timestamps": [],
+        "independent": true,
+        "overlap": [],
+        "split_method": "explicit_independent_dataset",
+        "split_reason": "independent datasets supplied",
+        "validation_observation_ids": [
+          "tgt_case_02_plot_transfer:0:2026-01-03T00:00:00+00:00:biomass"
+        ]
+      },
+      "level": "LEVEL_2_NEW_PLOT",
+      "notes": [],
+      "source_context": {
+        "crop": "tomato",
+        "cycle_id": "cycle_2026_A",
+        "environment": "GREENHOUSE",
+        "management": null,
+        "phenological_stage": null,
+        "plot_id": "plot_12010",
+        "variety": "RAF",
+        "weather_regime": null
+      },
+      "target_context": {
+        "crop": "tomato",
+        "cycle_id": "cycle_2026_A",
+        "environment": "GREENHOUSE",
+        "management": null,
+        "phenological_stage": null,
+        "plot_id": "plot_14705",
+        "variety": "RAF",
+        "weather_regime": null
+      }
+    },
+    {
+      "case_id": "case_03_variety_transfer",
+      "data_source": "synthetic_test_data",
+      "dimension": "VARIETAL",
+      "independence": {
+        "basis": [
+          "varietal"
+        ],
+        "calibration_observation_ids": [
+          "src_case_03_variety_transfer:0:2026-01-01T00:00:00+00:00:biomass"
+        ],
+        "duplicate_timestamps": [],
+        "independent": true,
+        "overlap": [],
+        "split_method": "explicit_independent_dataset",
+        "split_reason": "independent datasets supplied",
+        "validation_observation_ids": [
+          "tgt_case_03_variety_transfer:0:2026-01-04T00:00:00+00:00:biomass"
+        ]
+      },
+      "level": "LEVEL_3_NEW_VARIETY",
+      "notes": [],
+      "source_context": {
+        "crop": "tomato",
+        "cycle_id": "cycle_2026_A",
+        "environment": "GREENHOUSE",
+        "management": null,
+        "phenological_stage": null,
+        "plot_id": "plot_12010",
+        "variety": "RAF",
+        "weather_regime": null
+      },
+      "target_context": {
+        "crop": "tomato",
+        "cycle_id": "cycle_2026_A",
+        "environment": "GREENHOUSE",
+        "management": null,
+        "phenological_stage": null,
+        "plot_id": "plot_12010",
+        "variety": "Marmande",
+        "weather_regime": null
+      }
+    },
+    {
+      "case_id": "case_04_environment_transfer",
+      "data_source": "synthetic_test_data",
+      "dimension": "ENVIRONMENTAL",
+      "independence": {
+        "basis": [
+          "environmental"
+        ],
+        "calibration_observation_ids": [
+          "src_case_04_environment_transfer:0:2026-01-01T00:00:00+00:00:biomass"
+        ],
+        "duplicate_timestamps": [],
+        "independent": true,
+        "overlap": [],
+        "split_method": "explicit_independent_dataset",
+        "split_reason": "independent datasets supplied",
+        "validation_observation_ids": [
+          "tgt_case_04_environment_transfer:0:2026-01-05T00:00:00+00:00:biomass"
+        ]
+      },
+      "level": "LEVEL_4_NEW_ENVIRONMENT",
+      "notes": [],
+      "source_context": {
+        "crop": "tomato",
+        "cycle_id": "cycle_2026_A",
+        "environment": "GREENHOUSE",
+        "management": null,
+        "phenological_stage": null,
+        "plot_id": "plot_12010",
+        "variety": "RAF",
+        "weather_regime": null
+      },
+      "target_context": {
+        "crop": "tomato",
+        "cycle_id": "cycle_2026_A",
+        "environment": "OUTDOOR",
+        "management": null,
+        "phenological_stage": null,
+        "plot_id": "plot_12010",
+        "variety": "RAF",
+        "weather_regime": null
+      }
+    },
+    {
+      "case_id": "case_05_cross_species",
+      "data_source": "synthetic_test_data",
+      "dimension": "CROSS_SPECIES",
+      "independence": {
+        "basis": [
+          "cross_species"
+        ],
+        "calibration_observation_ids": [
+          "src_case_05_cross_species:0:2026-01-01T00:00:00+00:00:biomass"
+        ],
+        "duplicate_timestamps": [],
+        "independent": true,
+        "overlap": [],
+        "split_method": "explicit_independent_dataset",
+        "split_reason": "independent datasets supplied",
+        "validation_observation_ids": [
+          "tgt_case_05_cross_species:0:2026-01-06T00:00:00+00:00:biomass"
+        ]
+      },
+      "level": "LEVEL_5_NEW_CROP_SPECIES",
+      "notes": [],
+      "source_context": {
+        "crop": "tomato",
+        "cycle_id": "cycle_2026_A",
+        "environment": "GREENHOUSE",
+        "management": null,
+        "phenological_stage": null,
+        "plot_id": "plot_12010",
+        "variety": "RAF",
+        "weather_regime": null
+      },
+      "target_context": {
+        "crop": "pepper",
+        "cycle_id": "cycle_2026_A",
+        "environment": "GREENHOUSE",
+        "management": null,
+        "phenological_stage": null,
+        "plot_id": "plot_14705",
+        "variety": "Lamuyo",
+        "weather_regime": null
+      }
+    }
+  ],
+  "transferability_dimensions": [
+    "CROSS_SPECIES",
+    "ENVIRONMENTAL",
+    "SPATIAL_PLOT",
+    "TEMPORAL_CYCLE",
+    "VARIETAL"
+  ],
+  "transferability_matrix": {
+    "cases": [
+      {
+        "baseline_metrics": [
+          {
+            "bias": 0.0,
+            "count": 1,
+            "event_error_days": null,
+            "mae": 0.0,
+            "r2": null,
+            "rmse": 0.0,
+            "variable": "biomass"
+          }
+        ],
+        "calibrated_metrics": [
+          {
+            "bias": 0.0,
+            "count": 1,
+            "event_error_days": null,
+            "mae": 0.0,
+            "r2": null,
+            "rmse": 0.0,
+            "variable": "biomass"
+          }
+        ],
+        "case": {
+          "case_id": "case_01_cycle_transfer",
+          "data_source": "synthetic_test_data",
+          "dimension": "TEMPORAL_CYCLE",
+          "independence": {
+            "basis": [
+              "temporal_cycle"
+            ],
+            "calibration_observation_ids": [
+              "src_case_01_cycle_transfer:0:2026-01-01T00:00:00+00:00:biomass"
+            ],
+            "duplicate_timestamps": [],
+            "independent": true,
+            "overlap": [],
+            "split_method": "explicit_independent_dataset",
+            "split_reason": "independent datasets supplied",
+            "validation_observation_ids": [
+              "tgt_case_01_cycle_transfer:0:2026-01-02T00:00:00+00:00:biomass"
+            ]
+          },
+          "level": "LEVEL_1_NEW_TIME_CYCLE",
+          "notes": [],
+          "source_context": {
+            "crop": "tomato",
+            "cycle_id": "cycle_2026_A",
+            "environment": "GREENHOUSE",
+            "management": null,
+            "phenological_stage": null,
+            "plot_id": "plot_12010",
+            "variety": "RAF",
+            "weather_regime": null
+          },
+          "target_context": {
+            "crop": "tomato",
+            "cycle_id": "cycle_2026_B",
+            "environment": "GREENHOUSE",
+            "management": null,
+            "phenological_stage": null,
+            "plot_id": "plot_12010",
+            "variety": "RAF",
+            "weather_regime": null
+          }
+        },
+        "context_dependence_diagnostic": {
+          "label": "NOT_DETECTED",
+          "signal": false,
+          "status": "SOFTWARE_TEST_ONLY"
+        },
+        "delta_metrics": [
+          {
+            "delta_rmse": 0.0,
+            "improved": false,
+            "rmse_after": 0.0,
+            "rmse_before": 0.0,
+            "variable": "biomass"
+          }
+        ],
+        "execution_status": "SOFTWARE_TEST_ONLY",
+        "limitations": [
+          "Synthetic fixture evaluation is not scientific evidence of transferability."
+        ],
+        "multilevel_diagnostics": {},
+        "overfit_diagnostic": {
+          "label": "NOT_DETECTED",
+          "signal": false,
+          "status": "SOFTWARE_TEST_ONLY"
+        },
+        "status": "QUALIFIED_SYNTHETIC",
+        "warnings": [
+          "SYNTHETIC_SOFTWARE_QUALIFICATION_ONLY"
+        ]
+      },
+      {
+        "baseline_metrics": [
+          {
+            "bias": 0.0,
+            "count": 1,
+            "event_error_days": null,
+            "mae": 0.0,
+            "r2": null,
+            "rmse": 0.0,
+            "variable": "biomass"
+          }
+        ],
+        "calibrated_metrics": [
+          {
+            "bias": 0.0,
+            "count": 1,
+            "event_error_days": null,
+            "mae": 0.0,
+            "r2": null,
+            "rmse": 0.0,
+            "variable": "biomass"
+          }
+        ],
+        "case": {
+          "case_id": "case_02_plot_transfer",
+          "data_source": "synthetic_test_data",
+          "dimension": "SPATIAL_PLOT",
+          "independence": {
+            "basis": [
+              "spatial_plot"
+            ],
+            "calibration_observation_ids": [
+              "src_case_02_plot_transfer:0:2026-01-01T00:00:00+00:00:biomass"
+            ],
+            "duplicate_timestamps": [],
+            "independent": true,
+            "overlap": [],
+            "split_method": "explicit_independent_dataset",
+            "split_reason": "independent datasets supplied",
+            "validation_observation_ids": [
+              "tgt_case_02_plot_transfer:0:2026-01-03T00:00:00+00:00:biomass"
+            ]
+          },
+          "level": "LEVEL_2_NEW_PLOT",
+          "notes": [],
+          "source_context": {
+            "crop": "tomato",
+            "cycle_id": "cycle_2026_A",
+            "environment": "GREENHOUSE",
+            "management": null,
+            "phenological_stage": null,
+            "plot_id": "plot_12010",
+            "variety": "RAF",
+            "weather_regime": null
+          },
+          "target_context": {
+            "crop": "tomato",
+            "cycle_id": "cycle_2026_A",
+            "environment": "GREENHOUSE",
+            "management": null,
+            "phenological_stage": null,
+            "plot_id": "plot_14705",
+            "variety": "RAF",
+            "weather_regime": null
+          }
+        },
+        "context_dependence_diagnostic": {
+          "label": "NOT_DETECTED",
+          "signal": false,
+          "status": "SOFTWARE_TEST_ONLY"
+        },
+        "delta_metrics": [
+          {
+            "delta_rmse": 0.0,
+            "improved": false,
+            "rmse_after": 0.0,
+            "rmse_before": 0.0,
+            "variable": "biomass"
+          }
+        ],
+        "execution_status": "SOFTWARE_TEST_ONLY",
+        "limitations": [
+          "Synthetic fixture evaluation is not scientific evidence of transferability."
+        ],
+        "multilevel_diagnostics": {},
+        "overfit_diagnostic": {
+          "label": "NOT_DETECTED",
+          "signal": false,
+          "status": "SOFTWARE_TEST_ONLY"
+        },
+        "status": "QUALIFIED_SYNTHETIC",
+        "warnings": [
+          "SYNTHETIC_SOFTWARE_QUALIFICATION_ONLY"
+        ]
+      },
+      {
+        "baseline_metrics": [
+          {
+            "bias": 0.0,
+            "count": 1,
+            "event_error_days": null,
+            "mae": 0.0,
+            "r2": null,
+            "rmse": 0.0,
+            "variable": "biomass"
+          }
+        ],
+        "calibrated_metrics": [
+          {
+            "bias": 0.0,
+            "count": 1,
+            "event_error_days": null,
+            "mae": 0.0,
+            "r2": null,
+            "rmse": 0.0,
+            "variable": "biomass"
+          }
+        ],
+        "case": {
+          "case_id": "case_03_variety_transfer",
+          "data_source": "synthetic_test_data",
+          "dimension": "VARIETAL",
+          "independence": {
+            "basis": [
+              "varietal"
+            ],
+            "calibration_observation_ids": [
+              "src_case_03_variety_transfer:0:2026-01-01T00:00:00+00:00:biomass"
+            ],
+            "duplicate_timestamps": [],
+            "independent": true,
+            "overlap": [],
+            "split_method": "explicit_independent_dataset",
+            "split_reason": "independent datasets supplied",
+            "validation_observation_ids": [
+              "tgt_case_03_variety_transfer:0:2026-01-04T00:00:00+00:00:biomass"
+            ]
+          },
+          "level": "LEVEL_3_NEW_VARIETY",
+          "notes": [],
+          "source_context": {
+            "crop": "tomato",
+            "cycle_id": "cycle_2026_A",
+            "environment": "GREENHOUSE",
+            "management": null,
+            "phenological_stage": null,
+            "plot_id": "plot_12010",
+            "variety": "RAF",
+            "weather_regime": null
+          },
+          "target_context": {
+            "crop": "tomato",
+            "cycle_id": "cycle_2026_A",
+            "environment": "GREENHOUSE",
+            "management": null,
+            "phenological_stage": null,
+            "plot_id": "plot_12010",
+            "variety": "Marmande",
+            "weather_regime": null
+          }
+        },
+        "context_dependence_diagnostic": {
+          "label": "NOT_DETECTED",
+          "signal": false,
+          "status": "SOFTWARE_TEST_ONLY"
+        },
+        "delta_metrics": [
+          {
+            "delta_rmse": 0.0,
+            "improved": false,
+            "rmse_after": 0.0,
+            "rmse_before": 0.0,
+            "variable": "biomass"
+          }
+        ],
+        "execution_status": "SOFTWARE_TEST_ONLY",
+        "limitations": [
+          "Synthetic fixture evaluation is not scientific evidence of transferability."
+        ],
+        "multilevel_diagnostics": {},
+        "overfit_diagnostic": {
+          "label": "NOT_DETECTED",
+          "signal": false,
+          "status": "SOFTWARE_TEST_ONLY"
+        },
+        "status": "QUALIFIED_SYNTHETIC",
+        "warnings": [
+          "SYNTHETIC_SOFTWARE_QUALIFICATION_ONLY"
+        ]
+      },
+      {
+        "baseline_metrics": [
+          {
+            "bias": 0.0,
+            "count": 1,
+            "event_error_days": null,
+            "mae": 0.0,
+            "r2": null,
+            "rmse": 0.0,
+            "variable": "biomass"
+          }
+        ],
+        "calibrated_metrics": [
+          {
+            "bias": 0.0,
+            "count": 1,
+            "event_error_days": null,
+            "mae": 0.0,
+            "r2": null,
+            "rmse": 0.0,
+            "variable": "biomass"
+          }
+        ],
+        "case": {
+          "case_id": "case_04_environment_transfer",
+          "data_source": "synthetic_test_data",
+          "dimension": "ENVIRONMENTAL",
+          "independence": {
+            "basis": [
+              "environmental"
+            ],
+            "calibration_observation_ids": [
+              "src_case_04_environment_transfer:0:2026-01-01T00:00:00+00:00:biomass"
+            ],
+            "duplicate_timestamps": [],
+            "independent": true,
+            "overlap": [],
+            "split_method": "explicit_independent_dataset",
+            "split_reason": "independent datasets supplied",
+            "validation_observation_ids": [
+              "tgt_case_04_environment_transfer:0:2026-01-05T00:00:00+00:00:biomass"
+            ]
+          },
+          "level": "LEVEL_4_NEW_ENVIRONMENT",
+          "notes": [],
+          "source_context": {
+            "crop": "tomato",
+            "cycle_id": "cycle_2026_A",
+            "environment": "GREENHOUSE",
+            "management": null,
+            "phenological_stage": null,
+            "plot_id": "plot_12010",
+            "variety": "RAF",
+            "weather_regime": null
+          },
+          "target_context": {
+            "crop": "tomato",
+            "cycle_id": "cycle_2026_A",
+            "environment": "OUTDOOR",
+            "management": null,
+            "phenological_stage": null,
+            "plot_id": "plot_12010",
+            "variety": "RAF",
+            "weather_regime": null
+          }
+        },
+        "context_dependence_diagnostic": {
+          "label": "NOT_DETECTED",
+          "signal": false,
+          "status": "SOFTWARE_TEST_ONLY"
+        },
+        "delta_metrics": [
+          {
+            "delta_rmse": 0.0,
+            "improved": false,
+            "rmse_after": 0.0,
+            "rmse_before": 0.0,
+            "variable": "biomass"
+          }
+        ],
+        "execution_status": "SOFTWARE_TEST_ONLY",
+        "limitations": [
+          "Synthetic fixture evaluation is not scientific evidence of transferability."
+        ],
+        "multilevel_diagnostics": {},
+        "overfit_diagnostic": {
+          "label": "NOT_DETECTED",
+          "signal": false,
+          "status": "SOFTWARE_TEST_ONLY"
+        },
+        "status": "QUALIFIED_SYNTHETIC",
+        "warnings": [
+          "SYNTHETIC_SOFTWARE_QUALIFICATION_ONLY"
+        ]
+      },
+      {
+        "baseline_metrics": [
+          {
+            "bias": 0.0,
+            "count": 1,
+            "event_error_days": null,
+            "mae": 0.0,
+            "r2": null,
+            "rmse": 0.0,
+            "variable": "biomass"
+          }
+        ],
+        "calibrated_metrics": [
+          {
+            "bias": 0.0,
+            "count": 1,
+            "event_error_days": null,
+            "mae": 0.0,
+            "r2": null,
+            "rmse": 0.0,
+            "variable": "biomass"
+          }
+        ],
+        "case": {
+          "case_id": "case_05_cross_species",
+          "data_source": "synthetic_test_data",
+          "dimension": "CROSS_SPECIES",
+          "independence": {
+            "basis": [
+              "cross_species"
+            ],
+            "calibration_observation_ids": [
+              "src_case_05_cross_species:0:2026-01-01T00:00:00+00:00:biomass"
+            ],
+            "duplicate_timestamps": [],
+            "independent": true,
+            "overlap": [],
+            "split_method": "explicit_independent_dataset",
+            "split_reason": "independent datasets supplied",
+            "validation_observation_ids": [
+              "tgt_case_05_cross_species:0:2026-01-06T00:00:00+00:00:biomass"
+            ]
+          },
+          "level": "LEVEL_5_NEW_CROP_SPECIES",
+          "notes": [],
+          "source_context": {
+            "crop": "tomato",
+            "cycle_id": "cycle_2026_A",
+            "environment": "GREENHOUSE",
+            "management": null,
+            "phenological_stage": null,
+            "plot_id": "plot_12010",
+            "variety": "RAF",
+            "weather_regime": null
+          },
+          "target_context": {
+            "crop": "pepper",
+            "cycle_id": "cycle_2026_A",
+            "environment": "GREENHOUSE",
+            "management": null,
+            "phenological_stage": null,
+            "plot_id": "plot_14705",
+            "variety": "Lamuyo",
+            "weather_regime": null
+          }
+        },
+        "context_dependence_diagnostic": {
+          "label": "NOT_DETECTED",
+          "signal": false,
+          "status": "SOFTWARE_TEST_ONLY"
+        },
+        "delta_metrics": [
+          {
+            "delta_rmse": 0.0,
+            "improved": false,
+            "rmse_after": 0.0,
+            "rmse_before": 0.0,
+            "variable": "biomass"
+          }
+        ],
+        "execution_status": "SOFTWARE_TEST_ONLY",
+        "limitations": [
+          "Synthetic fixture evaluation is not scientific evidence of transferability."
+        ],
+        "multilevel_diagnostics": {},
+        "overfit_diagnostic": {
+          "label": "NOT_DETECTED",
+          "signal": false,
+          "status": "SOFTWARE_TEST_ONLY"
+        },
+        "status": "QUALIFIED_SYNTHETIC",
+        "warnings": [
+          "SYNTHETIC_SOFTWARE_QUALIFICATION_ONLY"
+        ]
+      }
+    ],
+    "dimensions_evaluated": [
+      "CROSS_SPECIES",
+      "ENVIRONMENTAL",
+      "SPATIAL_PLOT",
+      "TEMPORAL_CYCLE",
+      "VARIETAL"
+    ],
+    "levels_evaluated": [
+      "LEVEL_1_NEW_TIME_CYCLE",
+      "LEVEL_2_NEW_PLOT",
+      "LEVEL_3_NEW_VARIETY",
+      "LEVEL_4_NEW_ENVIRONMENT",
+      "LEVEL_5_NEW_CROP_SPECIES"
+    ]
+  },
+  "uncertainty_cases": [
+    {
+      "bounds": [
+        1.5,
+        3.5
+      ],
+      "distribution": "UNIFORM",
+      "parameter": "crop.radiation_use_efficiency",
+      "source": "SYNTHETIC"
+    },
+    {
+      "bounds": [
+        0.65,
+        0.85
+      ],
+      "distribution": "UNIFORM",
+      "parameter": "greenhouse.cover_transmission",
+      "source": "SYNTHETIC"
+    }
+  ],
+  "validation_performed": false,
+  "warnings": [
+    "SCIENTIFIC TRANSFERABILITY NOT ASSESSED - INSUFFICIENT REAL DATA",
+    "SYNTHETIC TRANSFERABILITY QUALIFIED AS SOFTWARE TESTS ONLY"
+  ]
+}
