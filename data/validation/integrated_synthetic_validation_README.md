@@ -3,10 +3,10 @@
 Deterministic `SYNTHETIC_INTEGRATED_VALIDATION` artifact. It qualifies software and model consistency under controlled synthetic scenarios.
 It does not establish biological validity, field validity, experimental accuracy or transferability to real agricultural systems.
 
-- version: `5.29.1`
-- configuration hash: `99189c9e2a04f596a4265a47bb123bcb2bf4b85d3007bb34f99156898d8abf1a`
-- report hash: `735d615ecf6a3b00f2bfd135c252fa452554c300c2550d215244dfdaf54be210`
-- cases: `30`; status counts: `{"PASS": 25, "PASS_WITH_WARNINGS": 5}`
+- version: `5.29.2`
+- configuration hash: `691d75ec62768f6ec1598f163257a57d9e5f644d0813c09ab8f33c84136a8565`
+- report hash: `e6bf8a57912f9d8e04d7256a49bab3a6798113348091968bba2807db9df6f8f5`
+- cases: `30`; status counts: `{"PASS": 30}`
 - REAL_VERIFIED: `0`; calibration performed: `false`; experimental validation performed: `false`
 
 ## Qualification
@@ -17,7 +17,10 @@ It does not establish biological validity, field validity, experimental accuracy
 - PERSISTENT_STATE_CONSISTENCY: `QUALIFIED`
 - MULTI_PLOT_CONSISTENCY: `QUALIFIED`
 - MULTI_CYCLE_CONSISTENCY: `QUALIFIED`
-- GREENHOUSE_CROP_INTEGRATION: `NOT_QUALIFIED`
+- GREENHOUSE_CROP_INTEGRATION: `QUALIFIED`
+- MICROCLIMATE_TO_CROP_COUPLING: `QUALIFIED`
+- FEEDBACK_LOOP: `QUALIFIED`
+- DORMANCY_PHENOLOGY_CONSISTENCY: `QUALIFIED`
 - ROBUSTNESS_SCENARIOS: `QUALIFIED`
 - DETERMINISM: `QUALIFIED`
 - STATIC_AUDIT: `QUALIFIED`
@@ -25,11 +28,8 @@ It does not establish biological validity, field validity, experimental accuracy
 
 ## Open findings
 
-- `CO2_NOT_CONSUMED_BY_ORCHESTRATOR_GROWTH` (WARNING): CropDigitalTwinOrchestrator raises indoor CO2 under enrichment but its growth limitation product has no CO2 factor; only CropGreenhouseFeedbackLoop applies co2_ppm / 420 (capped at 1).
-- `DORMANCY_GROWTH_NOT_SUPPRESSED` (WARNING): Perennial biomass increases before dormancy release: dormancy only gates GDD accumulation in PhenologyEngine; growth engines do not suppress growth during endodormancy.
-- `PLAUSIBILITY_REVIEW` (WARNING): indoor air up to 8.8 C below outdoor without a cooling actuator (threshold 5 C, ENGINEERING_TEST_THRESHOLD)
-- `INVARIANT_VIOLATION` (FAILURE): latent heat flux > 0 while indoor VPD = 0 (saturated air) in 63 steps: CropPhysicalExchangeModel transpiration ignores indoor saturation
-- `PLAUSIBILITY_REVIEW` (WARNING): indoor air up to 32.7 C below outdoor without a cooling actuator (threshold 5 C, ENGINEERING_TEST_THRESHOLD)
-- `GREENHOUSE_TEMPERATURE_NOT_USED_BY_CROP` (WARNING): CropDigitalTwinOrchestrator passes outdoor air temperature (with indoor radiation) to phenology, water balance and climate stress; indoor air temperature from the greenhouse model is not used by the crop.
-- `GREENHOUSE_CONFIGURATION_VENTILATION_UNUSED` (WARNING): GreenhouseConfiguration.ventilation_ach (base infiltration) is not read by SimplifiedGreenhouseModel; only the actuator ventilation drives air exchange, so a closed greenhouse has zero infiltration and heat loss is referenced to a fixed 20 C.
-- `ORCHESTRATOR_GREENHOUSE_STEP_MEMORYLESS` (INFO): GreenhouseMicroclimateEngine.advance resets its prior state when no prior is given, so the orchestrator greenhouse step carries no thermal/CO2 memory between steps; memory is exercised through SimplifiedGreenhouseModel with an explicit prior.
+- `PLAUSIBILITY_REVIEW` (WARNING): indoor air up to 6.4 C below outdoor without a cooling actuator (threshold 5 C, ENGINEERING_TEST_THRESHOLD); consistent with thermal inertia (tau = C/G = 8.7 h lags the outdoor diurnal cycle) plus canopy latent cooling, not an energy-conservation violation
+- `CO2_RESPONSE_CAPPED_AT_REFERENCE` (INFO): CropGrowthEngine.co2_response = min(1, CO2 / 420): depletion limits growth, enrichment above 420 ppm gives no benefit (existing engineering response, not extended).
+- `ORCHESTRATOR_EXCHANGE_NOT_ITERATED` (INFO): CropDigitalTwinOrchestrator feeds only LAI back to the greenhouse; transpiration/CO2-uptake coupling is iterated only in CropGreenhouseFeedbackLoop.
+- `PERENNIAL_NEXT_CAMPAIGN_NOT_SUPPORTED` (INFO): No transition from post_harvest_dormancy back to dormancy/establishment exists in PhenologyEngine.
+- `CONDENSATION_LATENT_HEAT_NEGLECTED` (INFO): Vapour above saturation condenses without releasing latent heat to the air; no longwave radiative exchange is modelled.

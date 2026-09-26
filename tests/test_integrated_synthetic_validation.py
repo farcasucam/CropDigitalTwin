@@ -92,12 +92,14 @@ def test_normal_season_completes_full_annual_cycle(payload):
 
 def test_perennial_cycle_releases_dormancy_then_completes(payload):
     item = case(payload, "p529_plum_outdoor_normal_season")
-    assert item["status"] == "PASS_WITH_WARNINGS"
+    assert item["status"] == "PASS"
     assert item["observed_outputs"]["dormancy_release_time"] is not None
     assert metric(item, "behaviour.dormancy_release")["passed"] is True
     assert metric(item, "behaviour.full_stage_sequence")["passed"] is True
     assert metric(item, "invariant.dormancy_gates_thermal_time.violations")["value"] == 0
-    assert [warning["code"] for warning in item["warnings"]] == ["DORMANCY_GROWTH_NOT_SUPPRESSED"]
+    # Phase 5.30: endodormancy blocks active growth.
+    assert metric(item, "behaviour.growth_during_dormancy")["value"] == 0.0
+    assert item["warnings"] == []
 
 
 def test_water_stress_increases_and_reduces_growth(payload):
@@ -142,8 +144,9 @@ def test_greenhouse_ventilation_acts_through_microclimate(payload):
     item = case(payload, "p529_tomato_greenhouse_greenhouse_ventilation")
     assert item["status"] == "PASS"
     assert metric(item, "behaviour.outdoor_forcing_unchanged")["value"] is True
-    assert metric(item, "behaviour.indoor_humidity_response")["value"] < 0
-    assert metric(item, "behaviour.indoor_vpd_response")["value"] > 0
+    assert metric(item, "behaviour.air_exchange_response")["value"] > 0
+    assert metric(item, "behaviour.indoor_temperature_toward_outdoor")["value"] < 0
+    assert metric(item, "behaviour.crop_uses_indoor_temperature")["value"] is True
 
 
 def test_greenhouse_shading_transmission_and_causal_path(payload):
@@ -155,12 +158,13 @@ def test_greenhouse_shading_transmission_and_causal_path(payload):
     assert causal["microclimate_identical"] is True and causal["crop_state_identical"] is True
 
 
-def test_greenhouse_co2_response_and_documented_orchestrator_gap(payload):
+def test_greenhouse_co2_response_uses_single_path_and_persists(payload):
     item = case(payload, "p529_tomato_greenhouse_greenhouse_co2")
-    assert item["status"] == "PASS_WITH_WARNINGS"
+    assert item["status"] == "PASS"
     assert metric(item, "behaviour.indoor_co2_response")["value"] > 0
-    assert metric(item, "behaviour.co2_after_supply_ends")["passed"] is True
-    assert [warning["code"] for warning in item["warnings"]] == ["CO2_NOT_CONSUMED_BY_ORCHESTRATOR_GROWTH"]
+    assert metric(item, "behaviour.co2_state_persists")["passed"] is True
+    assert metric(item, "behaviour.co2_decays_by_air_exchange")["passed"] is True
+    assert metric(item, "behaviour.co2_response_single_path")["passed"] is True
     memory = payload["greenhouse"]["crop_greenhouse_feedback"]["greenhouse_state_memory"]
     assert memory["co2_state_carried_between_steps"] is True and memory["ventilation_monotonic"] is True
 
@@ -172,18 +176,22 @@ def test_combined_stress_keeps_valid_state(payload):
     assert metric(item, "behaviour.combined_growth_reduction")["value"] < 0
 
 
-def test_crop_greenhouse_feedback_converges_and_reports_saturation_defect(payload):
+def test_crop_greenhouse_feedback_converges_without_saturation_violation(payload):
     feedback = payload["greenhouse"]["crop_greenhouse_feedback"]
     runs = feedback["runs"]
     for run in runs.values():
         assert run["converged_steps"] == run["steps"]
         assert run["max_iterations"] <= run["configured_max_iterations"]
         assert run["all_finite"] is True
+        assert run["latent_flux_at_saturation_steps"] == 0
     assert runs["ventilated_3ach"]["status"] == "PASS"
-    assert runs["closed_0ach"]["status"] == "INVARIANT_VIOLATION"
-    assert runs["closed_0ach"]["latent_flux_at_saturation_steps"] > 0
-    assert feedback["status"] == "INVARIANT_VIOLATION"
-    assert payload["summary"]["qualification"]["GREENHOUSE_CROP_INTEGRATION"] == "NOT_QUALIFIED"
+    assert runs["closed_0ach"]["configured_ventilation_ach"] == 0.0
+    assert runs["closed_0ach"]["status"] in PASSING
+    assert feedback["status"] in PASSING
+    qualification = payload["summary"]["qualification"]
+    assert qualification["GREENHOUSE_CROP_INTEGRATION"] == qualification["FEEDBACK_LOOP"] == qualification["MICROCLIMATE_TO_CROP_COUPLING"] == "QUALIFIED"
+    assert qualification["DORMANCY_PHENOLOGY_CONSISTENCY"] == "QUALIFIED"
+    assert not any(finding["code"] == "OPEN_PHYSICAL_ISSUE" for finding in payload["findings"])
 
 
 def test_validate_trajectory_passes_clean_run_and_detects_biomass_loss():
@@ -232,9 +240,10 @@ def test_restart_from_checkpoint_equals_continuous_run(payload):
 def test_checkpoint_json_round_trip_is_exact():
     _, result = short_run()
     snapshot = result.snapshots[20]
-    restored_time, crop, soil = restore_checkpoint(checkpoint_payload(snapshot))
+    restored_time, crop, soil, microclimate = restore_checkpoint(checkpoint_payload(snapshot))
     assert restored_time == snapshot.simulation_time
     assert crop == snapshot.crop and soil == snapshot.soil
+    assert microclimate.to_dict() == snapshot.microclimate.indoor_state.to_dict()
 
 
 def test_resumed_scenario_rejects_checkpoint_on_event_boundary():

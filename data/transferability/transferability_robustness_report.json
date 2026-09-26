@@ -2,7 +2,7 @@
   "baseline_results": [],
   "calibrated_results": [],
   "calibration_performed": false,
-  "configuration_hash": "c334218adf3e7c4689f0f0e3f66a83ff4b966cf153304cd22a18c528584dff6e",
+  "configuration_hash": "9ea490af52f877a30210eb9ec032b129e31dcc1b10d887a299427635f8457ffe",
   "context_dependence": {
     "label": "NOT_DETECTED",
     "signal": false,
@@ -36,7 +36,7 @@
       "convergence": true,
       "description": "Air temperature 55C heat stress",
       "diagnostics": {
-        "iterations": 8.0
+        "iterations": 4.0
       },
       "dimension": "STRESS_SCENARIOS",
       "passed": true,
@@ -75,7 +75,7 @@
       "convergence": true,
       "description": "Solar radiation 1500 W/m2 extreme irradiance",
       "diagnostics": {
-        "iterations": 9.0
+        "iterations": 4.0
       },
       "dimension": "STRESS_SCENARIOS",
       "passed": true,
@@ -88,7 +88,7 @@
       "convergence": true,
       "description": "Hot and dry: 40C and 10% RH",
       "diagnostics": {
-        "iterations": 7.0
+        "iterations": 3.0
       },
       "dimension": "STRESS_SCENARIOS",
       "passed": true,
@@ -101,7 +101,7 @@
       "convergence": true,
       "description": "Saturated air: 20C and 100% RH",
       "diagnostics": {
-        "iterations": 3.0
+        "iterations": 2.0
       },
       "dimension": "STRESS_SCENARIOS",
       "passed": true,
@@ -114,7 +114,7 @@
       "convergence": true,
       "description": "Soil water at wilting point (VWC 0.10)",
       "diagnostics": {
-        "iterations": 7.0
+        "iterations": 3.0
       },
       "dimension": "STRESS_SCENARIOS",
       "passed": true,
@@ -127,7 +127,7 @@
       "convergence": true,
       "description": "Ventilation 30 ACH",
       "diagnostics": {
-        "iterations": 7.0
+        "iterations": 1.0
       },
       "dimension": "STRESS_SCENARIOS",
       "passed": true,
@@ -140,7 +140,7 @@
       "convergence": true,
       "description": "CO2 enrichment 1200 ppm",
       "diagnostics": {
-        "iterations": 7.0
+        "iterations": 3.0
       },
       "dimension": "STRESS_SCENARIOS",
       "passed": true,
@@ -153,7 +153,7 @@
       "convergence": true,
       "description": "Shading curtain 80% deployment",
       "diagnostics": {
-        "iterations": 7.0
+        "iterations": 1.0
       },
       "dimension": "STRESS_SCENARIOS",
       "passed": true,
@@ -166,7 +166,7 @@
       "convergence": true,
       "description": "Radiation monotonicity check (100 -> 500 -> 900 W/m2)",
       "diagnostics": {
-        "iterations": 7.0
+        "iterations": 4.0
       },
       "dimension": "STRESS_SCENARIOS",
       "passed": true,
@@ -179,7 +179,7 @@
       "convergence": true,
       "description": "Extinction coefficient check (k=0.3 -> 0.6 -> 0.9)",
       "diagnostics": {
-        "iterations": 7.0
+        "iterations": 3.0
       },
       "dimension": "STRESS_SCENARIOS",
       "passed": true,

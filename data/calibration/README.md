@@ -4,4 +4,4 @@ This artifact records conditional calibration readiness. Current scientific cali
 
 - status: `NOT_PERFORMED`
 - data readiness: `INSUFFICIENT_DATA`
-- configuration hash: `04bbeb9fe7842972f82025a9cef3337d13247c2b3ed22160ddbb7cf30c16b8b5`
+- configuration hash: `4c8563775d86580c817c5e0e217dd1714e9fed9a5e4030b3f6d650163314eb7e`

@@ -1,5 +1,16 @@
 # Phase 5.29 — Integrated Synthetic Validation with Plausible Agronomic Scenarios
 
+> **Status after Phase 5.30.** The greenhouse and orchestrator findings of
+> section 18 were corrected in Phase 5.30
+> (`docs/phase5_30_greenhouse_physical_corrections.md`). Re-running this suite
+> (version 5.29.2) on the corrected model gives 30/30 `PASS`, no latent flux at
+> saturation in the closed-greenhouse feedback run, and
+> `GREENHOUSE-CROP INTEGRATION SYNTHETICALLY QUALIFIED`. Sections 17–18 below
+> record the original Phase 5.29 result that motivated the corrections. The
+> restart checkpoint now also carries the persistent greenhouse microclimate, and
+> the feedback runs set closed/low/ventilated air exchange through
+> `GreenhouseConfiguration.ventilation_ach`.
+
 ## Current Result and Scientific Stance
 
 ```text

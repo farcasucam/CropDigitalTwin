@@ -6,6 +6,7 @@ import math
 from dataclasses import dataclass, replace
 
 from agri_twin.domain.models import CropGrowthState, WeatherState
+from agri_twin.domain.phenology import PhenologyEngine
 
 
 class RadiationGrowthError(ValueError):
@@ -90,6 +91,8 @@ class RadiationGrowthEngine:
         if not math.isfinite(limitation_factor) or not 0 <= limitation_factor <= 1:
             raise RadiationGrowthError("limitation_factor must be between 0 and 1")
         profile = self.profile_for(state.crop_key)
+        if PhenologyEngine.endodormant(state):
+            return state
         if state.current_stage == "post_harvest_dormancy":
             return self._senesce(state, profile, dt_seconds)
         par = self.par_mj_m2(weather.solar_radiation_w_m2, dt_seconds)

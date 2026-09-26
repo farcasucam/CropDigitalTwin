@@ -2,15 +2,15 @@
 
 ## Summary
 
-- `total_parameters`: 526
-- `literature_parameters`: 35
+- `total_parameters`: 538
+- `literature_parameters`: 37
 - `project_data_parameters`: 8
 - `measured_parameters`: 0
 - `derived_parameters`: 0
-- `engineering_defaults`: 16
+- `engineering_defaults`: 26
 - `unknown_parameters`: 467
 - `calibrated_parameters`: 0
-- `calibration_candidates`: 522
+- `calibration_candidates`: 532
 
 ## By crop
 
@@ -109,6 +109,7 @@
 | crop.apple.yield_maturation.vwc_thresholds.moderate_min | moderate_min | unknown | none | candidate_for_calibration | apple/yield_maturation | crop stage thresholds have no source metadata |
 | crop.apple.yield_maturation.vwc_thresholds.optimal_min | optimal_min | unknown | none | candidate_for_calibration | apple/yield_maturation | crop stage thresholds have no source metadata |
 | crop.apple.yield_maturation.vwc_thresholds.wilting_point | wilting_point | unknown | none | candidate_for_calibration | apple/yield_maturation | crop stage thresholds have no source metadata |
+| crop.co2_response_reference | CO2 growth-response reference (factor = min(1, CO2 / reference)) | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
 | crop.grape.establishment.irrigation.preventive_hours_before_peak | preventive_hours_before_peak | unknown | none | candidate_for_calibration | grape/establishment | crop stage thresholds have no source metadata |
 | crop.grape.establishment.irrigation.shading_reduction_pct | shading_reduction_pct | unknown | none | candidate_for_calibration | grape/establishment | crop stage thresholds have no source metadata |
 | crop.grape.establishment.irrigation.target_vwc_after_irrigation | target_vwc_after_irrigation | unknown | none | candidate_for_calibration | grape/establishment | crop stage thresholds have no source metadata |
@@ -528,8 +529,17 @@
 | evidence.tomato_tbase_003 | Tbase | literature | medium | candidate_for_calibration | tomato/varieties unspecified | external event transplant; evidence retained; not activated |
 | evidence.tomato_tupper_001 | Tupper | literature | high | candidate_for_calibration | tomato | external event not mapped; evidence retained; not activated |
 | evidence.tomato_tupper_002 | Tupper | literature | high | candidate_for_calibration | tomato | external event not mapped; evidence retained; not activated |
+| feedback.air_density | greenhouse air density | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
+| feedback.air_volume | greenhouse air volume | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
+| feedback.co2_carbon_fraction | dry matter carbon fraction | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
+| feedback.latent_heat_vaporization | latent heat of vaporization | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
+| feedback.leaf_air_delta | radiation to leaf-air delta proxy | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
+| feedback.relaxation_alpha | fixed-point relaxation factor | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
+| feedback.sensible_heat_transfer | leaf-air sensible heat coefficient | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
 | greenhouse.cover_transmission | default greenhouse transmission | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
 | greenhouse.outdoor.solar_transmission_fraction | solar_transmission_fraction | engineering_default | none | candidate_for_calibration | global |  |
+| greenhouse.outdoor_co2 | outdoor ambient CO2 concentration for air exchange | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
+| greenhouse.thermal_exchange_area | feedback thermal exchange normalization | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
 | plot.plot_12010.area_ha | plot area | project_data | none | not_applicable | tomato/RAF |  |
 | plot.plot_12010.soil_type | soil type | project_data | none | candidate_for_calibration | tomato/RAF |  |
 | plot.plot_14705.area_ha | plot area | project_data | none | not_applicable | plum/Suplum 26 |  |

@@ -8,6 +8,7 @@ from datetime import datetime
 
 from agri_twin.domain.climate_stress import ClimateStressEngine
 from agri_twin.domain.models import CropGrowthState, DerivedEnvironmentState, SoilState, WeatherState
+from agri_twin.domain.phenology import PhenologyEngine
 from agri_twin.domain.radiation_growth import RadiationGrowthEngine
 
 
@@ -24,10 +25,16 @@ class CropGrowthInput:
     nutrient_factor: float | None = None
     water_factor: float | None = None
     co2_factor: float = 1.0
+    co2_ppm: float | None = None
 
     def __post_init__(self) -> None:
         if not math.isfinite(self.dt_seconds) or self.dt_seconds < 0:
             raise CropGrowthError("dt_seconds must be finite and non-negative")
+        if self.co2_ppm is not None:
+            if not math.isfinite(self.co2_ppm) or self.co2_ppm < 0:
+                raise CropGrowthError("co2_ppm must be finite and non-negative")
+            if self.co2_factor != 1.0:
+                raise CropGrowthError("provide either co2_ppm or an explicit co2_factor, never both (CO2 response applied once)")
         for name, value in (("nutrient_factor", self.nutrient_factor), ("water_factor", self.water_factor), ("co2_factor", self.co2_factor)):
             if value is not None and (not math.isfinite(value) or not 0 <= value <= 1):
                 raise CropGrowthError(f"{name} must be between 0 and 1")
@@ -55,9 +62,20 @@ class CropGrowthResult:
 class CropGrowthEngine:
     """Advance growth without owning weather, water, phenology or a clock."""
 
+    # Existing engineering response (formerly inline in the feedback loop):
+    # growth is limited below the ambient reference and not enhanced above it.
+    CO2_REFERENCE_PPM = 420.0
+
     def __init__(self, radiation: RadiationGrowthEngine | None = None, climate: ClimateStressEngine | None = None) -> None:
         self.radiation = radiation or RadiationGrowthEngine()
         self.climate = climate or ClimateStressEngine()
+
+    @classmethod
+    def co2_response(cls, co2_ppm: float) -> float:
+        """The single CO2 growth-response factor used by every integration path."""
+        if not math.isfinite(co2_ppm) or co2_ppm < 0:
+            raise CropGrowthError("co2_ppm must be finite and non-negative")
+        return min(1.0, co2_ppm / cls.CO2_REFERENCE_PPM)
 
     def advance(self, state: CropGrowthState, inputs: CropGrowthInput, simulation_time: datetime | None = None) -> CropGrowthResult:
         if not isinstance(state, CropGrowthState):
@@ -71,19 +89,24 @@ class CropGrowthEngine:
         nutrient_factor = climate.nutrient_factor if inputs.nutrient_factor is None else inputs.nutrient_factor
         vpd_factor = climate.vpd_factor
         radiation_factor = climate.radiation_factor
-        co2_factor = inputs.co2_factor
+        co2_factor = self.co2_response(inputs.co2_ppm) if inputs.co2_ppm is not None else inputs.co2_factor
         par = self.radiation.par_mj_m2(inputs.weather.solar_radiation_w_m2, inputs.dt_seconds)
         apar = par * (1.0 - math.exp(-profile.extinction_coefficient * max(0.0, state.leaf_area_index)))
         potential = apar * profile.rue_g_dm_mj_par
         actual = potential * temperature_factor * water_factor * vpd_factor * radiation_factor * nutrient_factor * co2_factor
-        if state.current_stage == "post_harvest_dormancy":
+        if not PhenologyEngine.growth_active(state):
             actual = 0.0
         leaf_growth = actual * profile.partition_by_stage[state.current_stage][0]
         lai_growth = leaf_growth * profile.specific_leaf_area_m2_g_dm
         senescence = state.leaf_area_index * profile.senescence_rate_per_day * inputs.dt_seconds / 86400.0
         damage = state.leaf_area_index * min(1.0, state.frost_damage + state.heat_damage + state.radiation_stress * 0.1 + state.water_stress * 0.1)
+        maturity = max(state.maturity_index, min(1.0, state.maturity_index + state.phenology_progress * inputs.dt_seconds / (86400.0 * 30.0)))
+        if PhenologyEngine.endodormant(state):
+            # Endodormancy (PhenologyEngine): canopy and development are frozen until chilling release.
+            senescence = damage = 0.0
+            maturity = state.maturity_index
         next_lai = max(0.0, min(profile.maximum_lai, state.leaf_area_index + lai_growth - senescence - damage))
-        next_state = replace(climate.state, leaf_area_index=next_lai, maturity_index=max(state.maturity_index, min(1.0, state.maturity_index + state.phenology_progress * inputs.dt_seconds / (86400.0 * 30.0))))
+        next_state = replace(climate.state, leaf_area_index=next_lai, maturity_index=maturity)
         grown = self.radiation.advance(next_state, inputs.weather, inputs.dt_seconds, temperature_factor * water_factor * vpd_factor * radiation_factor * nutrient_factor * co2_factor)
         # RadiationGrowthEngine owns biomass partitioning; this facade reports the
         # same explicit APAR/RUE calculation and restores the LAI balance above.

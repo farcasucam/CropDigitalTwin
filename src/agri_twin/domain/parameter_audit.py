@@ -220,8 +220,16 @@ class ParameterRegistry:
             ("feedback.air_volume", "greenhouse air volume", "m3", 1000.0, "crop_greenhouse_feedback.py:CropGreenhouseFeedbackConfiguration"),
             ("feedback.relaxation_alpha", "fixed-point relaxation factor", "fraction", 0.4, "crop_greenhouse_feedback.py:CropGreenhouseFeedbackConfiguration"),
             ("water.et_temperature_range", "ET approximation temperature range", "degC", 10.0, "water_balance.py:_et0_mm"),
+            ("greenhouse.outdoor_co2", "outdoor ambient CO2 concentration for air exchange", "ppm", 420.0, "greenhouse.py:OUTDOOR_CO2_PPM"),
+            ("crop.co2_response_reference", "CO2 growth-response reference (factor = min(1, CO2 / reference))", "ppm", 420.0, "crop_growth.py:CropGrowthEngine.CO2_REFERENCE_PPM"),
         ]
-        return [cls._record(parameter_id, name, "Hardcoded engineering baseline", "engineering_default", "runtime_code", None, None, None, unit, value, 0, None, "engineering_default", None, detail, "none", "low", "candidate_for_calibration", True, "radiation, biomass, site and climate observations", "must not be presented as biological validation") for parameter_id, name, unit, value, detail in constants]
+        physical_constants = [
+            ("physics.air_specific_heat", "specific heat of air at constant pressure", "J_kg-1_K-1", 1013.0, "greenhouse.py:AIR_SPECIFIC_HEAT_J_KG_K", "FAO-56 (Allen et al. 1998), cp = 1.013e-3 MJ kg-1 C-1"),
+            ("physics.water_vapour_gas_constant", "specific gas constant of water vapour", "J_kg-1_K-1", 461.5, "greenhouse.py:WATER_VAPOUR_GAS_CONSTANT_J_KG_K", "standard thermodynamic constant R/M_w"),
+        ]
+        records = [cls._record(parameter_id, name, "Hardcoded engineering baseline", "engineering_default", "runtime_code", None, None, None, unit, value, 0, None, "engineering_default", None, detail, "none", "low", "candidate_for_calibration", True, "radiation, biomass, site and climate observations", "must not be presented as biological validation") for parameter_id, name, unit, value, detail in constants]
+        records += [cls._record(parameter_id, name, "Physical constant used by the greenhouse energy and vapour balances", "environmental", "runtime_code", None, None, None, unit, value, 0, None, "literature", reference, detail, "high", "high", "fixed", False, "none (physical constant)", "not a calibration parameter") for parameter_id, name, unit, value, detail, reference in physical_constants]
+        return records
 
     def audit(self) -> ParameterAudit:
         audit = ParameterAudit(tuple(sorted(self.records, key=lambda record: record.parameter_id)))

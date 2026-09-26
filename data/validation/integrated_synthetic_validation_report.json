@@ -301,7 +301,7 @@
       "start_time": "2026-03-01T00:00:00+00:00",
       "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "bb48866acb3d623894564a8b22a018a5834d462a4f39872436e9f5162ba594ae",
+      "trajectory_hash": "7487f727f31b2d424db25b97ce433c7cdbfed5eef8c08178a58307ee451a0cc3",
       "variety": "RAF",
       "warnings": []
     },
@@ -524,7 +524,7 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": 507.01528003798967
+          "value": 500.8107201039869
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
@@ -534,30 +534,30 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "m2_m-2",
-          "value": 2.5416705259112997
+          "value": 2.515431993319549
         }
       ],
       "observed_outputs": {
         "dormancy_release_time": null,
-        "final_biomass_fruit_g_m2": 88.21004809736486,
-        "final_biomass_g_m2": 517.0152800379897,
+        "final_biomass_fruit_g_m2": 90.78661083666049,
+        "final_biomass_g_m2": 510.8107201039869,
         "final_chilling_hours": 0.0,
-        "final_gdd": 1428.9207443275923,
-        "final_lai": 1.569625482457996,
+        "final_gdd": 1453.3638667233392,
+        "final_lai": 1.492288712534327,
         "final_maturity": 1.0,
         "final_simulation_time": "2026-07-09T00:00:00+00:00",
         "final_stage": "post_harvest_dormancy",
         "harvest_ready": true,
-        "min_soil_vwc": 0.345613176117862,
-        "peak_heat_damage": 0.0016653092326265845,
-        "peak_heat_stress": 0.13739840951545848,
+        "min_soil_vwc": 0.3456064718899198,
+        "peak_heat_damage": 0.003489828430318642,
+        "peak_heat_stress": 0.2233060819355787,
         "peak_indoor_co2_ppm": 420.0,
-        "peak_water_stress": 0.01754729552855183,
+        "peak_water_stress": 0.01757411244032081,
         "stage_entry_times": {
           "establishment": "2026-03-01T01:00:00+00:00",
-          "post_harvest_dormancy": "2026-05-21T21:00:00+00:00",
-          "vegetative_growth": "2026-03-23T19:00:00+00:00",
-          "yield_maturation": "2026-04-15T15:00:00+00:00"
+          "post_harvest_dormancy": "2026-05-20T15:00:00+00:00",
+          "vegetative_growth": "2026-03-23T13:00:00+00:00",
+          "yield_maturation": "2026-04-14T19:00:00+00:00"
         }
       },
       "plot_id": "plot_12010",
@@ -606,7 +606,7 @@
       "start_time": "2026-03-01T00:00:00+00:00",
       "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "a2bc22838c43b32eaf0bee2e00635292e0cdb7245ac60cd10ca8e5847c9d92c9",
+      "trajectory_hash": "83ea73531631fb795c11ab0783198b9f518661f47d94aa2de1d64571db341e04",
       "variety": "RAF",
       "warnings": []
     },
@@ -911,7 +911,7 @@
       "start_time": "2026-03-01T00:00:00+00:00",
       "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "5c2155d32f4365adc3d476219641900803b7ecfd1c18e2e19a0c44111878d601",
+      "trajectory_hash": "edd6e4dc4718bc033695844e14b6b0c5dfaab82ed5d17de9fd0f50bf0abbc036",
       "variety": "RAF",
       "warnings": []
     },
@@ -1113,7 +1113,7 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "fraction",
-          "value": -0.36813031764020565
+          "value": -0.5987638497409584
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
@@ -1133,25 +1133,25 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": -105.10907993337145
+          "value": -116.6792791516445
         }
       ],
       "observed_outputs": {
         "dormancy_release_time": null,
-        "final_biomass_fruit_g_m2": 27.258253260004643,
-        "final_biomass_g_m2": 267.6826414790768,
+        "final_biomass_fruit_g_m2": 27.087449341523424,
+        "final_biomass_g_m2": 256.11244226080373,
         "final_chilling_hours": 0.0,
         "final_gdd": 1462.7021423278434,
-        "final_lai": 0.883128619589451,
+        "final_lai": 0.8439220279966807,
         "final_maturity": 1.0,
         "final_simulation_time": "2026-07-09T00:00:00+00:00",
         "final_stage": "post_harvest_dormancy",
         "harvest_ready": true,
-        "min_soil_vwc": 0.3434976552760184,
+        "min_soil_vwc": 0.3438817706789004,
         "peak_heat_damage": 0.7967588516059438,
         "peak_heat_stress": 1.0,
         "peak_indoor_co2_ppm": 420.0,
-        "peak_water_stress": 0.02600937889592636,
+        "peak_water_stress": 0.024472917284398266,
         "stage_entry_times": {
           "establishment": "2026-03-01T01:00:00+00:00",
           "post_harvest_dormancy": "2026-05-18T20:00:00+00:00",
@@ -1205,7 +1205,7 @@
       "start_time": "2026-03-01T00:00:00+00:00",
       "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "92b7d2ded80348dd7fc24ae5e5ea1b2b32a4986d7f16155171e5ead6add579c9",
+      "trajectory_hash": "cd6095f4dd8b62368810c6a5fb30883409a8d277d96925908c9bc23afb248294",
       "variety": "RAF",
       "warnings": []
     },
@@ -1477,7 +1477,7 @@
       "start_time": "2026-03-01T00:00:00+00:00",
       "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "11057358fea548e941167d085ebd797755d6a250c7464a5bb9a7097e8d2fa77c",
+      "trajectory_hash": "a5e229fba019520684e9c449bd94834466f0e6dbccbdc70a7019b4831df712ce",
       "variety": "RAF",
       "warnings": []
     },
@@ -1760,7 +1760,7 @@
       "start_time": "2026-03-01T00:00:00+00:00",
       "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "e7d61b2942afba41ac0e0168d1eac9f5ce5ca186c7849e5168a90a0f69b02dd8",
+      "trajectory_hash": "40aa2290faaa231f08947c117e964b8ccc2ffbf97442b841c9312160b4d76b11",
       "variety": "RAF",
       "warnings": []
     },
@@ -1773,9 +1773,10 @@
       "environment": "greenhouse",
       "expected_behaviours": [
         "outdoor_forcing_unchanged",
-        "indoor_humidity_response",
-        "indoor_vpd_response",
-        "crop_vpd_stress_response"
+        "air_exchange_response",
+        "indoor_temperature_toward_outdoor",
+        "crop_uses_indoor_temperature",
+        "crop_vpd_stress_observed"
       ],
       "expected_invariants": [
         "finite_state",
@@ -1956,56 +1957,66 @@
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
-          "definition": "ventilation lowers indoor RH per SimplifiedGreenhouseModel",
-          "name": "behaviour.indoor_humidity_response",
-          "passed": true,
-          "threshold": null,
-          "threshold_kind": null,
-          "unit": "pct",
-          "value": -10.0
-        },
-        {
-          "category": "MECHANISTIC_CONSISTENCY",
-          "definition": "indoor VPD rises as RH falls",
-          "name": "behaviour.indoor_vpd_response",
-          "passed": true,
-          "threshold": null,
-          "threshold_kind": null,
-          "unit": "kPa",
-          "value": 0.2652875601090181
-        },
-        {
-          "category": "MECHANISTIC_CONSISTENCY",
-          "definition": "crop VPD stress follows the resulting microclimate",
-          "name": "behaviour.crop_vpd_stress_response",
+          "definition": "extra ACH raises the air fraction exchanged per step, 1 - exp(-ACH dt)",
+          "name": "behaviour.air_exchange_response",
           "passed": true,
           "threshold": null,
           "threshold_kind": null,
           "unit": "fraction",
-          "value": 0.06748143028256035
+          "value": 0.047308316191197575
+        },
+        {
+          "category": "MECHANISTIC_CONSISTENCY",
+          "definition": "more air exchange brings indoor air temperature closer to outdoor",
+          "name": "behaviour.indoor_temperature_toward_outdoor",
+          "passed": true,
+          "threshold": null,
+          "threshold_kind": null,
+          "unit": "C",
+          "value": -0.17262380540099065
+        },
+        {
+          "category": "MECHANISTIC_CONSISTENCY",
+          "definition": "the crop environment temperature is the microclimate air temperature",
+          "name": "behaviour.crop_uses_indoor_temperature",
+          "passed": true,
+          "threshold": null,
+          "threshold_kind": null,
+          "unit": "",
+          "value": true
+        },
+        {
+          "category": "MECHANISTIC_CONSISTENCY",
+          "definition": "crop VPD stress follows the resulting microclimate (sign not imposed)",
+          "name": "behaviour.crop_vpd_stress_observed",
+          "passed": null,
+          "threshold": null,
+          "threshold_kind": null,
+          "unit": "fraction",
+          "value": 0.0
         }
       ],
       "observed_outputs": {
         "dormancy_release_time": null,
-        "final_biomass_fruit_g_m2": 87.68167741481076,
-        "final_biomass_g_m2": 496.25835939849173,
+        "final_biomass_fruit_g_m2": 90.79376812418711,
+        "final_biomass_g_m2": 511.0137713581376,
         "final_chilling_hours": 0.0,
-        "final_gdd": 1428.9207443275923,
-        "final_lai": 1.49593370553742,
+        "final_gdd": 1452.406038781475,
+        "final_lai": 1.4954739547488864,
         "final_maturity": 1.0,
         "final_simulation_time": "2026-07-09T00:00:00+00:00",
         "final_stage": "post_harvest_dormancy",
         "harvest_ready": true,
-        "min_soil_vwc": 0.345613176117862,
-        "peak_heat_damage": 0.0016653092326265845,
-        "peak_heat_stress": 0.13739840951545848,
+        "min_soil_vwc": 0.3456064718899198,
+        "peak_heat_damage": 0.003489828430318642,
+        "peak_heat_stress": 0.2233060819355787,
         "peak_indoor_co2_ppm": 420.0,
-        "peak_water_stress": 0.01754729552855183,
+        "peak_water_stress": 0.01757411244032081,
         "stage_entry_times": {
           "establishment": "2026-03-01T01:00:00+00:00",
-          "post_harvest_dormancy": "2026-05-21T21:00:00+00:00",
-          "vegetative_growth": "2026-03-23T19:00:00+00:00",
-          "yield_maturation": "2026-04-15T15:00:00+00:00"
+          "post_harvest_dormancy": "2026-05-20T17:00:00+00:00",
+          "vegetative_growth": "2026-03-23T13:00:00+00:00",
+          "yield_maturation": "2026-04-14T20:00:00+00:00"
         }
       },
       "plot_id": "plot_12010",
@@ -2054,7 +2065,7 @@
       "start_time": "2026-03-01T00:00:00+00:00",
       "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "72edb2f46a1a9f98bef3185fc92e8d5a452b10b05d3cc50b40eb0f0206c1f88f",
+      "trajectory_hash": "986a2eeabe84d8ed1cee1cdb0b71a7ec69f588bdead4620f0008065d4efe1de3",
       "variety": "RAF",
       "warnings": []
     },
@@ -2254,30 +2265,30 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": -78.27391062946015
+          "value": -77.80000851964468
         }
       ],
       "observed_outputs": {
         "dormancy_release_time": null,
-        "final_biomass_fruit_g_m2": 106.08418845780224,
-        "final_biomass_g_m2": 511.7192950079087,
+        "final_biomass_fruit_g_m2": 108.04361875006761,
+        "final_biomass_g_m2": 504.35238847165516,
         "final_chilling_hours": 0.0,
-        "final_gdd": 1428.9207443275923,
-        "final_lai": 1.4649511248306775,
+        "final_gdd": 1452.446528177765,
+        "final_lai": 1.3900659602295176,
         "final_maturity": 1.0,
         "final_simulation_time": "2026-07-09T00:00:00+00:00",
         "final_stage": "post_harvest_dormancy",
         "harvest_ready": true,
-        "min_soil_vwc": 0.345613176117862,
-        "peak_heat_damage": 0.0016653092326265845,
-        "peak_heat_stress": 0.13739840951545848,
+        "min_soil_vwc": 0.3456064718899198,
+        "peak_heat_damage": 0.003489828430318642,
+        "peak_heat_stress": 0.2233060819355787,
         "peak_indoor_co2_ppm": 420.0,
-        "peak_water_stress": 0.01754729552855183,
+        "peak_water_stress": 0.01757411244032081,
         "stage_entry_times": {
           "establishment": "2026-03-01T01:00:00+00:00",
-          "post_harvest_dormancy": "2026-05-21T21:00:00+00:00",
-          "vegetative_growth": "2026-03-23T19:00:00+00:00",
-          "yield_maturation": "2026-04-15T15:00:00+00:00"
+          "post_harvest_dormancy": "2026-05-20T16:00:00+00:00",
+          "vegetative_growth": "2026-03-23T13:00:00+00:00",
+          "yield_maturation": "2026-04-14T20:00:00+00:00"
         }
       },
       "plot_id": "plot_12010",
@@ -2326,7 +2337,7 @@
       "start_time": "2026-03-01T00:00:00+00:00",
       "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "35447815bd25e18d425e7412459e42559d581599ba1709676d9a9172bc0faed6",
+      "trajectory_hash": "0cf03a4da27db169d1de1caafe5a521746020f26f8060f2ec5fe48945f401d08",
       "variety": "RAF",
       "warnings": []
     },
@@ -2339,8 +2350,9 @@
       "environment": "greenhouse",
       "expected_behaviours": [
         "indoor_co2_response",
-        "co2_after_supply_ends",
-        "crop_growth_uses_co2"
+        "co2_state_persists",
+        "co2_decays_by_air_exchange",
+        "co2_response_single_path"
       ],
       "expected_invariants": [
         "finite_state",
@@ -2517,12 +2529,12 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "ppm",
-          "value": 400.0
+          "value": 133.30422461306034
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
-          "definition": "indoor CO2 returns to the control value once supply stops (orchestrator greenhouse step carries no memory)",
-          "name": "behaviour.co2_after_supply_ends",
+          "definition": "enriched CO2 is carried into the step after supply stops (persistent microclimate, no reset)",
+          "name": "behaviour.co2_state_persists",
           "passed": true,
           "threshold": null,
           "threshold_kind": null,
@@ -2531,36 +2543,46 @@
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
-          "definition": "CropDigitalTwinOrchestrator growth does not consume indoor CO2; only CropGreenhouseFeedbackLoop applies a CO2 factor",
-          "name": "behaviour.crop_growth_uses_co2",
-          "passed": false,
+          "definition": "within 24 h of supply stopping, indoor CO2 is back within 1 ppm of control through air exchange",
+          "name": "behaviour.co2_decays_by_air_exchange",
+          "passed": true,
+          "threshold": 1.0,
+          "threshold_kind": "ENGINEERING_TEST_THRESHOLD",
+          "unit": "",
+          "value": true
+        },
+        {
+          "category": "MECHANISTIC_CONSISTENCY",
+          "definition": "every step applies CropGrowthEngine.co2_response(indoor CO2) exactly once",
+          "name": "behaviour.co2_response_single_path",
+          "passed": true,
           "threshold": null,
           "threshold_kind": null,
-          "unit": "g_DM_m-2",
-          "value": 0.0
+          "unit": "",
+          "value": true
         }
       ],
       "observed_outputs": {
         "dormancy_release_time": null,
-        "final_biomass_fruit_g_m2": 88.21004809736486,
-        "final_biomass_g_m2": 517.0152800379897,
+        "final_biomass_fruit_g_m2": 90.78661083666049,
+        "final_biomass_g_m2": 510.8107201039869,
         "final_chilling_hours": 0.0,
-        "final_gdd": 1428.9207443275923,
-        "final_lai": 1.569625482457996,
+        "final_gdd": 1453.3638667233392,
+        "final_lai": 1.492288712534327,
         "final_maturity": 1.0,
         "final_simulation_time": "2026-07-09T00:00:00+00:00",
         "final_stage": "post_harvest_dormancy",
         "harvest_ready": true,
-        "min_soil_vwc": 0.345613176117862,
-        "peak_heat_damage": 0.0016653092326265845,
-        "peak_heat_stress": 0.13739840951545848,
-        "peak_indoor_co2_ppm": 820.0,
-        "peak_water_stress": 0.01754729552855183,
+        "min_soil_vwc": 0.3456064718899198,
+        "peak_heat_damage": 0.003489828430318642,
+        "peak_heat_stress": 0.2233060819355787,
+        "peak_indoor_co2_ppm": 553.3333333333333,
+        "peak_water_stress": 0.01757411244032081,
         "stage_entry_times": {
           "establishment": "2026-03-01T01:00:00+00:00",
-          "post_harvest_dormancy": "2026-05-21T21:00:00+00:00",
-          "vegetative_growth": "2026-03-23T19:00:00+00:00",
-          "yield_maturation": "2026-04-15T15:00:00+00:00"
+          "post_harvest_dormancy": "2026-05-20T15:00:00+00:00",
+          "vegetative_growth": "2026-03-23T13:00:00+00:00",
+          "yield_maturation": "2026-04-14T19:00:00+00:00"
         }
       },
       "plot_id": "plot_12010",
@@ -2607,18 +2629,11 @@
       "scenario": "GREENHOUSE_CO2",
       "scenario_id": "p529_tomato_greenhouse_greenhouse_co2",
       "start_time": "2026-03-01T00:00:00+00:00",
-      "status": "PASS_WITH_WARNINGS",
+      "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "76009f9e2e77649afd5fed66232acfa1e45fe31dfc8db9e062be6fe91a5427cf",
+      "trajectory_hash": "931d2f7ae625d1ac5b0e5ccc508b7a798e782264300ec575888a6060cf9ea982",
       "variety": "RAF",
-      "warnings": [
-        {
-          "code": "CO2_NOT_CONSUMED_BY_ORCHESTRATOR_GROWTH",
-          "message": "crop_growth_uses_co2: CropDigitalTwinOrchestrator growth does not consume indoor CO2; only CropGreenhouseFeedbackLoop applies a CO2 factor (observed 0.0)",
-          "severity": "WARNING",
-          "simulation_time": null
-        }
-      ]
+      "warnings": []
     },
     {
       "case_id": "p529_tomato_greenhouse_combined_stress",
@@ -2805,30 +2820,30 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": -74.9098147026059
+          "value": -73.93560249492967
         }
       ],
       "observed_outputs": {
         "dormancy_release_time": null,
-        "final_biomass_fruit_g_m2": 44.66745923645137,
-        "final_biomass_g_m2": 319.13678459338036,
+        "final_biomass_fruit_g_m2": 40.63610661443568,
+        "final_biomass_g_m2": 306.52482234160414,
         "final_chilling_hours": 0.0,
-        "final_gdd": 1468.7117504103935,
-        "final_lai": 0.9821082647284738,
+        "final_gdd": 1492.0847519542565,
+        "final_lai": 0.9267584923451798,
         "final_maturity": 1.0,
         "final_simulation_time": "2026-07-09T00:00:00+00:00",
         "final_stage": "post_harvest_dormancy",
         "harvest_ready": true,
-        "min_soil_vwc": 0.2576062528953402,
-        "peak_heat_damage": 0.7655690051264297,
+        "min_soil_vwc": 0.2581058057724871,
+        "peak_heat_damage": 0.7974149557008404,
         "peak_heat_stress": 1.0,
         "peak_indoor_co2_ppm": 420.0,
-        "peak_water_stress": 0.369574988418639,
+        "peak_water_stress": 0.36757677691005153,
         "stage_entry_times": {
           "establishment": "2026-03-01T01:00:00+00:00",
-          "post_harvest_dormancy": "2026-05-18T12:00:00+00:00",
-          "vegetative_growth": "2026-03-23T19:00:00+00:00",
-          "yield_maturation": "2026-04-11T22:00:00+00:00"
+          "post_harvest_dormancy": "2026-05-17T03:00:00+00:00",
+          "vegetative_growth": "2026-03-23T13:00:00+00:00",
+          "yield_maturation": "2026-04-11T14:00:00+00:00"
         }
       },
       "plot_id": "plot_12010",
@@ -2877,7 +2892,7 @@
       "start_time": "2026-03-01T00:00:00+00:00",
       "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "8f59da68b0ad7d9ed8d8126e253e3956dc7f702fb0c3d3a9bfb917a9389dd970",
+      "trajectory_hash": "6ebf500fa169914eb5da10d78c3f034ca7d89a4ec4778f1271995a6fcb199075",
       "variety": "RAF",
       "warnings": []
     },
@@ -3179,7 +3194,7 @@
       "start_time": "2026-01-10T00:00:00+00:00",
       "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "a5457f85e69d0acdd353f6a32da68b1221c2ea1770794b807538f81813fd09f0",
+      "trajectory_hash": "caf1561185f2da7bea8f10048ff8d0fa3c135f16b2ede34df8aaea9589b9eed9",
       "variety": "UNSPECIFIED",
       "warnings": []
     },
@@ -3402,7 +3417,7 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": 258.2973328881869
+          "value": 252.5100236236609
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
@@ -3412,16 +3427,16 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "m2_m-2",
-          "value": 1.10025949231215
+          "value": 1.0899591816952467
         }
       ],
       "observed_outputs": {
         "dormancy_release_time": null,
-        "final_biomass_fruit_g_m2": 71.96621072893932,
-        "final_biomass_g_m2": 268.2973328881869,
+        "final_biomass_fruit_g_m2": 69.80477884263235,
+        "final_biomass_g_m2": 262.5100236236609,
         "final_chilling_hours": 0.0,
-        "final_gdd": 1100.0059225418431,
-        "final_lai": 0.6399032768757552,
+        "final_gdd": 1116.1088198982418,
+        "final_lai": 0.62154253852801,
         "final_maturity": 1.0,
         "final_simulation_time": "2026-04-30T00:00:00+00:00",
         "final_stage": "post_harvest_dormancy",
@@ -3433,9 +3448,9 @@
         "peak_water_stress": 0.0,
         "stage_entry_times": {
           "establishment": "2026-01-10T01:00:00+00:00",
-          "post_harvest_dormancy": "2026-03-11T00:00:00+00:00",
-          "vegetative_growth": "2026-01-25T00:00:00+00:00",
-          "yield_maturation": "2026-02-14T01:00:00+00:00"
+          "post_harvest_dormancy": "2026-03-10T09:00:00+00:00",
+          "vegetative_growth": "2026-01-24T19:00:00+00:00",
+          "yield_maturation": "2026-02-13T15:00:00+00:00"
         }
       },
       "plot_id": "plot_20500",
@@ -3481,7 +3496,7 @@
       "start_time": "2026-01-10T00:00:00+00:00",
       "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "1891226d830dfa98de5435136e63d3c5977be0bf4b110733876da2fd42d10e34",
+      "trajectory_hash": "09f852b60be7eeb489507aa179a6db801c336e04bb40cb89ea0a3ae511db1644",
       "variety": "UNSPECIFIED",
       "warnings": []
     },
@@ -3783,7 +3798,7 @@
       "start_time": "2026-01-10T00:00:00+00:00",
       "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "0cd726d411fa60bfc1553e1a9158c4a4e3d29e20c3bbfc0d2b0f500ca25e0744",
+      "trajectory_hash": "f22dd3952a346f7f21ecab3c11d875f78210a5b17c457264fd2c31de4862d867",
       "variety": "UNSPECIFIED",
       "warnings": []
     },
@@ -3985,7 +4000,7 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "fraction",
-          "value": -0.5345908131206238
+          "value": -0.6187827146929435
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
@@ -4005,16 +4020,16 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": -130.08965112464057
+          "value": -133.22130397112122
         }
       ],
       "observed_outputs": {
         "dormancy_release_time": null,
-        "final_biomass_fruit_g_m2": 22.363392515393066,
-        "final_biomass_g_m2": 120.52222536683155,
+        "final_biomass_fruit_g_m2": 21.895992920888286,
+        "final_biomass_g_m2": 117.3905725203509,
         "final_chilling_hours": 0.0,
         "final_gdd": 1147.2329607277015,
-        "final_lai": 0.3165588569879927,
+        "final_lai": 0.30840622571466375,
         "final_maturity": 1.0,
         "final_simulation_time": "2026-04-30T00:00:00+00:00",
         "final_stage": "post_harvest_dormancy",
@@ -4074,7 +4089,7 @@
       "start_time": "2026-01-10T00:00:00+00:00",
       "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "7d06e6511b93b71f1398f3174160c0f56282bfc5421e3142f98e84c281cc578b",
+      "trajectory_hash": "63d1416887aaa2e1f9d20957fe7e41a93484f87b4eb6e4a6f78c43e7746cf16d",
       "variety": "UNSPECIFIED",
       "warnings": []
     },
@@ -4379,7 +4394,7 @@
       "start_time": "2026-03-01T00:00:00+00:00",
       "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "42cdfcb436341c7693c0cb8b24dfd4d9691b6bf43ec907ac2f56dd323a96f34b",
+      "trajectory_hash": "bfca11935852076bcb4ee37edf7027382193c2bf02c7dac3908ff662b5b56aa7",
       "variety": "Lamuyo",
       "warnings": []
     },
@@ -4602,7 +4617,7 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": 484.34176612990444
+          "value": 471.54425181234427
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
@@ -4612,30 +4627,30 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "m2_m-2",
-          "value": 2.318672685545943
+          "value": 2.3161629954534675
         }
       ],
       "observed_outputs": {
         "dormancy_release_time": null,
-        "final_biomass_fruit_g_m2": 73.36023438717329,
-        "final_biomass_g_m2": 494.34176612990444,
+        "final_biomass_fruit_g_m2": 74.98671981880779,
+        "final_biomass_g_m2": 481.54425181234427,
         "final_chilling_hours": 0.0,
-        "final_gdd": 1428.9207443275923,
-        "final_lai": 1.677993981120724,
+        "final_gdd": 1453.3638667233392,
+        "final_lai": 1.5858415121715685,
         "final_maturity": 1.0,
         "final_simulation_time": "2026-07-09T00:00:00+00:00",
         "final_stage": "post_harvest_dormancy",
         "harvest_ready": true,
-        "min_soil_vwc": 0.345613176117862,
-        "peak_heat_damage": 0.00906851191027973,
-        "peak_heat_stress": 0.41239840951545853,
+        "min_soil_vwc": 0.3456064718899198,
+        "peak_heat_damage": 0.011604403718948908,
+        "peak_heat_stress": 0.49830608193557874,
         "peak_indoor_co2_ppm": 420.0,
-        "peak_water_stress": 0.01754729552855183,
+        "peak_water_stress": 0.01757411244032081,
         "stage_entry_times": {
           "establishment": "2026-03-01T01:00:00+00:00",
-          "post_harvest_dormancy": "2026-05-26T15:00:00+00:00",
-          "vegetative_growth": "2026-03-23T19:00:00+00:00",
-          "yield_maturation": "2026-04-20T04:00:00+00:00"
+          "post_harvest_dormancy": "2026-05-25T00:00:00+00:00",
+          "vegetative_growth": "2026-03-23T13:00:00+00:00",
+          "yield_maturation": "2026-04-19T11:00:00+00:00"
         }
       },
       "plot_id": "plot_40811",
@@ -4684,7 +4699,7 @@
       "start_time": "2026-03-01T00:00:00+00:00",
       "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "242df4ce898074620d92a4f16da7cd56bb33f5c39e9b777fe579182692073f56",
+      "trajectory_hash": "790f73b738d8288dde703d90e35696eedda163dc2d641e852397ebaa4b635191",
       "variety": "Lamuyo",
       "warnings": []
     },
@@ -4989,7 +5004,7 @@
       "start_time": "2026-03-01T00:00:00+00:00",
       "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "159b146bbb6fe5aea37ea061fd887b443abfa27879eb17e45d02b2edc5a81e82",
+      "trajectory_hash": "2966a64df07817b90648189842948c99142b362c4681eee462c2ecc75d9c27d1",
       "variety": "Lamuyo",
       "warnings": []
     },
@@ -5191,7 +5206,7 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "fraction",
-          "value": -0.4031169551509355
+          "value": -0.6224481476955386
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
@@ -5211,25 +5226,25 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": -110.92753207644353
+          "value": -118.93371794635354
         }
       ],
       "observed_outputs": {
         "dormancy_release_time": null,
-        "final_biomass_fruit_g_m2": 16.25730010579109,
-        "final_biomass_g_m2": 177.3657128568458,
+        "final_biomass_fruit_g_m2": 16.173290284178798,
+        "final_biomass_g_m2": 169.35952698693578,
         "final_chilling_hours": 0.0,
         "final_gdd": 1462.7021423278434,
-        "final_lai": 0.654939331324416,
+        "final_lai": 0.6249361567358939,
         "final_maturity": 1.0,
         "final_simulation_time": "2026-07-09T00:00:00+00:00",
         "final_stage": "post_harvest_dormancy",
         "harvest_ready": true,
-        "min_soil_vwc": 0.34593320120842286,
+        "min_soil_vwc": 0.34618661080403806,
         "peak_heat_damage": 0.936753089263701,
         "peak_heat_stress": 1.0,
         "peak_indoor_co2_ppm": 420.0,
-        "peak_water_stress": 0.01626719516630848,
+        "peak_water_stress": 0.015253556783847655,
         "stage_entry_times": {
           "establishment": "2026-03-01T01:00:00+00:00",
           "post_harvest_dormancy": "2026-05-23T14:00:00+00:00",
@@ -5283,7 +5298,7 @@
       "start_time": "2026-03-01T00:00:00+00:00",
       "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "d18ddb471e73492305afb8c37452e3bf7011f36bc8d5f678a52e9ca1acc81ff2",
+      "trajectory_hash": "e96dcd1f76c62951c9c9b1a5cc8d1d5ff37979d2c1daf304a9e46e8f819fc852",
       "variety": "Lamuyo",
       "warnings": []
     },
@@ -5506,7 +5521,7 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": 489.99245947172653
+          "value": 494.4118990003161
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
@@ -5532,17 +5547,17 @@
           "category": "MECHANISTIC_CONSISTENCY",
           "definition": "biomass gain before dormancy release (the existing engines do not suppress growth during endodormancy)",
           "name": "behaviour.growth_during_dormancy",
-          "passed": false,
+          "passed": null,
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": 19.90974705681404
+          "value": 0.0
         }
       ],
       "observed_outputs": {
         "dormancy_release_time": "2026-01-17T16:00:00+00:00",
-        "final_biomass_fruit_g_m2": 34.051427782843774,
-        "final_biomass_g_m2": 534.9924594717265,
+        "final_biomass_fruit_g_m2": 67.00457748109582,
+        "final_biomass_g_m2": 539.4118990003161,
         "final_chilling_hours": 400.0,
         "final_gdd": 2158.8839368245945,
         "final_lai": 0.8302507372856514,
@@ -5606,18 +5621,11 @@
       "scenario": "NORMAL_SEASON",
       "scenario_id": "p529_grape_outdoor_normal_season",
       "start_time": "2026-01-01T00:00:00+00:00",
-      "status": "PASS_WITH_WARNINGS",
+      "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "bad3be22d08f8bea3703d52dd555992760f9352e16978d771bc93297c5b11d18",
+      "trajectory_hash": "5e04309ad805e4e9a732800e9dca4f3542f71a67c5893396c9013280f6b4d9e7",
       "variety": "Monastrell",
-      "warnings": [
-        {
-          "code": "DORMANCY_GROWTH_NOT_SUPPRESSED",
-          "message": "growth_during_dormancy: biomass gain before dormancy release (the existing engines do not suppress growth during endodormancy) (observed 19.90974705681404)",
-          "severity": "WARNING",
-          "simulation_time": null
-        }
-      ]
+      "warnings": []
     },
     {
       "case_id": "p529_grape_outdoor_water_stress_recovery",
@@ -5818,7 +5826,7 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": -5.72059661792855
+          "value": -25.310773906579584
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
@@ -5848,13 +5856,13 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": -5.72059661792855
+          "value": -28.04781828457351
         }
       ],
       "observed_outputs": {
         "dormancy_release_time": "2026-01-17T16:00:00+00:00",
-        "final_biomass_fruit_g_m2": 31.477159304775814,
-        "final_biomass_g_m2": 529.271862853798,
+        "final_biomass_fruit_g_m2": 54.38305925303765,
+        "final_biomass_g_m2": 511.3640807157426,
         "final_chilling_hours": 400.0,
         "final_gdd": 2158.8839368245945,
         "final_lai": 0.8302507372856514,
@@ -5920,7 +5928,7 @@
       "start_time": "2026-01-01T00:00:00+00:00",
       "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "3b5e78c485eae4b74fc9565d283e31466dc876fc89e49a19662e6c10d82608a7",
+      "trajectory_hash": "60cef26128e947191f26f4ad262a444cea4586083d484c176453fb4ea1490ce1",
       "variety": "Monastrell",
       "warnings": []
     },
@@ -6122,7 +6130,7 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "fraction",
-          "value": -0.09122913868389865
+          "value": -0.23704446808292873
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
@@ -6142,13 +6150,13 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": -16.499935907634836
+          "value": -50.51486865139361
         }
       ],
       "observed_outputs": {
         "dormancy_release_time": "2026-01-17T16:00:00+00:00",
-        "final_biomass_fruit_g_m2": 26.62645662440811,
-        "final_biomass_g_m2": 518.4925235640917,
+        "final_biomass_fruit_g_m2": 44.272886587968735,
+        "final_biomass_g_m2": 488.8970303489225,
         "final_chilling_hours": 400.0,
         "final_gdd": 2192.5659803061412,
         "final_lai": 0.7963539205667517,
@@ -6214,7 +6222,7 @@
       "start_time": "2026-01-01T00:00:00+00:00",
       "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "62970f9b8d22ca967f7adbb3063e2b94b58a51d32a67173808ec57bbf812e9db",
+      "trajectory_hash": "9ba346888bd4b14e71df56db8016679d052accfe15c67d69dfaba74b2bc0ac0e",
       "variety": "Monastrell",
       "warnings": []
     },
@@ -6437,7 +6445,7 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": 421.1634503963545
+          "value": 384.1318582949151
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
@@ -6447,7 +6455,7 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "m2_m-2",
-          "value": 3.1956518247779298
+          "value": 2.4249661882747846
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
@@ -6463,29 +6471,29 @@
           "category": "MECHANISTIC_CONSISTENCY",
           "definition": "biomass gain before dormancy release (the existing engines do not suppress growth during endodormancy)",
           "name": "behaviour.growth_during_dormancy",
-          "passed": false,
+          "passed": null,
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": 47.540749980260514
+          "value": 0.0
         }
       ],
       "observed_outputs": {
         "dormancy_release_time": "2026-01-26T00:00:00+00:00",
-        "final_biomass_fruit_g_m2": 26.65760861646793,
-        "final_biomass_g_m2": 466.1634503963545,
+        "final_biomass_fruit_g_m2": 73.9996880940254,
+        "final_biomass_g_m2": 429.1318582949151,
         "final_chilling_hours": 600.0,
         "final_gdd": 2226.3839368245945,
-        "final_lai": 0.8010148418887374,
+        "final_lai": 0.607836527379342,
         "final_maturity": 1.0,
         "final_simulation_time": "2026-06-20T00:00:00+00:00",
         "final_stage": "post_harvest_dormancy",
         "harvest_ready": true,
-        "min_soil_vwc": 0.3429393214774751,
+        "min_soil_vwc": 0.3431689360132133,
         "peak_heat_damage": 0.0016653092326265845,
         "peak_heat_stress": 0.13726483055438116,
         "peak_indoor_co2_ppm": 420.0,
-        "peak_water_stress": 0.028242714090099597,
+        "peak_water_stress": 0.027324255947146714,
         "stage_entry_times": {
           "establishment": "2026-01-01T01:00:00+00:00",
           "post_harvest_dormancy": "2026-03-31T16:00:00+00:00",
@@ -6534,18 +6542,11 @@
       "scenario": "NORMAL_SEASON",
       "scenario_id": "p529_peach_outdoor_normal_season",
       "start_time": "2026-01-01T00:00:00+00:00",
-      "status": "PASS_WITH_WARNINGS",
+      "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "0fd78126a4b9119ddaf039696fc2e2469a8dd82dc5b408842e72b04a4ee84703",
+      "trajectory_hash": "05c26afeea4dd4b5a99214c65411f0910c1d85586e025532979fd1af35463190",
       "variety": "UNSPECIFIED",
-      "warnings": [
-        {
-          "code": "DORMANCY_GROWTH_NOT_SUPPRESSED",
-          "message": "growth_during_dormancy: biomass gain before dormancy release (the existing engines do not suppress growth during endodormancy) (observed 47.540749980260514)",
-          "severity": "WARNING",
-          "simulation_time": null
-        }
-      ]
+      "warnings": []
     },
     {
       "case_id": "p529_peach_outdoor_water_stress_recovery",
@@ -6736,7 +6737,7 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "fraction",
-          "value": 0.7768762070140625
+          "value": 0.7295471198208308
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
@@ -6746,7 +6747,7 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": -3.472240257883527
+          "value": -29.627505954880746
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
@@ -6766,7 +6767,7 @@
           "threshold": 0.5,
           "threshold_kind": "ENGINEERING_TEST_THRESHOLD",
           "unit": "fraction",
-          "value": 0.7938570784662177
+          "value": 0.7434331937549556
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
@@ -6776,25 +6777,25 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": -3.472240257883527
+          "value": -40.74989853185525
         }
       ],
       "observed_outputs": {
         "dormancy_release_time": "2026-01-26T00:00:00+00:00",
-        "final_biomass_fruit_g_m2": 25.095100500420372,
-        "final_biomass_g_m2": 462.691210138471,
+        "final_biomass_fruit_g_m2": 55.662233754690526,
+        "final_biomass_g_m2": 388.38195976305985,
         "final_chilling_hours": 600.0,
         "final_gdd": 2226.3839368245945,
-        "final_lai": 0.8010148418887374,
+        "final_lai": 0.5751952538498655,
         "final_maturity": 1.0,
         "final_simulation_time": "2026-06-20T00:00:00+00:00",
         "final_stage": "post_harvest_dormancy",
         "harvest_ready": true,
-        "min_soil_vwc": 0.14631055263207776,
+        "min_soil_vwc": 0.15890066665655717,
         "peak_heat_damage": 0.0016653092326265845,
         "peak_heat_stress": 0.13726483055438116,
         "peak_indoor_co2_ppm": 420.0,
-        "peak_water_stress": 0.814757789471689,
+        "peak_water_stress": 0.7643973333737714,
         "stage_entry_times": {
           "establishment": "2026-01-01T01:00:00+00:00",
           "post_harvest_dormancy": "2026-03-31T16:00:00+00:00",
@@ -6845,7 +6846,7 @@
       "start_time": "2026-01-01T00:00:00+00:00",
       "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "46db8073d7878e45fe9f61f6e456e2c4b40cf5cb47b5571c77ab2a6659270b79",
+      "trajectory_hash": "a995b344d3d6c78330e1d51bab603b15b30fb2dc1944c822177eecda70183d8b",
       "variety": "UNSPECIFIED",
       "warnings": []
     },
@@ -7047,7 +7048,7 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "fraction",
-          "value": -0.09616839093480223
+          "value": -0.4041129395959343
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
@@ -7067,25 +7068,25 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": -14.261171879195956
+          "value": -86.70191510982824
         }
       ],
       "observed_outputs": {
         "dormancy_release_time": "2026-01-26T00:00:00+00:00",
-        "final_biomass_fruit_g_m2": 20.24008127082977,
-        "final_biomass_g_m2": 451.90227851715855,
+        "final_biomass_fruit_g_m2": 34.98382629460273,
+        "final_biomass_g_m2": 342.42994318508687,
         "final_chilling_hours": 600.0,
         "final_gdd": 2260.065980306146,
-        "final_lai": 0.7689524387517763,
+        "final_lai": 0.5168368674761163,
         "final_maturity": 1.0,
         "final_simulation_time": "2026-06-20T00:00:00+00:00",
         "final_stage": "post_harvest_dormancy",
         "harvest_ready": true,
-        "min_soil_vwc": 0.335200976987448,
+        "min_soil_vwc": 0.3414901606351938,
         "peak_heat_damage": 0.8024780545242501,
         "peak_heat_stress": 1.0,
         "peak_indoor_co2_ppm": 420.0,
-        "peak_water_stress": 0.05919609205020793,
+        "peak_water_stress": 0.03403935745922482,
         "stage_entry_times": {
           "establishment": "2026-01-01T01:00:00+00:00",
           "post_harvest_dormancy": "2026-03-29T15:00:00+00:00",
@@ -7136,7 +7137,7 @@
       "start_time": "2026-01-01T00:00:00+00:00",
       "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "46518557b417cd1d9a3ee220a0d51ed7fc7e27dd282d4410a94c83af847aae13",
+      "trajectory_hash": "8257a24939f66ebe9b3103c88c73a5a3aee6c6b2805e929f068ad71fbade6620",
       "variety": "UNSPECIFIED",
       "warnings": []
     },
@@ -7359,7 +7360,7 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": 438.1874679652721
+          "value": 407.47127897056396
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
@@ -7369,7 +7370,7 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "m2_m-2",
-          "value": 3.1815047438445845
+          "value": 2.8257816642733986
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
@@ -7385,20 +7386,20 @@
           "category": "MECHANISTIC_CONSISTENCY",
           "definition": "biomass gain before dormancy release (the existing engines do not suppress growth during endodormancy)",
           "name": "behaviour.growth_during_dormancy",
-          "passed": false,
+          "passed": null,
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": 40.81284624382167
+          "value": 0.0
         }
       ],
       "observed_outputs": {
         "dormancy_release_time": "2026-01-21T20:00:00+00:00",
-        "final_biomass_fruit_g_m2": 19.049855704843107,
-        "final_biomass_g_m2": 483.1874679652721,
+        "final_biomass_fruit_g_m2": 57.564222520758385,
+        "final_biomass_g_m2": 452.47127897056396,
         "final_chilling_hours": 500.0,
         "final_gdd": 2072.1936365476226,
-        "final_lai": 0.8151619228220824,
+        "final_lai": 0.7240189156974023,
         "final_maturity": 1.0,
         "final_simulation_time": "2026-06-20T00:00:00+00:00",
         "final_stage": "post_harvest_dormancy",
@@ -7459,18 +7460,11 @@
       "scenario": "NORMAL_SEASON",
       "scenario_id": "p529_plum_outdoor_normal_season",
       "start_time": "2026-01-01T00:00:00+00:00",
-      "status": "PASS_WITH_WARNINGS",
+      "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "b7ef4a09635c57c7ae53c3466393538b91a6bdd40ff2faeeb8de91950de95108",
+      "trajectory_hash": "162a31b1ba6b87ada9593968de3c30cce40da53560e65428030b901386d64a2a",
       "variety": "Suplum 26",
-      "warnings": [
-        {
-          "code": "DORMANCY_GROWTH_NOT_SUPPRESSED",
-          "message": "growth_during_dormancy: biomass gain before dormancy release (the existing engines do not suppress growth during endodormancy) (observed 40.81284624382167)",
-          "severity": "WARNING",
-          "simulation_time": null
-        }
-      ]
+      "warnings": []
     },
     {
       "case_id": "p529_plum_outdoor_water_stress_recovery",
@@ -7671,7 +7665,7 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": -2.583195665879316
+          "value": -26.52761452265304
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
@@ -7701,16 +7695,16 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": -2.583195665879316
+          "value": -34.03101114635206
         }
       ],
       "observed_outputs": {
         "dormancy_release_time": "2026-01-21T20:00:00+00:00",
-        "final_biomass_fruit_g_m2": 17.887417655197325,
-        "final_biomass_g_m2": 480.6042722993928,
+        "final_biomass_fruit_g_m2": 42.25026750490006,
+        "final_biomass_g_m2": 418.4402678242119,
         "final_chilling_hours": 500.0,
         "final_gdd": 2072.1936365476226,
-        "final_lai": 0.8151619228220824,
+        "final_lai": 0.6962781312157591,
         "final_maturity": 1.0,
         "final_simulation_time": "2026-06-20T00:00:00+00:00",
         "final_stage": "post_harvest_dormancy",
@@ -7773,7 +7767,7 @@
       "start_time": "2026-01-01T00:00:00+00:00",
       "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "a803b8376dc55a6bf1e347d2df4f8857076952b2792c13e1d393bdecf12a79f4",
+      "trajectory_hash": "8173d42e0d0a7fc83455efefbde834ed0a160391af51f0f31017f52b30353286",
       "variety": "Suplum 26",
       "warnings": []
     },
@@ -7975,7 +7969,7 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "fraction",
-          "value": -0.08364457609123697
+          "value": -0.3633477507749832
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
@@ -7995,16 +7989,16 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": -11.66847059454119
+          "value": -72.83191508517473
         }
       ],
       "observed_outputs": {
         "dormancy_release_time": "2026-01-21T20:00:00+00:00",
-        "final_biomass_fruit_g_m2": 13.799043937299494,
-        "final_biomass_g_m2": 471.5189973707309,
+        "final_biomass_fruit_g_m2": 24.78986073242965,
+        "final_biomass_g_m2": 379.63936388538923,
         "final_chilling_hours": 500.0,
         "final_gdd": 2095.6421908270772,
-        "final_lai": 0.7884267797179733,
+        "final_lai": 0.6428503885562367,
         "final_maturity": 1.0,
         "final_simulation_time": "2026-06-20T00:00:00+00:00",
         "final_stage": "post_harvest_dormancy",
@@ -8067,7 +8061,7 @@
       "start_time": "2026-01-01T00:00:00+00:00",
       "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "0f406ffbfa0be3f0c981f7a957a997461920fc1d5979355422eda167383066ba",
+      "trajectory_hash": "8a7c070e35fa3c939d9209f2c04f5d9595327a894f72a769fda0aa8e1fa2ef56",
       "variety": "Suplum 26",
       "warnings": []
     },
@@ -8290,7 +8284,7 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": 403.33533716442395
+          "value": 315.83225241989766
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
@@ -8300,7 +8294,7 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "m2_m-2",
-          "value": 3.526413556233181
+          "value": 2.04600741855578
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
@@ -8316,29 +8310,29 @@
           "category": "MECHANISTIC_CONSISTENCY",
           "definition": "biomass gain before dormancy release (the existing engines do not suppress growth during endodormancy)",
           "name": "behaviour.growth_during_dormancy",
-          "passed": false,
+          "passed": null,
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": 71.44621743354644
+          "value": 0.0
         }
       ],
       "observed_outputs": {
         "dormancy_release_time": "2026-01-26T00:00:00+00:00",
-        "final_biomass_fruit_g_m2": 17.470390792383803,
-        "final_biomass_g_m2": 448.33533716442395,
+        "final_biomass_fruit_g_m2": 60.66984616785654,
+        "final_biomass_g_m2": 360.83225241989766,
         "final_chilling_hours": 600.0,
         "final_gdd": 2293.883936824583,
-        "final_lai": 0.847961497139627,
+        "final_lai": 0.4919829980606569,
         "final_maturity": 1.0,
         "final_simulation_time": "2026-06-20T00:00:00+00:00",
         "final_stage": "post_harvest_dormancy",
         "harvest_ready": true,
-        "min_soil_vwc": 0.3429393214774751,
+        "min_soil_vwc": 0.3445501381280922,
         "peak_heat_damage": 0.028579537336408327,
         "peak_heat_stress": 0.6872648305543811,
         "peak_indoor_co2_ppm": 420.0,
-        "peak_water_stress": 0.028242714090099597,
+        "peak_water_stress": 0.021799447487631074,
         "stage_entry_times": {
           "establishment": "2026-01-01T01:00:00+00:00",
           "post_harvest_dormancy": "2026-03-30T00:00:00+00:00",
@@ -8387,18 +8381,11 @@
       "scenario": "NORMAL_SEASON",
       "scenario_id": "p529_apple_outdoor_normal_season",
       "start_time": "2026-01-01T00:00:00+00:00",
-      "status": "PASS_WITH_WARNINGS",
+      "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "cf9c98478e899956a4b93189c64da04002ec4af7b4f9ddc8afb7cc26d8d279fd",
+      "trajectory_hash": "b0108b8568500a83f81458515d1a5603ea8d6f343cf1da65838aac434075fa63",
       "variety": "UNSPECIFIED",
-      "warnings": [
-        {
-          "code": "DORMANCY_GROWTH_NOT_SUPPRESSED",
-          "message": "growth_during_dormancy: biomass gain before dormancy release (the existing engines do not suppress growth during endodormancy) (observed 71.44621743354644)",
-          "severity": "WARNING",
-          "simulation_time": null
-        }
-      ]
+      "warnings": []
     },
     {
       "case_id": "p529_apple_outdoor_water_stress_recovery",
@@ -8589,7 +8576,7 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "fraction",
-          "value": 0.7768762070140625
+          "value": 0.6522626774929912
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
@@ -8599,7 +8586,7 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": -0.9869825911050043
+          "value": -21.78439129476658
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
@@ -8619,7 +8606,7 @@
           "threshold": 0.5,
           "threshold_kind": "ENGINEERING_TEST_THRESHOLD",
           "unit": "fraction",
-          "value": 0.7938570784662177
+          "value": 0.6552039946515766
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
@@ -8629,25 +8616,25 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": -0.9869825911050043
+          "value": -28.0722758267338
         }
       ],
       "observed_outputs": {
         "dormancy_release_time": "2026-01-26T00:00:00+00:00",
-        "final_biomass_fruit_g_m2": 17.026248626386515,
-        "final_biomass_g_m2": 447.34835457331894,
+        "final_biomass_fruit_g_m2": 48.037322045826265,
+        "final_biomass_g_m2": 332.75997659316386,
         "final_chilling_hours": 600.0,
         "final_gdd": 2293.883936824583,
-        "final_lai": 0.8471968386095513,
+        "final_lai": 0.47023417962868413,
         "final_maturity": 1.0,
         "final_simulation_time": "2026-06-20T00:00:00+00:00",
         "final_stage": "post_harvest_dormancy",
         "harvest_ready": true,
-        "min_soil_vwc": 0.14631055263207776,
+        "min_soil_vwc": 0.18090813729535174,
         "peak_heat_damage": 0.028579537336408327,
         "peak_heat_stress": 0.6872648305543811,
         "peak_indoor_co2_ppm": 420.0,
-        "peak_water_stress": 0.814757789471689,
+        "peak_water_stress": 0.6763674508185931,
         "stage_entry_times": {
           "establishment": "2026-01-01T01:00:00+00:00",
           "post_harvest_dormancy": "2026-03-30T00:00:00+00:00",
@@ -8698,7 +8685,7 @@
       "start_time": "2026-01-01T00:00:00+00:00",
       "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "316d04c259d71bafce0bd33b4a3a3f666bd1f5b6847bdbb49949629afd751909",
+      "trajectory_hash": "ff146f6a5874147236ae8544dcbb37322da027be925e5d3253a423f96fab321e",
       "variety": "UNSPECIFIED",
       "warnings": []
     },
@@ -8900,7 +8887,7 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "fraction",
-          "value": -0.0591850926559154
+          "value": -0.4417604225945097
         },
         {
           "category": "MECHANISTIC_CONSISTENCY",
@@ -8920,25 +8907,25 @@
           "threshold": null,
           "threshold_kind": null,
           "unit": "g_DM_m-2",
-          "value": -6.537405959753357
+          "value": -82.92766365444845
         }
       ],
       "observed_outputs": {
         "dormancy_release_time": "2026-01-26T00:00:00+00:00",
-        "final_biomass_fruit_g_m2": 14.528558110494817,
-        "final_biomass_g_m2": 441.7979312046706,
+        "final_biomass_fruit_g_m2": 23.352397523354686,
+        "final_biomass_g_m2": 277.9045887654492,
         "final_chilling_hours": 600.0,
         "final_gdd": 2327.565980306137,
-        "final_lai": 0.8098327266423746,
+        "final_lai": 0.4109567195868802,
         "final_maturity": 1.0,
         "final_simulation_time": "2026-06-20T00:00:00+00:00",
         "final_stage": "post_harvest_dormancy",
         "harvest_ready": true,
-        "min_soil_vwc": 0.335200976987448,
+        "min_soil_vwc": 0.34300987851540055,
         "peak_heat_damage": 1.0,
         "peak_heat_stress": 1.0,
         "peak_indoor_co2_ppm": 420.0,
-        "peak_water_stress": 0.05919609205020793,
+        "peak_water_stress": 0.027960485938397728,
         "stage_entry_times": {
           "establishment": "2026-01-01T01:00:00+00:00",
           "post_harvest_dormancy": "2026-03-28T00:00:00+00:00",
@@ -8989,7 +8976,7 @@
       "start_time": "2026-01-01T00:00:00+00:00",
       "status": "PASS",
       "timestep_seconds": 3600,
-      "trajectory_hash": "b99d4ca56137cfe9dc183447b12ca7b3755ac6116b663301c75271707aa9ff56",
+      "trajectory_hash": "50fa941275ba0073f9948d3e274de666dafb2862808ecc60b46c64860356af62",
       "variety": "UNSPECIFIED",
       "warnings": []
     }
@@ -11931,9 +11918,9 @@
     ],
     "seed": 529,
     "timestep_seconds": 3600,
-    "version": "5.29.1"
+    "version": "5.29.2"
   },
-  "configuration_hash": "99189c9e2a04f596a4265a47bb123bcb2bf4b85d3007bb34f99156898d8abf1a",
+  "configuration_hash": "691d75ec62768f6ec1598f163257a57d9e5f644d0813c09ab8f33c84136a8565",
   "coverage_matrix": [
     {
       "crop": "tomato",
@@ -12022,87 +12009,46 @@
   },
   "findings": [
     {
-      "action": "documented; not changed in Phase 5.29 (no parameter or equation tuning)",
-      "cases": [
-        "p529_tomato_greenhouse_greenhouse_co2"
-      ],
-      "code": "CO2_NOT_CONSUMED_BY_ORCHESTRATOR_GROWTH",
-      "description": "CropDigitalTwinOrchestrator raises indoor CO2 under enrichment but its growth limitation product has no CO2 factor; only CropGreenhouseFeedbackLoop applies co2_ppm / 420 (capped at 1).",
-      "severity": "WARNING",
-      "type": "mechanistic"
-    },
-    {
-      "action": "documented; not changed in Phase 5.29 (no parameter or equation tuning)",
-      "cases": [
-        "p529_grape_outdoor_normal_season",
-        "p529_peach_outdoor_normal_season",
-        "p529_plum_outdoor_normal_season",
-        "p529_apple_outdoor_normal_season"
-      ],
-      "code": "DORMANCY_GROWTH_NOT_SUPPRESSED",
-      "description": "Perennial biomass increases before dormancy release: dormancy only gates GDD accumulation in PhenologyEngine; growth engines do not suppress growth during endodormancy.",
-      "severity": "WARNING",
-      "type": "mechanistic"
-    },
-    {
-      "action": "root cause in SimplifiedGreenhouseModel/CropPhysicalExchangeModel; equation change requires an explicit scientific decision (not performed in Phase 5.29)",
-      "cases": [
-        "low_infiltration_0_3ach_co2"
-      ],
-      "code": "PLAUSIBILITY_REVIEW",
-      "description": "indoor air up to 8.8 C below outdoor without a cooling actuator (threshold 5 C, ENGINEERING_TEST_THRESHOLD)",
-      "severity": "WARNING",
-      "type": "greenhouse_feedback"
-    },
-    {
-      "action": "root cause in SimplifiedGreenhouseModel/CropPhysicalExchangeModel; equation change requires an explicit scientific decision (not performed in Phase 5.29)",
-      "cases": [
-        "closed_0ach"
-      ],
-      "code": "INVARIANT_VIOLATION",
-      "description": "latent heat flux > 0 while indoor VPD = 0 (saturated air) in 63 steps: CropPhysicalExchangeModel transpiration ignores indoor saturation",
-      "severity": "FAILURE",
-      "type": "greenhouse_feedback"
-    },
-    {
-      "action": "root cause in SimplifiedGreenhouseModel/CropPhysicalExchangeModel; equation change requires an explicit scientific decision (not performed in Phase 5.29)",
+      "action": "open; requires physical analysis before qualification",
       "cases": [
         "closed_0ach"
       ],
       "code": "PLAUSIBILITY_REVIEW",
-      "description": "indoor air up to 32.7 C below outdoor without a cooling actuator (threshold 5 C, ENGINEERING_TEST_THRESHOLD)",
+      "description": "indoor air up to 6.4 C below outdoor without a cooling actuator (threshold 5 C, ENGINEERING_TEST_THRESHOLD); consistent with thermal inertia (tau = C/G = 8.7 h lags the outdoor diurnal cycle) plus canopy latent cooling, not an energy-conservation violation",
       "severity": "WARNING",
       "type": "greenhouse_feedback"
     },
     {
-      "action": "documented; orchestrator change requires an explicit scientific decision",
-      "cases": [
-        "all greenhouse orchestrator cases"
-      ],
-      "code": "GREENHOUSE_TEMPERATURE_NOT_USED_BY_CROP",
-      "description": "CropDigitalTwinOrchestrator passes outdoor air temperature (with indoor radiation) to phenology, water balance and climate stress; indoor air temperature from the greenhouse model is not used by the crop.",
-      "severity": "WARNING",
-      "type": "mechanistic"
-    },
-    {
-      "action": "documented; not changed in Phase 5.29",
-      "cases": [
-        "crop_greenhouse_feedback"
-      ],
-      "code": "GREENHOUSE_CONFIGURATION_VENTILATION_UNUSED",
-      "description": "GreenhouseConfiguration.ventilation_ach (base infiltration) is not read by SimplifiedGreenhouseModel; only the actuator ventilation drives air exchange, so a closed greenhouse has zero infiltration and heat loss is referenced to a fixed 20 C.",
-      "severity": "WARNING",
-      "type": "mechanistic"
-    },
-    {
-      "action": "documented",
-      "cases": [
-        "all greenhouse orchestrator cases"
-      ],
-      "code": "ORCHESTRATOR_GREENHOUSE_STEP_MEMORYLESS",
-      "description": "GreenhouseMicroclimateEngine.advance resets its prior state when no prior is given, so the orchestrator greenhouse step carries no thermal/CO2 memory between steps; memory is exercised through SimplifiedGreenhouseModel with an explicit prior.",
+      "action": "documented limitation",
+      "cases": [],
+      "code": "CO2_RESPONSE_CAPPED_AT_REFERENCE",
+      "description": "CropGrowthEngine.co2_response = min(1, CO2 / 420): depletion limits growth, enrichment above 420 ppm gives no benefit (existing engineering response, not extended).",
       "severity": "INFO",
-      "type": "mechanistic"
+      "type": "limitation"
+    },
+    {
+      "action": "documented limitation",
+      "cases": [],
+      "code": "ORCHESTRATOR_EXCHANGE_NOT_ITERATED",
+      "description": "CropDigitalTwinOrchestrator feeds only LAI back to the greenhouse; transpiration/CO2-uptake coupling is iterated only in CropGreenhouseFeedbackLoop.",
+      "severity": "INFO",
+      "type": "limitation"
+    },
+    {
+      "action": "documented limitation",
+      "cases": [],
+      "code": "PERENNIAL_NEXT_CAMPAIGN_NOT_SUPPORTED",
+      "description": "No transition from post_harvest_dormancy back to dormancy/establishment exists in PhenologyEngine.",
+      "severity": "INFO",
+      "type": "limitation"
+    },
+    {
+      "action": "documented limitation",
+      "cases": [],
+      "code": "CONDENSATION_LATENT_HEAT_NEGLECTED",
+      "description": "Vapour above saturation condenses without releasing latent heat to the air; no longwave radiative exchange is modelled.",
+      "severity": "INFO",
+      "type": "limitation"
     }
   ],
   "greenhouse": {
@@ -12117,33 +12063,33 @@
     },
     "crop_greenhouse_feedback": {
       "backend": "SimplifiedGreenhouseModel (PRIMARY/REQUIRED)",
-      "co2_enrichment_peak_ppm": 918.7166974129464,
+      "co2_enrichment_peak_ppm": 586.5853098806115,
       "greenhouse_state_memory": {
         "co2_state_carried_between_steps": true,
         "co2_traces_ppm": {
           "0.3": [
-            620.0,
-            600.0,
-            582.0,
-            565.8,
-            551.2199999999999,
-            538.098
+            592.7878528788547,
+            548.0043897251276,
+            514.8279842356181,
+            490.2502985522646,
+            472.04270117584815,
+            458.55418128456216
           ],
           "1.5": [
-            620.0,
-            520.0,
-            470.0,
-            445.0,
-            432.5,
-            426.25
+            523.5826453135427,
+            443.11241223740876,
+            425.1570762439495,
+            421.1506992482101,
+            420.2567557075358,
+            420.0572899421415
           ],
           "3.0": [
-            620.0,
-            420.0,
-            420.0,
-            420.0,
-            420.0,
-            420.0
+            483.3475287754757,
+            423.1538877460798,
+            420.15702282483863,
+            420.00781770611553,
+            420.00038922066886,
+            420.000019378156
           ]
         },
         "definition": "with an explicit prior state, enriched CO2 persists after supply stops and relaxes toward outdoor CO2 faster at higher ventilation (SimplifiedGreenhouseModel exchange term)",
@@ -12154,76 +12100,71 @@
         "closed_0ach": {
           "all_finite": true,
           "co2_max_ppm": 420.0,
-          "co2_min_ppm": 378.7171899102287,
+          "co2_min_ppm": 355.22701606225166,
           "configured_max_iterations": 8,
-          "converged_steps": 168,
-          "issues": [
-            {
-              "code": "INVARIANT_VIOLATION",
-              "message": "latent heat flux > 0 while indoor VPD = 0 (saturated air) in 63 steps: CropPhysicalExchangeModel transpiration ignores indoor saturation",
-              "severity": "FAILURE"
-            },
-            {
-              "code": "PLAUSIBILITY_REVIEW",
-              "message": "indoor air up to 32.7 C below outdoor without a cooling actuator (threshold 5 C, ENGINEERING_TEST_THRESHOLD)",
-              "severity": "WARNING"
-            }
-          ],
-          "latent_flux_at_saturation_steps": 63,
-          "max_final_error": 0.9973349865787462,
-          "max_indoor_minus_outdoor_c": 3.975801060457437,
-          "max_iterations": 6,
-          "mean_iterations": 1.9642857142857142,
-          "min_indoor_minus_outdoor_c": -32.68709121696441,
-          "relaxation_alpha": 0.4,
-          "status": "INVARIANT_VIOLATION",
-          "steps": 168,
-          "temperature_trend_reversals_over_1c": 0
-        },
-        "low_infiltration_0_3ach_co2": {
-          "all_finite": true,
-          "co2_max_ppm": 918.7166974129464,
-          "co2_min_ppm": 412.41869696191054,
-          "configured_max_iterations": 8,
+          "configured_ventilation_ach": 0.0,
           "converged_steps": 168,
           "issues": [
             {
               "code": "PLAUSIBILITY_REVIEW",
-              "message": "indoor air up to 8.8 C below outdoor without a cooling actuator (threshold 5 C, ENGINEERING_TEST_THRESHOLD)",
+              "message": "indoor air up to 6.4 C below outdoor without a cooling actuator (threshold 5 C, ENGINEERING_TEST_THRESHOLD); consistent with thermal inertia (tau = C/G = 8.7 h lags the outdoor diurnal cycle) plus canopy latent cooling, not an energy-conservation violation",
               "severity": "WARNING"
             }
           ],
           "latent_flux_at_saturation_steps": 0,
-          "max_final_error": 0.995674436500309,
-          "max_indoor_minus_outdoor_c": 6.0209097258561854,
-          "max_iterations": 7,
-          "mean_iterations": 4.785714285714286,
-          "min_indoor_minus_outdoor_c": -8.793974091358198,
+          "max_final_error": 0.9993714483398364,
+          "max_indoor_minus_outdoor_c": 8.778993710456135,
+          "max_iterations": 5,
+          "mean_iterations": 2.3095238095238093,
+          "min_indoor_minus_outdoor_c": -6.356433096241773,
           "relaxation_alpha": 0.4,
           "status": "PASS_WITH_WARNINGS",
           "steps": 168,
-          "temperature_trend_reversals_over_1c": 0
+          "temperature_trend_reversals_over_1c": 0,
+          "thermal_time_constant_h": 8.680555555555555
+        },
+        "low_infiltration_0_3ach_co2": {
+          "all_finite": true,
+          "co2_max_ppm": 586.5853098806115,
+          "co2_min_ppm": 414.9886104201696,
+          "configured_max_iterations": 8,
+          "configured_ventilation_ach": 0.3,
+          "converged_steps": 168,
+          "issues": [],
+          "latent_flux_at_saturation_steps": 0,
+          "max_final_error": 0.9983095832088651,
+          "max_indoor_minus_outdoor_c": 5.743930875207589,
+          "max_iterations": 5,
+          "mean_iterations": 2.2738095238095237,
+          "min_indoor_minus_outdoor_c": -4.4732313415959375,
+          "relaxation_alpha": 0.4,
+          "status": "PASS",
+          "steps": 168,
+          "temperature_trend_reversals_over_1c": 0,
+          "thermal_time_constant_h": 3.8303609732181156
         },
         "ventilated_3ach": {
           "all_finite": true,
           "co2_max_ppm": 420.0,
-          "co2_min_ppm": 418.0019324322872,
+          "co2_min_ppm": 419.4162197997207,
           "configured_max_iterations": 8,
+          "configured_ventilation_ach": 3.0,
           "converged_steps": 168,
           "issues": [],
           "latent_flux_at_saturation_steps": 0,
-          "max_final_error": 0.9959989001440306,
-          "max_indoor_minus_outdoor_c": 0.01694801294156889,
-          "max_iterations": 7,
-          "mean_iterations": 3.130952380952381,
-          "min_indoor_minus_outdoor_c": -0.5411160028136806,
+          "max_final_error": 0.9989371499710842,
+          "max_indoor_minus_outdoor_c": 0.6894806591856728,
+          "max_iterations": 4,
+          "mean_iterations": 1.6130952380952381,
+          "min_indoor_minus_outdoor_c": -0.32458224955031056,
           "relaxation_alpha": 0.4,
           "status": "PASS",
           "steps": 168,
-          "temperature_trend_reversals_over_1c": 0
+          "temperature_trend_reversals_over_1c": 0,
+          "thermal_time_constant_h": 0.6353563078174239
         }
       },
-      "status": "INVARIANT_VIOLATION"
+      "status": "PASS_WITH_WARNINGS"
     },
     "energyplus": {
       "adapter_contract_check": {
@@ -12277,13 +12218,13 @@
     "real_agronomic_data_used": false,
     "source_type": "SYNTHETIC",
     "validation_kind": "SYNTHETIC_INTEGRATED_VALIDATION",
-    "version": "5.29.1"
+    "version": "5.29.2"
   },
   "multi_cycle": {
     "cycle_histories_disjoint": true,
     "lettuce_cycles": {
       "lettuce_001": {
-        "final_biomass_g_m2": 11.859940449483148,
+        "final_biomass_g_m2": 11.812476438617473,
         "first_step": "2026-01-10T00:00:00+00:00",
         "last_step": "2026-02-20T23:00:00+00:00",
         "not_reactivated": true,
@@ -12295,7 +12236,7 @@
         "steps": 1008
       },
       "lettuce_002": {
-        "final_biomass_g_m2": 11.985810818006698,
+        "final_biomass_g_m2": 11.923065283726174,
         "first_step": "2026-03-01T00:00:00+00:00",
         "last_step": "2026-04-10T23:00:00+00:00",
         "not_reactivated": true,
@@ -12344,7 +12285,7 @@
     "final_biomass_g_m2": {
       "grape_30412_2026": 281.5426555134118,
       "pepper_40811_2026": 105.58430760192317,
-      "tomato_12010_2026": 181.26747680823885
+      "tomato_12010_2026": 178.26882505209755
     },
     "one_state_per_plot_per_snapshot": true,
     "perturbation_isolated": true,
@@ -12362,12 +12303,12 @@
   "mutation": {
     "after": {
       "configuration_files": "0b5c00d7128bc786c98ffdb69b6f554706bee6136a8320b192b63fb5069b6936",
-      "parameter_registry": "42c28000a7050b8e7a0e97b4ac30547b166c126a17be1e5605917b9dc2cc5f60",
+      "parameter_registry": "f7f81a2e6b5a84a0f1f4002eb6bce1f64cd22408d5e3942b07cc2721204f22f0",
       "parameter_set_tomato": "ea8ad3805c0fc4a6aedca62554c4e6d0949d1fbb6b62c0537f63377b60bcc2c8"
     },
     "before": {
       "configuration_files": "0b5c00d7128bc786c98ffdb69b6f554706bee6136a8320b192b63fb5069b6936",
-      "parameter_registry": "42c28000a7050b8e7a0e97b4ac30547b166c126a17be1e5605917b9dc2cc5f60",
+      "parameter_registry": "f7f81a2e6b5a84a0f1f4002eb6bce1f64cd22408d5e3942b07cc2721204f22f0",
       "parameter_set_tomato": "ea8ad3805c0fc4a6aedca62554c4e6d0949d1fbb6b62c0537f63377b60bcc2c8"
     },
     "calibration_performed": false,
@@ -12390,7 +12331,7 @@
     "status": "PASS",
     "twin_state_frozen": true
   },
-  "report_hash": "735d615ecf6a3b00f2bfd135c252fa452554c300c2550d215244dfdaf54be210",
+  "report_hash": "e6bf8a57912f9d8e04d7256a49bab3a6798113348091968bba2807db9df6f8f5",
   "restart": {
     "cases": [
       {
@@ -12436,7 +12377,7 @@
             "tolerance_kind": "ENGINEERING_TEST_THRESHOLD"
           }
         ],
-        "method": "continuous run vs run restored at t1 from a JSON checkpoint of the full CropGrowthState and SoilState, compared at every later step (t1 -> t2 -> end)",
+        "method": "continuous run vs run restored at t1 from a JSON checkpoint of the full CropGrowthState, SoilState and greenhouse microclimate, compared at every later step (t1 -> t2 -> end)",
         "status": "PASS"
       },
       {
@@ -12482,7 +12423,7 @@
             "tolerance_kind": "ENGINEERING_TEST_THRESHOLD"
           }
         ],
-        "method": "continuous run vs run restored at t1 from a JSON checkpoint of the full CropGrowthState and SoilState, compared at every later step (t1 -> t2 -> end)",
+        "method": "continuous run vs run restored at t1 from a JSON checkpoint of the full CropGrowthState, SoilState and greenhouse microclimate, compared at every later step (t1 -> t2 -> end)",
         "status": "PASS"
       },
       {
@@ -12528,7 +12469,7 @@
             "tolerance_kind": "ENGINEERING_TEST_THRESHOLD"
           }
         ],
-        "method": "continuous run vs run restored at t1 from a JSON checkpoint of the full CropGrowthState and SoilState, compared at every later step (t1 -> t2 -> end)",
+        "method": "continuous run vs run restored at t1 from a JSON checkpoint of the full CropGrowthState, SoilState and greenhouse microclimate, compared at every later step (t1 -> t2 -> end)",
         "status": "PASS"
       }
     ],
@@ -12763,6 +12704,12 @@
         "SimulationScheduler",
         "CropGrowthEngine",
         "PhenologyEngine",
+        "WaterBalanceEngine",
+        "ClimateStressEngine",
+        "GreenhousePhysicalModel",
+        "SimplifiedGreenhouseModel",
+        "CropGreenhouseFeedbackLoop",
+        "CropPhysicalExchangeModel",
         "ObservationDataset",
         "ParameterRegistry",
         "TwinStateRepository",
@@ -12790,8 +12737,11 @@
     ],
     "qualification": {
       "DETERMINISM": "QUALIFIED",
-      "GREENHOUSE_CROP_INTEGRATION": "NOT_QUALIFIED",
+      "DORMANCY_PHENOLOGY_CONSISTENCY": "QUALIFIED",
+      "FEEDBACK_LOOP": "QUALIFIED",
+      "GREENHOUSE_CROP_INTEGRATION": "QUALIFIED",
       "INTEGRATED_SYNTHETIC_VALIDATION": "READY",
+      "MICROCLIMATE_TO_CROP_COUPLING": "QUALIFIED",
       "MULTI_CYCLE_CONSISTENCY": "QUALIFIED",
       "MULTI_PLOT_CONSISTENCY": "QUALIFIED",
       "PARAMETER_IMMUTABILITY": "QUALIFIED",
@@ -12826,7 +12776,7 @@
     "section_status": {
       "determinism": "PASS",
       "greenhouse.actuator_causal_path": "PASS",
-      "greenhouse.crop_greenhouse_feedback": "INVARIANT_VIOLATION",
+      "greenhouse.crop_greenhouse_feedback": "PASS_WITH_WARNINGS",
       "greenhouse.energyplus": "NOT_APPLICABLE",
       "invariant_results": "PASS",
       "multi_cycle": "PASS_WITH_WARNINGS",
@@ -12839,8 +12789,7 @@
       "transferability": "DATA_INSUFFICIENT"
     },
     "status_counts": {
-      "PASS": 25,
-      "PASS_WITH_WARNINGS": 5
+      "PASS": 30
     },
     "total_cases": 30,
     "varieties": [

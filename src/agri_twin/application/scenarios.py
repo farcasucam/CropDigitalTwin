@@ -23,6 +23,7 @@ from agri_twin.domain import (
     WeatherConfiguration,
     WeatherState,
 )
+from agri_twin.domain.greenhouse import GreenhouseMicroclimateState
 from agri_twin.domain.calibration import DatasetRole, Observation, ObservationDataset, ObservationResolution, SimulationPoint
 
 
@@ -82,6 +83,7 @@ class Scenario:
     parameters: ParameterSet | None = None
     labels: tuple[str, ...] = ()
     seed: int | None = None
+    initial_microclimate: GreenhouseMicroclimateState | None = None
 
     def __post_init__(self) -> None:
         if not self.scenario_id or not self.name or self.start.tzinfo is None or self.end <= self.start:
@@ -102,6 +104,8 @@ class Scenario:
             "events": [asdict(event) | {"start": event.start.isoformat(), "end": event.end.isoformat()} for event in self.events],
             "parameters": self.parameters.value_map() if self.parameters else {},
         }
+        if self.initial_microclimate is not None:
+            payload["initial_microclimate"] = self.initial_microclimate.to_dict()
         encoded = json.dumps(payload, sort_keys=True, separators=(",", ":"), default=str).encode("utf-8")
         return hashlib.sha256(encoded).hexdigest()
 
@@ -178,7 +182,7 @@ class ScenarioRunner:
         clock = SimulationClock(scenario.start)
         base = self.base_weather_factory(scenario) if self.base_weather_factory is not None else None
         weather = WeatherEngine(WeatherConfiguration(simulation=WeatherConfiguration().simulation), provider=_ScenarioWeatherProvider(scenario, base))
-        orchestrator = CropDigitalTwinOrchestrator(clock, weather, scenario.initial_crop, scenario.initial_soil, scenario.greenhouse_mode)
+        orchestrator = CropDigitalTwinOrchestrator(clock, weather, scenario.initial_crop, scenario.initial_soil, scenario.greenhouse_mode, scenario.initial_microclimate)
         snapshots: list[CropSimulationSnapshot] = []
         current = scenario.start
         try:

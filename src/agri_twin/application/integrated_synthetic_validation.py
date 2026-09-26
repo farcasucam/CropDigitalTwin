@@ -41,10 +41,14 @@ from agri_twin.application.weather import WeatherEngine
 from agri_twin.domain.calibration import ParameterSet
 from agri_twin.domain.climate_stress import ClimateStressEngine
 from agri_twin.domain.crop_greenhouse_feedback import CropGreenhouseFeedbackLoop
+from agri_twin.domain.crop_growth import CropGrowthEngine
 from agri_twin.domain.greenhouse import (
+    AIR_DENSITY_KG_M3,
+    AIR_SPECIFIC_HEAT_J_KG_K,
     CropMicroclimateFeedback,
     GreenhouseActuatorState,
     GreenhouseConfiguration,
+    GreenhouseMicroclimateState,
     SimplifiedGreenhouseModel,
 )
 from agri_twin.domain.models import CropGrowthState, SoilState, WeatherState
@@ -61,7 +65,7 @@ from agri_twin.domain.weather import (
 )
 
 UTC = timezone.utc
-VERSION = "5.29.1"
+VERSION = "5.29.2"
 VALIDATION_KIND = "SYNTHETIC_INTEGRATED_VALIDATION"
 SOURCE_TYPE = "SYNTHETIC"
 WEATHER_GENERATOR = "agri_twin.application.weather.WeatherEngine (seeded, timestamp-pure) + ScenarioEvent overlays"
@@ -721,18 +725,20 @@ def _radiation(direction: int) -> BehaviourCheck:
 def _ventilation(scenario, snapshots, control) -> list:
     assert scenario.window is not None and control is not None
     window = _window_indices(scenario, *scenario.window)
-    rh = _mean(_series(snapshots, window, lambda s: s.microclimate.indoor_state.relative_humidity_pct))
-    control_rh = _mean(_series(control, window, lambda s: s.microclimate.indoor_state.relative_humidity_pct))
-    vpd = _mean(_series(snapshots, window, lambda s: s.environment.vpd_kpa))
-    control_vpd = _mean(_series(control, window, lambda s: s.environment.vpd_kpa))
-    forcing_equal = all(snapshots[i].weather.temperature_c == control[i].weather.temperature_c and snapshots[i].weather.relative_humidity_pct == control[i].weather.relative_humidity_pct for i in window)
+    exchanged = _mean(_series(snapshots, window, lambda s: s.microclimate.indoor_state.ventilation_fraction))
+    control_exchanged = _mean(_series(control, window, lambda s: s.microclimate.indoor_state.ventilation_fraction))
+    gap = _mean(_series(snapshots, window, lambda s: abs(s.microclimate.indoor_state.temperature_c - s.outdoor_weather.temperature_c)))
+    control_gap = _mean(_series(control, window, lambda s: abs(s.microclimate.indoor_state.temperature_c - s.outdoor_weather.temperature_c)))
+    crop_temperature = all(s.weather.temperature_c == s.microclimate.indoor_state.temperature_c for s in snapshots)
+    forcing_equal = all(snapshots[i].outdoor_weather == control[i].outdoor_weather for i in window)
     stress = _mean(_series(snapshots, window, lambda s: s.crop.vpd_stress))
     control_stress = _mean(_series(control, window, lambda s: s.crop.vpd_stress))
     return [
         _check("outdoor_forcing_unchanged", forcing_equal, forcing_equal, "the actuator does not modify outdoor weather forcing"),
-        _check("indoor_humidity_response", rh - control_rh, rh < control_rh, "ventilation lowers indoor RH per SimplifiedGreenhouseModel", unit="pct"),
-        _check("indoor_vpd_response", vpd - control_vpd, vpd > control_vpd, "indoor VPD rises as RH falls", unit="kPa"),
-        _check("crop_vpd_stress_response", stress - control_stress, stress >= control_stress, "crop VPD stress follows the resulting microclimate", unit="fraction"),
+        _check("air_exchange_response", exchanged - control_exchanged, exchanged > control_exchanged, "extra ACH raises the air fraction exchanged per step, 1 - exp(-ACH dt)", unit="fraction"),
+        _check("indoor_temperature_toward_outdoor", gap - control_gap, gap < control_gap, "more air exchange brings indoor air temperature closer to outdoor", unit="C"),
+        _check("crop_uses_indoor_temperature", crop_temperature, crop_temperature, "the crop environment temperature is the microclimate air temperature"),
+        _check("crop_vpd_stress_observed", stress - control_stress, None, "crop VPD stress follows the resulting microclimate (sign not imposed)", unit="fraction"),
     ]
 
 
@@ -754,17 +760,16 @@ def _co2(scenario, snapshots, control) -> list:
     window = _window_indices(scenario, *scenario.window)
     co2 = _mean(_series(snapshots, window, lambda s: s.microclimate.indoor_state.co2_ppm))
     control_co2 = _mean(_series(control, window, lambda s: s.microclimate.indoor_state.co2_ppm))
-    after = range(window.stop + 1, min(len(snapshots), window.stop + 25))
-    returned = all(snapshots[i].microclimate.indoor_state.co2_ppm == control[i].microclimate.indoor_state.co2_ppm for i in after)
-    growth_delta = snapshots[-1].crop.biomass_total - control[-1].crop.biomass_total
+    first_after = window.stop
+    persisted = snapshots[first_after].microclimate.indoor_state.co2_ppm > control[first_after].microclimate.indoor_state.co2_ppm + FLOAT_TOLERANCE
+    day_after = min(len(snapshots) - 1, window.stop + 24)
+    decayed = abs(snapshots[day_after].microclimate.indoor_state.co2_ppm - control[day_after].microclimate.indoor_state.co2_ppm) <= 1.0
+    single_path = all(s.co2_factor == CropGrowthEngine.co2_response(s.microclimate.indoor_state.co2_ppm) for s in snapshots)
     return [
         _check("indoor_co2_response", co2 - control_co2, co2 > control_co2, "CO2 supply raises indoor CO2", unit="ppm"),
-        _check("co2_after_supply_ends", returned, returned, "indoor CO2 returns to the control value once supply stops (orchestrator greenhouse step carries no memory)"),
-        _check(
-            "crop_growth_uses_co2", growth_delta, None if abs(growth_delta) > FLOAT_TOLERANCE else False,
-            "CropDigitalTwinOrchestrator growth does not consume indoor CO2; only CropGreenhouseFeedbackLoop applies a CO2 factor",
-            unit="g_DM_m-2", severity="WARNING", code="CO2_NOT_CONSUMED_BY_ORCHESTRATOR_GROWTH",
-        ),
+        _check("co2_state_persists", persisted, persisted, "enriched CO2 is carried into the step after supply stops (persistent microclimate, no reset)"),
+        _check("co2_decays_by_air_exchange", decayed, decayed, "within 24 h of supply stopping, indoor CO2 is back within 1 ppm of control through air exchange", threshold=1.0, threshold_kind=ENGINEERING_TEST_THRESHOLD),
+        _check("co2_response_single_path", single_path, single_path, "every step applies CropGrowthEngine.co2_response(indoor CO2) exactly once"),
     ]
 
 
@@ -793,9 +798,9 @@ BEHAVIOURS: Mapping[SyntheticScenarioKind, tuple[str, ...]] = {
     SyntheticScenarioKind.HEAT_WAVE_RECOVERY: ("heat_stress_response", "growth_factor_reduction", "heat_damage_recovery", "persistent_biomass_deficit"),
     SyntheticScenarioKind.LOW_RADIATION: ("potential_growth_response", "radiation_physically_bounded"),
     SyntheticScenarioKind.HIGH_RADIATION: ("potential_growth_response", "radiation_physically_bounded", "photoinhibition_observed"),
-    SyntheticScenarioKind.GREENHOUSE_VENTILATION: ("outdoor_forcing_unchanged", "indoor_humidity_response", "indoor_vpd_response", "crop_vpd_stress_response"),
+    SyntheticScenarioKind.GREENHOUSE_VENTILATION: ("outdoor_forcing_unchanged", "air_exchange_response", "indoor_temperature_toward_outdoor", "crop_uses_indoor_temperature", "crop_vpd_stress_observed"),
     SyntheticScenarioKind.GREENHOUSE_SHADING: ("indoor_radiation_transmission", "potential_growth_reduction"),
-    SyntheticScenarioKind.GREENHOUSE_CO2: ("indoor_co2_response", "co2_after_supply_ends", "crop_growth_uses_co2"),
+    SyntheticScenarioKind.GREENHOUSE_CO2: ("indoor_co2_response", "co2_state_persists", "co2_decays_by_air_exchange", "co2_response_single_path"),
     SyntheticScenarioKind.COMBINED_STRESS: ("combined_growth_reduction",),
 }
 
@@ -828,17 +833,23 @@ def _section_status(passed: bool, warnings: bool = False, failure: SyntheticVali
 
 
 def checkpoint_payload(snapshot: CropSimulationSnapshot) -> str:
-    return json.dumps({"simulation_time": snapshot.simulation_time.isoformat(), "crop": snapshot.crop.to_dict(), "soil": asdict(snapshot.soil)}, sort_keys=True)
+    """Full persistent orchestrator state: crop, soil and the greenhouse microclimate."""
+    return json.dumps({
+        "simulation_time": snapshot.simulation_time.isoformat(),
+        "crop": snapshot.crop.to_dict(),
+        "soil": asdict(snapshot.soil),
+        "microclimate": snapshot.microclimate.indoor_state.to_dict(),
+    }, sort_keys=True)
 
 
-def restore_checkpoint(payload: str) -> tuple[datetime, CropGrowthState, SoilState]:
+def restore_checkpoint(payload: str) -> tuple[datetime, CropGrowthState, SoilState, GreenhouseMicroclimateState]:
     data = json.loads(payload)
     crop_values = dict(data["crop"])
     crop_values["simulation_time"] = datetime.fromisoformat(crop_values["simulation_time"])
-    return datetime.fromisoformat(data["simulation_time"]), CropGrowthState(**crop_values), SoilState(**data["soil"])
+    return datetime.fromisoformat(data["simulation_time"]), CropGrowthState(**crop_values), SoilState(**data["soil"]), GreenhouseMicroclimateState(**data["microclimate"])
 
 
-def resumed_scenario(scenario: Scenario, restart_time: datetime, crop: CropGrowthState, soil: SoilState) -> Scenario:
+def resumed_scenario(scenario: Scenario, restart_time: datetime, crop: CropGrowthState, soil: SoilState, microclimate: GreenhouseMicroclimateState | None = None) -> Scenario:
     events = []
     for event in scenario.events:
         if event.end < restart_time:
@@ -846,7 +857,7 @@ def resumed_scenario(scenario: Scenario, restart_time: datetime, crop: CropGrowt
         if event.end == restart_time:
             raise ScenarioError(f"checkpoint {restart_time.isoformat()} coincides with the end of event {event.event_id}")
         events.append(replace(event, start=max(event.start, restart_time)))
-    return replace(scenario, start=restart_time, initial_crop=crop, initial_soil=soil, events=tuple(events))
+    return replace(scenario, start=restart_time, initial_crop=crop, initial_soil=soil, events=tuple(events), initial_microclimate=microclimate)
 
 
 def twin_state_from_snapshot(snapshot: CropSimulationSnapshot, scenario: SyntheticValidationScenario) -> TwinState:
@@ -885,7 +896,11 @@ def twin_state_from_snapshot(snapshot: CropSimulationSnapshot, scenario: Synthet
 FORBIDDEN_CALLS = {"datetime.now", "datetime.utcnow", "datetime.today", "date.today", "time.time", "time.sleep", "asyncio.sleep", "sleep"}
 FORBIDDEN_IMPORTS = {"socket", "requests", "urllib", "http", "httpx", "aiohttp", "serial", "sklearn", "torch", "tensorflow", "keras", "xgboost", "scipy", "pyenergyplus", "eppy"}
 OPTIMIZER_METHODS = {"calibrate", "software_fixture_calibration", "optimize", "minimize", "fit", "grid_search"}
-SINGLETON_CLASSES = ("SimulationClock", "SimulationScheduler", "CropGrowthEngine", "PhenologyEngine", "ObservationDataset", "ParameterRegistry", "TwinStateRepository", "InMemoryTwinStateRepository")
+SINGLETON_CLASSES = (
+    "SimulationClock", "SimulationScheduler", "CropGrowthEngine", "PhenologyEngine", "WaterBalanceEngine",
+    "ClimateStressEngine", "GreenhousePhysicalModel", "SimplifiedGreenhouseModel", "CropGreenhouseFeedbackLoop",
+    "CropPhysicalExchangeModel", "ObservationDataset", "ParameterRegistry", "TwinStateRepository", "InMemoryTwinStateRepository",
+)
 ALLOWED_EXCEPTIONS = {
     "agri_twin/contracts.py": "datetime.now for the message-envelope emission timestamp (metadata, not simulation dynamics)",
     "agri_twin/infrastructure/open_meteo.py": "urllib network access and retrieved_at metadata for explicit, user-triggered weather downloads only",
@@ -1128,9 +1143,9 @@ class IntegratedSyntheticValidationSuite:
             index = max(0, min(steps - 2, index - (index + 1 - 12) % 24))
             restart = continuous.snapshots[index]
             payload = checkpoint_payload(restart)
-            restart_time, crop, soil = restore_checkpoint(payload)
+            restart_time, crop, soil, microclimate = restore_checkpoint(payload)
             try:
-                resumed = self.runner.run(resumed_scenario(scenario.to_scenario(), restart_time, crop, soil))
+                resumed = self.runner.run(resumed_scenario(scenario.to_scenario(), restart_time, crop, soil, microclimate))
             except ScenarioError as exc:
                 checks.append({"checkpoint": restart_time.isoformat(), "status": SyntheticValidationStatus.INVALID_CONFIGURATION.value, "detail": str(exc)})
                 continue
@@ -1138,7 +1153,7 @@ class IntegratedSyntheticValidationSuite:
             aligned = len(resumed.snapshots) == len(tail) and all(a.simulation_time == b.simulation_time for a, b in zip(resumed.snapshots, tail))
             max_difference = max((_max_difference(snapshot_numbers(a), snapshot_numbers(b)) for a, b in zip(resumed.snapshots, tail)), default=math.inf)
             stage_equal = all(a.crop.current_stage == b.crop.current_stage and a.crop.harvest_ready == b.crop.harvest_ready for a, b in zip(resumed.snapshots, tail))
-            restored_equal = crop == restart.crop and soil == restart.soil
+            restored_equal = crop == restart.crop and soil == restart.soil and microclimate.to_dict() == restart.microclimate.indoor_state.to_dict()
             passed = aligned and stage_equal and restored_equal and max_difference <= FLOAT_TOLERANCE
             checks.append({
                 "checkpoint": restart_time.isoformat(),
@@ -1157,7 +1172,7 @@ class IntegratedSyntheticValidationSuite:
         return {
             "case_id": case.case_id,
             "status": _section_status(passed, failure=SyntheticValidationStatus.NON_DETERMINISTIC),
-            "method": "continuous run vs run restored at t1 from a JSON checkpoint of the full CropGrowthState and SoilState, compared at every later step (t1 -> t2 -> end)",
+            "method": "continuous run vs run restored at t1 from a JSON checkpoint of the full CropGrowthState, SoilState and greenhouse microclimate, compared at every later step (t1 -> t2 -> end)",
             "checkpoints": checks,
         }
 
@@ -1361,13 +1376,15 @@ class IntegratedSyntheticValidationSuite:
     def feedback_loop(self, days: int = 7) -> dict[str, Any]:
         start = datetime(2026, 4, 1, tzinfo=UTC)
         engine = WeatherEngine(weather_configuration("warm_season", self.seed))
+        # Air exchange is GreenhouseConfiguration.ventilation_ach (structure) plus
+        # actuator ventilation; the runs vary the structural exchange only.
         configurations = {
-            "ventilated_3ach": lambda hour: GreenhouseActuatorState(ventilation_ach=3.0),
-            "low_infiltration_0_3ach_co2": lambda hour: GreenhouseActuatorState(ventilation_ach=0.3, co2_supply_ppm=50.0 if 24 <= hour < 72 else 0.0),
-            "closed_0ach": lambda hour: GreenhouseActuatorState(),
+            "ventilated_3ach": (GreenhouseConfiguration(ventilation_ach=3.0), lambda hour: GreenhouseActuatorState()),
+            "low_infiltration_0_3ach_co2": (GreenhouseConfiguration(ventilation_ach=0.3), lambda hour: GreenhouseActuatorState(co2_supply_ppm=50.0 if 24 <= hour < 72 else 0.0)),
+            "closed_0ach": (GreenhouseConfiguration(ventilation_ach=0.0), lambda hour: GreenhouseActuatorState()),
         }
         runs = {}
-        for name, actuators in configurations.items():
+        for name, (greenhouse_configuration, actuators) in configurations.items():
             loop = CropGreenhouseFeedbackLoop(SimplifiedGreenhouseModel())
             crop = CropGrowthState(start, "tomato", "RAF", "vegetative_growth", biomass_total=100.0, biomass_leaf=60.0, biomass_stem=20.0, biomass_root=20.0, leaf_area_index=1.2, root_depth_m=0.6, soil_water_vwc=0.3, phenology_model="SYNTHETIC_INITIAL_STATE")
             soil = SoilState(0.30, 18.0, 0.35, 0.10, 0.0, 120.0)
@@ -1376,7 +1393,7 @@ class IntegratedSyntheticValidationSuite:
             for hour in range(days * 24):
                 now = start + timedelta(hours=hour + 1)
                 weather = engine.generate(now)
-                result = loop.step(crop, weather, GreenhouseConfiguration(), actuators(hour), 3600.0, soil, simulation_time=now)
+                result = loop.step(crop, weather, greenhouse_configuration, actuators(hour), 3600.0, soil, simulation_time=now)
                 micro = result.microclimate
                 values = [*micro.to_dict().values(), result.convergence.final_error, *result.crop.to_dict().values()]
                 finite = finite and all(math.isfinite(v) for v in values if isinstance(v, float))
@@ -1400,9 +1417,11 @@ class IntegratedSyntheticValidationSuite:
             if not finite:
                 issues.append({"code": "NUMERICAL_FAILURE", "severity": "FAILURE", "message": "non-finite value in feedback loop"})
             if latent_at_saturation:
-                issues.append({"code": "INVARIANT_VIOLATION", "severity": "FAILURE", "message": f"latent heat flux > 0 while indoor VPD = 0 (saturated air) in {latent_at_saturation} steps: CropPhysicalExchangeModel transpiration ignores indoor saturation"})
+                issues.append({"code": "INVARIANT_VIOLATION", "severity": "FAILURE", "message": f"latent heat flux > 0 while indoor VPD = 0 (saturated air) in {latent_at_saturation} steps"})
+            conductance = greenhouse_configuration.heat_loss_w_k + AIR_DENSITY_KG_M3 * AIR_SPECIFIC_HEAT_J_KG_K * greenhouse_configuration.volume_m3 * greenhouse_configuration.ventilation_ach / 3600.0
+            time_constant_h = greenhouse_configuration.thermal_mass_kj_k * 1000.0 / conductance / 3600.0 if conductance > 0 else math.inf
             if daytime_cooling < -5.0:
-                issues.append({"code": "PLAUSIBILITY_REVIEW", "severity": "WARNING", "message": f"indoor air up to {abs(daytime_cooling):.1f} C below outdoor without a cooling actuator (threshold 5 C, {ENGINEERING_TEST_THRESHOLD})"})
+                issues.append({"code": "PLAUSIBILITY_REVIEW", "severity": "WARNING", "message": f"indoor air up to {abs(daytime_cooling):.1f} C below outdoor without a cooling actuator (threshold 5 C, {ENGINEERING_TEST_THRESHOLD}); consistent with thermal inertia (tau = C/G = {time_constant_h:.1f} h lags the outdoor diurnal cycle) plus canopy latent cooling, not an energy-conservation violation"})
             failures = [issue for issue in issues if issue["severity"] == "FAILURE"]
             codes = {issue["code"] for issue in failures}
             status = (
@@ -1427,6 +1446,8 @@ class IntegratedSyntheticValidationSuite:
                 "co2_min_ppm": min(co2),
                 "co2_max_ppm": max(co2),
                 "latent_flux_at_saturation_steps": latent_at_saturation,
+                "configured_ventilation_ach": greenhouse_configuration.ventilation_ach,
+                "thermal_time_constant_h": time_constant_h,
                 "issues": issues,
             }
         co2_run = runs["low_infiltration_0_3ach_co2"]
@@ -1450,7 +1471,7 @@ class IntegratedSyntheticValidationSuite:
             prior = None
             trace = []
             for step in range(6):
-                state = model.step(weather, GreenhouseConfiguration(), GreenhouseActuatorState(ventilation_ach=ventilation, co2_supply_ppm=200.0 if step == 0 else 0.0), CropMicroclimateFeedback(), 3600.0, prior=prior)
+                state = model.step(weather, GreenhouseConfiguration(ventilation_ach=ventilation), GreenhouseActuatorState(co2_supply_ppm=200.0 if step == 0 else 0.0), CropMicroclimateFeedback(), 3600.0, prior=prior)
                 prior = state
                 trace.append(state.co2_ppm)
             traces[ventilation] = trace
@@ -1635,41 +1656,21 @@ class IntegratedSyntheticValidationSuite:
         for result in results:
             for issue in result.warnings:
                 warning_codes.setdefault(issue.code, []).append(result.case_id)
-        descriptions = {
-            "DORMANCY_GROWTH_NOT_SUPPRESSED": ("mechanistic", "Perennial biomass increases before dormancy release: dormancy only gates GDD accumulation in PhenologyEngine; growth engines do not suppress growth during endodormancy."),
-            "CO2_NOT_CONSUMED_BY_ORCHESTRATOR_GROWTH": ("mechanistic", "CropDigitalTwinOrchestrator raises indoor CO2 under enrichment but its growth limitation product has no CO2 factor; only CropGreenhouseFeedbackLoop applies co2_ppm / 420 (capped at 1)."),
-        }
         for code, cases in sorted(warning_codes.items()):
-            kind, text = descriptions.get(code, ("mechanistic", code))
-            findings.append({"code": code, "type": kind, "severity": "WARNING", "cases": cases, "description": text, "action": "documented; not changed in Phase 5.29 (no parameter or equation tuning)"})
+            findings.append({"code": code, "type": "mechanistic", "severity": "WARNING", "cases": cases, "description": next(issue.message for result in results for issue in result.warnings if issue.code == code), "action": "open; documented"})
         feedback = sections["greenhouse"]["crop_greenhouse_feedback"]["runs"]
         for name, run in feedback.items():
             for issue in run["issues"]:
-                findings.append({"code": issue["code"], "type": "greenhouse_feedback", "severity": issue["severity"], "cases": [name], "description": issue["message"], "action": "root cause in SimplifiedGreenhouseModel/CropPhysicalExchangeModel; equation change requires an explicit scientific decision (not performed in Phase 5.29)"})
-        findings.append({
-            "code": "GREENHOUSE_TEMPERATURE_NOT_USED_BY_CROP",
-            "type": "mechanistic",
-            "severity": "WARNING",
-            "cases": ["all greenhouse orchestrator cases"],
-            "description": "CropDigitalTwinOrchestrator passes outdoor air temperature (with indoor radiation) to phenology, water balance and climate stress; indoor air temperature from the greenhouse model is not used by the crop.",
-            "action": "documented; orchestrator change requires an explicit scientific decision",
-        })
-        findings.append({
-            "code": "GREENHOUSE_CONFIGURATION_VENTILATION_UNUSED",
-            "type": "mechanistic",
-            "severity": "WARNING",
-            "cases": ["crop_greenhouse_feedback"],
-            "description": "GreenhouseConfiguration.ventilation_ach (base infiltration) is not read by SimplifiedGreenhouseModel; only the actuator ventilation drives air exchange, so a closed greenhouse has zero infiltration and heat loss is referenced to a fixed 20 C.",
-            "action": "documented; not changed in Phase 5.29",
-        })
-        findings.append({
-            "code": "ORCHESTRATOR_GREENHOUSE_STEP_MEMORYLESS",
-            "type": "mechanistic",
-            "severity": "INFO",
-            "cases": ["all greenhouse orchestrator cases"],
-            "description": "GreenhouseMicroclimateEngine.advance resets its prior state when no prior is given, so the orchestrator greenhouse step carries no thermal/CO2 memory between steps; memory is exercised through SimplifiedGreenhouseModel with an explicit prior.",
-            "action": "documented",
-        })
+                severity = issue["severity"]
+                findings.append({"code": "OPEN_PHYSICAL_ISSUE" if severity == "FAILURE" else issue["code"], "type": "greenhouse_feedback", "severity": severity, "cases": [name], "description": issue["message"], "action": "open; requires physical analysis before qualification"})
+        # Documented limitations of the corrected (Phase 5.30) model; not defects.
+        for code, description in (
+            ("CO2_RESPONSE_CAPPED_AT_REFERENCE", "CropGrowthEngine.co2_response = min(1, CO2 / 420): depletion limits growth, enrichment above 420 ppm gives no benefit (existing engineering response, not extended)."),
+            ("ORCHESTRATOR_EXCHANGE_NOT_ITERATED", "CropDigitalTwinOrchestrator feeds only LAI back to the greenhouse; transpiration/CO2-uptake coupling is iterated only in CropGreenhouseFeedbackLoop."),
+            ("PERENNIAL_NEXT_CAMPAIGN_NOT_SUPPORTED", "No transition from post_harvest_dormancy back to dormancy/establishment exists in PhenologyEngine."),
+            ("CONDENSATION_LATENT_HEAT_NEGLECTED", "Vapour above saturation condenses without releasing latent heat to the air; no longwave radiative exchange is modelled."),
+        ):
+            findings.append({"code": code, "type": "limitation", "severity": "INFO", "cases": [], "description": description, "action": "documented limitation"})
         return tuple(findings)
 
     def _summary(self, results: Sequence[SyntheticValidationResult], sections: Mapping[str, Any], coverage: Sequence[Mapping[str, Any]]) -> IntegratedValidationSummary:
@@ -1687,6 +1688,13 @@ class IntegratedSyntheticValidationSuite:
             return "QUALIFIED" if ok else "NOT_QUALIFIED"
 
         greenhouse_cases_ok = all(result.status in PASSING_STATUSES for result in results if result.scenario.environment == "greenhouse")
+        feedback_ok = section_status["greenhouse.crop_greenhouse_feedback"] in passing
+        coupling_ok = greenhouse_cases_ok and section_status["greenhouse.actuator_causal_path"] in passing
+        perennial_normal = [result for result in results if result.scenario.perennial and result.scenario.kind is SyntheticScenarioKind.NORMAL_SEASON]
+        dormancy_ok = bool(perennial_normal) and all(result.status is SyntheticValidationStatus.PASS for result in perennial_normal)
+
+        def physical(ok: bool) -> str:
+            return "QUALIFIED" if ok else "OPEN_PHYSICAL_ISSUE"
         qualification = {
             "INTEGRATED_SYNTHETIC_VALIDATION": "READY",
             "SYNTHETIC_MODEL_CONSISTENCY": qualified(cases_ok and section_status["invariant_results"] in passing),
@@ -1694,7 +1702,10 @@ class IntegratedSyntheticValidationSuite:
             "PERSISTENT_STATE_CONSISTENCY": qualified(section_status["persistence"] in passing),
             "MULTI_PLOT_CONSISTENCY": qualified(section_status["multi_plot"] in passing),
             "MULTI_CYCLE_CONSISTENCY": qualified(section_status["multi_cycle"] in passing),
-            "GREENHOUSE_CROP_INTEGRATION": qualified(greenhouse_cases_ok and section_status["greenhouse.actuator_causal_path"] in passing and section_status["greenhouse.crop_greenhouse_feedback"] in passing),
+            "GREENHOUSE_CROP_INTEGRATION": physical(coupling_ok and feedback_ok),
+            "MICROCLIMATE_TO_CROP_COUPLING": physical(coupling_ok),
+            "FEEDBACK_LOOP": physical(feedback_ok),
+            "DORMANCY_PHENOLOGY_CONSISTENCY": physical(dormancy_ok) if perennial_normal else "NOT_EVALUATED",
             "ROBUSTNESS_SCENARIOS": qualified(section_status.get("robustness") in passing) if "robustness" in sections else "NOT_EVALUATED",
             "DETERMINISM": qualified(section_status["determinism"] in passing),
             "STATIC_AUDIT": qualified(section_status["static_audit"] in passing),

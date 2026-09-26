@@ -2,7 +2,7 @@
   "artifact_status": "SYNTHETIC_SOFTWARE_BENCHMARK",
   "assimilation_status": "DATA ASSIMILATION NOT IMPLEMENTED",
   "calibration_status": "CALIBRATION NOT PERFORMED",
-  "configuration_hash": "62c77caaeb28d084839dc5ec95458c1e754a9d85d4783e5f6de16802c65940cd",
+  "configuration_hash": "7a04761be2bbe44137156b425ebd72b07aa1e1558f3b138fb2f84a9a86138d0d",
   "definition": {
     "benchmark_id": "phase5_24_integrated",
     "cases": [
@@ -493,7 +493,7 @@
       },
       "environment": "outdoor",
       "failure_reason": null,
-      "input_hash": "8431d1368a84c358d26e879df0cded57cfdd16cba7736607960d0fb26c5911ed",
+      "input_hash": "feae452bf4a8ff420bb79e70a24e002b86afd5d216896d5b243a64dcbb0b2e30",
       "metrics": [
         {
           "category": "software_metric",
@@ -513,9 +513,9 @@
         }
       ],
       "model_configuration_hash": "c0d99d2f18224c78093092b9acba7e29ff4253e33b8f49565d31e687db58a89f",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": "plot_12010",
-      "result_hash": "0f6d4e0ec9cf512e570c0af6e14b717d52b530c100a1a7729eac12046f567bb6",
+      "result_hash": "36b014f71e1d5895650ecfea5fab371c67887529754a83b267d624933d83514f",
       "scenario_id": "tomato_annual-1_outdoor_control_plot_12010",
       "seed": 100,
       "sensitivity": {
@@ -523,16 +523,16 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "tomato",
           "evaluations": {
-            "baseline": 101.22270668984561,
-            "p1_base_p2_high": 101.3448418279959,
-            "p1_base_p2_low": 101.10054650652637,
-            "p1_high_p2_base": 101.3448418279959,
-            "p1_high_p2_high": 101.47916139456308,
-            "p1_low_p2_base": 101.10054650652637,
-            "p1_low_p2_low": 100.99058103798836
+            "baseline": 101.22639547410738,
+            "p1_base_p2_high": 101.34930596360053,
+            "p1_base_p2_low": 101.10353394555302,
+            "p1_high_p2_base": 101.34930596360053,
+            "p1_high_p2_high": 101.48456393257112,
+            "p1_low_p2_base": 101.10353394555302,
+            "p1_low_p2_low": 100.99300051422397
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.012184428416901483,
+          "interaction_delta": 0.01234747947744097,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
@@ -726,11 +726,11 @@
       "benchmark_id": "case_tomato_annual-1_greenhouse_control_plot_12010",
       "comparison": {
         "baseline_score": 10.0,
-        "improvement": 0.24372360435387835,
+        "improvement": 0.24370274577284706,
         "interpretation": "Synthetic software comparison; not biological validation.",
         "label": "SYNTHETIC_SOFTWARE_BENCHMARK",
-        "model_score": 12.437236043538784,
-        "relative_difference": 0.24372360435387835
+        "model_score": 12.43702745772847,
+        "relative_difference": 0.24370274577284706
       },
       "crop": "tomato",
       "cycle_id": "annual-1",
@@ -753,7 +753,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "59f2f52475c689c7745a9112a30ac817325f4d03dcb7b31c2297f30646f31fab",
+      "input_hash": "cc9e8891b599d7dd4d190197804e0e9f293d1107ae13abe5b3dc3a25b45900b1",
       "metrics": [
         {
           "category": "software_metric",
@@ -761,7 +761,7 @@
           "name": "final_biomass",
           "status": "AVAILABLE",
           "unit": "g_DM_m-2",
-          "value": 12.437236043538784
+          "value": 12.43702745772847
         },
         {
           "category": "robustness_metric",
@@ -773,9 +773,9 @@
         }
       ],
       "model_configuration_hash": "5a0cd4cb16adf2a8a3683de0ff03fa8339466a85996594b8d027aca3ae145c5e",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": "plot_12010",
-      "result_hash": "9c062bfc94a7f92d400234ec81f011f0d5a7e2d5ab368cf4f861d8aea054f605",
+      "result_hash": "c42cdf9378215dcf3683d03ea2b14654c591320eca42d037ccd5f8daf79b2ea6",
       "scenario_id": "tomato_annual-1_greenhouse_control_plot_12010",
       "seed": 100,
       "sensitivity": {
@@ -783,25 +783,25 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "tomato",
           "evaluations": {
-            "baseline": 101.22270668984561,
-            "p1_base_p2_high": 101.3448418279959,
-            "p1_base_p2_low": 101.10054650652637,
-            "p1_high_p2_base": 101.3448418279959,
-            "p1_high_p2_high": 101.47916139456308,
-            "p1_low_p2_base": 101.10054650652637,
-            "p1_low_p2_low": 100.99058103798836
+            "baseline": 101.22639547410738,
+            "p1_base_p2_high": 101.34930596360053,
+            "p1_base_p2_low": 101.10353394555302,
+            "p1_high_p2_base": 101.34930596360053,
+            "p1_high_p2_high": 101.48456393257112,
+            "p1_low_p2_base": 101.10353394555302,
+            "p1_low_p2_low": 100.99300051422397
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.012184428416901483,
+          "interaction_delta": 0.01234747947744097,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
           "perturbation_percent": 10.0
         },
         "oat": {
-          "absolute_change": 0.1221351381502842,
-          "absolute_sensitivity": 0.6106756907514205,
-          "baseline_output": 101.22270668984561,
+          "absolute_change": 0.12291048949315098,
+          "absolute_sensitivity": 0.6145524474657543,
+          "baseline_output": 101.22639547410738,
           "baseline_value": 2.0,
           "classification": "LOW",
           "classification_reason": "analytical_threshold_applied",
@@ -814,19 +814,19 @@
           "cycle_id": null,
           "direction": "+",
           "environment": "greenhouse",
-          "feedback_iterations": 7,
+          "feedback_iterations": 3,
           "name": "radiation use efficiency",
-          "normalized_sensitivity": 0.012065982242948298,
+          "normalized_sensitivity": 0.0121421383145654,
           "observable": "biomass",
           "parameter_id": "radiation.rue",
           "perturbation_percent": 10.0,
-          "perturbed_output": 101.3448418279959,
+          "perturbed_output": 101.34930596360053,
           "perturbed_value": 2.2,
           "phenological_stage": "vegetative_growth",
           "plot_id": null,
           "provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
           "range_source_type": "ENGINEERING_RANGE",
-          "relative_change": 0.0012065982242948309,
+          "relative_change": 0.001214213831456541,
           "scientific_interpretation": "synthetic + OAT sensitivity demonstrates directional response under synthetic contract; it does not establish parameter identifiability or calibration fit",
           "uncertainty_status": "OBSERVATIONAL",
           "variety": "RAF"
@@ -986,11 +986,11 @@
       "benchmark_id": "case_lettuce_annual-1_outdoor_control_unregistered",
       "comparison": {
         "baseline_score": 10.0,
-        "improvement": 0.15442931695859574,
+        "improvement": 0.09819740488478335,
         "interpretation": "Synthetic software comparison; not biological validation.",
         "label": "SYNTHETIC_SOFTWARE_BENCHMARK",
-        "model_score": 11.544293169585957,
-        "relative_difference": 0.15442931695859574
+        "model_score": 10.981974048847833,
+        "relative_difference": 0.09819740488478335
       },
       "crop": "lettuce",
       "cycle_id": "annual-1",
@@ -1013,7 +1013,7 @@
       },
       "environment": "outdoor",
       "failure_reason": null,
-      "input_hash": "858b72cdac2c79e4117ef5dc55353a4d4f436aeb2039183be3b2933ae63fd75c",
+      "input_hash": "f481397677cc34818e04fcfd589efdd86154906c1fc2dcbddbb084ede8b43d8a",
       "metrics": [
         {
           "category": "software_metric",
@@ -1021,7 +1021,7 @@
           "name": "final_biomass",
           "status": "AVAILABLE",
           "unit": "g_DM_m-2",
-          "value": 11.544293169585957
+          "value": 10.981974048847833
         },
         {
           "category": "robustness_metric",
@@ -1033,9 +1033,9 @@
         }
       ],
       "model_configuration_hash": "d98e7fb01d7d13a4cf2b7e367393b82056debcd1db7697110f16dbe4b84daa05",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": null,
-      "result_hash": "6be6f83772076b465de05d15f81c941c4020b1a8009928b1c47aefd14332dc95",
+      "result_hash": "c53e6fbb08d7de00f396df123e0e9aab84e2c57e7791376135d4dcc1dd72def5",
       "scenario_id": "lettuce_annual-1_outdoor_control_unregistered",
       "seed": 110,
       "sensitivity": {
@@ -1043,16 +1043,16 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "lettuce",
           "evaluations": {
-            "baseline": 100.44466740915011,
-            "p1_base_p2_high": 100.46339370508196,
-            "p1_base_p2_low": 100.40075078858514,
-            "p1_high_p2_base": 100.4891223570593,
-            "p1_high_p2_high": 100.50972022050604,
-            "p1_low_p2_base": 100.40021029589134,
-            "p1_low_p2_low": 100.36068349156228
+            "baseline": 100.08948849104702,
+            "p1_base_p2_high": 100.08823206057733,
+            "p1_base_p2_low": 100.08510462158382,
+            "p1_high_p2_base": 100.09843891466551,
+            "p1_high_p2_high": 100.09705681023193,
+            "p1_low_p2_base": 100.08053835359193,
+            "p1_low_p2_low": 100.07659300360717
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.0018715675148968103,
+          "interaction_delta": -0.00012567396387908047,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
@@ -1246,11 +1246,11 @@
       "benchmark_id": "case_lettuce_annual-1_greenhouse_control_unregistered",
       "comparison": {
         "baseline_score": 10.0,
-        "improvement": 0.07720231570823995,
+        "improvement": 0.047582323344188285,
         "interpretation": "Synthetic software comparison; not biological validation.",
         "label": "SYNTHETIC_SOFTWARE_BENCHMARK",
-        "model_score": 10.7720231570824,
-        "relative_difference": 0.07720231570823995
+        "model_score": 10.475823233441883,
+        "relative_difference": 0.047582323344188285
       },
       "crop": "lettuce",
       "cycle_id": "annual-1",
@@ -1273,7 +1273,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "6d4bd7ac4ce9e0739b214d1c1d840bc746ba1f68db90df6ef58c3b1edd633ccb",
+      "input_hash": "bba6b28f383a6753690b780f78ed31d8d14d26748199137715ad6960c7f128ce",
       "metrics": [
         {
           "category": "software_metric",
@@ -1281,7 +1281,7 @@
           "name": "final_biomass",
           "status": "AVAILABLE",
           "unit": "g_DM_m-2",
-          "value": 10.7720231570824
+          "value": 10.475823233441883
         },
         {
           "category": "robustness_metric",
@@ -1293,9 +1293,9 @@
         }
       ],
       "model_configuration_hash": "a5ef40eea1a70bd510eb417954e882a3af8f3796c1cfde005e3d796f456d9146",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": null,
-      "result_hash": "5650df9dedba42558764202ee3be101e5bdf2a3f50fdeeae1db217e08739957c",
+      "result_hash": "2006c177d9c2f57c5af44cbe45203cb18c96bc21128ffa61f4a90e768bac4b9d",
       "scenario_id": "lettuce_annual-1_greenhouse_control_unregistered",
       "seed": 110,
       "sensitivity": {
@@ -1303,25 +1303,25 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "lettuce",
           "evaluations": {
-            "baseline": 100.44466740915011,
-            "p1_base_p2_high": 100.46339370508196,
-            "p1_base_p2_low": 100.40075078858514,
-            "p1_high_p2_base": 100.4891223570593,
-            "p1_high_p2_high": 100.50972022050604,
-            "p1_low_p2_base": 100.40021029589134,
-            "p1_low_p2_low": 100.36068349156228
+            "baseline": 100.08948849104702,
+            "p1_base_p2_high": 100.08823206057733,
+            "p1_base_p2_low": 100.08510462158382,
+            "p1_high_p2_base": 100.09843891466551,
+            "p1_high_p2_high": 100.09705681023193,
+            "p1_low_p2_base": 100.08053835359193,
+            "p1_low_p2_low": 100.07659300360717
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.0018715675148968103,
+          "interaction_delta": -0.00012567396387908047,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
           "perturbation_percent": 10.0
         },
         "oat": {
-          "absolute_change": 0.04445494790918758,
-          "absolute_sensitivity": 0.2222747395459377,
-          "baseline_output": 100.44466740915011,
+          "absolute_change": 0.008950423618486525,
+          "absolute_sensitivity": 0.04475211809243258,
+          "baseline_output": 100.08948849104702,
           "baseline_value": 2.0,
           "classification": "LOW",
           "classification_reason": "analytical_threshold_applied",
@@ -1334,19 +1334,19 @@
           "cycle_id": null,
           "direction": "+",
           "environment": "greenhouse",
-          "feedback_iterations": 7,
+          "feedback_iterations": 3,
           "name": "radiation use efficiency",
-          "normalized_sensitivity": 0.004425814635644646,
+          "normalized_sensitivity": 0.0008942421180708831,
           "observable": "biomass",
           "parameter_id": "radiation.rue",
           "perturbation_percent": 10.0,
-          "perturbed_output": 100.4891223570593,
+          "perturbed_output": 100.09843891466551,
           "perturbed_value": 2.2,
           "phenological_stage": "vegetative_growth",
           "plot_id": null,
           "provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
           "range_source_type": "ENGINEERING_RANGE",
-          "relative_change": 0.000442581463564465,
+          "relative_change": 8.942421180708839e-05,
           "scientific_interpretation": "synthetic + OAT sensitivity demonstrates directional response under synthetic contract; it does not establish parameter identifiability or calibration fit",
           "uncertainty_status": "OBSERVATIONAL",
           "variety": null
@@ -1506,11 +1506,11 @@
       "benchmark_id": "case_lettuce_annual-2_outdoor_control_unregistered",
       "comparison": {
         "baseline_score": 10.0,
-        "improvement": 0.15442931695859574,
+        "improvement": 0.09819740488478335,
         "interpretation": "Synthetic software comparison; not biological validation.",
         "label": "SYNTHETIC_SOFTWARE_BENCHMARK",
-        "model_score": 11.544293169585957,
-        "relative_difference": 0.15442931695859574
+        "model_score": 10.981974048847833,
+        "relative_difference": 0.09819740488478335
       },
       "crop": "lettuce",
       "cycle_id": "annual-2",
@@ -1533,7 +1533,7 @@
       },
       "environment": "outdoor",
       "failure_reason": null,
-      "input_hash": "121024ff4914b4ae59e18633488579369f2777a6dca9f37dec3f210b04511f7e",
+      "input_hash": "bfe3f63709888766960d066bc79f631c37259d2c604628d7ff29eacce06de543",
       "metrics": [
         {
           "category": "software_metric",
@@ -1541,7 +1541,7 @@
           "name": "final_biomass",
           "status": "AVAILABLE",
           "unit": "g_DM_m-2",
-          "value": 11.544293169585957
+          "value": 10.981974048847833
         },
         {
           "category": "robustness_metric",
@@ -1553,9 +1553,9 @@
         }
       ],
       "model_configuration_hash": "b35f4b03bbf824fe25999967c70ad97caf37071f98d813751dfa206635495846",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": null,
-      "result_hash": "242aa0a02f94302323da44df82e015728e2093d7b80d3e1c35c1b82e2d8c20db",
+      "result_hash": "93259c22b9fc28e338ff92467914dfbadef0264ff581fa1017dfeb53a3ae7694",
       "scenario_id": "lettuce_annual-2_outdoor_control_unregistered",
       "seed": 111,
       "sensitivity": {
@@ -1563,16 +1563,16 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "lettuce",
           "evaluations": {
-            "baseline": 100.44466740915011,
-            "p1_base_p2_high": 100.46339370508196,
-            "p1_base_p2_low": 100.40075078858514,
-            "p1_high_p2_base": 100.4891223570593,
-            "p1_high_p2_high": 100.50972022050604,
-            "p1_low_p2_base": 100.40021029589134,
-            "p1_low_p2_low": 100.36068349156228
+            "baseline": 100.08948849104702,
+            "p1_base_p2_high": 100.08823206057733,
+            "p1_base_p2_low": 100.08510462158382,
+            "p1_high_p2_base": 100.09843891466551,
+            "p1_high_p2_high": 100.09705681023193,
+            "p1_low_p2_base": 100.08053835359193,
+            "p1_low_p2_low": 100.07659300360717
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.0018715675148968103,
+          "interaction_delta": -0.00012567396387908047,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
@@ -1766,11 +1766,11 @@
       "benchmark_id": "case_lettuce_annual-2_greenhouse_control_unregistered",
       "comparison": {
         "baseline_score": 10.0,
-        "improvement": 0.07720231570823995,
+        "improvement": 0.047582323344188285,
         "interpretation": "Synthetic software comparison; not biological validation.",
         "label": "SYNTHETIC_SOFTWARE_BENCHMARK",
-        "model_score": 10.7720231570824,
-        "relative_difference": 0.07720231570823995
+        "model_score": 10.475823233441883,
+        "relative_difference": 0.047582323344188285
       },
       "crop": "lettuce",
       "cycle_id": "annual-2",
@@ -1793,7 +1793,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "83a9514f08638aab4e5fb4ff9b360e2bf874a02c8abc6cd256421512a1863c4e",
+      "input_hash": "06dfaee8f759d28fd1a45a8be6a4dbfb40fe5be24df9eb027529dbd4f55bfecb",
       "metrics": [
         {
           "category": "software_metric",
@@ -1801,7 +1801,7 @@
           "name": "final_biomass",
           "status": "AVAILABLE",
           "unit": "g_DM_m-2",
-          "value": 10.7720231570824
+          "value": 10.475823233441883
         },
         {
           "category": "robustness_metric",
@@ -1813,9 +1813,9 @@
         }
       ],
       "model_configuration_hash": "1bba160bd8e0941f5678d302235210266cf7298f265c097ef67b676e6fc98b32",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": null,
-      "result_hash": "3d651ea5ccd7e8423414d7a23fbef2ed80f2067a21ba6210bec4f40d7bdfdd84",
+      "result_hash": "e416d16d08804cd3eeddd23ffc26e6eb561aa623c325052d29288de93445c6eb",
       "scenario_id": "lettuce_annual-2_greenhouse_control_unregistered",
       "seed": 111,
       "sensitivity": {
@@ -1823,25 +1823,25 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "lettuce",
           "evaluations": {
-            "baseline": 100.44466740915011,
-            "p1_base_p2_high": 100.46339370508196,
-            "p1_base_p2_low": 100.40075078858514,
-            "p1_high_p2_base": 100.4891223570593,
-            "p1_high_p2_high": 100.50972022050604,
-            "p1_low_p2_base": 100.40021029589134,
-            "p1_low_p2_low": 100.36068349156228
+            "baseline": 100.08948849104702,
+            "p1_base_p2_high": 100.08823206057733,
+            "p1_base_p2_low": 100.08510462158382,
+            "p1_high_p2_base": 100.09843891466551,
+            "p1_high_p2_high": 100.09705681023193,
+            "p1_low_p2_base": 100.08053835359193,
+            "p1_low_p2_low": 100.07659300360717
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.0018715675148968103,
+          "interaction_delta": -0.00012567396387908047,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
           "perturbation_percent": 10.0
         },
         "oat": {
-          "absolute_change": 0.04445494790918758,
-          "absolute_sensitivity": 0.2222747395459377,
-          "baseline_output": 100.44466740915011,
+          "absolute_change": 0.008950423618486525,
+          "absolute_sensitivity": 0.04475211809243258,
+          "baseline_output": 100.08948849104702,
           "baseline_value": 2.0,
           "classification": "LOW",
           "classification_reason": "analytical_threshold_applied",
@@ -1854,19 +1854,19 @@
           "cycle_id": null,
           "direction": "+",
           "environment": "greenhouse",
-          "feedback_iterations": 7,
+          "feedback_iterations": 3,
           "name": "radiation use efficiency",
-          "normalized_sensitivity": 0.004425814635644646,
+          "normalized_sensitivity": 0.0008942421180708831,
           "observable": "biomass",
           "parameter_id": "radiation.rue",
           "perturbation_percent": 10.0,
-          "perturbed_output": 100.4891223570593,
+          "perturbed_output": 100.09843891466551,
           "perturbed_value": 2.2,
           "phenological_stage": "vegetative_growth",
           "plot_id": null,
           "provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
           "range_source_type": "ENGINEERING_RANGE",
-          "relative_change": 0.000442581463564465,
+          "relative_change": 8.942421180708839e-05,
           "scientific_interpretation": "synthetic + OAT sensitivity demonstrates directional response under synthetic contract; it does not establish parameter identifiability or calibration fit",
           "uncertainty_status": "OBSERVATIONAL",
           "variety": null
@@ -2026,11 +2026,11 @@
       "benchmark_id": "case_lettuce_annual-3_outdoor_control_unregistered",
       "comparison": {
         "baseline_score": 10.0,
-        "improvement": 0.15442931695859574,
+        "improvement": 0.09819740488478335,
         "interpretation": "Synthetic software comparison; not biological validation.",
         "label": "SYNTHETIC_SOFTWARE_BENCHMARK",
-        "model_score": 11.544293169585957,
-        "relative_difference": 0.15442931695859574
+        "model_score": 10.981974048847833,
+        "relative_difference": 0.09819740488478335
       },
       "crop": "lettuce",
       "cycle_id": "annual-3",
@@ -2053,7 +2053,7 @@
       },
       "environment": "outdoor",
       "failure_reason": null,
-      "input_hash": "646a6fc52caae01fc1e1d2435de0b275e53f766465bf2c4613629ec85d78666c",
+      "input_hash": "1fb85c430ed987241935a2e8b7a557aed5007439643403e2ce1207544857d06b",
       "metrics": [
         {
           "category": "software_metric",
@@ -2061,7 +2061,7 @@
           "name": "final_biomass",
           "status": "AVAILABLE",
           "unit": "g_DM_m-2",
-          "value": 11.544293169585957
+          "value": 10.981974048847833
         },
         {
           "category": "robustness_metric",
@@ -2073,9 +2073,9 @@
         }
       ],
       "model_configuration_hash": "7a170e78b68d2c26b2129061c6a6e78f0b80267b17fdc3b1a4cebb72ae2ed0f9",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": null,
-      "result_hash": "c451b37fba5b47b494e90f50d235a5f17085ba4fccda72f633d4bb915294d60f",
+      "result_hash": "1bf9cd58f787c3e53edd8af0c1e2b17c24b78f593fa2d3e8db23d981a417edbd",
       "scenario_id": "lettuce_annual-3_outdoor_control_unregistered",
       "seed": 112,
       "sensitivity": {
@@ -2083,16 +2083,16 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "lettuce",
           "evaluations": {
-            "baseline": 100.44466740915011,
-            "p1_base_p2_high": 100.46339370508196,
-            "p1_base_p2_low": 100.40075078858514,
-            "p1_high_p2_base": 100.4891223570593,
-            "p1_high_p2_high": 100.50972022050604,
-            "p1_low_p2_base": 100.40021029589134,
-            "p1_low_p2_low": 100.36068349156228
+            "baseline": 100.08948849104702,
+            "p1_base_p2_high": 100.08823206057733,
+            "p1_base_p2_low": 100.08510462158382,
+            "p1_high_p2_base": 100.09843891466551,
+            "p1_high_p2_high": 100.09705681023193,
+            "p1_low_p2_base": 100.08053835359193,
+            "p1_low_p2_low": 100.07659300360717
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.0018715675148968103,
+          "interaction_delta": -0.00012567396387908047,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
@@ -2286,11 +2286,11 @@
       "benchmark_id": "case_lettuce_annual-3_greenhouse_control_unregistered",
       "comparison": {
         "baseline_score": 10.0,
-        "improvement": 0.07720231570823995,
+        "improvement": 0.047582323344188285,
         "interpretation": "Synthetic software comparison; not biological validation.",
         "label": "SYNTHETIC_SOFTWARE_BENCHMARK",
-        "model_score": 10.7720231570824,
-        "relative_difference": 0.07720231570823995
+        "model_score": 10.475823233441883,
+        "relative_difference": 0.047582323344188285
       },
       "crop": "lettuce",
       "cycle_id": "annual-3",
@@ -2313,7 +2313,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "d583f2239e505d2357647430485c4e397f934e7bfc7357ebe2a7972464a99988",
+      "input_hash": "9d8d0be022e80e23dd30e84b9ff0ff9d781186b49a6b62881719182f5547cd3e",
       "metrics": [
         {
           "category": "software_metric",
@@ -2321,7 +2321,7 @@
           "name": "final_biomass",
           "status": "AVAILABLE",
           "unit": "g_DM_m-2",
-          "value": 10.7720231570824
+          "value": 10.475823233441883
         },
         {
           "category": "robustness_metric",
@@ -2333,9 +2333,9 @@
         }
       ],
       "model_configuration_hash": "110a5f892c5bc994e2d77f346c9e6b60efab026839ee2b59fa6a792ef6ebce23",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": null,
-      "result_hash": "685ad7160e29a75de0912d3e0d62b1caaa5c3ae415e27d1c8bb84a6000b2a7c0",
+      "result_hash": "c2e2cbc4bd55b3233694bdf8f6c04428bb4b59e505dd4301021ab9fb8c4ad62f",
       "scenario_id": "lettuce_annual-3_greenhouse_control_unregistered",
       "seed": 112,
       "sensitivity": {
@@ -2343,25 +2343,25 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "lettuce",
           "evaluations": {
-            "baseline": 100.44466740915011,
-            "p1_base_p2_high": 100.46339370508196,
-            "p1_base_p2_low": 100.40075078858514,
-            "p1_high_p2_base": 100.4891223570593,
-            "p1_high_p2_high": 100.50972022050604,
-            "p1_low_p2_base": 100.40021029589134,
-            "p1_low_p2_low": 100.36068349156228
+            "baseline": 100.08948849104702,
+            "p1_base_p2_high": 100.08823206057733,
+            "p1_base_p2_low": 100.08510462158382,
+            "p1_high_p2_base": 100.09843891466551,
+            "p1_high_p2_high": 100.09705681023193,
+            "p1_low_p2_base": 100.08053835359193,
+            "p1_low_p2_low": 100.07659300360717
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.0018715675148968103,
+          "interaction_delta": -0.00012567396387908047,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
           "perturbation_percent": 10.0
         },
         "oat": {
-          "absolute_change": 0.04445494790918758,
-          "absolute_sensitivity": 0.2222747395459377,
-          "baseline_output": 100.44466740915011,
+          "absolute_change": 0.008950423618486525,
+          "absolute_sensitivity": 0.04475211809243258,
+          "baseline_output": 100.08948849104702,
           "baseline_value": 2.0,
           "classification": "LOW",
           "classification_reason": "analytical_threshold_applied",
@@ -2374,19 +2374,19 @@
           "cycle_id": null,
           "direction": "+",
           "environment": "greenhouse",
-          "feedback_iterations": 7,
+          "feedback_iterations": 3,
           "name": "radiation use efficiency",
-          "normalized_sensitivity": 0.004425814635644646,
+          "normalized_sensitivity": 0.0008942421180708831,
           "observable": "biomass",
           "parameter_id": "radiation.rue",
           "perturbation_percent": 10.0,
-          "perturbed_output": 100.4891223570593,
+          "perturbed_output": 100.09843891466551,
           "perturbed_value": 2.2,
           "phenological_stage": "vegetative_growth",
           "plot_id": null,
           "provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
           "range_source_type": "ENGINEERING_RANGE",
-          "relative_change": 0.000442581463564465,
+          "relative_change": 8.942421180708839e-05,
           "scientific_interpretation": "synthetic + OAT sensitivity demonstrates directional response under synthetic contract; it does not establish parameter identifiability or calibration fit",
           "uncertainty_status": "OBSERVATIONAL",
           "variety": null
@@ -2573,7 +2573,7 @@
       },
       "environment": "outdoor",
       "failure_reason": null,
-      "input_hash": "59d4b7d64b6c4961923e823441799cc02a1bac23de65aa310a5644e40c0d58e5",
+      "input_hash": "9a1cbb0687c598871e1c14b3629df76353b236095bfa8b74ef31fbb56b0d7f1e",
       "metrics": [
         {
           "category": "software_metric",
@@ -2593,9 +2593,9 @@
         }
       ],
       "model_configuration_hash": "400da157f49623376a72c0ed2f803071c7831ba33bcff14b3880f3a00175f2c3",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": "plot_40811",
-      "result_hash": "8e5d2a6d9595a7358475975ab495824ed58db2dbe3f70c1c3682e7937078e026",
+      "result_hash": "e24f108f77935e99c63178757b4aa78feff02c6c5bb809a7a032c89816508507",
       "scenario_id": "pepper_annual-1_outdoor_control_plot_40811",
       "seed": 120,
       "sensitivity": {
@@ -2603,16 +2603,16 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "pepper",
           "evaluations": {
-            "baseline": 101.22270668984561,
-            "p1_base_p2_high": 101.3448418279959,
-            "p1_base_p2_low": 101.10054650652637,
-            "p1_high_p2_base": 101.3448418279959,
-            "p1_high_p2_high": 101.47916139456308,
-            "p1_low_p2_base": 101.10054650652637,
-            "p1_low_p2_low": 100.99058103798836
+            "baseline": 101.22639547410738,
+            "p1_base_p2_high": 101.34930596360053,
+            "p1_base_p2_low": 101.10353394555302,
+            "p1_high_p2_base": 101.34930596360053,
+            "p1_high_p2_high": 101.48456393257112,
+            "p1_low_p2_base": 101.10353394555302,
+            "p1_low_p2_low": 100.99300051422397
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.012184428416901483,
+          "interaction_delta": 0.01234747947744097,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
@@ -2806,11 +2806,11 @@
       "benchmark_id": "case_pepper_annual-1_greenhouse_control_plot_40811",
       "comparison": {
         "baseline_score": 10.0,
-        "improvement": 0.24372360435387835,
+        "improvement": 0.24370274577284706,
         "interpretation": "Synthetic software comparison; not biological validation.",
         "label": "SYNTHETIC_SOFTWARE_BENCHMARK",
-        "model_score": 12.437236043538784,
-        "relative_difference": 0.24372360435387835
+        "model_score": 12.43702745772847,
+        "relative_difference": 0.24370274577284706
       },
       "crop": "pepper",
       "cycle_id": "annual-1",
@@ -2833,7 +2833,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "1a30f544f4bf3be260e9d4e40e3896014980a976d08e7ad864b4d7fb12073799",
+      "input_hash": "1df3b2036bc403899cd4afdd7f72e444d257c7b61ed81a2ab0a123cff400bb73",
       "metrics": [
         {
           "category": "software_metric",
@@ -2841,7 +2841,7 @@
           "name": "final_biomass",
           "status": "AVAILABLE",
           "unit": "g_DM_m-2",
-          "value": 12.437236043538784
+          "value": 12.43702745772847
         },
         {
           "category": "robustness_metric",
@@ -2853,9 +2853,9 @@
         }
       ],
       "model_configuration_hash": "61193e86291bad71aedf77defc67773444b8ea736b57b5906628badc98befa92",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": "plot_40811",
-      "result_hash": "42554af3bd5b360fbd8ff31f63c11b868ab2b0d629505fce5d437ecc5738e6b8",
+      "result_hash": "8c8f4e54411a212b69b721ae886ede5d8c792f00d22a851ae6bf77d1c1f0f57e",
       "scenario_id": "pepper_annual-1_greenhouse_control_plot_40811",
       "seed": 120,
       "sensitivity": {
@@ -2863,25 +2863,25 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "pepper",
           "evaluations": {
-            "baseline": 101.22270668984561,
-            "p1_base_p2_high": 101.3448418279959,
-            "p1_base_p2_low": 101.10054650652637,
-            "p1_high_p2_base": 101.3448418279959,
-            "p1_high_p2_high": 101.47916139456308,
-            "p1_low_p2_base": 101.10054650652637,
-            "p1_low_p2_low": 100.99058103798836
+            "baseline": 101.22639547410738,
+            "p1_base_p2_high": 101.34930596360053,
+            "p1_base_p2_low": 101.10353394555302,
+            "p1_high_p2_base": 101.34930596360053,
+            "p1_high_p2_high": 101.48456393257112,
+            "p1_low_p2_base": 101.10353394555302,
+            "p1_low_p2_low": 100.99300051422397
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.012184428416901483,
+          "interaction_delta": 0.01234747947744097,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
           "perturbation_percent": 10.0
         },
         "oat": {
-          "absolute_change": 0.1221351381502842,
-          "absolute_sensitivity": 0.6106756907514205,
-          "baseline_output": 101.22270668984561,
+          "absolute_change": 0.12291048949315098,
+          "absolute_sensitivity": 0.6145524474657543,
+          "baseline_output": 101.22639547410738,
           "baseline_value": 2.0,
           "classification": "LOW",
           "classification_reason": "analytical_threshold_applied",
@@ -2894,19 +2894,19 @@
           "cycle_id": null,
           "direction": "+",
           "environment": "greenhouse",
-          "feedback_iterations": 7,
+          "feedback_iterations": 3,
           "name": "radiation use efficiency",
-          "normalized_sensitivity": 0.012065982242948298,
+          "normalized_sensitivity": 0.0121421383145654,
           "observable": "biomass",
           "parameter_id": "radiation.rue",
           "perturbation_percent": 10.0,
-          "perturbed_output": 101.3448418279959,
+          "perturbed_output": 101.34930596360053,
           "perturbed_value": 2.2,
           "phenological_stage": "vegetative_growth",
           "plot_id": null,
           "provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
           "range_source_type": "ENGINEERING_RANGE",
-          "relative_change": 0.0012065982242948309,
+          "relative_change": 0.001214213831456541,
           "scientific_interpretation": "synthetic + OAT sensitivity demonstrates directional response under synthetic contract; it does not establish parameter identifiability or calibration fit",
           "uncertainty_status": "OBSERVATIONAL",
           "variety": "Lamuyo"
@@ -3093,7 +3093,7 @@
       },
       "environment": "outdoor",
       "failure_reason": null,
-      "input_hash": "89779677c3eb36bf6b14284ee6554118a13866d8246dd3e9981dd70eb7b23045",
+      "input_hash": "2cc21958373c34778e12eec00e2f69c92ee3e0b2e11d95251edbc0fec19c4966",
       "metrics": [
         {
           "category": "software_metric",
@@ -3113,9 +3113,9 @@
         }
       ],
       "model_configuration_hash": "b04e4ce0a8eee8d1fd1857c7a2983d703967d652e34c9fab49dfc0330fc1ed85",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": "plot_30412",
-      "result_hash": "4a4e56f02265ca42694dde19bd4e643ec335bbd7f0e5d3e83733ca0fcebe865c",
+      "result_hash": "fc28ce36a936fa04c1b7e02f39ba5f34b8cc3f32a6716d2a8d572691e9b87708",
       "scenario_id": "grape_perennial-1_outdoor_control_plot_30412",
       "seed": 130,
       "sensitivity": {
@@ -3123,16 +3123,16 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "grape",
           "evaluations": {
-            "baseline": 101.22270668984561,
-            "p1_base_p2_high": 101.3448418279959,
-            "p1_base_p2_low": 101.10054650652637,
-            "p1_high_p2_base": 101.3448418279959,
-            "p1_high_p2_high": 101.47916139456308,
-            "p1_low_p2_base": 101.10054650652637,
-            "p1_low_p2_low": 100.99058103798836
+            "baseline": 101.22639547410738,
+            "p1_base_p2_high": 101.34930596360053,
+            "p1_base_p2_low": 101.10353394555302,
+            "p1_high_p2_base": 101.34930596360053,
+            "p1_high_p2_high": 101.48456393257112,
+            "p1_low_p2_base": 101.10353394555302,
+            "p1_low_p2_low": 100.99300051422397
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.012184428416901483,
+          "interaction_delta": 0.01234747947744097,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
@@ -3326,11 +3326,11 @@
       "benchmark_id": "case_grape_perennial-1_greenhouse_control_plot_30412",
       "comparison": {
         "baseline_score": 10.0,
-        "improvement": 0.24372360435387835,
+        "improvement": 0.24370274577284706,
         "interpretation": "Synthetic software comparison; not biological validation.",
         "label": "SYNTHETIC_SOFTWARE_BENCHMARK",
-        "model_score": 12.437236043538784,
-        "relative_difference": 0.24372360435387835
+        "model_score": 12.43702745772847,
+        "relative_difference": 0.24370274577284706
       },
       "crop": "grape",
       "cycle_id": "perennial-1",
@@ -3353,7 +3353,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "ab92837b066004371136e76e14cb6ffc65290f7a9b7646de66f18a32796d2a62",
+      "input_hash": "80a040292498c51725fabc918308e0d74ed1bfeaf0d42f3ef172dbad8a15b9cb",
       "metrics": [
         {
           "category": "software_metric",
@@ -3361,7 +3361,7 @@
           "name": "final_biomass",
           "status": "AVAILABLE",
           "unit": "g_DM_m-2",
-          "value": 12.437236043538784
+          "value": 12.43702745772847
         },
         {
           "category": "robustness_metric",
@@ -3373,9 +3373,9 @@
         }
       ],
       "model_configuration_hash": "9a43f20fc17269c39940f73f8cbe6e07267fb230648cec1ee562e254a8cd5b26",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": "plot_30412",
-      "result_hash": "9c0b118db7bddbaf89c6617ecfe9bb1d1b8bd660ad615344371fb39d3eb2d41f",
+      "result_hash": "3a18e6c080ee9a834bdede5c0a2381e1946aea5c0e2df61d83334efc06a30dca",
       "scenario_id": "grape_perennial-1_greenhouse_control_plot_30412",
       "seed": 130,
       "sensitivity": {
@@ -3383,25 +3383,25 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "grape",
           "evaluations": {
-            "baseline": 101.22270668984561,
-            "p1_base_p2_high": 101.3448418279959,
-            "p1_base_p2_low": 101.10054650652637,
-            "p1_high_p2_base": 101.3448418279959,
-            "p1_high_p2_high": 101.47916139456308,
-            "p1_low_p2_base": 101.10054650652637,
-            "p1_low_p2_low": 100.99058103798836
+            "baseline": 101.22639547410738,
+            "p1_base_p2_high": 101.34930596360053,
+            "p1_base_p2_low": 101.10353394555302,
+            "p1_high_p2_base": 101.34930596360053,
+            "p1_high_p2_high": 101.48456393257112,
+            "p1_low_p2_base": 101.10353394555302,
+            "p1_low_p2_low": 100.99300051422397
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.012184428416901483,
+          "interaction_delta": 0.01234747947744097,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
           "perturbation_percent": 10.0
         },
         "oat": {
-          "absolute_change": 0.1221351381502842,
-          "absolute_sensitivity": 0.6106756907514205,
-          "baseline_output": 101.22270668984561,
+          "absolute_change": 0.12291048949315098,
+          "absolute_sensitivity": 0.6145524474657543,
+          "baseline_output": 101.22639547410738,
           "baseline_value": 2.0,
           "classification": "LOW",
           "classification_reason": "analytical_threshold_applied",
@@ -3414,19 +3414,19 @@
           "cycle_id": null,
           "direction": "+",
           "environment": "greenhouse",
-          "feedback_iterations": 7,
+          "feedback_iterations": 3,
           "name": "radiation use efficiency",
-          "normalized_sensitivity": 0.012065982242948298,
+          "normalized_sensitivity": 0.0121421383145654,
           "observable": "biomass",
           "parameter_id": "radiation.rue",
           "perturbation_percent": 10.0,
-          "perturbed_output": 101.3448418279959,
+          "perturbed_output": 101.34930596360053,
           "perturbed_value": 2.2,
           "phenological_stage": "vegetative_growth",
           "plot_id": null,
           "provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
           "range_source_type": "ENGINEERING_RANGE",
-          "relative_change": 0.0012065982242948309,
+          "relative_change": 0.001214213831456541,
           "scientific_interpretation": "synthetic + OAT sensitivity demonstrates directional response under synthetic contract; it does not establish parameter identifiability or calibration fit",
           "uncertainty_status": "OBSERVATIONAL",
           "variety": "Monastrell"
@@ -3613,7 +3613,7 @@
       },
       "environment": "outdoor",
       "failure_reason": null,
-      "input_hash": "801ca895e6ae4f841103fadf9ee5ccab59fcb63e66f272a10588109ee5ea073f",
+      "input_hash": "4ebc4f439f2605ad092cbb17db5f4666830776b0c5968b565a5ca6060b871600",
       "metrics": [
         {
           "category": "software_metric",
@@ -3633,9 +3633,9 @@
         }
       ],
       "model_configuration_hash": "7689ce0cac2dd7c9761d28b7cee55e214ef545fd81d73af94be02a8c3baa92f1",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": null,
-      "result_hash": "ed647543f56b75c10e171042653f321311a027f0fd1ee11210c82bc03cbe6782",
+      "result_hash": "caf3cb0502fac1cb20e9f47dcb284328ad439e23d0ac0427dce43e3e9e8a8bb6",
       "scenario_id": "peach_perennial-1_outdoor_control_unregistered",
       "seed": 140,
       "sensitivity": {
@@ -3643,16 +3643,16 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "peach",
           "evaluations": {
-            "baseline": 101.22270668984561,
-            "p1_base_p2_high": 101.3448418279959,
-            "p1_base_p2_low": 101.10054650652637,
-            "p1_high_p2_base": 101.3448418279959,
-            "p1_high_p2_high": 101.47916139456308,
-            "p1_low_p2_base": 101.10054650652637,
-            "p1_low_p2_low": 100.99058103798836
+            "baseline": 101.22639547410738,
+            "p1_base_p2_high": 101.34930596360053,
+            "p1_base_p2_low": 101.10353394555302,
+            "p1_high_p2_base": 101.34930596360053,
+            "p1_high_p2_high": 101.48456393257112,
+            "p1_low_p2_base": 101.10353394555302,
+            "p1_low_p2_low": 100.99300051422397
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.012184428416901483,
+          "interaction_delta": 0.01234747947744097,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
@@ -3846,11 +3846,11 @@
       "benchmark_id": "case_peach_perennial-1_greenhouse_control_unregistered",
       "comparison": {
         "baseline_score": 10.0,
-        "improvement": 0.24372360435387835,
+        "improvement": 0.24370274577284706,
         "interpretation": "Synthetic software comparison; not biological validation.",
         "label": "SYNTHETIC_SOFTWARE_BENCHMARK",
-        "model_score": 12.437236043538784,
-        "relative_difference": 0.24372360435387835
+        "model_score": 12.43702745772847,
+        "relative_difference": 0.24370274577284706
       },
       "crop": "peach",
       "cycle_id": "perennial-1",
@@ -3873,7 +3873,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "835324ac6e1be592fa50cc4acf56fbafb12dab04c13259e8614a5b67a0671195",
+      "input_hash": "d3bcdb7bf26b320070da05f2f9f375aa8c058f446aecc800fb66eba5fd0aff53",
       "metrics": [
         {
           "category": "software_metric",
@@ -3881,7 +3881,7 @@
           "name": "final_biomass",
           "status": "AVAILABLE",
           "unit": "g_DM_m-2",
-          "value": 12.437236043538784
+          "value": 12.43702745772847
         },
         {
           "category": "robustness_metric",
@@ -3893,9 +3893,9 @@
         }
       ],
       "model_configuration_hash": "c394afe46e3160308bc783dba88a6c90279da1f4fbcb547e699d65471978970e",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": null,
-      "result_hash": "7b91898ec7c1b87b6644fa8df597364826ec0c944ca9bbfc38b43bdbb57f81f8",
+      "result_hash": "7e90f14d8311ee478ddd3bc60b60e3eea9b8add733c819f858411b3c5d94dedc",
       "scenario_id": "peach_perennial-1_greenhouse_control_unregistered",
       "seed": 140,
       "sensitivity": {
@@ -3903,25 +3903,25 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "peach",
           "evaluations": {
-            "baseline": 101.22270668984561,
-            "p1_base_p2_high": 101.3448418279959,
-            "p1_base_p2_low": 101.10054650652637,
-            "p1_high_p2_base": 101.3448418279959,
-            "p1_high_p2_high": 101.47916139456308,
-            "p1_low_p2_base": 101.10054650652637,
-            "p1_low_p2_low": 100.99058103798836
+            "baseline": 101.22639547410738,
+            "p1_base_p2_high": 101.34930596360053,
+            "p1_base_p2_low": 101.10353394555302,
+            "p1_high_p2_base": 101.34930596360053,
+            "p1_high_p2_high": 101.48456393257112,
+            "p1_low_p2_base": 101.10353394555302,
+            "p1_low_p2_low": 100.99300051422397
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.012184428416901483,
+          "interaction_delta": 0.01234747947744097,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
           "perturbation_percent": 10.0
         },
         "oat": {
-          "absolute_change": 0.1221351381502842,
-          "absolute_sensitivity": 0.6106756907514205,
-          "baseline_output": 101.22270668984561,
+          "absolute_change": 0.12291048949315098,
+          "absolute_sensitivity": 0.6145524474657543,
+          "baseline_output": 101.22639547410738,
           "baseline_value": 2.0,
           "classification": "LOW",
           "classification_reason": "analytical_threshold_applied",
@@ -3934,19 +3934,19 @@
           "cycle_id": null,
           "direction": "+",
           "environment": "greenhouse",
-          "feedback_iterations": 7,
+          "feedback_iterations": 3,
           "name": "radiation use efficiency",
-          "normalized_sensitivity": 0.012065982242948298,
+          "normalized_sensitivity": 0.0121421383145654,
           "observable": "biomass",
           "parameter_id": "radiation.rue",
           "perturbation_percent": 10.0,
-          "perturbed_output": 101.3448418279959,
+          "perturbed_output": 101.34930596360053,
           "perturbed_value": 2.2,
           "phenological_stage": "vegetative_growth",
           "plot_id": null,
           "provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
           "range_source_type": "ENGINEERING_RANGE",
-          "relative_change": 0.0012065982242948309,
+          "relative_change": 0.001214213831456541,
           "scientific_interpretation": "synthetic + OAT sensitivity demonstrates directional response under synthetic contract; it does not establish parameter identifiability or calibration fit",
           "uncertainty_status": "OBSERVATIONAL",
           "variety": null
@@ -4133,7 +4133,7 @@
       },
       "environment": "outdoor",
       "failure_reason": null,
-      "input_hash": "75ef1d8353b900e40da24c9de30cd9d0f71bf02a5156da94c1d46e129cb53b3c",
+      "input_hash": "25930276a9a6ca6af33b5da37cc3717dc3b40463eb449504f8950d5da6086f1f",
       "metrics": [
         {
           "category": "software_metric",
@@ -4153,9 +4153,9 @@
         }
       ],
       "model_configuration_hash": "4ba393131866184d08b6f165d1f1c3becf16e54723478e1b6d68e809098bc611",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": "plot_14705",
-      "result_hash": "77c39605dce27a7980070b0ca1db163bc664f5ac12060ee5641ffc49c95c2050",
+      "result_hash": "072383ac712b58c20731569a7747b50a5282fa1cb5bc1319e0622cd5ff192db1",
       "scenario_id": "plum_perennial-1_outdoor_control_plot_14705",
       "seed": 150,
       "sensitivity": {
@@ -4163,16 +4163,16 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "plum",
           "evaluations": {
-            "baseline": 101.22270668984561,
-            "p1_base_p2_high": 101.3448418279959,
-            "p1_base_p2_low": 101.10054650652637,
-            "p1_high_p2_base": 101.3448418279959,
-            "p1_high_p2_high": 101.47916139456308,
-            "p1_low_p2_base": 101.10054650652637,
-            "p1_low_p2_low": 100.99058103798836
+            "baseline": 101.22639547410738,
+            "p1_base_p2_high": 101.34930596360053,
+            "p1_base_p2_low": 101.10353394555302,
+            "p1_high_p2_base": 101.34930596360053,
+            "p1_high_p2_high": 101.48456393257112,
+            "p1_low_p2_base": 101.10353394555302,
+            "p1_low_p2_low": 100.99300051422397
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.012184428416901483,
+          "interaction_delta": 0.01234747947744097,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
@@ -4366,11 +4366,11 @@
       "benchmark_id": "case_plum_perennial-1_greenhouse_control_plot_14705",
       "comparison": {
         "baseline_score": 10.0,
-        "improvement": 0.24372360435387835,
+        "improvement": 0.24370274577284706,
         "interpretation": "Synthetic software comparison; not biological validation.",
         "label": "SYNTHETIC_SOFTWARE_BENCHMARK",
-        "model_score": 12.437236043538784,
-        "relative_difference": 0.24372360435387835
+        "model_score": 12.43702745772847,
+        "relative_difference": 0.24370274577284706
       },
       "crop": "plum",
       "cycle_id": "perennial-1",
@@ -4393,7 +4393,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "ab4d30a6eb671e46732078082dcac93a2e918b4cf094dd940d47d7939eb86fbf",
+      "input_hash": "2baa187541c2176540075cf2d33e80f83e5ff2c2aae8ffccfcebb290a649e042",
       "metrics": [
         {
           "category": "software_metric",
@@ -4401,7 +4401,7 @@
           "name": "final_biomass",
           "status": "AVAILABLE",
           "unit": "g_DM_m-2",
-          "value": 12.437236043538784
+          "value": 12.43702745772847
         },
         {
           "category": "robustness_metric",
@@ -4413,9 +4413,9 @@
         }
       ],
       "model_configuration_hash": "eda340fce05c5ab0b2b58b3b52c6485ae3c153bb64d6030e103c6be880ba40ff",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": "plot_14705",
-      "result_hash": "0ff9f4ede12ac33797367f0a886a1849a493099dcd5d35b805f03de4bb74e588",
+      "result_hash": "0299fdf20c178b4ccb9a2c4b0ddd21a3473465da482e35474b1dedeaf2950bca",
       "scenario_id": "plum_perennial-1_greenhouse_control_plot_14705",
       "seed": 150,
       "sensitivity": {
@@ -4423,25 +4423,25 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "plum",
           "evaluations": {
-            "baseline": 101.22270668984561,
-            "p1_base_p2_high": 101.3448418279959,
-            "p1_base_p2_low": 101.10054650652637,
-            "p1_high_p2_base": 101.3448418279959,
-            "p1_high_p2_high": 101.47916139456308,
-            "p1_low_p2_base": 101.10054650652637,
-            "p1_low_p2_low": 100.99058103798836
+            "baseline": 101.22639547410738,
+            "p1_base_p2_high": 101.34930596360053,
+            "p1_base_p2_low": 101.10353394555302,
+            "p1_high_p2_base": 101.34930596360053,
+            "p1_high_p2_high": 101.48456393257112,
+            "p1_low_p2_base": 101.10353394555302,
+            "p1_low_p2_low": 100.99300051422397
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.012184428416901483,
+          "interaction_delta": 0.01234747947744097,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
           "perturbation_percent": 10.0
         },
         "oat": {
-          "absolute_change": 0.1221351381502842,
-          "absolute_sensitivity": 0.6106756907514205,
-          "baseline_output": 101.22270668984561,
+          "absolute_change": 0.12291048949315098,
+          "absolute_sensitivity": 0.6145524474657543,
+          "baseline_output": 101.22639547410738,
           "baseline_value": 2.0,
           "classification": "LOW",
           "classification_reason": "analytical_threshold_applied",
@@ -4454,19 +4454,19 @@
           "cycle_id": null,
           "direction": "+",
           "environment": "greenhouse",
-          "feedback_iterations": 7,
+          "feedback_iterations": 3,
           "name": "radiation use efficiency",
-          "normalized_sensitivity": 0.012065982242948298,
+          "normalized_sensitivity": 0.0121421383145654,
           "observable": "biomass",
           "parameter_id": "radiation.rue",
           "perturbation_percent": 10.0,
-          "perturbed_output": 101.3448418279959,
+          "perturbed_output": 101.34930596360053,
           "perturbed_value": 2.2,
           "phenological_stage": "vegetative_growth",
           "plot_id": null,
           "provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
           "range_source_type": "ENGINEERING_RANGE",
-          "relative_change": 0.0012065982242948309,
+          "relative_change": 0.001214213831456541,
           "scientific_interpretation": "synthetic + OAT sensitivity demonstrates directional response under synthetic contract; it does not establish parameter identifiability or calibration fit",
           "uncertainty_status": "OBSERVATIONAL",
           "variety": "Suplum 26"
@@ -4653,7 +4653,7 @@
       },
       "environment": "outdoor",
       "failure_reason": null,
-      "input_hash": "23d204305de0cd25e7b6d05b51e03615dfbf10a1f0521435b73e72df77db08ab",
+      "input_hash": "ba94059ea4597238fd719c2b5dcbe3b078b0a7847d6f9eb35aa05cfcb5a074ec",
       "metrics": [
         {
           "category": "software_metric",
@@ -4673,9 +4673,9 @@
         }
       ],
       "model_configuration_hash": "0d41a5a1f352d4d4add36d48ccfb370005ec837604c5ca93d52e8f03827a7f0e",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": null,
-      "result_hash": "a9073624ceddc96275a367936976b9976d82ccd94a265d9c08e01f64430a5675",
+      "result_hash": "e33fc3a0233aafdc9ca15917f420e95508a9f2c84f4325700fe2f5cf074f2fb0",
       "scenario_id": "apple_perennial-1_outdoor_control_unregistered",
       "seed": 160,
       "sensitivity": {
@@ -4683,16 +4683,16 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "apple",
           "evaluations": {
-            "baseline": 101.22270668984561,
-            "p1_base_p2_high": 101.3448418279959,
-            "p1_base_p2_low": 101.10054650652637,
-            "p1_high_p2_base": 101.3448418279959,
-            "p1_high_p2_high": 101.47916139456308,
-            "p1_low_p2_base": 101.10054650652637,
-            "p1_low_p2_low": 100.99058103798836
+            "baseline": 101.22639547410738,
+            "p1_base_p2_high": 101.34930596360053,
+            "p1_base_p2_low": 101.10353394555302,
+            "p1_high_p2_base": 101.34930596360053,
+            "p1_high_p2_high": 101.48456393257112,
+            "p1_low_p2_base": 101.10353394555302,
+            "p1_low_p2_low": 100.99300051422397
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.012184428416901483,
+          "interaction_delta": 0.01234747947744097,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
@@ -4886,11 +4886,11 @@
       "benchmark_id": "case_apple_perennial-1_greenhouse_control_unregistered",
       "comparison": {
         "baseline_score": 10.0,
-        "improvement": 0.24372360435387835,
+        "improvement": 0.24370274577284706,
         "interpretation": "Synthetic software comparison; not biological validation.",
         "label": "SYNTHETIC_SOFTWARE_BENCHMARK",
-        "model_score": 12.437236043538784,
-        "relative_difference": 0.24372360435387835
+        "model_score": 12.43702745772847,
+        "relative_difference": 0.24370274577284706
       },
       "crop": "apple",
       "cycle_id": "perennial-1",
@@ -4913,7 +4913,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "3b48f9f75c91096344b1019c82763bc16b217f06c317577f491a3c624ca2d8bd",
+      "input_hash": "110c7962e33ccd5d34c67c9888e81d29520edd960bb9225e2f0165b44b2693a7",
       "metrics": [
         {
           "category": "software_metric",
@@ -4921,7 +4921,7 @@
           "name": "final_biomass",
           "status": "AVAILABLE",
           "unit": "g_DM_m-2",
-          "value": 12.437236043538784
+          "value": 12.43702745772847
         },
         {
           "category": "robustness_metric",
@@ -4933,9 +4933,9 @@
         }
       ],
       "model_configuration_hash": "10e40442260c99800d996a7a741f83b4f7a6e4955559219391658707ed7ced0a",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": null,
-      "result_hash": "268307bb0c18d044d8090d5f36f4c3e50e21303a8c985afda8a314f227f4e4cc",
+      "result_hash": "d940c379db51f19c968d104dc84124bc537cab8566f8b87da0d9d64ecea486e0",
       "scenario_id": "apple_perennial-1_greenhouse_control_unregistered",
       "seed": 160,
       "sensitivity": {
@@ -4943,25 +4943,25 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "apple",
           "evaluations": {
-            "baseline": 101.22270668984561,
-            "p1_base_p2_high": 101.3448418279959,
-            "p1_base_p2_low": 101.10054650652637,
-            "p1_high_p2_base": 101.3448418279959,
-            "p1_high_p2_high": 101.47916139456308,
-            "p1_low_p2_base": 101.10054650652637,
-            "p1_low_p2_low": 100.99058103798836
+            "baseline": 101.22639547410738,
+            "p1_base_p2_high": 101.34930596360053,
+            "p1_base_p2_low": 101.10353394555302,
+            "p1_high_p2_base": 101.34930596360053,
+            "p1_high_p2_high": 101.48456393257112,
+            "p1_low_p2_base": 101.10353394555302,
+            "p1_low_p2_low": 100.99300051422397
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.012184428416901483,
+          "interaction_delta": 0.01234747947744097,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
           "perturbation_percent": 10.0
         },
         "oat": {
-          "absolute_change": 0.1221351381502842,
-          "absolute_sensitivity": 0.6106756907514205,
-          "baseline_output": 101.22270668984561,
+          "absolute_change": 0.12291048949315098,
+          "absolute_sensitivity": 0.6145524474657543,
+          "baseline_output": 101.22639547410738,
           "baseline_value": 2.0,
           "classification": "LOW",
           "classification_reason": "analytical_threshold_applied",
@@ -4974,19 +4974,19 @@
           "cycle_id": null,
           "direction": "+",
           "environment": "greenhouse",
-          "feedback_iterations": 7,
+          "feedback_iterations": 3,
           "name": "radiation use efficiency",
-          "normalized_sensitivity": 0.012065982242948298,
+          "normalized_sensitivity": 0.0121421383145654,
           "observable": "biomass",
           "parameter_id": "radiation.rue",
           "perturbation_percent": 10.0,
-          "perturbed_output": 101.3448418279959,
+          "perturbed_output": 101.34930596360053,
           "perturbed_value": 2.2,
           "phenological_stage": "vegetative_growth",
           "plot_id": null,
           "provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
           "range_source_type": "ENGINEERING_RANGE",
-          "relative_change": 0.0012065982242948309,
+          "relative_change": 0.001214213831456541,
           "scientific_interpretation": "synthetic + OAT sensitivity demonstrates directional response under synthetic contract; it does not establish parameter identifiability or calibration fit",
           "uncertainty_status": "OBSERVATIONAL",
           "variety": null
@@ -5173,7 +5173,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "4c3c47c7efbb506d15fff512180605c229bfd737ad3943aac61dfa7aae843e0c",
+      "input_hash": "229abe6c92ba566d5c317b727be780754b2e4b04779a3c4f1d500d3bebf54ba3",
       "metrics": [
         {
           "category": "software_metric",
@@ -5193,9 +5193,9 @@
         }
       ],
       "model_configuration_hash": "24f0063093052c74d727d16cfc22c58ccf64b006f16218807061f5aaececb153",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": "plot_12010",
-      "result_hash": "09b13a6029d9035a98e874dd84592d48e2885a2e9a32b7307a35f218c11fb932",
+      "result_hash": "570579f9797e84524b1a8220f6f31edd6bde62661b91603abc1e1af9cbea9bb5",
       "scenario_id": "tomato_annual-1_greenhouse_heat_plot_12010",
       "seed": 218,
       "sensitivity": {
@@ -5203,25 +5203,25 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "tomato",
           "evaluations": {
-            "baseline": 101.22270668984561,
-            "p1_base_p2_high": 101.3448418279959,
-            "p1_base_p2_low": 101.10054650652637,
-            "p1_high_p2_base": 101.3448418279959,
-            "p1_high_p2_high": 101.47916139456308,
-            "p1_low_p2_base": 101.10054650652637,
-            "p1_low_p2_low": 100.99058103798836
+            "baseline": 101.22639547410738,
+            "p1_base_p2_high": 101.34930596360053,
+            "p1_base_p2_low": 101.10353394555302,
+            "p1_high_p2_base": 101.34930596360053,
+            "p1_high_p2_high": 101.48456393257112,
+            "p1_low_p2_base": 101.10353394555302,
+            "p1_low_p2_low": 100.99300051422397
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.012184428416901483,
+          "interaction_delta": 0.01234747947744097,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
           "perturbation_percent": 10.0
         },
         "oat": {
-          "absolute_change": 0.1221351381502842,
-          "absolute_sensitivity": 0.6106756907514205,
-          "baseline_output": 101.22270668984561,
+          "absolute_change": 0.12291048949315098,
+          "absolute_sensitivity": 0.6145524474657543,
+          "baseline_output": 101.22639547410738,
           "baseline_value": 2.0,
           "classification": "LOW",
           "classification_reason": "analytical_threshold_applied",
@@ -5234,19 +5234,19 @@
           "cycle_id": null,
           "direction": "+",
           "environment": "greenhouse",
-          "feedback_iterations": 7,
+          "feedback_iterations": 3,
           "name": "radiation use efficiency",
-          "normalized_sensitivity": 0.012065982242948298,
+          "normalized_sensitivity": 0.0121421383145654,
           "observable": "biomass",
           "parameter_id": "radiation.rue",
           "perturbation_percent": 10.0,
-          "perturbed_output": 101.3448418279959,
+          "perturbed_output": 101.34930596360053,
           "perturbed_value": 2.2,
           "phenological_stage": "vegetative_growth",
           "plot_id": null,
           "provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
           "range_source_type": "ENGINEERING_RANGE",
-          "relative_change": 0.0012065982242948309,
+          "relative_change": 0.001214213831456541,
           "scientific_interpretation": "synthetic + OAT sensitivity demonstrates directional response under synthetic contract; it does not establish parameter identifiability or calibration fit",
           "uncertainty_status": "OBSERVATIONAL",
           "variety": "RAF"
@@ -5406,11 +5406,11 @@
       "benchmark_id": "case_tomato_annual-1_greenhouse_drought_plot_12010",
       "comparison": {
         "baseline_score": 10.0,
-        "improvement": 0.24372360435387835,
+        "improvement": 0.24370274577284706,
         "interpretation": "Synthetic software comparison; not biological validation.",
         "label": "SYNTHETIC_SOFTWARE_BENCHMARK",
-        "model_score": 12.437236043538784,
-        "relative_difference": 0.24372360435387835
+        "model_score": 12.43702745772847,
+        "relative_difference": 0.24370274577284706
       },
       "crop": "tomato",
       "cycle_id": "annual-1",
@@ -5433,7 +5433,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "23cb3c5f47128cab219b1a09a74073e90162df43cd38fa764a1475d116057b3b",
+      "input_hash": "c21f77c2f25456dda369b38555995114e7f1df2a07483d54a47fcdff1a0954b0",
       "metrics": [
         {
           "category": "software_metric",
@@ -5441,7 +5441,7 @@
           "name": "final_biomass",
           "status": "AVAILABLE",
           "unit": "g_DM_m-2",
-          "value": 12.437236043538784
+          "value": 12.43702745772847
         },
         {
           "category": "robustness_metric",
@@ -5453,9 +5453,9 @@
         }
       ],
       "model_configuration_hash": "74b70a6b4e8922e65c995670b78dbab8ba2089ca14babd6d68893ec569a1d909",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": "plot_12010",
-      "result_hash": "298183b9914f807678678c9e77d5117d975e4841b525d8ddde1b5170798165f0",
+      "result_hash": "4d0b5e7c0d509b6a8e8778b96de72b91d9ef5f571485ea869a4c0ad265842cab",
       "scenario_id": "tomato_annual-1_greenhouse_drought_plot_12010",
       "seed": 219,
       "sensitivity": {
@@ -5463,25 +5463,25 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "tomato",
           "evaluations": {
-            "baseline": 101.22270668984561,
-            "p1_base_p2_high": 101.3448418279959,
-            "p1_base_p2_low": 101.10054650652637,
-            "p1_high_p2_base": 101.3448418279959,
-            "p1_high_p2_high": 101.47916139456308,
-            "p1_low_p2_base": 101.10054650652637,
-            "p1_low_p2_low": 100.99058103798836
+            "baseline": 101.22639547410738,
+            "p1_base_p2_high": 101.34930596360053,
+            "p1_base_p2_low": 101.10353394555302,
+            "p1_high_p2_base": 101.34930596360053,
+            "p1_high_p2_high": 101.48456393257112,
+            "p1_low_p2_base": 101.10353394555302,
+            "p1_low_p2_low": 100.99300051422397
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.012184428416901483,
+          "interaction_delta": 0.01234747947744097,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
           "perturbation_percent": 10.0
         },
         "oat": {
-          "absolute_change": 0.1221351381502842,
-          "absolute_sensitivity": 0.6106756907514205,
-          "baseline_output": 101.22270668984561,
+          "absolute_change": 0.12291048949315098,
+          "absolute_sensitivity": 0.6145524474657543,
+          "baseline_output": 101.22639547410738,
           "baseline_value": 2.0,
           "classification": "LOW",
           "classification_reason": "analytical_threshold_applied",
@@ -5494,19 +5494,19 @@
           "cycle_id": null,
           "direction": "+",
           "environment": "greenhouse",
-          "feedback_iterations": 7,
+          "feedback_iterations": 3,
           "name": "radiation use efficiency",
-          "normalized_sensitivity": 0.012065982242948298,
+          "normalized_sensitivity": 0.0121421383145654,
           "observable": "biomass",
           "parameter_id": "radiation.rue",
           "perturbation_percent": 10.0,
-          "perturbed_output": 101.3448418279959,
+          "perturbed_output": 101.34930596360053,
           "perturbed_value": 2.2,
           "phenological_stage": "vegetative_growth",
           "plot_id": null,
           "provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
           "range_source_type": "ENGINEERING_RANGE",
-          "relative_change": 0.0012065982242948309,
+          "relative_change": 0.001214213831456541,
           "scientific_interpretation": "synthetic + OAT sensitivity demonstrates directional response under synthetic contract; it does not establish parameter identifiability or calibration fit",
           "uncertainty_status": "OBSERVATIONAL",
           "variety": "RAF"
@@ -5666,11 +5666,11 @@
       "benchmark_id": "case_tomato_annual-1_greenhouse_low_radiation_plot_12010",
       "comparison": {
         "baseline_score": 10.0,
-        "improvement": 0.06055450621817506,
+        "improvement": 0.060554192161717244,
         "interpretation": "Synthetic software comparison; not biological validation.",
         "label": "SYNTHETIC_SOFTWARE_BENCHMARK",
-        "model_score": 10.60554506218175,
-        "relative_difference": 0.06055450621817506
+        "model_score": 10.605541921617172,
+        "relative_difference": 0.060554192161717244
       },
       "crop": "tomato",
       "cycle_id": "annual-1",
@@ -5693,7 +5693,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "b3efefac2f561c15cf6c5fb002ea39ae78eb1d6f39d47e3b122c62b5c0b5337b",
+      "input_hash": "83d0cff70a8c8f9a5aa1a269f66516a722b8f55d460ed4b12597c889c4e43b09",
       "metrics": [
         {
           "category": "software_metric",
@@ -5701,7 +5701,7 @@
           "name": "final_biomass",
           "status": "AVAILABLE",
           "unit": "g_DM_m-2",
-          "value": 10.60554506218175
+          "value": 10.605541921617172
         },
         {
           "category": "robustness_metric",
@@ -5713,9 +5713,9 @@
         }
       ],
       "model_configuration_hash": "84b646af1d4133f3919e581184c42e8b6ee0a948eab55ca1b1618420ae8dcc47",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": "plot_12010",
-      "result_hash": "9543b4db71be1a96f0c773a24289287c6e7612d52b692883ce9b321bcdb79507",
+      "result_hash": "0dbe5b959d768759a6306ca8659994ee6238b35cc14758b906d67daa6b07f989",
       "scenario_id": "tomato_annual-1_greenhouse_low_radiation_plot_12010",
       "seed": 220,
       "sensitivity": {
@@ -5723,25 +5723,25 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "tomato",
           "evaluations": {
-            "baseline": 101.22270668984561,
-            "p1_base_p2_high": 101.3448418279959,
-            "p1_base_p2_low": 101.10054650652637,
-            "p1_high_p2_base": 101.3448418279959,
-            "p1_high_p2_high": 101.47916139456308,
-            "p1_low_p2_base": 101.10054650652637,
-            "p1_low_p2_low": 100.99058103798836
+            "baseline": 101.22639547410738,
+            "p1_base_p2_high": 101.34930596360053,
+            "p1_base_p2_low": 101.10353394555302,
+            "p1_high_p2_base": 101.34930596360053,
+            "p1_high_p2_high": 101.48456393257112,
+            "p1_low_p2_base": 101.10353394555302,
+            "p1_low_p2_low": 100.99300051422397
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.012184428416901483,
+          "interaction_delta": 0.01234747947744097,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
           "perturbation_percent": 10.0
         },
         "oat": {
-          "absolute_change": 0.1221351381502842,
-          "absolute_sensitivity": 0.6106756907514205,
-          "baseline_output": 101.22270668984561,
+          "absolute_change": 0.12291048949315098,
+          "absolute_sensitivity": 0.6145524474657543,
+          "baseline_output": 101.22639547410738,
           "baseline_value": 2.0,
           "classification": "LOW",
           "classification_reason": "analytical_threshold_applied",
@@ -5754,19 +5754,19 @@
           "cycle_id": null,
           "direction": "+",
           "environment": "greenhouse",
-          "feedback_iterations": 7,
+          "feedback_iterations": 3,
           "name": "radiation use efficiency",
-          "normalized_sensitivity": 0.012065982242948298,
+          "normalized_sensitivity": 0.0121421383145654,
           "observable": "biomass",
           "parameter_id": "radiation.rue",
           "perturbation_percent": 10.0,
-          "perturbed_output": 101.3448418279959,
+          "perturbed_output": 101.34930596360053,
           "perturbed_value": 2.2,
           "phenological_stage": "vegetative_growth",
           "plot_id": null,
           "provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
           "range_source_type": "ENGINEERING_RANGE",
-          "relative_change": 0.0012065982242948309,
+          "relative_change": 0.001214213831456541,
           "scientific_interpretation": "synthetic + OAT sensitivity demonstrates directional response under synthetic contract; it does not establish parameter identifiability or calibration fit",
           "uncertainty_status": "OBSERVATIONAL",
           "variety": "RAF"
@@ -5953,7 +5953,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "6a8b9eb685fcb41a5a598a15389cd475762d51e5f2b160bf6c314fa7f7f86cb4",
+      "input_hash": "97eef73b9c91e24032139aaa6fabadc4cc3147beda9ba7b27f76ad7130b1065a",
       "metrics": [
         {
           "category": "software_metric",
@@ -5973,9 +5973,9 @@
         }
       ],
       "model_configuration_hash": "3765000eae0225b6365e74c1e49a249f70919eda1383addb953116dc20c62312",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": "plot_12010",
-      "result_hash": "c22e8a4f95501f94af7f0ff1d78946e9711ccd96186ea48275654a8490824299",
+      "result_hash": "d3db7d23388135fdb0303bd87052a85f90184a8ac8419e431a94f86e00439a2d",
       "scenario_id": "tomato_annual-1_greenhouse_high_vpd_plot_12010",
       "seed": 221,
       "sensitivity": {
@@ -5983,25 +5983,25 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "tomato",
           "evaluations": {
-            "baseline": 101.22270668984561,
-            "p1_base_p2_high": 101.3448418279959,
-            "p1_base_p2_low": 101.10054650652637,
-            "p1_high_p2_base": 101.3448418279959,
-            "p1_high_p2_high": 101.47916139456308,
-            "p1_low_p2_base": 101.10054650652637,
-            "p1_low_p2_low": 100.99058103798836
+            "baseline": 101.22639547410738,
+            "p1_base_p2_high": 101.34930596360053,
+            "p1_base_p2_low": 101.10353394555302,
+            "p1_high_p2_base": 101.34930596360053,
+            "p1_high_p2_high": 101.48456393257112,
+            "p1_low_p2_base": 101.10353394555302,
+            "p1_low_p2_low": 100.99300051422397
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.012184428416901483,
+          "interaction_delta": 0.01234747947744097,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
           "perturbation_percent": 10.0
         },
         "oat": {
-          "absolute_change": 0.1221351381502842,
-          "absolute_sensitivity": 0.6106756907514205,
-          "baseline_output": 101.22270668984561,
+          "absolute_change": 0.12291048949315098,
+          "absolute_sensitivity": 0.6145524474657543,
+          "baseline_output": 101.22639547410738,
           "baseline_value": 2.0,
           "classification": "LOW",
           "classification_reason": "analytical_threshold_applied",
@@ -6014,19 +6014,19 @@
           "cycle_id": null,
           "direction": "+",
           "environment": "greenhouse",
-          "feedback_iterations": 7,
+          "feedback_iterations": 3,
           "name": "radiation use efficiency",
-          "normalized_sensitivity": 0.012065982242948298,
+          "normalized_sensitivity": 0.0121421383145654,
           "observable": "biomass",
           "parameter_id": "radiation.rue",
           "perturbation_percent": 10.0,
-          "perturbed_output": 101.3448418279959,
+          "perturbed_output": 101.34930596360053,
           "perturbed_value": 2.2,
           "phenological_stage": "vegetative_growth",
           "plot_id": null,
           "provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
           "range_source_type": "ENGINEERING_RANGE",
-          "relative_change": 0.0012065982242948309,
+          "relative_change": 0.001214213831456541,
           "scientific_interpretation": "synthetic + OAT sensitivity demonstrates directional response under synthetic contract; it does not establish parameter identifiability or calibration fit",
           "uncertainty_status": "OBSERVATIONAL",
           "variety": "RAF"
@@ -6186,11 +6186,11 @@
       "benchmark_id": "case_tomato_annual-1_greenhouse_co2_plot_12010",
       "comparison": {
         "baseline_score": 10.0,
-        "improvement": 0.24372360435387835,
+        "improvement": 0.24370274577284706,
         "interpretation": "Synthetic software comparison; not biological validation.",
         "label": "SYNTHETIC_SOFTWARE_BENCHMARK",
-        "model_score": 12.437236043538784,
-        "relative_difference": 0.24372360435387835
+        "model_score": 12.43702745772847,
+        "relative_difference": 0.24370274577284706
       },
       "crop": "tomato",
       "cycle_id": "annual-1",
@@ -6213,7 +6213,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "882a1919401b96cfde13c028d9cb6a0be319c75188f10626f6145b1d8ce16c46",
+      "input_hash": "e16182c2c4680c581d69c4d476ef96df19f1f16e262aa8ae35106e138c30d700",
       "metrics": [
         {
           "category": "software_metric",
@@ -6221,7 +6221,7 @@
           "name": "final_biomass",
           "status": "AVAILABLE",
           "unit": "g_DM_m-2",
-          "value": 12.437236043538784
+          "value": 12.43702745772847
         },
         {
           "category": "robustness_metric",
@@ -6233,9 +6233,9 @@
         }
       ],
       "model_configuration_hash": "43bbccee13be4474c003390d9acdbd1b17151e57a615dffcc980cfa2fc90e45c",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": "plot_12010",
-      "result_hash": "f3bb92555b364fb2e765c7e0fcd4be2bd4647c51717e66597cdc94b43ec72899",
+      "result_hash": "eb93339fbbf2915251023b9caf34077b9b5533bf97305ad52c9a5be389733aea",
       "scenario_id": "tomato_annual-1_greenhouse_co2_plot_12010",
       "seed": 222,
       "sensitivity": {
@@ -6243,25 +6243,25 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "tomato",
           "evaluations": {
-            "baseline": 101.22270668984561,
-            "p1_base_p2_high": 101.3448418279959,
-            "p1_base_p2_low": 101.10054650652637,
-            "p1_high_p2_base": 101.3448418279959,
-            "p1_high_p2_high": 101.47916139456308,
-            "p1_low_p2_base": 101.10054650652637,
-            "p1_low_p2_low": 100.99058103798836
+            "baseline": 101.22639547410738,
+            "p1_base_p2_high": 101.34930596360053,
+            "p1_base_p2_low": 101.10353394555302,
+            "p1_high_p2_base": 101.34930596360053,
+            "p1_high_p2_high": 101.48456393257112,
+            "p1_low_p2_base": 101.10353394555302,
+            "p1_low_p2_low": 100.99300051422397
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.012184428416901483,
+          "interaction_delta": 0.01234747947744097,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
           "perturbation_percent": 10.0
         },
         "oat": {
-          "absolute_change": 0.1221351381502842,
-          "absolute_sensitivity": 0.6106756907514205,
-          "baseline_output": 101.22270668984561,
+          "absolute_change": 0.12291048949315098,
+          "absolute_sensitivity": 0.6145524474657543,
+          "baseline_output": 101.22639547410738,
           "baseline_value": 2.0,
           "classification": "LOW",
           "classification_reason": "analytical_threshold_applied",
@@ -6274,19 +6274,19 @@
           "cycle_id": null,
           "direction": "+",
           "environment": "greenhouse",
-          "feedback_iterations": 7,
+          "feedback_iterations": 3,
           "name": "radiation use efficiency",
-          "normalized_sensitivity": 0.012065982242948298,
+          "normalized_sensitivity": 0.0121421383145654,
           "observable": "biomass",
           "parameter_id": "radiation.rue",
           "perturbation_percent": 10.0,
-          "perturbed_output": 101.3448418279959,
+          "perturbed_output": 101.34930596360053,
           "perturbed_value": 2.2,
           "phenological_stage": "vegetative_growth",
           "plot_id": null,
           "provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
           "range_source_type": "ENGINEERING_RANGE",
-          "relative_change": 0.0012065982242948309,
+          "relative_change": 0.001214213831456541,
           "scientific_interpretation": "synthetic + OAT sensitivity demonstrates directional response under synthetic contract; it does not establish parameter identifiability or calibration fit",
           "uncertainty_status": "OBSERVATIONAL",
           "variety": "RAF"
@@ -6446,11 +6446,11 @@
       "benchmark_id": "case_tomato_annual-1_greenhouse_ventilation_plot_12010",
       "comparison": {
         "baseline_score": 10.0,
-        "improvement": 0.24372360435387835,
+        "improvement": 0.2437076676975444,
         "interpretation": "Synthetic software comparison; not biological validation.",
         "label": "SYNTHETIC_SOFTWARE_BENCHMARK",
-        "model_score": 12.437236043538784,
-        "relative_difference": 0.24372360435387835
+        "model_score": 12.437076676975444,
+        "relative_difference": 0.2437076676975444
       },
       "crop": "tomato",
       "cycle_id": "annual-1",
@@ -6473,7 +6473,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "0f78eec0d54d2164131f8a703e83ea940532f0665f302f5d73971dc2acc05a12",
+      "input_hash": "a003535ac02b2f18f7ebe00ef5b9691cc5517594eecbcf8e1ab74eeb9bef722b",
       "metrics": [
         {
           "category": "software_metric",
@@ -6481,7 +6481,7 @@
           "name": "final_biomass",
           "status": "AVAILABLE",
           "unit": "g_DM_m-2",
-          "value": 12.437236043538784
+          "value": 12.437076676975444
         },
         {
           "category": "robustness_metric",
@@ -6493,9 +6493,9 @@
         }
       ],
       "model_configuration_hash": "f907001a4ccae625360c72bfe42a22c371d428aba2db08b7b4b8816582dbb5f6",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": "plot_12010",
-      "result_hash": "90a504e48ca632308fdaf05c5bb571aca413939b60052d8ee244f027a33f1037",
+      "result_hash": "95d07fb31e426be9b7ea35dcf024e9c8925ce7085c46db2ec827bd3c5729214e",
       "scenario_id": "tomato_annual-1_greenhouse_ventilation_plot_12010",
       "seed": 223,
       "sensitivity": {
@@ -6503,25 +6503,25 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "tomato",
           "evaluations": {
-            "baseline": 101.22270668984561,
-            "p1_base_p2_high": 101.3448418279959,
-            "p1_base_p2_low": 101.10054650652637,
-            "p1_high_p2_base": 101.3448418279959,
-            "p1_high_p2_high": 101.47916139456308,
-            "p1_low_p2_base": 101.10054650652637,
-            "p1_low_p2_low": 100.99058103798836
+            "baseline": 101.22639547410738,
+            "p1_base_p2_high": 101.34930596360053,
+            "p1_base_p2_low": 101.10353394555302,
+            "p1_high_p2_base": 101.34930596360053,
+            "p1_high_p2_high": 101.48456393257112,
+            "p1_low_p2_base": 101.10353394555302,
+            "p1_low_p2_low": 100.99300051422397
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.012184428416901483,
+          "interaction_delta": 0.01234747947744097,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
           "perturbation_percent": 10.0
         },
         "oat": {
-          "absolute_change": 0.1221351381502842,
-          "absolute_sensitivity": 0.6106756907514205,
-          "baseline_output": 101.22270668984561,
+          "absolute_change": 0.12291048949315098,
+          "absolute_sensitivity": 0.6145524474657543,
+          "baseline_output": 101.22639547410738,
           "baseline_value": 2.0,
           "classification": "LOW",
           "classification_reason": "analytical_threshold_applied",
@@ -6534,19 +6534,19 @@
           "cycle_id": null,
           "direction": "+",
           "environment": "greenhouse",
-          "feedback_iterations": 7,
+          "feedback_iterations": 3,
           "name": "radiation use efficiency",
-          "normalized_sensitivity": 0.012065982242948298,
+          "normalized_sensitivity": 0.0121421383145654,
           "observable": "biomass",
           "parameter_id": "radiation.rue",
           "perturbation_percent": 10.0,
-          "perturbed_output": 101.3448418279959,
+          "perturbed_output": 101.34930596360053,
           "perturbed_value": 2.2,
           "phenological_stage": "vegetative_growth",
           "plot_id": null,
           "provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
           "range_source_type": "ENGINEERING_RANGE",
-          "relative_change": 0.0012065982242948309,
+          "relative_change": 0.001214213831456541,
           "scientific_interpretation": "synthetic + OAT sensitivity demonstrates directional response under synthetic contract; it does not establish parameter identifiability or calibration fit",
           "uncertainty_status": "OBSERVATIONAL",
           "variety": "RAF"
@@ -6706,11 +6706,11 @@
       "benchmark_id": "case_tomato_annual-1_greenhouse_recovery_plot_12010",
       "comparison": {
         "baseline_score": 10.0,
-        "improvement": 0.3000285153052863,
+        "improvement": 0.24370274577284706,
         "interpretation": "Synthetic software comparison; not biological validation.",
         "label": "SYNTHETIC_SOFTWARE_BENCHMARK",
-        "model_score": 13.000285153052863,
-        "relative_difference": 0.3000285153052863
+        "model_score": 12.43702745772847,
+        "relative_difference": 0.24370274577284706
       },
       "crop": "tomato",
       "cycle_id": "annual-1",
@@ -6733,7 +6733,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "a599a81e5f4fafa7e948c286060d2ae42048c30cf8dbf53dd808b86e67c2ff09",
+      "input_hash": "3aa6bd92ad308d021f70c2e9474936691ee708c8aa10163c146abad681c4d57d",
       "metrics": [
         {
           "category": "software_metric",
@@ -6741,7 +6741,7 @@
           "name": "final_biomass",
           "status": "AVAILABLE",
           "unit": "g_DM_m-2",
-          "value": 13.000285153052863
+          "value": 12.43702745772847
         },
         {
           "category": "robustness_metric",
@@ -6753,9 +6753,9 @@
         }
       ],
       "model_configuration_hash": "5ea1c29fce9a50613e857aeeb586400b56a93b67dbe8993f309350ba8c11f7a6",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": "plot_12010",
-      "result_hash": "803db2ec68af0af868e5c1502c863a9688c060400e6efb7ac4bfaf403dbba452",
+      "result_hash": "aecca535de6fcc50a244775867b1f021b6e93a45dffb18ff3ec3ca0195c14ffe",
       "scenario_id": "tomato_annual-1_greenhouse_recovery_plot_12010",
       "seed": 224,
       "sensitivity": {
@@ -6763,25 +6763,25 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "tomato",
           "evaluations": {
-            "baseline": 101.22270668984561,
-            "p1_base_p2_high": 101.3448418279959,
-            "p1_base_p2_low": 101.10054650652637,
-            "p1_high_p2_base": 101.3448418279959,
-            "p1_high_p2_high": 101.47916139456308,
-            "p1_low_p2_base": 101.10054650652637,
-            "p1_low_p2_low": 100.99058103798836
+            "baseline": 101.22639547410738,
+            "p1_base_p2_high": 101.34930596360053,
+            "p1_base_p2_low": 101.10353394555302,
+            "p1_high_p2_base": 101.34930596360053,
+            "p1_high_p2_high": 101.48456393257112,
+            "p1_low_p2_base": 101.10353394555302,
+            "p1_low_p2_low": 100.99300051422397
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.012184428416901483,
+          "interaction_delta": 0.01234747947744097,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
           "perturbation_percent": 10.0
         },
         "oat": {
-          "absolute_change": 0.1221351381502842,
-          "absolute_sensitivity": 0.6106756907514205,
-          "baseline_output": 101.22270668984561,
+          "absolute_change": 0.12291048949315098,
+          "absolute_sensitivity": 0.6145524474657543,
+          "baseline_output": 101.22639547410738,
           "baseline_value": 2.0,
           "classification": "LOW",
           "classification_reason": "analytical_threshold_applied",
@@ -6794,19 +6794,19 @@
           "cycle_id": null,
           "direction": "+",
           "environment": "greenhouse",
-          "feedback_iterations": 7,
+          "feedback_iterations": 3,
           "name": "radiation use efficiency",
-          "normalized_sensitivity": 0.012065982242948298,
+          "normalized_sensitivity": 0.0121421383145654,
           "observable": "biomass",
           "parameter_id": "radiation.rue",
           "perturbation_percent": 10.0,
-          "perturbed_output": 101.3448418279959,
+          "perturbed_output": 101.34930596360053,
           "perturbed_value": 2.2,
           "phenological_stage": "vegetative_growth",
           "plot_id": null,
           "provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
           "range_source_type": "ENGINEERING_RANGE",
-          "relative_change": 0.0012065982242948309,
+          "relative_change": 0.001214213831456541,
           "scientific_interpretation": "synthetic + OAT sensitivity demonstrates directional response under synthetic contract; it does not establish parameter identifiability or calibration fit",
           "uncertainty_status": "OBSERVATIONAL",
           "variety": "RAF"
@@ -6993,7 +6993,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "62c557982149d82fe407107b67031496c794b176b8a7be5ecd94be1a20172aab",
+      "input_hash": "4c24d0d2e89fc2423aa366e1db102804afd949d640758031e092416179e426b2",
       "metrics": [
         {
           "category": "software_metric",
@@ -7013,9 +7013,9 @@
         }
       ],
       "model_configuration_hash": "8efcfc3d2f1fe5d3575cb793622a591fc9048dcc43362eda33da6dd7fbfd7f47",
-      "parameter_configuration_hash": "5d5a7c766dda32f9ec08164d4422e3518b59aa47599671e5b14eeda0547f12ab",
+      "parameter_configuration_hash": "ee69cfd8c931ed89e4dde706958ef357329483a5bfba5d67c9827b45307271d5",
       "plot_id": "plot_12010",
-      "result_hash": "4199e787037ae90c9ea6501418d1893204f5deabadcd7ce992dbe1982eb9a66a",
+      "result_hash": "44a79986dcf73cfc90bdf2847662dcea0cbd11317a1be1682cefc8c0b49a5073",
       "scenario_id": "tomato_annual-1_greenhouse_combined_plot_12010",
       "seed": 225,
       "sensitivity": {
@@ -7023,25 +7023,25 @@
           "confounder_warning": "Coupled sensitivity detected. These parameters interact non-additively; identifiability cannot be resolved from single output observations.",
           "crop": "tomato",
           "evaluations": {
-            "baseline": 101.22270668984561,
-            "p1_base_p2_high": 101.3448418279959,
-            "p1_base_p2_low": 101.10054650652637,
-            "p1_high_p2_base": 101.3448418279959,
-            "p1_high_p2_high": 101.47916139456308,
-            "p1_low_p2_base": 101.10054650652637,
-            "p1_low_p2_low": 100.99058103798836
+            "baseline": 101.22639547410738,
+            "p1_base_p2_high": 101.34930596360053,
+            "p1_base_p2_low": 101.10353394555302,
+            "p1_high_p2_base": 101.34930596360053,
+            "p1_high_p2_high": 101.48456393257112,
+            "p1_low_p2_base": 101.10353394555302,
+            "p1_low_p2_low": 100.99300051422397
           },
           "has_non_additive_coupling": true,
-          "interaction_delta": 0.012184428416901483,
+          "interaction_delta": 0.01234747947744097,
           "observable": "biomass",
           "parameter_1": "radiation.rue",
           "parameter_2": "greenhouse.cover_transmission",
           "perturbation_percent": 10.0
         },
         "oat": {
-          "absolute_change": 0.1221351381502842,
-          "absolute_sensitivity": 0.6106756907514205,
-          "baseline_output": 101.22270668984561,
+          "absolute_change": 0.12291048949315098,
+          "absolute_sensitivity": 0.6145524474657543,
+          "baseline_output": 101.22639547410738,
           "baseline_value": 2.0,
           "classification": "LOW",
           "classification_reason": "analytical_threshold_applied",
@@ -7054,19 +7054,19 @@
           "cycle_id": null,
           "direction": "+",
           "environment": "greenhouse",
-          "feedback_iterations": 7,
+          "feedback_iterations": 3,
           "name": "radiation use efficiency",
-          "normalized_sensitivity": 0.012065982242948298,
+          "normalized_sensitivity": 0.0121421383145654,
           "observable": "biomass",
           "parameter_id": "radiation.rue",
           "perturbation_percent": 10.0,
-          "perturbed_output": 101.3448418279959,
+          "perturbed_output": 101.34930596360053,
           "perturbed_value": 2.2,
           "phenological_stage": "vegetative_growth",
           "plot_id": null,
           "provenance": "SIMULATED_REAL_DATA_SUBSTITUTE",
           "range_source_type": "ENGINEERING_RANGE",
-          "relative_change": 0.0012065982242948309,
+          "relative_change": 0.001214213831456541,
           "scientific_interpretation": "synthetic + OAT sensitivity demonstrates directional response under synthetic contract; it does not establish parameter identifiability or calibration fit",
           "uncertainty_status": "OBSERVATIONAL",
           "variety": "RAF"

@@ -2,17 +2,21 @@
   "baseline_metrics": [],
   "calibrated_metrics": [],
   "calibration_case": null,
-  "calibration_observations": [],
+  "calibration_observations": [
+    "phase5_26_fixture:0:2026-01-01T00:00:00+00:00:biomass"
+  ],
   "calibration_performed": false,
   "calibration_status": "INSUFFICIENT_DATA",
-  "configuration_hash": "04bbeb9fe7842972f82025a9cef3337d13247c2b3ed22160ddbb7cf30c16b8b5",
+  "configuration_hash": "4c8563775d86580c817c5e0e217dd1714e9fed9a5e4030b3f6d650163314eb7e",
   "confounders": {
     "co2": [
       "actuator.co2.capacity",
       "actuator.ventilation.capacity",
+      "crop.co2_response_reference",
       "feedback.co2_carbon_fraction",
       "greenhouse.cover_transmission",
-      "greenhouse.outdoor.solar_transmission_fraction"
+      "greenhouse.outdoor.solar_transmission_fraction",
+      "greenhouse.outdoor_co2"
     ],
     "fruit_development": [
       "contract.maturity_response",
@@ -372,7 +376,8 @@
       "crop.tomato.yield_maturation.stress_thresholds.min_temp_c",
       "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
       "feedback.latent_heat_vaporization",
-      "feedback.sensible_heat_transfer"
+      "feedback.sensible_heat_transfer",
+      "physics.air_specific_heat"
     ],
     "vpd": [
       "contract.thermal_base_temperature_c",
@@ -663,6 +668,7 @@
       "crop.tomato.yield_maturation.vwc_thresholds.moderate_min",
       "crop.tomato.yield_maturation.vwc_thresholds.optimal_min",
       "crop.tomato.yield_maturation.vwc_thresholds.wilting_point",
+      "physics.water_vapour_gas_constant",
       "plot.plot_12010.soil_type",
       "plot.plot_14705.soil_type",
       "plot.plot_30412.soil_type",
@@ -695,7 +701,9 @@
       "category": "greenhouse",
       "confidence": "none",
       "confounders": [
-        "feedback.co2_carbon_fraction"
+        "crop.co2_response_reference",
+        "feedback.co2_carbon_fraction",
+        "greenhouse.outdoor_co2"
       ],
       "crop": null,
       "evidence_level": "none",
@@ -786,7 +794,8 @@
         "crop.tomato.vegetative_growth.stress_thresholds.critical_heat_c",
         "crop.tomato.yield_maturation.stress_thresholds.critical_heat_c",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": null,
       "evidence_level": "none",
@@ -2553,7 +2562,8 @@
         "crop.tomato.yield_maturation.stress_thresholds.min_temp_c",
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "apple",
       "evidence_level": "none",
@@ -5108,7 +5118,8 @@
         "crop.tomato.yield_maturation.stress_thresholds.min_temp_c",
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "apple",
       "evidence_level": "none",
@@ -7663,7 +7674,8 @@
         "crop.tomato.yield_maturation.stress_thresholds.min_temp_c",
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "apple",
       "evidence_level": "none",
@@ -10813,7 +10825,8 @@
         "crop.tomato.yield_maturation.vwc_thresholds.optimal_min",
         "crop.tomato.yield_maturation.vwc_thresholds.wilting_point",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "apple",
       "evidence_level": "none",
@@ -13090,6 +13103,44 @@
     {
       "calibration_allowed": true,
       "calibration_status": "candidate_for_calibration",
+      "category": "engineering_default",
+      "confidence": "low",
+      "confounders": [
+        "actuator.co2.capacity",
+        "feedback.co2_carbon_fraction",
+        "greenhouse.outdoor_co2"
+      ],
+      "crop": null,
+      "evidence_level": "none",
+      "identifiability_status": "INSUFFICIENT_DATA",
+      "measurement_method": null,
+      "name": "CO2 growth-response reference (factor = min(1, CO2 / reference))",
+      "notes": "must not be presented as biological validation",
+      "observable_variables": [
+        "air_temperature",
+        "biomass",
+        "solar_radiation"
+      ],
+      "parameter_id": "crop.co2_response_reference",
+      "phenological_stage": null,
+      "plot": null,
+      "provenance": "engineering_default",
+      "required_environmental_coverage": [],
+      "required_observation_types": [
+        "radiation, biomass, site and climate observations"
+      ],
+      "required_stage_coverage": [],
+      "scientific_warnings": [
+        "no observation dataset supplied"
+      ],
+      "subsystem": "runtime_code",
+      "temporal_resolution": null,
+      "uncertainty_requirement": null,
+      "variety": null
+    },
+    {
+      "calibration_allowed": true,
+      "calibration_status": "candidate_for_calibration",
       "category": "environmental",
       "confidence": "low",
       "confounders": [
@@ -14075,7 +14126,8 @@
         "crop.tomato.yield_maturation.stress_thresholds.min_temp_c",
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "grape",
       "evidence_level": "none",
@@ -16630,7 +16682,8 @@
         "crop.tomato.yield_maturation.stress_thresholds.min_temp_c",
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "grape",
       "evidence_level": "none",
@@ -19185,7 +19238,8 @@
         "crop.tomato.yield_maturation.stress_thresholds.min_temp_c",
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "grape",
       "evidence_level": "none",
@@ -22335,7 +22389,8 @@
         "crop.tomato.yield_maturation.vwc_thresholds.optimal_min",
         "crop.tomato.yield_maturation.vwc_thresholds.wilting_point",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "grape",
       "evidence_level": "none",
@@ -25597,7 +25652,8 @@
         "crop.tomato.yield_maturation.stress_thresholds.min_temp_c",
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "lettuce",
       "evidence_level": "none",
@@ -28152,7 +28208,8 @@
         "crop.tomato.yield_maturation.stress_thresholds.min_temp_c",
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "lettuce",
       "evidence_level": "none",
@@ -30707,7 +30764,8 @@
         "crop.tomato.yield_maturation.stress_thresholds.min_temp_c",
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "lettuce",
       "evidence_level": "none",
@@ -33857,7 +33915,8 @@
         "crop.tomato.yield_maturation.vwc_thresholds.optimal_min",
         "crop.tomato.yield_maturation.vwc_thresholds.wilting_point",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "lettuce",
       "evidence_level": "none",
@@ -37119,7 +37178,8 @@
         "crop.tomato.yield_maturation.stress_thresholds.min_temp_c",
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "peach",
       "evidence_level": "none",
@@ -39674,7 +39734,8 @@
         "crop.tomato.yield_maturation.stress_thresholds.min_temp_c",
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "peach",
       "evidence_level": "none",
@@ -42229,7 +42290,8 @@
         "crop.tomato.yield_maturation.stress_thresholds.min_temp_c",
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "peach",
       "evidence_level": "none",
@@ -45379,7 +45441,8 @@
         "crop.tomato.yield_maturation.vwc_thresholds.optimal_min",
         "crop.tomato.yield_maturation.vwc_thresholds.wilting_point",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "peach",
       "evidence_level": "none",
@@ -48641,7 +48704,8 @@
         "crop.tomato.yield_maturation.stress_thresholds.min_temp_c",
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "pepper",
       "evidence_level": "none",
@@ -51196,7 +51260,8 @@
         "crop.tomato.yield_maturation.stress_thresholds.min_temp_c",
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "pepper",
       "evidence_level": "none",
@@ -53751,7 +53816,8 @@
         "crop.tomato.yield_maturation.stress_thresholds.min_temp_c",
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "pepper",
       "evidence_level": "none",
@@ -56901,7 +56967,8 @@
         "crop.tomato.yield_maturation.vwc_thresholds.optimal_min",
         "crop.tomato.yield_maturation.vwc_thresholds.wilting_point",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "pepper",
       "evidence_level": "none",
@@ -60163,7 +60230,8 @@
         "crop.tomato.yield_maturation.stress_thresholds.min_temp_c",
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "plum",
       "evidence_level": "none",
@@ -62718,7 +62786,8 @@
         "crop.tomato.yield_maturation.stress_thresholds.min_temp_c",
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "plum",
       "evidence_level": "none",
@@ -65273,7 +65342,8 @@
         "crop.tomato.yield_maturation.stress_thresholds.min_temp_c",
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "plum",
       "evidence_level": "none",
@@ -68423,7 +68493,8 @@
         "crop.tomato.yield_maturation.vwc_thresholds.optimal_min",
         "crop.tomato.yield_maturation.vwc_thresholds.wilting_point",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "plum",
       "evidence_level": "none",
@@ -71685,7 +71756,8 @@
         "crop.tomato.yield_maturation.stress_thresholds.min_temp_c",
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "tomato",
       "evidence_level": "none",
@@ -74240,7 +74312,8 @@
         "crop.tomato.yield_maturation.stress_thresholds.min_temp_c",
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "tomato",
       "evidence_level": "none",
@@ -76795,7 +76868,8 @@
         "crop.tomato.yield_maturation.stress_thresholds.min_temp_c",
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "tomato",
       "evidence_level": "none",
@@ -79945,7 +80019,8 @@
         "crop.tomato.yield_maturation.vwc_thresholds.optimal_min",
         "crop.tomato.yield_maturation.vwc_thresholds.wilting_point",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": "tomato",
       "evidence_level": "none",
@@ -83609,7 +83684,9 @@
       "category": "engineering_default",
       "confidence": "low",
       "confounders": [
-        "actuator.co2.capacity"
+        "actuator.co2.capacity",
+        "crop.co2_response_reference",
+        "greenhouse.outdoor_co2"
       ],
       "crop": null,
       "evidence_level": "none",
@@ -83674,7 +83751,8 @@
         "crop.tomato.post_harvest_dormancy.stress_thresholds.critical_heat_c",
         "crop.tomato.vegetative_growth.stress_thresholds.critical_heat_c",
         "crop.tomato.yield_maturation.stress_thresholds.critical_heat_c",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "physics.air_specific_heat"
       ],
       "crop": null,
       "evidence_level": "none",
@@ -83869,7 +83947,8 @@
         "crop.tomato.post_harvest_dormancy.stress_thresholds.critical_heat_c",
         "crop.tomato.vegetative_growth.stress_thresholds.critical_heat_c",
         "crop.tomato.yield_maturation.stress_thresholds.critical_heat_c",
-        "feedback.latent_heat_vaporization"
+        "feedback.latent_heat_vaporization",
+        "physics.air_specific_heat"
       ],
       "crop": null,
       "evidence_level": "none",
@@ -83973,6 +84052,44 @@
       "category": "engineering_default",
       "confidence": "low",
       "confounders": [
+        "actuator.co2.capacity",
+        "crop.co2_response_reference",
+        "feedback.co2_carbon_fraction"
+      ],
+      "crop": null,
+      "evidence_level": "none",
+      "identifiability_status": "ENVIRONMENT_SPECIFIC",
+      "measurement_method": null,
+      "name": "outdoor ambient CO2 concentration for air exchange",
+      "notes": "must not be presented as biological validation",
+      "observable_variables": [
+        "air_temperature",
+        "biomass",
+        "solar_radiation"
+      ],
+      "parameter_id": "greenhouse.outdoor_co2",
+      "phenological_stage": null,
+      "plot": null,
+      "provenance": "engineering_default",
+      "required_environmental_coverage": [],
+      "required_observation_types": [
+        "radiation, biomass, site and climate observations"
+      ],
+      "required_stage_coverage": [],
+      "scientific_warnings": [
+        "environment-specific scope requires site observations"
+      ],
+      "subsystem": "runtime_code",
+      "temporal_resolution": null,
+      "uncertainty_requirement": null,
+      "variety": null
+    },
+    {
+      "calibration_allowed": true,
+      "calibration_status": "candidate_for_calibration",
+      "category": "engineering_default",
+      "confidence": "low",
+      "confounders": [
         "contract.thermal_base_temperature_c",
         "contract.thermal_upper_temperature_c"
       ],
@@ -83999,6 +84116,99 @@
       "scientific_warnings": [
         "environment-specific scope requires site observations"
       ],
+      "subsystem": "runtime_code",
+      "temporal_resolution": null,
+      "uncertainty_requirement": null,
+      "variety": null
+    },
+    {
+      "calibration_allowed": false,
+      "calibration_status": "fixed",
+      "category": "environmental",
+      "confidence": "high",
+      "confounders": [
+        "actuator.heating.capacity",
+        "crop.apple.establishment.stress_thresholds.critical_heat_c",
+        "crop.apple.post_harvest_dormancy.stress_thresholds.critical_heat_c",
+        "crop.apple.vegetative_growth.stress_thresholds.critical_heat_c",
+        "crop.apple.yield_maturation.stress_thresholds.critical_heat_c",
+        "crop.grape.establishment.stress_thresholds.critical_heat_c",
+        "crop.grape.post_harvest_dormancy.stress_thresholds.critical_heat_c",
+        "crop.grape.vegetative_growth.stress_thresholds.critical_heat_c",
+        "crop.grape.yield_maturation.stress_thresholds.critical_heat_c",
+        "crop.lettuce.establishment.stress_thresholds.critical_heat_c",
+        "crop.lettuce.post_harvest_dormancy.stress_thresholds.critical_heat_c",
+        "crop.lettuce.vegetative_growth.stress_thresholds.critical_heat_c",
+        "crop.lettuce.yield_maturation.stress_thresholds.critical_heat_c",
+        "crop.peach.establishment.stress_thresholds.critical_heat_c",
+        "crop.peach.post_harvest_dormancy.stress_thresholds.critical_heat_c",
+        "crop.peach.vegetative_growth.stress_thresholds.critical_heat_c",
+        "crop.peach.yield_maturation.stress_thresholds.critical_heat_c",
+        "crop.pepper.establishment.stress_thresholds.critical_heat_c",
+        "crop.pepper.post_harvest_dormancy.stress_thresholds.critical_heat_c",
+        "crop.pepper.vegetative_growth.stress_thresholds.critical_heat_c",
+        "crop.pepper.yield_maturation.stress_thresholds.critical_heat_c",
+        "crop.plum.establishment.stress_thresholds.critical_heat_c",
+        "crop.plum.post_harvest_dormancy.stress_thresholds.critical_heat_c",
+        "crop.plum.vegetative_growth.stress_thresholds.critical_heat_c",
+        "crop.plum.yield_maturation.stress_thresholds.critical_heat_c",
+        "crop.tomato.establishment.stress_thresholds.critical_heat_c",
+        "crop.tomato.post_harvest_dormancy.stress_thresholds.critical_heat_c",
+        "crop.tomato.vegetative_growth.stress_thresholds.critical_heat_c",
+        "crop.tomato.yield_maturation.stress_thresholds.critical_heat_c",
+        "feedback.latent_heat_vaporization",
+        "feedback.sensible_heat_transfer"
+      ],
+      "crop": null,
+      "evidence_level": "high",
+      "identifiability_status": "FIXED",
+      "measurement_method": null,
+      "name": "specific heat of air at constant pressure",
+      "notes": "not a calibration parameter",
+      "observable_variables": [],
+      "parameter_id": "physics.air_specific_heat",
+      "phenological_stage": null,
+      "plot": null,
+      "provenance": "literature",
+      "required_environmental_coverage": [],
+      "required_observation_types": [
+        "none (physical constant)"
+      ],
+      "required_stage_coverage": [],
+      "scientific_warnings": [],
+      "subsystem": "runtime_code",
+      "temporal_resolution": null,
+      "uncertainty_requirement": null,
+      "variety": null
+    },
+    {
+      "calibration_allowed": false,
+      "calibration_status": "fixed",
+      "category": "environmental",
+      "confidence": "high",
+      "confounders": [
+        "soil.calcareous_loam.available_water_capacity_mm_m",
+        "soil.clay_loam.available_water_capacity_mm_m",
+        "soil.sandy_loam.available_water_capacity_mm_m",
+        "water.et_temperature_range"
+      ],
+      "crop": null,
+      "evidence_level": "high",
+      "identifiability_status": "FIXED",
+      "measurement_method": null,
+      "name": "specific gas constant of water vapour",
+      "notes": "not a calibration parameter",
+      "observable_variables": [],
+      "parameter_id": "physics.water_vapour_gas_constant",
+      "phenological_stage": null,
+      "plot": null,
+      "provenance": "literature",
+      "required_environmental_coverage": [],
+      "required_observation_types": [
+        "none (physical constant)"
+      ],
+      "required_stage_coverage": [],
+      "scientific_warnings": [],
       "subsystem": "runtime_code",
       "temporal_resolution": null,
       "uncertainty_requirement": null,
@@ -84687,6 +84897,7 @@
       "category": "soil",
       "confidence": "low",
       "confounders": [
+        "physics.water_vapour_gas_constant",
         "plot.plot_12010.soil_type",
         "plot.plot_14705.soil_type",
         "plot.plot_30412.soil_type",
@@ -85103,6 +85314,7 @@
       "category": "soil",
       "confidence": "low",
       "confounders": [
+        "physics.water_vapour_gas_constant",
         "plot.plot_12010.soil_type",
         "plot.plot_14705.soil_type",
         "plot.plot_30412.soil_type",
@@ -85519,6 +85731,7 @@
       "category": "soil",
       "confidence": "low",
       "confounders": [
+        "physics.water_vapour_gas_constant",
         "plot.plot_12010.soil_type",
         "plot.plot_14705.soil_type",
         "plot.plot_30412.soil_type",
@@ -85937,6 +86150,7 @@
       "confounders": [
         "contract.thermal_base_temperature_c",
         "contract.thermal_upper_temperature_c",
+        "physics.water_vapour_gas_constant",
         "soil.calcareous_loam.available_water_capacity_mm_m",
         "soil.clay_loam.available_water_capacity_mm_m",
         "soil.sandy_loam.available_water_capacity_mm_m"
@@ -85970,11 +86184,19 @@
       "variety": null
     }
   ],
-  "limitations": [],
+  "limitations": [
+    "No REAL_VERIFIED dataset is available; synthetic and forcing sources are rejected.",
+    "Independent validation is reserved for Phase 5.27."
+  ],
   "literature_sources": [
     "src/crop_phenology.csv"
   ],
-  "objective": {},
+  "objective": {
+    "normalizers": {},
+    "weights": {
+      "biomass": 1.0
+    }
+  },
   "parameter_candidates": [],
   "parameters_calibrated": [],
   "parameters_rejected": [
@@ -86545,6 +86767,13 @@
     },
     {
       "parameter_id": "crop.apple.yield_maturation.vwc_thresholds.wilting_point",
+      "reasons": [
+        "traceable bounds unavailable",
+        "identifiability=INSUFFICIENT_DATA"
+      ]
+    },
+    {
+      "parameter_id": "crop.co2_response_reference",
       "reasons": [
         "traceable bounds unavailable",
         "identifiability=INSUFFICIENT_DATA"
@@ -89532,10 +89761,33 @@
       ]
     },
     {
+      "parameter_id": "greenhouse.outdoor_co2",
+      "reasons": [
+        "traceable bounds unavailable",
+        "identifiability=ENVIRONMENT_SPECIFIC"
+      ]
+    },
+    {
       "parameter_id": "greenhouse.thermal_exchange_area",
       "reasons": [
         "traceable bounds unavailable",
         "identifiability=ENVIRONMENT_SPECIFIC"
+      ]
+    },
+    {
+      "parameter_id": "physics.air_specific_heat",
+      "reasons": [
+        "calibration_allowed=false",
+        "traceable bounds unavailable",
+        "identifiability=FIXED"
+      ]
+    },
+    {
+      "parameter_id": "physics.water_vapour_gas_constant",
+      "reasons": [
+        "calibration_allowed=false",
+        "traceable bounds unavailable",
+        "identifiability=FIXED"
       ]
     },
     {
@@ -89703,7 +89955,8 @@
   "simulated_real_substitute_sources": [
     "data/sensitivity/synthetic_sensitivity_report.json",
     "data/synthetic_real_substitute/manifest.json",
-    "data/synthetic_real_substitute/observations.csv"
+    "data/synthetic_real_substitute/observations.csv",
+    "data/transferability/transferability_robustness_report.json"
   ],
   "sources_audited": [
     {
@@ -90032,6 +90285,16 @@
       "variables": []
     },
     {
+      "classification": "SIMULATED_REAL_DATA_SUBSTITUTE",
+      "evidence": [
+        "explicit synthetic real-data substitute provenance"
+      ],
+      "notes": [],
+      "path": "data/transferability/transferability_robustness_report.json",
+      "source_type": "synthetic",
+      "variables": []
+    },
+    {
       "classification": "FORCING",
       "evidence": [
         "weather or forecast forcing metadata"
@@ -90272,7 +90535,16 @@
       "variables": []
     }
   ],
-  "split": null,
+  "split": {
+    "calibration_observation_ids": [
+      "phase5_26_fixture:0:2026-01-01T00:00:00+00:00:biomass"
+    ],
+    "holdout_observation_ids": [],
+    "independent": false,
+    "overlap": [],
+    "split_method": "explicit_dataset",
+    "split_reason": "NO_INDEPENDENT_HOLDOUT"
+  },
   "status": "NOT_PERFORMED",
   "synthetic_sources": [
     "data/synthetic/phase5_9/biomass.csv",
@@ -90322,6 +90594,7 @@
     "src/growth_model_config.json"
   ],
   "warnings": [
-    "CALIBRATION NOT PERFORMED"
+    "CALIBRATION NOT PERFORMED",
+    "INSUFFICIENT REAL DATA"
   ]
 }

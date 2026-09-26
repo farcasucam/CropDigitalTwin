@@ -4,4 +4,4 @@ Scientific validation is not performed without REAL_VERIFIED observations and a 
 
 - status: `INSUFFICIENT_REAL_DATA`
 - validation performed: `False`
-- configuration hash: `7bc4ac53e3aa06845324d5c573e7e0aa93d7ff3a31cbb6c8fa8ac4ed33cdf522`
+- configuration hash: `397fc76dc233b73c409b8b789160f5f82f2191a601a1f7314e33aa434db7e5aa`

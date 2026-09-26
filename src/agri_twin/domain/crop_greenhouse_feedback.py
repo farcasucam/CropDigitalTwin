@@ -9,11 +9,15 @@ from typing import Mapping
 
 from agri_twin.domain.crop_growth import CropGrowthEngine, CropGrowthInput, CropGrowthResult
 from agri_twin.domain.greenhouse import (
+    AIR_DENSITY_KG_M3,
+    LATENT_HEAT_VAPORIZATION_J_KG,
     CropMicroclimateFeedback,
     GreenhouseActuatorState,
     GreenhouseConfiguration,
     GreenhousePhysicalModel,
     MicroclimateState,
+    vapour_deficit_density_kg_m3,
+    vapour_pressure_deficit_kpa,
 )
 from agri_twin.domain.models import CropGrowthState, DerivedEnvironmentState, SoilState, WeatherState
 from agri_twin.domain.water_balance import WaterBalanceEngine
@@ -90,12 +94,12 @@ class CropGreenhouseFeedbackConfiguration:
     tolerance_relative_humidity_pct: float = 0.2
     tolerance_co2_ppm: float = 1.0
     relaxation_alpha: float = 0.4
-    latent_heat_j_kg: float = 2_450_000.0
+    latent_heat_j_kg: float = LATENT_HEAT_VAPORIZATION_J_KG
     sensible_heat_transfer_w_m2_k: float = 5.0
     leaf_air_delta_per_intercepted_w_m2: float = 0.002
     co2_carbon_fraction: float = 0.45
     co2_molar_mass_ratio: float = 44.0 / 12.0
-    air_density_kg_m3: float = 1.2
+    air_density_kg_m3: float = AIR_DENSITY_KG_M3
     air_volume_m3: float = 1000.0
 
     def __post_init__(self) -> None:
@@ -128,16 +132,22 @@ class CropPhysicalExchangeModel:
         profile = CropGrowthEngine().radiation.profile_for(crop.crop_key)
         fraction_intercepted = 1.0 - math.exp(-profile.extinction_coefficient * max(0.0, growth.state.leaf_area_index))
         intercepted = max(0.0, microclimate.solar_radiation_w_m2 * fraction_intercepted)
+        hours = dt_seconds / 3600.0
+        # The crop transpires into the indoor air: demand uses the microclimate, not outdoor weather.
+        indoor = WeatherState(microclimate.temperature_c, microclimate.relative_humidity_pct, microclimate.solar_radiation_w_m2, weather.wind_speed_m_s, weather.wind_direction_deg, 0.0, microclimate.pressure_hpa)
         if soil is not None and crop.root_depth_m > 0:
-            water_result = self.water.advance(soil, weather, dt_seconds, crop)
-            hours = dt_seconds / 3600.0
-            base_rate = water_result.transpiration_mm / max(hours, 1e-12)
-            transpiration = base_rate
-            origin = "WaterBalanceEngine; no second VPD correction"
+            water_result = self.water.advance(soil, indoor, dt_seconds, crop)
+            demand = water_result.transpiration_mm / max(hours, 1e-12)
+            origin = "WaterBalanceEngine (indoor microclimate); no second VPD correction"
         else:
             canopy = min(1.0, max(0.0, growth.state.leaf_area_index / 3.0))
-            transpiration = max(0.0, (microclimate.vpd_kpa * 0.15 + microclimate.solar_radiation_w_m2 * 0.00005) * canopy)
+            demand = max(0.0, (microclimate.vpd_kpa * 0.15 + microclimate.solar_radiation_w_m2 * 0.00005) * canopy)
             origin = "engineering_default simplified canopy demand"
+        # Mass conservation: the air (air_volume_m3 per m2, as in the CO2 exchange)
+        # cannot take up more vapour in one step than its deficit; zero at VPD = 0.
+        capacity = vapour_deficit_density_kg_m3(microclimate.temperature_c, microclimate.vpd_kpa) * self.configuration.air_volume_m3 / max(hours, 1e-12)
+        transpiration = min(demand, capacity)
+        origin += "; limited by indoor vapour deficit"
         latent = transpiration * self.configuration.latent_heat_j_kg / 3600.0
         leaf_air_delta = min(5.0, max(-5.0, intercepted * self.configuration.leaf_air_delta_per_intercepted_w_m2))
         sensible = max(0.0, self.configuration.sensible_heat_transfer_w_m2_k * max(0.0, crop.leaf_area_index) * leaf_air_delta)
@@ -163,25 +173,43 @@ class CropGreenhouseFeedbackLoop:
         self.crop_engine = crop_engine or CropGrowthEngine()
         self.configuration = configuration or CropGreenhouseFeedbackConfiguration()
         self.exchange = exchange or CropPhysicalExchangeModel(self.configuration)
+        self.last_converged: MicroclimateState | None = None
 
-    def step(self, crop: CropGrowthState, weather: WeatherState, greenhouse_configuration: GreenhouseConfiguration, actuators: GreenhouseActuatorState, dt_seconds: float, soil: SoilState | None = None, simulation_time: datetime | None = None) -> CropGreenhouseStepResult:
+    @staticmethod
+    def _outdoor_start(weather: WeatherState, greenhouse_configuration: GreenhouseConfiguration) -> MicroclimateState:
+        """Start-of-run state when no converged state exists: outdoor air at the configured CO2 baseline."""
+        return MicroclimateState(
+            air_temperature_c=weather.temperature_c,
+            relative_humidity_pct=weather.relative_humidity_pct,
+            vpd_kpa=vapour_pressure_deficit_kpa(weather.temperature_c, weather.relative_humidity_pct),
+            pressure_hpa=weather.pressure_hpa,
+            solar_radiation_w_m2=weather.solar_radiation_w_m2,
+            par_umol_m2_s=max(0.0, weather.solar_radiation_w_m2 * 2.04),
+            co2_ppm=greenhouse_configuration.co2_ppm_baseline,
+            wind_speed_m_s=weather.wind_speed_m_s,
+        )
+
+    def step(self, crop: CropGrowthState, weather: WeatherState, greenhouse_configuration: GreenhouseConfiguration, actuators: GreenhouseActuatorState, dt_seconds: float, soil: SoilState | None = None, simulation_time: datetime | None = None, prior: MicroclimateState | None = None) -> CropGreenhouseStepResult:
+        """One external timestep. Every iteration integrates the greenhouse from the
+        same start-of-step state (``prior``, else the last converged state, else
+        outdoor air); only the converged state is carried to the next timestep."""
         if not math.isfinite(dt_seconds) or dt_seconds <= 0:
             raise CropGreenhouseFeedbackError("dt_seconds must be positive and finite")
         time = simulation_time or crop.simulation_time
         if time.tzinfo is None:
             raise CropGreenhouseFeedbackError("simulation_time must be timezone-aware")
+        start = prior or self.last_converged or self._outdoor_start(weather, greenhouse_configuration)
         zero_feedback = CropMicroclimateFeedback()
-        current = self.greenhouse.step(weather, greenhouse_configuration, actuators, zero_feedback, dt_seconds)
-        initial = current
-        last_exchange = self.exchange.calculate(crop, self._grow(crop, weather, current, dt_seconds, time), current, weather, dt_seconds, soil)
+        current = self.greenhouse.step(weather, greenhouse_configuration, actuators, zero_feedback, dt_seconds, prior=start)
         last_growth = self._grow(crop, weather, current, dt_seconds, time)
+        last_exchange = self.exchange.calculate(crop, last_growth, current, weather, dt_seconds, soil)
         error = math.inf
         converged = False
         reason = "maximum iterations reached"
         for iteration in range(1, self.configuration.max_iterations + 1):
             last_growth = self._grow(crop, weather, current, dt_seconds, time)
             last_exchange = self.exchange.calculate(crop, last_growth, current, weather, dt_seconds, soil)
-            calculated = self.greenhouse.step(weather, greenhouse_configuration, actuators, last_exchange.to_feedback(), dt_seconds, prior=current if iteration == 1 else initial)
+            calculated = self.greenhouse.step(weather, greenhouse_configuration, actuators, last_exchange.to_feedback(), dt_seconds, prior=start)
             next_state = self._relax(current, calculated)
             error = max(
                 abs(next_state.temperature_c - current.temperature_c) / self.configuration.tolerance_temperature_c,
@@ -194,15 +222,16 @@ class CropGreenhouseFeedbackLoop:
                 reason = "converged"
                 break
         feedback = last_exchange.to_feedback()
+        self.last_converged = current
         return CropGreenhouseStepResult(current, last_growth.state, last_growth, last_exchange, feedback, FeedbackConvergence(converged, iteration, error, reason))
 
     def _grow(self, crop: CropGrowthState, weather: WeatherState, microclimate: MicroclimateState, dt_seconds: float, simulation_time: datetime) -> CropGrowthResult:
-        crop_weather = WeatherState(microclimate.temperature_c, microclimate.relative_humidity_pct, microclimate.solar_radiation_w_m2, weather.wind_speed_m_s, weather.wind_direction_deg, weather.rain_rate_mm_h, microclimate.pressure_hpa)
+        # No rain falls inside the greenhouse; the crop sees only the microclimate.
+        crop_weather = WeatherState(microclimate.temperature_c, microclimate.relative_humidity_pct, microclimate.solar_radiation_w_m2, weather.wind_speed_m_s, weather.wind_direction_deg, 0.0, microclimate.pressure_hpa)
         saturation = 0.6108 * math.exp(17.27 * microclimate.temperature_c / (microclimate.temperature_c + 237.3))
         vapor = saturation * microclimate.relative_humidity_pct / 100.0
         environment = DerivedEnvironmentState(microclimate.vpd_kpa, max(0.0, microclimate.temperature_c - 20.0) + microclimate.solar_radiation_w_m2 / 1000.0, saturation, vapor, 0.0, 0.0)
-        co2_factor = min(1.0, max(0.0, microclimate.co2_ppm / 420.0))
-        return self.crop_engine.advance(crop, CropGrowthInput(crop_weather, dt_seconds, environment=environment, co2_factor=co2_factor), simulation_time)
+        return self.crop_engine.advance(crop, CropGrowthInput(crop_weather, dt_seconds, environment=environment, co2_ppm=microclimate.co2_ppm), simulation_time)
 
     def _relax(self, old: MicroclimateState, new: MicroclimateState) -> MicroclimateState:
         alpha = self.configuration.relaxation_alpha

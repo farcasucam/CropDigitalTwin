@@ -14,6 +14,47 @@ class GreenhouseModelError(ValueError):
     """Raised when greenhouse or actuator inputs are invalid."""
 
 
+# Physical constants (FAO-56, Allen et al. 1998, for cp and lambda; standard
+# thermodynamics for the water-vapour gas constant) and the ambient CO2
+# reference already used by the model. Registered in ParameterRegistry.
+AIR_DENSITY_KG_M3 = 1.2
+AIR_SPECIFIC_HEAT_J_KG_K = 1013.0
+LATENT_HEAT_VAPORIZATION_J_KG = 2_450_000.0
+WATER_VAPOUR_GAS_CONSTANT_J_KG_K = 461.5
+OUTDOOR_CO2_PPM = 420.0
+
+
+def saturation_vapour_pressure_kpa(temperature_c: float) -> float:
+    """Tetens saturation vapour pressure (kPa), the formula used across the project."""
+    return 0.6108 * math.exp(17.27 * temperature_c / (temperature_c + 237.3))
+
+
+def vapour_pressure_deficit_kpa(temperature_c: float, relative_humidity_pct: float) -> float:
+    return max(0.0, saturation_vapour_pressure_kpa(temperature_c) * (1.0 - relative_humidity_pct / 100.0))
+
+
+def saturation_vapour_density_kg_m3(temperature_c: float) -> float:
+    """Ideal-gas water-vapour density at saturation: e_s [Pa] / (R_v T [K])."""
+    return saturation_vapour_pressure_kpa(temperature_c) * 1000.0 / (WATER_VAPOUR_GAS_CONSTANT_J_KG_K * (temperature_c + 273.15))
+
+
+def vapour_density_kg_m3(temperature_c: float, relative_humidity_pct: float) -> float:
+    return saturation_vapour_density_kg_m3(temperature_c) * relative_humidity_pct / 100.0
+
+
+def vapour_deficit_density_kg_m3(temperature_c: float, vpd_kpa: float) -> float:
+    """Water vapour the air can still hold (kg m-3) for a given VPD at temperature."""
+    return max(0.0, vpd_kpa) * 1000.0 / (WATER_VAPOUR_GAS_CONSTANT_J_KG_K * (temperature_c + 273.15))
+
+
+def _first_order(initial: float, outdoor: float, source: float, rate: float, dt_seconds: float) -> float:
+    """Exact solution of dX/dt = source + rate (outdoor - X) over dt_seconds."""
+    if rate <= 0.0:
+        return initial + source * dt_seconds
+    equilibrium = outdoor + source / rate
+    return equilibrium + (initial - equilibrium) * math.exp(-rate * dt_seconds)
+
+
 @dataclass(frozen=True, slots=True)
 class GreenhouseConfiguration:
     """Explicit engineering configuration for a simplified greenhouse model."""
@@ -400,11 +441,11 @@ class SimplifiedGreenhouseModel(GreenhousePhysicalModel):
             indoor = MicroclimateState(
                 air_temperature_c=weather.temperature_c,
                 relative_humidity_pct=weather.relative_humidity_pct,
-                vpd_kpa=0.0,
+                vpd_kpa=vapour_pressure_deficit_kpa(weather.temperature_c, weather.relative_humidity_pct),
                 pressure_hpa=weather.pressure_hpa,
                 solar_radiation_w_m2=weather.solar_radiation_w_m2,
                 par_umol_m2_s=max(0.0, weather.solar_radiation_w_m2 * 2.04),
-                co2_ppm=420.0,
+                co2_ppm=OUTDOOR_CO2_PPM,
                 wind_speed_m_s=weather.wind_speed_m_s,
                 ventilation_fraction=0.0,
                 heating_kw=0.0,
@@ -414,33 +455,60 @@ class SimplifiedGreenhouseModel(GreenhousePhysicalModel):
             )
             return indoor
 
+        # Lumped, well-mixed air volume (Phase 5.30). Every balance is a linear
+        # first-order ODE integrated exactly over dt, so no step size can overshoot:
+        #   dX/dt = S + k (X_out - X),  k = ACH / 3600 s-1
+        #   X(dt) = X_eq + (X0 - X_eq) exp(-k dt),  X_eq = X_out + S / k   (k > 0)
+        #   X(dt) = X0 + S dt                                               (k = 0)
+        # Crop fluxes and solar gain are per m2 of thermal_exchange_area_m2.
         shade = min(1.0, max(0.0, actuators.shading_fraction))
-        ventilation = max(0.0, actuators.ventilation_ach)
+        air_changes_h = max(0.0, config.ventilation_ach) + max(0.0, actuators.ventilation_ach)
+        exchange_rate_s = air_changes_h / 3600.0
+        exchanged_fraction = 1.0 - math.exp(-exchange_rate_s * dt_seconds)
         transmission = config.solar_transmission * (1.0 - shade)
         indoor_radiation = weather.solar_radiation_w_m2 * transmission
         par = max(0.0, indoor_radiation * 2.04)
-        delta_t = weather.temperature_c - 20.0
-        crop_heat_w = (crop_feedback.sensible_heat_w_m2 - crop_feedback.latent_heat_w_m2) * config.thermal_exchange_area_m2
-        thermal_gain = indoor_radiation * 0.004 + actuators.heating_kw * 10.0 - actuators.cooling_kw * 10.0 - config.heat_loss_w_k * max(-10.0, min(10.0, delta_t)) / 100.0
-        ventilation_ratio = min(1.0, ventilation / max(profile.ventilation_ach, 1e-6))
-        base_temperature = weather.temperature_c + thermal_gain / max(config.volume_m3 / 10.0, 1.0) * (dt_seconds / 3600.0)
+        area = config.thermal_exchange_area_m2
+        volume = config.volume_m3
         previous_temperature = prior.temperature_c if prior is not None else weather.temperature_c
-        temperature = weather.temperature_c + (previous_temperature - weather.temperature_c) * (1.0 - ventilation_ratio)
-        temperature += (base_temperature - weather.temperature_c) * 0.25
-        temperature += (crop_heat_w / max(config.thermal_mass_kj_k * 1000.0, 1.0)) * dt_seconds
+        previous_vapour = (
+            vapour_density_kg_m3(prior.temperature_c, prior.relative_humidity_pct) if prior is not None
+            else vapour_density_kg_m3(weather.temperature_c, weather.relative_humidity_pct)
+        )
+        outdoor_vapour = vapour_density_kg_m3(weather.temperature_c, weather.relative_humidity_pct)
 
-        humidity_change = (crop_feedback.transpiration_mm_h - actuators.misting_mm_h) * dt_seconds / max(config.volume_m3, 1.0) * 4.0
-        previous_humidity = prior.relative_humidity_pct if prior is not None else weather.relative_humidity_pct
-        humidity = weather.relative_humidity_pct + (previous_humidity - weather.relative_humidity_pct) * (1.0 - ventilation_ratio)
-        humidity = min(100.0, max(0.0, humidity + humidity_change - ventilation_ratio * 10.0))
+        # Misting can only evaporate into the vapour deficit of the air at the
+        # start of the step; the evaporated water humidifies and cools the air.
+        misting_supplied_kg = actuators.misting_mm_h * area * dt_seconds / 3600.0
+        misting_capacity_kg = max(0.0, saturation_vapour_density_kg_m3(previous_temperature) - previous_vapour) * volume
+        misting_evaporated_kg = min(misting_supplied_kg, misting_capacity_kg)
 
-        saturation = 0.6108 * math.exp(17.27 * temperature / (temperature + 237.3))
-        vapor = saturation * humidity / 100.0
-        vpd = max(0.0, saturation - vapor)
+        # Energy (W): solar gain + actuators + crop sensible - crop latent - misting latent.
+        heat_sources_w = (
+            indoor_radiation * area
+            + actuators.heating_kw * 1000.0
+            - actuators.cooling_kw * 1000.0
+            + (crop_feedback.sensible_heat_w_m2 - crop_feedback.latent_heat_w_m2) * area
+            - misting_evaporated_kg * LATENT_HEAT_VAPORIZATION_J_KG / dt_seconds
+        )
+        # Conductance to outdoor air (W K-1): cover heat loss + ventilation enthalpy exchange.
+        conductance_w_k = config.heat_loss_w_k + AIR_DENSITY_KG_M3 * AIR_SPECIFIC_HEAT_J_KG_K * volume * exchange_rate_s
+        heat_capacity_j_k = config.thermal_mass_kj_k * 1000.0
+        temperature = _first_order(previous_temperature, weather.temperature_c, heat_sources_w / heat_capacity_j_k, conductance_w_k / heat_capacity_j_k, dt_seconds)
+
+        # Water vapour (kg m-3): transpiration + evaporated misting, exchanged with
+        # outdoor air; vapour above saturation at the new temperature condenses.
+        vapour_source = (crop_feedback.transpiration_mm_h * area / 3600.0 + misting_evaporated_kg / dt_seconds) / volume
+        vapour = _first_order(previous_vapour, outdoor_vapour, vapour_source, exchange_rate_s, dt_seconds)
+        saturation_vapour = saturation_vapour_density_kg_m3(temperature)
+        vapour = min(max(0.0, vapour), saturation_vapour)
+        humidity = min(100.0, max(0.0, 100.0 * vapour / saturation_vapour))
+        vpd = vapour_pressure_deficit_kpa(temperature, humidity)
+
+        # CO2 (ppm): supply and crop uptake are per-timestep increments (contract).
         previous_co2 = prior.co2_ppm if prior is not None else config.co2_ppm_baseline
-        outdoor_co2 = 420.0
-        co2_exchange = ventilation_ratio * (outdoor_co2 - previous_co2)
-        co2 = previous_co2 + actuators.co2_supply_ppm + co2_exchange - crop_feedback.co2_uptake_ppm
+        co2_source = (actuators.co2_supply_ppm - crop_feedback.co2_uptake_ppm) / dt_seconds
+        co2 = _first_order(previous_co2, OUTDOOR_CO2_PPM, co2_source, exchange_rate_s, dt_seconds)
         return MicroclimateState(
             air_temperature_c=temperature,
             relative_humidity_pct=humidity,
@@ -450,7 +518,7 @@ class SimplifiedGreenhouseModel(GreenhousePhysicalModel):
             par_umol_m2_s=par,
             co2_ppm=max(0.0, co2),
             wind_speed_m_s=weather.wind_speed_m_s,
-            ventilation_fraction=ventilation_ratio,
+            ventilation_fraction=exchanged_fraction,
             heating_kw=actuators.heating_kw,
             cooling_kw=actuators.cooling_kw,
             shading_fraction=shade,

@@ -1,9 +1,9 @@
 """Offline delivery verification for Phase 5.29: Integrated Synthetic Validation.
 
 Runs the full synthetic suite twice, checks every section, writes the canonical
-artifact and prints the scientific status. Known open findings (for example the
-closed-greenhouse feedback defect) are expected to be *detected*; they are
-reported, never hidden, and they keep the corresponding qualification open.
+artifact and prints the scientific status. Open physical issues, if any are
+detected, are reported (never hidden) and keep the corresponding qualification
+open (OPEN_PHYSICAL_ISSUE). Phase 5.30 closed the greenhouse findings of 5.29.
 """
 
 from __future__ import annotations
@@ -15,7 +15,7 @@ from agri_twin.application.integrated_synthetic_validation import IntegratedSynt
 
 ROOT = Path(__file__).resolve().parent
 PASSING = {"PASS", "PASS_WITH_WARNINGS"}
-EXPECTED_OPEN_FINDINGS = {"greenhouse.crop_greenhouse_feedback": "INVARIANT_VIOLATION"}
+EXPECTED_OPEN_FINDINGS: dict[str, str] = {}
 
 
 def main() -> int:
@@ -88,9 +88,13 @@ def main() -> int:
         ("MULTI_PLOT_CONSISTENCY", "MULTI-PLOT CONSISTENCY"),
         ("MULTI_CYCLE_CONSISTENCY", "MULTI-CYCLE CONSISTENCY"),
         ("GREENHOUSE_CROP_INTEGRATION", "GREENHOUSE-CROP INTEGRATION"),
+        ("MICROCLIMATE_TO_CROP_COUPLING", "MICROCLIMATE-TO-CROP COUPLING"),
+        ("FEEDBACK_LOOP", "FEEDBACK LOOP"),
+        ("DORMANCY_PHENOLOGY_CONSISTENCY", "DORMANCY / PHENOLOGY CONSISTENCY"),
         ("ROBUSTNESS_SCENARIOS", "ROBUSTNESS SCENARIOS"),
     ):
-        print(f"{label} {qualification[name].replace('_', ' ')}")
+        value = qualification[name]
+        print(f"{label} {'SYNTHETICALLY QUALIFIED' if value == 'QUALIFIED' else value.replace('_', ' ')}")
     print(f"REAL_VERIFIED = {scientific['REAL_VERIFIED']}")
     print("REAL AGRICULTURAL DATA NOT VERIFIED")
     print("SCIENTIFIC EXPERIMENTAL VALIDATION DEFERRED TO FINAL VALIDATION STAGE")

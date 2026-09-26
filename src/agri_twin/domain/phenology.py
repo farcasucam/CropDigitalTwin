@@ -69,6 +69,16 @@ class PhenologyEngine:
     def __init__(self, profiles: dict[str, PhenologyProfile] | None = None) -> None:
         self._profiles = dict(APPROXIMATE_PROFILES if profiles is None else profiles)
 
+    @staticmethod
+    def endodormant(state: CropGrowthState) -> bool:
+        """Perennial dormancy not yet released by chilling: no active growth."""
+        return not state.dormancy_released
+
+    @classmethod
+    def growth_active(cls, state: CropGrowthState) -> bool:
+        """Active growth requires released dormancy and a non-terminal stage."""
+        return not cls.endodormant(state) and state.current_stage != "post_harvest_dormancy"
+
     def profile_for(self, crop_key: str) -> PhenologyProfile:
         try:
             return self._profiles[crop_key.lower()]

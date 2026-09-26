@@ -170,8 +170,10 @@ def test_feedback_state_has_no_nan_or_invalid_humidity_co2():
 
 
 def test_co2_uptake_is_dynamic_and_does_not_reset_to_baseline():
+    # Phase 5.30: the configured ventilation_ach now exchanges air, so the pure
+    # uptake bookkeeping is isolated in a closed greenhouse (0 ACH).
     model = SimplifiedGreenhouseModel()
-    configuration = GreenhouseConfiguration(co2_ppm_baseline=450)
+    configuration = GreenhouseConfiguration(co2_ppm_baseline=450, ventilation_ach=0.0)
     feedback = CropMicroclimateFeedback(co2_uptake_ppm=10)
     first = model.step(weather(), configuration, GreenhouseActuatorState(), feedback, 3600)
     second = model.step(weather(), configuration, GreenhouseActuatorState(), feedback, 3600)

@@ -13,10 +13,12 @@ from agri_twin.application.weather import WeatherEngine
 from agri_twin.domain import (
     ActuatorControl,
     ClimateStressEngine,
+    CropGrowthEngine,
     CropGrowthState,
     FertilizationRequest,
     GreenhouseMicroclimateEngine,
     GreenhouseMicroclimateResult,
+    GreenhouseMicroclimateState,
     IrrigationRequest,
     NutrientBalanceEngine,
     PhenologyEngine,
@@ -43,12 +45,20 @@ class CropSimulationSnapshot:
     actual_growth_g_m2: float
     growth_factor: float
     harvest_ready: bool
+    outdoor_weather: WeatherState | None = None
+    co2_factor: float = 1.0
 
 
 class CropDigitalTwinOrchestrator:
-    """Coordinate all crop engines using one injected SimulationClock."""
+    """Coordinate all crop engines using one injected SimulationClock.
 
-    def __init__(self, clock: SimulationClock, weather_engine: WeatherEngine, crop: CropGrowthState, soil: SoilState, greenhouse_mode: str = "outdoor") -> None:
+    ``weather`` in each snapshot is the environment the crop experienced: the
+    outdoor WeatherState in outdoor mode, the indoor microclimate (temperature,
+    RH, radiation, pressure; no rain) in greenhouse modes. The greenhouse
+    microclimate is persistent state carried from step to step.
+    """
+
+    def __init__(self, clock: SimulationClock, weather_engine: WeatherEngine, crop: CropGrowthState, soil: SoilState, greenhouse_mode: str = "outdoor", microclimate: GreenhouseMicroclimateState | None = None) -> None:
         self.clock = clock
         self.weather_engine = weather_engine
         normalized = replace(crop, root_depth_m=1.0) if crop.root_depth_m <= 0 else crop
@@ -64,11 +74,14 @@ class CropDigitalTwinOrchestrator:
         self.water = WaterBalanceEngine()
         self.nutrients = NutrientBalanceEngine()
         self.climate = ClimateStressEngine()
+        self.microclimate = microclimate
         self.last_snapshot: CropSimulationSnapshot | None = None
 
-    @staticmethod
-    def _with_radiation(weather: WeatherState, radiation_w_m2: float) -> WeatherState:
-        return WeatherState(weather.temperature_c, weather.relative_humidity_pct, radiation_w_m2, weather.wind_speed_m_s, weather.wind_direction_deg, weather.rain_rate_mm_h, weather.pressure_hpa)
+    def _crop_environment(self, weather: WeatherState, indoor: GreenhouseMicroclimateState) -> WeatherState:
+        """Outdoor mode: the outdoor WeatherState. Greenhouse: the resulting microclimate."""
+        if self.greenhouse_mode == "outdoor":
+            return weather
+        return WeatherState(indoor.temperature_c, indoor.relative_humidity_pct, indoor.radiation_w_m2, weather.wind_speed_m_s, weather.wind_direction_deg, 0.0, indoor.pressure_hpa)
 
     def step(self, dt_seconds: float, actuators: Mapping[str, ActuatorControl] | None = None, irrigation: IrrigationRequest | None = None, fertilization: FertilizationRequest | None = None) -> CropSimulationSnapshot:
         if not math.isfinite(dt_seconds) or dt_seconds <= 0:
@@ -80,22 +93,24 @@ class CropDigitalTwinOrchestrator:
         if simulation_time.tzinfo is None or not math.isfinite(dt_seconds) or dt_seconds <= 0:
             raise CropSimulationError("simulation time and dt_seconds are invalid")
         weather = self.weather_engine.generate(simulation_time)
-        microclimate = self.greenhouse.advance(weather, self.crop, dt_seconds, self.greenhouse_mode, actuators)
-        phenological = self.phenology.advance(self.crop, weather, simulation_time, dt_seconds)
+        microclimate = self.greenhouse.advance(weather, self.crop, dt_seconds, self.greenhouse_mode, actuators, prior=self.microclimate)
+        crop_weather = self._crop_environment(weather, microclimate.indoor_state)
+        phenological = self.phenology.advance(self.crop, crop_weather, simulation_time, dt_seconds)
         phenological = replace(phenological, soil_water_vwc=self.soil.vwc_m3_m3)
-        crop_weather = self._with_radiation(weather, microclimate.indoor_state.radiation_w_m2)
         potential_state = self.radiation.advance(phenological, crop_weather, dt_seconds)
         potential_growth = potential_state.biomass_total - phenological.biomass_total
         water_result = self.water.advance(self.soil, crop_weather, dt_seconds, phenological, irrigation)
         nutrient_result = self.nutrients.advance(phenological, potential_growth, dt_seconds, fertilization)
         climate_result = self.climate.advance(nutrient_result.state, crop_weather, dt_seconds, microclimate.environment, water_result.water_stress, nutrient_result.nutrient_factor)
-        combined = climate_result.temperature_factor * climate_result.radiation_factor * climate_result.water_factor * climate_result.vpd_factor * climate_result.nutrient_factor
+        co2_factor = CropGrowthEngine.co2_response(microclimate.indoor_state.co2_ppm)
+        combined = climate_result.temperature_factor * climate_result.radiation_factor * climate_result.water_factor * climate_result.vpd_factor * climate_result.nutrient_factor * co2_factor
         actual = self.radiation.advance(climate_result.state, crop_weather, dt_seconds, combined)
         actual_growth = actual.biomass_total - climate_result.state.biomass_total
         harvest_ready = actual.maturity_index >= 1.0 and actual.current_stage == "post_harvest_dormancy"
         self.crop = replace(actual, soil_water_vwc=water_result.soil.vwc_m3_m3, water_stress=water_result.water_stress, nutrient_status=nutrient_result.nutrient_status, harvest_ready=harvest_ready)
         self.soil = water_result.soil
-        snapshot = CropSimulationSnapshot(simulation_time, crop_weather, microclimate.environment, microclimate, self.crop, self.soil, potential_growth, actual_growth, combined, harvest_ready)
+        self.microclimate = microclimate.indoor_state
+        snapshot = CropSimulationSnapshot(simulation_time, crop_weather, microclimate.environment, microclimate, self.crop, self.soil, potential_growth, actual_growth, combined, harvest_ready, weather, co2_factor)
         self.last_snapshot = snapshot
         return snapshot
 

@@ -42,8 +42,10 @@ def test_ventilation_moves_temperature_and_humidity_toward_outdoor():
     still = engine.advance(weather(), crop(), 86400, mode="passive_greenhouse", prior=__import__("agri_twin.domain", fromlist=["GreenhouseMicroclimateState"]).GreenhouseMicroclimateState(50, 90, 500))
     ventilated = engine.advance(weather(), crop(), 86400, mode="passive_greenhouse", prior=still.indoor_state, actuators={"ventilation": ActuatorControl(12, maximum=20, capacity=20)})
 
+    # Phase 5.30: with no moisture source, air exchange moves RH toward outdoor RH
+    # (the former artificial "-10 % RH per ventilation ratio" drying term was removed).
     assert abs(ventilated.indoor_state.temperature_c - weather().temperature_c) < abs(still.indoor_state.temperature_c - weather().temperature_c)
-    assert ventilated.indoor_state.relative_humidity_pct < still.indoor_state.relative_humidity_pct
+    assert abs(ventilated.indoor_state.relative_humidity_pct - weather().relative_humidity_pct) < abs(still.indoor_state.relative_humidity_pct - weather().relative_humidity_pct)
 
 
 def test_heating_cooling_and_hvac_are_capacity_limited():
