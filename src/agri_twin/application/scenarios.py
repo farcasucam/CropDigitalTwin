@@ -8,7 +8,7 @@ import math
 from dataclasses import asdict, dataclass, field, replace
 from datetime import datetime, timedelta
 from enum import StrEnum
-from typing import Any, Mapping, Sequence
+from typing import Any, Callable, Mapping, Protocol, Sequence
 
 from agri_twin.application.clock import SimulationClock
 from agri_twin.application.orchestrator import CropDigitalTwinOrchestrator, CropSimulationSnapshot
@@ -28,6 +28,10 @@ from agri_twin.domain.calibration import DatasetRole, Observation, ObservationDa
 
 class ScenarioError(ValueError):
     """Raised when a scenario configuration is invalid."""
+
+
+class WeatherProvider(Protocol):
+    def get(self, timestamp: datetime) -> WeatherState: ...
 
 
 class ScenarioKind(StrEnum):
@@ -133,11 +137,14 @@ class ScenarioResult:
 
 
 class _ScenarioWeatherProvider:
-    def __init__(self, scenario: Scenario) -> None:
+    """Apply scenario events to constant base weather or to an optional base provider."""
+
+    def __init__(self, scenario: Scenario, base_provider: WeatherProvider | None = None) -> None:
         self.scenario = scenario
+        self.base_provider = base_provider
 
     def get(self, timestamp: datetime) -> WeatherState:
-        values = asdict(self.scenario.base_weather)
+        values = asdict(self.base_provider.get(timestamp) if self.base_provider is not None else self.scenario.base_weather)
         for event in self.scenario.events:
             if not event.active(timestamp):
                 continue
@@ -157,11 +164,20 @@ class _ScenarioWeatherProvider:
 
 
 class ScenarioRunner:
-    """Execute a scenario using one injected SimulationClock and no wall time."""
+    """Execute a scenario using one injected SimulationClock and no wall time.
+
+    ``base_weather_factory`` optionally supplies time-varying base weather (for
+    example a seeded ``WeatherEngine``); scenario events are applied on top of
+    it exactly as they are applied to the constant ``Scenario.base_weather``.
+    """
+
+    def __init__(self, base_weather_factory: Callable[[Scenario], WeatherProvider] | None = None) -> None:
+        self.base_weather_factory = base_weather_factory
 
     def run(self, scenario: Scenario) -> ScenarioResult:
         clock = SimulationClock(scenario.start)
-        weather = WeatherEngine(WeatherConfiguration(simulation=WeatherConfiguration().simulation), provider=_ScenarioWeatherProvider(scenario))
+        base = self.base_weather_factory(scenario) if self.base_weather_factory is not None else None
+        weather = WeatherEngine(WeatherConfiguration(simulation=WeatherConfiguration().simulation), provider=_ScenarioWeatherProvider(scenario, base))
         orchestrator = CropDigitalTwinOrchestrator(clock, weather, scenario.initial_crop, scenario.initial_soil, scenario.greenhouse_mode)
         snapshots: list[CropSimulationSnapshot] = []
         current = scenario.start

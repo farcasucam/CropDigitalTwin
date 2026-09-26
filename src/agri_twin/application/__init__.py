@@ -246,6 +246,20 @@ from agri_twin.application.transferability_robustness import (
     TransferabilityStatus,
     TransferContext,
 )
+from agri_twin.application.integrated_synthetic_validation import (
+    IntegratedSyntheticValidationSuite,
+    IntegratedValidationSummary,
+    SyntheticScenarioKind,
+    SyntheticValidationCase,
+    SyntheticValidationIssue,
+    SyntheticValidationMetric,
+    SyntheticValidationReport,
+    SyntheticValidationResult,
+    SyntheticValidationScenario,
+    SyntheticValidationStatus,
+    ValidationCategory,
+    VarietyParameterResolution,
+)
 
 
 __all__ = [
@@ -441,4 +455,16 @@ __all__ = [
     "TransferabilityRobustnessSuite",
     "TransferabilityStatus",
     "TransferContext",
+    "IntegratedSyntheticValidationSuite",
+    "IntegratedValidationSummary",
+    "SyntheticScenarioKind",
+    "SyntheticValidationCase",
+    "SyntheticValidationIssue",
+    "SyntheticValidationMetric",
+    "SyntheticValidationReport",
+    "SyntheticValidationResult",
+    "SyntheticValidationScenario",
+    "SyntheticValidationStatus",
+    "ValidationCategory",
+    "VarietyParameterResolution",
 ]
