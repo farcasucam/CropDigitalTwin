@@ -253,6 +253,12 @@ from agri_twin.application.greenhouse_physical_benchmark import (
     PhysicalBenchmarkCase,
     PhysicalBenchmarkReport,
 )
+from agri_twin.application.dormancy_chilling_framework import (
+    ChillingFrameworkReport,
+    DormancyChillingFrameworkSuite,
+    DormancyOutcome,
+    SyntheticLocation,
+)
 from agri_twin.application.seasonal_synthetic_campaign import (
     CampaignResult,
     CampaignSpec,
@@ -374,6 +380,10 @@ __all__ = [
     "CampaignConfiguration",
     "CampaignCropSpec",
     "CampaignQualityReport",
+    "ChillingFrameworkReport",
+    "DormancyChillingFrameworkSuite",
+    "DormancyOutcome",
+    "SyntheticLocation",
     "CampaignResult",
     "DEFAULT_VARIABLES",
     "SyntheticCampaignError",

@@ -63,11 +63,98 @@ APPROXIMATE_PROFILES = {
 STAGES = ("establishment", "vegetative_growth", "yield_maturation", "post_harvest_dormancy")
 
 
+class ChillingModelType(StrEnum):
+    CHILLING_HOURS = "CHILLING_HOURS"
+    UTAH = "UTAH"
+    DYNAMIC = "DYNAMIC"
+
+
+class ChillingStartPolicyType(StrEnum):
+    DORMANCY_STATE = "DORMANCY_STATE"
+    FIXED_DATE = "FIXED_DATE"
+    EFFECTIVE_CHILL_ONSET = "EFFECTIVE_CHILL_ONSET"
+    MODEL_DEFINED = "MODEL_DEFINED"
+    ENVIRONMENTAL_WINDOW = "ENVIRONMENTAL_WINDOW"
+
+
+@dataclass(frozen=True, slots=True)
+class ChillingModel:
+    """HOW TO COUNT. Only the Chilling Hours rule already used by the project is
+    implemented; Utah and Dynamic are declared for traceability, not implemented."""
+
+    model_type: ChillingModelType = ChillingModelType.CHILLING_HOURS
+    unit: str = "chill_hours"
+    temperature_resolution: str = "per simulation step, weighted by dt (hourly steps give whole hours)"
+    applicability: str = "hours with air temperature in [lower, upper] C count; no negation by warm hours"
+    traceability: str = "project CHILLING_HOURS rule (PhenologyProfile chilling_min/max_temperature_c); Weinberger (1950) counted hours below 7.2 C"
+
+    @property
+    def implemented(self) -> bool:
+        return self.model_type is ChillingModelType.CHILLING_HOURS
+
+    def increment(self, temperature_c: float, profile: PhenologyProfile, dt_seconds: float) -> float:
+        if not self.implemented:
+            raise PhenologyError(f"MODEL_NOT_SUPPORTED: chilling model {self.model_type.value} is not implemented")
+        if profile.chilling_min_temperature_c <= temperature_c <= profile.chilling_max_temperature_c:
+            return dt_seconds / 3600.0
+        return 0.0
+
+
+@dataclass(frozen=True, slots=True)
+class ChillingStartPolicy:
+    """WHEN TO COUNT. No policy carries a built-in calendar date: FIXED_DATE requires
+    an explicit, configured instant; the default counts whenever the crop is endodormant."""
+
+    policy_type: ChillingStartPolicyType = ChillingStartPolicyType.DORMANCY_STATE
+    start_time: datetime | None = None
+    rationale: str = "count whenever the crop state is endodormant (dormancy_released is False)"
+
+    def __post_init__(self) -> None:
+        if self.policy_type is ChillingStartPolicyType.FIXED_DATE:
+            if self.start_time is None or self.start_time.tzinfo is None:
+                raise PhenologyError("FIXED_DATE requires an explicit timezone-aware start_time")
+        elif self.start_time is not None:
+            raise PhenologyError(f"{self.policy_type.value} does not take a start_time")
+
+    @property
+    def implemented(self) -> bool:
+        return self.policy_type in {ChillingStartPolicyType.DORMANCY_STATE, ChillingStartPolicyType.FIXED_DATE, ChillingStartPolicyType.EFFECTIVE_CHILL_ONSET}
+
+    def counting(self, simulation_time: datetime) -> bool:
+        if not self.implemented:
+            raise PhenologyError(f"MODEL_NOT_SUPPORTED: start policy {self.policy_type.value} is not implemented")
+        if self.policy_type is ChillingStartPolicyType.FIXED_DATE:
+            assert self.start_time is not None
+            return simulation_time >= self.start_time
+        # DORMANCY_STATE and EFFECTIVE_CHILL_ONSET count every endodormant step; with the
+        # Chilling Hours rule only effective hours add, so the effective onset is implicit.
+        return True
+
+
+class DormancyChillingController:
+    """Dormancy / chilling layer used by PhenologyEngine (not a second phenology engine).
+
+    WHEN TO COUNT (start policy) + HOW TO COUNT (chilling model) + HOW MUCH IS REQUIRED
+    (profile requirement) -> dormancy state. Time comes only from the caller's
+    SimulationClock instant; no latitude, hemisphere or calendar month is used.
+    """
+
+    def __init__(self, policy: ChillingStartPolicy | None = None, model: ChillingModel | None = None) -> None:
+        self.policy = policy or ChillingStartPolicy()
+        self.model = model or ChillingModel()
+
+    def advance(self, chilling_hours: float, profile: PhenologyProfile, weather: WeatherState, simulation_time: datetime, dt_seconds: float) -> tuple[float, bool]:
+        if self.policy.counting(simulation_time):
+            chilling_hours += self.model.increment(weather.temperature_c, profile, dt_seconds)
+        return chilling_hours, chilling_hours >= profile.chilling_requirement_hours
+
+
 class PhenologyEngine:
     """Advance phenology only from provided weather and simulation time."""
 
-    def __init__(self, profiles: dict[str, PhenologyProfile] | None = None) -> None:
+    def __init__(self, profiles: dict[str, PhenologyProfile] | None = None, dormancy: DormancyChillingController | None = None) -> None:
         self._profiles = dict(APPROXIMATE_PROFILES if profiles is None else profiles)
+        self.dormancy = dormancy or DormancyChillingController()
 
     @staticmethod
     def endodormant(state: CropGrowthState) -> bool:
@@ -109,9 +196,7 @@ class PhenologyEngine:
         chilling = state.chilling_hours
         dormancy_released = state.dormancy_released
         if profile.perennial and not dormancy_released:
-            if profile.chilling_min_temperature_c <= weather.temperature_c <= profile.chilling_max_temperature_c:
-                chilling += dt_seconds / 3600.0
-            dormancy_released = chilling >= profile.chilling_requirement_hours
+            chilling, dormancy_released = self.dormancy.advance(chilling, profile, weather, simulation_time, dt_seconds)
             return replace(
                 state,
                 simulation_time=simulation_time,

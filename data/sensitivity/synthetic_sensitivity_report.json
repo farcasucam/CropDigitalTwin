@@ -3,8 +3,8 @@
   "calibration_status": "CALIBRATION NOT PERFORMED",
   "computational_benchmark": {
     "average_feedback_iterations": 2.4,
-    "elapsed_wall_clock_seconds": 0.3492,
-    "simulations_per_second": 1194.08,
+    "elapsed_wall_clock_seconds": 0.3581,
+    "simulations_per_second": 1164.44,
     "total_simulations": 417
   },
   "configuration_hash": "b93fe053a15f50af498e380403341c5bcd72c681d51d903e5e892eb233d8253a",

@@ -2,7 +2,7 @@
   "artifact_status": "SYNTHETIC_SOFTWARE_BENCHMARK",
   "assimilation_status": "DATA ASSIMILATION NOT IMPLEMENTED",
   "calibration_status": "CALIBRATION NOT PERFORMED",
-  "configuration_hash": "6e5746ea55f115aa882598724a7478e7585360ef525f12f2ab37e1e3377928ac",
+  "configuration_hash": "f5484217648511429956d7b5699f8a2d409e978adc2c4af701184adf18bbb19d",
   "definition": {
     "benchmark_id": "phase5_24_integrated",
     "cases": [
@@ -493,7 +493,7 @@
       },
       "environment": "outdoor",
       "failure_reason": null,
-      "input_hash": "5ac04430371e3f509a3fa5de13ea0d54231deba4fb6bd1f7321b7d46dad104b3",
+      "input_hash": "5f61db3e47ec3c48223c1698e4b0519f7830753d2780b9562b3258e4f1af6337",
       "metrics": [
         {
           "category": "software_metric",
@@ -513,7 +513,7 @@
         }
       ],
       "model_configuration_hash": "c0d99d2f18224c78093092b9acba7e29ff4253e33b8f49565d31e687db58a89f",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": "plot_12010",
       "result_hash": "36b014f71e1d5895650ecfea5fab371c67887529754a83b267d624933d83514f",
       "scenario_id": "tomato_annual-1_outdoor_control_plot_12010",
@@ -753,7 +753,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "f6939f6b764d2af59c31d4f063f6b7c45ff35b6f457901b776474eb88681cb5a",
+      "input_hash": "cad3eb87a75a875dd4c16b28fb16e58ebb9e4ffd722c955557b2225588c9e5f3",
       "metrics": [
         {
           "category": "software_metric",
@@ -773,7 +773,7 @@
         }
       ],
       "model_configuration_hash": "5a0cd4cb16adf2a8a3683de0ff03fa8339466a85996594b8d027aca3ae145c5e",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": "plot_12010",
       "result_hash": "c42cdf9378215dcf3683d03ea2b14654c591320eca42d037ccd5f8daf79b2ea6",
       "scenario_id": "tomato_annual-1_greenhouse_control_plot_12010",
@@ -1013,7 +1013,7 @@
       },
       "environment": "outdoor",
       "failure_reason": null,
-      "input_hash": "660b14c21cbc91f51102a9f80ce4c5257814caf4d7739205878c957ba446f051",
+      "input_hash": "45fbb5e098bb4f2ed1969983b84a3daee300f9d3e2a6761b92b9f5d405a1c880",
       "metrics": [
         {
           "category": "software_metric",
@@ -1033,7 +1033,7 @@
         }
       ],
       "model_configuration_hash": "d98e7fb01d7d13a4cf2b7e367393b82056debcd1db7697110f16dbe4b84daa05",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": null,
       "result_hash": "c53e6fbb08d7de00f396df123e0e9aab84e2c57e7791376135d4dcc1dd72def5",
       "scenario_id": "lettuce_annual-1_outdoor_control_unregistered",
@@ -1273,7 +1273,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "3532c0c4ff7930b9eb57d0b493f6a05475777ef447c8eef80a426cf68d9a2a62",
+      "input_hash": "82e8d7f908af4380ad4e855cdbd6ebf22e4a36ee10438afdedcc74707e7956de",
       "metrics": [
         {
           "category": "software_metric",
@@ -1293,7 +1293,7 @@
         }
       ],
       "model_configuration_hash": "a5ef40eea1a70bd510eb417954e882a3af8f3796c1cfde005e3d796f456d9146",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": null,
       "result_hash": "2006c177d9c2f57c5af44cbe45203cb18c96bc21128ffa61f4a90e768bac4b9d",
       "scenario_id": "lettuce_annual-1_greenhouse_control_unregistered",
@@ -1533,7 +1533,7 @@
       },
       "environment": "outdoor",
       "failure_reason": null,
-      "input_hash": "22ddab65d13b12b4841b350577e38a1f382cdaa260ad53727dff4ceef068b9b2",
+      "input_hash": "9da0c5903dedc081deb026be8992eaeb031389fcae8e967316c78824c02b5c0e",
       "metrics": [
         {
           "category": "software_metric",
@@ -1553,7 +1553,7 @@
         }
       ],
       "model_configuration_hash": "b35f4b03bbf824fe25999967c70ad97caf37071f98d813751dfa206635495846",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": null,
       "result_hash": "93259c22b9fc28e338ff92467914dfbadef0264ff581fa1017dfeb53a3ae7694",
       "scenario_id": "lettuce_annual-2_outdoor_control_unregistered",
@@ -1793,7 +1793,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "c96be72818663c3f894190e3c58f4b3fc407443cf935426ba0913c0157c4973b",
+      "input_hash": "1ed835fdd7cf6b90431f8148a4624d6bfde5066565e79fdf0a7370a312f518ad",
       "metrics": [
         {
           "category": "software_metric",
@@ -1813,7 +1813,7 @@
         }
       ],
       "model_configuration_hash": "1bba160bd8e0941f5678d302235210266cf7298f265c097ef67b676e6fc98b32",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": null,
       "result_hash": "e416d16d08804cd3eeddd23ffc26e6eb561aa623c325052d29288de93445c6eb",
       "scenario_id": "lettuce_annual-2_greenhouse_control_unregistered",
@@ -2053,7 +2053,7 @@
       },
       "environment": "outdoor",
       "failure_reason": null,
-      "input_hash": "ce91783ec3c5eb6888a77b08c52bb7c1df656e8b22d2eb1d957684deaf9b15df",
+      "input_hash": "88f3b80813f336bd75824c4f35523c29c7e0a72187fba8070558faa5bd8db14b",
       "metrics": [
         {
           "category": "software_metric",
@@ -2073,7 +2073,7 @@
         }
       ],
       "model_configuration_hash": "7a170e78b68d2c26b2129061c6a6e78f0b80267b17fdc3b1a4cebb72ae2ed0f9",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": null,
       "result_hash": "1bf9cd58f787c3e53edd8af0c1e2b17c24b78f593fa2d3e8db23d981a417edbd",
       "scenario_id": "lettuce_annual-3_outdoor_control_unregistered",
@@ -2313,7 +2313,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "a49993804cfafc1f9c16f2641ca4839e8142bafebfc2b0184700ebd94ca3be70",
+      "input_hash": "f0bb05096029b77dab781c1e40c541e59494050f4528ea9ca9095ac14a269ba9",
       "metrics": [
         {
           "category": "software_metric",
@@ -2333,7 +2333,7 @@
         }
       ],
       "model_configuration_hash": "110a5f892c5bc994e2d77f346c9e6b60efab026839ee2b59fa6a792ef6ebce23",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": null,
       "result_hash": "c2e2cbc4bd55b3233694bdf8f6c04428bb4b59e505dd4301021ab9fb8c4ad62f",
       "scenario_id": "lettuce_annual-3_greenhouse_control_unregistered",
@@ -2573,7 +2573,7 @@
       },
       "environment": "outdoor",
       "failure_reason": null,
-      "input_hash": "3a8c8162ea79f13abd4d349be247bd5804d0c924a1c1a58cf870490ec2c5c408",
+      "input_hash": "f68846502fdf2379fcfdb79e356ee85afc5da807d46f631a7f7d274abc9b9a08",
       "metrics": [
         {
           "category": "software_metric",
@@ -2593,7 +2593,7 @@
         }
       ],
       "model_configuration_hash": "400da157f49623376a72c0ed2f803071c7831ba33bcff14b3880f3a00175f2c3",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": "plot_40811",
       "result_hash": "e24f108f77935e99c63178757b4aa78feff02c6c5bb809a7a032c89816508507",
       "scenario_id": "pepper_annual-1_outdoor_control_plot_40811",
@@ -2833,7 +2833,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "e638fcb3d97f5b05d528dc5c6feaf9b7b8595d96742719cad923fd792f1da0bf",
+      "input_hash": "c87d1969e79e337d6dcecd5a049d93e6032b4ce12dea4e64fc95f706e9de5534",
       "metrics": [
         {
           "category": "software_metric",
@@ -2853,7 +2853,7 @@
         }
       ],
       "model_configuration_hash": "61193e86291bad71aedf77defc67773444b8ea736b57b5906628badc98befa92",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": "plot_40811",
       "result_hash": "8c8f4e54411a212b69b721ae886ede5d8c792f00d22a851ae6bf77d1c1f0f57e",
       "scenario_id": "pepper_annual-1_greenhouse_control_plot_40811",
@@ -3093,7 +3093,7 @@
       },
       "environment": "outdoor",
       "failure_reason": null,
-      "input_hash": "1081954ea0db4431838444beb7794b2a5243d3a9bfabf81b0391b498cf113df3",
+      "input_hash": "5f726304f8b4397b6fc640e85650827f8db1fc6e5db30fc8c7743be566289fc9",
       "metrics": [
         {
           "category": "software_metric",
@@ -3113,7 +3113,7 @@
         }
       ],
       "model_configuration_hash": "b04e4ce0a8eee8d1fd1857c7a2983d703967d652e34c9fab49dfc0330fc1ed85",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": "plot_30412",
       "result_hash": "fc28ce36a936fa04c1b7e02f39ba5f34b8cc3f32a6716d2a8d572691e9b87708",
       "scenario_id": "grape_perennial-1_outdoor_control_plot_30412",
@@ -3353,7 +3353,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "c7290eee4f79ddccfc63ff297f3a4e7733d0e1229cf4d968375e2c20e0300fba",
+      "input_hash": "c7695f6213ca68b18b141efd3bdf3f633e05f488b07cdc16137f5f2a0cd2ce08",
       "metrics": [
         {
           "category": "software_metric",
@@ -3373,7 +3373,7 @@
         }
       ],
       "model_configuration_hash": "9a43f20fc17269c39940f73f8cbe6e07267fb230648cec1ee562e254a8cd5b26",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": "plot_30412",
       "result_hash": "3a18e6c080ee9a834bdede5c0a2381e1946aea5c0e2df61d83334efc06a30dca",
       "scenario_id": "grape_perennial-1_greenhouse_control_plot_30412",
@@ -3613,7 +3613,7 @@
       },
       "environment": "outdoor",
       "failure_reason": null,
-      "input_hash": "e3b478462b2c4ca1ef1628ea36bb7fa05a57e5872428b5a112f4390c34b85578",
+      "input_hash": "cd75226795045b3b61b611f62a22b7a5a8c9196cf01bfc87d753c139fc654217",
       "metrics": [
         {
           "category": "software_metric",
@@ -3633,7 +3633,7 @@
         }
       ],
       "model_configuration_hash": "7689ce0cac2dd7c9761d28b7cee55e214ef545fd81d73af94be02a8c3baa92f1",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": null,
       "result_hash": "caf3cb0502fac1cb20e9f47dcb284328ad439e23d0ac0427dce43e3e9e8a8bb6",
       "scenario_id": "peach_perennial-1_outdoor_control_unregistered",
@@ -3873,7 +3873,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "cbe3f3b02193efa8b76a308eeba438b779ae6accf9bd556f5f5f34831c6fe9c9",
+      "input_hash": "41f109084f2fa4e27c102c6e4e58a3e7746c24a3cbe21dfc1015c9e93f8e6d39",
       "metrics": [
         {
           "category": "software_metric",
@@ -3893,7 +3893,7 @@
         }
       ],
       "model_configuration_hash": "c394afe46e3160308bc783dba88a6c90279da1f4fbcb547e699d65471978970e",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": null,
       "result_hash": "7e90f14d8311ee478ddd3bc60b60e3eea9b8add733c819f858411b3c5d94dedc",
       "scenario_id": "peach_perennial-1_greenhouse_control_unregistered",
@@ -4133,7 +4133,7 @@
       },
       "environment": "outdoor",
       "failure_reason": null,
-      "input_hash": "b0918dbff7de9406236a28b3e6c575dc4e8ef0d3d569a9a10014b4c11e9e2f53",
+      "input_hash": "68a68b69601b7d6101230f1ed01c19f0b9350adf38b934ec234ea552a1092d73",
       "metrics": [
         {
           "category": "software_metric",
@@ -4153,7 +4153,7 @@
         }
       ],
       "model_configuration_hash": "4ba393131866184d08b6f165d1f1c3becf16e54723478e1b6d68e809098bc611",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": "plot_14705",
       "result_hash": "072383ac712b58c20731569a7747b50a5282fa1cb5bc1319e0622cd5ff192db1",
       "scenario_id": "plum_perennial-1_outdoor_control_plot_14705",
@@ -4393,7 +4393,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "221a9e7d700594ee254ebb15348255235734ddd653f3ae4d88ca531480a3509f",
+      "input_hash": "408302e0cd744a8376fe273a5ef3b799c095ec8ab7e238629f035ec8becb90b3",
       "metrics": [
         {
           "category": "software_metric",
@@ -4413,7 +4413,7 @@
         }
       ],
       "model_configuration_hash": "eda340fce05c5ab0b2b58b3b52c6485ae3c153bb64d6030e103c6be880ba40ff",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": "plot_14705",
       "result_hash": "0299fdf20c178b4ccb9a2c4b0ddd21a3473465da482e35474b1dedeaf2950bca",
       "scenario_id": "plum_perennial-1_greenhouse_control_plot_14705",
@@ -4653,7 +4653,7 @@
       },
       "environment": "outdoor",
       "failure_reason": null,
-      "input_hash": "731dee2b4656dab6d975f65452425aa5ecaf312a6d49544dfa1bb2011ac5dff9",
+      "input_hash": "d69bda420380c865dfd87030f06f27e98f1753238394dfb9beedb5b932111471",
       "metrics": [
         {
           "category": "software_metric",
@@ -4673,7 +4673,7 @@
         }
       ],
       "model_configuration_hash": "0d41a5a1f352d4d4add36d48ccfb370005ec837604c5ca93d52e8f03827a7f0e",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": null,
       "result_hash": "e33fc3a0233aafdc9ca15917f420e95508a9f2c84f4325700fe2f5cf074f2fb0",
       "scenario_id": "apple_perennial-1_outdoor_control_unregistered",
@@ -4913,7 +4913,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "758c4c5f1499d45ee17ec914334cce77c68a96ed46588f1d51c9c092fbb36518",
+      "input_hash": "65558fce46c0ecd130cf7dbaf18f15cd61886fbc783dfea87e5db77ce4f0b52d",
       "metrics": [
         {
           "category": "software_metric",
@@ -4933,7 +4933,7 @@
         }
       ],
       "model_configuration_hash": "10e40442260c99800d996a7a741f83b4f7a6e4955559219391658707ed7ced0a",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": null,
       "result_hash": "d940c379db51f19c968d104dc84124bc537cab8566f8b87da0d9d64ecea486e0",
       "scenario_id": "apple_perennial-1_greenhouse_control_unregistered",
@@ -5173,7 +5173,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "4bd632792a0e83dacc5734ab1bf0c745b505be1f5b40282961bf25195975e2bb",
+      "input_hash": "78136748bf04746c4e28ec669d8c275430753103e1069a034956ff0bee0cc41c",
       "metrics": [
         {
           "category": "software_metric",
@@ -5193,7 +5193,7 @@
         }
       ],
       "model_configuration_hash": "24f0063093052c74d727d16cfc22c58ccf64b006f16218807061f5aaececb153",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": "plot_12010",
       "result_hash": "570579f9797e84524b1a8220f6f31edd6bde62661b91603abc1e1af9cbea9bb5",
       "scenario_id": "tomato_annual-1_greenhouse_heat_plot_12010",
@@ -5433,7 +5433,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "cfcb3f709853c1f4470c8ca04543c1de24cf0600c9988dc60733f2c631288732",
+      "input_hash": "704dfd004aea78595ebe59503439efeed87dbd26c8e7aace3d1680b082fafc8d",
       "metrics": [
         {
           "category": "software_metric",
@@ -5453,7 +5453,7 @@
         }
       ],
       "model_configuration_hash": "74b70a6b4e8922e65c995670b78dbab8ba2089ca14babd6d68893ec569a1d909",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": "plot_12010",
       "result_hash": "4d0b5e7c0d509b6a8e8778b96de72b91d9ef5f571485ea869a4c0ad265842cab",
       "scenario_id": "tomato_annual-1_greenhouse_drought_plot_12010",
@@ -5693,7 +5693,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "3375e0debbc08846db882600133a744f1a7a0b480586a84392ceeea8bb506c34",
+      "input_hash": "98fda3ba1a7b950fa271af461e92916b128e42925cb7943b31b11f10534e3323",
       "metrics": [
         {
           "category": "software_metric",
@@ -5713,7 +5713,7 @@
         }
       ],
       "model_configuration_hash": "84b646af1d4133f3919e581184c42e8b6ee0a948eab55ca1b1618420ae8dcc47",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": "plot_12010",
       "result_hash": "0dbe5b959d768759a6306ca8659994ee6238b35cc14758b906d67daa6b07f989",
       "scenario_id": "tomato_annual-1_greenhouse_low_radiation_plot_12010",
@@ -5953,7 +5953,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "c7e1dbca6470134c1454591683fadb5cff99e66ed163803e2176e4e81268a300",
+      "input_hash": "178a9b076dbb3877296dc716b69f2c11837cf39b90951a26712a690b203f703a",
       "metrics": [
         {
           "category": "software_metric",
@@ -5973,7 +5973,7 @@
         }
       ],
       "model_configuration_hash": "3765000eae0225b6365e74c1e49a249f70919eda1383addb953116dc20c62312",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": "plot_12010",
       "result_hash": "d3db7d23388135fdb0303bd87052a85f90184a8ac8419e431a94f86e00439a2d",
       "scenario_id": "tomato_annual-1_greenhouse_high_vpd_plot_12010",
@@ -6213,7 +6213,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "b8c9bcbd6864b6d2ff2750e6e3cec1435eb335920ba8a7ff016cfdcb833a90c0",
+      "input_hash": "208cd9d9967ac591742e3821b3b1af2b1dbe5c28eec614427b41e0bea8fe2c11",
       "metrics": [
         {
           "category": "software_metric",
@@ -6233,7 +6233,7 @@
         }
       ],
       "model_configuration_hash": "43bbccee13be4474c003390d9acdbd1b17151e57a615dffcc980cfa2fc90e45c",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": "plot_12010",
       "result_hash": "eb93339fbbf2915251023b9caf34077b9b5533bf97305ad52c9a5be389733aea",
       "scenario_id": "tomato_annual-1_greenhouse_co2_plot_12010",
@@ -6473,7 +6473,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "a9398b7ffea14a0d81e4c2ab7942192c8aa629e73c7716c06f8b11928ff5b103",
+      "input_hash": "01c210b26ed1acdf9386c0c5aeda4e34c3e1f5e6cbc828e5530c52df46c7a1f9",
       "metrics": [
         {
           "category": "software_metric",
@@ -6493,7 +6493,7 @@
         }
       ],
       "model_configuration_hash": "f907001a4ccae625360c72bfe42a22c371d428aba2db08b7b4b8816582dbb5f6",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": "plot_12010",
       "result_hash": "95d07fb31e426be9b7ea35dcf024e9c8925ce7085c46db2ec827bd3c5729214e",
       "scenario_id": "tomato_annual-1_greenhouse_ventilation_plot_12010",
@@ -6733,7 +6733,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "cc08d8310d380e89c52a265ef0c18f05db4c6cb94a3c9683697d7e84ac3ec6fa",
+      "input_hash": "7d42e33597a94759668dfda28d0e3d4178b6b835c5455d7da4fd908c72275bd0",
       "metrics": [
         {
           "category": "software_metric",
@@ -6753,7 +6753,7 @@
         }
       ],
       "model_configuration_hash": "5ea1c29fce9a50613e857aeeb586400b56a93b67dbe8993f309350ba8c11f7a6",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": "plot_12010",
       "result_hash": "aecca535de6fcc50a244775867b1f021b6e93a45dffb18ff3ec3ca0195c14ffe",
       "scenario_id": "tomato_annual-1_greenhouse_recovery_plot_12010",
@@ -6993,7 +6993,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "a3ae729a5ceed5fbf8480a19c6946992ee98db4ac502ef99fd36707635efa823",
+      "input_hash": "821163019d5dd8f86045f2d8d707f19dee064528bcf6e80c027acc9e9372abe4",
       "metrics": [
         {
           "category": "software_metric",
@@ -7013,7 +7013,7 @@
         }
       ],
       "model_configuration_hash": "8efcfc3d2f1fe5d3575cb793622a591fc9048dcc43362eda33da6dd7fbfd7f47",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": "plot_12010",
       "result_hash": "44a79986dcf73cfc90bdf2847662dcea0cbd11317a1be1682cefc8c0b49a5073",
       "scenario_id": "tomato_annual-1_greenhouse_combined_plot_12010",

@@ -7,7 +7,7 @@ This report documents the Phase 5.28 transferability and robustness evaluation f
 - **Real Data Verified**: `False`
 - **Calibration Performed**: `False`
 - **Validation Performed**: `False`
-- **Configuration Hash**: `81d451ad045ecff089b34f11f9ff724bdc1302d6a2c3b4c7f6b3c656ff356023`
+- **Configuration Hash**: `b87a6116c408c7d04d05fd61a4fd34318ad6f3e9a790f833dc074b3d519fd7d3`
 
 ## Scientific Stance
 

@@ -60,7 +60,7 @@ class CropDigitalTwinOrchestrator:
     microclimate is persistent state carried from step to step.
     """
 
-    def __init__(self, clock: SimulationClock, weather_engine: WeatherEngine, crop: CropGrowthState, soil: SoilState, greenhouse_mode: str = "outdoor", microclimate: GreenhouseMicroclimateState | None = None) -> None:
+    def __init__(self, clock: SimulationClock, weather_engine: WeatherEngine, crop: CropGrowthState, soil: SoilState, greenhouse_mode: str = "outdoor", microclimate: GreenhouseMicroclimateState | None = None, phenology: PhenologyEngine | None = None) -> None:
         self.clock = clock
         self.weather_engine = weather_engine
         normalized = replace(crop, root_depth_m=1.0) if crop.root_depth_m <= 0 else crop
@@ -70,7 +70,7 @@ class CropDigitalTwinOrchestrator:
         self.crop = normalized
         self.soil = soil
         self.greenhouse_mode = greenhouse_mode
-        self.phenology = PhenologyEngine()
+        self.phenology = phenology or PhenologyEngine()
         self.greenhouse = GreenhouseMicroclimateEngine()
         self.radiation = RadiationGrowthEngine()
         self.water = WaterBalanceEngine()

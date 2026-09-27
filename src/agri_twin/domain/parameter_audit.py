@@ -234,6 +234,19 @@ class ParameterRegistry:
         ]
         records = [cls._record(parameter_id, name, "Hardcoded engineering baseline", "engineering_default", "runtime_code", None, None, None, unit, value, 0, None, "engineering_default", None, detail, "none", "low", "candidate_for_calibration", True, "radiation, biomass, site and climate observations", "must not be presented as biological validation") for parameter_id, name, unit, value, detail in constants]
         records += [cls._record(parameter_id, name, "Physical constant used by the greenhouse energy and vapour balances", "environmental", "runtime_code", None, None, None, unit, value, 0, None, "literature", reference, detail, "high", "high", "fixed", False, "none (physical constant)", "not a calibration parameter") for parameter_id, name, unit, value, detail, reference in physical_constants]
+        chilling_requirements = [
+            ("grape", 400.0, "no chill-hours evidence row for grape in crop_phenology.csv"),
+            ("peach", 600.0, "inside the 446-866 chill-hours range of crop_phenology.csv peach_chill_hours_001 (SRC-011); not cultivar-specific"),
+            ("plum", 500.0, "inside the 277-851 chill-hours range of crop_phenology.csv plum_chill_hours_001 (SRC-014); not cultivar-specific"),
+            ("apple", 600.0, "apple evidence rows are in chill portions only; chill hours are not converted"),
+        ]
+        records += [cls._record(f"phenology.{crop}.chilling_requirement_hours", f"{crop} chilling requirement", "Chill hours to release endodormancy in the runtime PhenologyProfile", "biological", "runtime_code", crop, None, None, "chill_hours", value, 0, None, "engineering_default", None, "phenology.py:APPROXIMATE_PROFILES", "low", "low", "candidate_for_calibration", True, "cultivar endodormancy-release experiments (forcing tests) with local hourly temperature", note) for crop, value, note in chilling_requirements]
+        records += [
+            cls._record("phenology.chilling_hours.lower_threshold", "Chilling Hours lower threshold", "Lower air temperature counted by the Chilling Hours rule", "biological", "runtime_code", None, None, None, "degC", 0.0, None, None, "engineering_default", None, "phenology.py:PhenologyProfile.chilling_min_temperature_c", "low", "medium", "fixed", False, "none (model definition)", "0-7.2 C variant of the Chilling Hours rule; Weinberger (1950) counted hours below 7.2 C"),
+            cls._record("phenology.chilling_hours.upper_threshold", "Chilling Hours upper threshold", "Upper air temperature counted by the Chilling Hours rule", "biological", "runtime_code", None, None, None, "degC", 7.2, None, None, "engineering_default", None, "phenology.py:PhenologyProfile.chilling_max_temperature_c", "low", "medium", "fixed", False, "none (model definition)", "7.2 C (45 F) threshold of the Chilling Hours rule (Weinberger 1950)"),
+            cls._record("phenology.chilling_model", "Chilling model", "Active HOW-TO-COUNT chilling model", "biological", "runtime_code", None, None, None, "categorical", "CHILLING_HOURS", None, None, "engineering_default", None, "phenology.py:ChillingModel", "low", "low", "not_applicable", False, "model comparison against cultivar release observations", "Utah and Dynamic declared, not implemented; no universal model selected"),
+            cls._record("phenology.chilling_start_policy", "Chilling start policy", "Default WHEN-TO-COUNT policy", "biological", "runtime_code", None, None, None, "categorical", "DORMANCY_STATE", None, None, "engineering_default", None, "phenology.py:ChillingStartPolicy", "low", "low", "not_applicable", False, "dormancy-onset observations per site and cultivar", "no universal calendar start date; FIXED_DATE only with an explicit configured instant"),
+        ]
         return records
 
     def audit(self) -> ParameterAudit:

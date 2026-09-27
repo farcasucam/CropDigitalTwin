@@ -23,6 +23,11 @@ from agri_twin.domain.growth_configuration import (
     GrowthModelConfigurationRepository,
 )
 from agri_twin.domain.phenology import (
+    ChillingModel,
+    ChillingModelType,
+    ChillingStartPolicy,
+    ChillingStartPolicyType,
+    DormancyChillingController,
     PhenologyEngine,
     PhenologyError,
     PhenologyEvidenceLevel,
@@ -206,6 +211,11 @@ __all__ = [
     "PlotLocation",
     "GrowthModelConfigurationError",
     "GrowthModelConfigurationRepository",
+    "ChillingModel",
+    "ChillingModelType",
+    "ChillingStartPolicy",
+    "ChillingStartPolicyType",
+    "DormancyChillingController",
     "PhenologyEngine",
     "PhenologyError",
     "PhenologyEvidenceLevel",

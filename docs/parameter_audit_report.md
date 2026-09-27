@@ -2,24 +2,24 @@
 
 ## Summary
 
-- `total_parameters`: 543
+- `total_parameters`: 551
 - `literature_parameters`: 37
 - `project_data_parameters`: 8
 - `measured_parameters`: 0
 - `derived_parameters`: 0
-- `engineering_defaults`: 31
+- `engineering_defaults`: 39
 - `unknown_parameters`: 467
 - `calibrated_parameters`: 0
-- `calibration_candidates`: 537
+- `calibration_candidates`: 541
 
 ## By crop
 
-- `apple`: 70 parameters
-- `grape`: 72 parameters
+- `apple`: 71 parameters
+- `grape`: 73 parameters
 - `lettuce`: 68 parameters
-- `peach`: 68 parameters
+- `peach`: 69 parameters
 - `pepper`: 69 parameters
-- `plum`: 72 parameters
+- `plum`: 73 parameters
 - `tomato`: 72 parameters
 
 ## Scientific debt
@@ -545,6 +545,14 @@
 | greenhouse.thermal_mass | lumped greenhouse heat capacity | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
 | greenhouse.ventilation_ach | structural air exchange rate (infiltration and fixed vents) | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
 | greenhouse.volume | greenhouse air volume | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
+| phenology.apple.chilling_requirement_hours | apple chilling requirement | engineering_default | low | candidate_for_calibration | apple | apple evidence rows are in chill portions only; chill hours are not converted |
+| phenology.chilling_hours.lower_threshold | Chilling Hours lower threshold | engineering_default | low | fixed | global | 0-7.2 C variant of the Chilling Hours rule; Weinberger (1950) counted hours below 7.2 C |
+| phenology.chilling_hours.upper_threshold | Chilling Hours upper threshold | engineering_default | low | fixed | global | 7.2 C (45 F) threshold of the Chilling Hours rule (Weinberger 1950) |
+| phenology.chilling_model | Chilling model | engineering_default | low | not_applicable | global | Utah and Dynamic declared, not implemented; no universal model selected |
+| phenology.chilling_start_policy | Chilling start policy | engineering_default | low | not_applicable | global | no universal calendar start date; FIXED_DATE only with an explicit configured instant |
+| phenology.grape.chilling_requirement_hours | grape chilling requirement | engineering_default | low | candidate_for_calibration | grape | no chill-hours evidence row for grape in crop_phenology.csv |
+| phenology.peach.chilling_requirement_hours | peach chilling requirement | engineering_default | low | candidate_for_calibration | peach | inside the 446-866 chill-hours range of crop_phenology.csv peach_chill_hours_001 (SRC-011); not cultivar-specific |
+| phenology.plum.chilling_requirement_hours | plum chilling requirement | engineering_default | low | candidate_for_calibration | plum | inside the 277-851 chill-hours range of crop_phenology.csv plum_chill_hours_001 (SRC-014); not cultivar-specific |
 | plot.plot_12010.area_ha | plot area | project_data | none | not_applicable | tomato/RAF |  |
 | plot.plot_12010.soil_type | soil type | project_data | none | candidate_for_calibration | tomato/RAF |  |
 | plot.plot_14705.area_ha | plot area | project_data | none | not_applicable | plum/Suplum 26 |  |

@@ -8,8 +8,8 @@ it is not validation against a real greenhouse, not calibration, and claims no b
 - qualified: `True`
 - invariants: `PASS`; traceability: `PASS`; static audit: `PASS`
 - EnergyPlus: `UNAVAILABLE` (optional, never ground truth)
-- parameter registry hash: `18cddbc7e9b834a9a327825489178bdca7f1a64924b075274f4882d70839aa90`
-- report hash: `c4b0ba39d307bf643909d7501dcf03f8efbdbc202e59647b3f717ca478645c55`
+- parameter registry hash: `bed4a362e68171d51f95b4201eb2966bf3f83042e4576850f643ee6134008808`
+- report hash: `d03b77a63ded26beb1fd9733acf2b820faf469385a59e1b375b6cbd546a9e3ba`
 
 ## Cases
 

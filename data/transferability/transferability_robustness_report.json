@@ -2,7 +2,7 @@
   "baseline_results": [],
   "calibrated_results": [],
   "calibration_performed": false,
-  "configuration_hash": "81d451ad045ecff089b34f11f9ff724bdc1302d6a2c3b4c7f6b3c656ff356023",
+  "configuration_hash": "b87a6116c408c7d04d05fd61a4fd34318ad6f3e9a790f833dc074b3d519fd7d3",
   "context_dependence": {
     "label": "NOT_DETECTED",
     "signal": false,
@@ -224,6 +224,16 @@
       ],
       "path": "config/weather_config.json",
       "source_type": "forcing",
+      "variables": []
+    },
+    {
+      "classification": "LITERATURE",
+      "evidence": [
+        "literature/evidence fields present"
+      ],
+      "notes": [],
+      "path": "data/phenology/chilling_framework_report.json",
+      "source_type": "literature",
       "variables": []
     },
     {

@@ -2,7 +2,7 @@
   "artifact_status": "SYNTHETIC_SOFTWARE_BENCHMARK",
   "assimilation_status": "DATA ASSIMILATION NOT IMPLEMENTED",
   "calibration_status": "CALIBRATION NOT PERFORMED",
-  "configuration_hash": "48550edaf7a01f67a7861341ab9d7312d07aa6a7254c8ceac4db734e0d980c83",
+  "configuration_hash": "4155635489d70e616674bf467a40ae3ad8995e0022ccdcddd8c8e354bf46055b",
   "definition": {
     "benchmark_id": "phase5_24_manual",
     "cases": [
@@ -85,7 +85,7 @@
       },
       "environment": "outdoor",
       "failure_reason": null,
-      "input_hash": "5ac04430371e3f509a3fa5de13ea0d54231deba4fb6bd1f7321b7d46dad104b3",
+      "input_hash": "5f61db3e47ec3c48223c1698e4b0519f7830753d2780b9562b3258e4f1af6337",
       "metrics": [
         {
           "category": "software_metric",
@@ -105,7 +105,7 @@
         }
       ],
       "model_configuration_hash": "c0d99d2f18224c78093092b9acba7e29ff4253e33b8f49565d31e687db58a89f",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": "plot_12010",
       "result_hash": "36b014f71e1d5895650ecfea5fab371c67887529754a83b267d624933d83514f",
       "scenario_id": "tomato_annual-1_outdoor_control_plot_12010",
@@ -345,7 +345,7 @@
       },
       "environment": "greenhouse",
       "failure_reason": null,
-      "input_hash": "a3ae729a5ceed5fbf8480a19c6946992ee98db4ac502ef99fd36707635efa823",
+      "input_hash": "821163019d5dd8f86045f2d8d707f19dee064528bcf6e80c027acc9e9372abe4",
       "metrics": [
         {
           "category": "software_metric",
@@ -365,7 +365,7 @@
         }
       ],
       "model_configuration_hash": "8efcfc3d2f1fe5d3575cb793622a591fc9048dcc43362eda33da6dd7fbfd7f47",
-      "parameter_configuration_hash": "1b1beca64e66e31622d928e4b11fc64e0a87c13dcaae10f103873c1761372f58",
+      "parameter_configuration_hash": "40f7d12eecc04f76ee9ee060c552738e057668d18546edf923b0fbe9829edf75",
       "plot_id": "plot_12010",
       "result_hash": "44a79986dcf73cfc90bdf2847662dcea0cbd11317a1be1682cefc8c0b49a5073",
       "scenario_id": "tomato_annual-1_greenhouse_combined_plot_12010",

@@ -12303,12 +12303,12 @@
   "mutation": {
     "after": {
       "configuration_files": "0b5c00d7128bc786c98ffdb69b6f554706bee6136a8320b192b63fb5069b6936",
-      "parameter_registry": "18cddbc7e9b834a9a327825489178bdca7f1a64924b075274f4882d70839aa90",
+      "parameter_registry": "bed4a362e68171d51f95b4201eb2966bf3f83042e4576850f643ee6134008808",
       "parameter_set_tomato": "ea8ad3805c0fc4a6aedca62554c4e6d0949d1fbb6b62c0537f63377b60bcc2c8"
     },
     "before": {
       "configuration_files": "0b5c00d7128bc786c98ffdb69b6f554706bee6136a8320b192b63fb5069b6936",
-      "parameter_registry": "18cddbc7e9b834a9a327825489178bdca7f1a64924b075274f4882d70839aa90",
+      "parameter_registry": "bed4a362e68171d51f95b4201eb2966bf3f83042e4576850f643ee6134008808",
       "parameter_set_tomato": "ea8ad3805c0fc4a6aedca62554c4e6d0949d1fbb6b62c0537f63377b60bcc2c8"
     },
     "calibration_performed": false,
@@ -12331,7 +12331,7 @@
     "status": "PASS",
     "twin_state_frozen": true
   },
-  "report_hash": "25d7b553b04544602b9ac5d5840274dcaecf6687f7a00df4f6d646edde1eab54",
+  "report_hash": "12e16c7525311c92d8415bca46457fa170d6c8c1a334e028af540ca9a3961ccd",
   "restart": {
     "cases": [
       {
@@ -12719,7 +12719,7 @@
         "MultiPlotSimulation"
       ]
     },
-    "scanned_files": 54,
+    "scanned_files": 55,
     "scope": "src/agri_twin/domain/*.py and src/agri_twin/application/*.py (AST: real calls/imports only, docs and strings ignored)",
     "status": "PASS",
     "violations": []
@@ -12804,7 +12804,7 @@
     ]
   },
   "transferability": {
-    "audited_sources": 54,
+    "audited_sources": 55,
     "calibration_performed": false,
     "interpretation": "transferability/generalization remain not assessable scientifically without REAL_VERIFIED observations; synthetic integrated validation does not change this",
     "post_calibration_validation_performed": false,

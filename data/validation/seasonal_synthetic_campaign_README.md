@@ -8,7 +8,7 @@ a representation of any real climatology.
 - campaigns: `122`; status counts: `{"PASS": 72, "PASS_WITH_WARNINGS": 50}`
 - direction checks: `112` rows, inconsistent: `0`
 - qualified: `True`
-- report hash: `b35f427c399fe4c4742e65a198181c5180f0e0747b9bc931e8be332ed20d72c8` (execution metadata excluded)
+- report hash: `54ed8088b5972d42ed73fa788615e00eef93cd2f72ded82d1e67a34f9afb0d9b` (execution metadata excluded)
 
 ## Sections
 

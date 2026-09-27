@@ -7,7 +7,7 @@
   ],
   "calibration_performed": false,
   "calibration_status": "INSUFFICIENT_DATA",
-  "configuration_hash": "1682e8c9b0841da1a473f67ae988de488d0386d3811284823db0b851d919f70a",
+  "configuration_hash": "787ea8ffd6148f96fe1ccf84bd7db38387732ae960ad15f34c88f63699657de3",
   "confounders": {
     "co2": [
       "actuator.co2.capacity",
@@ -84446,6 +84446,246 @@
       "variety": null
     },
     {
+      "calibration_allowed": true,
+      "calibration_status": "candidate_for_calibration",
+      "category": "biological",
+      "confidence": "low",
+      "confounders": [],
+      "crop": "apple",
+      "evidence_level": "low",
+      "identifiability_status": "INSUFFICIENT_DATA",
+      "measurement_method": null,
+      "name": "apple chilling requirement",
+      "notes": "apple evidence rows are in chill portions only; chill hours are not converted",
+      "observable_variables": [
+        "air_temperature"
+      ],
+      "parameter_id": "phenology.apple.chilling_requirement_hours",
+      "phenological_stage": null,
+      "plot": null,
+      "provenance": "engineering_default",
+      "required_environmental_coverage": [],
+      "required_observation_types": [
+        "cultivar endodormancy-release experiments (forcing tests) with local hourly temperature"
+      ],
+      "required_stage_coverage": [],
+      "scientific_warnings": [
+        "no observation dataset supplied"
+      ],
+      "subsystem": "runtime_code",
+      "temporal_resolution": null,
+      "uncertainty_requirement": null,
+      "variety": null
+    },
+    {
+      "calibration_allowed": false,
+      "calibration_status": "fixed",
+      "category": "biological",
+      "confidence": "medium",
+      "confounders": [],
+      "crop": null,
+      "evidence_level": "low",
+      "identifiability_status": "FIXED",
+      "measurement_method": null,
+      "name": "Chilling Hours lower threshold",
+      "notes": "0-7.2 C variant of the Chilling Hours rule; Weinberger (1950) counted hours below 7.2 C",
+      "observable_variables": [],
+      "parameter_id": "phenology.chilling_hours.lower_threshold",
+      "phenological_stage": null,
+      "plot": null,
+      "provenance": "engineering_default",
+      "required_environmental_coverage": [],
+      "required_observation_types": [
+        "none (model definition)"
+      ],
+      "required_stage_coverage": [],
+      "scientific_warnings": [],
+      "subsystem": "runtime_code",
+      "temporal_resolution": null,
+      "uncertainty_requirement": null,
+      "variety": null
+    },
+    {
+      "calibration_allowed": false,
+      "calibration_status": "fixed",
+      "category": "biological",
+      "confidence": "medium",
+      "confounders": [],
+      "crop": null,
+      "evidence_level": "low",
+      "identifiability_status": "FIXED",
+      "measurement_method": null,
+      "name": "Chilling Hours upper threshold",
+      "notes": "7.2 C (45 F) threshold of the Chilling Hours rule (Weinberger 1950)",
+      "observable_variables": [],
+      "parameter_id": "phenology.chilling_hours.upper_threshold",
+      "phenological_stage": null,
+      "plot": null,
+      "provenance": "engineering_default",
+      "required_environmental_coverage": [],
+      "required_observation_types": [
+        "none (model definition)"
+      ],
+      "required_stage_coverage": [],
+      "scientific_warnings": [],
+      "subsystem": "runtime_code",
+      "temporal_resolution": null,
+      "uncertainty_requirement": null,
+      "variety": null
+    },
+    {
+      "calibration_allowed": false,
+      "calibration_status": "not_applicable",
+      "category": "biological",
+      "confidence": "low",
+      "confounders": [],
+      "crop": null,
+      "evidence_level": "low",
+      "identifiability_status": "NOT_CALIBRATABLE",
+      "measurement_method": null,
+      "name": "Chilling model",
+      "notes": "Utah and Dynamic declared, not implemented; no universal model selected",
+      "observable_variables": [],
+      "parameter_id": "phenology.chilling_model",
+      "phenological_stage": null,
+      "plot": null,
+      "provenance": "engineering_default",
+      "required_environmental_coverage": [],
+      "required_observation_types": [
+        "model comparison against cultivar release observations"
+      ],
+      "required_stage_coverage": [],
+      "scientific_warnings": [],
+      "subsystem": "runtime_code",
+      "temporal_resolution": null,
+      "uncertainty_requirement": null,
+      "variety": null
+    },
+    {
+      "calibration_allowed": false,
+      "calibration_status": "not_applicable",
+      "category": "biological",
+      "confidence": "low",
+      "confounders": [],
+      "crop": null,
+      "evidence_level": "low",
+      "identifiability_status": "NOT_CALIBRATABLE",
+      "measurement_method": null,
+      "name": "Chilling start policy",
+      "notes": "no universal calendar start date; FIXED_DATE only with an explicit configured instant",
+      "observable_variables": [],
+      "parameter_id": "phenology.chilling_start_policy",
+      "phenological_stage": null,
+      "plot": null,
+      "provenance": "engineering_default",
+      "required_environmental_coverage": [],
+      "required_observation_types": [
+        "dormancy-onset observations per site and cultivar"
+      ],
+      "required_stage_coverage": [],
+      "scientific_warnings": [],
+      "subsystem": "runtime_code",
+      "temporal_resolution": null,
+      "uncertainty_requirement": null,
+      "variety": null
+    },
+    {
+      "calibration_allowed": true,
+      "calibration_status": "candidate_for_calibration",
+      "category": "biological",
+      "confidence": "low",
+      "confounders": [],
+      "crop": "grape",
+      "evidence_level": "low",
+      "identifiability_status": "INSUFFICIENT_DATA",
+      "measurement_method": null,
+      "name": "grape chilling requirement",
+      "notes": "no chill-hours evidence row for grape in crop_phenology.csv",
+      "observable_variables": [
+        "air_temperature"
+      ],
+      "parameter_id": "phenology.grape.chilling_requirement_hours",
+      "phenological_stage": null,
+      "plot": null,
+      "provenance": "engineering_default",
+      "required_environmental_coverage": [],
+      "required_observation_types": [
+        "cultivar endodormancy-release experiments (forcing tests) with local hourly temperature"
+      ],
+      "required_stage_coverage": [],
+      "scientific_warnings": [
+        "no observation dataset supplied"
+      ],
+      "subsystem": "runtime_code",
+      "temporal_resolution": null,
+      "uncertainty_requirement": null,
+      "variety": null
+    },
+    {
+      "calibration_allowed": true,
+      "calibration_status": "candidate_for_calibration",
+      "category": "biological",
+      "confidence": "low",
+      "confounders": [],
+      "crop": "peach",
+      "evidence_level": "low",
+      "identifiability_status": "INSUFFICIENT_DATA",
+      "measurement_method": null,
+      "name": "peach chilling requirement",
+      "notes": "inside the 446-866 chill-hours range of crop_phenology.csv peach_chill_hours_001 (SRC-011); not cultivar-specific",
+      "observable_variables": [
+        "air_temperature"
+      ],
+      "parameter_id": "phenology.peach.chilling_requirement_hours",
+      "phenological_stage": null,
+      "plot": null,
+      "provenance": "engineering_default",
+      "required_environmental_coverage": [],
+      "required_observation_types": [
+        "cultivar endodormancy-release experiments (forcing tests) with local hourly temperature"
+      ],
+      "required_stage_coverage": [],
+      "scientific_warnings": [
+        "no observation dataset supplied"
+      ],
+      "subsystem": "runtime_code",
+      "temporal_resolution": null,
+      "uncertainty_requirement": null,
+      "variety": null
+    },
+    {
+      "calibration_allowed": true,
+      "calibration_status": "candidate_for_calibration",
+      "category": "biological",
+      "confidence": "low",
+      "confounders": [],
+      "crop": "plum",
+      "evidence_level": "low",
+      "identifiability_status": "INSUFFICIENT_DATA",
+      "measurement_method": null,
+      "name": "plum chilling requirement",
+      "notes": "inside the 277-851 chill-hours range of crop_phenology.csv plum_chill_hours_001 (SRC-014); not cultivar-specific",
+      "observable_variables": [
+        "air_temperature"
+      ],
+      "parameter_id": "phenology.plum.chilling_requirement_hours",
+      "phenological_stage": null,
+      "plot": null,
+      "provenance": "engineering_default",
+      "required_environmental_coverage": [],
+      "required_observation_types": [
+        "cultivar endodormancy-release experiments (forcing tests) with local hourly temperature"
+      ],
+      "required_stage_coverage": [],
+      "scientific_warnings": [
+        "no observation dataset supplied"
+      ],
+      "subsystem": "runtime_code",
+      "temporal_resolution": null,
+      "uncertainty_requirement": null,
+      "variety": null
+    },
+    {
       "calibration_allowed": false,
       "calibration_status": "fixed",
       "category": "environmental",
@@ -86515,6 +86755,7 @@
     "Independent validation is reserved for Phase 5.27."
   ],
   "literature_sources": [
+    "data/phenology/chilling_framework_report.json",
     "src/crop_phenology.csv"
   ],
   "objective": {
@@ -90136,6 +90377,66 @@
       ]
     },
     {
+      "parameter_id": "phenology.apple.chilling_requirement_hours",
+      "reasons": [
+        "traceable bounds unavailable",
+        "identifiability=INSUFFICIENT_DATA"
+      ]
+    },
+    {
+      "parameter_id": "phenology.chilling_hours.lower_threshold",
+      "reasons": [
+        "calibration_allowed=false",
+        "traceable bounds unavailable",
+        "identifiability=FIXED"
+      ]
+    },
+    {
+      "parameter_id": "phenology.chilling_hours.upper_threshold",
+      "reasons": [
+        "calibration_allowed=false",
+        "traceable bounds unavailable",
+        "identifiability=FIXED"
+      ]
+    },
+    {
+      "parameter_id": "phenology.chilling_model",
+      "reasons": [
+        "calibration_allowed=false",
+        "traceable bounds unavailable",
+        "identifiability=NOT_CALIBRATABLE"
+      ]
+    },
+    {
+      "parameter_id": "phenology.chilling_start_policy",
+      "reasons": [
+        "calibration_allowed=false",
+        "traceable bounds unavailable",
+        "identifiability=NOT_CALIBRATABLE"
+      ]
+    },
+    {
+      "parameter_id": "phenology.grape.chilling_requirement_hours",
+      "reasons": [
+        "traceable bounds unavailable",
+        "identifiability=INSUFFICIENT_DATA"
+      ]
+    },
+    {
+      "parameter_id": "phenology.peach.chilling_requirement_hours",
+      "reasons": [
+        "traceable bounds unavailable",
+        "identifiability=INSUFFICIENT_DATA"
+      ]
+    },
+    {
+      "parameter_id": "phenology.plum.chilling_requirement_hours",
+      "reasons": [
+        "traceable bounds unavailable",
+        "identifiability=INSUFFICIENT_DATA"
+      ]
+    },
+    {
       "parameter_id": "physics.air_specific_heat",
       "reasons": [
         "calibration_allowed=false",
@@ -90352,6 +90653,16 @@
       ],
       "path": "config/weather_config.json",
       "source_type": "forcing",
+      "variables": []
+    },
+    {
+      "classification": "LITERATURE",
+      "evidence": [
+        "literature/evidence fields present"
+      ],
+      "notes": [],
+      "path": "data/phenology/chilling_framework_report.json",
+      "source_type": "literature",
       "variables": []
     },
     {

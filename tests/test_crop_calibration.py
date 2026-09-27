@@ -61,6 +61,16 @@ def test_observation_audit_finds_weather_but_not_agronomic_observations():
     assert any("weather CSV" in limitation for limitation in audit.limitations)
 
 
+def test_generated_report_artifacts_are_not_counted_as_observations(tmp_path):
+    (tmp_path / "data" / "phenology").mkdir(parents=True)
+    (tmp_path / "data" / "phenology" / "chilling_framework_report.json").write_text("{}", encoding="utf-8")
+    (tmp_path / "data" / "phenology" / "chilling_framework_README.md").write_text("# report", encoding="utf-8")
+    audit = audit_observations(tmp_path, "peach", None, None)
+    assert any("weather CSV" in limitation for limitation in audit.limitations)
+    (tmp_path / "data" / "phenology" / "field_phenology.csv").write_text("date,stage\n", encoding="utf-8")
+    assert not any("weather CSV" in limitation for limitation in audit_observations(tmp_path, "peach", None, None).limitations)
+
+
 def test_protocol_matrix_has_prior_range_and_scientific_status():
     protocol = build_protocol(ROOT, registry(), "tomato", "RAF", "plot_12010")
     candidate = next(record for record in protocol.matrix if record.parameter_id == "crop.tomato.establishment.stress_thresholds.min_temp_c")
