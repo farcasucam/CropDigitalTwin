@@ -65,6 +65,17 @@ class WeatherEngine:
         temperature = self._baseline_temperature(instant) + self._temperature_variability(instant)
         radiation = self._baseline_radiation(instant) + self._radiation_variability(instant)
         humidity = self._baseline_humidity(instant) + self._humidity_variability(instant)
+        seasonal = self._configuration.seasonal
+        if seasonal is not None:
+            cycle = self._seasonal_cycle(instant)
+            temperature += seasonal.temperature_amplitude_c * cycle
+            radiation *= 1.0 + seasonal.radiation_amplitude_fraction * cycle
+            humidity -= seasonal.humidity_amplitude_pct * cycle
+        daily = self._configuration.daily_variability
+        if daily is not None:
+            temperature += daily.temperature_c * self._daily_anomaly(instant, 1.0)
+            radiation *= 1.0 + daily.radiation_fraction * self._daily_anomaly(instant, 2.0)
+            humidity += daily.humidity_pct * self._daily_anomaly(instant, 3.0)
         wind_speed, wind_direction = self._baseline_wind(instant)
         pressure = self._baseline_pressure(instant)
         humidity = min(
@@ -140,12 +151,41 @@ class WeatherEngine:
     def _temperature_variability(self, instant: datetime) -> float:
         return self._wave(instant, 1.0) * self._configuration.temperature.variability_c
 
+    def _daylight_window(self, instant: datetime) -> tuple[float, float]:
+        config = self._configuration.radiation
+        seasonal = self._configuration.seasonal
+        if seasonal is None or seasonal.daylength_amplitude_h == 0.0:
+            return config.sunrise_hour, config.sunset_hour
+        middle = (config.sunrise_hour + config.sunset_hour) / 2.0
+        half = (config.sunset_hour - config.sunrise_hour) / 2.0 + seasonal.daylength_amplitude_h / 2.0 * self._seasonal_cycle(instant)
+        half = min(max(half, 0.5), 11.5)
+        return max(0.0, middle - half), min(24.0, middle + half)
+
+    def _seasonal_cycle(self, instant: datetime) -> float:
+        """cos of the fractional day of year; 1 on the warmest day, -1 half a year later."""
+        seasonal = self._configuration.seasonal
+        assert seasonal is not None
+        day = instant.timetuple().tm_yday - 1 + (instant.hour + instant.minute / 60 + instant.second / 3600) / 24
+        return math.cos(2 * math.pi * (day - (seasonal.warmest_day_of_year - 1)) / 365.25)
+
+    def _daily_anomaly(self, instant: datetime, channel: float) -> float:
+        """Seeded anomaly in [-1, 1], interpolated between midnight anchors (continuous)."""
+        day = instant.date().toordinal()
+        fraction = (instant.hour * 3600 + instant.minute * 60 + instant.second + instant.microsecond / 1_000_000) / 86400
+        today, tomorrow = self._day_anchor(day, channel), self._day_anchor(day + 1, channel)
+        return today + (tomorrow - today) * fraction
+
+    def _day_anchor(self, day: int, channel: float) -> float:
+        digest = hashlib.blake2b(f"{self._seed}:{day}:daily:{channel}".encode("ascii"), digest_size=8).digest()
+        return int.from_bytes(digest, "big") / 2**64 * 2.0 - 1.0
+
     def _baseline_radiation(self, instant: datetime) -> float:
         config = self._configuration.radiation
+        sunrise, sunset = self._daylight_window(instant)
         hour = instant.hour + instant.minute / 60 + instant.second / 3600
-        if hour <= config.sunrise_hour or hour >= config.sunset_hour:
+        if hour <= sunrise or hour >= sunset:
             return 0.0
-        daylight = (hour - config.sunrise_hour) / (config.sunset_hour - config.sunrise_hour)
+        daylight = (hour - sunrise) / (sunset - sunrise)
         profile = math.sin(math.pi * daylight)
         return config.maximum_w_m2 * profile
 
@@ -153,9 +193,9 @@ class WeatherEngine:
         return self._wave(instant, 2.0) * self._configuration.radiation.variability_w_m2
 
     def _is_night(self, instant: datetime) -> bool:
-        config = self._configuration.radiation
+        sunrise, sunset = self._daylight_window(instant)
         hour = instant.hour + instant.minute / 60 + instant.second / 3600
-        return hour <= config.sunrise_hour or hour >= config.sunset_hour
+        return hour <= sunrise or hour >= sunset
 
     def _baseline_humidity(self, instant: datetime) -> float:
         config = self._configuration.humidity

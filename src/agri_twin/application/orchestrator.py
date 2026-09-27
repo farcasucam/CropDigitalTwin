@@ -27,6 +27,7 @@ from agri_twin.domain import (
     WaterBalanceEngine,
     WeatherState,
 )
+from agri_twin.domain.water_balance import WaterBalanceResult
 
 
 class CropSimulationError(ValueError):
@@ -47,6 +48,7 @@ class CropSimulationSnapshot:
     harvest_ready: bool
     outdoor_weather: WeatherState | None = None
     co2_factor: float = 1.0
+    water_balance: WaterBalanceResult | None = None
 
 
 class CropDigitalTwinOrchestrator:
@@ -110,7 +112,7 @@ class CropDigitalTwinOrchestrator:
         self.crop = replace(actual, soil_water_vwc=water_result.soil.vwc_m3_m3, water_stress=water_result.water_stress, nutrient_status=nutrient_result.nutrient_status, harvest_ready=harvest_ready)
         self.soil = water_result.soil
         self.microclimate = microclimate.indoor_state
-        snapshot = CropSimulationSnapshot(simulation_time, crop_weather, microclimate.environment, microclimate, self.crop, self.soil, potential_growth, actual_growth, combined, harvest_ready, weather, co2_factor)
+        snapshot = CropSimulationSnapshot(simulation_time, crop_weather, microclimate.environment, microclimate, self.crop, self.soil, potential_growth, actual_growth, combined, harvest_ready, weather, co2_factor, water_result)
         self.last_snapshot = snapshot
         return snapshot
 

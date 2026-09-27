@@ -147,24 +147,47 @@ class _ScenarioWeatherProvider:
         self.scenario = scenario
         self.base_provider = base_provider
 
+    @staticmethod
+    def _ramp(event: ScenarioEvent, timestamp: datetime) -> float:
+        """Event weight in [0, 1]: 1 inside the event, linear onset/decay over
+        ``ramp_hours`` at both edges (weight 1 throughout when no ramp is set)."""
+        ramp = event.parameters.get("ramp_hours", 0.0) * 3600.0
+        if ramp <= 0.0:
+            return 1.0
+        elapsed = (timestamp - event.start).total_seconds()
+        remaining = (event.end - timestamp).total_seconds()
+        return max(0.0, min(1.0, elapsed / ramp, remaining / ramp))
+
     def get(self, timestamp: datetime) -> WeatherState:
         values = asdict(self.base_provider.get(timestamp) if self.base_provider is not None else self.scenario.base_weather)
         for event in self.scenario.events:
             if not event.active(timestamp):
                 continue
+            weight = self._ramp(event, timestamp)
             if event.event_type in {"warm", "heat_wave", "heat"}:
-                values["temperature_c"] += event.parameters.get("temperature_offset_c", event.intensity)
+                values["temperature_c"] += weight * event.parameters.get("temperature_offset_c", event.intensity)
+            elif event.event_type == "cold_wave":
+                values["temperature_c"] -= weight * event.parameters.get("temperature_offset_c", event.intensity)
             elif event.event_type in {"cold", "frost"}:
-                values["temperature_c"] = event.parameters.get("temperature_c", event.intensity)
+                values["temperature_c"] = self._toward(values["temperature_c"], event.parameters.get("temperature_c", event.intensity), weight)
             elif event.event_type in {"dry", "drought"}:
                 values["rain_rate_mm_h"] = 0.0
             elif event.event_type == "wet":
-                values["rain_rate_mm_h"] = event.parameters.get("rain_rate_mm_h", event.intensity)
+                values["rain_rate_mm_h"] = weight * event.parameters.get("rain_rate_mm_h", event.intensity)
             elif event.event_type in {"high_vpd", "low_vpd"}:
-                values["relative_humidity_pct"] = event.parameters.get("relative_humidity_pct", event.intensity)
+                values["relative_humidity_pct"] = self._toward(values["relative_humidity_pct"], event.parameters.get("relative_humidity_pct", event.intensity), weight)
             elif event.event_type in {"low_radiation", "high_radiation", "photoinhibition"}:
-                values["solar_radiation_w_m2"] = max(0.0, values["solar_radiation_w_m2"] * event.parameters.get("radiation_multiplier", event.intensity or 1.0))
+                multiplier = self._toward(1.0, event.parameters.get("radiation_multiplier", event.intensity or 1.0), weight)
+                values["solar_radiation_w_m2"] = max(0.0, values["solar_radiation_w_m2"] * multiplier)
+            elif event.event_type == "wind":
+                multiplier = self._toward(1.0, event.parameters.get("speed_multiplier", event.intensity or 1.0), weight)
+                values["wind_speed_m_s"] = max(0.0, values["wind_speed_m_s"] * multiplier)
         return WeatherState(**values)
+
+    @staticmethod
+    def _toward(base: float, target: float, weight: float) -> float:
+        # Full weight returns the target exactly, so unramped events are unchanged.
+        return target if weight >= 1.0 else base + weight * (target - base)
 
 
 class ScenarioRunner:

@@ -253,6 +253,13 @@ from agri_twin.application.greenhouse_physical_benchmark import (
     PhysicalBenchmarkCase,
     PhysicalBenchmarkReport,
 )
+from agri_twin.application.seasonal_synthetic_campaign import (
+    CampaignResult,
+    CampaignSpec,
+    SeasonalCampaignReport,
+    SeasonalSyntheticCampaignSuite,
+    SyntheticClimateScenario,
+)
 from agri_twin.application.integrated_synthetic_validation import (
     IntegratedSyntheticValidationSuite,
     IntegratedValidationSummary,
@@ -467,6 +474,11 @@ __all__ = [
     "IssueClassification",
     "PhysicalBenchmarkCase",
     "PhysicalBenchmarkReport",
+    "CampaignResult",
+    "CampaignSpec",
+    "SeasonalCampaignReport",
+    "SeasonalSyntheticCampaignSuite",
+    "SyntheticClimateScenario",
     "IntegratedSyntheticValidationSuite",
     "IntegratedValidationSummary",
     "SyntheticScenarioKind",

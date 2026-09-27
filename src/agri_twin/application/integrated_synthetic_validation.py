@@ -900,6 +900,7 @@ SINGLETON_CLASSES = (
     "SimulationClock", "SimulationScheduler", "CropGrowthEngine", "PhenologyEngine", "WaterBalanceEngine",
     "ClimateStressEngine", "GreenhousePhysicalModel", "SimplifiedGreenhouseModel", "CropGreenhouseFeedbackLoop",
     "CropPhysicalExchangeModel", "ObservationDataset", "ParameterRegistry", "TwinStateRepository", "InMemoryTwinStateRepository",
+    "WeatherEngine", "ScenarioRunner", "MultiPlotSimulation",
 )
 ALLOWED_EXCEPTIONS = {
     "agri_twin/contracts.py": "datetime.now for the message-envelope emission timestamp (metadata, not simulation dynamics)",
@@ -1222,12 +1223,15 @@ class IntegratedSyntheticValidationSuite:
 
     # -- multi-plot -------------------------------------------------------------
 
-    def _cycle_orchestrator(self, clock: SimulationClock, cycle: SyntheticCropCycle, environment: str, first_step: datetime, dt: float) -> CropDigitalTwinOrchestrator:
+    def _weather(self, weather: WeatherConfiguration | None) -> WeatherConfiguration:
+        return weather if weather is not None else weather_configuration("warm_season", self.seed)
+
+    def _cycle_orchestrator(self, clock: SimulationClock, cycle: SyntheticCropCycle, environment: str, first_step: datetime, dt: float, weather: WeatherConfiguration | None = None) -> CropDigitalTwinOrchestrator:
         crop, soil = _initial_state(cycle.crop, cycle.variety or "UNSPECIFIED", first_step - timedelta(seconds=dt))
         mode = "passive_greenhouse" if environment == "greenhouse" else "outdoor"
-        return CropDigitalTwinOrchestrator(clock, WeatherEngine(weather_configuration("warm_season", self.seed)), replace(crop, dormancy_released=True), soil, mode)
+        return CropDigitalTwinOrchestrator(clock, WeatherEngine(self._weather(weather)), replace(crop, dormancy_released=True), soil, mode)
 
-    def _multi_plot_run(self, plots: Sequence[SyntheticPlot], cycles: Sequence[SyntheticCropCycle], start: datetime, days: int, *, dry_cycle: str | None = None) -> tuple[MultiPlotSimulation, dict[str, CropDigitalTwinOrchestrator], dict[str, list[CropSimulationSnapshot]]]:
+    def _multi_plot_run(self, plots: Sequence[SyntheticPlot], cycles: Sequence[SyntheticCropCycle], start: datetime, days: int, *, dry_cycle: str | None = None, weather: WeatherConfiguration | None = None) -> tuple[MultiPlotSimulation, dict[str, CropDigitalTwinOrchestrator], dict[str, list[CropSimulationSnapshot]]]:
         """One SimulationClock/Scheduler (MultiPlotSimulation) ticks one orchestrator per crop cycle."""
         clock = SimulationClock(start)
         environments = {plot.plot_id: plot.environment for plot in plots}
@@ -1238,32 +1242,32 @@ class IntegratedSyntheticValidationSuite:
             cycle = result.cycle
             orchestrator = orchestrators.get(cycle.crop_cycle_id)
             if orchestrator is None:
-                orchestrator = self._cycle_orchestrator(clock, cycle, environments[cycle.plot_id], result.simulation_time, dt)
+                orchestrator = self._cycle_orchestrator(clock, cycle, environments[cycle.plot_id], result.simulation_time, dt, weather)
                 orchestrators[cycle.crop_cycle_id] = orchestrator
             irrigation = None if cycle.crop_cycle_id == dry_cycle else IrrigationRequest("scheduled", BASELINE_IRRIGATION_MM_H)
             steps.setdefault(cycle.crop_cycle_id, []).append(orchestrator.step_at(result.simulation_time, dt, None, irrigation))
 
-        engine = WeatherEngine(weather_configuration("warm_season", self.seed))
+        engine = WeatherEngine(self._weather(weather))
 
         simulation = MultiPlotSimulation(clock, plots, cycles, SyntheticWeatherProvider(engine), handler, 3600.0, InMemoryTwinStateRepository())
         simulation.advance(days * 86400.0)
         return simulation, orchestrators, steps
 
-    def multi_plot(self) -> dict[str, Any]:
+    def multi_plot(self, weather: WeatherConfiguration | None = None) -> dict[str, Any]:
         crops = ("tomato", "pepper", "grape")
         plots = tuple(_plot_for(crop) for crop in crops)
         cycles = tuple(cycle for cycle in SyntheticReferenceDatasetGenerator._cycles(plots))
         start, days = datetime(2026, 4, 1, tzinfo=UTC), 30
-        combined, orchestrators, _ = self._multi_plot_run(plots, cycles, start, days)
+        combined, orchestrators, _ = self._multi_plot_run(plots, cycles, start, days, weather=weather)
         final = {key: orchestrator.crop.to_dict() for key, orchestrator in orchestrators.items()}
         isolated = {}
         for plot in plots:
-            _, alone, _ = self._multi_plot_run((plot,), tuple(cycle for cycle in cycles if cycle.plot_id == plot.plot_id), start, days)
+            _, alone, _ = self._multi_plot_run((plot,), tuple(cycle for cycle in cycles if cycle.plot_id == plot.plot_id), start, days, weather=weather)
             isolated.update({key: orchestrator.crop.to_dict() for key, orchestrator in alone.items()})
         dry_cycle = cycles[0].crop_cycle_id
-        _, perturbed, _ = self._multi_plot_run(plots, cycles, start, days, dry_cycle=dry_cycle)
+        _, perturbed, _ = self._multi_plot_run(plots, cycles, start, days, dry_cycle=dry_cycle, weather=weather)
         perturbed_final = {key: orchestrator.crop.to_dict() for key, orchestrator in perturbed.items()}
-        _, repeated, _ = self._multi_plot_run(plots, cycles, start, days)
+        _, repeated, _ = self._multi_plot_run(plots, cycles, start, days, weather=weather)
         repeated_final = {key: orchestrator.crop.to_dict() for key, orchestrator in repeated.items()}
         snapshot = combined.latest_snapshot()
         histories = {plot.plot_id: combined.history(plot.plot_id) for plot in plots}
@@ -1290,12 +1294,12 @@ class IntegratedSyntheticValidationSuite:
 
     # -- multi-cycle ------------------------------------------------------------
 
-    def multi_cycle(self) -> dict[str, Any]:
+    def multi_cycle(self, weather: WeatherConfiguration | None = None) -> dict[str, Any]:
         plots = (_plot_for("lettuce"), _plot_for("plum"))
         cycles = SyntheticReferenceDatasetGenerator._cycles(plots)
         start = datetime(2026, 1, 1, tzinfo=UTC)
         days = 258
-        simulation, orchestrators, steps = self._multi_plot_run(plots, cycles, start, days)
+        simulation, orchestrators, steps = self._multi_plot_run(plots, cycles, start, days, weather=weather)
         lettuce = [cycle for cycle in cycles if cycle.crop == "lettuce"]
         plum = next(cycle for cycle in cycles if cycle.crop == "plum")
         checks: dict[str, Any] = {}
@@ -1315,7 +1319,7 @@ class IntegratedSyntheticValidationSuite:
             }
         second = lettuce[1].crop_cycle_id
         first_second = steps[second][0]
-        fresh = self._cycle_orchestrator(SimulationClock(start), lettuce[1], plots[0].environment, first_second.simulation_time, 3600.0)
+        fresh = self._cycle_orchestrator(SimulationClock(start), lettuce[1], plots[0].environment, first_second.simulation_time, 3600.0, weather)
         fresh_first = fresh.step_at(first_second.simulation_time, 3600.0, None, IrrigationRequest("scheduled", BASELINE_IRRIGATION_MM_H))
         second_starts_fresh = fresh_first.crop == first_second.crop
         histories_disjoint = not ({state.simulation_time for state in simulation.history(lettuce[0].plot_id, lettuce[0].crop_cycle_id)} & {state.simulation_time for state in simulation.history(lettuce[1].plot_id, second)})

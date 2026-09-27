@@ -129,6 +129,47 @@ class WeatherSimulationConfiguration:
 
 
 @dataclass(frozen=True, slots=True)
+class SeasonalConfiguration:
+    """Optional continuous annual cycle (cosine of the fractional day of year).
+
+    Temperature and humidity are offsets (C, %RH) added to the diurnal baseline;
+    radiation scales the configured maximum by (1 + amplitude * cycle); day length
+    varies by +/- daylength_amplitude_h around the configured sunrise/sunset.
+    Humidity uses the opposite phase (humid when cold).
+    """
+
+    temperature_amplitude_c: float = 0.0
+    radiation_amplitude_fraction: float = 0.0
+    humidity_amplitude_pct: float = 0.0
+    daylength_amplitude_h: float = 0.0
+    warmest_day_of_year: float = 200.0
+
+    def __post_init__(self) -> None:
+        _finite_configuration(self)
+        if self.temperature_amplitude_c < 0 or self.humidity_amplitude_pct < 0 or self.daylength_amplitude_h < 0:
+            raise WeatherEngineValueError("seasonal amplitudes cannot be negative")
+        if not 0 <= self.radiation_amplitude_fraction < 1:
+            raise WeatherEngineValueError("radiation seasonal amplitude must be in [0, 1)")
+        if not 0 <= self.warmest_day_of_year < 366:
+            raise WeatherEngineValueError("warmest_day_of_year must be within a year")
+
+
+@dataclass(frozen=True, slots=True)
+class DailyVariabilityConfiguration:
+    """Optional seeded day-to-day anomalies, linearly interpolated between
+    midnight anchors so the forcing stays continuous across days."""
+
+    temperature_c: float = 0.0
+    radiation_fraction: float = 0.0
+    humidity_pct: float = 0.0
+
+    def __post_init__(self) -> None:
+        _finite_configuration(self)
+        if self.temperature_c < 0 or self.humidity_pct < 0 or not 0 <= self.radiation_fraction < 1:
+            raise WeatherEngineValueError("daily variability amplitudes are invalid")
+
+
+@dataclass(frozen=True, slots=True)
 class WeatherConfiguration:
     temperature: TemperatureConfiguration = TemperatureConfiguration()
     radiation: RadiationConfiguration = RadiationConfiguration()
@@ -136,6 +177,8 @@ class WeatherConfiguration:
     wind: WindConfiguration = WindConfiguration()
     pressure: PressureConfiguration = PressureConfiguration()
     simulation: WeatherSimulationConfiguration = WeatherSimulationConfiguration()
+    seasonal: SeasonalConfiguration | None = None
+    daily_variability: DailyVariabilityConfiguration | None = None
 
     def __post_init__(self) -> None:
         if not all(isinstance(value, tuple(expected)) for value, expected in (
@@ -145,6 +188,8 @@ class WeatherConfiguration:
             (self.wind, (WindConfiguration,)),
             (self.pressure, (PressureConfiguration,)),
             (self.simulation, (WeatherSimulationConfiguration,)),
+            (self.seasonal, (SeasonalConfiguration, type(None))),
+            (self.daily_variability, (DailyVariabilityConfiguration, type(None))),
         )):
             raise WeatherEngineValueError("weather configuration sections have invalid types")
 
