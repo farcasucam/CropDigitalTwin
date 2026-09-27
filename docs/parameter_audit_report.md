@@ -2,15 +2,15 @@
 
 ## Summary
 
-- `total_parameters`: 538
+- `total_parameters`: 543
 - `literature_parameters`: 37
 - `project_data_parameters`: 8
 - `measured_parameters`: 0
 - `derived_parameters`: 0
-- `engineering_defaults`: 26
+- `engineering_defaults`: 31
 - `unknown_parameters`: 467
 - `calibrated_parameters`: 0
-- `calibration_candidates`: 532
+- `calibration_candidates`: 537
 
 ## By crop
 
@@ -536,10 +536,15 @@
 | feedback.leaf_air_delta | radiation to leaf-air delta proxy | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
 | feedback.relaxation_alpha | fixed-point relaxation factor | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
 | feedback.sensible_heat_transfer | leaf-air sensible heat coefficient | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
+| greenhouse.co2_baseline | initial indoor CO2 concentration | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
 | greenhouse.cover_transmission | default greenhouse transmission | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
+| greenhouse.heat_loss_conductance | cover heat-loss conductance to outdoor air | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
 | greenhouse.outdoor.solar_transmission_fraction | solar_transmission_fraction | engineering_default | none | candidate_for_calibration | global |  |
 | greenhouse.outdoor_co2 | outdoor ambient CO2 concentration for air exchange | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
 | greenhouse.thermal_exchange_area | feedback thermal exchange normalization | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
+| greenhouse.thermal_mass | lumped greenhouse heat capacity | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
+| greenhouse.ventilation_ach | structural air exchange rate (infiltration and fixed vents) | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
+| greenhouse.volume | greenhouse air volume | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
 | plot.plot_12010.area_ha | plot area | project_data | none | not_applicable | tomato/RAF |  |
 | plot.plot_12010.soil_type | soil type | project_data | none | candidate_for_calibration | tomato/RAF |  |
 | plot.plot_14705.area_ha | plot area | project_data | none | not_applicable | plum/Suplum 26 |  |

@@ -5,6 +5,7 @@ from __future__ import annotations
 import math
 from dataclasses import dataclass, replace
 
+from agri_twin.domain.greenhouse import vapour_pressure_deficit_kpa
 from agri_twin.domain.models import CropGrowthState, DerivedEnvironmentState, WeatherState
 
 
@@ -138,5 +139,4 @@ class ClimateStressEngine:
 
     @staticmethod
     def _vpd(weather: WeatherState) -> float:
-        saturation = 0.6108 * math.exp(17.27 * weather.temperature_c / (weather.temperature_c + 237.3))
-        return max(0.0, saturation * (1.0 - weather.relative_humidity_pct / 100.0))
+        return vapour_pressure_deficit_kpa(weather.temperature_c, weather.relative_humidity_pct)

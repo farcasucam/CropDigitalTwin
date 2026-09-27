@@ -1,0 +1,1583 @@
+{
+  "benchmark_count": 47,
+  "cases": [
+    {
+      "actual_relation": "dT=0.000e+00 C, drho_v=0.000e+00 kg m-3",
+      "case_hash": "be485d0aef5c1078469a7b3c4f825894272ccfec9f6863e944bdd229edb19b4d",
+      "case_id": "energy.identical_ambient_no_drift",
+      "category": "energy",
+      "classification": null,
+      "expected_relation": "identical indoor/outdoor state without sources: no thermal or humidity drift",
+      "inputs": {
+        "actuators": "none",
+        "crop_feedback": "none",
+        "indoor": [
+          22.0,
+          60.0
+        ],
+        "outdoor": [
+          22.0,
+          60.0
+        ],
+        "radiation_w_m2": 0.0,
+        "ventilation_ach": 0.0
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "temperature_drift_c": 0.0,
+        "vapour_drift_kg_m3": 0.0
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "stored=1684800.000000 J vs solar=1684800.000000 J",
+      "case_hash": "3a069823b493252aeb38a18cc137090ec2b3a8680c646bcda520ed57e663bfd8",
+      "case_id": "energy.radiation_energy_closure",
+      "category": "energy",
+      "classification": null,
+      "expected_relation": "sealed adiabatic air: stored heat C*dT equals transmitted solar energy (no energy created or lost)",
+      "inputs": {
+        "area_m2": 1.0,
+        "closed_box": true,
+        "dt_s": 3600.0,
+        "outdoor_radiation_w_m2": 600.0,
+        "solar_transmission": 0.78
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "absorbed_solar_j": 1684800.0,
+        "stored_heat_j": 1684799.9999999974
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "warmer dT=-15.8554, colder dT=15.8554",
+      "case_hash": "72d9a495f48c5ab1faf95c4807ac01e88fc84c41ee9520793c44b19907528499",
+      "case_id": "energy.exchange_sign",
+      "category": "energy",
+      "classification": null,
+      "expected_relation": "indoor warmer than outdoor loses heat, colder gains heat",
+      "inputs": {
+        "cases": [
+          [
+            30.0,
+            10.0
+          ],
+          [
+            10.0,
+            30.0
+          ]
+        ],
+        "radiation_w_m2": 0.0
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "indoor_colder_dT": 15.855375167833472,
+        "indoor_warmer_dT": -15.855375167833472
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "changes=[-1.981922, -3.963844, -7.927688]",
+      "case_hash": "35a549dca914aae0bdc20ffb3b3693039fb8356287852ca75b549eb9f2fe7bfc",
+      "case_id": "energy.exchange_scales_with_difference",
+      "category": "energy",
+      "classification": null,
+      "expected_relation": "without sources the exchange is linear in (T_in - T_out): doubling the difference doubles the change",
+      "inputs": {
+        "indoor_minus_outdoor_c": [
+          2.5,
+          5.0,
+          10.0
+        ]
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "temperature_change_c": [
+          -1.981921895979184,
+          -3.963843791958368,
+          -7.927687583916736
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "changes=[-3.171075034, -3.171075034, -3.171075034, -3.171075034]",
+      "case_hash": "a6c0340c938d14877ae81d5ea8fa55d0e1cc89c0784f0702302175167154bdce",
+      "case_id": "energy.no_hidden_reference_temperature",
+      "category": "energy",
+      "classification": null,
+      "expected_relation": "translating both temperatures (across 20 C) leaves the exchange unchanged: no fixed reference temperature",
+      "inputs": {
+        "indoor_minus_outdoor_c": 4.0,
+        "outdoor_c": [
+          -5.0,
+          10.0,
+          20.0,
+          35.0
+        ]
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "temperature_change_c": [
+          -3.1710750335666944,
+          -3.1710750335666944,
+          -3.1710750335666944,
+          -3.1710750335666944
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "T=25.000000000 C (expected 25)",
+      "case_hash": "b1b2918fcd61107f57f4721f8bd727f9da27d8aea4a1e69da4e52e382811be87",
+      "case_id": "energy.thermal_time_constant",
+      "category": "energy",
+      "classification": null,
+      "expected_relation": "pure decay with tau = C/G: after ln2*tau the indoor-outdoor difference halves",
+      "inputs": {
+        "conductance_w_k": 1093.0,
+        "dt_s": 1585.4235602926472,
+        "indoor_c": 30.0,
+        "outdoor_c": 20.0
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "indoor_after_half_life_c": 25.0
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "indoor=[12.4868, 20.4145, 28.3422, 36.2698]",
+      "case_hash": "9c95d92f733634829b9c2d46a9dd30a738997f24f59f4c362851f87e7c5e0735",
+      "case_id": "monotonicity.outdoor_temperature",
+      "category": "energy",
+      "classification": null,
+      "expected_relation": "higher outdoor temperature gives a higher indoor temperature, ceteris paribus",
+      "inputs": {
+        "outdoor_c": [
+          10.0,
+          20.0,
+          30.0,
+          40.0
+        ],
+        "prior_indoor_c": 22.0
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "indoor_c": [
+          12.486774899299917,
+          20.414462483216653,
+          28.34215006713339,
+          36.269837651050125
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "fractions=[0.0, 0.393469, 0.950213, 0.999955]",
+      "case_hash": "6677e72483e64579cbc8598cb5baef86e7db115944d938667f1471d1c8d290da",
+      "case_id": "ventilation.exchanged_fraction",
+      "category": "ventilation",
+      "classification": null,
+      "expected_relation": "exchanged fraction = 1 - exp(-ACH dt/3600), 0 at 0 ACH, increasing with ACH, never instantaneous equilibrium",
+      "inputs": {
+        "ach": [
+          0.0,
+          0.5,
+          3.0,
+          10.0
+        ],
+        "dt_s": 3600.0
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "exchanged_fraction": [
+          0.0,
+          0.3934693402873666,
+          0.950212931632136,
+          0.9999546000702375
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "gaps=[15.0, 11.762661103, 3.488005912, 0.115978576]",
+      "case_hash": "eb8fc16deab2fc1a0d29ae3b39ba3bab4ca11b4afb6985eb8c26a0d5268a777e",
+      "case_id": "ventilation.temperature_toward_outdoor",
+      "category": "ventilation",
+      "classification": null,
+      "expected_relation": "more air exchange brings indoor temperature closer to outdoor; no change at 0 ACH",
+      "inputs": {
+        "ach": [
+          0.0,
+          0.5,
+          3.0,
+          10.0
+        ],
+        "heat_loss_w_k": 0.0,
+        "outdoor": [
+          20.0,
+          40.0
+        ],
+        "prior": {
+          "air_temperature_c": 35.0,
+          "co2_ppm": 900.0,
+          "cooling_kw": 0.0,
+          "heating_kw": 0.0,
+          "par_umol_m2_s": 0.0,
+          "pressure_hpa": 1013.0,
+          "relative_humidity_pct": 90.0,
+          "shading_fraction": 0.0,
+          "solar_radiation_w_m2": 0.0,
+          "temperature_c": 35.0,
+          "ventilation_fraction": 0.0,
+          "vpd_kpa": 0.562268123849612,
+          "wind_speed_m_s": 0.0
+        }
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "temperature_gap_to_outdoor": [
+          15.0,
+          11.762661102546495,
+          3.4880059123585134,
+          0.1159785755001792
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "gaps=[0.028670326, 0.017389432, 0.001427411, 1.302e-06]",
+      "case_hash": "90d6b40f9a76374dbd3862f81a973f536c6dda7ccb850195d9a90e36de0fdd31",
+      "case_id": "ventilation.vapour_toward_outdoor",
+      "category": "ventilation",
+      "classification": null,
+      "expected_relation": "more air exchange brings indoor vapour closer to outdoor; no change at 0 ACH",
+      "inputs": {
+        "ach": [
+          0.0,
+          0.5,
+          3.0,
+          10.0
+        ],
+        "heat_loss_w_k": 0.0,
+        "outdoor": [
+          20.0,
+          40.0
+        ],
+        "prior": {
+          "air_temperature_c": 35.0,
+          "co2_ppm": 900.0,
+          "cooling_kw": 0.0,
+          "heating_kw": 0.0,
+          "par_umol_m2_s": 0.0,
+          "pressure_hpa": 1013.0,
+          "relative_humidity_pct": 90.0,
+          "shading_fraction": 0.0,
+          "solar_radiation_w_m2": 0.0,
+          "temperature_c": 35.0,
+          "ventilation_fraction": 0.0,
+          "vpd_kpa": 0.562268123849612,
+          "wind_speed_m_s": 0.0
+        }
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "vapour_gap_to_outdoor": [
+          0.02867032622944364,
+          0.01738943188212087,
+          0.001427411492114272,
+          1.3016307970842647e-06
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "gaps=[480.0, 291.134716662, 23.897792817, 0.021791966]",
+      "case_hash": "2685d61770150981d9a70baf284cff8ddb288b66408875136bb2dbf48c6e25bf",
+      "case_id": "ventilation.co2_toward_outdoor",
+      "category": "ventilation",
+      "classification": null,
+      "expected_relation": "more air exchange brings indoor co2 closer to outdoor; no change at 0 ACH",
+      "inputs": {
+        "ach": [
+          0.0,
+          0.5,
+          3.0,
+          10.0
+        ],
+        "heat_loss_w_k": 0.0,
+        "outdoor": [
+          20.0,
+          40.0
+        ],
+        "prior": {
+          "air_temperature_c": 35.0,
+          "co2_ppm": 900.0,
+          "cooling_kw": 0.0,
+          "heating_kw": 0.0,
+          "par_umol_m2_s": 0.0,
+          "pressure_hpa": 1013.0,
+          "relative_humidity_pct": 90.0,
+          "shading_fraction": 0.0,
+          "solar_radiation_w_m2": 0.0,
+          "temperature_c": 35.0,
+          "ventilation_fraction": 0.0,
+          "vpd_kpa": 0.562268123849612,
+          "wind_speed_m_s": 0.0
+        }
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "co2_gap_to_outdoor": [
+          480.0,
+          291.13471666206397,
+          23.89779281657468,
+          0.021791966286002662
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "identical states",
+      "case_hash": "a24744befe3255bed7e6fe92367df1abb0660e0174452e742f50b09ef739755a",
+      "case_id": "ventilation.configuration_plus_actuator",
+      "category": "ventilation",
+      "classification": null,
+      "expected_relation": "air exchange = configured ventilation_ach + actuator ventilation",
+      "inputs": {
+        "actuator_ach": 1.0,
+        "configured_ach": 2.0,
+        "reference_ach": 3.0
+      },
+      "layer": "SOFTWARE_CORRECTNESS",
+      "mandatory": true,
+      "outputs": {
+        "joined": {
+          "air_temperature_c": 23.108468624124896,
+          "co2_ppm": 443.8977928165747,
+          "cooling_kw": 0.0,
+          "heating_kw": 0.0,
+          "par_umol_m2_s": 0.0,
+          "pressure_hpa": 1013.0,
+          "relative_humidity_pct": 40.3260971923572,
+          "shading_fraction": 0.0,
+          "solar_radiation_w_m2": 0.0,
+          "temperature_c": 23.108468624124896,
+          "ventilation_fraction": 0.950212931632136,
+          "vpd_kpa": 1.6875315351257518,
+          "wind_speed_m_s": 2.0
+        },
+        "split": {
+          "air_temperature_c": 23.108468624124896,
+          "co2_ppm": 443.8977928165747,
+          "cooling_kw": 0.0,
+          "heating_kw": 0.0,
+          "par_umol_m2_s": 0.0,
+          "pressure_hpa": 1013.0,
+          "relative_humidity_pct": 40.3260971923572,
+          "shading_fraction": 0.0,
+          "solar_radiation_w_m2": 0.0,
+          "temperature_c": 23.108468624124896,
+          "ventilation_fraction": 0.950212931632136,
+          "vpd_kpa": 1.6875315351257518,
+          "wind_speed_m_s": 2.0
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "microclimate identical=True, crop identical=True",
+      "case_hash": "cb83ae0ff358909b6acaf5df33a59143524bfa525b0bb1e347dd856bda545809",
+      "case_id": "ventilation.no_direct_biomass_path",
+      "category": "ventilation",
+      "classification": null,
+      "expected_relation": "when ventilation leaves the microclimate unchanged, the crop is unchanged: no actuator-to-biomass path",
+      "inputs": {
+        "outdoor": [
+          24.0,
+          55.0,
+          0.0
+        ],
+        "prior_indoor": "equal to outdoor",
+        "ventilation_actuator_ach": 10.0
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "crop_identical": true,
+        "microclimate_identical": true
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "0 violations over 16 states",
+      "case_hash": "258bfb33a572bca8df355da04399a9f0df790a71b8b1fbe5b0ac4ae3e4e27ec7",
+      "case_id": "humidity.rh_vpd_bounds",
+      "category": "humidity_vpd",
+      "classification": null,
+      "expected_relation": "RH in [0, 100] %, VPD >= 0 kPa, VPD = 0 at saturation, for dry, humid and saturated air",
+      "inputs": {
+        "grid_rh_pct": [
+          5.0,
+          50.0,
+          80.0,
+          100.0
+        ],
+        "grid_temperature_c": [
+          -10.0,
+          5.0,
+          25.0,
+          45.0
+        ]
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "violations": []
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "gain=0.200000000 kg vs transpired=0.200000000 kg",
+      "case_hash": "b57893c9dbf92bf320d2fdefbd45d6388b488e56a5f69828ef75230c760467d7",
+      "case_id": "humidity.closed_box_vapour_conservation",
+      "category": "humidity_vpd",
+      "classification": null,
+      "expected_relation": "sealed air below saturation: vapour mass gain equals transpired water (1 mm = 1 kg m-2)",
+      "inputs": {
+        "area_m2": 1.0,
+        "dt_s": 3600.0,
+        "transpiration_mm_h": 0.2,
+        "volume_m3": 1000.0
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "vapour_added_kg": 0.2000000000000005,
+        "water_transpired_kg": 0.2
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "RH=100.000000 VPD=0.000e+00",
+      "case_hash": "e7bdf3d0566751f6b310661d14d3bcfb537696570720b6fc588b7ef8c73f7272",
+      "case_id": "humidity.condensation_bound",
+      "category": "humidity_vpd",
+      "classification": null,
+      "expected_relation": "cooling humid air caps vapour at saturation: RH = 100 %, VPD = 0",
+      "inputs": {
+        "dt_s": 43200.0,
+        "outdoor": [
+          5.0,
+          95.0
+        ],
+        "prior": [
+          30.0,
+          95.0
+        ]
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "rh_pct": 100.0,
+        "vpd_kpa": 0.0
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "0 violating steps, max RH 100.000 %",
+      "case_hash": "b8407ae5b8016e6e42ff09aa166ee9b4ade3c2d83d33f108992645f6268ee342",
+      "case_id": "humidity.closed_saturated_greenhouse_no_latent_regression",
+      "category": "humidity_vpd",
+      "classification": null,
+      "expected_relation": "Phase 5.29 regression: no latent heat flux while indoor air is saturated (VPD = 0) in a closed greenhouse",
+      "inputs": {
+        "hours": 96,
+        "outdoor_rh_pct": 90.0,
+        "ventilation_ach": 0.0
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "latent_flux_at_saturation_steps": 0,
+        "max_rh_pct": 100.0
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "transpiration equal=True, vpd_stress 1.000000 vs 1.000000",
+      "case_hash": "f4e1bb29a96e991f89ee12dde9ef6190b96fa3080af9a2b6e76859167f8a0ca6",
+      "case_id": "humidity.no_double_vpd_correction",
+      "category": "humidity_vpd",
+      "classification": null,
+      "expected_relation": "transpiration demand is not VPD-corrected a second time (only the saturation cap), and crop VPD stress is one ramp of the environment VPD",
+      "inputs": {
+        "orchestrator_outdoor": [
+          30.0,
+          30.0,
+          500.0
+        ],
+        "vpd_field_kpa": [
+          0.5,
+          2.5
+        ]
+      },
+      "layer": "SOFTWARE_CORRECTNESS",
+      "mandatory": true,
+      "outputs": {
+        "crop_vpd_stress": 1.0,
+        "reference_microclimate_vpd": 2.970145541131309,
+        "single_ramp_vpd_stress": 1.0,
+        "transpiration_mm_h": [
+          0.23984231667993866,
+          0.23984231667993866
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "VPD=1.5839 kPa",
+      "case_hash": "be8cca1a65257d0f0f70e045c67239d5333d7a40fb389338675b2f42e49cf744",
+      "case_id": "units.vpd_kpa",
+      "category": "units",
+      "classification": null,
+      "expected_relation": "VPD is reported in kPa (Tetens e_s(25 C) = 3.1686 kPa, half of it at 50 % RH)",
+      "inputs": {
+        "rh_pct": 50.0,
+        "temperature_c": 25.0
+      },
+      "layer": "SOFTWARE_CORRECTNESS",
+      "mandatory": true,
+      "outputs": {
+        "vpd_kpa": 1.5838888587534237
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "E=0.0, LE=0.0",
+      "case_hash": "5260d6aae3aaceb7a0ecf8f3a99603c377a817157e0490e3e583014f671eb432",
+      "case_id": "latent.no_crop_no_flux",
+      "category": "latent",
+      "classification": null,
+      "expected_relation": "no canopy: no transpiration and no latent flux",
+      "inputs": {
+        "indoor": [
+          28.0,
+          40.0,
+          600.0
+        ],
+        "lai": 0.0
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "latent_w_m2": 0.0,
+        "transpiration_mm_h": 0.0
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "E=0.0, LE=0.0",
+      "case_hash": "d9cca3f4df666c8e5ebbea11a6b207b9fa525654264a73c0fe555109860624dd",
+      "case_id": "latent.crop_without_transpiration",
+      "category": "latent",
+      "classification": null,
+      "expected_relation": "canopy without radiative demand (night): no transpiration, no latent flux",
+      "inputs": {
+        "indoor_radiation_w_m2": 0.0,
+        "lai": 1.2
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "latent_w_m2": 0.0,
+        "transpiration_mm_h": 0.0
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "LE=195.8712 W m-2, dT=-0.282055 vs -0.282055",
+      "case_hash": "f74feee158be46941b2b637b743d74dc2640282be05b97b7942698540e566301",
+      "case_id": "latent.dry_air_cooling_applied_once",
+      "category": "latent",
+      "classification": null,
+      "expected_relation": "LE = E*lambda/3600 and the greenhouse cools by exactly LE*A*dt/C (single application, correct sign)",
+      "inputs": {
+        "closed_box": true,
+        "indoor": [
+          28.0,
+          40.0,
+          600.0
+        ]
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "expected_change_c": -0.2820545644156079,
+        "latent_w_m2": 195.87122528861659,
+        "temperature_change_c": -0.2820545644156063,
+        "transpiration_mm_h": 0.2878107800159264
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "E=0.0, LE=0.0",
+      "case_hash": "8a33c9716d37791b34b1021ffe997ac5c6fb6d989c14c22936fda7d447e7cbfb",
+      "case_id": "latent.saturated_air_no_cooling",
+      "category": "latent",
+      "classification": null,
+      "expected_relation": "saturated air (VPD = 0) has no evaporative capacity: no latent cooling",
+      "inputs": {
+        "indoor": [
+          28.0,
+          100.0,
+          600.0
+        ]
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "latent_w_m2": 0.0,
+        "transpiration_mm_h": 0.0
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "LE=[0.1851, 1.8509, 18.5094, 185.0942, 195.8712, 195.8712]",
+      "case_hash": "d1ee2fa4117cbdc9857bba5ef5e8d85f7f2823d14fb347a418297c4e8ba53a78",
+      "case_id": "monotonicity.transpiration_capacity",
+      "category": "latent",
+      "classification": null,
+      "expected_relation": "more evaporative capacity (lower RH) gives non-decreasing latent flux, bounded by the water-balance demand",
+      "inputs": {
+        "rh_pct": [
+          99.999,
+          99.99,
+          99.9,
+          99.0,
+          90.0,
+          50.0
+        ],
+        "temperature_c": 28.0
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "latent_w_m2": [
+          0.18509419985015635,
+          1.850941998491289,
+          18.509419984892343,
+          185.09419984894396,
+          195.87122528861659,
+          195.87122528861659
+        ],
+        "unlimited_demand_mm_h": 0.2878107800159264
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "indoor=[400.0, 624.0, 800.0]",
+      "case_hash": "d35532e0b1b84b6100d9a31dbda1e81e9975b4605ba8e1ab88b7a9085313e54b",
+      "case_id": "radiation.cover_transmission",
+      "category": "radiation",
+      "classification": null,
+      "expected_relation": "indoor radiation = outdoor x transmission (lower transmission, less radiation)",
+      "inputs": {
+        "outdoor_w_m2": 800.0,
+        "solar_transmission": [
+          0.5,
+          0.78,
+          1.0
+        ]
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "indoor_w_m2": [
+          400.0,
+          624.0,
+          800.0
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "indoor=[624.0, 436.8, 187.2]",
+      "case_hash": "e9647224ea7b28a81e9e1c0fd58396699961d11b68cd372943fd035753d65459",
+      "case_id": "radiation.shading",
+      "category": "radiation",
+      "classification": null,
+      "expected_relation": "indoor radiation = outdoor x transmission x (1 - shading) (more shading, less radiation)",
+      "inputs": {
+        "outdoor_w_m2": 800.0,
+        "shading_fraction": [
+          0.0,
+          0.3,
+          0.7
+        ]
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "indoor_w_m2": [
+          624.0,
+          436.79999999999995,
+          187.20000000000005
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "indoor=0.0, potential=0.0",
+      "case_hash": "1efc7924e364d99b2ad2db587f00715e1a00af70c001243f7956a37e01841089",
+      "case_id": "radiation.zero",
+      "category": "radiation",
+      "classification": null,
+      "expected_relation": "no outdoor radiation: no indoor radiation and no potential growth",
+      "inputs": {
+        "outdoor_w_m2": 0.0
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "indoor_w_m2": 0.0,
+        "potential_growth_g_m2": 0.0
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "potential=0.664104806 vs indoor path 0.664104806 (outdoor path 1.419027363)",
+      "case_hash": "860dbe388fd590a9da83f673970974c0cd9948210483bdf7a559716a9d7829ae",
+      "case_id": "radiation.single_path_to_crop",
+      "category": "radiation",
+      "classification": null,
+      "expected_relation": "potential growth = PAR(indoor radiation) x (1 - exp(-k LAI)) x RUE, applied once; never the outdoor radiation",
+      "inputs": {
+        "lai": 1.2,
+        "outdoor_w_m2": 800.0,
+        "shading": 0.4
+      },
+      "layer": "SOFTWARE_CORRECTNESS",
+      "mandatory": true,
+      "outputs": {
+        "indoor_w_m2": 374.4,
+        "outdoor_path_g_m2": 1.4190273627218701,
+        "potential_growth_g_m2": 0.664104805753837,
+        "single_indoor_path_g_m2": 0.6641048057538352
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "supplied=540.0, uptaken=475.0",
+      "case_hash": "f792803734622b9e52c98fe20b924717630dfd3bd7b303370c2d3bf676480767",
+      "case_id": "co2.closed_box_bookkeeping",
+      "category": "co2",
+      "classification": null,
+      "expected_relation": "sealed air: supply adds and uptake removes exactly their per-step increments",
+      "inputs": {
+        "prior_ppm": 500.0,
+        "supply_ppm_step": 40.0,
+        "uptake_ppm_step": 25.0,
+        "ventilation_ach": 0.0
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "supplied_ppm": 540.0,
+        "uptaken_ppm": 475.0
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "CO2=420.020833333 vs 420.020833333",
+      "case_hash": "45d45bdce047cc952078f018d2f4737b182107c835ef1df78f387648f1ee2b93",
+      "case_id": "co2.ventilated_equilibrium",
+      "category": "co2",
+      "classification": null,
+      "expected_relation": "with constant supply and exchange, CO2 tends to C_out + S/k",
+      "inputs": {
+        "ach": 2.0,
+        "dt_s": 2592000.0,
+        "supply_ppm_per_step": 30.0
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "analytic_equilibrium_ppm": 420.0208333333333,
+        "co2_ppm": 420.0208333333333
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "CO2=[420.0, 426.334753, 439.004259]",
+      "case_hash": "c894b6ac44dcd5f59ca27fea018c89a54675cf074ac937ee4a61f396bc4ffdcf",
+      "case_id": "monotonicity.co2_supply",
+      "category": "co2",
+      "classification": null,
+      "expected_relation": "more supply gives higher indoor CO2, ceteris paribus",
+      "inputs": {
+        "supply_ppm_step": [
+          0.0,
+          20.0,
+          60.0
+        ]
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "co2_ppm": [
+          420.0,
+          426.3347528775476,
+          439.00425863264275
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "with=419.800424, without=420.000000",
+      "case_hash": "1d33ce18674dec54ed6c1304f6fd5c36ef9106239112bf3cd3f04749cefb1acd",
+      "case_id": "co2.crop_uptake_reduces_co2",
+      "category": "co2",
+      "classification": null,
+      "expected_relation": "a growing canopy lowers indoor CO2 relative to the same greenhouse without crop",
+      "inputs": {
+        "lai": [
+          1.2,
+          0.0
+        ],
+        "outdoor": [
+          25.0,
+          60.0,
+          800.0
+        ]
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "uptake_ppm_step": 1.0059811698451773,
+        "with_crop_ppm": 419.8004244860993,
+        "without_crop_ppm": 420.0
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "growth ratios 210/420=0.500000, 840/420=1.000000; double rejected=True",
+      "case_hash": "9adfa564184f4ab728b498b38e4cf4a9084b9be6bf25bbb604cef2b516c1fd03",
+      "case_id": "co2.single_path_to_growth",
+      "category": "co2",
+      "classification": null,
+      "expected_relation": "MicroclimateState.CO2 -> CropGrowthInput.co2_ppm -> CropGrowthEngine.co2_response, applied once in both integration paths; double input rejected",
+      "inputs": {
+        "co2_ppm": [
+          210.0,
+          420.0,
+          840.0
+        ],
+        "double_input": "co2_factor=0.5 and co2_ppm=210"
+      },
+      "layer": "SOFTWARE_CORRECTNESS",
+      "mandatory": true,
+      "outputs": {
+        "actual_growth_g_m2": {
+          "210.0": 0.516663958442027,
+          "420.0": 1.033327916884054,
+          "840.0": 1.033327916884054
+        },
+        "double_application_rejected": true,
+        "loop_co2_factor": 0.7142857142857143,
+        "orchestrator_co2_factor": 1.0
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "crop T=26.0",
+      "case_hash": "102e2a1c7ca34daf8a3d324ae1a1e1eb371c432a18e13503d9839b4248257b1e",
+      "case_id": "crop_microclimate.outdoor_temperature",
+      "category": "crop_microclimate",
+      "classification": null,
+      "expected_relation": "outdoor: crop temperature == outdoor weather temperature (whole WeatherState, rain included)",
+      "inputs": {
+        "mode": "outdoor",
+        "outdoor": [
+          26.0,
+          35.0,
+          600.0,
+          2.0
+        ]
+      },
+      "layer": "SOFTWARE_CORRECTNESS",
+      "mandatory": true,
+      "outputs": {
+        "crop_environment_equals_weather": true,
+        "crop_temperature_c": 26.0
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "outdoor=5.0, indoor=19.5063, crop=19.5063",
+      "case_hash": "ada3e8564113b00c488a98bb64eba7f017642523c3f006fcd27ad4db748dddb2",
+      "case_id": "crop_microclimate.greenhouse_temperature",
+      "category": "crop_microclimate",
+      "classification": null,
+      "expected_relation": "greenhouse: crop temperature == indoor microclimate temperature, not outdoor",
+      "inputs": {
+        "heating_kw": 20.0,
+        "mode": "passive_greenhouse",
+        "outdoor_c": 5.0
+      },
+      "layer": "SOFTWARE_CORRECTNESS",
+      "mandatory": true,
+      "outputs": {
+        "crop_c": 19.506290181000434,
+        "indoor_c": 19.506290181000434,
+        "outdoor_c": 5.0
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "consumed indoor=True",
+      "case_hash": "c07819aeac9d05314dbbe2e4d521da6fe045ca7cf57237e6c59f91afd5e9a326",
+      "case_id": "crop_microclimate.greenhouse_rh_vpd_radiation_co2",
+      "category": "crop_microclimate",
+      "classification": null,
+      "expected_relation": "greenhouse: crop RH, VPD, radiation and CO2 are the indoor values and no rain reaches the crop",
+      "inputs": {
+        "co2_supply_ppm": 300.0,
+        "mode": "passive_greenhouse",
+        "outdoor": [
+          28.0,
+          40.0,
+          800.0,
+          5.0
+        ],
+        "shading": 0.5
+      },
+      "layer": "SOFTWARE_CORRECTNESS",
+      "mandatory": true,
+      "outputs": {
+        "crop_environment": {
+          "radiation": 312.0,
+          "rain": 0.0,
+          "rh": 39.50650948244509
+        },
+        "environment_vpd": 2.3169144658330967,
+        "indoor": {
+          "air_temperature_c": 28.226298126823608,
+          "co2_ppm": 515.0212931632136,
+          "cooling_kw": 0.0,
+          "heating_kw": 0.0,
+          "par_umol_m2_s": 636.48,
+          "pressure_hpa": 1013.0,
+          "relative_humidity_pct": 39.50650948244509,
+          "shading_fraction": 0.5,
+          "solar_radiation_w_m2": 312.0,
+          "temperature_c": 28.226298126823608,
+          "ventilation_fraction": 0.950212931632136,
+          "vpd_kpa": 2.3169144658330967,
+          "wind_speed_m_s": 2.0
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "exchanges zero=True, reproduced=True",
+      "case_hash": "e85dfd24e0e3747ea58a0e428023ea729042e72007dcca67ce6799c39a96e318",
+      "case_id": "feedback.none",
+      "category": "feedback",
+      "classification": null,
+      "expected_relation": "without crop exchanges (all zero) the loop reproduces the greenhouse step (to 1e-12 relative, the rounding of the relaxation blend)",
+      "inputs": {
+        "lai": 0.0,
+        "prior": {
+          "air_temperature_c": 25.0,
+          "co2_ppm": 450.0,
+          "cooling_kw": 0.0,
+          "heating_kw": 0.0,
+          "par_umol_m2_s": 0.0,
+          "pressure_hpa": 1013.0,
+          "relative_humidity_pct": 55.0,
+          "shading_fraction": 0.0,
+          "solar_radiation_w_m2": 0.0,
+          "temperature_c": 25.0,
+          "ventilation_fraction": 0.0,
+          "vpd_kpa": 1.425499972878081,
+          "wind_speed_m_s": 0.0
+        }
+      },
+      "layer": "SOFTWARE_CORRECTNESS",
+      "mandatory": true,
+      "outputs": {
+        "all_exchanges_zero": true,
+        "greenhouse_only": {
+          "air_temperature_c": 24.63154022940259,
+          "co2_ppm": 421.49361205103594,
+          "cooling_kw": 0.0,
+          "heating_kw": 0.0,
+          "par_umol_m2_s": 1193.4,
+          "pressure_hpa": 1013.0,
+          "relative_humidity_pct": 57.80944603784783,
+          "shading_fraction": 0.0,
+          "solar_radiation_w_m2": 585.0,
+          "temperature_c": 24.63154022940259,
+          "ventilation_fraction": 0.950212931632136,
+          "vpd_kpa": 1.3074493502966629,
+          "wind_speed_m_s": 2.0
+        },
+        "loop": {
+          "air_temperature_c": 24.63154022940259,
+          "co2_ppm": 421.49361205103594,
+          "cooling_kw": 0.0,
+          "heating_kw": 0.0,
+          "par_umol_m2_s": 1193.4,
+          "pressure_hpa": 1013.0,
+          "relative_humidity_pct": 57.80944603784782,
+          "shading_fraction": 0.0,
+          "solar_radiation_w_m2": 585.0,
+          "temperature_c": 24.63154022940259,
+          "ventilation_fraction": 0.950212931632136,
+          "vpd_kpa": 1.3074493502966629,
+          "wind_speed_m_s": 2.0
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "dT sign=+1, vapour changed=False, CO2 changed=False",
+      "case_hash": "f431af70111f5a8e37c13ea3ddc7f401791ddde932cb4ddcecae5ff81fbac040",
+      "case_id": "feedback.thermal_isolated",
+      "category": "feedback",
+      "classification": null,
+      "expected_relation": "thermal feedback changes only its own balance (temperature sign +1; vapour unchanged; CO2 unchanged)",
+      "inputs": {
+        "feedback": {
+          "co2_uptake_ppm": 0.0,
+          "intercepted_radiation_w_m2": 0.0,
+          "latent_heat_w_m2": 0.0,
+          "leaf_area_index": 0.0,
+          "sensible_heat_w_m2": 30.0,
+          "transpiration_mm_h": 0.0
+        }
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "co2_change_ppm": 0.0,
+        "temperature_change_c": 0.021759435271498262,
+        "vapour_changed": false
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "dT sign=-1, vapour changed=False, CO2 changed=False",
+      "case_hash": "f7183cbd45f4eb83a1d55725d94c9a140ee4d3dc81eb07775a5290dba1e2efde",
+      "case_id": "feedback.latent_isolated",
+      "category": "feedback",
+      "classification": null,
+      "expected_relation": "latent feedback changes only its own balance (temperature sign -1; vapour unchanged; CO2 unchanged)",
+      "inputs": {
+        "feedback": {
+          "co2_uptake_ppm": 0.0,
+          "intercepted_radiation_w_m2": 0.0,
+          "latent_heat_w_m2": 150.0,
+          "leaf_area_index": 0.0,
+          "sensible_heat_w_m2": 0.0,
+          "transpiration_mm_h": 0.0
+        }
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "co2_change_ppm": 0.0,
+        "temperature_change_c": -0.10879717635750197,
+        "vapour_changed": false
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "dT sign=+0, vapour changed=False, CO2 changed=True",
+      "case_hash": "1b4444a2f54f075303bbfb1618fd30cbf272c1c25aaa19c00b6dc3c54678b900",
+      "case_id": "feedback.co2_isolated",
+      "category": "feedback",
+      "classification": null,
+      "expected_relation": "co2 feedback changes only its own balance (temperature sign +0; vapour unchanged; CO2 decreases)",
+      "inputs": {
+        "feedback": {
+          "co2_uptake_ppm": 15.0,
+          "intercepted_radiation_w_m2": 0.0,
+          "latent_heat_w_m2": 0.0,
+          "leaf_area_index": 0.0,
+          "sensible_heat_w_m2": 0.0,
+          "transpiration_mm_h": 0.0
+        }
+      },
+      "layer": "PHYSICAL_CONSISTENCY",
+      "mandatory": true,
+      "outputs": {
+        "co2_change_ppm": -4.751064658160715,
+        "temperature_change_c": 0.0,
+        "vapour_changed": false
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "loop=24.581257399036 vs 24.581257399036",
+      "case_hash": "1b9408739ef763ee3fa5de39076fdfbe70c79cde71dea0823be798ff5206d9cf",
+      "case_id": "feedback.relaxation_applied_once",
+      "category": "feedback",
+      "classification": null,
+      "expected_relation": "one iteration = one relaxation of the candidate toward the recomputed state, both from the same start state",
+      "inputs": {
+        "alpha": 0.4,
+        "max_iterations": 1
+      },
+      "layer": "SOFTWARE_CORRECTNESS",
+      "mandatory": true,
+      "outputs": {
+        "loop_temperature_c": 24.581257399036264,
+        "reconstructed_c": 24.581257399036264
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "loop=True, backend=True",
+      "case_hash": "dbe42480a8d0f4f2ae3ea6fd083ad2b17dfca7cfb5a83bc738a09cbcca159ca9",
+      "case_id": "feedback.only_converged_state_persists",
+      "category": "feedback",
+      "classification": null,
+      "expected_relation": "intermediate iterations mutate no persistent state: loop and greenhouse backend hold the converged state, the input crop is untouched",
+      "inputs": {
+        "prior": {
+          "air_temperature_c": 25.0,
+          "co2_ppm": 450.0,
+          "cooling_kw": 0.0,
+          "heating_kw": 0.0,
+          "par_umol_m2_s": 0.0,
+          "pressure_hpa": 1013.0,
+          "relative_humidity_pct": 55.0,
+          "shading_fraction": 0.0,
+          "solar_radiation_w_m2": 0.0,
+          "temperature_c": 25.0,
+          "ventilation_fraction": 0.0,
+          "vpd_kpa": 1.425499972878081,
+          "wind_speed_m_s": 0.0
+        }
+      },
+      "layer": "SOFTWARE_CORRECTNESS",
+      "mandatory": true,
+      "outputs": {
+        "backend_state_equals_converged": true,
+        "input_crop_unchanged": true,
+        "loop_last_converged_is_result": true
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "{\"0.0\": [48, 4, 0], \"0.3\": [48, 4, 0], \"3.0\": [48, 3, 0]}",
+      "case_hash": "689522abfce50d641a34e4f524065c2c0b189d77bbd04190e76aa70571118049",
+      "case_id": "feedback.combined_convergence_determinism",
+      "category": "feedback",
+      "classification": null,
+      "expected_relation": "combined thermal+latent+CO2 feedback converges every step, replays identically, has no NaN/Inf and no artificial temperature oscillation",
+      "inputs": {
+        "ach": [
+          0.0,
+          0.3,
+          3.0
+        ],
+        "hours": 48
+      },
+      "layer": "SOFTWARE_CORRECTNESS",
+      "mandatory": true,
+      "outputs": {
+        "runs": {
+          "0.0": {
+            "converged": 48,
+            "finite": true,
+            "hash": "3d70f44b230adf6f3f1112c381598347259a29e76021998e49209543c08d2867",
+            "max_iterations": 4,
+            "replay_identical": true,
+            "reversals_over_1c": 0,
+            "steps": 48
+          },
+          "0.3": {
+            "converged": 48,
+            "finite": true,
+            "hash": "464ad030479cebe6d68f30e9e9b5428b3dd061844aa292bf0405ef3c6cb40ae6",
+            "max_iterations": 4,
+            "replay_identical": true,
+            "reversals_over_1c": 0,
+            "steps": 48
+          },
+          "3.0": {
+            "converged": 48,
+            "finite": true,
+            "hash": "3659470f40007bae342cf2a5c5a92d6bc36a0be88e4b1661219e144457db68c4",
+            "max_iterations": 3,
+            "replay_identical": true,
+            "reversals_over_1c": 0,
+            "steps": 48
+          }
+        }
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "identical",
+      "case_hash": "ddc149d09643ff16b31fb4ff1e4714b84ce05083e2463fc6973ce822007983eb",
+      "case_id": "determinism.scenario_replay",
+      "category": "determinism",
+      "classification": null,
+      "expected_relation": "the same scenario replayed through SimulationClock gives an identical full trajectory",
+      "inputs": {
+        "clock": "SimulationClock via ScenarioRunner",
+        "hours": 48,
+        "scenario": "dfd045cf604cdbfab758a5a17327a53150825856f4b53c4df7fbe7f13b4b3dad"
+      },
+      "layer": "SOFTWARE_CORRECTNESS",
+      "mandatory": true,
+      "outputs": {
+        "first_hash": "de4941c6e0a3df584c4187f28b37b0e7d22b61dfe4fd90702c4a2382c9245d75",
+        "second_hash": "de4941c6e0a3df584c4187f28b37b0e7d22b61dfe4fd90702c4a2382c9245d75"
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "dT=1.440000000 vs 1.440000000",
+      "case_hash": "722e028490eed81d141e7425d4a4a8f9dae6762f15e6e461e50d3161a7bd4bac",
+      "case_id": "units.heating_kw_to_joules",
+      "category": "units",
+      "classification": null,
+      "expected_relation": "1 kW for 1 h into C = thermal_mass_kj_k x 1000 J/K raises T by 3.6e6 / C",
+      "inputs": {
+        "dt_s": 3600.0,
+        "heating_kw": 1.0,
+        "thermal_mass_kj_k": 2500.0
+      },
+      "layer": "SOFTWARE_CORRECTNESS",
+      "mandatory": true,
+      "outputs": {
+        "expected_c": 1.44,
+        "temperature_change_c": 1.4400000000000013
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "added=0.360000000 kg, dT=-0.352800000 vs -0.352800000",
+      "case_hash": "d6f98fbf1f7a14970f7b02c7adaa3edd502963f07da8e52d728c395bf4a8708e",
+      "case_id": "units.misting_mm_h_to_kg",
+      "category": "units",
+      "classification": null,
+      "expected_relation": "0.36 mm/h over 1 m2 for 1 h evaporates 0.36 kg (below saturation) and removes its latent heat",
+      "inputs": {
+        "area_m2": 1.0,
+        "dt_s": 3600.0,
+        "misting_mm_h": 0.36
+      },
+      "layer": "SOFTWARE_CORRECTNESS",
+      "mandatory": true,
+      "outputs": {
+        "expected_cooling_c": -0.3528,
+        "temperature_change_c": -0.35279999999999845,
+        "vapour_added_kg": 0.3599999999999992
+      },
+      "status": "PASS"
+    },
+    {
+      "actual_relation": "unchanged=True",
+      "case_hash": "d2932f98b853013b93859afff5306836032fc25eb35887bf0e4595b3deb9b181",
+      "case_id": "mutation.no_parameter_configuration_or_state_mutation",
+      "category": "mutation",
+      "classification": null,
+      "expected_relation": "benchmark execution mutates neither the ParameterRegistry, nor GreenhouseConfiguration, nor input crop states",
+      "inputs": {
+        "components": [
+          "CropGreenhouseFeedbackLoop",
+          "CropDigitalTwinOrchestrator"
+        ]
+      },
+      "layer": "SOFTWARE_CORRECTNESS",
+      "mandatory": true,
+      "outputs": {
+        "unchanged": true
+      },
+      "status": "PASS"
+    }
+  ],
+  "configuration_hashes": {
+    "closed": "93451608f92231fbe4f58a3094493f30c3d944d108e6c9a992e529657ae7514f",
+    "closed_box": "63955bd6266997a919b36fb7c366d705fe93bc26bd8edb9d093015406bfd8145",
+    "default": "bd2e909fb1d252ef80f31a2d4ce6132b858f1ec8f7e0a46d493a6ba4ed6bbeee",
+    "feedback": "a4fa80a36486f9ad8c3102a89c2acb28aa2ef7c252840d2f163428bbb501b29a"
+  },
+  "energyplus": {
+    "availability": "UNAVAILABLE",
+    "benchmark_use": "none (not available)",
+    "detail": "EnergyPlus executable and pyenergyplus are not available",
+    "role": "optional secondary backend; never ground truth"
+  },
+  "invariants": {
+    "crop_states_checked": 400,
+    "cross_references": {
+      "deterministic replay": "determinism.scenario_replay, feedback.combined_convergence_determinism",
+      "greenhouse crop receives indoor microclimate": "crop_microclimate.*",
+      "no duplicate CO2 application": "co2.single_path_to_growth",
+      "no duplicate VPD correction": "humidity.no_double_vpd_correction",
+      "no latent flux without evaporative capacity": "latent.saturated_air_no_cooling, humidity.closed_saturated_greenhouse_no_latent_regression",
+      "no state mutation": "mutation.no_parameter_configuration_or_state_mutation, feedback.only_converged_state_persists"
+    },
+    "failures": [],
+    "microclimate_states_checked": 461,
+    "rules": [
+      "finite values",
+      "VPD >= 0",
+      "0 <= RH <= 100",
+      "radiation >= 0",
+      "CO2 >= 0",
+      "biomass >= 0",
+      "LAI >= 0",
+      "maturity in [0, 1]"
+    ],
+    "status": "PASS"
+  },
+  "parameter_registry_hash": "18cddbc7e9b834a9a327825489178bdca7f1a64924b075274f4882d70839aa90",
+  "phase": "5.31",
+  "qualified": true,
+  "report_hash": "c4b0ba39d307bf643909d7501dcf03f8efbdbc202e59647b3f717ca478645c55",
+  "scientific_limitations": [
+    "Lumped single-zone well-mixed air; no CFD, no longwave radiative exchange, condensation releases no latent heat to the air.",
+    "Default geometry (1000 m3 air with a 1 m2 exchange area) is an engineering placeholder; magnitudes are not calibrated and only directions/closures are benchmarked.",
+    "Crop sensible heat is an engineering proxy; transpiration demand is the WaterBalanceEngine Hargreaves-type estimate capped by the indoor vapour deficit.",
+    "CO2 response is the existing min(1, CO2/420) engineering response; no enrichment benefit is represented.",
+    "Benchmarks are synthetic and analytic; they establish internal physical consistency only, not biological validity or field accuracy."
+  ],
+  "scientific_status": {
+    "BIOLOGICAL_VALIDITY_CLAIMED": false,
+    "CALIBRATION_PERFORMED": false,
+    "DATA_ASSIMILATION_IMPLEMENTED": false,
+    "EXPERIMENTAL_VALIDATION": "DEFERRED_TO_FINAL_VALIDATION_STAGE",
+    "FIELD_ACCURACY_CLAIMED": false,
+    "GREENHOUSE_PHYSICAL_BENCHMARKS": "QUALIFIED",
+    "REAL_AGRICULTURAL_DATA_VERIFIED": false,
+    "meaning_of_qualified": "the implementation passed the synthetic physical benchmarks of Phase 5.31; not validation against a real greenhouse"
+  },
+  "simulation_time_origin": "2026-07-01T00:00:00+00:00",
+  "static_audit": {
+    "classification": null,
+    "phase5_29_static_audit": {
+      "duplicate_core_classes": {},
+      "missing_core_classes": [],
+      "phase_module_calibration_imports": [],
+      "phase_module_optimizer_calls": [],
+      "status": "PASS",
+      "violations": []
+    },
+    "saturation_vapour_pressure_definitions": [
+      "agri_twin/domain/greenhouse.py:29"
+    ],
+    "single_psychrometric_definition": true,
+    "status": "PASS"
+  },
+  "status_counts": {
+    "FAIL": 0,
+    "PASS": 47,
+    "WARN": 0
+  },
+  "test_count": 56,
+  "traceability": {
+    "classification": null,
+    "gaps": [],
+    "parameters": [
+      {
+        "calibration_allowed": true,
+        "calibration_status": "candidate_for_calibration",
+        "code_value": 1000.0,
+        "parameter": "volume_m3",
+        "parameter_id": "greenhouse.volume",
+        "registered": true,
+        "registry_value": 1000.0,
+        "source_type": "engineering_default",
+        "unit": "m3"
+      },
+      {
+        "calibration_allowed": true,
+        "calibration_status": "candidate_for_calibration",
+        "code_value": 0.78,
+        "parameter": "solar_transmission",
+        "parameter_id": "greenhouse.cover_transmission",
+        "registered": true,
+        "registry_value": 0.78,
+        "source_type": "engineering_default",
+        "unit": "fraction"
+      },
+      {
+        "calibration_allowed": true,
+        "calibration_status": "candidate_for_calibration",
+        "code_value": 3.0,
+        "parameter": "ventilation_ach",
+        "parameter_id": "greenhouse.ventilation_ach",
+        "registered": true,
+        "registry_value": 3.0,
+        "source_type": "engineering_default",
+        "unit": "h-1"
+      },
+      {
+        "calibration_allowed": true,
+        "calibration_status": "candidate_for_calibration",
+        "code_value": 80.0,
+        "parameter": "heat_loss_w_k",
+        "parameter_id": "greenhouse.heat_loss_conductance",
+        "registered": true,
+        "registry_value": 80.0,
+        "source_type": "engineering_default",
+        "unit": "W_K-1"
+      },
+      {
+        "calibration_allowed": true,
+        "calibration_status": "candidate_for_calibration",
+        "code_value": 2500.0,
+        "parameter": "thermal_mass_kj_k",
+        "parameter_id": "greenhouse.thermal_mass",
+        "registered": true,
+        "registry_value": 2500.0,
+        "source_type": "engineering_default",
+        "unit": "kJ_K-1"
+      },
+      {
+        "calibration_allowed": true,
+        "calibration_status": "candidate_for_calibration",
+        "code_value": 1.0,
+        "parameter": "thermal_exchange_area_m2",
+        "parameter_id": "greenhouse.thermal_exchange_area",
+        "registered": true,
+        "registry_value": 1.0,
+        "source_type": "engineering_default",
+        "unit": "m2"
+      },
+      {
+        "calibration_allowed": true,
+        "calibration_status": "candidate_for_calibration",
+        "code_value": 420.0,
+        "parameter": "co2_ppm_baseline",
+        "parameter_id": "greenhouse.co2_baseline",
+        "registered": true,
+        "registry_value": 420.0,
+        "source_type": "engineering_default",
+        "unit": "ppm"
+      },
+      {
+        "calibration_allowed": true,
+        "calibration_status": "candidate_for_calibration",
+        "code_value": 1.2,
+        "parameter": "AIR_DENSITY_KG_M3",
+        "parameter_id": "feedback.air_density",
+        "registered": true,
+        "registry_value": 1.2,
+        "source_type": "engineering_default",
+        "unit": "kg_m-3"
+      },
+      {
+        "calibration_allowed": false,
+        "calibration_status": "fixed",
+        "code_value": 1013.0,
+        "parameter": "AIR_SPECIFIC_HEAT_J_KG_K",
+        "parameter_id": "physics.air_specific_heat",
+        "registered": true,
+        "registry_value": 1013.0,
+        "source_type": "literature",
+        "unit": "J_kg-1_K-1"
+      },
+      {
+        "calibration_allowed": true,
+        "calibration_status": "candidate_for_calibration",
+        "code_value": 2450000.0,
+        "parameter": "LATENT_HEAT_VAPORIZATION_J_KG",
+        "parameter_id": "feedback.latent_heat_vaporization",
+        "registered": true,
+        "registry_value": 2450000.0,
+        "source_type": "engineering_default",
+        "unit": "J_kg-1"
+      },
+      {
+        "calibration_allowed": false,
+        "calibration_status": "fixed",
+        "code_value": 461.5,
+        "parameter": "WATER_VAPOUR_GAS_CONSTANT_J_KG_K",
+        "parameter_id": "physics.water_vapour_gas_constant",
+        "registered": true,
+        "registry_value": 461.5,
+        "source_type": "literature",
+        "unit": "J_kg-1_K-1"
+      },
+      {
+        "calibration_allowed": true,
+        "calibration_status": "candidate_for_calibration",
+        "code_value": 420.0,
+        "parameter": "OUTDOOR_CO2_PPM",
+        "parameter_id": "greenhouse.outdoor_co2",
+        "registered": true,
+        "registry_value": 420.0,
+        "source_type": "engineering_default",
+        "unit": "ppm"
+      },
+      {
+        "calibration_allowed": true,
+        "calibration_status": "candidate_for_calibration",
+        "code_value": 420.0,
+        "parameter": "CO2_REFERENCE_PPM",
+        "parameter_id": "crop.co2_response_reference",
+        "registered": true,
+        "registry_value": 420.0,
+        "source_type": "engineering_default",
+        "unit": "ppm"
+      },
+      {
+        "calibration_allowed": true,
+        "calibration_status": "candidate_for_calibration",
+        "code_value": 1000.0,
+        "parameter": "air_volume_m3",
+        "parameter_id": "feedback.air_volume",
+        "registered": true,
+        "registry_value": 1000.0,
+        "source_type": "engineering_default",
+        "unit": "m3"
+      },
+      {
+        "calibration_allowed": true,
+        "calibration_status": "candidate_for_calibration",
+        "code_value": 0.4,
+        "parameter": "relaxation_alpha",
+        "parameter_id": "feedback.relaxation_alpha",
+        "registered": true,
+        "registry_value": 0.4,
+        "source_type": "engineering_default",
+        "unit": "fraction"
+      },
+      {
+        "calibration_allowed": true,
+        "calibration_status": "candidate_for_calibration",
+        "code_value": 5.0,
+        "parameter": "sensible_heat_transfer_w_m2_k",
+        "parameter_id": "feedback.sensible_heat_transfer",
+        "registered": true,
+        "registry_value": 5.0,
+        "source_type": "engineering_default",
+        "unit": "W_m-2_K-1"
+      }
+    ],
+    "status": "PASS"
+  },
+  "version": "5.31.1"
+}

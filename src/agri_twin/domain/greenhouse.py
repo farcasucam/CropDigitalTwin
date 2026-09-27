@@ -298,6 +298,11 @@ class GreenhousePhysicalModel(ABC):
     def reset(self) -> None:
         raise NotImplementedError
 
+    def commit(self, state: MicroclimateState) -> None:
+        """Record an externally converged state (e.g. by the crop feedback loop)
+        as the model's current state, replacing the last evaluated candidate."""
+        self._state = state
+
     @abstractmethod
     def state(self) -> MicroclimateState:
         raise NotImplementedError
@@ -393,8 +398,8 @@ class SimplifiedGreenhouseModel(GreenhousePhysicalModel):
                 environment=DerivedEnvironmentState(
                     state.vpd_kpa,
                     max(0.0, state.air_temperature_c - 20.0) + state.solar_radiation_w_m2 / 1000.0,
-                    0.6108 * math.exp(17.27 * state.air_temperature_c / (state.air_temperature_c + 237.3)),
-                    0.6108 * math.exp(17.27 * state.air_temperature_c / (state.air_temperature_c + 237.3)) * state.relative_humidity_pct / 100.0,
+                    saturation_vapour_pressure_kpa(state.air_temperature_c),
+                    saturation_vapour_pressure_kpa(state.air_temperature_c) * state.relative_humidity_pct / 100.0,
                     max(0.0, state.vpd_kpa * 0.15 + state.solar_radiation_w_m2 * 0.00005),
                     max(0.0, state.vpd_kpa * 0.15 + state.solar_radiation_w_m2 * 0.00005),
                 ),
@@ -541,7 +546,7 @@ class SimplifiedGreenhouseModel(GreenhousePhysicalModel):
 
     @staticmethod
     def _result(indoor: GreenhouseMicroclimateState, weather: WeatherState, consumption: float, irrigation: float) -> GreenhouseMicroclimateResult:
-        saturation = 0.6108 * math.exp(17.27 * indoor.temperature_c / (indoor.temperature_c + 237.3))
+        saturation = saturation_vapour_pressure_kpa(indoor.temperature_c)
         vapor = saturation * indoor.relative_humidity_pct / 100.0
         vpd = max(0.0, saturation - vapor)
         environment = DerivedEnvironmentState(vpd, max(0.0, indoor.temperature_c - 20.0) + indoor.radiation_w_m2 / 1000.0, saturation, vapor, max(0.0, vpd * 0.15 + indoor.radiation_w_m2 * 0.00005), max(0.0, vpd * 0.15 + indoor.radiation_w_m2 * 0.00005))
@@ -574,8 +579,8 @@ class GreenhouseMicroclimateEngine(SimplifiedGreenhouseModel):
         environment = DerivedEnvironmentState(
             state.vpd_kpa,
             max(0.0, state.air_temperature_c - 20.0) + state.solar_radiation_w_m2 / 1000.0,
-            0.6108 * math.exp(17.27 * state.air_temperature_c / (state.air_temperature_c + 237.3)),
-            0.6108 * math.exp(17.27 * state.air_temperature_c / (state.air_temperature_c + 237.3)) * state.relative_humidity_pct / 100.0,
+            saturation_vapour_pressure_kpa(state.air_temperature_c),
+            saturation_vapour_pressure_kpa(state.air_temperature_c) * state.relative_humidity_pct / 100.0,
             max(0.0, state.vpd_kpa * 0.15 + state.solar_radiation_w_m2 * 0.00005),
             max(0.0, state.vpd_kpa * 0.15 + state.solar_radiation_w_m2 * 0.00005),
         )

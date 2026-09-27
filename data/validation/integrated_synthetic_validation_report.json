@@ -12303,12 +12303,12 @@
   "mutation": {
     "after": {
       "configuration_files": "0b5c00d7128bc786c98ffdb69b6f554706bee6136a8320b192b63fb5069b6936",
-      "parameter_registry": "f7f81a2e6b5a84a0f1f4002eb6bce1f64cd22408d5e3942b07cc2721204f22f0",
+      "parameter_registry": "18cddbc7e9b834a9a327825489178bdca7f1a64924b075274f4882d70839aa90",
       "parameter_set_tomato": "ea8ad3805c0fc4a6aedca62554c4e6d0949d1fbb6b62c0537f63377b60bcc2c8"
     },
     "before": {
       "configuration_files": "0b5c00d7128bc786c98ffdb69b6f554706bee6136a8320b192b63fb5069b6936",
-      "parameter_registry": "f7f81a2e6b5a84a0f1f4002eb6bce1f64cd22408d5e3942b07cc2721204f22f0",
+      "parameter_registry": "18cddbc7e9b834a9a327825489178bdca7f1a64924b075274f4882d70839aa90",
       "parameter_set_tomato": "ea8ad3805c0fc4a6aedca62554c4e6d0949d1fbb6b62c0537f63377b60bcc2c8"
     },
     "calibration_performed": false,
@@ -12331,7 +12331,7 @@
     "status": "PASS",
     "twin_state_frozen": true
   },
-  "report_hash": "e6bf8a57912f9d8e04d7256a49bab3a6798113348091968bba2807db9df6f8f5",
+  "report_hash": "d02ad7e0630aaa0f7b6fe5c91f632a06cc0accfa0862d93d88d513866f3f8601",
   "restart": {
     "cases": [
       {
@@ -12716,7 +12716,7 @@
         "InMemoryTwinStateRepository"
       ]
     },
-    "scanned_files": 52,
+    "scanned_files": 53,
     "scope": "src/agri_twin/domain/*.py and src/agri_twin/application/*.py (AST: real calls/imports only, docs and strings ignored)",
     "status": "PASS",
     "violations": []

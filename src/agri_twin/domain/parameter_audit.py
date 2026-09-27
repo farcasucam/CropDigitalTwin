@@ -221,6 +221,11 @@ class ParameterRegistry:
             ("feedback.relaxation_alpha", "fixed-point relaxation factor", "fraction", 0.4, "crop_greenhouse_feedback.py:CropGreenhouseFeedbackConfiguration"),
             ("water.et_temperature_range", "ET approximation temperature range", "degC", 10.0, "water_balance.py:_et0_mm"),
             ("greenhouse.outdoor_co2", "outdoor ambient CO2 concentration for air exchange", "ppm", 420.0, "greenhouse.py:OUTDOOR_CO2_PPM"),
+            ("greenhouse.volume", "greenhouse air volume", "m3", 1000.0, "greenhouse.py:GreenhouseConfiguration.volume_m3"),
+            ("greenhouse.ventilation_ach", "structural air exchange rate (infiltration and fixed vents)", "h-1", 3.0, "greenhouse.py:GreenhouseConfiguration.ventilation_ach"),
+            ("greenhouse.heat_loss_conductance", "cover heat-loss conductance to outdoor air", "W_K-1", 80.0, "greenhouse.py:GreenhouseConfiguration.heat_loss_w_k"),
+            ("greenhouse.thermal_mass", "lumped greenhouse heat capacity", "kJ_K-1", 2500.0, "greenhouse.py:GreenhouseConfiguration.thermal_mass_kj_k"),
+            ("greenhouse.co2_baseline", "initial indoor CO2 concentration", "ppm", 420.0, "greenhouse.py:GreenhouseConfiguration.co2_ppm_baseline"),
             ("crop.co2_response_reference", "CO2 growth-response reference (factor = min(1, CO2 / reference))", "ppm", 420.0, "crop_growth.py:CropGrowthEngine.CO2_REFERENCE_PPM"),
         ]
         physical_constants = [

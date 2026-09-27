@@ -7,16 +7,18 @@
   ],
   "calibration_performed": false,
   "calibration_status": "INSUFFICIENT_DATA",
-  "configuration_hash": "4c8563775d86580c817c5e0e217dd1714e9fed9a5e4030b3f6d650163314eb7e",
+  "configuration_hash": "1682e8c9b0841da1a473f67ae988de488d0386d3811284823db0b851d919f70a",
   "confounders": {
     "co2": [
       "actuator.co2.capacity",
       "actuator.ventilation.capacity",
       "crop.co2_response_reference",
       "feedback.co2_carbon_fraction",
+      "greenhouse.co2_baseline",
       "greenhouse.cover_transmission",
       "greenhouse.outdoor.solar_transmission_fraction",
-      "greenhouse.outdoor_co2"
+      "greenhouse.outdoor_co2",
+      "greenhouse.ventilation_ach"
     ],
     "fruit_development": [
       "contract.maturity_response",
@@ -166,7 +168,8 @@
       "evidence.tomato_tbase_003",
       "evidence.tomato_tupper_001",
       "evidence.tomato_tupper_002",
-      "greenhouse.thermal_exchange_area"
+      "greenhouse.thermal_exchange_area",
+      "greenhouse.thermal_mass"
     ],
     "radiation_interception": [
       "contract.lai_max",
@@ -377,6 +380,8 @@
       "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
       "feedback.latent_heat_vaporization",
       "feedback.sensible_heat_transfer",
+      "greenhouse.heat_loss_conductance",
+      "greenhouse.thermal_mass",
       "physics.air_specific_heat"
     ],
     "vpd": [
@@ -703,6 +708,7 @@
       "confounders": [
         "crop.co2_response_reference",
         "feedback.co2_carbon_fraction",
+        "greenhouse.co2_baseline",
         "greenhouse.outdoor_co2"
       ],
       "crop": null,
@@ -795,6 +801,8 @@
         "crop.tomato.yield_maturation.stress_thresholds.critical_heat_c",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": null,
@@ -1031,7 +1039,9 @@
       "calibration_status": "candidate_for_calibration",
       "category": "greenhouse",
       "confidence": "none",
-      "confounders": [],
+      "confounders": [
+        "greenhouse.ventilation_ach"
+      ],
       "crop": null,
       "evidence_level": "none",
       "identifiability_status": "ENVIRONMENT_SPECIFIC",
@@ -1393,6 +1403,7 @@
       "confounders": [
         "contract.thermal_upper_temperature_c",
         "greenhouse.thermal_exchange_area",
+        "greenhouse.thermal_mass",
         "water.et_temperature_range"
       ],
       "crop": null,
@@ -1429,6 +1440,7 @@
       "confounders": [
         "contract.thermal_base_temperature_c",
         "greenhouse.thermal_exchange_area",
+        "greenhouse.thermal_mass",
         "water.et_temperature_range"
       ],
       "crop": null,
@@ -2563,6 +2575,8 @@
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "apple",
@@ -5119,6 +5133,8 @@
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "apple",
@@ -7675,6 +7691,8 @@
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "apple",
@@ -10826,6 +10844,8 @@
         "crop.tomato.yield_maturation.vwc_thresholds.wilting_point",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "apple",
@@ -13108,6 +13128,7 @@
       "confounders": [
         "actuator.co2.capacity",
         "feedback.co2_carbon_fraction",
+        "greenhouse.co2_baseline",
         "greenhouse.outdoor_co2"
       ],
       "crop": null,
@@ -14127,6 +14148,8 @@
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "grape",
@@ -16683,6 +16706,8 @@
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "grape",
@@ -19239,6 +19264,8 @@
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "grape",
@@ -22390,6 +22417,8 @@
         "crop.tomato.yield_maturation.vwc_thresholds.wilting_point",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "grape",
@@ -25653,6 +25682,8 @@
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "lettuce",
@@ -28209,6 +28240,8 @@
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "lettuce",
@@ -30765,6 +30798,8 @@
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "lettuce",
@@ -33916,6 +33951,8 @@
         "crop.tomato.yield_maturation.vwc_thresholds.wilting_point",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "lettuce",
@@ -37179,6 +37216,8 @@
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "peach",
@@ -39735,6 +39774,8 @@
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "peach",
@@ -42291,6 +42332,8 @@
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "peach",
@@ -45442,6 +45485,8 @@
         "crop.tomato.yield_maturation.vwc_thresholds.wilting_point",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "peach",
@@ -48705,6 +48750,8 @@
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "pepper",
@@ -51261,6 +51308,8 @@
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "pepper",
@@ -53817,6 +53866,8 @@
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "pepper",
@@ -56968,6 +57019,8 @@
         "crop.tomato.yield_maturation.vwc_thresholds.wilting_point",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "pepper",
@@ -60231,6 +60284,8 @@
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "plum",
@@ -62787,6 +62842,8 @@
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "plum",
@@ -65343,6 +65400,8 @@
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "plum",
@@ -68494,6 +68553,8 @@
         "crop.tomato.yield_maturation.vwc_thresholds.wilting_point",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "plum",
@@ -71757,6 +71818,8 @@
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "tomato",
@@ -74313,6 +74376,8 @@
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "tomato",
@@ -76869,6 +76934,8 @@
         "crop.tomato.yield_maturation.vpd_thresholds.stress_max_kpa",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "tomato",
@@ -80020,6 +80087,8 @@
         "crop.tomato.yield_maturation.vwc_thresholds.wilting_point",
         "feedback.latent_heat_vaporization",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": "tomato",
@@ -83686,6 +83755,7 @@
       "confounders": [
         "actuator.co2.capacity",
         "crop.co2_response_reference",
+        "greenhouse.co2_baseline",
         "greenhouse.outdoor_co2"
       ],
       "crop": null,
@@ -83752,6 +83822,8 @@
         "crop.tomato.vegetative_growth.stress_thresholds.critical_heat_c",
         "crop.tomato.yield_maturation.stress_thresholds.critical_heat_c",
         "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": null,
@@ -83948,6 +84020,8 @@
         "crop.tomato.vegetative_growth.stress_thresholds.critical_heat_c",
         "crop.tomato.yield_maturation.stress_thresholds.critical_heat_c",
         "feedback.latent_heat_vaporization",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass",
         "physics.air_specific_heat"
       ],
       "crop": null,
@@ -83984,6 +84058,45 @@
       "category": "engineering_default",
       "confidence": "low",
       "confounders": [
+        "actuator.co2.capacity",
+        "crop.co2_response_reference",
+        "feedback.co2_carbon_fraction",
+        "greenhouse.outdoor_co2"
+      ],
+      "crop": null,
+      "evidence_level": "none",
+      "identifiability_status": "ENVIRONMENT_SPECIFIC",
+      "measurement_method": null,
+      "name": "initial indoor CO2 concentration",
+      "notes": "must not be presented as biological validation",
+      "observable_variables": [
+        "air_temperature",
+        "biomass",
+        "solar_radiation"
+      ],
+      "parameter_id": "greenhouse.co2_baseline",
+      "phenological_stage": null,
+      "plot": null,
+      "provenance": "engineering_default",
+      "required_environmental_coverage": [],
+      "required_observation_types": [
+        "radiation, biomass, site and climate observations"
+      ],
+      "required_stage_coverage": [],
+      "scientific_warnings": [
+        "environment-specific scope requires site observations"
+      ],
+      "subsystem": "runtime_code",
+      "temporal_resolution": null,
+      "uncertainty_requirement": null,
+      "variety": null
+    },
+    {
+      "calibration_allowed": true,
+      "calibration_status": "candidate_for_calibration",
+      "category": "engineering_default",
+      "confidence": "low",
+      "confounders": [
         "greenhouse.outdoor.solar_transmission_fraction"
       ],
       "crop": null,
@@ -83998,6 +84111,74 @@
         "solar_radiation"
       ],
       "parameter_id": "greenhouse.cover_transmission",
+      "phenological_stage": null,
+      "plot": null,
+      "provenance": "engineering_default",
+      "required_environmental_coverage": [],
+      "required_observation_types": [
+        "radiation, biomass, site and climate observations"
+      ],
+      "required_stage_coverage": [],
+      "scientific_warnings": [
+        "environment-specific scope requires site observations"
+      ],
+      "subsystem": "runtime_code",
+      "temporal_resolution": null,
+      "uncertainty_requirement": null,
+      "variety": null
+    },
+    {
+      "calibration_allowed": true,
+      "calibration_status": "candidate_for_calibration",
+      "category": "engineering_default",
+      "confidence": "low",
+      "confounders": [
+        "actuator.heating.capacity",
+        "crop.apple.establishment.stress_thresholds.critical_heat_c",
+        "crop.apple.post_harvest_dormancy.stress_thresholds.critical_heat_c",
+        "crop.apple.vegetative_growth.stress_thresholds.critical_heat_c",
+        "crop.apple.yield_maturation.stress_thresholds.critical_heat_c",
+        "crop.grape.establishment.stress_thresholds.critical_heat_c",
+        "crop.grape.post_harvest_dormancy.stress_thresholds.critical_heat_c",
+        "crop.grape.vegetative_growth.stress_thresholds.critical_heat_c",
+        "crop.grape.yield_maturation.stress_thresholds.critical_heat_c",
+        "crop.lettuce.establishment.stress_thresholds.critical_heat_c",
+        "crop.lettuce.post_harvest_dormancy.stress_thresholds.critical_heat_c",
+        "crop.lettuce.vegetative_growth.stress_thresholds.critical_heat_c",
+        "crop.lettuce.yield_maturation.stress_thresholds.critical_heat_c",
+        "crop.peach.establishment.stress_thresholds.critical_heat_c",
+        "crop.peach.post_harvest_dormancy.stress_thresholds.critical_heat_c",
+        "crop.peach.vegetative_growth.stress_thresholds.critical_heat_c",
+        "crop.peach.yield_maturation.stress_thresholds.critical_heat_c",
+        "crop.pepper.establishment.stress_thresholds.critical_heat_c",
+        "crop.pepper.post_harvest_dormancy.stress_thresholds.critical_heat_c",
+        "crop.pepper.vegetative_growth.stress_thresholds.critical_heat_c",
+        "crop.pepper.yield_maturation.stress_thresholds.critical_heat_c",
+        "crop.plum.establishment.stress_thresholds.critical_heat_c",
+        "crop.plum.post_harvest_dormancy.stress_thresholds.critical_heat_c",
+        "crop.plum.vegetative_growth.stress_thresholds.critical_heat_c",
+        "crop.plum.yield_maturation.stress_thresholds.critical_heat_c",
+        "crop.tomato.establishment.stress_thresholds.critical_heat_c",
+        "crop.tomato.post_harvest_dormancy.stress_thresholds.critical_heat_c",
+        "crop.tomato.vegetative_growth.stress_thresholds.critical_heat_c",
+        "crop.tomato.yield_maturation.stress_thresholds.critical_heat_c",
+        "feedback.latent_heat_vaporization",
+        "feedback.sensible_heat_transfer",
+        "greenhouse.thermal_mass",
+        "physics.air_specific_heat"
+      ],
+      "crop": null,
+      "evidence_level": "none",
+      "identifiability_status": "ENVIRONMENT_SPECIFIC",
+      "measurement_method": null,
+      "name": "cover heat-loss conductance to outdoor air",
+      "notes": "must not be presented as biological validation",
+      "observable_variables": [
+        "air_temperature",
+        "biomass",
+        "solar_radiation"
+      ],
+      "parameter_id": "greenhouse.heat_loss_conductance",
       "phenological_stage": null,
       "plot": null,
       "provenance": "engineering_default",
@@ -84054,7 +84235,8 @@
       "confounders": [
         "actuator.co2.capacity",
         "crop.co2_response_reference",
-        "feedback.co2_carbon_fraction"
+        "feedback.co2_carbon_fraction",
+        "greenhouse.co2_baseline"
       ],
       "crop": null,
       "evidence_level": "none",
@@ -84091,7 +84273,8 @@
       "confidence": "low",
       "confounders": [
         "contract.thermal_base_temperature_c",
-        "contract.thermal_upper_temperature_c"
+        "contract.thermal_upper_temperature_c",
+        "greenhouse.thermal_mass"
       ],
       "crop": null,
       "evidence_level": "none",
@@ -84105,6 +84288,147 @@
         "solar_radiation"
       ],
       "parameter_id": "greenhouse.thermal_exchange_area",
+      "phenological_stage": null,
+      "plot": null,
+      "provenance": "engineering_default",
+      "required_environmental_coverage": [],
+      "required_observation_types": [
+        "radiation, biomass, site and climate observations"
+      ],
+      "required_stage_coverage": [],
+      "scientific_warnings": [
+        "environment-specific scope requires site observations"
+      ],
+      "subsystem": "runtime_code",
+      "temporal_resolution": null,
+      "uncertainty_requirement": null,
+      "variety": null
+    },
+    {
+      "calibration_allowed": true,
+      "calibration_status": "candidate_for_calibration",
+      "category": "engineering_default",
+      "confidence": "low",
+      "confounders": [
+        "actuator.heating.capacity",
+        "contract.thermal_base_temperature_c",
+        "contract.thermal_upper_temperature_c",
+        "crop.apple.establishment.stress_thresholds.critical_heat_c",
+        "crop.apple.post_harvest_dormancy.stress_thresholds.critical_heat_c",
+        "crop.apple.vegetative_growth.stress_thresholds.critical_heat_c",
+        "crop.apple.yield_maturation.stress_thresholds.critical_heat_c",
+        "crop.grape.establishment.stress_thresholds.critical_heat_c",
+        "crop.grape.post_harvest_dormancy.stress_thresholds.critical_heat_c",
+        "crop.grape.vegetative_growth.stress_thresholds.critical_heat_c",
+        "crop.grape.yield_maturation.stress_thresholds.critical_heat_c",
+        "crop.lettuce.establishment.stress_thresholds.critical_heat_c",
+        "crop.lettuce.post_harvest_dormancy.stress_thresholds.critical_heat_c",
+        "crop.lettuce.vegetative_growth.stress_thresholds.critical_heat_c",
+        "crop.lettuce.yield_maturation.stress_thresholds.critical_heat_c",
+        "crop.peach.establishment.stress_thresholds.critical_heat_c",
+        "crop.peach.post_harvest_dormancy.stress_thresholds.critical_heat_c",
+        "crop.peach.vegetative_growth.stress_thresholds.critical_heat_c",
+        "crop.peach.yield_maturation.stress_thresholds.critical_heat_c",
+        "crop.pepper.establishment.stress_thresholds.critical_heat_c",
+        "crop.pepper.post_harvest_dormancy.stress_thresholds.critical_heat_c",
+        "crop.pepper.vegetative_growth.stress_thresholds.critical_heat_c",
+        "crop.pepper.yield_maturation.stress_thresholds.critical_heat_c",
+        "crop.plum.establishment.stress_thresholds.critical_heat_c",
+        "crop.plum.post_harvest_dormancy.stress_thresholds.critical_heat_c",
+        "crop.plum.vegetative_growth.stress_thresholds.critical_heat_c",
+        "crop.plum.yield_maturation.stress_thresholds.critical_heat_c",
+        "crop.tomato.establishment.stress_thresholds.critical_heat_c",
+        "crop.tomato.post_harvest_dormancy.stress_thresholds.critical_heat_c",
+        "crop.tomato.vegetative_growth.stress_thresholds.critical_heat_c",
+        "crop.tomato.yield_maturation.stress_thresholds.critical_heat_c",
+        "feedback.latent_heat_vaporization",
+        "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_exchange_area",
+        "physics.air_specific_heat"
+      ],
+      "crop": null,
+      "evidence_level": "none",
+      "identifiability_status": "ENVIRONMENT_SPECIFIC",
+      "measurement_method": null,
+      "name": "lumped greenhouse heat capacity",
+      "notes": "must not be presented as biological validation",
+      "observable_variables": [
+        "air_temperature",
+        "biomass",
+        "solar_radiation"
+      ],
+      "parameter_id": "greenhouse.thermal_mass",
+      "phenological_stage": null,
+      "plot": null,
+      "provenance": "engineering_default",
+      "required_environmental_coverage": [],
+      "required_observation_types": [
+        "radiation, biomass, site and climate observations"
+      ],
+      "required_stage_coverage": [],
+      "scientific_warnings": [
+        "environment-specific scope requires site observations"
+      ],
+      "subsystem": "runtime_code",
+      "temporal_resolution": null,
+      "uncertainty_requirement": null,
+      "variety": null
+    },
+    {
+      "calibration_allowed": true,
+      "calibration_status": "candidate_for_calibration",
+      "category": "engineering_default",
+      "confidence": "low",
+      "confounders": [
+        "actuator.ventilation.capacity"
+      ],
+      "crop": null,
+      "evidence_level": "none",
+      "identifiability_status": "ENVIRONMENT_SPECIFIC",
+      "measurement_method": null,
+      "name": "structural air exchange rate (infiltration and fixed vents)",
+      "notes": "must not be presented as biological validation",
+      "observable_variables": [
+        "air_temperature",
+        "biomass",
+        "solar_radiation"
+      ],
+      "parameter_id": "greenhouse.ventilation_ach",
+      "phenological_stage": null,
+      "plot": null,
+      "provenance": "engineering_default",
+      "required_environmental_coverage": [],
+      "required_observation_types": [
+        "radiation, biomass, site and climate observations"
+      ],
+      "required_stage_coverage": [],
+      "scientific_warnings": [
+        "environment-specific scope requires site observations"
+      ],
+      "subsystem": "runtime_code",
+      "temporal_resolution": null,
+      "uncertainty_requirement": null,
+      "variety": null
+    },
+    {
+      "calibration_allowed": true,
+      "calibration_status": "candidate_for_calibration",
+      "category": "engineering_default",
+      "confidence": "low",
+      "confounders": [],
+      "crop": null,
+      "evidence_level": "none",
+      "identifiability_status": "ENVIRONMENT_SPECIFIC",
+      "measurement_method": null,
+      "name": "greenhouse air volume",
+      "notes": "must not be presented as biological validation",
+      "observable_variables": [
+        "air_temperature",
+        "biomass",
+        "solar_radiation"
+      ],
+      "parameter_id": "greenhouse.volume",
       "phenological_stage": null,
       "plot": null,
       "provenance": "engineering_default",
@@ -84157,7 +84481,9 @@
         "crop.tomato.vegetative_growth.stress_thresholds.critical_heat_c",
         "crop.tomato.yield_maturation.stress_thresholds.critical_heat_c",
         "feedback.latent_heat_vaporization",
-        "feedback.sensible_heat_transfer"
+        "feedback.sensible_heat_transfer",
+        "greenhouse.heat_loss_conductance",
+        "greenhouse.thermal_mass"
       ],
       "crop": null,
       "evidence_level": "high",
@@ -89748,7 +90074,21 @@
       ]
     },
     {
+      "parameter_id": "greenhouse.co2_baseline",
+      "reasons": [
+        "traceable bounds unavailable",
+        "identifiability=ENVIRONMENT_SPECIFIC"
+      ]
+    },
+    {
       "parameter_id": "greenhouse.cover_transmission",
+      "reasons": [
+        "traceable bounds unavailable",
+        "identifiability=ENVIRONMENT_SPECIFIC"
+      ]
+    },
+    {
+      "parameter_id": "greenhouse.heat_loss_conductance",
       "reasons": [
         "traceable bounds unavailable",
         "identifiability=ENVIRONMENT_SPECIFIC"
@@ -89769,6 +90109,27 @@
     },
     {
       "parameter_id": "greenhouse.thermal_exchange_area",
+      "reasons": [
+        "traceable bounds unavailable",
+        "identifiability=ENVIRONMENT_SPECIFIC"
+      ]
+    },
+    {
+      "parameter_id": "greenhouse.thermal_mass",
+      "reasons": [
+        "traceable bounds unavailable",
+        "identifiability=ENVIRONMENT_SPECIFIC"
+      ]
+    },
+    {
+      "parameter_id": "greenhouse.ventilation_ach",
+      "reasons": [
+        "traceable bounds unavailable",
+        "identifiability=ENVIRONMENT_SPECIFIC"
+      ]
+    },
+    {
+      "parameter_id": "greenhouse.volume",
       "reasons": [
         "traceable bounds unavailable",
         "identifiability=ENVIRONMENT_SPECIFIC"

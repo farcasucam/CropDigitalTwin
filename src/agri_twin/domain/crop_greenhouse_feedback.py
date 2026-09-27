@@ -16,6 +16,7 @@ from agri_twin.domain.greenhouse import (
     GreenhouseConfiguration,
     GreenhousePhysicalModel,
     MicroclimateState,
+    saturation_vapour_pressure_kpa,
     vapour_deficit_density_kg_m3,
     vapour_pressure_deficit_kpa,
 )
@@ -223,12 +224,14 @@ class CropGreenhouseFeedbackLoop:
                 break
         feedback = last_exchange.to_feedback()
         self.last_converged = current
+        # Iterations evaluate candidates on the backend; only the converged state persists there.
+        self.greenhouse.commit(current)
         return CropGreenhouseStepResult(current, last_growth.state, last_growth, last_exchange, feedback, FeedbackConvergence(converged, iteration, error, reason))
 
     def _grow(self, crop: CropGrowthState, weather: WeatherState, microclimate: MicroclimateState, dt_seconds: float, simulation_time: datetime) -> CropGrowthResult:
         # No rain falls inside the greenhouse; the crop sees only the microclimate.
         crop_weather = WeatherState(microclimate.temperature_c, microclimate.relative_humidity_pct, microclimate.solar_radiation_w_m2, weather.wind_speed_m_s, weather.wind_direction_deg, 0.0, microclimate.pressure_hpa)
-        saturation = 0.6108 * math.exp(17.27 * microclimate.temperature_c / (microclimate.temperature_c + 237.3))
+        saturation = saturation_vapour_pressure_kpa(microclimate.temperature_c)
         vapor = saturation * microclimate.relative_humidity_pct / 100.0
         environment = DerivedEnvironmentState(microclimate.vpd_kpa, max(0.0, microclimate.temperature_c - 20.0) + microclimate.solar_radiation_w_m2 / 1000.0, saturation, vapor, 0.0, 0.0)
         return self.crop_engine.advance(crop, CropGrowthInput(crop_weather, dt_seconds, environment=environment, co2_ppm=microclimate.co2_ppm), simulation_time)

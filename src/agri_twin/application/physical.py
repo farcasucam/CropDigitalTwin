@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from datetime import timedelta
 from typing import Protocol
 
+from agri_twin.domain.greenhouse import saturation_vapour_pressure_kpa
 from agri_twin.domain.models import DerivedEnvironmentState, SoilState, WeatherState
 
 
@@ -81,4 +82,4 @@ class OpenFieldPhysicalModel:
     def _saturation_vapor_pressure(temperature_c: float) -> float:
         if not math.isfinite(temperature_c):
             raise PhysicalModelError("temperature must be finite")
-        return 0.6108 * math.exp(17.27 * temperature_c / (temperature_c + 237.3))
+        return saturation_vapour_pressure_kpa(temperature_c)

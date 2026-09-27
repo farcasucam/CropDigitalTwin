@@ -246,6 +246,13 @@ from agri_twin.application.transferability_robustness import (
     TransferabilityStatus,
     TransferContext,
 )
+from agri_twin.application.greenhouse_physical_benchmark import (
+    BenchmarkLayer,
+    GreenhousePhysicalBenchmarkSuite,
+    IssueClassification,
+    PhysicalBenchmarkCase,
+    PhysicalBenchmarkReport,
+)
 from agri_twin.application.integrated_synthetic_validation import (
     IntegratedSyntheticValidationSuite,
     IntegratedValidationSummary,
@@ -455,6 +462,11 @@ __all__ = [
     "TransferabilityRobustnessSuite",
     "TransferabilityStatus",
     "TransferContext",
+    "BenchmarkLayer",
+    "GreenhousePhysicalBenchmarkSuite",
+    "IssueClassification",
+    "PhysicalBenchmarkCase",
+    "PhysicalBenchmarkReport",
     "IntegratedSyntheticValidationSuite",
     "IntegratedValidationSummary",
     "SyntheticScenarioKind",

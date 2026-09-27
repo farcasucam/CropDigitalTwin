@@ -24,6 +24,7 @@ from agri_twin.domain.greenhouse import (
     GreenhouseModelError,
     GreenhousePhysicalModel,
     MicroclimateState,
+    vapour_pressure_deficit_kpa,
 )
 from agri_twin.domain.models import WeatherState
 
@@ -238,8 +239,7 @@ class EnergyPlusGreenhouseModel(GreenhousePhysicalModel):
         heating = cls._required(variables, "heating_energy_j") / dt_seconds / 1000.0
         cooling = cls._required(variables, "cooling_energy_j") / dt_seconds / 1000.0
         co2 = cls._required(variables, "co2_ppm")
-        saturation = 0.6108 * pow(2.718281828459045, 17.27 * temperature / (temperature + 237.3))
-        vpd = max(0.0, saturation * (1.0 - humidity / 100.0))
+        vpd = vapour_pressure_deficit_kpa(temperature, humidity)
         return MicroclimateState(
             air_temperature_c=temperature,
             relative_humidity_pct=humidity,
