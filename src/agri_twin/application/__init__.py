@@ -253,6 +253,10 @@ from agri_twin.application.greenhouse_physical_benchmark import (
     PhysicalBenchmarkCase,
     PhysicalBenchmarkReport,
 )
+from agri_twin.application.chilling_policy import (
+    ChillingPolicyReport,
+    ChillingPolicySuite,
+)
 from agri_twin.application.dormancy_chilling_framework import (
     ChillingFrameworkReport,
     DormancyChillingFrameworkSuite,
@@ -381,6 +385,8 @@ __all__ = [
     "CampaignCropSpec",
     "CampaignQualityReport",
     "ChillingFrameworkReport",
+    "ChillingPolicyReport",
+    "ChillingPolicySuite",
     "DormancyChillingFrameworkSuite",
     "DormancyOutcome",
     "SyntheticLocation",

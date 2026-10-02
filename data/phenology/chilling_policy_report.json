@@ -1,0 +1,2556 @@
+{
+  "biological_validity_claimed": false,
+  "calibration_performed": false,
+  "canonical_configurations": {
+    "CHILLING_HOURS+DEFAULT": {
+      "dormancy": {
+        "effective_chilling_model": "CHILLING_HOURS",
+        "effective_start_policy": "DORMANCY_STATE",
+        "fallback_applied": false,
+        "fallback_policy": "STRICT",
+        "requested_chilling_model": "CHILLING_HOURS",
+        "requested_start_policy": "DORMANCY_STATE",
+        "start_time": null
+      }
+    },
+    "CHILLING_HOURS+STRICT": {
+      "dormancy": {
+        "effective_chilling_model": "CHILLING_HOURS",
+        "effective_start_policy": "DORMANCY_STATE",
+        "fallback_applied": false,
+        "fallback_policy": "STRICT",
+        "requested_chilling_model": "CHILLING_HOURS",
+        "requested_start_policy": "DORMANCY_STATE",
+        "start_time": null
+      }
+    },
+    "DYNAMIC+DEFAULT": {
+      "dormancy": {
+        "effective_chilling_model": "CHILLING_HOURS",
+        "effective_start_policy": "DORMANCY_STATE",
+        "fallback_applied": true,
+        "fallback_policy": "STRICT",
+        "requested_chilling_model": "DYNAMIC",
+        "requested_start_policy": "DORMANCY_STATE",
+        "start_time": null
+      }
+    },
+    "DYNAMIC+STRICT": {
+      "dormancy": {
+        "effective_chilling_model": "CHILLING_HOURS",
+        "effective_start_policy": "DORMANCY_STATE",
+        "fallback_applied": true,
+        "fallback_policy": "STRICT",
+        "requested_chilling_model": "DYNAMIC",
+        "requested_start_policy": "DORMANCY_STATE",
+        "start_time": null
+      }
+    },
+    "FIXED_DATE+CHILLING_HOURS+STRICT": {
+      "dormancy": {
+        "effective_chilling_model": "CHILLING_HOURS",
+        "effective_start_policy": "FIXED_DATE",
+        "fallback_applied": false,
+        "fallback_policy": "STRICT",
+        "requested_chilling_model": "CHILLING_HOURS",
+        "requested_start_policy": "FIXED_DATE",
+        "start_time": "2025-11-01T00:00:00+00:00"
+      }
+    },
+    "FIXED_DATE+DYNAMIC+STRICT": {
+      "dormancy": {
+        "effective_chilling_model": "CHILLING_HOURS",
+        "effective_start_policy": "FIXED_DATE",
+        "fallback_applied": true,
+        "fallback_policy": "STRICT",
+        "requested_chilling_model": "DYNAMIC",
+        "requested_start_policy": "FIXED_DATE",
+        "start_time": "2025-11-01T00:00:00+00:00"
+      }
+    },
+    "MODEL_DEFINED+DYNAMIC+STRICT": {
+      "dormancy": {
+        "effective_chilling_model": "CHILLING_HOURS",
+        "effective_start_policy": "MODEL_DEFINED",
+        "fallback_applied": true,
+        "fallback_policy": "STRICT",
+        "requested_chilling_model": "DYNAMIC",
+        "requested_start_policy": "MODEL_DEFINED",
+        "start_time": null
+      }
+    },
+    "UTAH+DEFAULT": {
+      "dormancy": {
+        "effective_chilling_model": "CHILLING_HOURS",
+        "effective_start_policy": "DORMANCY_STATE",
+        "fallback_applied": true,
+        "fallback_policy": "STRICT",
+        "requested_chilling_model": "UTAH",
+        "requested_start_policy": "DORMANCY_STATE",
+        "start_time": null
+      }
+    },
+    "UTAH+STRICT": {
+      "dormancy": {
+        "effective_chilling_model": "CHILLING_HOURS",
+        "effective_start_policy": "DORMANCY_STATE",
+        "fallback_applied": true,
+        "fallback_policy": "STRICT",
+        "requested_chilling_model": "UTAH",
+        "requested_start_policy": "DORMANCY_STATE",
+        "start_time": null
+      }
+    }
+  },
+  "configuration_hash": "81f79a25fae27485f66a54d9b0f617f0145c5fe8b46808e63ff645afe0c0ffb0",
+  "contract": [
+    "Dynamic is declared but not implemented.",
+    "Utah is declared but not implemented.",
+    "Unsupported models use explicit STRICT fallback to CHILLING_HOURS.",
+    "DEFAULT is an alias of STRICT.",
+    "No biological claim is made."
+  ],
+  "data_assimilation_implemented": false,
+  "default_configuration": {
+    "dormancy": {
+      "effective_chilling_model": "CHILLING_HOURS",
+      "effective_start_policy": "DORMANCY_STATE",
+      "fallback_applied": false,
+      "fallback_policy": "STRICT",
+      "requested_chilling_model": "CHILLING_HOURS",
+      "requested_start_policy": "DORMANCY_STATE",
+      "start_time": null
+    }
+  },
+  "determinism_result": {
+    "mismatches": [],
+    "replayed_sections": [
+      "configurations",
+      "equivalence",
+      "fallback_matrix",
+      "negative_cases",
+      "policy_alias_matrix",
+      "unsupported_models"
+    ],
+    "section_hashes": {
+      "configurations": "88ad444c0303cc5ee6d5b8dd2d46e7b37c0753335b8cf33b30e458ca9151fcb2",
+      "equivalence": "30ec883282b360e752cbf1328e4f88ee6eda5e34373df1e59fa6feb6ef5f2138",
+      "fallback_matrix": "75ae0d5bbb13d3973b6536d73ee64becaccd53aded06131ad2e2f160664df9c9",
+      "negative_cases": "ef8b6d63771b8b6d18356d05f0fe390e81ce13c5b29c471767761b83bde734f4",
+      "policy_alias_matrix": "404cb842e382f721e6b01bd79e51790ece69cc3ce828433a4f86461c5972533c",
+      "unsupported_models": "be60b824b2a16d46bed288b11eb1942a1634edb078f25db046f6b216375ca71b"
+    },
+    "status": "PASS"
+  },
+  "effective_configurations": {
+    "CHILLING_HOURS+DEFAULT": {
+      "dormancy": {
+        "effective_chilling_model": "CHILLING_HOURS",
+        "effective_start_policy": "DORMANCY_STATE",
+        "fallback_policy": "STRICT",
+        "start_time": null
+      }
+    },
+    "CHILLING_HOURS+STRICT": {
+      "dormancy": {
+        "effective_chilling_model": "CHILLING_HOURS",
+        "effective_start_policy": "DORMANCY_STATE",
+        "fallback_policy": "STRICT",
+        "start_time": null
+      }
+    },
+    "DYNAMIC+DEFAULT": {
+      "dormancy": {
+        "effective_chilling_model": "CHILLING_HOURS",
+        "effective_start_policy": "DORMANCY_STATE",
+        "fallback_policy": "STRICT",
+        "start_time": null
+      }
+    },
+    "DYNAMIC+STRICT": {
+      "dormancy": {
+        "effective_chilling_model": "CHILLING_HOURS",
+        "effective_start_policy": "DORMANCY_STATE",
+        "fallback_policy": "STRICT",
+        "start_time": null
+      }
+    },
+    "FIXED_DATE+CHILLING_HOURS+STRICT": {
+      "dormancy": {
+        "effective_chilling_model": "CHILLING_HOURS",
+        "effective_start_policy": "FIXED_DATE",
+        "fallback_policy": "STRICT",
+        "start_time": "2025-11-01T00:00:00+00:00"
+      }
+    },
+    "FIXED_DATE+DYNAMIC+STRICT": {
+      "dormancy": {
+        "effective_chilling_model": "CHILLING_HOURS",
+        "effective_start_policy": "FIXED_DATE",
+        "fallback_policy": "STRICT",
+        "start_time": "2025-11-01T00:00:00+00:00"
+      }
+    },
+    "MODEL_DEFINED+DYNAMIC+STRICT": {
+      "dormancy": {
+        "effective_chilling_model": "CHILLING_HOURS",
+        "effective_start_policy": "MODEL_DEFINED",
+        "fallback_policy": "STRICT",
+        "start_time": null
+      }
+    },
+    "UTAH+DEFAULT": {
+      "dormancy": {
+        "effective_chilling_model": "CHILLING_HOURS",
+        "effective_start_policy": "DORMANCY_STATE",
+        "fallback_policy": "STRICT",
+        "start_time": null
+      }
+    },
+    "UTAH+STRICT": {
+      "dormancy": {
+        "effective_chilling_model": "CHILLING_HOURS",
+        "effective_start_policy": "DORMANCY_STATE",
+        "fallback_policy": "STRICT",
+        "start_time": null
+      }
+    }
+  },
+  "experimental_validation_performed": false,
+  "fallback_matrix": [
+    {
+      "effective_model": "CHILLING_HOURS",
+      "fallback": "STRICT",
+      "fallback_applied": false,
+      "implemented": true,
+      "passed": true,
+      "requested_model": "CHILLING_HOURS",
+      "requested_model_recorded": true
+    },
+    {
+      "effective_model": "CHILLING_HOURS",
+      "fallback": "STRICT",
+      "fallback_applied": true,
+      "implemented": false,
+      "passed": true,
+      "requested_model": "DYNAMIC",
+      "requested_model_recorded": true
+    },
+    {
+      "effective_model": "CHILLING_HOURS",
+      "fallback": "STRICT",
+      "fallback_applied": true,
+      "implemented": false,
+      "passed": true,
+      "requested_model": "UTAH",
+      "requested_model_recorded": true
+    }
+  ],
+  "field_accuracy_claimed": false,
+  "hashes": {
+    "CHILLING_HOURS+DEFAULT": {
+      "configuration_hash": "6e39f1be5e4a195e7ab16b45c8b59d4d2d606c7f1f4abfb4346444c5f6169f0e",
+      "effective_hash": "58946b6536b0f492b1e10de0c7bf13b1d79d6727428712c5bc72115cf47996db"
+    },
+    "CHILLING_HOURS+STRICT": {
+      "configuration_hash": "6e39f1be5e4a195e7ab16b45c8b59d4d2d606c7f1f4abfb4346444c5f6169f0e",
+      "effective_hash": "58946b6536b0f492b1e10de0c7bf13b1d79d6727428712c5bc72115cf47996db"
+    },
+    "DYNAMIC+DEFAULT": {
+      "configuration_hash": "f1d72034255f1ee15c6ff8a9dd541ee21b6a6ac3bac0346437c183e5ef424930",
+      "effective_hash": "58946b6536b0f492b1e10de0c7bf13b1d79d6727428712c5bc72115cf47996db"
+    },
+    "DYNAMIC+STRICT": {
+      "configuration_hash": "f1d72034255f1ee15c6ff8a9dd541ee21b6a6ac3bac0346437c183e5ef424930",
+      "effective_hash": "58946b6536b0f492b1e10de0c7bf13b1d79d6727428712c5bc72115cf47996db"
+    },
+    "FIXED_DATE+CHILLING_HOURS+STRICT": {
+      "configuration_hash": "924208c565b89441ce6253ec723a34aae19127b7208b66905af7cf0a3c1c72df",
+      "effective_hash": "95cdf6a51808d51e93c8ffaac03b7a68b460b5a9a81f083443630461af455507"
+    },
+    "FIXED_DATE+DYNAMIC+STRICT": {
+      "configuration_hash": "8e96004aa37b2481064e1bd8659aba85c63c8002e7a6cb322732f189513b2319",
+      "effective_hash": "95cdf6a51808d51e93c8ffaac03b7a68b460b5a9a81f083443630461af455507"
+    },
+    "MODEL_DEFINED+DYNAMIC+STRICT": {
+      "configuration_hash": "23d8cd07331dd7208c884bcce438bb682f93296a4c53a96a697b637354aa53df",
+      "effective_hash": "a5bac20150c3b6a253d75a1ab59a19f700cef0005bcf8d5c282aea512096afa6"
+    },
+    "UTAH+DEFAULT": {
+      "configuration_hash": "1db6cf68b5b5da3bf2d0cb69d94d1e9ffb742dd7ae7d31f0694ef4421279701b",
+      "effective_hash": "58946b6536b0f492b1e10de0c7bf13b1d79d6727428712c5bc72115cf47996db"
+    },
+    "UTAH+STRICT": {
+      "configuration_hash": "1db6cf68b5b5da3bf2d0cb69d94d1e9ffb742dd7ae7d31f0694ef4421279701b",
+      "effective_hash": "58946b6536b0f492b1e10de0c7bf13b1d79d6727428712c5bc72115cf47996db"
+    }
+  },
+  "limitations": [
+    "A DYNAMIC or UTAH request is executed with Chilling Hours; its outputs are chill hours and carry no Dynamic or Utah meaning.",
+    "Equivalence and regression are shown on synthetic Phase 5.33 locations and the Phase 5.32 BASE_SEASON climate, not on observations.",
+    "Requirements, thresholds, climates and dates are unchanged Phase 5.33 engineering defaults."
+  ],
+  "open_scientific_decisions": [
+    {
+      "classification": "OPEN_SCIENTIFIC_DECISION",
+      "decision": "CHILLING_MODEL_SELECTION",
+      "detail": "only Chilling Hours is implemented; a DYNAMIC or UTAH request runs Chilling Hours (explicit STRICT fallback), so its results are in chill hours, not chill portions or chill units"
+    },
+    {
+      "classification": "OPEN_MODEL_CAPABILITY",
+      "decision": "DYNAMIC_MODEL_IMPLEMENTATION",
+      "detail": "the Dynamic Model needs its published parameters and cultivar requirements in chill portions before it can be implemented; none are invented here"
+    },
+    {
+      "classification": "OPEN_MODEL_CAPABILITY",
+      "decision": "UTAH_MODEL_IMPLEMENTATION",
+      "detail": "the Utah Model needs its chill-unit weights and cultivar requirements in chill units; not implemented"
+    },
+    {
+      "classification": "OPEN_MODEL_CAPABILITY",
+      "decision": "UNSUPPORTED_START_POLICIES",
+      "detail": "MODEL_DEFINED and ENVIRONMENTAL_WINDOW are declared, not implemented; the fallback never changes the start policy, so they report MODEL_NOT_SUPPORTED"
+    },
+    {
+      "classification": "OPEN_SCIENTIFIC_DECISION",
+      "decision": "CULTIVAR_REQUIREMENTS",
+      "detail": "requirements stay species-level engineering defaults (Phase 5.33); no cultivar calibration"
+    }
+  ],
+  "parameter_mutation_result": {
+    "after": {
+      "default_configuration": "6e39f1be5e4a195e7ab16b45c8b59d4d2d606c7f1f4abfb4346444c5f6169f0e",
+      "parameter_registry": "f1e456366e99902c8d6a34fe1a88767ac6ce25dc97974867830e3016b67072e7",
+      "parameter_sets": "185df90d72b92fb913dc5faef9b998fdbc4b0884437b2e2e26202eb86e8f06b5",
+      "phenology_profiles": "256751c89b23b16befab98061ac33e5c2f467f92dcf1bef323d37eef89f78f79",
+      "request_documents": "62c563eb7236ffa4069ade8909898f62108a1f5800f126d981cc38195e08e6ca",
+      "weather_profiles": "0ae009290c1d4cb7cdf840955366180f91d8601a3d1ea734be0f07050286e14a"
+    },
+    "before": {
+      "default_configuration": "6e39f1be5e4a195e7ab16b45c8b59d4d2d606c7f1f4abfb4346444c5f6169f0e",
+      "parameter_registry": "f1e456366e99902c8d6a34fe1a88767ac6ce25dc97974867830e3016b67072e7",
+      "parameter_sets": "185df90d72b92fb913dc5faef9b998fdbc4b0884437b2e2e26202eb86e8f06b5",
+      "phenology_profiles": "256751c89b23b16befab98061ac33e5c2f467f92dcf1bef323d37eef89f78f79",
+      "request_documents": "62c563eb7236ffa4069ade8909898f62108a1f5800f126d981cc38195e08e6ca",
+      "weather_profiles": "0ae009290c1d4cb7cdf840955366180f91d8601a3d1ea734be0f07050286e14a"
+    },
+    "status": "PASS"
+  },
+  "phase": "5.34",
+  "policy_matrix": [
+    {
+      "canonical_policy": "STRICT",
+      "passed": true,
+      "policy": "DEFAULT"
+    },
+    {
+      "canonical_policy": "STRICT",
+      "passed": true,
+      "policy": "STRICT"
+    }
+  ],
+  "real_agricultural_data_verified": false,
+  "regression_result": {
+    "regression_533": {
+      "baseline_artifact": "data/phenology/chilling_framework_report.json",
+      "baseline_report_hash": "2eee01cfbc22fce1ef2d74235c745a0a7314ba4ad48db0e415d2ea5a3585679e",
+      "comparison": "every field of each Phase 5.33 DORMANCY_STATE policy-matrix row (trajectory hash, release, budburst, chill totals, outcome)",
+      "rows": [
+        {
+          "crop": "peach",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_20N_WARM_WINTER",
+          "phase533_trajectory_hash": "604d5bbeeb763eac11a8cf5dda900163a622bf9f5680c6f03b63c1ad72e169ac"
+        },
+        {
+          "crop": "apple",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_20N_WARM_WINTER",
+          "phase533_trajectory_hash": "604d5bbeeb763eac11a8cf5dda900163a622bf9f5680c6f03b63c1ad72e169ac"
+        },
+        {
+          "crop": "plum",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_20N_WARM_WINTER",
+          "phase533_trajectory_hash": "604d5bbeeb763eac11a8cf5dda900163a622bf9f5680c6f03b63c1ad72e169ac"
+        },
+        {
+          "crop": "peach",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "phase533_trajectory_hash": "82cab6bcf8648d5081e9f18d75646dd96b3fc0e2563a7ebdc4e792d48be2bc60"
+        },
+        {
+          "crop": "apple",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "phase533_trajectory_hash": "38917ba4af87834de5e2cc23bf24f28b55e0648d86e945780fb46db9bf935bbe"
+        },
+        {
+          "crop": "plum",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "phase533_trajectory_hash": "05a5b47a4f68c5bba84fa930d93d9702f57aa7b00cc57bbd9089441eba7f0e89"
+        },
+        {
+          "crop": "peach",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_50N_CONTINENTAL",
+          "phase533_trajectory_hash": "858b32b09927144823cfa7c8fec9d826f57fc699c1e6a369b4fdf5a2ff9e8864"
+        },
+        {
+          "crop": "apple",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_50N_CONTINENTAL",
+          "phase533_trajectory_hash": "1ac0d78bcc374ed947cb8470bb4645a40e631af2a530d583f805510705108839"
+        },
+        {
+          "crop": "plum",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_50N_CONTINENTAL",
+          "phase533_trajectory_hash": "92dbcda1b6e224c4d783902d8bb28557b1bbb7b32194d54c8a6aa23f022d3005"
+        },
+        {
+          "crop": "peach",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_20S_WARM_WINTER",
+          "phase533_trajectory_hash": "95ea7a089186d61b66581537426e0c151f7a45a297b994387d00c3bab32e91c5"
+        },
+        {
+          "crop": "apple",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_20S_WARM_WINTER",
+          "phase533_trajectory_hash": "95ea7a089186d61b66581537426e0c151f7a45a297b994387d00c3bab32e91c5"
+        },
+        {
+          "crop": "plum",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_20S_WARM_WINTER",
+          "phase533_trajectory_hash": "95ea7a089186d61b66581537426e0c151f7a45a297b994387d00c3bab32e91c5"
+        },
+        {
+          "crop": "peach",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_35S_TEMPERATE",
+          "phase533_trajectory_hash": "3c7eb3f5571dd4cb5ece8911c6d151d4b16eb16626ea02d8ecc2b433fcffcf3c"
+        },
+        {
+          "crop": "apple",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_35S_TEMPERATE",
+          "phase533_trajectory_hash": "dac3b7041b9e39101df844a11df3a4dbad7f3e94dca45cc5d83f5c1d5396da3a"
+        },
+        {
+          "crop": "plum",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_35S_TEMPERATE",
+          "phase533_trajectory_hash": "95848c706601f795471cc43c0be633b6a1af4aea4ff07e9c5676484bdd425ffe"
+        },
+        {
+          "crop": "peach",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_50S_COLD",
+          "phase533_trajectory_hash": "6d9d990fb01f51f515b66d6b7d928dfd98d5e92389d7962999b02ab860d0f6a5"
+        },
+        {
+          "crop": "apple",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_50S_COLD",
+          "phase533_trajectory_hash": "6cc60049eb2356d49374c6828a595e7f2c446e6152ed995fd89ba787d21c6f42"
+        },
+        {
+          "crop": "plum",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_50S_COLD",
+          "phase533_trajectory_hash": "21054f156274371cfa5db5c313285048229a14cf12e2cc1720e11146fcb2e31d"
+        }
+      ],
+      "status": "PASS"
+    },
+    "twin_integration": {
+      "dormancy_release": "2026-02-04T03:00:00+00:00",
+      "record": "peach, BASE_SEASON seed 532, 150 days hourly from 2025-11-01T00:00:00+00:00 (explicit experiment start)",
+      "status": "PASS",
+      "trajectory_hashes": {
+        "CHILLING_HOURS+DEFAULT": "d6fe8e88c503d6a9690687ff18db892664dee2a17ad875ccfb5a8992a2f20425",
+        "DYNAMIC+STRICT": "d6fe8e88c503d6a9690687ff18db892664dee2a17ad875ccfb5a8992a2f20425",
+        "UTAH+STRICT": "d6fe8e88c503d6a9690687ff18db892664dee2a17ad875ccfb5a8992a2f20425",
+        "phase533_default_orchestrator": "d6fe8e88c503d6a9690687ff18db892664dee2a17ad875ccfb5a8992a2f20425"
+      }
+    }
+  },
+  "report_hash": "99328f9d7f299fc8371529492a8cb92f74e7d08503dd7b4c5f54502f6dfa3cdd",
+  "requested_configurations": {
+    "CHILLING_HOURS+DEFAULT": {
+      "dormancy": {
+        "chilling_model": "CHILLING_HOURS",
+        "fallback_policy": "DEFAULT",
+        "start_policy": "DORMANCY_STATE"
+      }
+    },
+    "CHILLING_HOURS+STRICT": {
+      "dormancy": {
+        "chilling_model": "CHILLING_HOURS",
+        "fallback_policy": "STRICT",
+        "start_policy": "DORMANCY_STATE"
+      }
+    },
+    "DYNAMIC+DEFAULT": {
+      "dormancy": {
+        "chilling_model": "DYNAMIC",
+        "fallback_policy": "DEFAULT",
+        "start_policy": "DORMANCY_STATE"
+      }
+    },
+    "DYNAMIC+STRICT": {
+      "dormancy": {
+        "chilling_model": "DYNAMIC",
+        "fallback_policy": "STRICT",
+        "start_policy": "DORMANCY_STATE"
+      }
+    },
+    "FIXED_DATE+CHILLING_HOURS+STRICT": {
+      "dormancy": {
+        "chilling_model": "CHILLING_HOURS",
+        "fallback_policy": "STRICT",
+        "start_policy": "FIXED_DATE",
+        "start_time": "2025-11-01T00:00:00+00:00"
+      }
+    },
+    "FIXED_DATE+DYNAMIC+STRICT": {
+      "dormancy": {
+        "chilling_model": "DYNAMIC",
+        "fallback_policy": "STRICT",
+        "start_policy": "FIXED_DATE",
+        "start_time": "2025-11-01T00:00:00+00:00"
+      }
+    },
+    "MODEL_DEFINED+DYNAMIC+STRICT": {
+      "dormancy": {
+        "chilling_model": "DYNAMIC",
+        "fallback_policy": "STRICT",
+        "start_policy": "MODEL_DEFINED"
+      }
+    },
+    "UTAH+DEFAULT": {
+      "dormancy": {
+        "chilling_model": "UTAH",
+        "fallback_policy": "DEFAULT",
+        "start_policy": "DORMANCY_STATE"
+      }
+    },
+    "UTAH+STRICT": {
+      "dormancy": {
+        "chilling_model": "UTAH",
+        "fallback_policy": "STRICT",
+        "start_policy": "DORMANCY_STATE"
+      }
+    }
+  },
+  "scientific_evidence": [],
+  "scientific_evidence_note": "NONE: this phase qualifies software contracts only and produces no scientific evidence",
+  "scientific_status": [
+    "PHASE 5.34 COMPLETE",
+    "CHILLING MODEL POLICY QUALIFIED",
+    "STRICT FALLBACK QUALIFIED",
+    "DEFAULT == STRICT",
+    "DYNAMIC NOT IMPLEMENTED",
+    "UTAH NOT IMPLEMENTED",
+    "CANONICAL CONFIGURATION QUALIFIED",
+    "DETERMINISTIC CONFIGURATION HASH QUALIFIED",
+    "BACKWARD COMPATIBILITY QUALIFIED",
+    "REAL AGRICULTURAL DATA NOT VERIFIED",
+    "CALIBRATION NOT PERFORMED",
+    "EXPERIMENTAL VALIDATION DEFERRED TO FINAL VALIDATION STAGE",
+    "BIOLOGICAL VALIDITY NOT CLAIMED",
+    "FIELD ACCURACY NOT CLAIMED",
+    "DATA ASSIMILATION NOT IMPLEMENTED"
+  ],
+  "section_status": {
+    "configurations": "PASS",
+    "determinism": "PASS",
+    "equivalence": "PASS",
+    "fallback_matrix": "PASS",
+    "negative_cases": "PASS",
+    "parameter_mutation": "PASS",
+    "policy_alias_matrix": "PASS",
+    "regression_533": "PASS",
+    "static_audit": "PASS",
+    "traceability": "PASS",
+    "twin_integration": "PASS",
+    "unsupported_models": "PASS"
+  },
+  "seed": 533,
+  "software_result": {
+    "configurations": {
+      "rows": [
+        {
+          "audit_entries": [
+            {
+              "calibration_status": "not_applicable",
+              "field": "requested_chilling_model",
+              "source_type": "engineering_configuration",
+              "value": "CHILLING_HOURS"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "effective_chilling_model",
+              "source_type": "engineering_configuration",
+              "value": "CHILLING_HOURS"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "fallback_policy",
+              "source_type": "engineering_configuration",
+              "value": "STRICT"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "fallback_applied",
+              "source_type": "engineering_configuration",
+              "value": false
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "requested_start_policy",
+              "source_type": "engineering_configuration",
+              "value": "DORMANCY_STATE"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "effective_start_policy",
+              "source_type": "engineering_configuration",
+              "value": "DORMANCY_STATE"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "start_time",
+              "source_type": "engineering_configuration",
+              "value": null
+            }
+          ],
+          "canonical": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_applied": false,
+              "fallback_policy": "STRICT",
+              "requested_chilling_model": "CHILLING_HOURS",
+              "requested_start_policy": "DORMANCY_STATE",
+              "start_time": null
+            }
+          },
+          "configuration_hash": "6e39f1be5e4a195e7ab16b45c8b59d4d2d606c7f1f4abfb4346444c5f6169f0e",
+          "effective": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_policy": "STRICT",
+              "start_time": null
+            }
+          },
+          "effective_hash": "58946b6536b0f492b1e10de0c7bf13b1d79d6727428712c5bc72115cf47996db",
+          "label": "CHILLING_HOURS+DEFAULT",
+          "requested": {
+            "dormancy": {
+              "chilling_model": "CHILLING_HOURS",
+              "fallback_policy": "DEFAULT",
+              "start_policy": "DORMANCY_STATE"
+            }
+          },
+          "result_type": "SOFTWARE_RESULT",
+          "round_trip": true,
+          "start_policy_implemented": true
+        },
+        {
+          "audit_entries": [
+            {
+              "calibration_status": "not_applicable",
+              "field": "requested_chilling_model",
+              "source_type": "engineering_configuration",
+              "value": "CHILLING_HOURS"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "effective_chilling_model",
+              "source_type": "engineering_configuration",
+              "value": "CHILLING_HOURS"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "fallback_policy",
+              "source_type": "engineering_configuration",
+              "value": "STRICT"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "fallback_applied",
+              "source_type": "engineering_configuration",
+              "value": false
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "requested_start_policy",
+              "source_type": "engineering_configuration",
+              "value": "DORMANCY_STATE"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "effective_start_policy",
+              "source_type": "engineering_configuration",
+              "value": "DORMANCY_STATE"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "start_time",
+              "source_type": "engineering_configuration",
+              "value": null
+            }
+          ],
+          "canonical": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_applied": false,
+              "fallback_policy": "STRICT",
+              "requested_chilling_model": "CHILLING_HOURS",
+              "requested_start_policy": "DORMANCY_STATE",
+              "start_time": null
+            }
+          },
+          "configuration_hash": "6e39f1be5e4a195e7ab16b45c8b59d4d2d606c7f1f4abfb4346444c5f6169f0e",
+          "effective": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_policy": "STRICT",
+              "start_time": null
+            }
+          },
+          "effective_hash": "58946b6536b0f492b1e10de0c7bf13b1d79d6727428712c5bc72115cf47996db",
+          "label": "CHILLING_HOURS+STRICT",
+          "requested": {
+            "dormancy": {
+              "chilling_model": "CHILLING_HOURS",
+              "fallback_policy": "STRICT",
+              "start_policy": "DORMANCY_STATE"
+            }
+          },
+          "result_type": "SOFTWARE_RESULT",
+          "round_trip": true,
+          "start_policy_implemented": true
+        },
+        {
+          "audit_entries": [
+            {
+              "calibration_status": "not_applicable",
+              "field": "requested_chilling_model",
+              "source_type": "engineering_configuration",
+              "value": "UTAH"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "effective_chilling_model",
+              "source_type": "engineering_configuration",
+              "value": "CHILLING_HOURS"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "fallback_policy",
+              "source_type": "engineering_configuration",
+              "value": "STRICT"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "fallback_applied",
+              "source_type": "engineering_configuration",
+              "value": true
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "requested_start_policy",
+              "source_type": "engineering_configuration",
+              "value": "DORMANCY_STATE"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "effective_start_policy",
+              "source_type": "engineering_configuration",
+              "value": "DORMANCY_STATE"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "start_time",
+              "source_type": "engineering_configuration",
+              "value": null
+            }
+          ],
+          "canonical": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_applied": true,
+              "fallback_policy": "STRICT",
+              "requested_chilling_model": "UTAH",
+              "requested_start_policy": "DORMANCY_STATE",
+              "start_time": null
+            }
+          },
+          "configuration_hash": "1db6cf68b5b5da3bf2d0cb69d94d1e9ffb742dd7ae7d31f0694ef4421279701b",
+          "effective": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_policy": "STRICT",
+              "start_time": null
+            }
+          },
+          "effective_hash": "58946b6536b0f492b1e10de0c7bf13b1d79d6727428712c5bc72115cf47996db",
+          "label": "UTAH+DEFAULT",
+          "requested": {
+            "dormancy": {
+              "chilling_model": "UTAH",
+              "fallback_policy": "DEFAULT",
+              "start_policy": "DORMANCY_STATE"
+            }
+          },
+          "result_type": "SOFTWARE_RESULT",
+          "round_trip": true,
+          "start_policy_implemented": true
+        },
+        {
+          "audit_entries": [
+            {
+              "calibration_status": "not_applicable",
+              "field": "requested_chilling_model",
+              "source_type": "engineering_configuration",
+              "value": "UTAH"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "effective_chilling_model",
+              "source_type": "engineering_configuration",
+              "value": "CHILLING_HOURS"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "fallback_policy",
+              "source_type": "engineering_configuration",
+              "value": "STRICT"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "fallback_applied",
+              "source_type": "engineering_configuration",
+              "value": true
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "requested_start_policy",
+              "source_type": "engineering_configuration",
+              "value": "DORMANCY_STATE"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "effective_start_policy",
+              "source_type": "engineering_configuration",
+              "value": "DORMANCY_STATE"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "start_time",
+              "source_type": "engineering_configuration",
+              "value": null
+            }
+          ],
+          "canonical": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_applied": true,
+              "fallback_policy": "STRICT",
+              "requested_chilling_model": "UTAH",
+              "requested_start_policy": "DORMANCY_STATE",
+              "start_time": null
+            }
+          },
+          "configuration_hash": "1db6cf68b5b5da3bf2d0cb69d94d1e9ffb742dd7ae7d31f0694ef4421279701b",
+          "effective": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_policy": "STRICT",
+              "start_time": null
+            }
+          },
+          "effective_hash": "58946b6536b0f492b1e10de0c7bf13b1d79d6727428712c5bc72115cf47996db",
+          "label": "UTAH+STRICT",
+          "requested": {
+            "dormancy": {
+              "chilling_model": "UTAH",
+              "fallback_policy": "STRICT",
+              "start_policy": "DORMANCY_STATE"
+            }
+          },
+          "result_type": "SOFTWARE_RESULT",
+          "round_trip": true,
+          "start_policy_implemented": true
+        },
+        {
+          "audit_entries": [
+            {
+              "calibration_status": "not_applicable",
+              "field": "requested_chilling_model",
+              "source_type": "engineering_configuration",
+              "value": "DYNAMIC"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "effective_chilling_model",
+              "source_type": "engineering_configuration",
+              "value": "CHILLING_HOURS"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "fallback_policy",
+              "source_type": "engineering_configuration",
+              "value": "STRICT"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "fallback_applied",
+              "source_type": "engineering_configuration",
+              "value": true
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "requested_start_policy",
+              "source_type": "engineering_configuration",
+              "value": "DORMANCY_STATE"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "effective_start_policy",
+              "source_type": "engineering_configuration",
+              "value": "DORMANCY_STATE"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "start_time",
+              "source_type": "engineering_configuration",
+              "value": null
+            }
+          ],
+          "canonical": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_applied": true,
+              "fallback_policy": "STRICT",
+              "requested_chilling_model": "DYNAMIC",
+              "requested_start_policy": "DORMANCY_STATE",
+              "start_time": null
+            }
+          },
+          "configuration_hash": "f1d72034255f1ee15c6ff8a9dd541ee21b6a6ac3bac0346437c183e5ef424930",
+          "effective": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_policy": "STRICT",
+              "start_time": null
+            }
+          },
+          "effective_hash": "58946b6536b0f492b1e10de0c7bf13b1d79d6727428712c5bc72115cf47996db",
+          "label": "DYNAMIC+DEFAULT",
+          "requested": {
+            "dormancy": {
+              "chilling_model": "DYNAMIC",
+              "fallback_policy": "DEFAULT",
+              "start_policy": "DORMANCY_STATE"
+            }
+          },
+          "result_type": "SOFTWARE_RESULT",
+          "round_trip": true,
+          "start_policy_implemented": true
+        },
+        {
+          "audit_entries": [
+            {
+              "calibration_status": "not_applicable",
+              "field": "requested_chilling_model",
+              "source_type": "engineering_configuration",
+              "value": "DYNAMIC"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "effective_chilling_model",
+              "source_type": "engineering_configuration",
+              "value": "CHILLING_HOURS"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "fallback_policy",
+              "source_type": "engineering_configuration",
+              "value": "STRICT"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "fallback_applied",
+              "source_type": "engineering_configuration",
+              "value": true
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "requested_start_policy",
+              "source_type": "engineering_configuration",
+              "value": "DORMANCY_STATE"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "effective_start_policy",
+              "source_type": "engineering_configuration",
+              "value": "DORMANCY_STATE"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "start_time",
+              "source_type": "engineering_configuration",
+              "value": null
+            }
+          ],
+          "canonical": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_applied": true,
+              "fallback_policy": "STRICT",
+              "requested_chilling_model": "DYNAMIC",
+              "requested_start_policy": "DORMANCY_STATE",
+              "start_time": null
+            }
+          },
+          "configuration_hash": "f1d72034255f1ee15c6ff8a9dd541ee21b6a6ac3bac0346437c183e5ef424930",
+          "effective": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_policy": "STRICT",
+              "start_time": null
+            }
+          },
+          "effective_hash": "58946b6536b0f492b1e10de0c7bf13b1d79d6727428712c5bc72115cf47996db",
+          "label": "DYNAMIC+STRICT",
+          "requested": {
+            "dormancy": {
+              "chilling_model": "DYNAMIC",
+              "fallback_policy": "STRICT",
+              "start_policy": "DORMANCY_STATE"
+            }
+          },
+          "result_type": "SOFTWARE_RESULT",
+          "round_trip": true,
+          "start_policy_implemented": true
+        },
+        {
+          "audit_entries": [
+            {
+              "calibration_status": "not_applicable",
+              "field": "requested_chilling_model",
+              "source_type": "engineering_configuration",
+              "value": "CHILLING_HOURS"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "effective_chilling_model",
+              "source_type": "engineering_configuration",
+              "value": "CHILLING_HOURS"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "fallback_policy",
+              "source_type": "engineering_configuration",
+              "value": "STRICT"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "fallback_applied",
+              "source_type": "engineering_configuration",
+              "value": false
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "requested_start_policy",
+              "source_type": "engineering_configuration",
+              "value": "FIXED_DATE"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "effective_start_policy",
+              "source_type": "engineering_configuration",
+              "value": "FIXED_DATE"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "start_time",
+              "source_type": "engineering_configuration",
+              "value": "2025-11-01T00:00:00+00:00"
+            }
+          ],
+          "canonical": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "FIXED_DATE",
+              "fallback_applied": false,
+              "fallback_policy": "STRICT",
+              "requested_chilling_model": "CHILLING_HOURS",
+              "requested_start_policy": "FIXED_DATE",
+              "start_time": "2025-11-01T00:00:00+00:00"
+            }
+          },
+          "configuration_hash": "924208c565b89441ce6253ec723a34aae19127b7208b66905af7cf0a3c1c72df",
+          "effective": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "FIXED_DATE",
+              "fallback_policy": "STRICT",
+              "start_time": "2025-11-01T00:00:00+00:00"
+            }
+          },
+          "effective_hash": "95cdf6a51808d51e93c8ffaac03b7a68b460b5a9a81f083443630461af455507",
+          "label": "FIXED_DATE+CHILLING_HOURS+STRICT",
+          "requested": {
+            "dormancy": {
+              "chilling_model": "CHILLING_HOURS",
+              "fallback_policy": "STRICT",
+              "start_policy": "FIXED_DATE",
+              "start_time": "2025-11-01T00:00:00+00:00"
+            }
+          },
+          "result_type": "SOFTWARE_RESULT",
+          "round_trip": true,
+          "start_policy_implemented": true
+        },
+        {
+          "audit_entries": [
+            {
+              "calibration_status": "not_applicable",
+              "field": "requested_chilling_model",
+              "source_type": "engineering_configuration",
+              "value": "DYNAMIC"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "effective_chilling_model",
+              "source_type": "engineering_configuration",
+              "value": "CHILLING_HOURS"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "fallback_policy",
+              "source_type": "engineering_configuration",
+              "value": "STRICT"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "fallback_applied",
+              "source_type": "engineering_configuration",
+              "value": true
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "requested_start_policy",
+              "source_type": "engineering_configuration",
+              "value": "FIXED_DATE"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "effective_start_policy",
+              "source_type": "engineering_configuration",
+              "value": "FIXED_DATE"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "start_time",
+              "source_type": "engineering_configuration",
+              "value": "2025-11-01T00:00:00+00:00"
+            }
+          ],
+          "canonical": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "FIXED_DATE",
+              "fallback_applied": true,
+              "fallback_policy": "STRICT",
+              "requested_chilling_model": "DYNAMIC",
+              "requested_start_policy": "FIXED_DATE",
+              "start_time": "2025-11-01T00:00:00+00:00"
+            }
+          },
+          "configuration_hash": "8e96004aa37b2481064e1bd8659aba85c63c8002e7a6cb322732f189513b2319",
+          "effective": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "FIXED_DATE",
+              "fallback_policy": "STRICT",
+              "start_time": "2025-11-01T00:00:00+00:00"
+            }
+          },
+          "effective_hash": "95cdf6a51808d51e93c8ffaac03b7a68b460b5a9a81f083443630461af455507",
+          "label": "FIXED_DATE+DYNAMIC+STRICT",
+          "requested": {
+            "dormancy": {
+              "chilling_model": "DYNAMIC",
+              "fallback_policy": "STRICT",
+              "start_policy": "FIXED_DATE",
+              "start_time": "2025-11-01T00:00:00+00:00"
+            }
+          },
+          "result_type": "SOFTWARE_RESULT",
+          "round_trip": true,
+          "start_policy_implemented": true
+        },
+        {
+          "audit_entries": [
+            {
+              "calibration_status": "not_applicable",
+              "field": "requested_chilling_model",
+              "source_type": "engineering_configuration",
+              "value": "DYNAMIC"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "effective_chilling_model",
+              "source_type": "engineering_configuration",
+              "value": "CHILLING_HOURS"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "fallback_policy",
+              "source_type": "engineering_configuration",
+              "value": "STRICT"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "fallback_applied",
+              "source_type": "engineering_configuration",
+              "value": true
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "requested_start_policy",
+              "source_type": "engineering_configuration",
+              "value": "MODEL_DEFINED"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "effective_start_policy",
+              "source_type": "engineering_configuration",
+              "value": "MODEL_DEFINED"
+            },
+            {
+              "calibration_status": "not_applicable",
+              "field": "start_time",
+              "source_type": "engineering_configuration",
+              "value": null
+            }
+          ],
+          "canonical": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "MODEL_DEFINED",
+              "fallback_applied": true,
+              "fallback_policy": "STRICT",
+              "requested_chilling_model": "DYNAMIC",
+              "requested_start_policy": "MODEL_DEFINED",
+              "start_time": null
+            }
+          },
+          "configuration_hash": "23d8cd07331dd7208c884bcce438bb682f93296a4c53a96a697b637354aa53df",
+          "effective": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "MODEL_DEFINED",
+              "fallback_policy": "STRICT",
+              "start_time": null
+            }
+          },
+          "effective_hash": "a5bac20150c3b6a253d75a1ab59a19f700cef0005bcf8d5c282aea512096afa6",
+          "label": "MODEL_DEFINED+DYNAMIC+STRICT",
+          "requested": {
+            "dormancy": {
+              "chilling_model": "DYNAMIC",
+              "fallback_policy": "STRICT",
+              "start_policy": "MODEL_DEFINED"
+            }
+          },
+          "result_type": "SOFTWARE_RESULT",
+          "round_trip": true,
+          "start_policy_implemented": false
+        }
+      ],
+      "status": "PASS"
+    },
+    "determinism": {
+      "mismatches": [],
+      "replayed_sections": [
+        "configurations",
+        "equivalence",
+        "fallback_matrix",
+        "negative_cases",
+        "policy_alias_matrix",
+        "unsupported_models"
+      ],
+      "section_hashes": {
+        "configurations": "88ad444c0303cc5ee6d5b8dd2d46e7b37c0753335b8cf33b30e458ca9151fcb2",
+        "equivalence": "30ec883282b360e752cbf1328e4f88ee6eda5e34373df1e59fa6feb6ef5f2138",
+        "fallback_matrix": "75ae0d5bbb13d3973b6536d73ee64becaccd53aded06131ad2e2f160664df9c9",
+        "negative_cases": "ef8b6d63771b8b6d18356d05f0fe390e81ce13c5b29c471767761b83bde734f4",
+        "policy_alias_matrix": "404cb842e382f721e6b01bd79e51790ece69cc3ce828433a4f86461c5972533c",
+        "unsupported_models": "be60b824b2a16d46bed288b11eb1942a1634edb078f25db046f6b216375ca71b"
+      },
+      "status": "PASS"
+    },
+    "equivalence": {
+      "note": "MODEL_DEFINED is a start policy the fallback never changes: it stays MODEL_NOT_SUPPORTED; FIXED_DATE requests compare with the 5.33 FIXED_DATE path at the same instant",
+      "reference": "CHILLING_HOURS+STRICT",
+      "rows": [
+        {
+          "crop": "peach",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": false,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "CHILLING_HOURS+DEFAULT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "CHILLING_HOURS",
+          "trajectory_hash": "82cab6bcf8648d5081e9f18d75646dd96b3fc0e2563a7ebdc4e792d48be2bc60"
+        },
+        {
+          "crop": "peach",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": false,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "CHILLING_HOURS+STRICT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "CHILLING_HOURS",
+          "trajectory_hash": "82cab6bcf8648d5081e9f18d75646dd96b3fc0e2563a7ebdc4e792d48be2bc60"
+        },
+        {
+          "crop": "peach",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "UTAH+DEFAULT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "UTAH",
+          "trajectory_hash": "82cab6bcf8648d5081e9f18d75646dd96b3fc0e2563a7ebdc4e792d48be2bc60"
+        },
+        {
+          "crop": "peach",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "UTAH+STRICT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "UTAH",
+          "trajectory_hash": "82cab6bcf8648d5081e9f18d75646dd96b3fc0e2563a7ebdc4e792d48be2bc60"
+        },
+        {
+          "crop": "peach",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "DYNAMIC+DEFAULT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "DYNAMIC",
+          "trajectory_hash": "82cab6bcf8648d5081e9f18d75646dd96b3fc0e2563a7ebdc4e792d48be2bc60"
+        },
+        {
+          "crop": "peach",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "DYNAMIC+STRICT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "DYNAMIC",
+          "trajectory_hash": "82cab6bcf8648d5081e9f18d75646dd96b3fc0e2563a7ebdc4e792d48be2bc60"
+        },
+        {
+          "crop": "peach",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": false,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": null,
+          "label": "FIXED_DATE+CHILLING_HOURS+STRICT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "CHILLING_HOURS",
+          "trajectory_hash": "82cab6bcf8648d5081e9f18d75646dd96b3fc0e2563a7ebdc4e792d48be2bc60"
+        },
+        {
+          "crop": "peach",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": null,
+          "label": "FIXED_DATE+DYNAMIC+STRICT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "DYNAMIC",
+          "trajectory_hash": "82cab6bcf8648d5081e9f18d75646dd96b3fc0e2563a7ebdc4e792d48be2bc60"
+        },
+        {
+          "crop": "peach",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": null,
+          "label": "MODEL_DEFINED+DYNAMIC+STRICT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "MODEL_NOT_SUPPORTED",
+          "requested_chilling_model": "DYNAMIC",
+          "trajectory_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "crop": "apple",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": false,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "CHILLING_HOURS+DEFAULT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "CHILLING_HOURS",
+          "trajectory_hash": "38917ba4af87834de5e2cc23bf24f28b55e0648d86e945780fb46db9bf935bbe"
+        },
+        {
+          "crop": "apple",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": false,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "CHILLING_HOURS+STRICT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "CHILLING_HOURS",
+          "trajectory_hash": "38917ba4af87834de5e2cc23bf24f28b55e0648d86e945780fb46db9bf935bbe"
+        },
+        {
+          "crop": "apple",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "UTAH+DEFAULT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "UTAH",
+          "trajectory_hash": "38917ba4af87834de5e2cc23bf24f28b55e0648d86e945780fb46db9bf935bbe"
+        },
+        {
+          "crop": "apple",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "UTAH+STRICT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "UTAH",
+          "trajectory_hash": "38917ba4af87834de5e2cc23bf24f28b55e0648d86e945780fb46db9bf935bbe"
+        },
+        {
+          "crop": "apple",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "DYNAMIC+DEFAULT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "DYNAMIC",
+          "trajectory_hash": "38917ba4af87834de5e2cc23bf24f28b55e0648d86e945780fb46db9bf935bbe"
+        },
+        {
+          "crop": "apple",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "DYNAMIC+STRICT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "DYNAMIC",
+          "trajectory_hash": "38917ba4af87834de5e2cc23bf24f28b55e0648d86e945780fb46db9bf935bbe"
+        },
+        {
+          "crop": "apple",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": false,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": null,
+          "label": "FIXED_DATE+CHILLING_HOURS+STRICT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "CHILLING_HOURS",
+          "trajectory_hash": "38917ba4af87834de5e2cc23bf24f28b55e0648d86e945780fb46db9bf935bbe"
+        },
+        {
+          "crop": "apple",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": null,
+          "label": "FIXED_DATE+DYNAMIC+STRICT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "DYNAMIC",
+          "trajectory_hash": "38917ba4af87834de5e2cc23bf24f28b55e0648d86e945780fb46db9bf935bbe"
+        },
+        {
+          "crop": "apple",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": null,
+          "label": "MODEL_DEFINED+DYNAMIC+STRICT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "MODEL_NOT_SUPPORTED",
+          "requested_chilling_model": "DYNAMIC",
+          "trajectory_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "crop": "plum",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": false,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "CHILLING_HOURS+DEFAULT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "CHILLING_HOURS",
+          "trajectory_hash": "05a5b47a4f68c5bba84fa930d93d9702f57aa7b00cc57bbd9089441eba7f0e89"
+        },
+        {
+          "crop": "plum",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": false,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "CHILLING_HOURS+STRICT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "CHILLING_HOURS",
+          "trajectory_hash": "05a5b47a4f68c5bba84fa930d93d9702f57aa7b00cc57bbd9089441eba7f0e89"
+        },
+        {
+          "crop": "plum",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "UTAH+DEFAULT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "UTAH",
+          "trajectory_hash": "05a5b47a4f68c5bba84fa930d93d9702f57aa7b00cc57bbd9089441eba7f0e89"
+        },
+        {
+          "crop": "plum",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "UTAH+STRICT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "UTAH",
+          "trajectory_hash": "05a5b47a4f68c5bba84fa930d93d9702f57aa7b00cc57bbd9089441eba7f0e89"
+        },
+        {
+          "crop": "plum",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "DYNAMIC+DEFAULT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "DYNAMIC",
+          "trajectory_hash": "05a5b47a4f68c5bba84fa930d93d9702f57aa7b00cc57bbd9089441eba7f0e89"
+        },
+        {
+          "crop": "plum",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "DYNAMIC+STRICT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "DYNAMIC",
+          "trajectory_hash": "05a5b47a4f68c5bba84fa930d93d9702f57aa7b00cc57bbd9089441eba7f0e89"
+        },
+        {
+          "crop": "plum",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": false,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": null,
+          "label": "FIXED_DATE+CHILLING_HOURS+STRICT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "CHILLING_HOURS",
+          "trajectory_hash": "05a5b47a4f68c5bba84fa930d93d9702f57aa7b00cc57bbd9089441eba7f0e89"
+        },
+        {
+          "crop": "plum",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": null,
+          "label": "FIXED_DATE+DYNAMIC+STRICT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "DYNAMIC",
+          "trajectory_hash": "05a5b47a4f68c5bba84fa930d93d9702f57aa7b00cc57bbd9089441eba7f0e89"
+        },
+        {
+          "crop": "plum",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": null,
+          "label": "MODEL_DEFINED+DYNAMIC+STRICT",
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "outcome": "MODEL_NOT_SUPPORTED",
+          "requested_chilling_model": "DYNAMIC",
+          "trajectory_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "crop": "peach",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": false,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "CHILLING_HOURS+DEFAULT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "CHILLING_HOURS",
+          "trajectory_hash": "3c7eb3f5571dd4cb5ece8911c6d151d4b16eb16626ea02d8ecc2b433fcffcf3c"
+        },
+        {
+          "crop": "peach",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": false,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "CHILLING_HOURS+STRICT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "CHILLING_HOURS",
+          "trajectory_hash": "3c7eb3f5571dd4cb5ece8911c6d151d4b16eb16626ea02d8ecc2b433fcffcf3c"
+        },
+        {
+          "crop": "peach",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "UTAH+DEFAULT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "UTAH",
+          "trajectory_hash": "3c7eb3f5571dd4cb5ece8911c6d151d4b16eb16626ea02d8ecc2b433fcffcf3c"
+        },
+        {
+          "crop": "peach",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "UTAH+STRICT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "UTAH",
+          "trajectory_hash": "3c7eb3f5571dd4cb5ece8911c6d151d4b16eb16626ea02d8ecc2b433fcffcf3c"
+        },
+        {
+          "crop": "peach",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "DYNAMIC+DEFAULT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "DYNAMIC",
+          "trajectory_hash": "3c7eb3f5571dd4cb5ece8911c6d151d4b16eb16626ea02d8ecc2b433fcffcf3c"
+        },
+        {
+          "crop": "peach",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "DYNAMIC+STRICT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "DYNAMIC",
+          "trajectory_hash": "3c7eb3f5571dd4cb5ece8911c6d151d4b16eb16626ea02d8ecc2b433fcffcf3c"
+        },
+        {
+          "crop": "peach",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": false,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": null,
+          "label": "FIXED_DATE+CHILLING_HOURS+STRICT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "CHILLING_HOURS",
+          "trajectory_hash": "3c7eb3f5571dd4cb5ece8911c6d151d4b16eb16626ea02d8ecc2b433fcffcf3c"
+        },
+        {
+          "crop": "peach",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": null,
+          "label": "FIXED_DATE+DYNAMIC+STRICT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "DYNAMIC",
+          "trajectory_hash": "3c7eb3f5571dd4cb5ece8911c6d151d4b16eb16626ea02d8ecc2b433fcffcf3c"
+        },
+        {
+          "crop": "peach",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": null,
+          "label": "MODEL_DEFINED+DYNAMIC+STRICT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "MODEL_NOT_SUPPORTED",
+          "requested_chilling_model": "DYNAMIC",
+          "trajectory_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "crop": "apple",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": false,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "CHILLING_HOURS+DEFAULT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "CHILLING_HOURS",
+          "trajectory_hash": "dac3b7041b9e39101df844a11df3a4dbad7f3e94dca45cc5d83f5c1d5396da3a"
+        },
+        {
+          "crop": "apple",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": false,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "CHILLING_HOURS+STRICT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "CHILLING_HOURS",
+          "trajectory_hash": "dac3b7041b9e39101df844a11df3a4dbad7f3e94dca45cc5d83f5c1d5396da3a"
+        },
+        {
+          "crop": "apple",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "UTAH+DEFAULT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "UTAH",
+          "trajectory_hash": "dac3b7041b9e39101df844a11df3a4dbad7f3e94dca45cc5d83f5c1d5396da3a"
+        },
+        {
+          "crop": "apple",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "UTAH+STRICT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "UTAH",
+          "trajectory_hash": "dac3b7041b9e39101df844a11df3a4dbad7f3e94dca45cc5d83f5c1d5396da3a"
+        },
+        {
+          "crop": "apple",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "DYNAMIC+DEFAULT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "DYNAMIC",
+          "trajectory_hash": "dac3b7041b9e39101df844a11df3a4dbad7f3e94dca45cc5d83f5c1d5396da3a"
+        },
+        {
+          "crop": "apple",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "DYNAMIC+STRICT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "DYNAMIC",
+          "trajectory_hash": "dac3b7041b9e39101df844a11df3a4dbad7f3e94dca45cc5d83f5c1d5396da3a"
+        },
+        {
+          "crop": "apple",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": false,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": null,
+          "label": "FIXED_DATE+CHILLING_HOURS+STRICT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "CHILLING_HOURS",
+          "trajectory_hash": "dac3b7041b9e39101df844a11df3a4dbad7f3e94dca45cc5d83f5c1d5396da3a"
+        },
+        {
+          "crop": "apple",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": null,
+          "label": "FIXED_DATE+DYNAMIC+STRICT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "DYNAMIC",
+          "trajectory_hash": "dac3b7041b9e39101df844a11df3a4dbad7f3e94dca45cc5d83f5c1d5396da3a"
+        },
+        {
+          "crop": "apple",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": null,
+          "label": "MODEL_DEFINED+DYNAMIC+STRICT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "MODEL_NOT_SUPPORTED",
+          "requested_chilling_model": "DYNAMIC",
+          "trajectory_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "crop": "plum",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": false,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "CHILLING_HOURS+DEFAULT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "CHILLING_HOURS",
+          "trajectory_hash": "95848c706601f795471cc43c0be633b6a1af4aea4ff07e9c5676484bdd425ffe"
+        },
+        {
+          "crop": "plum",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": false,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "CHILLING_HOURS+STRICT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "CHILLING_HOURS",
+          "trajectory_hash": "95848c706601f795471cc43c0be633b6a1af4aea4ff07e9c5676484bdd425ffe"
+        },
+        {
+          "crop": "plum",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "UTAH+DEFAULT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "UTAH",
+          "trajectory_hash": "95848c706601f795471cc43c0be633b6a1af4aea4ff07e9c5676484bdd425ffe"
+        },
+        {
+          "crop": "plum",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "UTAH+STRICT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "UTAH",
+          "trajectory_hash": "95848c706601f795471cc43c0be633b6a1af4aea4ff07e9c5676484bdd425ffe"
+        },
+        {
+          "crop": "plum",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "DYNAMIC+DEFAULT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "DYNAMIC",
+          "trajectory_hash": "95848c706601f795471cc43c0be633b6a1af4aea4ff07e9c5676484bdd425ffe"
+        },
+        {
+          "crop": "plum",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": true,
+          "label": "DYNAMIC+STRICT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "DYNAMIC",
+          "trajectory_hash": "95848c706601f795471cc43c0be633b6a1af4aea4ff07e9c5676484bdd425ffe"
+        },
+        {
+          "crop": "plum",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": false,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": null,
+          "label": "FIXED_DATE+CHILLING_HOURS+STRICT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "CHILLING_HOURS",
+          "trajectory_hash": "95848c706601f795471cc43c0be633b6a1af4aea4ff07e9c5676484bdd425ffe"
+        },
+        {
+          "crop": "plum",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": null,
+          "label": "FIXED_DATE+DYNAMIC+STRICT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "RELEASED",
+          "requested_chilling_model": "DYNAMIC",
+          "trajectory_hash": "95848c706601f795471cc43c0be633b6a1af4aea4ff07e9c5676484bdd425ffe"
+        },
+        {
+          "crop": "plum",
+          "effective_chilling_model": "CHILLING_HOURS",
+          "fallback_applied": true,
+          "identical_to_effective_reference": true,
+          "identical_to_phase533_default": null,
+          "label": "MODEL_DEFINED+DYNAMIC+STRICT",
+          "location_id": "SH_35S_TEMPERATE",
+          "outcome": "MODEL_NOT_SUPPORTED",
+          "requested_chilling_model": "DYNAMIC",
+          "trajectory_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      ],
+      "status": "PASS"
+    },
+    "fallback_matrix": {
+      "rows": [
+        {
+          "effective_model": "CHILLING_HOURS",
+          "fallback": "STRICT",
+          "fallback_applied": false,
+          "implemented": true,
+          "passed": true,
+          "requested_model": "CHILLING_HOURS",
+          "requested_model_recorded": true
+        },
+        {
+          "effective_model": "CHILLING_HOURS",
+          "fallback": "STRICT",
+          "fallback_applied": true,
+          "implemented": false,
+          "passed": true,
+          "requested_model": "DYNAMIC",
+          "requested_model_recorded": true
+        },
+        {
+          "effective_model": "CHILLING_HOURS",
+          "fallback": "STRICT",
+          "fallback_applied": true,
+          "implemented": false,
+          "passed": true,
+          "requested_model": "UTAH",
+          "requested_model_recorded": true
+        }
+      ],
+      "single_fallback_target": "CHILLING_HOURS",
+      "status": "PASS",
+      "supported_models": [
+        "CHILLING_HOURS"
+      ]
+    },
+    "negative_cases": {
+      "rows": [
+        {
+          "case": "unknown_model",
+          "deterministic_message": true,
+          "error": "dormancy.chilling_model: unknown value 'DYNAMIC_APPROX'; allowed: CHILLING_HOURS, UTAH, DYNAMIC",
+          "input_kind": "mapping",
+          "rejected": true
+        },
+        {
+          "case": "unknown_fallback",
+          "deterministic_message": true,
+          "error": "dormancy.fallback_policy: unknown value 'LENIENT'; allowed: DEFAULT, STRICT",
+          "input_kind": "mapping",
+          "rejected": true
+        },
+        {
+          "case": "unknown_start_policy",
+          "deterministic_message": true,
+          "error": "dormancy.start_policy: unknown value 'FIRST_OF_NOVEMBER'; allowed: DORMANCY_STATE, FIXED_DATE, EFFECTIVE_CHILL_ONSET, MODEL_DEFINED, ENVIRONMENTAL_WINDOW",
+          "input_kind": "mapping",
+          "rejected": true
+        },
+        {
+          "case": "duplicated_json_field",
+          "deterministic_message": true,
+          "error": "dormancy configuration has a duplicated field: 'chilling_model'",
+          "input_kind": "json",
+          "rejected": true
+        },
+        {
+          "case": "ambiguous_request_and_canonical_field",
+          "deterministic_message": true,
+          "error": "dormancy configuration is ambiguous: both 'chilling_model' and 'requested_chilling_model' given",
+          "input_kind": "mapping",
+          "rejected": true
+        },
+        {
+          "case": "incomplete_missing_fallback",
+          "deterministic_message": true,
+          "error": "dormancy configuration is incomplete; missing: fallback_policy",
+          "input_kind": "mapping",
+          "rejected": true
+        },
+        {
+          "case": "incomplete_fixed_date_without_instant",
+          "deterministic_message": true,
+          "error": "dormancy.start_time: FIXED_DATE requires an explicit timezone-aware start_time",
+          "input_kind": "mapping",
+          "rejected": true
+        },
+        {
+          "case": "missing_root_key",
+          "deterministic_message": true,
+          "error": "dormancy configuration must be a mapping with the single key 'dormancy'",
+          "input_kind": "mapping",
+          "rejected": true
+        },
+        {
+          "case": "unknown_field",
+          "deterministic_message": true,
+          "error": "dormancy configuration has unknown fields: latitude",
+          "input_kind": "mapping",
+          "rejected": true
+        },
+        {
+          "case": "wrong_type_model",
+          "deterministic_message": true,
+          "error": "dormancy.chilling_model must be a string, got int",
+          "input_kind": "mapping",
+          "rejected": true
+        },
+        {
+          "case": "wrong_type_fallback",
+          "deterministic_message": true,
+          "error": "dormancy.fallback_policy must be a string, got NoneType",
+          "input_kind": "mapping",
+          "rejected": true
+        },
+        {
+          "case": "wrong_type_body",
+          "deterministic_message": true,
+          "error": "dormancy configuration 'dormancy' must be a mapping",
+          "input_kind": "mapping",
+          "rejected": true
+        },
+        {
+          "case": "wrong_type_fallback_applied",
+          "deterministic_message": true,
+          "error": "dormancy.fallback_applied must be a boolean, got int",
+          "input_kind": "mapping",
+          "rejected": true
+        },
+        {
+          "case": "out_of_domain_lowercase_model",
+          "deterministic_message": true,
+          "error": "dormancy.chilling_model: unknown value 'dynamic'; allowed: CHILLING_HOURS, UTAH, DYNAMIC",
+          "input_kind": "mapping",
+          "rejected": true
+        },
+        {
+          "case": "out_of_domain_naive_instant",
+          "deterministic_message": true,
+          "error": "dormancy.start_time: FIXED_DATE requires an explicit timezone-aware start_time",
+          "input_kind": "mapping",
+          "rejected": true
+        },
+        {
+          "case": "out_of_domain_unparseable_instant",
+          "deterministic_message": true,
+          "error": "dormancy.start_time: not an ISO-8601 instant: '1 November'",
+          "input_kind": "mapping",
+          "rejected": true
+        },
+        {
+          "case": "start_time_on_non_fixed_policy",
+          "deterministic_message": true,
+          "error": "dormancy.start_time: DORMANCY_STATE does not take a start_time",
+          "input_kind": "mapping",
+          "rejected": true
+        },
+        {
+          "case": "inconsistent_canonical_effective_model",
+          "deterministic_message": true,
+          "error": "dormancy configuration is inconsistent: stated effective fields differ from the STRICT resolution of the request",
+          "input_kind": "mapping",
+          "rejected": true
+        },
+        {
+          "case": "inconsistent_canonical_fallback_flag",
+          "deterministic_message": true,
+          "error": "dormancy configuration is inconsistent: stated effective fields differ from the STRICT resolution of the request",
+          "input_kind": "mapping",
+          "rejected": true
+        },
+        {
+          "case": "invalid_json",
+          "deterministic_message": true,
+          "error": "dormancy configuration is not valid JSON: Expecting value",
+          "input_kind": "json",
+          "rejected": true
+        }
+      ],
+      "status": "PASS"
+    },
+    "parameter_mutation": {
+      "after": {
+        "default_configuration": "6e39f1be5e4a195e7ab16b45c8b59d4d2d606c7f1f4abfb4346444c5f6169f0e",
+        "parameter_registry": "f1e456366e99902c8d6a34fe1a88767ac6ce25dc97974867830e3016b67072e7",
+        "parameter_sets": "185df90d72b92fb913dc5faef9b998fdbc4b0884437b2e2e26202eb86e8f06b5",
+        "phenology_profiles": "256751c89b23b16befab98061ac33e5c2f467f92dcf1bef323d37eef89f78f79",
+        "request_documents": "62c563eb7236ffa4069ade8909898f62108a1f5800f126d981cc38195e08e6ca",
+        "weather_profiles": "0ae009290c1d4cb7cdf840955366180f91d8601a3d1ea734be0f07050286e14a"
+      },
+      "before": {
+        "default_configuration": "6e39f1be5e4a195e7ab16b45c8b59d4d2d606c7f1f4abfb4346444c5f6169f0e",
+        "parameter_registry": "f1e456366e99902c8d6a34fe1a88767ac6ce25dc97974867830e3016b67072e7",
+        "parameter_sets": "185df90d72b92fb913dc5faef9b998fdbc4b0884437b2e2e26202eb86e8f06b5",
+        "phenology_profiles": "256751c89b23b16befab98061ac33e5c2f467f92dcf1bef323d37eef89f78f79",
+        "request_documents": "62c563eb7236ffa4069ade8909898f62108a1f5800f126d981cc38195e08e6ca",
+        "weather_profiles": "0ae009290c1d4cb7cdf840955366180f91d8601a3d1ea734be0f07050286e14a"
+      },
+      "status": "PASS"
+    },
+    "policy_alias_matrix": {
+      "contract": "DEFAULT == STRICT: one policy, one code path; DEFAULT is resolved to STRICT during canonicalization",
+      "default_strict_pairs": [
+        {
+          "chilling_model": "CHILLING_HOURS",
+          "same_configuration_hash": true,
+          "same_effective_hash": true,
+          "same_json": true,
+          "same_object": true
+        },
+        {
+          "chilling_model": "UTAH",
+          "same_configuration_hash": true,
+          "same_effective_hash": true,
+          "same_json": true,
+          "same_object": true
+        },
+        {
+          "chilling_model": "DYNAMIC",
+          "same_configuration_hash": true,
+          "same_effective_hash": true,
+          "same_json": true,
+          "same_object": true
+        }
+      ],
+      "requested_vs_effective_hash_separation": {
+        "dynamic_request_recorded": true,
+        "dynamic_vs_chilling_hours_distinct_configuration_hash": true,
+        "dynamic_vs_chilling_hours_same_effective_hash": true
+      },
+      "rows": [
+        {
+          "canonical_policy": "STRICT",
+          "passed": true,
+          "policy": "DEFAULT"
+        },
+        {
+          "canonical_policy": "STRICT",
+          "passed": true,
+          "policy": "STRICT"
+        }
+      ],
+      "status": "PASS"
+    },
+    "regression_533": {
+      "baseline_artifact": "data/phenology/chilling_framework_report.json",
+      "baseline_report_hash": "2eee01cfbc22fce1ef2d74235c745a0a7314ba4ad48db0e415d2ea5a3585679e",
+      "comparison": "every field of each Phase 5.33 DORMANCY_STATE policy-matrix row (trajectory hash, release, budburst, chill totals, outcome)",
+      "rows": [
+        {
+          "crop": "peach",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_20N_WARM_WINTER",
+          "phase533_trajectory_hash": "604d5bbeeb763eac11a8cf5dda900163a622bf9f5680c6f03b63c1ad72e169ac"
+        },
+        {
+          "crop": "apple",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_20N_WARM_WINTER",
+          "phase533_trajectory_hash": "604d5bbeeb763eac11a8cf5dda900163a622bf9f5680c6f03b63c1ad72e169ac"
+        },
+        {
+          "crop": "plum",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_20N_WARM_WINTER",
+          "phase533_trajectory_hash": "604d5bbeeb763eac11a8cf5dda900163a622bf9f5680c6f03b63c1ad72e169ac"
+        },
+        {
+          "crop": "peach",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "phase533_trajectory_hash": "82cab6bcf8648d5081e9f18d75646dd96b3fc0e2563a7ebdc4e792d48be2bc60"
+        },
+        {
+          "crop": "apple",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "phase533_trajectory_hash": "38917ba4af87834de5e2cc23bf24f28b55e0648d86e945780fb46db9bf935bbe"
+        },
+        {
+          "crop": "plum",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "phase533_trajectory_hash": "05a5b47a4f68c5bba84fa930d93d9702f57aa7b00cc57bbd9089441eba7f0e89"
+        },
+        {
+          "crop": "peach",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_50N_CONTINENTAL",
+          "phase533_trajectory_hash": "858b32b09927144823cfa7c8fec9d826f57fc699c1e6a369b4fdf5a2ff9e8864"
+        },
+        {
+          "crop": "apple",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_50N_CONTINENTAL",
+          "phase533_trajectory_hash": "1ac0d78bcc374ed947cb8470bb4645a40e631af2a530d583f805510705108839"
+        },
+        {
+          "crop": "plum",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_50N_CONTINENTAL",
+          "phase533_trajectory_hash": "92dbcda1b6e224c4d783902d8bb28557b1bbb7b32194d54c8a6aa23f022d3005"
+        },
+        {
+          "crop": "peach",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_20S_WARM_WINTER",
+          "phase533_trajectory_hash": "95ea7a089186d61b66581537426e0c151f7a45a297b994387d00c3bab32e91c5"
+        },
+        {
+          "crop": "apple",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_20S_WARM_WINTER",
+          "phase533_trajectory_hash": "95ea7a089186d61b66581537426e0c151f7a45a297b994387d00c3bab32e91c5"
+        },
+        {
+          "crop": "plum",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_20S_WARM_WINTER",
+          "phase533_trajectory_hash": "95ea7a089186d61b66581537426e0c151f7a45a297b994387d00c3bab32e91c5"
+        },
+        {
+          "crop": "peach",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_35S_TEMPERATE",
+          "phase533_trajectory_hash": "3c7eb3f5571dd4cb5ece8911c6d151d4b16eb16626ea02d8ecc2b433fcffcf3c"
+        },
+        {
+          "crop": "apple",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_35S_TEMPERATE",
+          "phase533_trajectory_hash": "dac3b7041b9e39101df844a11df3a4dbad7f3e94dca45cc5d83f5c1d5396da3a"
+        },
+        {
+          "crop": "plum",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_35S_TEMPERATE",
+          "phase533_trajectory_hash": "95848c706601f795471cc43c0be633b6a1af4aea4ff07e9c5676484bdd425ffe"
+        },
+        {
+          "crop": "peach",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_50S_COLD",
+          "phase533_trajectory_hash": "6d9d990fb01f51f515b66d6b7d928dfd98d5e92389d7962999b02ab860d0f6a5"
+        },
+        {
+          "crop": "apple",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_50S_COLD",
+          "phase533_trajectory_hash": "6cc60049eb2356d49374c6828a595e7f2c446e6152ed995fd89ba787d21c6f42"
+        },
+        {
+          "crop": "plum",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_50S_COLD",
+          "phase533_trajectory_hash": "21054f156274371cfa5db5c313285048229a14cf12e2cc1720e11146fcb2e31d"
+        }
+      ],
+      "status": "PASS"
+    },
+    "static_audit": {
+      "core_classes_in_files": {
+        "src/agri_twin/domain/parameter_audit.py": [
+          "ParameterRegistry"
+        ],
+        "src/agri_twin/domain/phenology.py": [
+          "DormancyChillingController",
+          "PhenologyEngine"
+        ]
+      },
+      "files": [
+        "src/agri_twin/domain/phenology.py",
+        "src/agri_twin/application/chilling_policy.py",
+        "src/agri_twin/application/dormancy_chilling_framework.py",
+        "src/agri_twin/domain/parameter_audit.py"
+      ],
+      "findings": [],
+      "new_core_classes": [],
+      "project_static_audit": {
+        "duplicate_core_classes": {},
+        "missing_core_classes": [],
+        "status": "PASS",
+        "violations": []
+      },
+      "rules": {
+        "forbidden_call_prefixes": [
+          "random.",
+          "np.random.",
+          "numpy.random."
+        ],
+        "forbidden_calls": [
+          "date.today",
+          "datetime.now",
+          "datetime.today",
+          "datetime.utcnow",
+          "perf_counter",
+          "sleep",
+          "time.monotonic",
+          "time.perf_counter",
+          "time.sleep",
+          "time.time"
+        ],
+        "forbidden_imports": [
+          "aiohttp",
+          "http",
+          "httpx",
+          "numpy.random",
+          "random",
+          "requests",
+          "serial",
+          "socket",
+          "urllib"
+        ]
+      },
+      "status": "PASS"
+    },
+    "traceability": {
+      "default_configuration_trace": {
+        "effective_chilling_model": "CHILLING_HOURS",
+        "effective_start_policy": "DORMANCY_STATE",
+        "fallback_applied": false,
+        "fallback_policy": "STRICT",
+        "requested_chilling_model": "CHILLING_HOURS",
+        "requested_start_policy": "DORMANCY_STATE",
+        "start_time": null
+      },
+      "no_literature_calibrated_or_real_verified_label": true,
+      "per_configuration_fields": [
+        "effective_chilling_model",
+        "effective_start_policy",
+        "fallback_applied",
+        "fallback_policy",
+        "requested_chilling_model",
+        "requested_start_policy"
+      ],
+      "registry_records": {
+        "phenology.chilling_fallback_policy": {
+          "calibration_allowed": false,
+          "calibration_status": "not_applicable",
+          "category": "biological",
+          "confidence": "low",
+          "crop": null,
+          "description": "Policy applied when the requested chilling model is not implemented",
+          "evidence_level": "low",
+          "maximum": null,
+          "minimum": null,
+          "name": "Chilling model fallback policy",
+          "notes": "DEFAULT is an alias of STRICT; UTAH/DYNAMIC requests resolve explicitly to CHILLING_HOURS with requested model and fallback_applied recorded; thresholds, requirements and start policy unchanged",
+          "observational_data_required": "none (software policy)",
+          "parameter_id": "phenology.chilling_fallback_policy",
+          "phenological_stage": null,
+          "source_detail": "phenology.py:canonicalize_dormancy_configuration",
+          "source_reference": null,
+          "source_type": "engineering_default",
+          "subsystem": "runtime_code",
+          "unit": "categorical",
+          "used_by": "phenology.py:canonicalize_dormancy_configuration",
+          "value": "STRICT",
+          "variety": null
+        },
+        "phenology.chilling_model": {
+          "calibration_allowed": false,
+          "calibration_status": "not_applicable",
+          "category": "biological",
+          "confidence": "low",
+          "crop": null,
+          "description": "Active HOW-TO-COUNT chilling model",
+          "evidence_level": "low",
+          "maximum": null,
+          "minimum": null,
+          "name": "Chilling model",
+          "notes": "Utah and Dynamic declared, not implemented; no universal model selected",
+          "observational_data_required": "model comparison against cultivar release observations",
+          "parameter_id": "phenology.chilling_model",
+          "phenological_stage": null,
+          "source_detail": "phenology.py:ChillingModel",
+          "source_reference": null,
+          "source_type": "engineering_default",
+          "subsystem": "runtime_code",
+          "unit": "categorical",
+          "used_by": "phenology.py:ChillingModel",
+          "value": "CHILLING_HOURS",
+          "variety": null
+        },
+        "phenology.chilling_start_policy": {
+          "calibration_allowed": false,
+          "calibration_status": "not_applicable",
+          "category": "biological",
+          "confidence": "low",
+          "crop": null,
+          "description": "Default WHEN-TO-COUNT policy",
+          "evidence_level": "low",
+          "maximum": null,
+          "minimum": null,
+          "name": "Chilling start policy",
+          "notes": "no universal calendar start date; FIXED_DATE only with an explicit configured instant",
+          "observational_data_required": "dormancy-onset observations per site and cultivar",
+          "parameter_id": "phenology.chilling_start_policy",
+          "phenological_stage": null,
+          "source_detail": "phenology.py:ChillingStartPolicy",
+          "source_reference": null,
+          "source_type": "engineering_default",
+          "subsystem": "runtime_code",
+          "unit": "categorical",
+          "used_by": "phenology.py:ChillingStartPolicy",
+          "value": "DORMANCY_STATE",
+          "variety": null
+        }
+      },
+      "status": "PASS"
+    },
+    "twin_integration": {
+      "dormancy_release": "2026-02-04T03:00:00+00:00",
+      "record": "peach, BASE_SEASON seed 532, 150 days hourly from 2025-11-01T00:00:00+00:00 (explicit experiment start)",
+      "status": "PASS",
+      "trajectory_hashes": {
+        "CHILLING_HOURS+DEFAULT": "d6fe8e88c503d6a9690687ff18db892664dee2a17ad875ccfb5a8992a2f20425",
+        "DYNAMIC+STRICT": "d6fe8e88c503d6a9690687ff18db892664dee2a17ad875ccfb5a8992a2f20425",
+        "UTAH+STRICT": "d6fe8e88c503d6a9690687ff18db892664dee2a17ad875ccfb5a8992a2f20425",
+        "phase533_default_orchestrator": "d6fe8e88c503d6a9690687ff18db892664dee2a17ad875ccfb5a8992a2f20425"
+      }
+    },
+    "unsupported_models": {
+      "note": "no Utah or Dynamic formula exists; the STRICT fallback applies only to configuration requests, never to an injected implementation (Phase 5.33 path)",
+      "rows": [
+        {
+          "implementation_raises_model_not_supported": true,
+          "injected_configuration": null,
+          "injected_implementation_outcome": "MODEL_NOT_SUPPORTED",
+          "model": "UTAH"
+        },
+        {
+          "implementation_raises_model_not_supported": true,
+          "injected_configuration": null,
+          "injected_implementation_outcome": "MODEL_NOT_SUPPORTED",
+          "model": "DYNAMIC"
+        }
+      ],
+      "status": "PASS",
+      "supported_models": [
+        "CHILLING_HOURS"
+      ]
+    }
+  },
+  "species": [
+    "peach",
+    "apple",
+    "plum"
+  ],
+  "status": "PASS",
+  "version": "5.34.0"
+}

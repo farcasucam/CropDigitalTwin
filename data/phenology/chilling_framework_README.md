@@ -4,7 +4,7 @@ Synthetic software experiments of the environment- and hemisphere-independent do
 model outputs; SCIENTIFIC_EVIDENCE entries are literature rows from src/crop_phenology.csv. Nothing here is calibration or biological validation.
 
 - status: `PASS`; decision: `POLICY_UNCERTAINTY`
-- report hash: `2237aed59ac1a1d84515b0c8b63160fb5113b488cf940e8cc930c4760ddcbd7f`
+- report hash: `2eee01cfbc22fce1ef2d74235c745a0a7314ba4ad48db0e415d2ea5a3585679e`
 
 ## Sections
 

@@ -44,6 +44,7 @@ from agri_twin.domain.phenology import (
     ChillingStartPolicy,
     ChillingStartPolicyType,
     DormancyChillingController,
+    DormancyConfiguration,
     PhenologyEngine,
     PhenologyError,
 )
@@ -163,6 +164,8 @@ class DormancySeasonResult:
     finite: bool
     final_state: CropGrowthState | None = field(default=None, compare=False)
     elapsed_hash: str = ""
+    # Canonical requested/effective configuration (Phase 5.34); None only for an injected unimplemented model.
+    configuration: DormancyConfiguration | None = field(default=None, compare=False)
 
     def to_dict(self) -> dict[str, Any]:
         iso = lambda value: value.isoformat() if value is not None else None
@@ -181,18 +184,26 @@ class DormancySeasonResult:
 WeatherSource = Callable[[datetime], WeatherState]
 
 
-def run_dormancy_season(crop: str, weather: WeatherSource, start: datetime, days: int, *, policy: ChillingStartPolicy | None = None, model: ChillingModel | None = None, location: SyntheticLocation | None = None, initial: CropGrowthState | None = None) -> DormancySeasonResult:
-    """Advance the existing PhenologyEngine hourly from ``start`` for ``days`` days."""
-    policy = policy or ChillingStartPolicy()
-    model = model or ChillingModel()
-    engine = PhenologyEngine(dormancy=DormancyChillingController(policy, model))
+def run_dormancy_season(crop: str, weather: WeatherSource, start: datetime, days: int, *, policy: ChillingStartPolicy | None = None, model: ChillingModel | None = None, location: SyntheticLocation | None = None, initial: CropGrowthState | None = None, configuration: DormancyConfiguration | Mapping[str, Any] | None = None) -> DormancySeasonResult:
+    """Advance the existing PhenologyEngine hourly from ``start`` for ``days`` days.
+
+    ``configuration`` (canonical DormancyConfiguration or its request mapping) is the
+    model-selection path; ``policy``/``model`` injection is the Phase 5.33 path.
+    """
+    if configuration is not None:
+        controller = DormancyChillingController(policy, model, configuration=configuration)
+    else:
+        controller = DormancyChillingController(policy or ChillingStartPolicy(), model or ChillingModel())
+    policy, model = controller.policy, controller.model
+    engine = PhenologyEngine(dormancy=controller)
     profile = engine.profile_for(crop)
     base = dict(crop=crop, location_id=location.location_id if location else None, hemisphere=location.hemisphere if location else None,
                 latitude=location.latitude if location else None, longitude=location.longitude if location else None,
                 policy=policy.policy_type.value, model=model.model_type.value, record_start=start, record_days=days)
     if not policy.implemented or not model.implemented:
         return DormancySeasonResult(**base, counting_start=None, first_effective_chill=None, chill_total=0.0, chill_at_release=None, chill_excluded_by_policy_hours=0.0,
-                                    dormancy_release=None, forcing_start=None, budburst=None, outcome=DormancyOutcome.MODEL_NOT_SUPPORTED, trajectory_hash=_hash([]), finite=True)
+                                    dormancy_release=None, forcing_start=None, budburst=None, outcome=DormancyOutcome.MODEL_NOT_SUPPORTED, trajectory_hash=_hash([]), finite=True,
+                                    configuration=controller.configuration)
     clock = SimulationClock(start)
     scheduler = SimulationScheduler(clock, DT)
     record: dict[str, Any] = {"state": initial or initial_dormant_state(crop, start), "first_effective": None, "counting_start": None, "excluded": 0.0,
@@ -238,7 +249,8 @@ def run_dormancy_season(crop: str, weather: WeatherSource, start: datetime, days
         outcome = DormancyOutcome.DORMANCY_NOT_RELEASED
     return DormancySeasonResult(**base, counting_start=record["counting_start"], first_effective_chill=first, chill_total=final.chilling_hours, chill_at_release=record["chill_at_release"],
                                 chill_excluded_by_policy_hours=record["excluded"], dormancy_release=record["release"], forcing_start=record["forcing"], budburst=record["budburst"],
-                                outcome=outcome, trajectory_hash=record["digest"].hexdigest(), finite=record["finite"], final_state=final, elapsed_hash=record["elapsed"].hexdigest())
+                                outcome=outcome, trajectory_hash=record["digest"].hexdigest(), finite=record["finite"], final_state=final, elapsed_hash=record["elapsed"].hexdigest(),
+                                configuration=controller.configuration)
 
 
 def location_weather(location: SyntheticLocation, seed: int = DEFAULT_SEED, **profile_changes: float) -> WeatherSource:

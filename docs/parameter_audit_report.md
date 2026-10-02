@@ -2,12 +2,12 @@
 
 ## Summary
 
-- `total_parameters`: 551
+- `total_parameters`: 552
 - `literature_parameters`: 37
 - `project_data_parameters`: 8
 - `measured_parameters`: 0
 - `derived_parameters`: 0
-- `engineering_defaults`: 39
+- `engineering_defaults`: 40
 - `unknown_parameters`: 467
 - `calibrated_parameters`: 0
 - `calibration_candidates`: 541
@@ -546,6 +546,7 @@
 | greenhouse.ventilation_ach | structural air exchange rate (infiltration and fixed vents) | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
 | greenhouse.volume | greenhouse air volume | engineering_default | none | candidate_for_calibration | global | must not be presented as biological validation |
 | phenology.apple.chilling_requirement_hours | apple chilling requirement | engineering_default | low | candidate_for_calibration | apple | apple evidence rows are in chill portions only; chill hours are not converted |
+| phenology.chilling_fallback_policy | Chilling model fallback policy | engineering_default | low | not_applicable | global | DEFAULT is an alias of STRICT; UTAH/DYNAMIC requests resolve explicitly to CHILLING_HOURS with requested model and fallback_applied recorded; thresholds, requirements and start policy unchanged |
 | phenology.chilling_hours.lower_threshold | Chilling Hours lower threshold | engineering_default | low | fixed | global | 0-7.2 C variant of the Chilling Hours rule; Weinberger (1950) counted hours below 7.2 C |
 | phenology.chilling_hours.upper_threshold | Chilling Hours upper threshold | engineering_default | low | fixed | global | 7.2 C (45 F) threshold of the Chilling Hours rule (Weinberger 1950) |
 | phenology.chilling_model | Chilling model | engineering_default | low | not_applicable | global | Utah and Dynamic declared, not implemented; no universal model selected |
