@@ -1,0 +1,2942 @@
+{
+  "biological_validity_claimed": false,
+  "calibration_performed": false,
+  "data_assimilation_implemented": false,
+  "deterministic_hash": "8718b6334ee0652b23644c47581dcae8ecd4e0f156353489e0a6ffbf68865fd3",
+  "experimental_validation_performed": false,
+  "field_accuracy_claimed": false,
+  "limitations": [
+    "Wall-clock timings depend on the machine, OS scheduling and background load; they are measurements, not contracts.",
+    "Timings are minima over repeated sequential runs; cProfile adds overhead, so profiled seconds are larger than plain timings.",
+    "Frontend classes are advisory latency bands for simulation only, measured on one machine; no frontend technology is assumed.",
+    "No model equation, parameter or semantic was changed for speed."
+  ],
+  "optimization_result": {
+    "before_after": null,
+    "optimizations": []
+  },
+  "performance_measurement": {
+    "baseline": "see 'before_after' and docs/phase5_36_performance_audit.md (regression and manual timings)",
+    "benchmark_matrix": [
+      {
+        "output_hash": "54e8bc8c9acb92d743a66aadc370a34c1a8f155a6c6622f099ae3ec58720a437",
+        "performance_measurement": {
+          "breakdown_seconds": {},
+          "elapsed_seconds": 0.07098040007986128,
+          "max_seconds": 0.07989930012263358,
+          "median_seconds": 0.07543985010124743,
+          "milliseconds_per_step": 0.4225023814277457,
+          "min_seconds": 0.07098040007986128,
+          "repeats": 2,
+          "seconds_per_simulated_day": 0.010140057154265898
+        },
+        "steps_executed": 168,
+        "workload": {
+          "category": "SIMULATION",
+          "crop": "tomato",
+          "cycles": 1,
+          "days": 7.0,
+          "environment": "outdoor",
+          "model_configuration_hash": "137d3fb462316ce89712aa0954f25146e52d0d99c3054823fdd3c52b7f7f033a",
+          "plots": 1,
+          "scenario": "BASE_SEASON",
+          "scenarios": 1,
+          "simulation_steps": 168,
+          "workload_id": "small_tomato_outdoor_7d"
+        }
+      },
+      {
+        "output_hash": "8e23a447e92c96f96ea2a6dd2895b2c9224de2134cf0d090b5eb427c393ebb61",
+        "performance_measurement": {
+          "breakdown_seconds": {},
+          "elapsed_seconds": 1.7522752999793738,
+          "max_seconds": 1.8251058999449015,
+          "median_seconds": 1.7886905999621376,
+          "milliseconds_per_step": 0.4680222489261148,
+          "min_seconds": 1.7522752999793738,
+          "repeats": 2,
+          "seconds_per_simulated_day": 0.011232533974226756
+        },
+        "steps_executed": 3744,
+        "workload": {
+          "category": "SIMULATION",
+          "crop": "tomato",
+          "cycles": 1,
+          "days": 156.0,
+          "environment": "outdoor",
+          "model_configuration_hash": "2e057ea70774567f9a2d8622fdb3ae2f01b9e1166fc5b42cc63362cc13837e62",
+          "plots": 1,
+          "scenario": "BASE_SEASON",
+          "scenarios": 1,
+          "simulation_steps": 3744,
+          "workload_id": "medium_tomato_outdoor_full_season"
+        }
+      },
+      {
+        "output_hash": "fad7ae8655d7b0ae1531e369f991d109c3ac4213507897c47d5acf9ac5fc98e9",
+        "performance_measurement": {
+          "breakdown_seconds": {},
+          "elapsed_seconds": 1.6464539000298828,
+          "max_seconds": 1.7214643999468535,
+          "median_seconds": 1.6839591499883682,
+          "milliseconds_per_step": 0.4397579861190926,
+          "min_seconds": 1.6464539000298828,
+          "repeats": 2,
+          "seconds_per_simulated_day": 0.010554191666858222
+        },
+        "steps_executed": 3744,
+        "workload": {
+          "category": "SIMULATION",
+          "crop": "tomato",
+          "cycles": 1,
+          "days": 156.0,
+          "environment": "outdoor",
+          "model_configuration_hash": "de0aff13b13ff621c557a3008768a2603c290563df02d97500b654b00483a64b",
+          "plots": 1,
+          "scenario": "HOT_SEASON",
+          "scenarios": 1,
+          "simulation_steps": 3744,
+          "workload_id": "scenario_tomato_outdoor_hot_season"
+        }
+      },
+      {
+        "output_hash": "82e94ed3b9632281ccda84a886d9d4382aba132949d60142bc81acc9540a7e06",
+        "performance_measurement": {
+          "breakdown_seconds": {},
+          "elapsed_seconds": 1.6977580999955535,
+          "max_seconds": 1.8452461000997573,
+          "median_seconds": 1.7715021000476554,
+          "milliseconds_per_step": 0.45346103098171836,
+          "min_seconds": 1.6977580999955535,
+          "repeats": 2,
+          "seconds_per_simulated_day": 0.01088306474356124
+        },
+        "steps_executed": 3744,
+        "workload": {
+          "category": "SIMULATION",
+          "crop": "tomato",
+          "cycles": 1,
+          "days": 156.0,
+          "environment": "outdoor",
+          "model_configuration_hash": "657250d27954c198e0088bdee2edf19bfca94d603a2fdd13cf863ed91c6c6720",
+          "plots": 1,
+          "scenario": "COLD_SEASON",
+          "scenarios": 1,
+          "simulation_steps": 3744,
+          "workload_id": "scenario_tomato_outdoor_cold_season"
+        }
+      },
+      {
+        "output_hash": "5ff76d6f236a1fc93658d774e0a08f9f329d66293016e3e5bb55e2701faf4b27",
+        "performance_measurement": {
+          "breakdown_seconds": {},
+          "elapsed_seconds": 1.6157879999373108,
+          "max_seconds": 1.794458899879828,
+          "median_seconds": 1.7051234499085695,
+          "milliseconds_per_step": 0.4315673076755638,
+          "min_seconds": 1.6157879999373108,
+          "repeats": 2,
+          "seconds_per_simulated_day": 0.010357615384213531
+        },
+        "steps_executed": 3744,
+        "workload": {
+          "category": "SIMULATION",
+          "crop": "tomato",
+          "cycles": 1,
+          "days": 156.0,
+          "environment": "outdoor",
+          "model_configuration_hash": "818dfbc7fd5325752e450447e712650f087e802eab06b1a19aeb5ec633ecebcb",
+          "plots": 1,
+          "scenario": "DRY_SEASON",
+          "scenarios": 1,
+          "simulation_steps": 3744,
+          "workload_id": "scenario_tomato_outdoor_dry_season"
+        }
+      },
+      {
+        "output_hash": "9be150b022c2298b71623215b746f22fcbdfae5c992af7eaacf1dbc162d3bc97",
+        "performance_measurement": {
+          "breakdown_seconds": {},
+          "elapsed_seconds": 1.695563399931416,
+          "max_seconds": 1.895748999901116,
+          "median_seconds": 1.795656199916266,
+          "milliseconds_per_step": 0.45287483972527137,
+          "min_seconds": 1.695563399931416,
+          "repeats": 2,
+          "seconds_per_simulated_day": 0.010868996153406512
+        },
+        "steps_executed": 3744,
+        "workload": {
+          "category": "SIMULATION",
+          "crop": "tomato",
+          "cycles": 1,
+          "days": 156.0,
+          "environment": "outdoor",
+          "model_configuration_hash": "c65e19dcbd3eafc9bc24965ad8f646300bd5f03069825f4cd98fae346aa9ff1c",
+          "plots": 1,
+          "scenario": "HUMID_SEASON",
+          "scenarios": 1,
+          "simulation_steps": 3744,
+          "workload_id": "scenario_tomato_outdoor_humid_season"
+        }
+      },
+      {
+        "output_hash": "55148cbf27b2916c51ab5665d64e25bd8a596200642496ac57e4d5fdd33a9424",
+        "performance_measurement": {
+          "breakdown_seconds": {},
+          "elapsed_seconds": 2.2848334000445902,
+          "max_seconds": 2.3293629998806864,
+          "median_seconds": 2.3070981999626383,
+          "milliseconds_per_step": 0.610265331208491,
+          "min_seconds": 2.2848334000445902,
+          "repeats": 2,
+          "seconds_per_simulated_day": 0.014646367949003784
+        },
+        "steps_executed": 3744,
+        "workload": {
+          "category": "SIMULATION",
+          "crop": "tomato",
+          "cycles": 1,
+          "days": 156.0,
+          "environment": "outdoor",
+          "model_configuration_hash": "4289e538dad87386b538f0fbc3ba7226c1b7fb4dc39a9d83d69e516e4fc12c64",
+          "plots": 1,
+          "scenario": "HEAT_WAVE",
+          "scenarios": 1,
+          "simulation_steps": 3744,
+          "workload_id": "scenario_tomato_outdoor_heat_wave"
+        }
+      },
+      {
+        "output_hash": "32ce613e5f7987eeced5a5eaa9b02bbd0277a97dba91458f33923d502262fb1f",
+        "performance_measurement": {
+          "breakdown_seconds": {},
+          "elapsed_seconds": 1.7421353999525309,
+          "max_seconds": 1.82244380004704,
+          "median_seconds": 1.7822895999997854,
+          "milliseconds_per_step": 0.4653139422950136,
+          "min_seconds": 1.7421353999525309,
+          "repeats": 2,
+          "seconds_per_simulated_day": 0.011167534615080327
+        },
+        "steps_executed": 3744,
+        "workload": {
+          "category": "SIMULATION",
+          "crop": "tomato",
+          "cycles": 1,
+          "days": 156.0,
+          "environment": "outdoor",
+          "model_configuration_hash": "dfe86f2925d651e47d5c8c58ece3435df9d4659a1e877aca64b3f7ea73545b47",
+          "plots": 1,
+          "scenario": "COLD_WAVE",
+          "scenarios": 1,
+          "simulation_steps": 3744,
+          "workload_id": "scenario_tomato_outdoor_cold_wave"
+        }
+      },
+      {
+        "output_hash": "d2e97f039352b71fbb19371a890690d6ad6bef5c78a7252721aaed5200b014f1",
+        "performance_measurement": {
+          "breakdown_seconds": {},
+          "elapsed_seconds": 1.7226247999351472,
+          "max_seconds": 2.027298199944198,
+          "median_seconds": 1.8749614999396726,
+          "milliseconds_per_step": 0.460102777760456,
+          "min_seconds": 1.7226247999351472,
+          "repeats": 2,
+          "seconds_per_simulated_day": 0.011042466666250944
+        },
+        "steps_executed": 3744,
+        "workload": {
+          "category": "SIMULATION",
+          "crop": "tomato",
+          "cycles": 1,
+          "days": 156.0,
+          "environment": "outdoor",
+          "model_configuration_hash": "99f4beb1a28148939d40364621c4c090e95a507642eef06062e2f2f597459a97",
+          "plots": 1,
+          "scenario": "HEAT_WAVE_WITH_DRYNESS",
+          "scenarios": 1,
+          "simulation_steps": 3744,
+          "workload_id": "scenario_tomato_outdoor_heat_wave_with_dryness"
+        }
+      },
+      {
+        "output_hash": "372e9a81d6af402736b8e9c11b03734b992593028d32018e281b450d59638499",
+        "performance_measurement": {
+          "breakdown_seconds": {},
+          "elapsed_seconds": 0.47037779982201755,
+          "max_seconds": 0.5046751999761909,
+          "median_seconds": 0.48752649989910424,
+          "milliseconds_per_step": 0.466644642680573,
+          "min_seconds": 0.47037779982201755,
+          "repeats": 2,
+          "seconds_per_simulated_day": 0.011199471424333751
+        },
+        "steps_executed": 1008,
+        "workload": {
+          "category": "SIMULATION",
+          "crop": "lettuce",
+          "cycles": 1,
+          "days": 42.0,
+          "environment": "outdoor",
+          "model_configuration_hash": "9afc73f8086a401877f83a636be05ed0d484ae0ca75a4f4d8b224b94d64889de",
+          "plots": 1,
+          "scenario": "BASE_SEASON",
+          "scenarios": 1,
+          "simulation_steps": 1008,
+          "workload_id": "crop_lettuce_outdoor_full_season"
+        }
+      },
+      {
+        "output_hash": "70503178329436453b66bc9d50cabc79e7753dab3157d4bc6230112eabb83591",
+        "performance_measurement": {
+          "breakdown_seconds": {},
+          "elapsed_seconds": 2.1727158001158386,
+          "max_seconds": 2.2609886000864208,
+          "median_seconds": 2.2168522001011297,
+          "milliseconds_per_step": 0.46664858249910623,
+          "min_seconds": 2.1727158001158386,
+          "repeats": 2,
+          "seconds_per_simulated_day": 0.01119956597997855
+        },
+        "steps_executed": 4656,
+        "workload": {
+          "category": "SIMULATION",
+          "crop": "pepper",
+          "cycles": 1,
+          "days": 194.0,
+          "environment": "outdoor",
+          "model_configuration_hash": "f82784a85470208d295772a49a8d249f847196023b7f74aa186557bf2d6f6904",
+          "plots": 1,
+          "scenario": "BASE_SEASON",
+          "scenarios": 1,
+          "simulation_steps": 4656,
+          "workload_id": "crop_pepper_outdoor_full_season"
+        }
+      },
+      {
+        "output_hash": "a5860acbd9d1bf225ca1901a0f03610dffb3823230aab892d10fb38f0b208f1d",
+        "performance_measurement": {
+          "breakdown_seconds": {},
+          "elapsed_seconds": 3.323511000024155,
+          "max_seconds": 3.4627561001107097,
+          "median_seconds": 3.3931335500674322,
+          "milliseconds_per_step": 0.434105407526666,
+          "min_seconds": 3.323511000024155,
+          "repeats": 2,
+          "seconds_per_simulated_day": 0.010418529780639984
+        },
+        "steps_executed": 7656,
+        "workload": {
+          "category": "SIMULATION",
+          "crop": "grape",
+          "cycles": 1,
+          "days": 319.0,
+          "environment": "outdoor",
+          "model_configuration_hash": "38837b051bb9aa00abf10512fc304a6fd643e9848064553153544d20da117847",
+          "plots": 1,
+          "scenario": "BASE_SEASON",
+          "scenarios": 1,
+          "simulation_steps": 7656,
+          "workload_id": "crop_grape_outdoor_full_season"
+        }
+      },
+      {
+        "output_hash": "274d73a447398e6f1a4a5202b8fa2d7d37ec421f2ccd1b80399ea1452719d869",
+        "performance_measurement": {
+          "breakdown_seconds": {},
+          "elapsed_seconds": 2.335773600032553,
+          "max_seconds": 2.412462400039658,
+          "median_seconds": 2.3741180000361055,
+          "milliseconds_per_step": 0.40216487603866274,
+          "min_seconds": 2.335773600032553,
+          "repeats": 2,
+          "seconds_per_simulated_day": 0.009651957024927904
+        },
+        "steps_executed": 5808,
+        "workload": {
+          "category": "SIMULATION",
+          "crop": "peach",
+          "cycles": 1,
+          "days": 242.0,
+          "environment": "outdoor",
+          "model_configuration_hash": "1130c74b1931243a5090e08868368cad91a6f436edd79e7c8c6c9468a130c543",
+          "plots": 1,
+          "scenario": "BASE_SEASON",
+          "scenarios": 1,
+          "simulation_steps": 5808,
+          "workload_id": "crop_peach_outdoor_full_season"
+        }
+      },
+      {
+        "output_hash": "59b2e99a4da9db295064bdc8e652c6c1c331ebddfbea0f076f7c60b9312fff25",
+        "performance_measurement": {
+          "breakdown_seconds": {},
+          "elapsed_seconds": 2.5603634000290185,
+          "max_seconds": 2.6259477001149207,
+          "median_seconds": 2.5931555500719696,
+          "milliseconds_per_step": 0.44083391873777866,
+          "min_seconds": 2.5603634000290185,
+          "repeats": 2,
+          "seconds_per_simulated_day": 0.010580014049706689
+        },
+        "steps_executed": 5808,
+        "workload": {
+          "category": "SIMULATION",
+          "crop": "plum",
+          "cycles": 1,
+          "days": 242.0,
+          "environment": "outdoor",
+          "model_configuration_hash": "0271f908a5998ac9ab5b9b588ce55b5b9f16683107b1c53b6b7ac4603f66ab7d",
+          "plots": 1,
+          "scenario": "BASE_SEASON",
+          "scenarios": 1,
+          "simulation_steps": 5808,
+          "workload_id": "crop_plum_outdoor_full_season"
+        }
+      },
+      {
+        "output_hash": "eee49b5ef6912fb637ca374543cc52272fefb97e1a4aa4b954118495ce40a944",
+        "performance_measurement": {
+          "breakdown_seconds": {},
+          "elapsed_seconds": 2.334654700011015,
+          "max_seconds": 2.3466973998583853,
+          "median_seconds": 2.3406760499347,
+          "milliseconds_per_step": 0.40197222796332904,
+          "min_seconds": 2.334654700011015,
+          "repeats": 2,
+          "seconds_per_simulated_day": 0.009647333471119896
+        },
+        "steps_executed": 5808,
+        "workload": {
+          "category": "SIMULATION",
+          "crop": "apple",
+          "cycles": 1,
+          "days": 242.0,
+          "environment": "outdoor",
+          "model_configuration_hash": "d34e6a493eebc78cda69089d6442fa7752fc945f262d50827c4ef70d6483ae8a",
+          "plots": 1,
+          "scenario": "BASE_SEASON",
+          "scenarios": 1,
+          "simulation_steps": 5808,
+          "workload_id": "crop_apple_outdoor_full_season"
+        }
+      },
+      {
+        "output_hash": "298492659376a03f43ebfa0d1e49255fe0c141e873cf057c715e6fd798dddea3",
+        "performance_measurement": {
+          "breakdown_seconds": {},
+          "elapsed_seconds": 1.7216566998977214,
+          "max_seconds": 1.760628400137648,
+          "median_seconds": 1.7411425500176847,
+          "milliseconds_per_step": 0.4598442040325111,
+          "min_seconds": 1.7216566998977214,
+          "repeats": 2,
+          "seconds_per_simulated_day": 0.011036260896780265
+        },
+        "steps_executed": 3744,
+        "workload": {
+          "category": "SIMULATION",
+          "crop": "tomato",
+          "cycles": 1,
+          "days": 156.0,
+          "environment": "greenhouse",
+          "model_configuration_hash": "5707b9ea8e7ebf3d6107e9c30d588ecff678da87ad4198f31d303eb5c56ec916",
+          "plots": 1,
+          "scenario": "BASE_SEASON",
+          "scenarios": 1,
+          "simulation_steps": 3744,
+          "workload_id": "greenhouse_tomato_full_season"
+        }
+      },
+      {
+        "output_hash": "4d25b233ecf24ae10367e2662a3fe2abd711c3be5c316d5bb241de6826befdba",
+        "performance_measurement": {
+          "breakdown_seconds": {},
+          "elapsed_seconds": 0.4674400999210775,
+          "max_seconds": 0.47007529996335506,
+          "median_seconds": 0.4687576999422163,
+          "milliseconds_per_step": 0.4637302578582118,
+          "min_seconds": 0.4674400999210775,
+          "repeats": 2,
+          "seconds_per_simulated_day": 0.011129526188597083
+        },
+        "steps_executed": 1008,
+        "workload": {
+          "category": "SIMULATION",
+          "crop": "lettuce",
+          "cycles": 1,
+          "days": 42.0,
+          "environment": "greenhouse",
+          "model_configuration_hash": "f0dec8d4b8a5c1766726ff3314aaa80ff0194f7ede766a8616b3f5ac3bd5ffc1",
+          "plots": 1,
+          "scenario": "BASE_SEASON",
+          "scenarios": 1,
+          "simulation_steps": 1008,
+          "workload_id": "greenhouse_lettuce_full_season"
+        }
+      },
+      {
+        "output_hash": "946361e7b9353a54918285b72e2ab8a649e10225c03bda3e5e84d964967bcf63",
+        "performance_measurement": {
+          "breakdown_seconds": {},
+          "elapsed_seconds": 2.121249300194904,
+          "max_seconds": 2.3651334000751376,
+          "median_seconds": 2.243191350135021,
+          "milliseconds_per_step": 0.4555947809696959,
+          "min_seconds": 2.121249300194904,
+          "repeats": 2,
+          "seconds_per_simulated_day": 0.010934274743272703
+        },
+        "steps_executed": 4656,
+        "workload": {
+          "category": "SIMULATION",
+          "crop": "pepper",
+          "cycles": 1,
+          "days": 194.0,
+          "environment": "greenhouse",
+          "model_configuration_hash": "ad177a6123f25af2a38d1a4a52b3dc14968ec43fbca9b4a6c1ce1b1e49228452",
+          "plots": 1,
+          "scenario": "BASE_SEASON",
+          "scenarios": 1,
+          "simulation_steps": 4656,
+          "workload_id": "greenhouse_pepper_full_season"
+        }
+      },
+      {
+        "output_hash": "873c283d4793dd5e1e28354ffcbd798a342e9148cca1318b797442dcb8e7c15e",
+        "performance_measurement": {
+          "breakdown_seconds": {},
+          "elapsed_seconds": 1.9791516999248415,
+          "max_seconds": 1.9948307999875396,
+          "median_seconds": 1.9869912499561906,
+          "milliseconds_per_step": 0.39268882935016697,
+          "min_seconds": 1.9791516999248415,
+          "repeats": 2,
+          "seconds_per_simulated_day": 0.009424531904404006
+        },
+        "steps_executed": 5040,
+        "workload": {
+          "category": "SIMULATION",
+          "crop": "tomato+lettuce+pepper+grape+peach+plum+apple",
+          "cycles": 1,
+          "days": 30.0,
+          "environment": "outdoor",
+          "model_configuration_hash": "35bf8b3e4a8d82a4d9bba40f0cbe356c9c3632ff6e9191bc52e860fae13a8daa",
+          "plots": 7,
+          "scenario": "BASE_SEASON",
+          "scenarios": 1,
+          "simulation_steps": 5040,
+          "workload_id": "multi_plot_7_crops_outdoor"
+        }
+      },
+      {
+        "output_hash": "66dc1c3d77e0cbdcf514a899159643ab6501fa46608331c4c3c0e99f4a527b5b",
+        "performance_measurement": {
+          "breakdown_seconds": {},
+          "elapsed_seconds": 1.3596800998784602,
+          "max_seconds": 1.4359661999624223,
+          "median_seconds": 1.3978231499204412,
+          "milliseconds_per_step": 0.44962966265822096,
+          "min_seconds": 1.3596800998784602,
+          "repeats": 2,
+          "seconds_per_simulated_day": 0.010791111903797303
+        },
+        "steps_executed": 3024,
+        "workload": {
+          "category": "SIMULATION",
+          "crop": "lettuce",
+          "cycles": 3,
+          "days": 42.0,
+          "environment": "outdoor",
+          "model_configuration_hash": "9afc73f8086a401877f83a636be05ed0d484ae0ca75a4f4d8b224b94d64889de",
+          "plots": 1,
+          "scenario": "BASE_SEASON",
+          "scenarios": 1,
+          "simulation_steps": 3024,
+          "workload_id": "multi_cycle_lettuce_outdoor_x3"
+        }
+      },
+      {
+        "output_hash": "82cab6bcf8648d5081e9f18d75646dd96b3fc0e2563a7ebdc4e792d48be2bc60",
+        "performance_measurement": {
+          "breakdown_seconds": {},
+          "elapsed_seconds": 1.0847298000007868,
+          "max_seconds": 1.0852614999748766,
+          "median_seconds": 1.0849956499878317,
+          "milliseconds_per_step": 0.12382760273981584,
+          "min_seconds": 1.0847298000007868,
+          "repeats": 2,
+          "seconds_per_simulated_day": 0.0029718624657555804
+        },
+        "steps_executed": 8760,
+        "workload": {
+          "category": "SIMULATION",
+          "crop": "peach",
+          "cycles": 1,
+          "days": 365.0,
+          "environment": "outdoor",
+          "model_configuration_hash": "6e39f1be5e4a195e7ab16b45c8b59d4d2d606c7f1f4abfb4346444c5f6169f0e",
+          "plots": 1,
+          "scenario": "NH_38N_MEDITERRANEAN",
+          "scenarios": 1,
+          "simulation_steps": 8760,
+          "workload_id": "chilling_chilling_hours_default_peach_365d"
+        }
+      },
+      {
+        "output_hash": "bc073ca9c5a732e334f6668880723ade0dc072342702faefdbc618b1f6557764",
+        "performance_measurement": {
+          "breakdown_seconds": {},
+          "elapsed_seconds": 0.9923085998743773,
+          "max_seconds": 0.9931865001562983,
+          "median_seconds": 0.9927475500153378,
+          "milliseconds_per_step": 0.11327723742858188,
+          "min_seconds": 0.9923085998743773,
+          "repeats": 2,
+          "seconds_per_simulated_day": 0.002718653698285965
+        },
+        "steps_executed": 8760,
+        "workload": {
+          "category": "SIMULATION",
+          "crop": "peach",
+          "cycles": 1,
+          "days": 365.0,
+          "environment": "outdoor",
+          "model_configuration_hash": "384f22c9206a5d02975decf7c8d9cf2f8ac56977d31b250266e35366f9e4faae",
+          "plots": 1,
+          "scenario": "NH_38N_MEDITERRANEAN",
+          "scenarios": 1,
+          "simulation_steps": 8760,
+          "workload_id": "chilling_fixed_date_utah_peach_365d"
+        }
+      },
+      {
+        "output_hash": "054f3e5220982c4b73da32f1b38f444019c7968b1cc6c895590a3e85e6a0c9b7",
+        "performance_measurement": {
+          "breakdown_seconds": {},
+          "elapsed_seconds": 1.0834494999144226,
+          "max_seconds": 1.1489187001716346,
+          "median_seconds": 1.1161841000430286,
+          "milliseconds_per_step": 0.12368144976192039,
+          "min_seconds": 1.0834494999144226,
+          "repeats": 2,
+          "seconds_per_simulated_day": 0.0029683547942860895
+        },
+        "steps_executed": 8760,
+        "workload": {
+          "category": "SIMULATION",
+          "crop": "peach",
+          "cycles": 1,
+          "days": 365.0,
+          "environment": "outdoor",
+          "model_configuration_hash": "0069810375df32a15c9e4e54aa5c21ffab34601e3bc35d2a2b730a43334bb029",
+          "plots": 1,
+          "scenario": "NH_38N_MEDITERRANEAN",
+          "scenarios": 1,
+          "simulation_steps": 8760,
+          "workload_id": "chilling_dynamic_strict_peach_365d"
+        }
+      }
+    ],
+    "bottlenecks": [
+      {
+        "call_count": 26208,
+        "classification": "STATE_MANAGEMENT",
+        "component": "dataclasses.py",
+        "function": "_replace",
+        "percentage_of_workload": 14.404435066780781,
+        "time_per_call_seconds": 1.5672168803418805e-05,
+        "total_time_seconds": 0.41073620000000005,
+        "workload": "simulation"
+      },
+      {
+        "call_count": 26208,
+        "classification": "VALIDATION",
+        "component": "agri_twin/domain/models.py",
+        "function": "__post_init__",
+        "percentage_of_workload": 14.309992104035251,
+        "time_per_call_seconds": 1.556941391941392e-05,
+        "total_time_seconds": 0.40804320000000005,
+        "workload": "simulation"
+      },
+      {
+        "call_count": 1840440,
+        "classification": "PYTHON_OVERHEAD",
+        "component": "~",
+        "function": "<built-in method builtins.getattr>",
+        "percentage_of_workload": 10.462730187186791,
+        "time_per_call_seconds": 1.6210264936645584e-07,
+        "total_time_seconds": 0.2983402,
+        "workload": "simulation"
+      },
+      {
+        "call_count": 1012719,
+        "classification": "MODEL_COMPUTATION",
+        "component": "~",
+        "function": "<built-in method math.isfinite>",
+        "percentage_of_workload": 5.051979576051747,
+        "time_per_call_seconds": 1.4224577597536928e-07,
+        "total_time_seconds": 0.14405500000000002,
+        "workload": "simulation"
+      },
+      {
+        "call_count": 22464,
+        "classification": "MODEL_COMPUTATION",
+        "component": "agri_twin/application/weather.py",
+        "function": "_wave",
+        "percentage_of_workload": 3.5168307845481768,
+        "time_per_call_seconds": 4.464071403133903e-06,
+        "total_time_seconds": 0.1002809,
+        "workload": "simulation"
+      },
+      {
+        "call_count": 1476864,
+        "classification": "DIAGNOSTICS",
+        "component": "agri_twin/application/integrated_synthetic_validation.py",
+        "function": "_numeric_fields",
+        "percentage_of_workload": 38.397685562822154,
+        "time_per_call_seconds": 1.1484545699536315e-05,
+        "total_time_seconds": 16.9611121,
+        "workload": "validation"
+      },
+      {
+        "call_count": 38517423,
+        "classification": "PYTHON_OVERHEAD",
+        "component": "~",
+        "function": "<built-in method builtins.isinstance>",
+        "percentage_of_workload": 13.352186100310355,
+        "time_per_call_seconds": 1.531244107374473e-07,
+        "total_time_seconds": 5.8979577,
+        "workload": "validation"
+      },
+      {
+        "call_count": 1482549,
+        "classification": "SERIALIZATION",
+        "component": "dataclasses.py",
+        "function": "fields",
+        "percentage_of_workload": 12.495934011710002,
+        "time_per_call_seconds": 3.7231363685112604e-06,
+        "total_time_seconds": 5.519732100000001,
+        "workload": "validation"
+      },
+      {
+        "call_count": 24571107,
+        "classification": "PYTHON_OVERHEAD",
+        "component": "~",
+        "function": "<built-in method builtins.getattr>",
+        "percentage_of_workload": 9.647790416607293,
+        "time_per_call_seconds": 1.7344125765273826e-07,
+        "total_time_seconds": 4.2616437000000005,
+        "workload": "validation"
+      },
+      {
+        "call_count": 21829344,
+        "classification": "OTHER",
+        "component": "dataclasses.py",
+        "function": "<genexpr>",
+        "percentage_of_workload": 7.092632062132638,
+        "time_per_call_seconds": 1.4352118872651419e-07,
+        "total_time_seconds": 3.1329734,
+        "workload": "validation"
+      },
+      {
+        "call_count": 369216,
+        "classification": "DIAGNOSTICS",
+        "component": "agri_twin/application/integrated_synthetic_validation.py",
+        "function": "snapshot_numbers",
+        "percentage_of_workload": 5.528347721835731,
+        "time_per_call_seconds": 6.613998851620733e-06,
+        "total_time_seconds": 2.4419942000000003,
+        "workload": "validation"
+      }
+    ],
+    "cost_separation": {
+      "answer": {
+        "twin_simulation_seconds": 1.275150500005111,
+        "validation_and_reporting_infrastructure_seconds": 16.95154709997587
+      },
+      "infrastructure_to_simulation_ratio": 13.293761873526242,
+      "seconds": {
+        "checkpoint_restart_validation_seconds": 14.689185000024736,
+        "determinism_replay_seconds": 1.294349899981171,
+        "persistence_validation_seconds": 0.010419199941679835,
+        "serialization_hashing_seconds": 0.36264310008846223,
+        "simulation_seconds": 1.275150500005111,
+        "validation_seconds": 0.5949498999398202
+      },
+      "workload": {
+        "crop": "tomato",
+        "days": 156.0,
+        "environment": "outdoor",
+        "scenario": "BASE_SEASON",
+        "steps": 3744,
+        "trajectory_hash": "8e23a447e92c96f96ea2a6dd2895b2c9224de2134cf0d090b5eb427c393ebb61"
+      }
+    },
+    "environment": {
+      "concurrency": "none (sequential, single thread)",
+      "dont_write_bytecode": true,
+      "executable_is_venv": true,
+      "implementation": "CPython",
+      "platform": "Windows-10-10.0.19045-SP0",
+      "processor": "Intel64 Family 6 Model 94 Stepping 3, GenuineIntel",
+      "python": "3.13.9"
+    },
+    "frontend": {
+      "bands_seconds": {
+        "BACKGROUND_TASK": 120.0,
+        "INTERACTIVE": 1.0,
+        "INTERACTIVE_WITH_PROGRESS": 10.0
+      },
+      "basis": "simulation only (ScenarioRunner/orchestrator); validation, reporting and artifact writing excluded; single thread on the audit machine; advisory, technology-neutral",
+      "cases": {
+        "greenhouse_lettuce_full_season": {
+          "classification": "INTERACTIVE",
+          "seconds": 0.4674400999210775
+        },
+        "greenhouse_pepper_full_season": {
+          "classification": "INTERACTIVE_WITH_PROGRESS",
+          "seconds": 2.121249300194904
+        },
+        "greenhouse_tomato_full_season": {
+          "classification": "INTERACTIVE_WITH_PROGRESS",
+          "seconds": 1.7216566998977214
+        },
+        "interactive_full_season_one_crop_one_plot": {
+          "classification": "INTERACTIVE_WITH_PROGRESS",
+          "seconds": 1.7522752999793738
+        },
+        "interactive_short_one_crop_one_plot": {
+          "classification": "INTERACTIVE",
+          "seconds": 0.07098040007986128
+        },
+        "multi_plot_50_plots_full_season_estimate": {
+          "classification": "BACKGROUND_TASK",
+          "seconds": 79.45145000121558
+        },
+        "multi_plot_7_plots_full_season_estimate": {
+          "classification": "BACKGROUND_TASK",
+          "seconds": 11.12320300017018
+        }
+      }
+    },
+    "initialization": [
+      {
+        "component": "configuration.crop_config",
+        "kind": "CONFIGURATION",
+        "max_seconds": 0.002652199938893318,
+        "median_seconds": 0.0020748499082401395,
+        "min_seconds": 0.0018903999589383602,
+        "repeats": 10
+      },
+      {
+        "component": "configuration.farm_config",
+        "kind": "CONFIGURATION",
+        "max_seconds": 0.0025631000753492117,
+        "median_seconds": 0.0019236999796703458,
+        "min_seconds": 0.0018225000239908695,
+        "repeats": 10
+      },
+      {
+        "component": "configuration.growth_model_config",
+        "kind": "CONFIGURATION",
+        "max_seconds": 0.008001099806278944,
+        "median_seconds": 0.00649925007019192,
+        "min_seconds": 0.005990399979054928,
+        "repeats": 10
+      },
+      {
+        "component": "parameter_registry.from_repository",
+        "kind": "CONFIGURATION",
+        "max_seconds": 0.018256899900734425,
+        "median_seconds": 0.014773899922147393,
+        "min_seconds": 0.012812100118026137,
+        "repeats": 10
+      },
+      {
+        "component": "weather.engine",
+        "kind": "MODEL_SETUP",
+        "max_seconds": 7.369997911155224e-05,
+        "median_seconds": 2.9250048100948334e-05,
+        "min_seconds": 2.7999980375170708e-05,
+        "repeats": 10
+      },
+      {
+        "component": "phenology.engine_default",
+        "kind": "MODEL_SETUP",
+        "max_seconds": 1.4800112694501877e-05,
+        "median_seconds": 3.250082954764366e-06,
+        "min_seconds": 3.00002284348011e-06,
+        "repeats": 10
+      },
+      {
+        "component": "phenology.controller_canonical_configuration",
+        "kind": "MODEL_SETUP",
+        "max_seconds": 5.719996988773346e-05,
+        "median_seconds": 2.27498821914196e-05,
+        "min_seconds": 2.1799933165311813e-05,
+        "repeats": 10
+      },
+      {
+        "component": "greenhouse.engine",
+        "kind": "MODEL_SETUP",
+        "max_seconds": 1.1499971151351929e-05,
+        "median_seconds": 3.049965016543865e-06,
+        "min_seconds": 2.7997884899377823e-06,
+        "repeats": 10
+      },
+      {
+        "component": "scenario.build_campaign",
+        "kind": "SCENARIO_SETUP",
+        "max_seconds": 8.839997462928295e-05,
+        "median_seconds": 4.844984505325556e-05,
+        "min_seconds": 4.610000178217888e-05,
+        "repeats": 10
+      },
+      {
+        "component": "scenario.config_hash",
+        "kind": "SCENARIO_SETUP",
+        "max_seconds": 0.00020819995552301407,
+        "median_seconds": 0.00014215009286999702,
+        "min_seconds": 0.0001400001347064972,
+        "repeats": 10
+      },
+      {
+        "component": "orchestrator.construct",
+        "kind": "MODEL_SETUP",
+        "max_seconds": 7.639988325536251e-05,
+        "median_seconds": 4.2599975131452084e-05,
+        "min_seconds": 4.12999652326107e-05,
+        "repeats": 10
+      },
+      {
+        "component": "twin_state.repository",
+        "kind": "PERSISTENCE",
+        "max_seconds": 2.800021320581436e-06,
+        "median_seconds": 4.998873919248581e-07,
+        "min_seconds": 4.00003045797348e-07,
+        "repeats": 10
+      }
+    ],
+    "profiling_summary": {
+      "note": "cProfile overhead inflates absolute times; use percentages and call counts",
+      "simulation": {
+        "deterministic_call_counts": {
+          "agri_twin/application/clock.py:125(advance)": 3744,
+          "agri_twin/application/clock.py:133(_sync_from_real_time)": 7488,
+          "agri_twin/application/clock.py:148(_validate_speed)": 1,
+          "agri_twin/application/clock.py:155(_validate_seconds)": 3744,
+          "agri_twin/application/clock.py:41(__init__)": 1,
+          "agri_twin/application/clock.py:79(now)": 3744,
+          "agri_twin/application/orchestrator.py:63(__init__)": 1,
+          "agri_twin/application/orchestrator.py:82(_crop_environment)": 3744,
+          "agri_twin/application/orchestrator.py:88(step)": 3744,
+          "agri_twin/application/orchestrator.py:94(step_at)": 3744,
+          "agri_twin/application/performance_audit.py:449(<lambda>)": 1,
+          "agri_twin/application/providers.py:32(__init__)": 1,
+          "agri_twin/application/providers.py:35(get)": 3744,
+          "agri_twin/application/scenarios.py:146(__init__)": 1,
+          "agri_twin/application/scenarios.py:150(_ramp)": 3744,
+          "agri_twin/application/scenarios.py:161(get)": 3744,
+          "agri_twin/application/scenarios.py:204(run)": 1,
+          "agri_twin/application/scenarios.py:224(_irrigation)": 3744,
+          "agri_twin/application/scenarios.py:231(_fertilization)": 3744,
+          "agri_twin/application/scenarios.py:238(_actuators)": 3744,
+          "agri_twin/application/scenarios.py:63(active)": 7488,
+          "agri_twin/application/scenarios.py:98(config_hash)": 1,
+          "agri_twin/application/seasonal_synthetic_campaign.py:128(climate_profile)": 1,
+          "agri_twin/application/seasonal_synthetic_campaign.py:140(weather_configuration)": 1,
+          "agri_twin/application/seasonal_synthetic_campaign.py:159(_label)": 2,
+          "agri_twin/application/seasonal_synthetic_campaign.py:161(<genexpr>)": 2,
+          "agri_twin/application/seasonal_synthetic_campaign.py:164(seasonal_weather_factory)": 1,
+          "agri_twin/application/seasonal_synthetic_campaign.py:452(run)": 1,
+          "agri_twin/application/weather.py:135(_baseline_temperature)": 3744,
+          "agri_twin/application/weather.py:151(_temperature_variability)": 3744,
+          "agri_twin/application/weather.py:154(_daylight_window)": 7488,
+          "agri_twin/application/weather.py:164(_seasonal_cycle)": 11232,
+          "agri_twin/application/weather.py:171(_daily_anomaly)": 11232,
+          "agri_twin/application/weather.py:178(_day_anchor)": 22464,
+          "agri_twin/application/weather.py:182(_baseline_radiation)": 3744,
+          "agri_twin/application/weather.py:192(_radiation_variability)": 3744,
+          "agri_twin/application/weather.py:195(_is_night)": 3744,
+          "agri_twin/application/weather.py:200(_baseline_humidity)": 3744,
+          "agri_twin/application/weather.py:209(_humidity_variability)": 3744,
+          "agri_twin/application/weather.py:212(_baseline_wind)": 3744,
+          "agri_twin/application/weather.py:218(_baseline_pressure)": 3744,
+          "agri_twin/application/weather.py:22(__init__)": 2,
+          "agri_twin/application/weather.py:222(_apply_events)": 7488,
+          "agri_twin/application/weather.py:231(<genexpr>)": 7488,
+          "agri_twin/application/weather.py:240(<genexpr>)": 7488,
+          "agri_twin/application/weather.py:253(<genexpr>)": 7488,
+          "agri_twin/application/weather.py:259(<genexpr>)": 7488,
+          "agri_twin/application/weather.py:268(_rain)": 7488,
+          "agri_twin/application/weather.py:277(_wave)": 22464,
+          "agri_twin/application/weather.py:37(generate)": 7488,
+          "agri_twin/application/weather.py:42(<genexpr>)": 7488,
+          "agri_twin/domain/climate_stress.py:132(_ramp)": 8425,
+          "agri_twin/domain/climate_stress.py:136(_bounded)": 14976,
+          "agri_twin/domain/climate_stress.py:80(__init__)": 1,
+          "agri_twin/domain/climate_stress.py:83(profile_for)": 3744,
+          "agri_twin/domain/climate_stress.py:89(advance)": 3744,
+          "agri_twin/domain/crop_growth.py:73(co2_response)": 3744,
+          "agri_twin/domain/greenhouse.py:115(__post_init__)": 3744,
+          "agri_twin/domain/greenhouse.py:182(__init__)": 7488,
+          "agri_twin/domain/greenhouse.py:221(_validate)": 7488,
+          "agri_twin/domain/greenhouse.py:237(radiation_w_m2)": 3744,
+          "agri_twin/domain/greenhouse.py:245(to_dict)": 3744,
+          "agri_twin/domain/greenhouse.py:27(saturation_vapour_pressure_kpa)": 26208,
+          "agri_twin/domain/greenhouse.py:314(__init__)": 1,
+          "agri_twin/domain/greenhouse.py:319(profile_for)": 3744,
+          "agri_twin/domain/greenhouse.py:32(vapour_pressure_deficit_kpa)": 3744,
+          "agri_twin/domain/greenhouse.py:325(_normalize_actuators)": 7488,
+          "agri_twin/domain/greenhouse.py:36(saturation_vapour_density_kg_m3)": 14976,
+          "agri_twin/domain/greenhouse.py:362(step)": 3744,
+          "agri_twin/domain/greenhouse.py:41(vapour_density_kg_m3)": 7488,
+          "agri_twin/domain/greenhouse.py:433(_compute_state)": 3744,
+          "agri_twin/domain/greenhouse.py:50(_first_order)": 11232,
+          "agri_twin/domain/greenhouse.py:559(advance)": 3744,
+          "agri_twin/domain/greenhouse.py:73(__post_init__)": 3745,
+          "agri_twin/domain/greenhouse.py:94(__post_init__)": 3744,
+          "agri_twin/domain/models.py:11(_in_range)": 329472,
+          "agri_twin/domain/models.py:199(__post_init__)": 26208,
+          "agri_twin/domain/models.py:252(to_dict)": 1,
+          "agri_twin/domain/models.py:43(__post_init__)": 14976,
+          "agri_twin/domain/models.py:76(__post_init__)": 3744,
+          "agri_twin/domain/nutrient_balance.py:24(__post_init__)": 3744,
+          "agri_twin/domain/nutrient_balance.py:80(__init__)": 1,
+          "agri_twin/domain/nutrient_balance.py:83(profile_for)": 3744,
+          "agri_twin/domain/nutrient_balance.py:89(advance)": 3744,
+          "agri_twin/domain/phenology.py:166(__post_init__)": 1,
+          "agri_twin/domain/phenology.py:244(__post_init__)": 1,
+          "agri_twin/domain/phenology.py:430(start_policy)": 1,
+          "agri_twin/domain/phenology.py:435(chilling_model)": 1,
+          "agri_twin/domain/phenology.py:446(canonicalize_dormancy_configuration)": 1,
+          "agri_twin/domain/phenology.py:551(__init__)": 1,
+          "agri_twin/domain/phenology.py:596(__init__)": 1,
+          "agri_twin/domain/phenology.py:600(endodormant)": 7488,
+          "agri_twin/domain/phenology.py:610(profile_for)": 3744,
+          "agri_twin/domain/phenology.py:616(degree_days)": 3744,
+          "agri_twin/domain/phenology.py:623(advance)": 3744,
+          "agri_twin/domain/phenology.py:666(_stage_progress)": 3744,
+          "agri_twin/domain/radiation_growth.py:114(_partition)": 5562,
+          "agri_twin/domain/radiation_growth.py:117(<genexpr>)": 27810,
+          "agri_twin/domain/radiation_growth.py:124(_senesce)": 1926,
+          "agri_twin/domain/radiation_growth.py:59(__init__)": 1,
+          "agri_twin/domain/radiation_growth.py:62(profile_for)": 7488,
+          "agri_twin/domain/radiation_growth.py:68(par_mj_m2)": 5562,
+          "agri_twin/domain/radiation_growth.py:76(advance)": 7488,
+          "agri_twin/domain/water_balance.py:107(_irrigation_mm)": 3744,
+          "agri_twin/domain/water_balance.py:122(_et0_mm)": 3744,
+          "agri_twin/domain/water_balance.py:128(_water_stress)": 3744,
+          "agri_twin/domain/water_balance.py:34(__post_init__)": 3744,
+          "agri_twin/domain/water_balance.py:64(__init__)": 1,
+          "agri_twin/domain/water_balance.py:67(advance)": 3744,
+          "agri_twin/domain/weather.py:120(__post_init__)": 1,
+          "agri_twin/domain/weather.py:147(__post_init__)": 1,
+          "agri_twin/domain/weather.py:166(__post_init__)": 1,
+          "agri_twin/domain/weather.py:183(__post_init__)": 3,
+          "agri_twin/domain/weather.py:184(<genexpr>)": 27,
+          "agri_twin/domain/weather.py:25(normalize_utc)": 7488,
+          "agri_twin/domain/weather.py:31(_finite)": 20,
+          "agri_twin/domain/weather.py:37(_finite_configuration)": 5,
+          "agri_twin/domain/weather.py:50(__post_init__)": 1,
+          "agri_twin/domain/weather.py:67(__post_init__)": 1,
+          "agri_twin/domain/weather.py:81(__post_init__)": 1
+        },
+        "function_count": 189,
+        "profiled_seconds": 2.8514565000000007,
+        "time_by_classification": {
+          "ALLOCATION": {
+            "percentage": 9.118147164440347e-05,
+            "seconds": 2.6e-06
+          },
+          "I/O": {
+            "percentage": 0.12421020625774931,
+            "seconds": 0.0035418000000000003
+          },
+          "MODEL_COMPUTATION": {
+            "percentage": 37.527116405247625,
+            "seconds": 1.0700694
+          },
+          "OTHER": {
+            "percentage": 0.7829647760714566,
+            "seconds": 0.0223259
+          },
+          "PYTHON_OVERHEAD": {
+            "percentage": 18.64359494875689,
+            "seconds": 0.5316140000000001
+          },
+          "SERIALIZATION": {
+            "percentage": 2.2802697498629207,
+            "seconds": 0.0650209
+          },
+          "STATE_MANAGEMENT": {
+            "percentage": 21.31204175830843,
+            "seconds": 0.6077036000000001
+          },
+          "VALIDATION": {
+            "percentage": 19.329710974023268,
+            "seconds": 0.5511782999999999
+          }
+        },
+        "top_by_cumtime": [
+          {
+            "calls": 1,
+            "classification": "OTHER",
+            "cumtime_seconds": 3.2619958000000002,
+            "function": "agri_twin/application/performance_audit.py:449(<lambda>)",
+            "module": "agri_twin/application/performance_audit.py",
+            "name": "<lambda>",
+            "percentage_of_workload": 0.00024899555718279405,
+            "primitive_calls": 1,
+            "seconds_per_call": 7.100000000000001e-06,
+            "tottime_seconds": 7.100000000000001e-06
+          },
+          {
+            "calls": 1,
+            "classification": "VALIDATION",
+            "cumtime_seconds": 3.2619887000000003,
+            "function": "agri_twin/application/seasonal_synthetic_campaign.py:452(run)",
+            "module": "agri_twin/application/seasonal_synthetic_campaign.py",
+            "name": "run",
+            "percentage_of_workload": 0.0008802518993363566,
+            "primitive_calls": 1,
+            "seconds_per_call": 2.51e-05,
+            "tottime_seconds": 2.51e-05
+          },
+          {
+            "calls": 1,
+            "classification": "STATE_MANAGEMENT",
+            "cumtime_seconds": 3.2619636,
+            "function": "agri_twin/application/scenarios.py:204(run)",
+            "module": "agri_twin/application/scenarios.py",
+            "name": "run",
+            "percentage_of_workload": 1.0149935655690345,
+            "primitive_calls": 1,
+            "seconds_per_call": 0.028942100000000002,
+            "tottime_seconds": 0.028942100000000002
+          },
+          {
+            "calls": 3744,
+            "classification": "STATE_MANAGEMENT",
+            "cumtime_seconds": 3.1984879000000004,
+            "function": "agri_twin/application/orchestrator.py:88(step)",
+            "module": "agri_twin/application/orchestrator.py",
+            "name": "step",
+            "percentage_of_workload": 0.42523531395271147,
+            "primitive_calls": 3744,
+            "seconds_per_call": 3.2386217948717954e-06,
+            "tottime_seconds": 0.012125400000000001
+          },
+          {
+            "calls": 3744,
+            "classification": "STATE_MANAGEMENT",
+            "cumtime_seconds": 3.1560639000000004,
+            "function": "agri_twin/application/orchestrator.py:94(step_at)",
+            "module": "agri_twin/application/orchestrator.py",
+            "name": "step_at",
+            "percentage_of_workload": 1.5240246519629528,
+            "primitive_calls": 3744,
+            "seconds_per_call": 1.1607077991452991e-05,
+            "tottime_seconds": 0.0434569
+          },
+          {
+            "calls": 26208,
+            "classification": "STATE_MANAGEMENT",
+            "cumtime_seconds": 1.5601545,
+            "function": "dataclasses.py:1580(replace)",
+            "module": "dataclasses.py",
+            "name": "replace",
+            "percentage_of_workload": 1.671763184884637,
+            "primitive_calls": 26208,
+            "seconds_per_call": 1.818894993894994e-06,
+            "tottime_seconds": 0.047669600000000006
+          },
+          {
+            "calls": 26208,
+            "classification": "STATE_MANAGEMENT",
+            "cumtime_seconds": 1.4936217,
+            "function": "dataclasses.py:1599(_replace)",
+            "module": "dataclasses.py",
+            "name": "_replace",
+            "percentage_of_workload": 14.404435066780781,
+            "primitive_calls": 26208,
+            "seconds_per_call": 1.5672168803418805e-05,
+            "tottime_seconds": 0.41073620000000005
+          },
+          {
+            "calls": 7488,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.7187765,
+            "function": "agri_twin/application/weather.py:37(generate)",
+            "module": "agri_twin/application/weather.py",
+            "name": "generate",
+            "percentage_of_workload": 2.9373549973495994,
+            "primitive_calls": 3744,
+            "seconds_per_call": 1.1185550213675215e-05,
+            "tottime_seconds": 0.08375740000000001
+          },
+          {
+            "calls": 26208,
+            "classification": "VALIDATION",
+            "cumtime_seconds": 0.6710645000000001,
+            "function": "agri_twin/domain/models.py:199(__post_init__)",
+            "module": "agri_twin/domain/models.py",
+            "name": "__post_init__",
+            "percentage_of_workload": 14.309992104035251,
+            "primitive_calls": 26208,
+            "seconds_per_call": 1.556941391941392e-05,
+            "tottime_seconds": 0.40804320000000005
+          },
+          {
+            "calls": 3744,
+            "classification": "STATE_MANAGEMENT",
+            "cumtime_seconds": 0.6183671000000001,
+            "function": "agri_twin/application/scenarios.py:161(get)",
+            "module": "agri_twin/application/scenarios.py",
+            "name": "get",
+            "percentage_of_workload": 0.6072615871923699,
+            "primitive_calls": 3744,
+            "seconds_per_call": 4.624946581196582e-06,
+            "tottime_seconds": 0.017315800000000003
+          },
+          {
+            "calls": 7488,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.5291322,
+            "function": "agri_twin/domain/radiation_growth.py:76(advance)",
+            "module": "agri_twin/domain/radiation_growth.py",
+            "name": "advance",
+            "percentage_of_workload": 1.2641048530812233,
+            "primitive_calls": 7488,
+            "seconds_per_call": 4.813755341880343e-06,
+            "tottime_seconds": 0.036045400000000005
+          },
+          {
+            "calls": 3744,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.5008349000000001,
+            "function": "agri_twin/application/providers.py:35(get)",
+            "module": "agri_twin/application/providers.py",
+            "name": "get",
+            "percentage_of_workload": 0.09531269370583068,
+            "primitive_calls": 3744,
+            "seconds_per_call": 7.259081196581197e-07,
+            "tottime_seconds": 0.0027178000000000003
+          },
+          {
+            "calls": 3744,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.3865736,
+            "function": "agri_twin/domain/greenhouse.py:559(advance)",
+            "module": "agri_twin/domain/greenhouse.py",
+            "name": "advance",
+            "percentage_of_workload": 1.3862634762269734,
+            "primitive_calls": 3744,
+            "seconds_per_call": 1.0557879273504274e-05,
+            "tottime_seconds": 0.0395287
+          },
+          {
+            "calls": 3744,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.3116438,
+            "function": "agri_twin/domain/climate_stress.py:89(advance)",
+            "module": "agri_twin/domain/climate_stress.py",
+            "name": "advance",
+            "percentage_of_workload": 1.5906502518975822,
+            "primitive_calls": 3744,
+            "seconds_per_call": 1.2114503205128206e-05,
+            "tottime_seconds": 0.0453567
+          },
+          {
+            "calls": 3744,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.3002245,
+            "function": "agri_twin/domain/nutrient_balance.py:89(advance)",
+            "module": "agri_twin/domain/nutrient_balance.py",
+            "name": "advance",
+            "percentage_of_workload": 1.000443106882395,
+            "primitive_calls": 3744,
+            "seconds_per_call": 7.619444444444445e-06,
+            "tottime_seconds": 0.028527200000000003
+          },
+          {
+            "calls": 1840440,
+            "classification": "PYTHON_OVERHEAD",
+            "cumtime_seconds": 0.2983402,
+            "function": "~:0(<built-in method builtins.getattr>)",
+            "module": "~",
+            "name": "<built-in method builtins.getattr>",
+            "percentage_of_workload": 10.462730187186791,
+            "primitive_calls": 1840440,
+            "seconds_per_call": 1.6210264936645584e-07,
+            "tottime_seconds": 0.2983402
+          },
+          {
+            "calls": 3744,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.28987640000000003,
+            "function": "agri_twin/domain/phenology.py:623(advance)",
+            "module": "agri_twin/domain/phenology.py",
+            "name": "advance",
+            "percentage_of_workload": 1.1168222275177613,
+            "primitive_calls": 3744,
+            "seconds_per_call": 8.50579594017094e-06,
+            "tottime_seconds": 0.031845700000000005
+          },
+          {
+            "calls": 3744,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.17997110000000002,
+            "function": "agri_twin/domain/greenhouse.py:362(step)",
+            "module": "agri_twin/domain/greenhouse.py",
+            "name": "step",
+            "percentage_of_workload": 0.8582806716497339,
+            "primitive_calls": 3744,
+            "seconds_per_call": 6.536725427350428e-06,
+            "tottime_seconds": 0.024473500000000002
+          },
+          {
+            "calls": 22464,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.1449387,
+            "function": "agri_twin/application/weather.py:277(_wave)",
+            "module": "agri_twin/application/weather.py",
+            "name": "_wave",
+            "percentage_of_workload": 3.5168307845481768,
+            "primitive_calls": 22464,
+            "seconds_per_call": 4.464071403133903e-06,
+            "tottime_seconds": 0.1002809
+          },
+          {
+            "calls": 1012719,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.14405500000000002,
+            "function": "~:0(<built-in method math.isfinite>)",
+            "module": "~",
+            "name": "<built-in method math.isfinite>",
+            "percentage_of_workload": 5.051979576051747,
+            "primitive_calls": 1012719,
+            "seconds_per_call": 1.4224577597536928e-07,
+            "tottime_seconds": 0.14405500000000002
+          },
+          {
+            "calls": 3744,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.14170390000000002,
+            "function": "agri_twin/domain/greenhouse.py:433(_compute_state)",
+            "module": "agri_twin/domain/greenhouse.py",
+            "name": "_compute_state",
+            "percentage_of_workload": 1.511652027656743,
+            "primitive_calls": 3744,
+            "seconds_per_call": 1.1512847222222222e-05,
+            "tottime_seconds": 0.0431041
+          },
+          {
+            "calls": 1926,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.1120724,
+            "function": "agri_twin/domain/radiation_growth.py:124(_senesce)",
+            "module": "agri_twin/domain/radiation_growth.py",
+            "name": "_senesce",
+            "percentage_of_workload": 0.12388756412731526,
+            "primitive_calls": 1926,
+            "seconds_per_call": 1.834164070612669e-06,
+            "tottime_seconds": 0.0035326000000000003
+          },
+          {
+            "calls": 7488,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.1016533,
+            "function": "agri_twin/domain/greenhouse.py:182(__init__)",
+            "module": "agri_twin/domain/greenhouse.py",
+            "name": "__init__",
+            "percentage_of_workload": 1.147031350469488,
+            "primitive_calls": 7488,
+            "seconds_per_call": 4.367935363247864e-06,
+            "tottime_seconds": 0.0327071
+          },
+          {
+            "calls": 11232,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.1005486,
+            "function": "agri_twin/application/weather.py:171(_daily_anomaly)",
+            "module": "agri_twin/application/weather.py",
+            "name": "_daily_anomaly",
+            "percentage_of_workload": 0.7666853764032521,
+            "primitive_calls": 11232,
+            "seconds_per_call": 1.9463764245014246e-06,
+            "tottime_seconds": 0.0218617
+          },
+          {
+            "calls": 14976,
+            "classification": "VALIDATION",
+            "cumtime_seconds": 0.0938056,
+            "function": "agri_twin/domain/models.py:43(__post_init__)",
+            "module": "agri_twin/domain/models.py",
+            "name": "__post_init__",
+            "percentage_of_workload": 1.9298242845366915,
+            "primitive_calls": 14976,
+            "seconds_per_call": 3.6744190705128207e-06,
+            "tottime_seconds": 0.0550281
+          }
+        ],
+        "top_by_tottime": [
+          {
+            "calls": 26208,
+            "classification": "STATE_MANAGEMENT",
+            "cumtime_seconds": 1.4936217,
+            "function": "dataclasses.py:1599(_replace)",
+            "module": "dataclasses.py",
+            "name": "_replace",
+            "percentage_of_workload": 14.404435066780781,
+            "primitive_calls": 26208,
+            "seconds_per_call": 1.5672168803418805e-05,
+            "tottime_seconds": 0.41073620000000005
+          },
+          {
+            "calls": 26208,
+            "classification": "VALIDATION",
+            "cumtime_seconds": 0.6710645000000001,
+            "function": "agri_twin/domain/models.py:199(__post_init__)",
+            "module": "agri_twin/domain/models.py",
+            "name": "__post_init__",
+            "percentage_of_workload": 14.309992104035251,
+            "primitive_calls": 26208,
+            "seconds_per_call": 1.556941391941392e-05,
+            "tottime_seconds": 0.40804320000000005
+          },
+          {
+            "calls": 1840440,
+            "classification": "PYTHON_OVERHEAD",
+            "cumtime_seconds": 0.2983402,
+            "function": "~:0(<built-in method builtins.getattr>)",
+            "module": "~",
+            "name": "<built-in method builtins.getattr>",
+            "percentage_of_workload": 10.462730187186791,
+            "primitive_calls": 1840440,
+            "seconds_per_call": 1.6210264936645584e-07,
+            "tottime_seconds": 0.2983402
+          },
+          {
+            "calls": 1012719,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.14405500000000002,
+            "function": "~:0(<built-in method math.isfinite>)",
+            "module": "~",
+            "name": "<built-in method math.isfinite>",
+            "percentage_of_workload": 5.051979576051747,
+            "primitive_calls": 1012719,
+            "seconds_per_call": 1.4224577597536928e-07,
+            "tottime_seconds": 0.14405500000000002
+          },
+          {
+            "calls": 22464,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.1449387,
+            "function": "agri_twin/application/weather.py:277(_wave)",
+            "module": "agri_twin/application/weather.py",
+            "name": "_wave",
+            "percentage_of_workload": 3.5168307845481768,
+            "primitive_calls": 22464,
+            "seconds_per_call": 4.464071403133903e-06,
+            "tottime_seconds": 0.1002809
+          },
+          {
+            "calls": 7488,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.7187765,
+            "function": "agri_twin/application/weather.py:37(generate)",
+            "module": "agri_twin/application/weather.py",
+            "name": "generate",
+            "percentage_of_workload": 2.9373549973495994,
+            "primitive_calls": 3744,
+            "seconds_per_call": 1.1185550213675215e-05,
+            "tottime_seconds": 0.08375740000000001
+          },
+          {
+            "calls": 14976,
+            "classification": "VALIDATION",
+            "cumtime_seconds": 0.0938056,
+            "function": "agri_twin/domain/models.py:43(__post_init__)",
+            "module": "agri_twin/domain/models.py",
+            "name": "__post_init__",
+            "percentage_of_workload": 1.9298242845366915,
+            "primitive_calls": 14976,
+            "seconds_per_call": 3.6744190705128207e-06,
+            "tottime_seconds": 0.0550281
+          },
+          {
+            "calls": 22464,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.0736011,
+            "function": "agri_twin/application/weather.py:178(_day_anchor)",
+            "module": "agri_twin/application/weather.py",
+            "name": "_day_anchor",
+            "percentage_of_workload": 1.8409468985411488,
+            "primitive_calls": 22464,
+            "seconds_per_call": 2.3367966524216525e-06,
+            "tottime_seconds": 0.0524938
+          },
+          {
+            "calls": 329472,
+            "classification": "VALIDATION",
+            "cumtime_seconds": 0.0493323,
+            "function": "agri_twin/domain/models.py:11(_in_range)",
+            "module": "agri_twin/domain/models.py",
+            "name": "_in_range",
+            "percentage_of_workload": 1.7300737360012326,
+            "primitive_calls": 329472,
+            "seconds_per_call": 1.4973138840326342e-07,
+            "tottime_seconds": 0.0493323
+          },
+          {
+            "calls": 26208,
+            "classification": "STATE_MANAGEMENT",
+            "cumtime_seconds": 1.5601545,
+            "function": "dataclasses.py:1580(replace)",
+            "module": "dataclasses.py",
+            "name": "replace",
+            "percentage_of_workload": 1.671763184884637,
+            "primitive_calls": 26208,
+            "seconds_per_call": 1.818894993894994e-06,
+            "tottime_seconds": 0.047669600000000006
+          },
+          {
+            "calls": 3744,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.3116438,
+            "function": "agri_twin/domain/climate_stress.py:89(advance)",
+            "module": "agri_twin/domain/climate_stress.py",
+            "name": "advance",
+            "percentage_of_workload": 1.5906502518975822,
+            "primitive_calls": 3744,
+            "seconds_per_call": 1.2114503205128206e-05,
+            "tottime_seconds": 0.0453567
+          },
+          {
+            "calls": 3744,
+            "classification": "STATE_MANAGEMENT",
+            "cumtime_seconds": 3.1560639000000004,
+            "function": "agri_twin/application/orchestrator.py:94(step_at)",
+            "module": "agri_twin/application/orchestrator.py",
+            "name": "step_at",
+            "percentage_of_workload": 1.5240246519629528,
+            "primitive_calls": 3744,
+            "seconds_per_call": 1.1607077991452991e-05,
+            "tottime_seconds": 0.0434569
+          },
+          {
+            "calls": 3744,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.14170390000000002,
+            "function": "agri_twin/domain/greenhouse.py:433(_compute_state)",
+            "module": "agri_twin/domain/greenhouse.py",
+            "name": "_compute_state",
+            "percentage_of_workload": 1.511652027656743,
+            "primitive_calls": 3744,
+            "seconds_per_call": 1.1512847222222222e-05,
+            "tottime_seconds": 0.0431041
+          },
+          {
+            "calls": 7488,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.0689462,
+            "function": "agri_twin/domain/greenhouse.py:221(_validate)",
+            "module": "agri_twin/domain/greenhouse.py",
+            "name": "_validate",
+            "percentage_of_workload": 1.4974277180802158,
+            "primitive_calls": 7488,
+            "seconds_per_call": 5.702256944444444e-06,
+            "tottime_seconds": 0.0426985
+          },
+          {
+            "calls": 211861,
+            "classification": "PYTHON_OVERHEAD",
+            "cumtime_seconds": 0.0413697,
+            "function": "~:0(<built-in method builtins.max>)",
+            "module": "~",
+            "name": "<built-in method builtins.max>",
+            "percentage_of_workload": 1.4508269721105682,
+            "primitive_calls": 211861,
+            "seconds_per_call": 1.952681239114325e-07,
+            "tottime_seconds": 0.0413697
+          },
+          {
+            "calls": 3744,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.3865736,
+            "function": "agri_twin/domain/greenhouse.py:559(advance)",
+            "module": "agri_twin/domain/greenhouse.py",
+            "name": "advance",
+            "percentage_of_workload": 1.3862634762269734,
+            "primitive_calls": 3744,
+            "seconds_per_call": 1.0557879273504274e-05,
+            "tottime_seconds": 0.0395287
+          },
+          {
+            "calls": 7488,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.5291322,
+            "function": "agri_twin/domain/radiation_growth.py:76(advance)",
+            "module": "agri_twin/domain/radiation_growth.py",
+            "name": "advance",
+            "percentage_of_workload": 1.2641048530812233,
+            "primitive_calls": 7488,
+            "seconds_per_call": 4.813755341880343e-06,
+            "tottime_seconds": 0.036045400000000005
+          },
+          {
+            "calls": 11232,
+            "classification": "PYTHON_OVERHEAD",
+            "cumtime_seconds": 0.034747600000000003,
+            "function": "~:0(<method 'timetuple' of 'datetime.datetime' objects>)",
+            "module": "~",
+            "name": "<method 'timetuple' of 'datetime.datetime' objects>",
+            "percentage_of_workload": 1.2185912708119515,
+            "primitive_calls": 11232,
+            "seconds_per_call": 3.0936253561253566e-06,
+            "tottime_seconds": 0.034747600000000003
+          },
+          {
+            "calls": 7488,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.1016533,
+            "function": "agri_twin/domain/greenhouse.py:182(__init__)",
+            "module": "agri_twin/domain/greenhouse.py",
+            "name": "__init__",
+            "percentage_of_workload": 1.147031350469488,
+            "primitive_calls": 7488,
+            "seconds_per_call": 4.367935363247864e-06,
+            "tottime_seconds": 0.0327071
+          },
+          {
+            "calls": 3744,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.0765879,
+            "function": "agri_twin/domain/water_balance.py:67(advance)",
+            "module": "agri_twin/domain/water_balance.py",
+            "name": "advance",
+            "percentage_of_workload": 1.1404277077346259,
+            "primitive_calls": 3744,
+            "seconds_per_call": 8.685576923076924e-06,
+            "tottime_seconds": 0.0325188
+          },
+          {
+            "calls": 3744,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.28987640000000003,
+            "function": "agri_twin/domain/phenology.py:623(advance)",
+            "module": "agri_twin/domain/phenology.py",
+            "name": "advance",
+            "percentage_of_workload": 1.1168222275177613,
+            "primitive_calls": 3744,
+            "seconds_per_call": 8.50579594017094e-06,
+            "tottime_seconds": 0.031845700000000005
+          },
+          {
+            "calls": 30013,
+            "classification": "SERIALIZATION",
+            "cumtime_seconds": 0.05607790000000001,
+            "function": "dataclasses.py:1362(_asdict_inner)",
+            "module": "dataclasses.py",
+            "name": "_asdict_inner",
+            "percentage_of_workload": 1.066174426998974,
+            "primitive_calls": 3748,
+            "seconds_per_call": 1.0129443907640023e-06,
+            "tottime_seconds": 0.0304015
+          },
+          {
+            "calls": 1,
+            "classification": "STATE_MANAGEMENT",
+            "cumtime_seconds": 3.2619636,
+            "function": "agri_twin/application/scenarios.py:204(run)",
+            "module": "agri_twin/application/scenarios.py",
+            "name": "run",
+            "percentage_of_workload": 1.0149935655690345,
+            "primitive_calls": 1,
+            "seconds_per_call": 0.028942100000000002,
+            "tottime_seconds": 0.028942100000000002
+          },
+          {
+            "calls": 3744,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.3002245,
+            "function": "agri_twin/domain/nutrient_balance.py:89(advance)",
+            "module": "agri_twin/domain/nutrient_balance.py",
+            "name": "advance",
+            "percentage_of_workload": 1.000443106882395,
+            "primitive_calls": 3744,
+            "seconds_per_call": 7.619444444444445e-06,
+            "tottime_seconds": 0.028527200000000003
+          },
+          {
+            "calls": 7488,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.050960200000000004,
+            "function": "agri_twin/application/weather.py:222(_apply_events)",
+            "module": "agri_twin/application/weather.py",
+            "name": "_apply_events",
+            "percentage_of_workload": 0.9571073589935528,
+            "primitive_calls": 7488,
+            "seconds_per_call": 3.644698183760684e-06,
+            "tottime_seconds": 0.027291500000000003
+          }
+        ],
+        "total_calls": 4884538,
+        "workload": "simulation: tomato passive greenhouse BASE_SEASON campaign (ScenarioRunner)"
+      },
+      "validation": {
+        "deterministic_call_counts": {
+          "agri_twin/application/clock.py:125(advance)": 5652,
+          "agri_twin/application/clock.py:133(_sync_from_real_time)": 11304,
+          "agri_twin/application/clock.py:148(_validate_speed)": 3,
+          "agri_twin/application/clock.py:155(_validate_seconds)": 5652,
+          "agri_twin/application/clock.py:41(__init__)": 3,
+          "agri_twin/application/clock.py:79(now)": 5652,
+          "agri_twin/application/integrated_synthetic_validation.py:416(_numeric_fields)": 1476864,
+          "agri_twin/application/integrated_synthetic_validation.py:423(snapshot_numbers)": 369216,
+          "agri_twin/application/integrated_synthetic_validation.py:438(trajectory_hash)": 1,
+          "agri_twin/application/integrated_synthetic_validation.py:465(validate_trajectory)": 1,
+          "agri_twin/application/integrated_synthetic_validation.py:474(<genexpr>)": 239616,
+          "agri_twin/application/integrated_synthetic_validation.py:835(checkpoint_payload)": 3,
+          "agri_twin/application/integrated_synthetic_validation.py:845(restore_checkpoint)": 3,
+          "agri_twin/application/integrated_synthetic_validation.py:852(resumed_scenario)": 3,
+          "agri_twin/application/orchestrator.py:63(__init__)": 3,
+          "agri_twin/application/orchestrator.py:82(_crop_environment)": 5652,
+          "agri_twin/application/orchestrator.py:88(step)": 5652,
+          "agri_twin/application/orchestrator.py:94(step_at)": 5652,
+          "agri_twin/application/performance_audit.py:450(<lambda>)": 1,
+          "agri_twin/application/providers.py:32(__init__)": 3,
+          "agri_twin/application/providers.py:35(get)": 5652,
+          "agri_twin/application/scenarios.py:146(__init__)": 3,
+          "agri_twin/application/scenarios.py:150(_ramp)": 5652,
+          "agri_twin/application/scenarios.py:161(get)": 5652,
+          "agri_twin/application/scenarios.py:204(run)": 3,
+          "agri_twin/application/scenarios.py:224(_irrigation)": 5652,
+          "agri_twin/application/scenarios.py:231(_fertilization)": 5652,
+          "agri_twin/application/scenarios.py:238(_actuators)": 5652,
+          "agri_twin/application/scenarios.py:57(__post_init__)": 3,
+          "agri_twin/application/scenarios.py:63(active)": 11304,
+          "agri_twin/application/scenarios.py:88(__post_init__)": 3,
+          "agri_twin/application/scenarios.py:95(<genexpr>)": 6,
+          "agri_twin/application/scenarios.py:98(config_hash)": 3,
+          "agri_twin/application/seasonal_synthetic_campaign.py:128(climate_profile)": 3,
+          "agri_twin/application/seasonal_synthetic_campaign.py:140(weather_configuration)": 3,
+          "agri_twin/application/seasonal_synthetic_campaign.py:159(_label)": 6,
+          "agri_twin/application/seasonal_synthetic_campaign.py:161(<genexpr>)": 6,
+          "agri_twin/application/seasonal_synthetic_campaign.py:164(seasonal_weather_factory)": 3,
+          "agri_twin/application/seasonal_synthetic_campaign.py:216(start)": 3744,
+          "agri_twin/application/seasonal_synthetic_campaign.py:220(timestep_seconds)": 3745,
+          "agri_twin/application/seasonal_synthetic_campaign.py:224(initial_crop)": 1,
+          "agri_twin/application/seasonal_synthetic_campaign.py:228(perennial)": 3746,
+          "agri_twin/application/seasonal_synthetic_campaign.py:328(stress_exposure)": 1,
+          "agri_twin/application/seasonal_synthetic_campaign.py:332(<lambda>)": 11232,
+          "agri_twin/application/seasonal_synthetic_campaign.py:333(<lambda>)": 11232,
+          "agri_twin/application/seasonal_synthetic_campaign.py:334(<lambda>)": 11232,
+          "agri_twin/application/seasonal_synthetic_campaign.py:335(<lambda>)": 11232,
+          "agri_twin/application/seasonal_synthetic_campaign.py:336(<lambda>)": 11232,
+          "agri_twin/application/seasonal_synthetic_campaign.py:337(<lambda>)": 11232,
+          "agri_twin/application/seasonal_synthetic_campaign.py:340(<genexpr>)": 6549,
+          "agri_twin/application/seasonal_synthetic_campaign.py:345(response_metrics)": 1,
+          "agri_twin/application/seasonal_synthetic_campaign.py:352(<genexpr>)": 1,
+          "agri_twin/application/seasonal_synthetic_campaign.py:353(<genexpr>)": 18725,
+          "agri_twin/application/seasonal_synthetic_campaign.py:353(<lambda>)": 5,
+          "agri_twin/application/seasonal_synthetic_campaign.py:359(<genexpr>)": 3745,
+          "agri_twin/application/seasonal_synthetic_campaign.py:360(<genexpr>)": 3745,
+          "agri_twin/application/seasonal_synthetic_campaign.py:361(<genexpr>)": 3745,
+          "agri_twin/application/seasonal_synthetic_campaign.py:362(<genexpr>)": 3745,
+          "agri_twin/application/seasonal_synthetic_campaign.py:363(<genexpr>)": 3745,
+          "agri_twin/application/seasonal_synthetic_campaign.py:364(<genexpr>)": 3745,
+          "agri_twin/application/seasonal_synthetic_campaign.py:365(<genexpr>)": 3745,
+          "agri_twin/application/seasonal_synthetic_campaign.py:366(<genexpr>)": 3745,
+          "agri_twin/application/seasonal_synthetic_campaign.py:367(<genexpr>)": 3745,
+          "agri_twin/application/seasonal_synthetic_campaign.py:368(<genexpr>)": 3745,
+          "agri_twin/application/seasonal_synthetic_campaign.py:369(<lambda>)": 3744,
+          "agri_twin/application/seasonal_synthetic_campaign.py:370(<lambda>)": 3744,
+          "agri_twin/application/seasonal_synthetic_campaign.py:371(<lambda>)": 3744,
+          "agri_twin/application/seasonal_synthetic_campaign.py:372(<lambda>)": 3744,
+          "agri_twin/application/seasonal_synthetic_campaign.py:373(<lambda>)": 3744,
+          "agri_twin/application/seasonal_synthetic_campaign.py:457(evaluate)": 1,
+          "agri_twin/application/seasonal_synthetic_campaign.py:483(_campaign_invariants)": 1,
+          "agri_twin/application/seasonal_synthetic_campaign.py:494(<genexpr>)": 3745,
+          "agri_twin/application/seasonal_synthetic_campaign.py:501(<genexpr>)": 3744,
+          "agri_twin/application/seasonal_synthetic_campaign.py:503(<genexpr>)": 3744,
+          "agri_twin/application/seasonal_synthetic_campaign.py:506(<genexpr>)": 3745,
+          "agri_twin/application/seasonal_synthetic_campaign.py:507(<genexpr>)": 3745,
+          "agri_twin/application/seasonal_synthetic_campaign.py:641(restart)": 1,
+          "agri_twin/application/seasonal_synthetic_campaign.py:652(<genexpr>)": 5655,
+          "agri_twin/application/seasonal_synthetic_campaign.py:653(<genexpr>)": 361728,
+          "agri_twin/application/seasonal_synthetic_campaign.py:655(<genexpr>)": 4,
+          "agri_twin/application/weather.py:135(_baseline_temperature)": 5652,
+          "agri_twin/application/weather.py:151(_temperature_variability)": 5652,
+          "agri_twin/application/weather.py:154(_daylight_window)": 11304,
+          "agri_twin/application/weather.py:164(_seasonal_cycle)": 16956,
+          "agri_twin/application/weather.py:171(_daily_anomaly)": 16956,
+          "agri_twin/application/weather.py:178(_day_anchor)": 33912,
+          "agri_twin/application/weather.py:182(_baseline_radiation)": 5652,
+          "agri_twin/application/weather.py:192(_radiation_variability)": 5652,
+          "agri_twin/application/weather.py:195(_is_night)": 5652,
+          "agri_twin/application/weather.py:200(_baseline_humidity)": 5652,
+          "agri_twin/application/weather.py:209(_humidity_variability)": 5652,
+          "agri_twin/application/weather.py:212(_baseline_wind)": 5652,
+          "agri_twin/application/weather.py:218(_baseline_pressure)": 5652,
+          "agri_twin/application/weather.py:22(__init__)": 6,
+          "agri_twin/application/weather.py:222(_apply_events)": 11304,
+          "agri_twin/application/weather.py:231(<genexpr>)": 11304,
+          "agri_twin/application/weather.py:240(<genexpr>)": 11304,
+          "agri_twin/application/weather.py:253(<genexpr>)": 11304,
+          "agri_twin/application/weather.py:259(<genexpr>)": 11304,
+          "agri_twin/application/weather.py:268(_rain)": 11304,
+          "agri_twin/application/weather.py:277(_wave)": 33912,
+          "agri_twin/application/weather.py:37(generate)": 11304,
+          "agri_twin/application/weather.py:42(<genexpr>)": 11304,
+          "agri_twin/domain/climate_stress.py:132(_ramp)": 12385,
+          "agri_twin/domain/climate_stress.py:136(_bounded)": 22608,
+          "agri_twin/domain/climate_stress.py:80(__init__)": 3,
+          "agri_twin/domain/climate_stress.py:83(profile_for)": 5652,
+          "agri_twin/domain/climate_stress.py:89(advance)": 5652,
+          "agri_twin/domain/crop_growth.py:73(co2_response)": 9396,
+          "agri_twin/domain/greenhouse.py:115(__post_init__)": 5652,
+          "agri_twin/domain/greenhouse.py:182(__init__)": 11307,
+          "agri_twin/domain/greenhouse.py:221(_validate)": 11307,
+          "agri_twin/domain/greenhouse.py:237(radiation_w_m2)": 5652,
+          "agri_twin/domain/greenhouse.py:245(to_dict)": 374874,
+          "agri_twin/domain/greenhouse.py:27(saturation_vapour_pressure_kpa)": 39564,
+          "agri_twin/domain/greenhouse.py:314(__init__)": 3,
+          "agri_twin/domain/greenhouse.py:319(profile_for)": 5652,
+          "agri_twin/domain/greenhouse.py:32(vapour_pressure_deficit_kpa)": 5652,
+          "agri_twin/domain/greenhouse.py:325(_normalize_actuators)": 11304,
+          "agri_twin/domain/greenhouse.py:36(saturation_vapour_density_kg_m3)": 22608,
+          "agri_twin/domain/greenhouse.py:362(step)": 5652,
+          "agri_twin/domain/greenhouse.py:41(vapour_density_kg_m3)": 11304,
+          "agri_twin/domain/greenhouse.py:433(_compute_state)": 5652,
+          "agri_twin/domain/greenhouse.py:50(_first_order)": 16956,
+          "agri_twin/domain/greenhouse.py:559(advance)": 5652,
+          "agri_twin/domain/greenhouse.py:73(__post_init__)": 5655,
+          "agri_twin/domain/greenhouse.py:94(__post_init__)": 5652,
+          "agri_twin/domain/models.py:11(_in_range)": 497412,
+          "agri_twin/domain/models.py:199(__post_init__)": 39567,
+          "agri_twin/domain/models.py:252(to_dict)": 6,
+          "agri_twin/domain/models.py:43(__post_init__)": 22608,
+          "agri_twin/domain/models.py:76(__post_init__)": 5655,
+          "agri_twin/domain/nutrient_balance.py:24(__post_init__)": 5652,
+          "agri_twin/domain/nutrient_balance.py:80(__init__)": 3,
+          "agri_twin/domain/nutrient_balance.py:83(profile_for)": 5652,
+          "agri_twin/domain/nutrient_balance.py:89(advance)": 5652,
+          "agri_twin/domain/phenology.py:166(__post_init__)": 3,
+          "agri_twin/domain/phenology.py:244(__post_init__)": 3,
+          "agri_twin/domain/phenology.py:430(start_policy)": 3,
+          "agri_twin/domain/phenology.py:435(chilling_model)": 3,
+          "agri_twin/domain/phenology.py:446(canonicalize_dormancy_configuration)": 3,
+          "agri_twin/domain/phenology.py:551(__init__)": 3,
+          "agri_twin/domain/phenology.py:596(__init__)": 3,
+          "agri_twin/domain/phenology.py:600(endodormant)": 11304,
+          "agri_twin/domain/phenology.py:610(profile_for)": 5652,
+          "agri_twin/domain/phenology.py:616(degree_days)": 5652,
+          "agri_twin/domain/phenology.py:623(advance)": 5652,
+          "agri_twin/domain/phenology.py:666(_stage_progress)": 5652,
+          "agri_twin/domain/radiation_growth.py:114(_partition)": 5556,
+          "agri_twin/domain/radiation_growth.py:117(<genexpr>)": 27780,
+          "agri_twin/domain/radiation_growth.py:124(_senesce)": 5748,
+          "agri_twin/domain/radiation_growth.py:59(__init__)": 5,
+          "agri_twin/domain/radiation_growth.py:62(profile_for)": 11306,
+          "agri_twin/domain/radiation_growth.py:68(par_mj_m2)": 5556,
+          "agri_twin/domain/radiation_growth.py:76(advance)": 11304,
+          "agri_twin/domain/water_balance.py:107(_irrigation_mm)": 5652,
+          "agri_twin/domain/water_balance.py:122(_et0_mm)": 5652,
+          "agri_twin/domain/water_balance.py:128(_water_stress)": 5652,
+          "agri_twin/domain/water_balance.py:34(__post_init__)": 5652,
+          "agri_twin/domain/water_balance.py:64(__init__)": 3,
+          "agri_twin/domain/water_balance.py:67(advance)": 5652,
+          "agri_twin/domain/weather.py:120(__post_init__)": 3,
+          "agri_twin/domain/weather.py:147(__post_init__)": 3,
+          "agri_twin/domain/weather.py:166(__post_init__)": 3,
+          "agri_twin/domain/weather.py:183(__post_init__)": 9,
+          "agri_twin/domain/weather.py:184(<genexpr>)": 81,
+          "agri_twin/domain/weather.py:25(normalize_utc)": 11304,
+          "agri_twin/domain/weather.py:31(_finite)": 60,
+          "agri_twin/domain/weather.py:37(_finite_configuration)": 15,
+          "agri_twin/domain/weather.py:50(__post_init__)": 3,
+          "agri_twin/domain/weather.py:67(__post_init__)": 3,
+          "agri_twin/domain/weather.py:81(__post_init__)": 3
+        },
+        "function_count": 253,
+        "profiled_seconds": 44.17222509999999,
+        "time_by_classification": {
+          "ALLOCATION": {
+            "percentage": 6.45201819366804e-05,
+            "seconds": 2.85e-05
+          },
+          "DIAGNOSTICS": {
+            "percentage": 43.92603328465788,
+            "seconds": 19.4031063
+          },
+          "I/O": {
+            "percentage": 0.012156281436680448,
+            "seconds": 0.005369700000000001
+          },
+          "MODEL_COMPUTATION": {
+            "percentage": 3.7689203933718085,
+            "seconds": 1.6648160000000003
+          },
+          "OTHER": {
+            "percentage": 7.153303671813445,
+            "seconds": 3.1597733999999997
+          },
+          "PYTHON_OVERHEAD": {
+            "percentage": 25.902405355622452,
+            "seconds": 11.441668800000002
+          },
+          "SERIALIZATION": {
+            "percentage": 13.351466417298509,
+            "seconds": 5.897639800000001
+          },
+          "STATE_MANAGEMENT": {
+            "percentage": 2.1635921618990395,
+            "seconds": 0.9557068
+          },
+          "VALIDATION": {
+            "percentage": 3.7220579137182748,
+            "seconds": 1.6441157999999998
+          }
+        },
+        "top_by_cumtime": [
+          {
+            "calls": 1,
+            "classification": "OTHER",
+            "cumtime_seconds": 44.835307400000005,
+            "function": "agri_twin/application/performance_audit.py:450(<lambda>)",
+            "module": "agri_twin/application/performance_audit.py",
+            "name": "<lambda>",
+            "percentage_of_workload": 0.001898930828367983,
+            "primitive_calls": 1,
+            "seconds_per_call": 0.0008388,
+            "tottime_seconds": 0.0008388
+          },
+          {
+            "calls": 1,
+            "classification": "VALIDATION",
+            "cumtime_seconds": 43.4450586,
+            "function": "agri_twin/application/seasonal_synthetic_campaign.py:641(restart)",
+            "module": "agri_twin/application/seasonal_synthetic_campaign.py",
+            "name": "restart",
+            "percentage_of_workload": 0.009644974846422218,
+            "primitive_calls": 1,
+            "seconds_per_call": 0.0042604,
+            "tottime_seconds": 0.0042604
+          },
+          {
+            "calls": 325261,
+            "classification": "PYTHON_OVERHEAD",
+            "cumtime_seconds": 38.4405516,
+            "function": "~:0(<built-in method builtins.max>)",
+            "module": "~",
+            "name": "<built-in method builtins.max>",
+            "percentage_of_workload": 0.3846738524385543,
+            "primitive_calls": 319609,
+            "seconds_per_call": 5.224081583712772e-07,
+            "tottime_seconds": 0.16991900000000001
+          },
+          {
+            "calls": 369216,
+            "classification": "DIAGNOSTICS",
+            "cumtime_seconds": 38.392700600000005,
+            "function": "agri_twin/application/integrated_synthetic_validation.py:423(snapshot_numbers)",
+            "module": "agri_twin/application/integrated_synthetic_validation.py",
+            "name": "snapshot_numbers",
+            "percentage_of_workload": 5.528347721835731,
+            "primitive_calls": 369216,
+            "seconds_per_call": 6.613998851620733e-06,
+            "tottime_seconds": 2.4419942000000003
+          },
+          {
+            "calls": 361728,
+            "classification": "VALIDATION",
+            "cumtime_seconds": 37.659236400000005,
+            "function": "agri_twin/application/seasonal_synthetic_campaign.py:653(<genexpr>)",
+            "module": "agri_twin/application/seasonal_synthetic_campaign.py",
+            "name": "<genexpr>",
+            "percentage_of_workload": 1.3473867314870678,
+            "primitive_calls": 361728,
+            "seconds_per_call": 1.6453542440728948e-06,
+            "tottime_seconds": 0.5951707
+          },
+          {
+            "calls": 1476864,
+            "classification": "DIAGNOSTICS",
+            "cumtime_seconds": 35.576453300000004,
+            "function": "agri_twin/application/integrated_synthetic_validation.py:416(_numeric_fields)",
+            "module": "agri_twin/application/integrated_synthetic_validation.py",
+            "name": "_numeric_fields",
+            "percentage_of_workload": 38.397685562822154,
+            "primitive_calls": 1476864,
+            "seconds_per_call": 1.1484545699536315e-05,
+            "tottime_seconds": 16.9611121
+          },
+          {
+            "calls": 1482549,
+            "classification": "SERIALIZATION",
+            "cumtime_seconds": 9.2678475,
+            "function": "dataclasses.py:1308(fields)",
+            "module": "dataclasses.py",
+            "name": "fields",
+            "percentage_of_workload": 12.495934011710002,
+            "primitive_calls": 1482549,
+            "seconds_per_call": 3.7231363685112604e-06,
+            "tottime_seconds": 5.519732100000001
+          },
+          {
+            "calls": 38517423,
+            "classification": "PYTHON_OVERHEAD",
+            "cumtime_seconds": 5.917763600000001,
+            "function": "~:0(<built-in method builtins.isinstance>)",
+            "module": "~",
+            "name": "<built-in method builtins.isinstance>",
+            "percentage_of_workload": 13.352186100310355,
+            "primitive_calls": 38506119,
+            "seconds_per_call": 1.531244107374473e-07,
+            "tottime_seconds": 5.8979577
+          },
+          {
+            "calls": 3,
+            "classification": "STATE_MANAGEMENT",
+            "cumtime_seconds": 5.0648193,
+            "function": "agri_twin/application/scenarios.py:204(run)",
+            "module": "agri_twin/application/scenarios.py",
+            "name": "run",
+            "percentage_of_workload": 0.10250060959686635,
+            "primitive_calls": 3,
+            "seconds_per_call": 0.015092266666666668,
+            "tottime_seconds": 0.045276800000000006
+          },
+          {
+            "calls": 5652,
+            "classification": "STATE_MANAGEMENT",
+            "cumtime_seconds": 4.9644623,
+            "function": "agri_twin/application/orchestrator.py:88(step)",
+            "module": "agri_twin/application/orchestrator.py",
+            "name": "step",
+            "percentage_of_workload": 0.041430785880877,
+            "primitive_calls": 5652,
+            "seconds_per_call": 3.237951167728238e-06,
+            "tottime_seconds": 0.018300900000000002
+          },
+          {
+            "calls": 5652,
+            "classification": "STATE_MANAGEMENT",
+            "cumtime_seconds": 4.898994500000001,
+            "function": "agri_twin/application/orchestrator.py:94(step_at)",
+            "module": "agri_twin/application/orchestrator.py",
+            "name": "step_at",
+            "percentage_of_workload": 0.15495642305780066,
+            "primitive_calls": 5652,
+            "seconds_per_call": 1.2110350318471337e-05,
+            "tottime_seconds": 0.0684477
+          },
+          {
+            "calls": 24571107,
+            "classification": "PYTHON_OVERHEAD",
+            "cumtime_seconds": 4.2616437000000005,
+            "function": "~:0(<built-in method builtins.getattr>)",
+            "module": "~",
+            "name": "<built-in method builtins.getattr>",
+            "percentage_of_workload": 9.647790416607293,
+            "primitive_calls": 24571107,
+            "seconds_per_call": 1.7344125765273826e-07,
+            "tottime_seconds": 4.2616437000000005
+          },
+          {
+            "calls": 21829344,
+            "classification": "OTHER",
+            "cumtime_seconds": 3.1329734,
+            "function": "dataclasses.py:1323(<genexpr>)",
+            "module": "dataclasses.py",
+            "name": "<genexpr>",
+            "percentage_of_workload": 7.092632062132638,
+            "primitive_calls": 21829344,
+            "seconds_per_call": 1.4352118872651419e-07,
+            "tottime_seconds": 3.1329734
+          },
+          {
+            "calls": 39570,
+            "classification": "STATE_MANAGEMENT",
+            "cumtime_seconds": 2.4417302000000003,
+            "function": "dataclasses.py:1580(replace)",
+            "module": "dataclasses.py",
+            "name": "replace",
+            "percentage_of_workload": 0.16438565147129075,
+            "primitive_calls": 39570,
+            "seconds_per_call": 1.8350467525903464e-06,
+            "tottime_seconds": 0.0726128
+          },
+          {
+            "calls": 39570,
+            "classification": "STATE_MANAGEMENT",
+            "cumtime_seconds": 2.3397976000000003,
+            "function": "dataclasses.py:1599(_replace)",
+            "module": "dataclasses.py",
+            "name": "_replace",
+            "percentage_of_workload": 1.4704762971064371,
+            "primitive_calls": 39570,
+            "seconds_per_call": 1.641501389941875e-05,
+            "tottime_seconds": 0.6495421
+          },
+          {
+            "calls": 1,
+            "classification": "VALIDATION",
+            "cumtime_seconds": 1.38941,
+            "function": "agri_twin/application/seasonal_synthetic_campaign.py:457(evaluate)",
+            "module": "agri_twin/application/seasonal_synthetic_campaign.py",
+            "name": "evaluate",
+            "percentage_of_workload": 0.00031897872403081646,
+            "primitive_calls": 1,
+            "seconds_per_call": 0.0001409,
+            "tottime_seconds": 0.0001409
+          },
+          {
+            "calls": 11304,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 1.1169789,
+            "function": "agri_twin/application/weather.py:37(generate)",
+            "module": "agri_twin/application/weather.py",
+            "name": "generate",
+            "percentage_of_workload": 0.294302357885974,
+            "primitive_calls": 5652,
+            "seconds_per_call": 1.1500345010615712e-05,
+            "tottime_seconds": 0.1299999
+          },
+          {
+            "calls": 39567,
+            "classification": "VALIDATION",
+            "cumtime_seconds": 1.0510195,
+            "function": "agri_twin/domain/models.py:199(__post_init__)",
+            "module": "agri_twin/domain/models.py",
+            "name": "__post_init__",
+            "percentage_of_workload": 1.452471770547054,
+            "primitive_calls": 39567,
+            "seconds_per_call": 1.621525766421513e-05,
+            "tottime_seconds": 0.6415891
+          },
+          {
+            "calls": 5652,
+            "classification": "STATE_MANAGEMENT",
+            "cumtime_seconds": 0.9609188000000001,
+            "function": "agri_twin/application/scenarios.py:161(get)",
+            "module": "agri_twin/application/scenarios.py",
+            "name": "get",
+            "percentage_of_workload": 0.06172181713345476,
+            "primitive_calls": 5652,
+            "seconds_per_call": 4.823761500353857e-06,
+            "tottime_seconds": 0.0272639
+          },
+          {
+            "calls": 11304,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.8055295,
+            "function": "agri_twin/domain/radiation_growth.py:76(advance)",
+            "module": "agri_twin/domain/radiation_growth.py",
+            "name": "advance",
+            "percentage_of_workload": 0.10325062841355487,
+            "primitive_calls": 11304,
+            "seconds_per_call": 4.034686836518047e-06,
+            "tottime_seconds": 0.045608100000000006
+          },
+          {
+            "calls": 5652,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.7784898,
+            "function": "agri_twin/application/providers.py:35(get)",
+            "module": "agri_twin/application/providers.py",
+            "name": "get",
+            "percentage_of_workload": 0.00947518489395727,
+            "primitive_calls": 5652,
+            "seconds_per_call": 7.405166312809625e-07,
+            "tottime_seconds": 0.004185400000000001
+          },
+          {
+            "calls": 1,
+            "classification": "VALIDATION",
+            "cumtime_seconds": 0.7712046,
+            "function": "agri_twin/application/integrated_synthetic_validation.py:438(trajectory_hash)",
+            "module": "agri_twin/application/integrated_synthetic_validation.py",
+            "name": "trajectory_hash",
+            "percentage_of_workload": 0.08821561492948203,
+            "primitive_calls": 1,
+            "seconds_per_call": 0.0389668,
+            "tottime_seconds": 0.0389668
+          },
+          {
+            "calls": 5652,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.6037795,
+            "function": "agri_twin/domain/greenhouse.py:559(advance)",
+            "module": "agri_twin/domain/greenhouse.py",
+            "name": "advance",
+            "percentage_of_workload": 0.1399474440331058,
+            "primitive_calls": 5652,
+            "seconds_per_call": 1.0937349610757254e-05,
+            "tottime_seconds": 0.0618179
+          },
+          {
+            "calls": 1,
+            "classification": "VALIDATION",
+            "cumtime_seconds": 0.5278900000000001,
+            "function": "agri_twin/application/integrated_synthetic_validation.py:465(validate_trajectory)",
+            "module": "agri_twin/application/integrated_synthetic_validation.py",
+            "name": "validate_trajectory",
+            "percentage_of_workload": 0.04424929909179514,
+            "primitive_calls": 1,
+            "seconds_per_call": 0.0195459,
+            "tottime_seconds": 0.0195459
+          },
+          {
+            "calls": 5652,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.4846537,
+            "function": "agri_twin/domain/climate_stress.py:89(advance)",
+            "module": "agri_twin/domain/climate_stress.py",
+            "name": "advance",
+            "percentage_of_workload": 0.15824423569733193,
+            "primitive_calls": 5652,
+            "seconds_per_call": 1.2367303609341827e-05,
+            "tottime_seconds": 0.0699
+          }
+        ],
+        "top_by_tottime": [
+          {
+            "calls": 1476864,
+            "classification": "DIAGNOSTICS",
+            "cumtime_seconds": 35.576453300000004,
+            "function": "agri_twin/application/integrated_synthetic_validation.py:416(_numeric_fields)",
+            "module": "agri_twin/application/integrated_synthetic_validation.py",
+            "name": "_numeric_fields",
+            "percentage_of_workload": 38.397685562822154,
+            "primitive_calls": 1476864,
+            "seconds_per_call": 1.1484545699536315e-05,
+            "tottime_seconds": 16.9611121
+          },
+          {
+            "calls": 38517423,
+            "classification": "PYTHON_OVERHEAD",
+            "cumtime_seconds": 5.917763600000001,
+            "function": "~:0(<built-in method builtins.isinstance>)",
+            "module": "~",
+            "name": "<built-in method builtins.isinstance>",
+            "percentage_of_workload": 13.352186100310355,
+            "primitive_calls": 38506119,
+            "seconds_per_call": 1.531244107374473e-07,
+            "tottime_seconds": 5.8979577
+          },
+          {
+            "calls": 1482549,
+            "classification": "SERIALIZATION",
+            "cumtime_seconds": 9.2678475,
+            "function": "dataclasses.py:1308(fields)",
+            "module": "dataclasses.py",
+            "name": "fields",
+            "percentage_of_workload": 12.495934011710002,
+            "primitive_calls": 1482549,
+            "seconds_per_call": 3.7231363685112604e-06,
+            "tottime_seconds": 5.519732100000001
+          },
+          {
+            "calls": 24571107,
+            "classification": "PYTHON_OVERHEAD",
+            "cumtime_seconds": 4.2616437000000005,
+            "function": "~:0(<built-in method builtins.getattr>)",
+            "module": "~",
+            "name": "<built-in method builtins.getattr>",
+            "percentage_of_workload": 9.647790416607293,
+            "primitive_calls": 24571107,
+            "seconds_per_call": 1.7344125765273826e-07,
+            "tottime_seconds": 4.2616437000000005
+          },
+          {
+            "calls": 21829344,
+            "classification": "OTHER",
+            "cumtime_seconds": 3.1329734,
+            "function": "dataclasses.py:1323(<genexpr>)",
+            "module": "dataclasses.py",
+            "name": "<genexpr>",
+            "percentage_of_workload": 7.092632062132638,
+            "primitive_calls": 21829344,
+            "seconds_per_call": 1.4352118872651419e-07,
+            "tottime_seconds": 3.1329734
+          },
+          {
+            "calls": 369216,
+            "classification": "DIAGNOSTICS",
+            "cumtime_seconds": 38.392700600000005,
+            "function": "agri_twin/application/integrated_synthetic_validation.py:423(snapshot_numbers)",
+            "module": "agri_twin/application/integrated_synthetic_validation.py",
+            "name": "snapshot_numbers",
+            "percentage_of_workload": 5.528347721835731,
+            "primitive_calls": 369216,
+            "seconds_per_call": 6.613998851620733e-06,
+            "tottime_seconds": 2.4419942000000003
+          },
+          {
+            "calls": 39570,
+            "classification": "STATE_MANAGEMENT",
+            "cumtime_seconds": 2.3397976000000003,
+            "function": "dataclasses.py:1599(_replace)",
+            "module": "dataclasses.py",
+            "name": "_replace",
+            "percentage_of_workload": 1.4704762971064371,
+            "primitive_calls": 39570,
+            "seconds_per_call": 1.641501389941875e-05,
+            "tottime_seconds": 0.6495421
+          },
+          {
+            "calls": 39567,
+            "classification": "VALIDATION",
+            "cumtime_seconds": 1.0510195,
+            "function": "agri_twin/domain/models.py:199(__post_init__)",
+            "module": "agri_twin/domain/models.py",
+            "name": "__post_init__",
+            "percentage_of_workload": 1.452471770547054,
+            "primitive_calls": 39567,
+            "seconds_per_call": 1.621525766421513e-05,
+            "tottime_seconds": 0.6415891
+          },
+          {
+            "calls": 361728,
+            "classification": "VALIDATION",
+            "cumtime_seconds": 37.659236400000005,
+            "function": "agri_twin/application/seasonal_synthetic_campaign.py:653(<genexpr>)",
+            "module": "agri_twin/application/seasonal_synthetic_campaign.py",
+            "name": "<genexpr>",
+            "percentage_of_workload": 1.3473867314870678,
+            "primitive_calls": 361728,
+            "seconds_per_call": 1.6453542440728948e-06,
+            "tottime_seconds": 0.5951707
+          },
+          {
+            "calls": 1537167,
+            "classification": "PYTHON_OVERHEAD",
+            "cumtime_seconds": 0.34453350000000005,
+            "function": "~:0(<method 'values' of 'dict' objects>)",
+            "module": "~",
+            "name": "<method 'values' of 'dict' objects>",
+            "percentage_of_workload": 0.7799776878344309,
+            "primitive_calls": 1537167,
+            "seconds_per_call": 2.2413537371020848e-07,
+            "tottime_seconds": 0.34453350000000005
+          },
+          {
+            "calls": 374874,
+            "classification": "SERIALIZATION",
+            "cumtime_seconds": 0.2782336,
+            "function": "agri_twin/domain/greenhouse.py:245(to_dict)",
+            "module": "agri_twin/domain/greenhouse.py",
+            "name": "to_dict",
+            "percentage_of_workload": 0.6298835962420196,
+            "primitive_calls": 374874,
+            "seconds_per_call": 7.422056477643155e-07,
+            "tottime_seconds": 0.2782336
+          },
+          {
+            "calls": 3744,
+            "classification": "PYTHON_OVERHEAD",
+            "cumtime_seconds": 0.2657759,
+            "function": "~:0(<built-in method builtins.repr>)",
+            "module": "~",
+            "name": "<built-in method builtins.repr>",
+            "percentage_of_workload": 0.6016810323643852,
+            "primitive_calls": 3744,
+            "seconds_per_call": 7.098715277777778e-05,
+            "tottime_seconds": 0.2657759
+          },
+          {
+            "calls": 1765743,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.24726610000000002,
+            "function": "~:0(<built-in method math.isfinite>)",
+            "module": "~",
+            "name": "<built-in method math.isfinite>",
+            "percentage_of_workload": 0.5597773248692425,
+            "primitive_calls": 1765743,
+            "seconds_per_call": 1.4003515800430755e-07,
+            "tottime_seconds": 0.24726610000000002
+          },
+          {
+            "calls": 325261,
+            "classification": "PYTHON_OVERHEAD",
+            "cumtime_seconds": 38.4405516,
+            "function": "~:0(<built-in method builtins.max>)",
+            "module": "~",
+            "name": "<built-in method builtins.max>",
+            "percentage_of_workload": 0.3846738524385543,
+            "primitive_calls": 319609,
+            "seconds_per_call": 5.224081583712772e-07,
+            "tottime_seconds": 0.16991900000000001
+          },
+          {
+            "calls": 33912,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.2265658,
+            "function": "agri_twin/application/weather.py:277(_wave)",
+            "module": "agri_twin/application/weather.py",
+            "name": "_wave",
+            "percentage_of_workload": 0.35670673062833785,
+            "primitive_calls": 33912,
+            "seconds_per_call": 4.646299245104978e-06,
+            "tottime_seconds": 0.15756530000000002
+          },
+          {
+            "calls": 11304,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 1.1169789,
+            "function": "agri_twin/application/weather.py:37(generate)",
+            "module": "agri_twin/application/weather.py",
+            "name": "generate",
+            "percentage_of_workload": 0.294302357885974,
+            "primitive_calls": 5652,
+            "seconds_per_call": 1.1500345010615712e-05,
+            "tottime_seconds": 0.1299999
+          },
+          {
+            "calls": 384270,
+            "classification": "PYTHON_OVERHEAD",
+            "cumtime_seconds": 0.1052344,
+            "function": "~:0(<method 'items' of 'dict' objects>)",
+            "module": "~",
+            "name": "<method 'items' of 'dict' objects>",
+            "percentage_of_workload": 0.23823658364903158,
+            "primitive_calls": 384270,
+            "seconds_per_call": 2.7385536211517944e-07,
+            "tottime_seconds": 0.1052344
+          },
+          {
+            "calls": 22608,
+            "classification": "VALIDATION",
+            "cumtime_seconds": 0.1454485,
+            "function": "agri_twin/domain/models.py:43(__post_init__)",
+            "module": "agri_twin/domain/models.py",
+            "name": "__post_init__",
+            "percentage_of_workload": 0.19279830211677526,
+            "primitive_calls": 22608,
+            "seconds_per_call": 3.766954175513093e-06,
+            "tottime_seconds": 0.08516330000000001
+          },
+          {
+            "calls": 33912,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.1143763,
+            "function": "agri_twin/application/weather.py:178(_day_anchor)",
+            "module": "agri_twin/application/weather.py",
+            "name": "_day_anchor",
+            "percentage_of_workload": 0.18568636697452676,
+            "primitive_calls": 33912,
+            "seconds_per_call": 2.418665958952583e-06,
+            "tottime_seconds": 0.0820218
+          },
+          {
+            "calls": 497412,
+            "classification": "VALIDATION",
+            "cumtime_seconds": 0.0785474,
+            "function": "agri_twin/domain/models.py:11(_in_range)",
+            "module": "agri_twin/domain/models.py",
+            "name": "_in_range",
+            "percentage_of_workload": 0.1778207908299372,
+            "primitive_calls": 497412,
+            "seconds_per_call": 1.5791215330550932e-07,
+            "tottime_seconds": 0.0785474
+          },
+          {
+            "calls": 39570,
+            "classification": "STATE_MANAGEMENT",
+            "cumtime_seconds": 2.4417302000000003,
+            "function": "dataclasses.py:1580(replace)",
+            "module": "dataclasses.py",
+            "name": "replace",
+            "percentage_of_workload": 0.16438565147129075,
+            "primitive_calls": 39570,
+            "seconds_per_call": 1.8350467525903464e-06,
+            "tottime_seconds": 0.0726128
+          },
+          {
+            "calls": 5652,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.4846537,
+            "function": "agri_twin/domain/climate_stress.py:89(advance)",
+            "module": "agri_twin/domain/climate_stress.py",
+            "name": "advance",
+            "percentage_of_workload": 0.15824423569733193,
+            "primitive_calls": 5652,
+            "seconds_per_call": 1.2367303609341827e-05,
+            "tottime_seconds": 0.0699
+          },
+          {
+            "calls": 5652,
+            "classification": "STATE_MANAGEMENT",
+            "cumtime_seconds": 4.898994500000001,
+            "function": "agri_twin/application/orchestrator.py:94(step_at)",
+            "module": "agri_twin/application/orchestrator.py",
+            "name": "step_at",
+            "percentage_of_workload": 0.15495642305780066,
+            "primitive_calls": 5652,
+            "seconds_per_call": 1.2110350318471337e-05,
+            "tottime_seconds": 0.0684477
+          },
+          {
+            "calls": 5652,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.2210591,
+            "function": "agri_twin/domain/greenhouse.py:433(_compute_state)",
+            "module": "agri_twin/domain/greenhouse.py",
+            "name": "_compute_state",
+            "percentage_of_workload": 0.152545858506005,
+            "primitive_calls": 5652,
+            "seconds_per_call": 1.1921956829440908e-05,
+            "tottime_seconds": 0.06738290000000001
+          },
+          {
+            "calls": 11307,
+            "classification": "MODEL_COMPUTATION",
+            "cumtime_seconds": 0.1069071,
+            "function": "agri_twin/domain/greenhouse.py:221(_validate)",
+            "module": "agri_twin/domain/greenhouse.py",
+            "name": "_validate",
+            "percentage_of_workload": 0.15128420596588876,
+            "primitive_calls": 11307,
+            "seconds_per_call": 5.910108782170337e-06,
+            "tottime_seconds": 0.0668256
+          }
+        ],
+        "total_calls": 96329046,
+        "workload": "validation: Phase 5.32 evaluate + checkpoint/restart of the same campaign"
+      }
+    },
+    "reporting": {
+      "bytes": 16883,
+      "note": "report construction includes the builder's own validation (climate profile checks over a synthetic year, determinism replay, restarts, persistence, static audit)",
+      "report": "SeasonalSyntheticCampaignSuite(lettuce, BASE_SEASON) Phase 5.32 builder",
+      "seconds": {
+        "artifact_writing_including_serialization": 0.0022028000093996525,
+        "json_serialization": 0.000443900004029274,
+        "of_which_campaign_simulation": 0.792,
+        "report_construction_total": 3.6473718001507223,
+        "sha256": 4.6900007873773575e-05,
+        "to_dict": 0.0005583998281508684
+      }
+    },
+    "scaling": {
+      "number_of_crops": {
+        "end_to_end_cost_ratio": 0.9618968912699747,
+        "intercept_seconds": 0.01986537994816895,
+        "measured_scaling": "LINEAR",
+        "r_squared": 0.9981042332190487,
+        "rows": [
+          {
+            "output_hash": "228e923ba2ea0bb19d30b21bf79c6b85dc36de11d991937df1df62be6b4559c1",
+            "seconds": 0.1518484998960048,
+            "size": 1,
+            "steps": 360
+          },
+          {
+            "output_hash": "ef110ce1e85a43f7eaecd94133a1265ca7439781e6daedc34cf2252d5a3a9698",
+            "seconds": 0.47210410004481673,
+            "size": 3,
+            "steps": 1080
+          },
+          {
+            "output_hash": "c7e8c77942d3e1dc05f862720123c553b82e9fd0e91c9d41e973e5fed4a6fa30",
+            "seconds": 0.7240136000327766,
+            "size": 5,
+            "steps": 1800
+          },
+          {
+            "output_hash": "42278a06a7bff0609544c3cb356b301f00f55f856fc2475f5e7fbe76b38031bb",
+            "seconds": 1.0224381999578327,
+            "size": 7,
+            "steps": 2520
+          }
+        ],
+        "rule": "LINEAR if R^2 >= 0.98 and (t_max/t_min)/(n_max/n_min) in [0.75, 1.25]",
+        "slope_seconds_per_unit": 0.1431839300086722
+      },
+      "number_of_cycles": {
+        "end_to_end_cost_ratio": 1.0072083843444921,
+        "intercept_seconds": -0.0028514001751318574,
+        "measured_scaling": "LINEAR",
+        "r_squared": 0.999810032472723,
+        "rows": [
+          {
+            "output_hash": "3f3acf04ca94f55de30b2e0d86062d3a1a1b7e75527add33141dcfb824adbb70",
+            "seconds": 0.15743819996714592,
+            "size": 1,
+            "steps": 360
+          },
+          {
+            "output_hash": "68f8b03cb584a4439767cd82000f610e661c3f6c6e34180ed5ff88e536307db1",
+            "seconds": 0.31371309980750084,
+            "size": 2,
+            "steps": 720
+          },
+          {
+            "output_hash": "82a5f994ae9095083d00b6086025da444613e0ca545f83cac9c38a2b92c45bcb",
+            "seconds": 0.46932579996064305,
+            "size": 3,
+            "steps": 1080
+          },
+          {
+            "output_hash": "5f8e43474143229601ed4aeb82c5e9e14867e8cdc79208371c5046919c38ac0b",
+            "seconds": 0.6342923000920564,
+            "size": 4,
+            "steps": 1440
+          }
+        ],
+        "rule": "LINEAR if R^2 >= 0.98 and (t_max/t_min)/(n_max/n_min) in [0.75, 1.25]",
+        "slope_seconds_per_unit": 0.15861750005278735
+      },
+      "number_of_plots": {
+        "end_to_end_cost_ratio": 0.9197359685755142,
+        "intercept_seconds": 0.023498716608931658,
+        "measured_scaling": "LINEAR",
+        "r_squared": 0.9966675772337943,
+        "rows": [
+          {
+            "output_hash": "228e923ba2ea0bb19d30b21bf79c6b85dc36de11d991937df1df62be6b4559c1",
+            "seconds": 0.15747259999625385,
+            "size": 1,
+            "steps": 360
+          },
+          {
+            "output_hash": "326c4f8fa8840aa919e5546c09cb63838b1cc8895a6b5f4d741f433761cc0f33",
+            "seconds": 0.3027146998792887,
+            "size": 2,
+            "steps": 720
+          },
+          {
+            "output_hash": "ce2988a2f2dd2a318d89b0d3464727b66c37631146e668b2599dab32a8e6a98b",
+            "seconds": 0.6306227999739349,
+            "size": 4,
+            "steps": 1440
+          },
+          {
+            "output_hash": "c6bf7285f71ed7d711de610a5c4a4c40c537c4d1789b9d5e2fb5da7579ba8662",
+            "seconds": 1.0138324999716133,
+            "size": 7,
+            "steps": 2520
+          }
+        ],
+        "rule": "LINEAR if R^2 >= 0.98 and (t_max/t_min)/(n_max/n_min) in [0.75, 1.25]",
+        "slope_seconds_per_unit": 0.14361769524181173
+      },
+      "number_of_scenarios": {
+        "end_to_end_cost_ratio": 1.0035734021983755,
+        "intercept_seconds": 0.008025939110666513,
+        "measured_scaling": "LINEAR",
+        "r_squared": 0.9996008730030097,
+        "rows": [
+          {
+            "output_hash": "ed197f50ab3af511a462fdbbd2f04afc19d6c88a3229275517653dde43e7da8c",
+            "seconds": 0.16234529996290803,
+            "size": 1,
+            "steps": 360
+          },
+          {
+            "output_hash": "45a3658c896ee9ba3fdb4270f63af45409ceebde5dae6a01f7aab58642bd9764",
+            "seconds": 0.34523870004341006,
+            "size": 2,
+            "steps": 720
+          },
+          {
+            "output_hash": "0a5b3a096a5edc95658c230d5a90a703da0de3026a2537641813d6512a6ad4b6",
+            "seconds": 0.6475921000819653,
+            "size": 4,
+            "steps": 1440
+          },
+          {
+            "output_hash": "3be8020810a6eea94dec8cc361f543a8737a8f0798b04558083729e04a4c1f40",
+            "seconds": 1.3034034001175314,
+            "size": 8,
+            "steps": 2880
+          }
+        ],
+        "rule": "LINEAR if R^2 >= 0.98 and (t_max/t_min)/(n_max/n_min) in [0.75, 1.25]",
+        "slope_seconds_per_unit": 0.16176504958420992
+      },
+      "simulation_days": {
+        "end_to_end_cost_ratio": 1.1976866632343144,
+        "intercept_seconds": -0.06203803480805259,
+        "measured_scaling": "LINEAR",
+        "r_squared": 0.9968610681593204,
+        "rows": [
+          {
+            "output_hash": "8a887f72000da18038795d4c7cb583e6932c325d7871dc0e1593d410c19837b8",
+            "seconds": 0.15130629995837808,
+            "size": 15.0,
+            "steps": 360
+          },
+          {
+            "output_hash": "ebd59ff27fe026addc23e43525a58fcdaf43e0c1b4fb9c2f5d4c1385f1d17961",
+            "seconds": 0.30989710008725524,
+            "size": 30.0,
+            "steps": 720
+          },
+          {
+            "output_hash": "80c12611b4526fc7a36b3bce10dbd7769e49961bb6f833c8ec1bffd64969fb1b",
+            "seconds": 0.6388302000705153,
+            "size": 60.0,
+            "steps": 1440
+          },
+          {
+            "output_hash": "a585a6482509ea1e5daa9cea8c6352539ebba43aa0912b0b332d39a7270948ec",
+            "seconds": 1.449740300187841,
+            "size": 120.0,
+            "steps": 2880
+          }
+        ],
+        "rule": "LINEAR if R^2 >= 0.98 and (t_max/t_min)/(n_max/n_min) in [0.75, 1.25]",
+        "slope_seconds_per_unit": 0.012435226842383112
+      },
+      "theoretical_structure": {
+        "combined": "O(S x C x T x P)",
+        "number_of_crops": "O(P): crops differ only in parameters/state, same step structure",
+        "number_of_cycles": "O(C): consecutive independent campaigns",
+        "number_of_plots": "O(P): one independent orchestrator per plot on a shared scheduler",
+        "number_of_scenarios": "O(S): each scenario is an independent campaign",
+        "simulation_days": "O(T): one orchestrator step per hourly timestep, constant work per step"
+      },
+      "time_x_plots_grid": {
+        "consistent_with_O_T_x_P": true,
+        "rows": [
+          {
+            "days": 15.0,
+            "output_hash": "228e923ba2ea0bb19d30b21bf79c6b85dc36de11d991937df1df62be6b4559c1",
+            "plots": 1,
+            "seconds": 0.13997849985025823,
+            "seconds_per_plot_day": 0.009331899990017215,
+            "steps": 360
+          },
+          {
+            "days": 15.0,
+            "output_hash": "ce2988a2f2dd2a318d89b0d3464727b66c37631146e668b2599dab32a8e6a98b",
+            "plots": 4,
+            "seconds": 0.6321463000494987,
+            "seconds_per_plot_day": 0.010535771667491645,
+            "steps": 1440
+          },
+          {
+            "days": 30.0,
+            "output_hash": "ab39085c24f5e929b72eb351dc61314ed71d75e0582a214119eba5a43d9a2da5",
+            "plots": 1,
+            "seconds": 0.31603870005346835,
+            "seconds_per_plot_day": 0.010534623335115612,
+            "steps": 720
+          },
+          {
+            "days": 30.0,
+            "output_hash": "106661d64fae3fc7cbe7571f6bb176d874ba786f2c74b3c6a09dc61f4392e425",
+            "plots": 4,
+            "seconds": 1.1805051998235285,
+            "seconds_per_plot_day": 0.009837543331862738,
+            "steps": 2880
+          }
+        ],
+        "seconds_per_plot_day_cv": 0.05047242673113309
+      }
+    },
+    "step_components": {
+      "note": "isolated calls with fixed inputs; radiation_growth.advance runs twice per orchestrator step (potential and actual growth); the estimate sums weather, every engine call and the two explicit state replacements of one step",
+      "per_step_components_seconds_estimate": 0.00025044024921953677,
+      "rows": [
+        {
+          "calls_per_sample": 400,
+          "component": "weather.base_seasonal_engine",
+          "kind": "MODEL_COMPUTATION",
+          "max_seconds": 5.788224982097745e-05,
+          "median_seconds": 5.599625001195818e-05,
+          "min_seconds": 5.109974998049438e-05,
+          "repeats": 3
+        },
+        {
+          "calls_per_sample": 400,
+          "component": "weather.scenario_event_overlay",
+          "kind": "MODEL_COMPUTATION",
+          "max_seconds": 6.219199975021183e-05,
+          "median_seconds": 6.192600005306304e-05,
+          "min_seconds": 6.188625004142522e-05,
+          "repeats": 3
+        },
+        {
+          "calls_per_sample": 400,
+          "component": "weather.engine_generate_total",
+          "kind": "MODEL_COMPUTATION",
+          "max_seconds": 7.862950034905225e-05,
+          "median_seconds": 6.92102499306202e-05,
+          "min_seconds": 6.646674999501557e-05,
+          "repeats": 3
+        },
+        {
+          "calls_per_sample": 400,
+          "component": "greenhouse.advance",
+          "kind": "MODEL_COMPUTATION",
+          "max_seconds": 2.9202749719843267e-05,
+          "median_seconds": 2.864499983843416e-05,
+          "min_seconds": 2.8112250147387387e-05,
+          "repeats": 3
+        },
+        {
+          "calls_per_sample": 400,
+          "component": "phenology.advance",
+          "kind": "MODEL_COMPUTATION",
+          "max_seconds": 2.3618499981239438e-05,
+          "median_seconds": 2.236850035842508e-05,
+          "min_seconds": 2.1356999641284348e-05,
+          "repeats": 3
+        },
+        {
+          "calls_per_sample": 400,
+          "component": "radiation_growth.advance",
+          "kind": "MODEL_COMPUTATION",
+          "max_seconds": 3.928249992895871e-05,
+          "median_seconds": 2.2294999798759818e-05,
+          "min_seconds": 2.1217250032350422e-05,
+          "repeats": 3
+        },
+        {
+          "calls_per_sample": 400,
+          "component": "water_balance.advance",
+          "kind": "MODEL_COMPUTATION",
+          "max_seconds": 6.442000158131123e-06,
+          "median_seconds": 6.2257499666884546e-06,
+          "min_seconds": 5.397500353865326e-06,
+          "repeats": 3
+        },
+        {
+          "calls_per_sample": 400,
+          "component": "nutrient_balance.advance",
+          "kind": "MODEL_COMPUTATION",
+          "max_seconds": 4.269599972758442e-05,
+          "median_seconds": 3.4368500346317885e-05,
+          "min_seconds": 2.6431999867781996e-05,
+          "repeats": 3
+        },
+        {
+          "calls_per_sample": 400,
+          "component": "climate_stress.advance",
+          "kind": "MODEL_COMPUTATION",
+          "max_seconds": 2.5165749830193816e-05,
+          "median_seconds": 2.5126499822363256e-05,
+          "min_seconds": 2.4923000019043684e-05,
+          "repeats": 3
+        },
+        {
+          "calls_per_sample": 400,
+          "component": "co2_response",
+          "kind": "MODEL_COMPUTATION",
+          "max_seconds": 5.87500398978591e-07,
+          "median_seconds": 5.85750094614923e-07,
+          "min_seconds": 5.652499385178089e-07,
+          "repeats": 3
+        },
+        {
+          "calls_per_sample": 400,
+          "component": "state.replace_crop_growth_state",
+          "kind": "STATE_MANAGEMENT",
+          "max_seconds": 3.2876000041142106e-05,
+          "median_seconds": 1.9868749659508468e-05,
+          "min_seconds": 1.7375999595969917e-05,
+          "repeats": 3
+        },
+        {
+          "calls_per_sample": 400,
+          "component": "persistence.twin_state_from_snapshot",
+          "kind": "PERSISTENCE",
+          "max_seconds": 4.347250214777887e-06,
+          "median_seconds": 4.222499555908144e-06,
+          "min_seconds": 4.191750194877386e-06,
+          "repeats": 3
+        },
+        {
+          "calls_per_sample": 400,
+          "component": "serialization.crop_to_dict",
+          "kind": "SERIALIZATION",
+          "max_seconds": 3.699799999594689e-05,
+          "median_seconds": 2.6200499851256607e-05,
+          "min_seconds": 2.54840002162382e-05,
+          "repeats": 3
+        },
+        {
+          "calls_per_sample": 400,
+          "component": "serialization.checkpoint_payload",
+          "kind": "SERIALIZATION",
+          "max_seconds": 8.156249998137355e-05,
+          "median_seconds": 8.153449976816774e-05,
+          "min_seconds": 7.903075020294636e-05,
+          "repeats": 3
+        },
+        {
+          "calls_per_sample": 400,
+          "component": "serialization.snapshot_numbers",
+          "kind": "VALIDATION",
+          "max_seconds": 6.55117497080937e-05,
+          "median_seconds": 3.057149995584041e-05,
+          "min_seconds": 2.9402249492704868e-05,
+          "repeats": 3
+        },
+        {
+          "calls_per_sample": 400,
+          "component": "hashing.trajectory_hash_one_snapshot",
+          "kind": "SERIALIZATION",
+          "max_seconds": 9.989549987949432e-05,
+          "median_seconds": 9.820999985095113e-05,
+          "min_seconds": 9.387700003571809e-05,
+          "repeats": 3
+        },
+        {
+          "calls_per_sample": 400,
+          "component": "persistence.repository_save_snapshot",
+          "kind": "PERSISTENCE",
+          "max_seconds": 9.17874975129962e-06,
+          "median_seconds": 7.749000214971602e-06,
+          "min_seconds": 7.742500165477396e-06,
+          "repeats": 3
+        }
+      ],
+      "state": {
+        "crop": "tomato",
+        "environment": "passive_greenhouse",
+        "simulation_time": "2026-03-17T01:00:00+00:00",
+        "stage": "establishment"
+      }
+    }
+  },
+  "phase": "5.36",
+  "real_agricultural_data_verified": false,
+  "scientific_evidence": [],
+  "software_result": {
+    "before_after_output_equivalence": null,
+    "determinism_checks": {
+      "method": "every benchmark workload re-executed; output (trajectory) hashes compared",
+      "replayed_workloads": 23,
+      "status": "PASS"
+    },
+    "mutation_checks": {
+      "after": {
+        "campaign_configuration": "2e057ea70774567f9a2d8622fdb3ae2f01b9e1166fc5b42cc63362cc13837e62",
+        "initial_twin_state": "d2c00b701941b31de88d95eb1a22acd6f09bca9e0f7547f25bcff1c1de7117a8",
+        "parameter_registry": "e09e90f08e754a7d0373c8da4461388a350b53e3dcb9a5ea4297ddeb3ea0db1d",
+        "parameter_sets": "6a8bb40d7771379331463a48f8a1a6b10e649ed21052f2d0384b41332f58c425",
+        "phenology_profiles": "256751c89b23b16befab98061ac33e5c2f467f92dcf1bef323d37eef89f78f79"
+      },
+      "before": {
+        "campaign_configuration": "2e057ea70774567f9a2d8622fdb3ae2f01b9e1166fc5b42cc63362cc13837e62",
+        "initial_twin_state": "d2c00b701941b31de88d95eb1a22acd6f09bca9e0f7547f25bcff1c1de7117a8",
+        "parameter_registry": "e09e90f08e754a7d0373c8da4461388a350b53e3dcb9a5ea4297ddeb3ea0db1d",
+        "parameter_sets": "6a8bb40d7771379331463a48f8a1a6b10e649ed21052f2d0384b41332f58c425",
+        "phenology_profiles": "256751c89b23b16befab98061ac33e5c2f467f92dcf1bef323d37eef89f78f79"
+      },
+      "status": "PASS"
+    }
+  },
+  "source": "pre-optimization audit at HEAD d2067ad (Phase 5.35 committed), before any Phase 5.36 optimization",
+  "status": "PASS",
+  "version": "5.36.0"
+}

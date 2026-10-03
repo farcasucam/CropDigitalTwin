@@ -321,6 +321,11 @@ def default_campaigns(crops: Sequence[str] = KNOWN_CROPS, scenarios: Sequence[st
 # ---------------------------------------------------------------------------
 
 
+def _max_abs_difference(resumed: Mapping[str, float], continuous: Mapping[str, float]) -> float:
+    """max |resumed[k] - continuous[k]| over the resumed snapshot's keys (each snapshot flattened once)."""
+    return max(abs(value - continuous[key]) for key, value in resumed.items())
+
+
 def _indices(spec: CampaignSpec, start: datetime, end: datetime) -> range:
     return range(int((start - spec.start).total_seconds() // spec.timestep_seconds), int((end - spec.start).total_seconds() // spec.timestep_seconds))
 
@@ -650,7 +655,7 @@ class SeasonalSyntheticCampaignSuite:
             resumed = self.runner.run(resumed_scenario(spec.scenario, restart_time, crop, soil, micro))
             tail = continuous.snapshots[index + 1:]
             aligned = len(resumed.snapshots) == len(tail) and all(a.simulation_time == b.simulation_time for a, b in zip(resumed.snapshots, tail))
-            difference = max((max(abs(v - snapshot_numbers(b)[k]) for k, v in snapshot_numbers(a).items()) for a, b in zip(resumed.snapshots, tail)), default=math.inf)
+            difference = max((_max_abs_difference(snapshot_numbers(a), snapshot_numbers(b)) for a, b in zip(resumed.snapshots, tail)), default=math.inf)
             rows.append({"checkpoint": restart_time.isoformat(), "fraction": fraction, "checkpoint_hash": hashlib.sha256(payload.encode("utf-8")).hexdigest(), "aligned": aligned, "max_difference": difference, "equivalent": aligned and difference <= FLOAT_TOLERANCE})
         return {"run_id": spec.run_id, "status": "PASS" if all(row["equivalent"] for row in rows) else "FAIL", "checkpoints": rows}
 

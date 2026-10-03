@@ -326,7 +326,9 @@ class DormancyChillingFrameworkSuite:
         rows = []
         for location in self.locations:
             start = location.analysis_start(SEASON_YEAR)
-            weather = location_weather(location, self.seed)
+            # Phase 5.36: every season of this location consumes the identical hourly series;
+            # it is generated once per call and replayed (same values, see ReplayedWeather).
+            weather = ReplayedWeather(record_series(location_weather(location, self.seed), start, 365), start)
             for crop in self.species:
                 for label, policy in policies_for(location):
                     result = run_dormancy_season(crop, weather, start, 365, policy=policy, location=location)
