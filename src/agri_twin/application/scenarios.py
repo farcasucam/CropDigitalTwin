@@ -19,6 +19,7 @@ from agri_twin.domain import (
     FertilizationRequest,
     IrrigationRequest,
     ParameterSet,
+    PhenologyEngine,
     SoilState,
     WeatherConfiguration,
     WeatherState,
@@ -201,11 +202,20 @@ class ScenarioRunner:
     def __init__(self, base_weather_factory: Callable[[Scenario], WeatherProvider] | None = None) -> None:
         self.base_weather_factory = base_weather_factory
 
-    def run(self, scenario: Scenario) -> ScenarioResult:
+    def run(self, scenario: Scenario, *, phenology: PhenologyEngine | None = None, observer: Callable[[CropSimulationSnapshot, int], bool] | None = None) -> ScenarioResult:
+        """Run the scenario step by step.
+
+        ``phenology`` optionally configures the orchestrator's PhenologyEngine (for
+        example a canonical DormancyConfiguration); None keeps the default engine.
+        ``observer`` is called after every completed step with the snapshot and the
+        number of completed steps; returning False stops the run cooperatively at that
+        step boundary (status ``STOPPED``, snapshots up to and including that step).
+        Both default to None, which is the unchanged historical behaviour.
+        """
         clock = SimulationClock(scenario.start)
         base = self.base_weather_factory(scenario) if self.base_weather_factory is not None else None
         weather = WeatherEngine(WeatherConfiguration(simulation=WeatherConfiguration().simulation), provider=_ScenarioWeatherProvider(scenario, base))
-        orchestrator = CropDigitalTwinOrchestrator(clock, weather, scenario.initial_crop, scenario.initial_soil, scenario.greenhouse_mode, scenario.initial_microclimate)
+        orchestrator = CropDigitalTwinOrchestrator(clock, weather, scenario.initial_crop, scenario.initial_soil, scenario.greenhouse_mode, scenario.initial_microclimate, phenology)
         snapshots: list[CropSimulationSnapshot] = []
         current = scenario.start
         try:
@@ -217,6 +227,8 @@ class ScenarioRunner:
                 fertilization = self._fertilization(active)
                 snapshots.append(orchestrator.step(dt, actuators, irrigation, fertilization))
                 current += timedelta(seconds=dt)
+                if observer is not None and not observer(snapshots[-1], len(snapshots)):
+                    return ScenarioResult(scenario.scenario_id, scenario.config_hash(), "STOPPED", tuple(snapshots), scenario.events, seed=scenario.seed)
             return ScenarioResult(scenario.scenario_id, scenario.config_hash(), "SUCCESS", tuple(snapshots), scenario.events, seed=scenario.seed)
         except Exception as exc:
             return ScenarioResult(scenario.scenario_id, scenario.config_hash(), "FAILED", tuple(snapshots), scenario.events, (str(exc),), scenario.seed)

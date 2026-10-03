@@ -1,0 +1,1533 @@
+{
+  "api_version": "1.0",
+  "biological_validity_claimed": false,
+  "calibration_performed": false,
+  "contract": {
+    "api_version": "1.0",
+    "availability": [
+      "AVAILABLE",
+      "NOT_APPLICABLE",
+      "NOT_SUPPORTED"
+    ],
+    "checkpoint_fields": [
+      "format",
+      "simulation_time",
+      "payload",
+      "sha256",
+      "resume_hash"
+    ],
+    "checkpoint_format": "agri_twin.checkpoint_payload/5.29",
+    "chilling_models": [
+      "CHILLING_HOURS",
+      "UTAH",
+      "DYNAMIC"
+    ],
+    "crops": [
+      "tomato",
+      "lettuce",
+      "pepper",
+      "grape",
+      "peach",
+      "plum",
+      "apple"
+    ],
+    "environments": {
+      "greenhouse": "passive_greenhouse",
+      "outdoor": "outdoor"
+    },
+    "error_codes": {
+      "CANCELLATION_REQUESTED": "OPERATIONAL",
+      "INTERNAL_EXECUTION_ERROR": "EXECUTION",
+      "INVALID_CHECKPOINT": "REQUEST",
+      "INVALID_CONFIGURATION": "CONFIGURATION",
+      "INVALID_REQUEST": "REQUEST",
+      "INVALID_SCENARIO": "CONFIGURATION",
+      "INVALID_TIME_RANGE": "REQUEST",
+      "MODEL_NOT_READY": "CONFIGURATION",
+      "UNSUPPORTED_CROP": "CONFIGURATION",
+      "UNSUPPORTED_ENVIRONMENT": "CONFIGURATION"
+    },
+    "greenhouse_crops": [
+      "tomato",
+      "lettuce",
+      "pepper"
+    ],
+    "modes": [
+      "INTERACTIVE",
+      "INTERACTIVE_WITH_PROGRESS",
+      "BACKGROUND"
+    ],
+    "option_fields": [
+      "progress_interval_steps",
+      "require_requested_chilling_model",
+      "include_trajectory",
+      "compute_trajectory_hash",
+      "variables"
+    ],
+    "profile_keys": [
+      "daily_humidity_pct",
+      "daily_radiation_fraction",
+      "daily_temperature_c",
+      "humidity_max_pct",
+      "humidity_min_pct",
+      "radiation_max_w_m2",
+      "seasonal_daylength_amplitude_h",
+      "seasonal_humidity_amplitude_pct",
+      "seasonal_radiation_amplitude_fraction",
+      "seasonal_temperature_amplitude_c",
+      "temperature_max_c",
+      "temperature_min_c",
+      "warmest_day_of_year"
+    ],
+    "request_fields": [
+      "api_version",
+      "crop",
+      "variety",
+      "environment",
+      "plot",
+      "scenario",
+      "start_time",
+      "end_time",
+      "seed",
+      "weather",
+      "dormancy",
+      "checkpoint",
+      "options"
+    ],
+    "scenarios": [
+      "BASE_SEASON",
+      "HOT_SEASON",
+      "COLD_SEASON",
+      "LOW_RADIATION",
+      "HIGH_RADIATION",
+      "DRY_SEASON",
+      "HUMID_SEASON",
+      "HEAT_WAVE",
+      "COLD_WAVE",
+      "HEAT_WAVE_WITH_DRYNESS",
+      "HIGH_RADIATION_WITH_LOW_WATER",
+      "RECOVERY_AFTER_STRESS",
+      "WIND_SPELL",
+      "RAIN_SPELL"
+    ],
+    "statuses": [
+      "CREATED",
+      "RUNNING",
+      "COMPLETED",
+      "CANCELLED",
+      "FAILED"
+    ],
+    "surface": [
+      "create_simulation",
+      "get_simulation",
+      "start_simulation",
+      "get_simulation_progress",
+      "cancel_simulation",
+      "get_simulation_result",
+      "resume_simulation",
+      "run_simulation",
+      "plan_execution"
+    ],
+    "timestep_seconds": 3600,
+    "variables": [
+      {
+        "name": "crop_stage",
+        "scope": "ALL",
+        "source": "crop.current_stage",
+        "unit": "-"
+      },
+      {
+        "name": "maturity_index",
+        "scope": "ALL",
+        "source": "crop.maturity_index",
+        "unit": "fraction"
+      },
+      {
+        "name": "biomass_total_g_m2",
+        "scope": "ALL",
+        "source": "crop.biomass_total",
+        "unit": "g_DM_m-2"
+      },
+      {
+        "name": "biomass_fruit_g_m2",
+        "scope": "ALL",
+        "source": "crop.biomass_fruit",
+        "unit": "g_DM_m-2"
+      },
+      {
+        "name": "leaf_area_index",
+        "scope": "ALL",
+        "source": "crop.leaf_area_index",
+        "unit": "m2_m-2"
+      },
+      {
+        "name": "soil_water_vwc_m3_m3",
+        "scope": "ALL",
+        "source": "soil.vwc_m3_m3",
+        "unit": "m3_m-3"
+      },
+      {
+        "name": "root_zone_water_mm",
+        "scope": "ALL",
+        "source": "soil.root_zone_water",
+        "unit": "mm"
+      },
+      {
+        "name": "irrigation_mm",
+        "scope": "ALL",
+        "source": "water_balance.irrigation_applied_mm",
+        "unit": "mm_per_step"
+      },
+      {
+        "name": "precipitation_mm",
+        "scope": "ALL",
+        "source": "water_balance.precipitation_mm",
+        "unit": "mm_per_step"
+      },
+      {
+        "name": "drainage_mm",
+        "scope": "ALL",
+        "source": "water_balance.drainage_mm",
+        "unit": "mm_per_step"
+      },
+      {
+        "name": "transpiration_mm",
+        "scope": "ALL",
+        "source": "water_balance.transpiration_mm",
+        "unit": "mm_per_step"
+      },
+      {
+        "name": "evaporation_mm",
+        "scope": "ALL",
+        "source": "water_balance.evaporation_mm",
+        "unit": "mm_per_step"
+      },
+      {
+        "name": "et0_mm",
+        "scope": "ALL",
+        "source": "water_balance.et0_mm",
+        "unit": "mm_per_step"
+      },
+      {
+        "name": "temperature_c",
+        "scope": "ALL",
+        "source": "weather.temperature_c",
+        "unit": "degC"
+      },
+      {
+        "name": "relative_humidity_pct",
+        "scope": "ALL",
+        "source": "weather.relative_humidity_pct",
+        "unit": "%"
+      },
+      {
+        "name": "vpd_kpa",
+        "scope": "ALL",
+        "source": "environment.vpd_kpa",
+        "unit": "kPa"
+      },
+      {
+        "name": "radiation_w_m2",
+        "scope": "ALL",
+        "source": "weather.solar_radiation_w_m2",
+        "unit": "W_m-2"
+      },
+      {
+        "name": "water_stress",
+        "scope": "ALL",
+        "source": "crop.water_stress",
+        "unit": "fraction"
+      },
+      {
+        "name": "heat_stress",
+        "scope": "ALL",
+        "source": "crop.heat_stress",
+        "unit": "fraction"
+      },
+      {
+        "name": "cold_stress",
+        "scope": "ALL",
+        "source": "crop.cold_stress",
+        "unit": "fraction"
+      },
+      {
+        "name": "vpd_stress",
+        "scope": "ALL",
+        "source": "crop.vpd_stress",
+        "unit": "fraction"
+      },
+      {
+        "name": "radiation_stress",
+        "scope": "ALL",
+        "source": "crop.radiation_stress",
+        "unit": "fraction"
+      },
+      {
+        "name": "frost_damage",
+        "scope": "ALL",
+        "source": "crop.frost_damage",
+        "unit": "fraction"
+      },
+      {
+        "name": "accumulated_stress",
+        "scope": "ALL",
+        "source": "crop.accumulated_stress",
+        "unit": "-"
+      },
+      {
+        "name": "growth_factor",
+        "scope": "ALL",
+        "source": "snapshot.growth_factor",
+        "unit": "fraction"
+      },
+      {
+        "name": "co2_ppm",
+        "scope": "GREENHOUSE",
+        "source": "microclimate.indoor_state.co2_ppm",
+        "unit": "ppm"
+      },
+      {
+        "name": "outdoor_temperature_c",
+        "scope": "GREENHOUSE",
+        "source": "outdoor_weather.temperature_c",
+        "unit": "degC"
+      },
+      {
+        "name": "greenhouse_ventilation_fraction",
+        "scope": "GREENHOUSE",
+        "source": "microclimate.indoor_state.ventilation_fraction",
+        "unit": "fraction"
+      },
+      {
+        "name": "greenhouse_shading_fraction",
+        "scope": "GREENHOUSE",
+        "source": "microclimate.indoor_state.shading_fraction",
+        "unit": "fraction"
+      },
+      {
+        "name": "greenhouse_heating_kw",
+        "scope": "GREENHOUSE",
+        "source": "microclimate.indoor_state.heating_kw",
+        "unit": "kW"
+      },
+      {
+        "name": "greenhouse_cooling_kw",
+        "scope": "GREENHOUSE",
+        "source": "microclimate.indoor_state.cooling_kw",
+        "unit": "kW"
+      },
+      {
+        "name": "dormancy_released",
+        "scope": "PERENNIAL",
+        "source": "crop.dormancy_released",
+        "unit": "bool"
+      },
+      {
+        "name": "chilling_accumulated",
+        "scope": "PERENNIAL",
+        "source": "crop.chilling_hours | crop.chilling_state.accumulated",
+        "unit": "effective chilling model unit"
+      },
+      {
+        "name": "canopy_temperature_c",
+        "scope": "NONE",
+        "source": "-",
+        "unit": "degC"
+      },
+      {
+        "name": "photosynthesis_rate_umol_m2_s",
+        "scope": "NONE",
+        "source": "-",
+        "unit": "umol_m-2_s-1"
+      },
+      {
+        "name": "fruit_count",
+        "scope": "NONE",
+        "source": "-",
+        "unit": "count_m-2"
+      },
+      {
+        "name": "leaf_water_potential_mpa",
+        "scope": "NONE",
+        "source": "-",
+        "unit": "MPa"
+      }
+    ],
+    "weather_fields": [
+      "source",
+      "profile_overrides"
+    ],
+    "weather_sources": [
+      "SYNTHETIC_SEASONAL"
+    ]
+  },
+  "data_assimilation_implemented": false,
+  "deterministic_hash": "74811542b9194953e1412f09edcfd64dbd9c355a1a1bd273451058fde5687aac",
+  "experimental_validation_performed": false,
+  "field_accuracy_claimed": false,
+  "limitations": [
+    "start_time is fixed by the crop's synthetic cycle; the horizon is set with end_time, a later start only through a checkpoint",
+    "a checkpoint inside a ramped scenario event is rejected (INVALID_CHECKPOINT): the existing resumed_scenario re-anchors event ramps",
+    "weather is the Phase 5.32 synthetic seasonal generator only; local CSV / downloaded weather is not exposed by API 1.0",
+    "execution is synchronous and in-process; BACKGROUND plans are classified, a decoupled executor is a future adapter",
+    "the execution-mode estimate uses the Phase 5.36 per-step cost measured on one machine (advisory)",
+    "the actuated greenhouse mode is not exposed (no actuator schedule contract yet)",
+    "one configured variety and plot per crop (the existing synthetic plots); other varieties are rejected, never invented"
+  ],
+  "performance_measurement": {
+    "canonicalization_seconds_per_request": 4.75000124424696e-05,
+    "classification": "PERFORMANCE_MEASUREMENT",
+    "method": "caller-injected timer (time.perf_counter in the manual and tests), minimum of sequential repeats; direct = ScenarioRunner with the same horizon observer; machine-dependent, never hashed",
+    "repeats": 3,
+    "rows": [
+      {
+        "API_OVERHEAD": {
+          "api_total_minus_direct_seconds": 0.006244499934837222,
+          "canonicalization_seconds": 4.679989069700241e-05,
+          "preparation_seconds": 0.0003355999942868948,
+          "relative_to_direct": 0.11897118234663444,
+          "result_projection_seconds": 0.0009282000828534365
+        },
+        "OPTIONAL_TRAJECTORY_HASH": {
+          "api_total_minus_direct_seconds": 0.023559199878945947,
+          "relative_to_direct": 0.44885353414803897,
+          "result_projection_with_hash_seconds": 0.016974999802187085
+        },
+        "SERIALIZATION_TIME": {
+          "response_bytes": 75860,
+          "to_json_seconds": 0.0037742999847978354
+        },
+        "SIMULATION_TIME": 0.05432980018667877,
+        "case": "tomato_outdoor_7d",
+        "direct_execution_seconds": 0.05248750001192093,
+        "steps": 168
+      },
+      {
+        "API_OVERHEAD": {
+          "api_total_minus_direct_seconds": 0.006467100000008941,
+          "canonicalization_seconds": 7.00000673532486e-05,
+          "preparation_seconds": 0.0003791998606175184,
+          "relative_to_direct": 0.01861920048066525,
+          "result_projection_seconds": 0.005891100037842989
+        },
+        "OPTIONAL_TRAJECTORY_HASH": {
+          "api_total_minus_direct_seconds": 0.1064551998861134,
+          "relative_to_direct": 0.3064914272063364,
+          "result_projection_with_hash_seconds": 0.09981460007838905
+        },
+        "SERIALIZATION_TIME": {
+          "response_bytes": 433611,
+          "to_json_seconds": 0.023732899921014905
+        },
+        "SIMULATION_TIME": 0.3309399001300335,
+        "case": "lettuce_greenhouse_full_season",
+        "direct_execution_seconds": 0.3473350000567734,
+        "steps": 1008
+      },
+      {
+        "API_OVERHEAD": {
+          "api_total_minus_direct_seconds": 0.04017890011891723,
+          "canonicalization_seconds": 5.360017530620098e-05,
+          "preparation_seconds": 0.00033179996535182,
+          "relative_to_direct": 0.03277049683888682,
+          "result_projection_seconds": 0.02087750006467104
+        },
+        "OPTIONAL_TRAJECTORY_HASH": {
+          "api_total_minus_direct_seconds": 0.44062950019724667,
+          "relative_to_direct": 0.35938384576474763,
+          "result_projection_with_hash_seconds": 0.38370190002024174
+        },
+        "SERIALIZATION_TIME": {
+          "response_bytes": 1317384,
+          "to_json_seconds": 0.08126090001314878
+        },
+        "SIMULATION_TIME": 1.199886600021273,
+        "case": "tomato_outdoor_full_season",
+        "direct_execution_seconds": 1.2260692999698222,
+        "steps": 3744
+      }
+    ]
+  },
+  "phase": "5.37",
+  "real_agricultural_data_verified": false,
+  "scientific_evidence": [],
+  "scientific_status": {
+    "BIOLOGICAL_VALIDITY_CLAIMED": false,
+    "CALIBRATION_PERFORMED": false,
+    "DATA_ASSIMILATION_IMPLEMENTED": false,
+    "EXPERIMENTAL_VALIDATION_PERFORMED": false,
+    "FIELD_ACCURACY_CLAIMED": false,
+    "REAL_VERIFIED": 0,
+    "forcing_classification": "SYNTHETIC",
+    "parameter_status": "ENGINEERING_DEFAULTS_UNCALIBRATED",
+    "result_type": "SOFTWARE_SIMULATION",
+    "statement": "Deterministic output of the implemented mechanistic-simplified model under synthetic forcing; software behaviour only, not a prediction, calibration or validated agronomic result."
+  },
+  "software_result": {
+    "cancellation": {
+      "cancel_at_step": 48,
+      "checks": {
+        "cancel_before_start": true,
+        "cancellation_is_operational_not_scientific": true,
+        "cancelled_at_step_boundary": true,
+        "deterministic_cancelled_state": true,
+        "no_restart_of_terminal_execution": true,
+        "partial_result_marked_incomplete": true,
+        "partial_trajectory_equals_completed_prefix": true,
+        "registry_and_configuration_unchanged": true,
+        "result_query_reports_cancellation": true,
+        "terminal_cancel_rejected": true
+      },
+      "mechanism": "cooperative flag observed by the ScenarioRunner observer at the next step boundary; no thread, timer or scheduler",
+      "status": "PASS"
+    },
+    "canonical_request": {
+      "checks": {
+        "defaults_from_existing_configuration": true,
+        "different_requests_different_hash": true,
+        "json_round_trip_identical": true,
+        "names_normalized": true,
+        "no_execution_timestamp_in_request": true,
+        "numbers_normalized": true,
+        "request_hash_is_sha256_of_canonical_json": true,
+        "same_request_same_json": true,
+        "timestamps_normalized_to_utc": true
+      },
+      "example_canonical_json": "{\"api_version\":\"1.0\",\"checkpoint\":null,\"crop\":\"tomato\",\"dormancy\":{\"effective_chilling_model\":\"CHILLING_HOURS\",\"effective_start_policy\":\"DORMANCY_STATE\",\"fallback_applied\":false,\"fallback_policy\":\"STRICT\",\"requested_chilling_model\":\"CHILLING_HOURS\",\"requested_start_policy\":\"DORMANCY_STATE\",\"start_time\":null},\"end_time\":\"2026-02-22T00:00:00+00:00\",\"environment\":\"outdoor\",\"options\":{\"compute_trajectory_hash\":true,\"include_trajectory\":true,\"progress_interval_steps\":null,\"require_requested_chilling_model\":false,\"variables\":null},\"plot\":\"plot_12010\",\"scenario\":\"HEAT_WAVE\",\"seed\":532,\"start_time\":\"2026-02-15T00:00:00+00:00\",\"variety\":\"RAF\",\"weather\":{\"profile_overrides\":{\"humidity_max_pct\":85.0,\"temperature_max_c\":26.0},\"source\":\"SYNTHETIC_SEASONAL\"}}",
+      "example_request_hash": "43cb7f7409d0fcd7453763e1a3eb15ec66188167d2fbb0d8cfc1ceb89c8d2514",
+      "status": "PASS"
+    },
+    "canonical_response": {
+      "checks": {
+        "configuration_hash_matches": true,
+        "model_result_separated_from_diagnostics": true,
+        "response_hash_excludes_operational": true,
+        "response_json_round_trip": true,
+        "scientific_status_explicit": true,
+        "sections_present": true,
+        "status_in_contract": true
+      },
+      "status": "PASS"
+    },
+    "checkpoint_resume": {
+      "format": "existing Phase 5.29 checkpoint_payload (crop, soil, microclimate JSON) wrapped with sha256 and resume_hash; restored with restore_checkpoint",
+      "rows": [
+        {
+          "case": "tomato_outdoor_base",
+          "checkpoint_format": "agri_twin.checkpoint_payload/5.29",
+          "checkpoint_sha256": "d8f50746eb8175a8afacf156f38002df19d7f7538ea92e3eaa5db6e60e571d64",
+          "checkpoint_time": "2026-04-10T00:00:00+00:00",
+          "equivalent": true,
+          "final_checkpoint_equal": true,
+          "final_state_equal": true,
+          "steps_full": 3744,
+          "steps_partial_plus_resumed": 3744,
+          "trajectory_concatenation_equal": true
+        },
+        {
+          "case": "lettuce_greenhouse_base",
+          "checkpoint_format": "agri_twin.checkpoint_payload/5.29",
+          "checkpoint_sha256": "f0ddec35e56d0ac0ae8c7aa3119ee1c1f2e482aa6bd99740eac3b1897228181b",
+          "checkpoint_time": "2026-01-20T12:00:00+00:00",
+          "equivalent": true,
+          "final_checkpoint_equal": true,
+          "final_state_equal": true,
+          "steps_full": 1008,
+          "steps_partial_plus_resumed": 1008,
+          "trajectory_concatenation_equal": true
+        },
+        {
+          "case": "tomato_outdoor_heat_wave_before_window",
+          "checkpoint_format": "agri_twin.checkpoint_payload/5.29",
+          "checkpoint_sha256": "aa2591bef5b07d57a43d2caf545fade6de715f8b7bd7bc67a0cac740d184670d",
+          "checkpoint_time": "2026-04-20T00:00:00+00:00",
+          "equivalent": true,
+          "final_checkpoint_equal": true,
+          "final_state_equal": true,
+          "steps_full": 3744,
+          "steps_partial_plus_resumed": 3744,
+          "trajectory_concatenation_equal": true
+        },
+        {
+          "case": "peach_chilling_hours_default",
+          "checkpoint_format": "agri_twin.checkpoint_payload/5.29",
+          "checkpoint_sha256": "8005fe135f6ff34c752396303e74b16c8bb9a0667d66ae41189f8b1417a56b1c",
+          "checkpoint_time": "2026-02-10T00:00:00+00:00",
+          "equivalent": true,
+          "final_checkpoint_equal": true,
+          "final_state_equal": true,
+          "steps_full": 2880,
+          "steps_partial_plus_resumed": 2880,
+          "trajectory_concatenation_equal": true
+        },
+        {
+          "case": "peach_dynamic_software_test",
+          "checkpoint_format": "agri_twin.checkpoint_payload/5.29",
+          "checkpoint_sha256": "b4b1e3f42185287c51fcbd99a38a295f2ee6d16729daa1a27ab1c4abcc0a88f6",
+          "checkpoint_time": "2026-02-10T00:00:00+00:00",
+          "equivalent": true,
+          "final_checkpoint_equal": true,
+          "final_state_equal": true,
+          "steps_full": 2880,
+          "steps_partial_plus_resumed": 2880,
+          "trajectory_concatenation_equal": true
+        },
+        {
+          "case": "tomato_outdoor_cancelled_at_step_100_then_resumed",
+          "checkpoint_format": "agri_twin.checkpoint_payload/5.29",
+          "checkpoint_sha256": "bcf2d081606093d7a5c3037c4605f793a9820d49711db01ab5f2bb33eea70e57",
+          "checkpoint_time": "2026-02-19T04:00:00+00:00",
+          "equivalent": true,
+          "final_checkpoint_equal": true,
+          "final_state_equal": true,
+          "steps_full": 672,
+          "steps_partial_plus_resumed": 672,
+          "trajectory_concatenation_equal": true
+        }
+      ],
+      "status": "PASS"
+    },
+    "classification": {
+      "cost_model": {
+        "interactive_max_seconds": 1.0,
+        "interactive_with_progress_max_seconds": 10.0,
+        "seconds_per_plot_step": 0.00047,
+        "source": "Phase 5.36 performance audit, upper single-plot cost per hourly step (0.40-0.47 ms)",
+        "status": "ADVISORY_PERFORMANCE_MEASUREMENT (machine-dependent, not a contract)"
+      },
+      "rows": {
+        "grape_outdoor_full_season": {
+          "basis": "single plot, season-scale horizon: progress observable",
+          "estimated_seconds": 3.59832,
+          "executor": "SYNCHRONOUS_IN_PROCESS (a decoupled background executor is a future adapter)",
+          "expected": "INTERACTIVE_WITH_PROGRESS",
+          "mode": "INTERACTIVE_WITH_PROGRESS",
+          "passed": true,
+          "plots": 1,
+          "requires_background_executor": false,
+          "total_steps": 7656
+        },
+        "lettuce_greenhouse_full_season": {
+          "basis": "single plot, estimate within the direct-response band",
+          "estimated_seconds": 0.47376,
+          "executor": "SYNCHRONOUS_IN_PROCESS (a decoupled background executor is a future adapter)",
+          "expected": "INTERACTIVE",
+          "mode": "INTERACTIVE",
+          "passed": true,
+          "plots": 1,
+          "requires_background_executor": false,
+          "total_steps": 1008
+        },
+        "seven_crops_multi_plot": {
+          "basis": "multi-plot / multi-request campaign or estimate above the progress band",
+          "estimated_seconds": 16.20936,
+          "executor": "SYNCHRONOUS_IN_PROCESS (a decoupled background executor is a future adapter)",
+          "expected": "BACKGROUND",
+          "mode": "BACKGROUND",
+          "passed": true,
+          "plots": 7,
+          "requires_background_executor": true,
+          "total_steps": 34488
+        },
+        "tomato_eight_scenarios": {
+          "basis": "multi-plot / multi-request campaign or estimate above the progress band",
+          "estimated_seconds": 14.07744,
+          "executor": "SYNCHRONOUS_IN_PROCESS (a decoupled background executor is a future adapter)",
+          "expected": "BACKGROUND",
+          "mode": "BACKGROUND",
+          "passed": true,
+          "plots": 8,
+          "requires_background_executor": true,
+          "total_steps": 29952
+        },
+        "tomato_outdoor_7d": {
+          "basis": "single plot, estimate within the direct-response band",
+          "estimated_seconds": 0.07896,
+          "executor": "SYNCHRONOUS_IN_PROCESS (a decoupled background executor is a future adapter)",
+          "expected": "INTERACTIVE",
+          "mode": "INTERACTIVE",
+          "passed": true,
+          "plots": 1,
+          "requires_background_executor": false,
+          "total_steps": 168
+        },
+        "tomato_outdoor_full_season": {
+          "basis": "single plot, season-scale horizon: progress observable",
+          "estimated_seconds": 1.75968,
+          "executor": "SYNCHRONOUS_IN_PROCESS (a decoupled background executor is a future adapter)",
+          "expected": "INTERACTIVE_WITH_PROGRESS",
+          "mode": "INTERACTIVE_WITH_PROGRESS",
+          "passed": true,
+          "plots": 1,
+          "requires_background_executor": false,
+          "total_steps": 3744
+        }
+      },
+      "rule": "BACKGROUND if more than one request (multi-plot / campaign) or estimate > 10 s; INTERACTIVE if estimate <= 1 s; otherwise INTERACTIVE_WITH_PROGRESS. Derived from configuration; no simulation is run to decide.",
+      "status": "PASS"
+    },
+    "determinism": {
+      "repetitions": 2,
+      "rows": [
+        {
+          "canonical_json_equal": true,
+          "case": "tomato_outdoor_7d",
+          "checkpoint_sha256": "60ab9afce16ad89352c91b677904b894cd67afa8da5563c85a995c313bd86472",
+          "configuration_hash": "d19f9c94f7ff3056d86da1b340ee1346e0b9f07fd42fc2347e17acf0c49cd7fd",
+          "configuration_hash_equal": true,
+          "deterministic": true,
+          "effective_configuration_equal": true,
+          "mode": "INTERACTIVE",
+          "request_hash": "3b4e6a7f343bfa3106c799d215d326956b1e4667966e424793dc0102374e7849",
+          "request_hash_equal": true,
+          "response_hash": "024f8672ab9392d040d687d86b18c9da4f71d24834f10616eb01c2c8eae216a7",
+          "result_hash": "602256531230e3ac103be53bf52c754a08d55d098a0082a098d7d0540efad303",
+          "result_hash_equal": true,
+          "resume_hash": "1e659a00bf4160ec784909c48d8351664046f7aa66fc690828839e21adf336c3",
+          "serialized_response_equal": true,
+          "status": "COMPLETED",
+          "steps": 168,
+          "trajectory_hash": "54e8bc8c9acb92d743a66aadc370a34c1a8f155a6c6622f099ae3ec58720a437",
+          "trajectory_hash_equal": true
+        },
+        {
+          "canonical_json_equal": true,
+          "case": "lettuce_greenhouse_full_season",
+          "checkpoint_sha256": "ecd3fc1e54390feaf565ffae495adcaad2613c37d7613f4f8d2be05d9a4ccaf4",
+          "configuration_hash": "111d39a9d11b8c0c41a92d5c2158087e3db08c9198126074b9489297a297de68",
+          "configuration_hash_equal": true,
+          "deterministic": true,
+          "effective_configuration_equal": true,
+          "mode": "INTERACTIVE",
+          "request_hash": "f386109a4338ae3cf8856e82000ae8de9ce710c27e6b20858c884af938fdb9b5",
+          "request_hash_equal": true,
+          "response_hash": "a93576e973fc6de017d538a0785c2cd562123ec79b8f25cdeffbca49abff50e5",
+          "result_hash": "699a94505af462c04c3d8dc10caf9aaeeb2e3ae83d3e84cc697f7275bb6446c4",
+          "result_hash_equal": true,
+          "resume_hash": "d77009cbb0187d30f73285302ca962772cb3760f0709d4f8bfa38f1cfe33674e",
+          "serialized_response_equal": true,
+          "status": "COMPLETED",
+          "steps": 1008,
+          "trajectory_hash": "4d25b233ecf24ae10367e2662a3fe2abd711c3be5c316d5bb241de6826befdba",
+          "trajectory_hash_equal": true
+        },
+        {
+          "canonical_json_equal": true,
+          "case": "tomato_outdoor_heat_wave_full_season",
+          "checkpoint_sha256": "4e493e04098829c88968aabfd02da2ce5919343a2dac0fb1d62d3bdf2b596a5d",
+          "configuration_hash": "e5bf7f11ca08d9285fd0cc0775f7e03407dca23cf3b89c6a6a11a11a139dcfbe",
+          "configuration_hash_equal": true,
+          "deterministic": true,
+          "effective_configuration_equal": true,
+          "mode": "INTERACTIVE_WITH_PROGRESS",
+          "request_hash": "48c14aa45e2675361eed83d3006aa08fd190557fe477fa72f817403e0bcd68c5",
+          "request_hash_equal": true,
+          "response_hash": "d3a281b4939d266e54fa8f6331c51848e9723ee0202d1f1d93a9ad738990410c",
+          "result_hash": "45ac1288f5541a642a83798ccabb5a539561dbd2659bcbb7f649baca0345455e",
+          "result_hash_equal": true,
+          "resume_hash": "f4a719288ffec34259db56aed9061e2d2c86a272176110ad422936cb589d9dab",
+          "serialized_response_equal": true,
+          "status": "COMPLETED",
+          "steps": 3744,
+          "trajectory_hash": "55148cbf27b2916c51ab5665d64e25bd8a596200642496ac57e4d5fdd33a9424",
+          "trajectory_hash_equal": true
+        },
+        {
+          "canonical_json_equal": true,
+          "case": "pepper_greenhouse_full_season",
+          "checkpoint_sha256": "d83d2b8c79f5322a201626e9d1dbaaf43fa38dd18190cff03e4550780ec0c3c4",
+          "configuration_hash": "cc94853ed02d53aefadacd1b8d397ed9f6cd52f2394652969dec0c8cf4026771",
+          "configuration_hash_equal": true,
+          "deterministic": true,
+          "effective_configuration_equal": true,
+          "mode": "INTERACTIVE_WITH_PROGRESS",
+          "request_hash": "180e4c74e94b33bd38bbbeb64a7763a23833075d1bc68c0c98c518967ce906e9",
+          "request_hash_equal": true,
+          "response_hash": "8727375b3ac876d653d00d4b38da91194038c61e7039bc75e0c93bce3dc1b3e0",
+          "result_hash": "95d56c43d53cd21dbb785cbd7a4fc3fdce24d2dc824abd458ad33382cad7d855",
+          "result_hash_equal": true,
+          "resume_hash": "17260f1c18bb0e040e31c1fa74a06d5b8ced4a3327a2f266c47deabd1f2fad03",
+          "serialized_response_equal": true,
+          "status": "COMPLETED",
+          "steps": 4656,
+          "trajectory_hash": "946361e7b9353a54918285b72e2ab8a649e10225c03bda3e5e84d964967bcf63",
+          "trajectory_hash_equal": true
+        },
+        {
+          "canonical_json_equal": true,
+          "case": "peach_dynamic_software_test_season",
+          "checkpoint_sha256": "f107355a1959358bfbac523472d09b2a89ef2fed18692b6ffe106bd9653d57e2",
+          "configuration_hash": "ca9296cc4260d3cb5b32209aa166b7cf88b85c0e534a053d3e4eb97a148b0a15",
+          "configuration_hash_equal": true,
+          "deterministic": true,
+          "effective_configuration_equal": true,
+          "mode": "INTERACTIVE_WITH_PROGRESS",
+          "request_hash": "c9b84f7d476dc3ffe6bfaa55587b5579ad427c1b33335d7144cdacc2efbd1b5b",
+          "request_hash_equal": true,
+          "response_hash": "034d71a92669bdb8d511de32e205527c965d482f16ccaac118c0c8f7beb0be5a",
+          "result_hash": "ff47f3a374bed5d971e0a35ebcca08399f2dab799b13b7efe5a2ab48ca010441",
+          "result_hash_equal": true,
+          "resume_hash": "f0af82bd4080c1920b5f7097b5b2e75b51ba004a71226261bfd1a0cc16ee154c",
+          "serialized_response_equal": true,
+          "status": "COMPLETED",
+          "steps": 5808,
+          "trajectory_hash": "f5cad782b4b355b4b022c8b31741646f269bee16b30c7e5f6e0796e6be9cc651",
+          "trajectory_hash_equal": true
+        },
+        {
+          "canonical_json_equal": true,
+          "case": "tomato_outdoor_weather_override_14d",
+          "checkpoint_sha256": "779ad5e1adddbf6c19b9e574e51ace94e398d92bab2d6b6de28f0b5e2516a554",
+          "configuration_hash": "cd3d6eda079c32adaaf79a59abc170bfb9eef0a7e34eb8866807b5f14790180a",
+          "configuration_hash_equal": true,
+          "deterministic": true,
+          "effective_configuration_equal": true,
+          "mode": "INTERACTIVE",
+          "request_hash": "8959713c3397dc50865a2c551e99c5dd0779db10365c715a782a621d551f9c69",
+          "request_hash_equal": true,
+          "response_hash": "c8fa347a0ca13d184d5214b2abbc2548e775845d166da61900c294099e838bd7",
+          "result_hash": "fe8b5a573d86a0b006584f1dc0e1a059d983213bc9d7f41581e0c11d200f4904",
+          "result_hash_equal": true,
+          "resume_hash": "59487f0d68a8e63a879e5036992743640b2625b50f04d9aae4130da99ea0b9be",
+          "serialized_response_equal": true,
+          "status": "COMPLETED",
+          "steps": 336,
+          "trajectory_hash": "248577ef93b945b03833f84a7f03abf9d6e1d936537f04e5d4fdcca10c7a86f1",
+          "trajectory_hash_equal": true
+        }
+      ],
+      "status": "PASS"
+    },
+    "direct_equivalence": {
+      "definition": "direct = build_campaign + ScenarioRunner(seasonal_weather_factory).run; the API horizon stops the same run at a step boundary (no event clipping)",
+      "rows": [
+        {
+          "api_status": "COMPLETED",
+          "case": "tomato_outdoor_full_season",
+          "direct_status": "SUCCESS",
+          "seven_day_horizon_is_exact_prefix": true,
+          "steps": 3744,
+          "trajectory_hash_equal": true
+        },
+        {
+          "api_status": "COMPLETED",
+          "case": "lettuce_greenhouse_full_season",
+          "direct_status": "SUCCESS",
+          "seven_day_horizon_is_exact_prefix": true,
+          "steps": 1008,
+          "trajectory_hash_equal": true
+        },
+        {
+          "api_status": "COMPLETED",
+          "case": "peach_dynamic_software_test_season",
+          "direct_status": "SUCCESS",
+          "seven_day_horizon_is_exact_prefix": true,
+          "steps": 5808,
+          "trajectory_hash_equal": true
+        }
+      ],
+      "status": "PASS"
+    },
+    "errors": {
+      "codes_covered": [
+        "INTERNAL_EXECUTION_ERROR",
+        "INVALID_CHECKPOINT",
+        "INVALID_CONFIGURATION",
+        "INVALID_REQUEST",
+        "INVALID_SCENARIO",
+        "INVALID_TIME_RANGE",
+        "MODEL_NOT_READY",
+        "UNSUPPORTED_CROP",
+        "UNSUPPORTED_ENVIRONMENT"
+      ],
+      "error_codes": [
+        "INVALID_REQUEST",
+        "INVALID_CONFIGURATION",
+        "UNSUPPORTED_CROP",
+        "UNSUPPORTED_ENVIRONMENT",
+        "INVALID_TIME_RANGE",
+        "INVALID_SCENARIO",
+        "INVALID_CHECKPOINT",
+        "MODEL_NOT_READY",
+        "CANCELLATION_REQUESTED",
+        "INTERNAL_EXECUTION_ERROR"
+      ],
+      "rows": [
+        {
+          "case": "request_not_a_mapping",
+          "code": "INVALID_REQUEST",
+          "expected_code": "INVALID_REQUEST",
+          "expected_path": null,
+          "message": "request must be a mapping, got list",
+          "passed": true,
+          "path": null
+        },
+        {
+          "case": "missing_crop",
+          "code": "INVALID_REQUEST",
+          "expected_code": "INVALID_REQUEST",
+          "expected_path": "crop",
+          "message": "crop is required",
+          "passed": true,
+          "path": "crop"
+        },
+        {
+          "case": "unknown_field",
+          "code": "INVALID_REQUEST",
+          "expected_code": "INVALID_REQUEST",
+          "expected_path": "latitude",
+          "message": "unknown fields: latitude; allowed: api_version, crop, variety, environment, plot, scenario, start_time, end_time, seed, weather, dormancy, checkpoint, options",
+          "passed": true,
+          "path": "latitude"
+        },
+        {
+          "case": "wrong_api_version",
+          "code": "INVALID_REQUEST",
+          "expected_code": "INVALID_REQUEST",
+          "expected_path": "api_version",
+          "message": "api_version must be '1.0'",
+          "passed": true,
+          "path": "api_version"
+        },
+        {
+          "case": "unknown_crop",
+          "code": "UNSUPPORTED_CROP",
+          "expected_code": "UNSUPPORTED_CROP",
+          "expected_path": "crop",
+          "message": "crop 'banana' is not configured; supported: tomato, lettuce, pepper, grape, peach, plum, apple",
+          "passed": true,
+          "path": "crop"
+        },
+        {
+          "case": "unknown_environment",
+          "code": "UNSUPPORTED_ENVIRONMENT",
+          "expected_code": "UNSUPPORTED_ENVIRONMENT",
+          "expected_path": "environment",
+          "message": "environment 'vertical_farm' is not supported; supported: outdoor, greenhouse",
+          "passed": true,
+          "path": "environment"
+        },
+        {
+          "case": "actuated_greenhouse_not_exposed",
+          "code": "UNSUPPORTED_ENVIRONMENT",
+          "expected_code": "UNSUPPORTED_ENVIRONMENT",
+          "expected_path": "environment",
+          "message": "environment 'actuated_greenhouse' is not supported; supported: outdoor, greenhouse",
+          "passed": true,
+          "path": "environment"
+        },
+        {
+          "case": "greenhouse_for_perennial",
+          "code": "UNSUPPORTED_ENVIRONMENT",
+          "expected_code": "UNSUPPORTED_ENVIRONMENT",
+          "expected_path": "environment",
+          "message": "no greenhouse configuration exists for peach; greenhouse crops: tomato, lettuce, pepper",
+          "passed": true,
+          "path": "environment"
+        },
+        {
+          "case": "unconfigured_variety",
+          "code": "INVALID_CONFIGURATION",
+          "expected_code": "INVALID_CONFIGURATION",
+          "expected_path": "variety",
+          "message": "variety 'Cherry' has no configuration for tomato; configured: 'RAF'",
+          "passed": true,
+          "path": "variety"
+        },
+        {
+          "case": "unconfigured_plot",
+          "code": "INVALID_CONFIGURATION",
+          "expected_code": "INVALID_CONFIGURATION",
+          "expected_path": "plot",
+          "message": "plot 'plot_99999' is not configured for tomato; configured: 'plot_12010'",
+          "passed": true,
+          "path": "plot"
+        },
+        {
+          "case": "unknown_scenario",
+          "code": "INVALID_SCENARIO",
+          "expected_code": "INVALID_SCENARIO",
+          "expected_path": "scenario",
+          "message": "scenario 'MONSOON' is not defined; available: BASE_SEASON, HOT_SEASON, COLD_SEASON, LOW_RADIATION, HIGH_RADIATION, DRY_SEASON, HUMID_SEASON, HEAT_WAVE, COLD_WAVE, HEAT_WAVE_WITH_DRYNESS, HIGH_RADIATION_WITH_LOW_WATER, RECOVERY_AFTER_STRESS, WIND_SPELL, RAIN_SPELL",
+          "passed": true,
+          "path": "scenario"
+        },
+        {
+          "case": "naive_timestamp",
+          "code": "INVALID_REQUEST",
+          "expected_code": "INVALID_REQUEST",
+          "expected_path": "end_time",
+          "message": "end_time is ambiguous: an explicit UTC offset is required ('2026-03-01T00:00:00')",
+          "passed": true,
+          "path": "end_time"
+        },
+        {
+          "case": "unparseable_timestamp",
+          "code": "INVALID_REQUEST",
+          "expected_code": "INVALID_REQUEST",
+          "expected_path": "end_time",
+          "message": "end_time is not an ISO-8601 instant: '1 March'",
+          "passed": true,
+          "path": "end_time"
+        },
+        {
+          "case": "end_before_start",
+          "code": "INVALID_TIME_RANGE",
+          "expected_code": "INVALID_TIME_RANGE",
+          "expected_path": "end_time",
+          "message": "end_time 2026-02-01T00:00:00+00:00 must be after start 2026-02-15T00:00:00+00:00",
+          "passed": true,
+          "path": "end_time"
+        },
+        {
+          "case": "end_equal_start",
+          "code": "INVALID_TIME_RANGE",
+          "expected_code": "INVALID_TIME_RANGE",
+          "expected_path": "end_time",
+          "message": "end_time 2026-02-15T00:00:00+00:00 must be after start 2026-02-15T00:00:00+00:00",
+          "passed": true,
+          "path": "end_time"
+        },
+        {
+          "case": "end_after_campaign",
+          "code": "INVALID_TIME_RANGE",
+          "expected_code": "INVALID_TIME_RANGE",
+          "expected_path": "end_time",
+          "message": "end_time 2026-12-31T00:00:00+00:00 exceeds the synthetic campaign end 2026-07-21T00:00:00+00:00",
+          "passed": true,
+          "path": "end_time"
+        },
+        {
+          "case": "start_not_campaign_start",
+          "code": "INVALID_TIME_RANGE",
+          "expected_code": "INVALID_TIME_RANGE",
+          "expected_path": "start_time",
+          "message": "start_time is fixed by the crop's synthetic cycle (2026-02-15T00:00:00+00:00); set the horizon with end_time or resume from a checkpoint",
+          "passed": true,
+          "path": "start_time"
+        },
+        {
+          "case": "partial_step_horizon",
+          "code": "INVALID_TIME_RANGE",
+          "expected_code": "INVALID_TIME_RANGE",
+          "expected_path": "end_time",
+          "message": "the horizon must be a whole number of 3600 s steps",
+          "passed": true,
+          "path": "end_time"
+        },
+        {
+          "case": "negative_seed",
+          "code": "INVALID_REQUEST",
+          "expected_code": "INVALID_REQUEST",
+          "expected_path": "seed",
+          "message": "seed must be a non-negative integer",
+          "passed": true,
+          "path": "seed"
+        },
+        {
+          "case": "boolean_seed",
+          "code": "INVALID_REQUEST",
+          "expected_code": "INVALID_REQUEST",
+          "expected_path": "seed",
+          "message": "seed must be a non-negative integer",
+          "passed": true,
+          "path": "seed"
+        },
+        {
+          "case": "unsupported_weather_source",
+          "code": "INVALID_CONFIGURATION",
+          "expected_code": "INVALID_CONFIGURATION",
+          "expected_path": "weather.source",
+          "message": "weather source 'OPEN_METEO' is not supported by API 1.0; supported: SYNTHETIC_SEASONAL",
+          "passed": true,
+          "path": "weather.source"
+        },
+        {
+          "case": "unknown_weather_field",
+          "code": "INVALID_REQUEST",
+          "expected_code": "INVALID_REQUEST",
+          "expected_path": "weather.station",
+          "message": "unknown fields: station; allowed: source, profile_overrides",
+          "passed": true,
+          "path": "weather.station"
+        },
+        {
+          "case": "unknown_profile_key",
+          "code": "INVALID_CONFIGURATION",
+          "expected_code": "INVALID_CONFIGURATION",
+          "expected_path": "weather.profile_overrides.frost_days",
+          "message": "unknown synthetic climate profile key 'frost_days'; allowed: daily_humidity_pct, daily_radiation_fraction, daily_temperature_c, humidity_max_pct, humidity_min_pct, radiation_max_w_m2, seasonal_daylength_amplitude_h, seasonal_humidity_amplitude_pct, seasonal_radiation_amplitude_fraction, seasonal_temperature_amplitude_c, temperature_max_c, temperature_min_c, warmest_day_of_year",
+          "passed": true,
+          "path": "weather.profile_overrides.frost_days"
+        },
+        {
+          "case": "non_finite_profile_value",
+          "code": "INVALID_CONFIGURATION",
+          "expected_code": "INVALID_CONFIGURATION",
+          "expected_path": "weather.profile_overrides.temperature_max_c",
+          "message": "temperature_max_c must be a finite number",
+          "passed": true,
+          "path": "weather.profile_overrides.temperature_max_c"
+        },
+        {
+          "case": "inconsistent_profile",
+          "code": "INVALID_CONFIGURATION",
+          "expected_code": "INVALID_CONFIGURATION",
+          "expected_path": "weather.profile_overrides",
+          "message": "the effective synthetic climate profile is invalid: temperature minimum cannot exceed maximum",
+          "passed": true,
+          "path": "weather.profile_overrides"
+        },
+        {
+          "case": "unknown_chilling_model",
+          "code": "INVALID_CONFIGURATION",
+          "expected_code": "INVALID_CONFIGURATION",
+          "expected_path": "dormancy",
+          "message": "dormancy.chilling_model: unknown value 'DYNAMIC_APPROX'; allowed: CHILLING_HOURS, UTAH, DYNAMIC",
+          "passed": true,
+          "path": "dormancy"
+        },
+        {
+          "case": "literature_requirement_not_activated",
+          "code": "INVALID_CONFIGURATION",
+          "expected_code": "INVALID_CONFIGURATION",
+          "expected_path": "dormancy",
+          "message": "dormancy.chilling_requirement.evidence: 'LITERATURE' is not accepted; no activated scientific requirement exists for DYNAMIC (literature rows are NOT_ACTIVATED); allowed: SOFTWARE_TEST_ONLY",
+          "passed": true,
+          "path": "dormancy"
+        },
+        {
+          "case": "requested_model_not_ready",
+          "code": "MODEL_NOT_READY",
+          "expected_code": "MODEL_NOT_READY",
+          "expected_path": "dormancy.chilling_model",
+          "message": "requested chilling model UTAH is IMPLEMENTED_UNPARAMETERIZED: no requirement in utah_chill_units; the STRICT fallback would run CHILLING_HOURS and the request forbids it",
+          "passed": true,
+          "path": "dormancy.chilling_model"
+        },
+        {
+          "case": "unknown_option",
+          "code": "INVALID_REQUEST",
+          "expected_code": "INVALID_REQUEST",
+          "expected_path": "options.threads",
+          "message": "unknown fields: threads; allowed: progress_interval_steps, require_requested_chilling_model, include_trajectory, compute_trajectory_hash, variables",
+          "passed": true,
+          "path": "options.threads"
+        },
+        {
+          "case": "unknown_variable",
+          "code": "INVALID_REQUEST",
+          "expected_code": "INVALID_REQUEST",
+          "expected_path": "options.variables[1]",
+          "message": "unknown variable 'yield_t_ha'; see the variable catalogue",
+          "passed": true,
+          "path": "options.variables[1]"
+        },
+        {
+          "case": "malformed_checkpoint",
+          "code": "INVALID_CHECKPOINT",
+          "expected_code": "INVALID_CHECKPOINT",
+          "expected_path": "checkpoint",
+          "message": "checkpoint must be the mapping returned by the API with exactly format, simulation_time, payload, sha256, resume_hash",
+          "passed": true,
+          "path": "checkpoint"
+        },
+        {
+          "case": "checkpoint_tampered_payload",
+          "code": "INVALID_CHECKPOINT",
+          "expected_code": "INVALID_CHECKPOINT",
+          "expected_path": "checkpoint.sha256",
+          "message": "checkpoint payload does not match its sha256 (altered or truncated)",
+          "passed": true,
+          "path": "checkpoint.sha256"
+        },
+        {
+          "case": "checkpoint_other_configuration",
+          "code": "INVALID_CHECKPOINT",
+          "expected_code": "INVALID_CHECKPOINT",
+          "expected_path": "checkpoint.resume_hash",
+          "message": "checkpoint was produced by a different configuration (crop, environment, scenario, seed, weather or dormancy differ)",
+          "passed": true,
+          "path": "checkpoint.resume_hash"
+        },
+        {
+          "case": "checkpoint_other_crop",
+          "code": "INVALID_CHECKPOINT",
+          "expected_code": "INVALID_CHECKPOINT",
+          "expected_path": "checkpoint.resume_hash",
+          "message": "checkpoint was produced by a different configuration (crop, environment, scenario, seed, weather or dormancy differ)",
+          "passed": true,
+          "path": "checkpoint.resume_hash"
+        },
+        {
+          "case": "start_time_conflicts_with_checkpoint",
+          "code": "INVALID_TIME_RANGE",
+          "expected_code": "INVALID_TIME_RANGE",
+          "expected_path": "start_time",
+          "message": "start_time must be omitted or equal to the checkpoint time when resuming",
+          "passed": true,
+          "path": "start_time"
+        },
+        {
+          "case": "resume_without_checkpoint",
+          "code": "INVALID_CHECKPOINT",
+          "expected_code": "INVALID_CHECKPOINT",
+          "expected_path": "checkpoint",
+          "message": "resume_simulation requires a checkpoint",
+          "passed": true,
+          "path": "checkpoint"
+        },
+        {
+          "case": "checkpoint_inside_ramped_event",
+          "code": "INVALID_CHECKPOINT",
+          "expected_code": "INVALID_CHECKPOINT",
+          "expected_path": "checkpoint.simulation_time",
+          "message": "checkpoint 2026-05-06T00:00:00+00:00 lies inside the ramped event 'heat_wave'; resuming there would re-anchor the event ramp (existing resumed_scenario limitation), so exact equivalence cannot be guaranteed",
+          "passed": true,
+          "path": "checkpoint.simulation_time"
+        },
+        {
+          "case": "unknown_simulation_id",
+          "code": "INVALID_REQUEST",
+          "expected_code": "INVALID_REQUEST",
+          "expected_path": "simulation_id",
+          "message": "unknown simulation id 'sim-000000-unknown'",
+          "passed": true,
+          "path": "simulation_id"
+        },
+        {
+          "case": "result_before_completion",
+          "code": "INVALID_REQUEST",
+          "expected_code": "INVALID_REQUEST",
+          "expected_path": "simulation_id",
+          "message": "simulation is CREATED; no result yet",
+          "passed": true,
+          "path": "simulation_id"
+        },
+        {
+          "case": "listener_failure_is_execution_error",
+          "code": "INTERNAL_EXECUTION_ERROR",
+          "expected_code": "INTERNAL_EXECUTION_ERROR",
+          "expected_path": null,
+          "message": "progress listener raised: RuntimeError: frontend callback failure; the model state was not affected",
+          "passed": true,
+          "path": null
+        },
+        {
+          "case": "failed_result_query",
+          "code": "INTERNAL_EXECUTION_ERROR",
+          "expected_code": "INTERNAL_EXECUTION_ERROR",
+          "expected_path": null,
+          "message": "progress listener raised: RuntimeError: frontend callback failure; the model state was not affected",
+          "passed": true,
+          "path": null
+        }
+      ],
+      "status": "PASS"
+    },
+    "immutability": {
+      "after": {
+        "configuration_files": "023b51084ab55f9c947d64870f3fa49715cc7aa8434b88547f6b48ffa1dbe205",
+        "dormancy_default": "6e39f1be5e4a195e7ab16b45c8b59d4d2d606c7f1f4abfb4346444c5f6169f0e",
+        "greenhouse_configuration": "25ab7a565c112ec978d2be65ba3b8e1ee95dbe42215e7f5add718ef97c26768c",
+        "parameter_registry": "e09e90f08e754a7d0373c8da4461388a350b53e3dcb9a5ea4297ddeb3ea0db1d",
+        "parameter_sets": "6a8bb40d7771379331463a48f8a1a6b10e649ed21052f2d0384b41332f58c425",
+        "phenology_profiles": "75b97302503401cb459bfe95f24fe48168827f79eab307ca8ba820c528c9682c",
+        "weather_profiles": "f9e279a28b318bb0b42dd0c813791af7787cfccd1105a8e4bffe8f2cab3f5358"
+      },
+      "before": {
+        "configuration_files": "023b51084ab55f9c947d64870f3fa49715cc7aa8434b88547f6b48ffa1dbe205",
+        "dormancy_default": "6e39f1be5e4a195e7ab16b45c8b59d4d2d606c7f1f4abfb4346444c5f6169f0e",
+        "greenhouse_configuration": "25ab7a565c112ec978d2be65ba3b8e1ee95dbe42215e7f5add718ef97c26768c",
+        "parameter_registry": "e09e90f08e754a7d0373c8da4461388a350b53e3dcb9a5ea4297ddeb3ea0db1d",
+        "parameter_sets": "6a8bb40d7771379331463a48f8a1a6b10e649ed21052f2d0384b41332f58c425",
+        "phenology_profiles": "75b97302503401cb459bfe95f24fe48168827f79eab307ca8ba820c528c9682c",
+        "weather_profiles": "f9e279a28b318bb0b42dd0c813791af7787cfccd1105a8e4bffe8f2cab3f5358"
+      },
+      "checks": {
+        "campaign_definition_unchanged": true,
+        "checkpoint_input_not_mutated": true,
+        "default_dormancy_unchanged": true,
+        "fingerprint_unchanged": true,
+        "progress_state_matches_trajectory": true,
+        "request_document_not_mutated": true,
+        "returned_twin_state_is_detached_copy": true
+      },
+      "status": "PASS"
+    },
+    "progress": {
+      "checks": {
+        "current_state_is_twin_state": true,
+        "elapsed_time_operational_only": true,
+        "fraction_monotonic_to_one": true,
+        "interactive_emits_only_final": true,
+        "progress_query_after_completion": true,
+        "season_daily_events_plus_final": true,
+        "season_mode_with_progress": true,
+        "simulated_time_tracks_steps": true,
+        "stage_matches_trajectory": true
+      },
+      "interval_steps": 24,
+      "season_events": 156,
+      "status": "PASS"
+    },
+    "result_contract": {
+      "expectations": {
+        "annual_chilling_not_applicable": true,
+        "greenhouse_co2_available": true,
+        "greenhouse_state_available_indoors": true,
+        "outdoor_co2_not_applicable": true,
+        "perennial_chilling_available": true,
+        "required_variables_available": true,
+        "variable_selection": true
+      },
+      "rows": [
+        {
+          "availability": {
+            "accumulated_stress": "AVAILABLE",
+            "biomass_fruit_g_m2": "AVAILABLE",
+            "biomass_total_g_m2": "AVAILABLE",
+            "canopy_temperature_c": "NOT_SUPPORTED",
+            "chilling_accumulated": "NOT_APPLICABLE",
+            "co2_ppm": "NOT_APPLICABLE",
+            "cold_stress": "AVAILABLE",
+            "crop_stage": "AVAILABLE",
+            "dormancy_released": "NOT_APPLICABLE",
+            "drainage_mm": "AVAILABLE",
+            "et0_mm": "AVAILABLE",
+            "evaporation_mm": "AVAILABLE",
+            "frost_damage": "AVAILABLE",
+            "fruit_count": "NOT_SUPPORTED",
+            "greenhouse_cooling_kw": "NOT_APPLICABLE",
+            "greenhouse_heating_kw": "NOT_APPLICABLE",
+            "greenhouse_shading_fraction": "NOT_APPLICABLE",
+            "greenhouse_ventilation_fraction": "NOT_APPLICABLE",
+            "growth_factor": "AVAILABLE",
+            "heat_stress": "AVAILABLE",
+            "irrigation_mm": "AVAILABLE",
+            "leaf_area_index": "AVAILABLE",
+            "leaf_water_potential_mpa": "NOT_SUPPORTED",
+            "maturity_index": "AVAILABLE",
+            "outdoor_temperature_c": "NOT_APPLICABLE",
+            "photosynthesis_rate_umol_m2_s": "NOT_SUPPORTED",
+            "precipitation_mm": "AVAILABLE",
+            "radiation_stress": "AVAILABLE",
+            "radiation_w_m2": "AVAILABLE",
+            "relative_humidity_pct": "AVAILABLE",
+            "root_zone_water_mm": "AVAILABLE",
+            "soil_water_vwc_m3_m3": "AVAILABLE",
+            "temperature_c": "AVAILABLE",
+            "transpiration_mm": "AVAILABLE",
+            "vpd_kpa": "AVAILABLE",
+            "vpd_stress": "AVAILABLE",
+            "water_stress": "AVAILABLE"
+          },
+          "case": "tomato_outdoor_14d",
+          "final_state_twin_state_round_trip": true,
+          "not_supported_never_fabricated": true,
+          "series_length_equals_steps": true,
+          "series_only_for_available": true,
+          "values_finite": true
+        },
+        {
+          "availability": {
+            "accumulated_stress": "AVAILABLE",
+            "biomass_fruit_g_m2": "AVAILABLE",
+            "biomass_total_g_m2": "AVAILABLE",
+            "canopy_temperature_c": "NOT_SUPPORTED",
+            "chilling_accumulated": "NOT_APPLICABLE",
+            "co2_ppm": "AVAILABLE",
+            "cold_stress": "AVAILABLE",
+            "crop_stage": "AVAILABLE",
+            "dormancy_released": "NOT_APPLICABLE",
+            "drainage_mm": "AVAILABLE",
+            "et0_mm": "AVAILABLE",
+            "evaporation_mm": "AVAILABLE",
+            "frost_damage": "AVAILABLE",
+            "fruit_count": "NOT_SUPPORTED",
+            "greenhouse_cooling_kw": "AVAILABLE",
+            "greenhouse_heating_kw": "AVAILABLE",
+            "greenhouse_shading_fraction": "AVAILABLE",
+            "greenhouse_ventilation_fraction": "AVAILABLE",
+            "growth_factor": "AVAILABLE",
+            "heat_stress": "AVAILABLE",
+            "irrigation_mm": "AVAILABLE",
+            "leaf_area_index": "AVAILABLE",
+            "leaf_water_potential_mpa": "NOT_SUPPORTED",
+            "maturity_index": "AVAILABLE",
+            "outdoor_temperature_c": "AVAILABLE",
+            "photosynthesis_rate_umol_m2_s": "NOT_SUPPORTED",
+            "precipitation_mm": "AVAILABLE",
+            "radiation_stress": "AVAILABLE",
+            "radiation_w_m2": "AVAILABLE",
+            "relative_humidity_pct": "AVAILABLE",
+            "root_zone_water_mm": "AVAILABLE",
+            "soil_water_vwc_m3_m3": "AVAILABLE",
+            "temperature_c": "AVAILABLE",
+            "transpiration_mm": "AVAILABLE",
+            "vpd_kpa": "AVAILABLE",
+            "vpd_stress": "AVAILABLE",
+            "water_stress": "AVAILABLE"
+          },
+          "case": "tomato_greenhouse_14d",
+          "final_state_twin_state_round_trip": true,
+          "not_supported_never_fabricated": true,
+          "series_length_equals_steps": true,
+          "series_only_for_available": true,
+          "values_finite": true
+        },
+        {
+          "availability": {
+            "accumulated_stress": "AVAILABLE",
+            "biomass_fruit_g_m2": "AVAILABLE",
+            "biomass_total_g_m2": "AVAILABLE",
+            "canopy_temperature_c": "NOT_SUPPORTED",
+            "chilling_accumulated": "AVAILABLE",
+            "co2_ppm": "NOT_APPLICABLE",
+            "cold_stress": "AVAILABLE",
+            "crop_stage": "AVAILABLE",
+            "dormancy_released": "AVAILABLE",
+            "drainage_mm": "AVAILABLE",
+            "et0_mm": "AVAILABLE",
+            "evaporation_mm": "AVAILABLE",
+            "frost_damage": "AVAILABLE",
+            "fruit_count": "NOT_SUPPORTED",
+            "greenhouse_cooling_kw": "NOT_APPLICABLE",
+            "greenhouse_heating_kw": "NOT_APPLICABLE",
+            "greenhouse_shading_fraction": "NOT_APPLICABLE",
+            "greenhouse_ventilation_fraction": "NOT_APPLICABLE",
+            "growth_factor": "AVAILABLE",
+            "heat_stress": "AVAILABLE",
+            "irrigation_mm": "AVAILABLE",
+            "leaf_area_index": "AVAILABLE",
+            "leaf_water_potential_mpa": "NOT_SUPPORTED",
+            "maturity_index": "AVAILABLE",
+            "outdoor_temperature_c": "NOT_APPLICABLE",
+            "photosynthesis_rate_umol_m2_s": "NOT_SUPPORTED",
+            "precipitation_mm": "AVAILABLE",
+            "radiation_stress": "AVAILABLE",
+            "radiation_w_m2": "AVAILABLE",
+            "relative_humidity_pct": "AVAILABLE",
+            "root_zone_water_mm": "AVAILABLE",
+            "soil_water_vwc_m3_m3": "AVAILABLE",
+            "temperature_c": "AVAILABLE",
+            "transpiration_mm": "AVAILABLE",
+            "vpd_kpa": "AVAILABLE",
+            "vpd_stress": "AVAILABLE",
+            "water_stress": "AVAILABLE"
+          },
+          "case": "peach_outdoor_14d",
+          "final_state_twin_state_round_trip": true,
+          "not_supported_never_fabricated": true,
+          "series_length_equals_steps": true,
+          "series_only_for_available": true,
+          "values_finite": true
+        }
+      ],
+      "status": "PASS"
+    },
+    "scientific_status": {
+      "propagated": {
+        "BIOLOGICAL_VALIDITY_CLAIMED": false,
+        "CALIBRATION_PERFORMED": false,
+        "DATA_ASSIMILATION_IMPLEMENTED": false,
+        "EXPERIMENTAL_VALIDATION_PERFORMED": false,
+        "FIELD_ACCURACY_CLAIMED": false,
+        "REAL_VERIFIED": 0,
+        "forcing_classification": "SYNTHETIC",
+        "parameter_status": "ENGINEERING_DEFAULTS_UNCALIBRATED",
+        "result_type": "SOFTWARE_SIMULATION",
+        "statement": "Deterministic output of the implemented mechanistic-simplified model under synthetic forcing; software behaviour only, not a prediction, calibration or validated agronomic result."
+      },
+      "status": "PASS"
+    },
+    "static_audit": {
+      "audited_files": [
+        "src/agri_twin/application/interactive_simulation.py",
+        "src/agri_twin/application/scenarios.py",
+        "src/agri_twin/application/integrated_synthetic_validation.py",
+        "manual_phase5_37_interactive_simulation_api_test.py"
+      ],
+      "operational_timer": {
+        "clock_reads_in_api_module": 0,
+        "use": "none: callers inject a timer for operational timings, excluded from every hash"
+      },
+      "project_static_audit": {
+        "duplicate_core_classes": {},
+        "missing_core_classes": [],
+        "scanned_files": 60,
+        "status": "PASS",
+        "violations": []
+      },
+      "rules": {
+        "core_class_suffixes": [
+          "Engine",
+          "Clock",
+          "Scheduler",
+          "Registry",
+          "TwinState",
+          "Orchestrator",
+          "Runner"
+        ],
+        "forbidden_call_prefixes": [
+          "random.",
+          "np.random.",
+          "numpy.random."
+        ],
+        "forbidden_calls": [
+          "asyncio.sleep",
+          "date.today",
+          "datetime.now",
+          "datetime.today",
+          "datetime.utcnow",
+          "sleep",
+          "time.sleep",
+          "time.time"
+        ],
+        "forbidden_imports": [
+          "aiohttp",
+          "asyncio",
+          "celery",
+          "concurrent",
+          "fastapi",
+          "flask",
+          "http",
+          "httpx",
+          "multiprocessing",
+          "pika",
+          "random",
+          "redis",
+          "requests",
+          "serial",
+          "socket",
+          "threading",
+          "urllib"
+        ]
+      },
+      "single_core_components": [
+        "ClimateStressEngine",
+        "CropGreenhouseFeedbackLoop",
+        "CropGrowthEngine",
+        "CropPhysicalExchangeModel",
+        "GreenhousePhysicalModel",
+        "InMemoryTwinStateRepository",
+        "MultiPlotSimulation",
+        "ObservationDataset",
+        "ParameterRegistry",
+        "PhenologyEngine",
+        "ScenarioRunner",
+        "SimplifiedGreenhouseModel",
+        "SimulationClock",
+        "SimulationScheduler",
+        "TwinStateRepository",
+        "WaterBalanceEngine",
+        "WeatherEngine"
+      ],
+      "status": "PASS",
+      "violations": []
+    }
+  },
+  "status": "PASS",
+  "title": "Interactive simulation API and execution contract",
+  "version": "5.37.0"
+}

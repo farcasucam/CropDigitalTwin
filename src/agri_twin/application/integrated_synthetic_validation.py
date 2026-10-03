@@ -844,9 +844,8 @@ def checkpoint_payload(snapshot: CropSimulationSnapshot) -> str:
 
 def restore_checkpoint(payload: str) -> tuple[datetime, CropGrowthState, SoilState, GreenhouseMicroclimateState]:
     data = json.loads(payload)
-    crop_values = dict(data["crop"])
-    crop_values["simulation_time"] = datetime.fromisoformat(crop_values["simulation_time"])
-    return datetime.fromisoformat(data["simulation_time"]), CropGrowthState(**crop_values), SoilState(**data["soil"]), GreenhouseMicroclimateState(**data["microclimate"])
+    # CropGrowthState.from_dict is the inverse of to_dict, including a Utah/Dynamic chilling_state.
+    return datetime.fromisoformat(data["simulation_time"]), CropGrowthState.from_dict(data["crop"]), SoilState(**data["soil"]), GreenhouseMicroclimateState(**data["microclimate"])
 
 
 def resumed_scenario(scenario: Scenario, restart_time: datetime, crop: CropGrowthState, soil: SoilState, microclimate: GreenhouseMicroclimateState | None = None) -> Scenario:
