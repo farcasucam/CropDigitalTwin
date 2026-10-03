@@ -119,11 +119,12 @@ def test_unsupported_model_result_is_identical_to_explicit_chilling_hours(weathe
 
 
 def test_no_utah_or_dynamic_formula_is_implemented():
+    # Phase 5.35: the formulations exist, but without a requirement in their unit they are not ready to decide release.
     profile = PhenologyEngine().profile_for("peach")
     for model in (ChillingModelType.UTAH, ChillingModelType.DYNAMIC):
-        assert not ChillingModel(model).implemented
-        with pytest.raises(PhenologyError, match="MODEL_NOT_SUPPORTED"):
-            ChillingModel(model).increment(4.0, profile, 3600.0)
+        assert not ChillingModel(model).ready
+        with pytest.raises(PhenologyError, match="MODEL_NOT_READY"):
+            ChillingModel(model).required(profile)
 
 
 def test_one_fallback_rule_for_all_unsupported_models():
@@ -134,7 +135,7 @@ def test_one_fallback_rule_for_all_unsupported_models():
 def test_injected_unimplemented_model_is_not_a_silent_fallback():
     for model in (ChillingModelType.UTAH, ChillingModelType.DYNAMIC):
         result = run_dormancy_season("peach", constant(4.0), START, 2, model=ChillingModel(model))
-        assert result.outcome is DormancyOutcome.MODEL_NOT_SUPPORTED and result.configuration is None
+        assert result.outcome is DormancyOutcome.MODEL_NOT_READY and result.configuration is None  # Phase 5.35: was MODEL_NOT_SUPPORTED
 
 
 def test_fallback_does_not_change_start_policy_or_profile_values():

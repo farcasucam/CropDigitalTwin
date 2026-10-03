@@ -81,8 +81,9 @@ def test_fixed_date_policy_requires_an_explicit_instant_and_no_default_date_exis
 
 
 def test_unimplemented_models_and_policies_report_model_not_supported():
+    # Phase 5.35: Utah/Dynamic are implemented but, injected without a requirement in their unit, cannot run (MODEL_NOT_READY).
     for model in (ChillingModel(ChillingModelType.UTAH), ChillingModel(ChillingModelType.DYNAMIC)):
-        assert run_dormancy_season("peach", constant(4.0), START, 2, model=model).outcome is DormancyOutcome.MODEL_NOT_SUPPORTED
+        assert run_dormancy_season("peach", constant(4.0), START, 2, model=model).outcome is DormancyOutcome.MODEL_NOT_READY
     assert run_dormancy_season("peach", constant(4.0), START, 2, policy=ChillingStartPolicy(ChillingStartPolicyType.MODEL_DEFINED)).outcome is DormancyOutcome.MODEL_NOT_SUPPORTED
 
 

@@ -1,0 +1,4591 @@
+{
+  "biological_validity_claimed": false,
+  "calibration_performed": false,
+  "case_matrix": [
+    {
+      "crop": "grape",
+      "diagnostic": null,
+      "evidence": "ENGINEERING_DEFAULT",
+      "model": "CHILLING_HOURS",
+      "requirement": 400.0,
+      "scientific_execution": "ENGINEERING_DEFAULT_ONLY",
+      "status": "IMPLEMENTED_PARAMETERIZED",
+      "unit": "chill_hours"
+    },
+    {
+      "crop": "grape",
+      "diagnostic": "MODEL_NOT_READY: chilling model UTAH is implemented but has no requirement in utah_chill_units; no species requirement is activated",
+      "evidence": "NONE_ACTIVATED",
+      "model": "UTAH",
+      "requirement": null,
+      "scientific_execution": "BLOCKED",
+      "status": "IMPLEMENTED_UNPARAMETERIZED",
+      "unit": "utah_chill_units"
+    },
+    {
+      "crop": "grape",
+      "diagnostic": "MODEL_NOT_READY: chilling model DYNAMIC is implemented but has no requirement in chill_portions; no species requirement is activated",
+      "evidence": "NONE_ACTIVATED",
+      "model": "DYNAMIC",
+      "requirement": null,
+      "scientific_execution": "BLOCKED",
+      "status": "IMPLEMENTED_UNPARAMETERIZED",
+      "unit": "chill_portions"
+    },
+    {
+      "crop": "peach",
+      "diagnostic": null,
+      "evidence": "ENGINEERING_DEFAULT",
+      "model": "CHILLING_HOURS",
+      "requirement": 600.0,
+      "scientific_execution": "ENGINEERING_DEFAULT_ONLY",
+      "status": "IMPLEMENTED_PARAMETERIZED",
+      "unit": "chill_hours"
+    },
+    {
+      "crop": "peach",
+      "diagnostic": "MODEL_NOT_READY: chilling model UTAH is implemented but has no requirement in utah_chill_units; no species requirement is activated",
+      "evidence": "NONE_ACTIVATED",
+      "model": "UTAH",
+      "requirement": null,
+      "scientific_execution": "BLOCKED",
+      "status": "IMPLEMENTED_UNPARAMETERIZED",
+      "unit": "utah_chill_units"
+    },
+    {
+      "crop": "peach",
+      "diagnostic": "MODEL_NOT_READY: chilling model DYNAMIC is implemented but has no requirement in chill_portions; no species requirement is activated",
+      "evidence": "NONE_ACTIVATED",
+      "model": "DYNAMIC",
+      "requirement": null,
+      "scientific_execution": "BLOCKED",
+      "status": "IMPLEMENTED_UNPARAMETERIZED",
+      "unit": "chill_portions"
+    },
+    {
+      "crop": "plum",
+      "diagnostic": null,
+      "evidence": "ENGINEERING_DEFAULT",
+      "model": "CHILLING_HOURS",
+      "requirement": 500.0,
+      "scientific_execution": "ENGINEERING_DEFAULT_ONLY",
+      "status": "IMPLEMENTED_PARAMETERIZED",
+      "unit": "chill_hours"
+    },
+    {
+      "crop": "plum",
+      "diagnostic": "MODEL_NOT_READY: chilling model UTAH is implemented but has no requirement in utah_chill_units; no species requirement is activated",
+      "evidence": "NONE_ACTIVATED",
+      "model": "UTAH",
+      "requirement": null,
+      "scientific_execution": "BLOCKED",
+      "status": "IMPLEMENTED_UNPARAMETERIZED",
+      "unit": "utah_chill_units"
+    },
+    {
+      "crop": "plum",
+      "diagnostic": "MODEL_NOT_READY: chilling model DYNAMIC is implemented but has no requirement in chill_portions; no species requirement is activated",
+      "evidence": "NONE_ACTIVATED",
+      "model": "DYNAMIC",
+      "requirement": null,
+      "scientific_execution": "BLOCKED",
+      "status": "IMPLEMENTED_UNPARAMETERIZED",
+      "unit": "chill_portions"
+    },
+    {
+      "crop": "apple",
+      "diagnostic": null,
+      "evidence": "ENGINEERING_DEFAULT",
+      "model": "CHILLING_HOURS",
+      "requirement": 600.0,
+      "scientific_execution": "ENGINEERING_DEFAULT_ONLY",
+      "status": "IMPLEMENTED_PARAMETERIZED",
+      "unit": "chill_hours"
+    },
+    {
+      "crop": "apple",
+      "diagnostic": "MODEL_NOT_READY: chilling model UTAH is implemented but has no requirement in utah_chill_units; no species requirement is activated",
+      "evidence": "NONE_ACTIVATED",
+      "model": "UTAH",
+      "requirement": null,
+      "scientific_execution": "BLOCKED",
+      "status": "IMPLEMENTED_UNPARAMETERIZED",
+      "unit": "utah_chill_units"
+    },
+    {
+      "crop": "apple",
+      "diagnostic": "MODEL_NOT_READY: chilling model DYNAMIC is implemented but has no requirement in chill_portions; no species requirement is activated",
+      "evidence": "NONE_ACTIVATED",
+      "model": "DYNAMIC",
+      "requirement": null,
+      "scientific_execution": "BLOCKED",
+      "status": "IMPLEMENTED_UNPARAMETERIZED",
+      "unit": "chill_portions"
+    }
+  ],
+  "configuration_hash": "85b500ec50c62648ea869485b3d9cb8e8d3153a61c8e5a0d3f6118a0fff02a04",
+  "configurations": {
+    "CHILLING_HOURS+DEFAULT": {
+      "canonical": {
+        "dormancy": {
+          "effective_chilling_model": "CHILLING_HOURS",
+          "effective_start_policy": "DORMANCY_STATE",
+          "fallback_applied": false,
+          "fallback_policy": "STRICT",
+          "requested_chilling_model": "CHILLING_HOURS",
+          "requested_start_policy": "DORMANCY_STATE",
+          "start_time": null
+        }
+      },
+      "effective": {
+        "dormancy": {
+          "effective_chilling_model": "CHILLING_HOURS",
+          "effective_start_policy": "DORMANCY_STATE",
+          "fallback_policy": "STRICT",
+          "start_time": null
+        }
+      },
+      "requested": {
+        "dormancy": {
+          "chilling_model": "CHILLING_HOURS",
+          "fallback_policy": "DEFAULT",
+          "start_policy": "DORMANCY_STATE"
+        }
+      }
+    },
+    "CHILLING_HOURS+STRICT": {
+      "canonical": {
+        "dormancy": {
+          "effective_chilling_model": "CHILLING_HOURS",
+          "effective_start_policy": "DORMANCY_STATE",
+          "fallback_applied": false,
+          "fallback_policy": "STRICT",
+          "requested_chilling_model": "CHILLING_HOURS",
+          "requested_start_policy": "DORMANCY_STATE",
+          "start_time": null
+        }
+      },
+      "effective": {
+        "dormancy": {
+          "effective_chilling_model": "CHILLING_HOURS",
+          "effective_start_policy": "DORMANCY_STATE",
+          "fallback_policy": "STRICT",
+          "start_time": null
+        }
+      },
+      "requested": {
+        "dormancy": {
+          "chilling_model": "CHILLING_HOURS",
+          "fallback_policy": "STRICT",
+          "start_policy": "DORMANCY_STATE"
+        }
+      }
+    },
+    "DYNAMIC+DEFAULT+SOFTWARE_TEST_ONLY": {
+      "canonical": {
+        "dormancy": {
+          "chilling_requirement": {
+            "evidence": "SOFTWARE_TEST_ONLY",
+            "unit": "chill_portions",
+            "value": 50.0
+          },
+          "effective_chilling_model": "DYNAMIC",
+          "effective_start_policy": "DORMANCY_STATE",
+          "fallback_applied": false,
+          "fallback_policy": "STRICT",
+          "model_parameter_set": "DYNAMIC_EREZ_1990",
+          "parameterization_status": "SOFTWARE_TEST_ONLY",
+          "requested_chilling_model": "DYNAMIC",
+          "requested_start_policy": "DORMANCY_STATE",
+          "start_time": null
+        }
+      },
+      "effective": {
+        "dormancy": {
+          "chilling_requirement": {
+            "evidence": "SOFTWARE_TEST_ONLY",
+            "unit": "chill_portions",
+            "value": 50.0
+          },
+          "effective_chilling_model": "DYNAMIC",
+          "effective_start_policy": "DORMANCY_STATE",
+          "fallback_policy": "STRICT",
+          "model_parameter_set": "DYNAMIC_EREZ_1990",
+          "start_time": null
+        }
+      },
+      "requested": {
+        "dormancy": {
+          "chilling_model": "DYNAMIC",
+          "chilling_requirement": {
+            "evidence": "SOFTWARE_TEST_ONLY",
+            "unit": "chill_portions",
+            "value": 50.0
+          },
+          "fallback_policy": "DEFAULT",
+          "start_policy": "DORMANCY_STATE"
+        }
+      }
+    },
+    "DYNAMIC+STRICT (no requirement)": {
+      "canonical": {
+        "dormancy": {
+          "effective_chilling_model": "CHILLING_HOURS",
+          "effective_start_policy": "DORMANCY_STATE",
+          "fallback_applied": true,
+          "fallback_policy": "STRICT",
+          "requested_chilling_model": "DYNAMIC",
+          "requested_start_policy": "DORMANCY_STATE",
+          "start_time": null
+        }
+      },
+      "effective": {
+        "dormancy": {
+          "effective_chilling_model": "CHILLING_HOURS",
+          "effective_start_policy": "DORMANCY_STATE",
+          "fallback_policy": "STRICT",
+          "start_time": null
+        }
+      },
+      "requested": {
+        "dormancy": {
+          "chilling_model": "DYNAMIC",
+          "fallback_policy": "STRICT",
+          "start_policy": "DORMANCY_STATE"
+        }
+      }
+    },
+    "DYNAMIC+STRICT+SOFTWARE_TEST_ONLY": {
+      "canonical": {
+        "dormancy": {
+          "chilling_requirement": {
+            "evidence": "SOFTWARE_TEST_ONLY",
+            "unit": "chill_portions",
+            "value": 50.0
+          },
+          "effective_chilling_model": "DYNAMIC",
+          "effective_start_policy": "DORMANCY_STATE",
+          "fallback_applied": false,
+          "fallback_policy": "STRICT",
+          "model_parameter_set": "DYNAMIC_EREZ_1990",
+          "parameterization_status": "SOFTWARE_TEST_ONLY",
+          "requested_chilling_model": "DYNAMIC",
+          "requested_start_policy": "DORMANCY_STATE",
+          "start_time": null
+        }
+      },
+      "effective": {
+        "dormancy": {
+          "chilling_requirement": {
+            "evidence": "SOFTWARE_TEST_ONLY",
+            "unit": "chill_portions",
+            "value": 50.0
+          },
+          "effective_chilling_model": "DYNAMIC",
+          "effective_start_policy": "DORMANCY_STATE",
+          "fallback_policy": "STRICT",
+          "model_parameter_set": "DYNAMIC_EREZ_1990",
+          "start_time": null
+        }
+      },
+      "requested": {
+        "dormancy": {
+          "chilling_model": "DYNAMIC",
+          "chilling_requirement": {
+            "evidence": "SOFTWARE_TEST_ONLY",
+            "unit": "chill_portions",
+            "value": 50.0
+          },
+          "fallback_policy": "STRICT",
+          "start_policy": "DORMANCY_STATE"
+        }
+      }
+    },
+    "FIXED_DATE+DYNAMIC+SOFTWARE_TEST_ONLY": {
+      "canonical": {
+        "dormancy": {
+          "chilling_requirement": {
+            "evidence": "SOFTWARE_TEST_ONLY",
+            "unit": "chill_portions",
+            "value": 50.0
+          },
+          "effective_chilling_model": "DYNAMIC",
+          "effective_start_policy": "FIXED_DATE",
+          "fallback_applied": false,
+          "fallback_policy": "STRICT",
+          "model_parameter_set": "DYNAMIC_EREZ_1990",
+          "parameterization_status": "SOFTWARE_TEST_ONLY",
+          "requested_chilling_model": "DYNAMIC",
+          "requested_start_policy": "FIXED_DATE",
+          "start_time": "2025-11-01T00:00:00+00:00"
+        }
+      },
+      "effective": {
+        "dormancy": {
+          "chilling_requirement": {
+            "evidence": "SOFTWARE_TEST_ONLY",
+            "unit": "chill_portions",
+            "value": 50.0
+          },
+          "effective_chilling_model": "DYNAMIC",
+          "effective_start_policy": "FIXED_DATE",
+          "fallback_policy": "STRICT",
+          "model_parameter_set": "DYNAMIC_EREZ_1990",
+          "start_time": "2025-11-01T00:00:00+00:00"
+        }
+      },
+      "requested": {
+        "dormancy": {
+          "chilling_model": "DYNAMIC",
+          "chilling_requirement": {
+            "evidence": "SOFTWARE_TEST_ONLY",
+            "unit": "chill_portions",
+            "value": 50.0
+          },
+          "fallback_policy": "STRICT",
+          "start_policy": "FIXED_DATE",
+          "start_time": "2025-11-01T00:00:00+00:00"
+        }
+      }
+    },
+    "FIXED_DATE+UTAH+SOFTWARE_TEST_ONLY": {
+      "canonical": {
+        "dormancy": {
+          "chilling_requirement": {
+            "evidence": "SOFTWARE_TEST_ONLY",
+            "unit": "utah_chill_units",
+            "value": 1000.0
+          },
+          "effective_chilling_model": "UTAH",
+          "effective_start_policy": "FIXED_DATE",
+          "fallback_applied": false,
+          "fallback_policy": "STRICT",
+          "model_parameter_set": "UTAH_RICHARDSON_1974",
+          "parameterization_status": "SOFTWARE_TEST_ONLY",
+          "requested_chilling_model": "UTAH",
+          "requested_start_policy": "FIXED_DATE",
+          "start_time": "2025-11-01T00:00:00+00:00"
+        }
+      },
+      "effective": {
+        "dormancy": {
+          "chilling_requirement": {
+            "evidence": "SOFTWARE_TEST_ONLY",
+            "unit": "utah_chill_units",
+            "value": 1000.0
+          },
+          "effective_chilling_model": "UTAH",
+          "effective_start_policy": "FIXED_DATE",
+          "fallback_policy": "STRICT",
+          "model_parameter_set": "UTAH_RICHARDSON_1974",
+          "start_time": "2025-11-01T00:00:00+00:00"
+        }
+      },
+      "requested": {
+        "dormancy": {
+          "chilling_model": "UTAH",
+          "chilling_requirement": {
+            "evidence": "SOFTWARE_TEST_ONLY",
+            "unit": "utah_chill_units",
+            "value": 1000.0
+          },
+          "fallback_policy": "STRICT",
+          "start_policy": "FIXED_DATE",
+          "start_time": "2025-11-01T00:00:00+00:00"
+        }
+      }
+    },
+    "UTAH+STRICT (no requirement)": {
+      "canonical": {
+        "dormancy": {
+          "effective_chilling_model": "CHILLING_HOURS",
+          "effective_start_policy": "DORMANCY_STATE",
+          "fallback_applied": true,
+          "fallback_policy": "STRICT",
+          "requested_chilling_model": "UTAH",
+          "requested_start_policy": "DORMANCY_STATE",
+          "start_time": null
+        }
+      },
+      "effective": {
+        "dormancy": {
+          "effective_chilling_model": "CHILLING_HOURS",
+          "effective_start_policy": "DORMANCY_STATE",
+          "fallback_policy": "STRICT",
+          "start_time": null
+        }
+      },
+      "requested": {
+        "dormancy": {
+          "chilling_model": "UTAH",
+          "fallback_policy": "STRICT",
+          "start_policy": "DORMANCY_STATE"
+        }
+      }
+    },
+    "UTAH+STRICT+SOFTWARE_TEST_ONLY": {
+      "canonical": {
+        "dormancy": {
+          "chilling_requirement": {
+            "evidence": "SOFTWARE_TEST_ONLY",
+            "unit": "utah_chill_units",
+            "value": 1000.0
+          },
+          "effective_chilling_model": "UTAH",
+          "effective_start_policy": "DORMANCY_STATE",
+          "fallback_applied": false,
+          "fallback_policy": "STRICT",
+          "model_parameter_set": "UTAH_RICHARDSON_1974",
+          "parameterization_status": "SOFTWARE_TEST_ONLY",
+          "requested_chilling_model": "UTAH",
+          "requested_start_policy": "DORMANCY_STATE",
+          "start_time": null
+        }
+      },
+      "effective": {
+        "dormancy": {
+          "chilling_requirement": {
+            "evidence": "SOFTWARE_TEST_ONLY",
+            "unit": "utah_chill_units",
+            "value": 1000.0
+          },
+          "effective_chilling_model": "UTAH",
+          "effective_start_policy": "DORMANCY_STATE",
+          "fallback_policy": "STRICT",
+          "model_parameter_set": "UTAH_RICHARDSON_1974",
+          "start_time": null
+        }
+      },
+      "requested": {
+        "dormancy": {
+          "chilling_model": "UTAH",
+          "chilling_requirement": {
+            "evidence": "SOFTWARE_TEST_ONLY",
+            "unit": "utah_chill_units",
+            "value": 1000.0
+          },
+          "fallback_policy": "STRICT",
+          "start_policy": "DORMANCY_STATE"
+        }
+      }
+    }
+  },
+  "data_assimilation_implemented": false,
+  "effective_hash": "b425fe8f76e9363f3619157750accf20e2fdc9b6f943394dbfed68228fb14ae2",
+  "evidence": {
+    "activated_requirement_rows": [],
+    "assessment": {
+      "CHILLING_HOURS": "profile requirements are species-level engineering defaults (Phase 5.33)",
+      "DYNAMIC": "formulation and constants supported; chill-portion rows exist for peach, plum and apple as cultivar-group ranges (one plum cultivar value) and all are NOT_ACTIVATED -> IMPLEMENTED_UNPARAMETERIZED",
+      "UTAH": "formulation supported; no Utah chill-unit requirement for any project species exists in the repository -> IMPLEMENTED_UNPARAMETERIZED"
+    },
+    "references": [
+      {
+        "id": "RICHARDSON_1974",
+        "identifier": "ISSN 0018-5345",
+        "limitations": "original article not retrieved; table taken from the two secondary sources below",
+        "parameters": "Utah bands and weights",
+        "reference": "Richardson, E.A., Seeley, S.D., Walker, D.R. (1974). A model for estimating the completion of rest for 'Redhaven' and 'Elberta' peach trees. HortScience 9(4), 331-332.",
+        "species": "peach ('Redhaven', 'Elberta')",
+        "supports": "Utah formulation: hourly weights per temperature band",
+        "unit": "utah_chill_units",
+        "use": "ACTIVATES_MODEL_PARAMETERS (formulation constants only)"
+      },
+      {
+        "id": "ZHANG_TAYLOR_2011",
+        "identifier": "HortScience 46(3):420-425",
+        "limitations": "pistachio requirement (59 CP) not transferable and not used",
+        "parameters": "Utah table rows; Dynamic slp, tetmlt, a0, a1, e0, e1",
+        "reference": "Zhang, J., Taylor, C. (2011). The Dynamic Model provides the best description of the chill process on 'Sirora' pistachio trees in Australia. HortScience 46(3), 420-425.",
+        "species": "pistachio (context only)",
+        "supports": "Table 1 (Utah chill units per temperature, citing Richardson et al. 1974); Dynamic Model equations and constants (citing Erez et al. 1988; Luedeling et al. 2009)",
+        "unit": "utah_chill_units; chill_portions",
+        "use": "SCIENTIFIC_EVIDENCE for the formulation; no requirement used"
+      },
+      {
+        "id": "LUEDELING_BROWN_2010",
+        "identifier": "doi:10.1007/s00484-010-0352-y",
+        "limitations": "its summary lists only the 15.9 C negative band; the -1 weight above 18 C comes from Zhang & Taylor (2011) Table 1",
+        "parameters": "Dynamic constants",
+        "reference": "Luedeling, E., Brown, P.H. (2010). A global analysis of the comparability of winter chill models for fruit and nut trees. Int. J. Biometeorol. 55, 411-421.",
+        "species": "global comparison",
+        "supports": "Chilling Hours, Utah and Dynamic definitions; Dynamic constants slp=1.6, Tf=277, A0=139500, A1=2.567e18, E0=4153.5, E1=12888.8",
+        "unit": "chill_hours; utah_chill_units; chill_portions",
+        "use": "SCIENTIFIC_EVIDENCE for the formulation"
+      },
+      {
+        "id": "EREZ_1990",
+        "identifier": "Acta Hortic. 276:165-174",
+        "limitations": "original article not retrieved; constants as reported by Luedeling & Brown (2010) and Zhang & Taylor (2011)",
+        "parameters": "Dynamic constants",
+        "reference": "Erez, A., Fishman, S., Linsley-Noakes, G.C., Allan, P. (1990). The dynamic model for rest completion in peach buds. Acta Hortic. 276, 165-174.",
+        "species": "peach",
+        "supports": "Dynamic Model constants and chill-portion formulation",
+        "unit": "chill_portions",
+        "use": "ACTIVATES_MODEL_PARAMETERS (formulation constants only)"
+      },
+      {
+        "id": "FISHMAN_1987",
+        "identifier": "ISSN 0022-5193",
+        "limitations": "original articles not retrieved",
+        "parameters": "none used directly",
+        "reference": "Fishman, S., Erez, A., Couvillon, G.A. (1987a, 1987b). The temperature dependence of dormancy breaking in plants. J. Theor. Biol. 126, 309-321; 124, 473-483.",
+        "species": "peach",
+        "supports": "two-step Dynamic Model structure",
+        "unit": "chill_portions",
+        "use": "SCIENTIFIC_EVIDENCE"
+      },
+      {
+        "id": "CHILLR_REFERENCE_IMPLEMENTATION",
+        "identifier": "CRAN chillR, ChillModels",
+        "limitations": "software, not a scientific source; used to remove implementation ambiguity",
+        "parameters": "kelvin_offset = 273",
+        "reference": "Luedeling, E. chillR: Statistical Methods for Phenology Analysis in Temperate Fruit Trees (R package), Dynamic_Model(); ChillModels (Pertille et al.) dynamic_model() adapted from it.",
+        "species": "n/a",
+        "supports": "hourly loop, Kelvin conversion T + 273, transfer with the previous hour's xi",
+        "unit": "chill_portions",
+        "use": "SOFTWARE_REFERENCE (equivalence test)"
+      }
+    ],
+    "requirement_evidence_rows": [
+      {
+        "activation_status": "NOT_ACTIVATED",
+        "authors": "Drogoudi, P.; Cant\u00edn, C.M.; Brandi, F.; et al.",
+        "crop": "peach",
+        "doi": "10.3390/plants12030584",
+        "id": "peach_chill_portions_001",
+        "maximum": "69",
+        "minimum": "49",
+        "notes": "Dynamic Model; Tabuenca tests.",
+        "parameter": "chill_portions",
+        "reference_cultivar": "14 peach and nectarine cultivars",
+        "result_type": "SCIENTIFIC_EVIDENCE",
+        "source_id": "SRC-011",
+        "unit": "chill_portions",
+        "value": "",
+        "year": "2023"
+      },
+      {
+        "activation_status": "NOT_ACTIVATED",
+        "authors": "Guerrero, B.I.; Fad\u00f3n, E.; Guerra, M.E.; Rodrigo, J.",
+        "crop": "plum",
+        "doi": "10.3389/fpls.2024.1343593",
+        "id": "plum_chill_portions_001",
+        "maximum": "51",
+        "minimum": "26",
+        "notes": "Dynamic Model.",
+        "parameter": "chill_portions",
+        "reference_cultivar": "21 Japanese plum-type cultivars",
+        "result_type": "SCIENTIFIC_EVIDENCE",
+        "source_id": "SRC-014",
+        "unit": "chill_portions",
+        "value": "",
+        "year": "2024"
+      },
+      {
+        "activation_status": "NOT_ACTIVATED",
+        "authors": "Guerrero, B.I.; Fad\u00f3n, E.; Guerra, M.E.; Rodrigo, J.",
+        "crop": "plum",
+        "doi": "10.3389/fpls.2024.1343593",
+        "id": "plum_chill_portions_002",
+        "maximum": "",
+        "minimum": "",
+        "notes": "Lowest cultivar-specific CP reported in article.",
+        "parameter": "chill_portions",
+        "reference_cultivar": "Earliqueen",
+        "result_type": "SCIENTIFIC_EVIDENCE",
+        "source_id": "SRC-014",
+        "unit": "chill_portions",
+        "value": "30",
+        "year": "2024"
+      },
+      {
+        "activation_status": "NOT_ACTIVATED",
+        "authors": "Gonz\u00e1lez Noguer, C.; et al.",
+        "crop": "apple",
+        "doi": "10.3389/fhort.2023.1217689",
+        "id": "apple_chill_portions_001",
+        "maximum": "70",
+        "minimum": "40",
+        "notes": "Review reports range for extensively planted cultivars; do not convert to CH.",
+        "parameter": "chill_portions",
+        "reference_cultivar": "Golden Delicious; Granny Smith; Gala; Fuji",
+        "result_type": "SCIENTIFIC_EVIDENCE",
+        "source_id": "SRC-016",
+        "unit": "chill_portions",
+        "value": "",
+        "year": "2023"
+      },
+      {
+        "activation_status": "NOT_ACTIVATED",
+        "authors": "D\u00edez-Palet, I.; Funes, I.; Sav\u00e9, R.; et al.",
+        "crop": "apple",
+        "doi": "10.3390/agronomy9110760",
+        "id": "apple_chill_portions_002",
+        "maximum": "88",
+        "minimum": "35",
+        "notes": "Range reported in subsequent literature citing D\u00edez-Palet et al.; exact cultivar-level table requires full-text extraction.",
+        "parameter": "chill_portions",
+        "reference_cultivar": "12 apple cultivars",
+        "result_type": "SCIENTIFIC_EVIDENCE",
+        "source_id": "SRC-017",
+        "unit": "chill_portions",
+        "value": "",
+        "year": "2019"
+      }
+    ],
+    "scientific_claims": [],
+    "status": "PASS",
+    "utah_requirement_rows": []
+  },
+  "experimental_validation_performed": false,
+  "fallback_matrix": [
+    {
+      "case": "CHILLING_HOURS+STRICT",
+      "effective_model": "CHILLING_HOURS",
+      "fallback": "STRICT",
+      "fallback_applied": false,
+      "fallback_reason": null,
+      "parameterization_status": "ENGINEERING_DEFAULT",
+      "requested_model": "CHILLING_HOURS",
+      "requested_model_status": "IMPLEMENTED_PARAMETERIZED",
+      "requirement": null
+    },
+    {
+      "case": "UTAH+STRICT (no requirement)",
+      "effective_model": "CHILLING_HOURS",
+      "fallback": "STRICT",
+      "fallback_applied": true,
+      "fallback_reason": "REQUESTED_MODEL_NOT_PARAMETERIZED",
+      "parameterization_status": "ENGINEERING_DEFAULT",
+      "requested_model": "UTAH",
+      "requested_model_status": "IMPLEMENTED_UNPARAMETERIZED",
+      "requirement": null
+    },
+    {
+      "case": "DYNAMIC+STRICT (no requirement)",
+      "effective_model": "CHILLING_HOURS",
+      "fallback": "STRICT",
+      "fallback_applied": true,
+      "fallback_reason": "REQUESTED_MODEL_NOT_PARAMETERIZED",
+      "parameterization_status": "ENGINEERING_DEFAULT",
+      "requested_model": "DYNAMIC",
+      "requested_model_status": "IMPLEMENTED_UNPARAMETERIZED",
+      "requirement": null
+    },
+    {
+      "case": "UTAH+STRICT+SOFTWARE_TEST_ONLY",
+      "effective_model": "UTAH",
+      "fallback": "STRICT",
+      "fallback_applied": false,
+      "fallback_reason": null,
+      "parameterization_status": "SOFTWARE_TEST_ONLY",
+      "requested_model": "UTAH",
+      "requested_model_status": "IMPLEMENTED_PARAMETERIZED",
+      "requirement": {
+        "evidence": "SOFTWARE_TEST_ONLY",
+        "unit": "utah_chill_units",
+        "value": 1000.0
+      }
+    },
+    {
+      "case": "DYNAMIC+STRICT+SOFTWARE_TEST_ONLY",
+      "effective_model": "DYNAMIC",
+      "fallback": "STRICT",
+      "fallback_applied": false,
+      "fallback_reason": null,
+      "parameterization_status": "SOFTWARE_TEST_ONLY",
+      "requested_model": "DYNAMIC",
+      "requested_model_status": "IMPLEMENTED_PARAMETERIZED",
+      "requirement": {
+        "evidence": "SOFTWARE_TEST_ONLY",
+        "unit": "chill_portions",
+        "value": 50.0
+      }
+    }
+  ],
+  "field_accuracy_claimed": false,
+  "hashes": {
+    "CHILLING_HOURS+DEFAULT": {
+      "configuration_hash": "6e39f1be5e4a195e7ab16b45c8b59d4d2d606c7f1f4abfb4346444c5f6169f0e",
+      "effective_hash": "58946b6536b0f492b1e10de0c7bf13b1d79d6727428712c5bc72115cf47996db"
+    },
+    "CHILLING_HOURS+STRICT": {
+      "configuration_hash": "6e39f1be5e4a195e7ab16b45c8b59d4d2d606c7f1f4abfb4346444c5f6169f0e",
+      "effective_hash": "58946b6536b0f492b1e10de0c7bf13b1d79d6727428712c5bc72115cf47996db"
+    },
+    "DYNAMIC+DEFAULT+SOFTWARE_TEST_ONLY": {
+      "configuration_hash": "0069810375df32a15c9e4e54aa5c21ffab34601e3bc35d2a2b730a43334bb029",
+      "effective_hash": "6f175352e4bdece589e90bcf7fe7c6b04a1dc279080e0f3709c531a80bbf1ac2"
+    },
+    "DYNAMIC+STRICT (no requirement)": {
+      "configuration_hash": "f1d72034255f1ee15c6ff8a9dd541ee21b6a6ac3bac0346437c183e5ef424930",
+      "effective_hash": "58946b6536b0f492b1e10de0c7bf13b1d79d6727428712c5bc72115cf47996db"
+    },
+    "DYNAMIC+STRICT+SOFTWARE_TEST_ONLY": {
+      "configuration_hash": "0069810375df32a15c9e4e54aa5c21ffab34601e3bc35d2a2b730a43334bb029",
+      "effective_hash": "6f175352e4bdece589e90bcf7fe7c6b04a1dc279080e0f3709c531a80bbf1ac2"
+    },
+    "FIXED_DATE+DYNAMIC+SOFTWARE_TEST_ONLY": {
+      "configuration_hash": "9db56b95250ffeeaef13821b14a13421e30cb579aaa3b6f2fee6f0921542124d",
+      "effective_hash": "a48895797b838ec685be278dcffc8ae2528861d1db5c5992f59bc7c04226d9f5"
+    },
+    "FIXED_DATE+UTAH+SOFTWARE_TEST_ONLY": {
+      "configuration_hash": "384f22c9206a5d02975decf7c8d9cf2f8ac56977d31b250266e35366f9e4faae",
+      "effective_hash": "9a4416af1f5c252de6390351c8ced69c6952b87ccde6bb41a6f58d337a648a6d"
+    },
+    "UTAH+STRICT (no requirement)": {
+      "configuration_hash": "1db6cf68b5b5da3bf2d0cb69d94d1e9ffb742dd7ae7d31f0694ef4421279701b",
+      "effective_hash": "58946b6536b0f492b1e10de0c7bf13b1d79d6727428712c5bc72115cf47996db"
+    },
+    "UTAH+STRICT+SOFTWARE_TEST_ONLY": {
+      "configuration_hash": "755c145828354664e7996b4359835e3a078551fae15815751f8576e797034ef1",
+      "effective_hash": "2e5247a1f9fb2ef1d96f02ff6d5d698c2e6f800b1d91af766f796c1a504538c6"
+    }
+  },
+  "limitations": [
+    "Utah and Dynamic run only with an explicit SOFTWARE_TEST_ONLY requirement; those thresholds are synthetic, not species requirements.",
+    "A Utah or Dynamic request without a requirement runs Chilling Hours (STRICT fallback); its results are chill hours.",
+    "Utah units, chill portions and chill hours are never converted into each other.",
+    "Utah and Dynamic are hourly models; the original Richardson (1974) and Erez (1990) articles were not retrieved, so formulations are taken from secondary peer-reviewed sources and checked against the chillR reference loop.",
+    "All seasons are synthetic Phase 5.33 locations and the Phase 5.32 climate, not observations."
+  ],
+  "models": {
+    "models_available": [
+      "CHILLING_HOURS",
+      "UTAH",
+      "DYNAMIC"
+    ],
+    "models_blocked": [
+      "UTAH",
+      "DYNAMIC"
+    ],
+    "models_implemented": [
+      "CHILLING_HOURS",
+      "UTAH",
+      "DYNAMIC"
+    ],
+    "models_parameterized": [
+      "CHILLING_HOURS"
+    ],
+    "models_supported": [
+      "CHILLING_HOURS"
+    ],
+    "rows": [
+      {
+        "implemented": true,
+        "model": "CHILLING_HOURS",
+        "model_parameter_set": "CHILLING_HOURS_PROFILE_THRESHOLDS",
+        "parameterized_for_species": true,
+        "requirement_source": "PhenologyProfile.chilling_requirement_hours (ENGINEERING_DEFAULT)",
+        "scientifically_active": false,
+        "state": "scalar chill hours (CropGrowthState.chilling_hours)",
+        "status_without_requirement": "IMPLEMENTED_PARAMETERIZED",
+        "supported_without_explicit_requirement": true,
+        "thermal_input": "air temperature (C)",
+        "time_step": "per simulation step, weighted by dt (hourly steps give whole hours)",
+        "traceability": "project CHILLING_HOURS rule (PhenologyProfile chilling_min/max_temperature_c); Weinberger (1950) counted hours below 7.2 C",
+        "unit": "chill_hours",
+        "validity": "hours with air temperature in [lower, upper] C count; no negation by warm hours"
+      },
+      {
+        "implemented": true,
+        "model": "UTAH",
+        "model_parameter_set": "UTAH_RICHARDSON_1974",
+        "parameterized_for_species": false,
+        "requirement_source": "explicit configuration only (SOFTWARE_TEST_ONLY); no activated species requirement",
+        "scientifically_active": false,
+        "state": "scalar Utah chill units (CropGrowthState.chilling_state)",
+        "status_without_requirement": "IMPLEMENTED_UNPARAMETERIZED",
+        "supported_without_explicit_requirement": false,
+        "thermal_input": "hourly air temperature (C)",
+        "time_step": "hourly only (dt_seconds == 3600)",
+        "traceability": "Richardson, Seeley & Walker (1974) HortScience 9:331-332; table as in Zhang & Taylor (2011) HortScience 46:420-425",
+        "unit": "utah_chill_units",
+        "validity": "published weight table; warm hours subtract units; the running sum can be negative"
+      },
+      {
+        "implemented": true,
+        "model": "DYNAMIC",
+        "model_parameter_set": "DYNAMIC_EREZ_1990",
+        "parameterized_for_species": false,
+        "requirement_source": "explicit configuration only (SOFTWARE_TEST_ONLY); no activated species requirement",
+        "scientifically_active": false,
+        "state": "intermediate product, previous transfer fraction and chill portions (CropGrowthState.chilling_state)",
+        "status_without_requirement": "IMPLEMENTED_UNPARAMETERIZED",
+        "supported_without_explicit_requirement": false,
+        "thermal_input": "hourly air temperature (C), converted as T + 273",
+        "time_step": "hourly only (dt_seconds == 3600)",
+        "traceability": "Fishman, Erez & Couvillon (1987) J. Theor. Biol. 124:473-483, 126:309-321; Erez et al. (1990) Acta Hortic. 276:165-174; constants as in Luedeling & Brown (2010) doi:10.1007/s00484-010-0352-y",
+        "unit": "chill_portions",
+        "validity": "two-step process: reversible intermediate, irreversible chill portions"
+      }
+    ],
+    "status": "PASS",
+    "units_distinct": true
+  },
+  "models_available": [
+    "CHILLING_HOURS",
+    "UTAH",
+    "DYNAMIC"
+  ],
+  "models_blocked": [
+    "UTAH",
+    "DYNAMIC"
+  ],
+  "models_implemented": [
+    "CHILLING_HOURS",
+    "UTAH",
+    "DYNAMIC"
+  ],
+  "models_parameterized": [
+    "CHILLING_HOURS"
+  ],
+  "models_supported": [
+    "CHILLING_HOURS"
+  ],
+  "open_model_capabilities": [
+    {
+      "capability": "UTAH_MODEL_DEFINED_ONSET",
+      "detail": "start of Utah accumulation at the most negative running sum (MODEL_DEFINED) is not implemented; Utah/Dynamic accept DORMANCY_STATE and FIXED_DATE only"
+    },
+    {
+      "capability": "EFFECTIVE_CHILL_ONSET_FOR_UTAH_DYNAMIC",
+      "detail": "EFFECTIVE_CHILL_ONSET is defined only for Chilling Hours"
+    },
+    {
+      "capability": "SUB_HOURLY_UTAH_DYNAMIC",
+      "detail": "Utah and Dynamic are defined on hourly temperatures; other time steps are rejected (MODEL_NOT_APPLICABLE)"
+    },
+    {
+      "capability": "DORMANCY_INDUCTION",
+      "detail": "no transition from post-harvest into endodormancy (Phase 5.33)"
+    },
+    {
+      "capability": "ENVIRONMENTAL_WINDOW_START_POLICY",
+      "detail": "declared, not implemented"
+    }
+  ],
+  "open_scientific_decisions": [
+    {
+      "classification": "OPEN_SCIENTIFIC_DECISION",
+      "decision": "CHILLING_MODEL_SELECTION",
+      "detail": "Chilling Hours, Utah and Dynamic are all implemented; which model represents peach, apple and plum at the project sites is not decided and needs observations"
+    },
+    {
+      "classification": "OPEN_SCIENTIFIC_DECISION",
+      "decision": "DYNAMIC_REQUIREMENT_ACTIVATION",
+      "detail": "chill-portion rows (peach 49-69 CP, plum 26-51 CP and Earliqueen 30 CP, apple 40-70 / 35-88 CP) are cultivar-group ranges and NOT_ACTIVATED; activating one needs cultivar selection, not a range midpoint"
+    },
+    {
+      "classification": "OPEN_SCIENTIFIC_DECISION",
+      "decision": "UTAH_REQUIREMENT_EVIDENCE",
+      "detail": "no Utah chill-unit requirement for any project species exists in the repository"
+    },
+    {
+      "classification": "OPEN_SCIENTIFIC_DECISION",
+      "decision": "CULTIVAR_REQUIREMENTS",
+      "detail": "Chilling Hours requirements remain species-level engineering defaults"
+    },
+    {
+      "classification": "OPEN_SCIENTIFIC_DECISION",
+      "decision": "UTAH_BOUNDARY_CONVENTION",
+      "detail": "the published Utah table has 0.1 C rows; readings between rows use an upper-row convention (ENGINEERING_CONVENTION) that reproduces every published row"
+    }
+  ],
+  "phase": "5.35",
+  "real_agricultural_data_verified": false,
+  "report_hash": "92aef11f1bc9926378ec1365aabfe4d72e917fadfed28b80917a70ba5189f3f3",
+  "results": {
+    "analytical_cases": {
+      "chilling_hours": {
+        "cases": [
+          {
+            "chill_hours": 0.0,
+            "dt_seconds": 3600.0,
+            "temperature_c": -0.1
+          },
+          {
+            "chill_hours": 1.0,
+            "dt_seconds": 3600.0,
+            "temperature_c": 0.0
+          },
+          {
+            "chill_hours": 1.0,
+            "dt_seconds": 3600.0,
+            "temperature_c": 3.0
+          },
+          {
+            "chill_hours": 1.0,
+            "dt_seconds": 3600.0,
+            "temperature_c": 7.2
+          },
+          {
+            "chill_hours": 0.0,
+            "dt_seconds": 3600.0,
+            "temperature_c": 7.3
+          },
+          {
+            "chill_hours": 0.0,
+            "dt_seconds": 3600.0,
+            "temperature_c": 25.0
+          },
+          {
+            "chill_hours": 0.5,
+            "dt_seconds": 1800.0,
+            "temperature_c": 3.0
+          }
+        ],
+        "passed": true
+      },
+      "dynamic": {
+        "constant_20c_1000h_cp": 0.0,
+        "constant_6c_1000h_cp": 34.20422244205969,
+        "model_total_cp": 49.358704482104486,
+        "one_hour_closed_form_identical": true,
+        "passed": true,
+        "per_hour_identical_to_reference_transcription": true,
+        "portions_irreversible": true,
+        "reference_hours": 1999,
+        "reference_total_cp": 49.358704482104486
+      },
+      "label": "SOFTWARE_TEST_ONLY",
+      "rejections": [
+        {
+          "case": "dt_1800",
+          "error": "MODEL_NOT_APPLICABLE: DYNAMIC is defined on hourly temperatures; dt_seconds must be 3600, got 1800.0",
+          "rejected": true
+        },
+        {
+          "case": "nan",
+          "error": "DYNAMIC: temperature_c must be finite, got nan",
+          "rejected": true
+        },
+        {
+          "case": "below_absolute_zero",
+          "error": "DYNAMIC: temperature_c=-300.0 is at or below absolute zero in the model's Kelvin conversion",
+          "rejected": true
+        },
+        {
+          "case": "negative_intermediate",
+          "error": "DYNAMIC: state must hold a finite non-negative intermediate and a transfer fraction in [0, 1]",
+          "rejected": true
+        },
+        {
+          "case": "utah_dt_1800",
+          "error": "MODEL_NOT_APPLICABLE: UTAH is defined on hourly temperatures; dt_seconds must be 3600, got 1800.0",
+          "rejected": true
+        },
+        {
+          "case": "utah_inf",
+          "error": "UTAH: temperature_c must be finite, got inf",
+          "rejected": true
+        }
+      ],
+      "status": "PASS",
+      "utah": {
+        "monotonic_falling_from_2_5": true,
+        "monotonic_rising_to_9_1": true,
+        "passed": true,
+        "points": [
+          {
+            "model_weight": 0.0,
+            "published_weight": 0.0,
+            "temperature_c": 1.4
+          },
+          {
+            "model_weight": 0.5,
+            "published_weight": 0.5,
+            "temperature_c": 1.5
+          },
+          {
+            "model_weight": 0.5,
+            "published_weight": 0.5,
+            "temperature_c": 2.4
+          },
+          {
+            "model_weight": 1.0,
+            "published_weight": 1.0,
+            "temperature_c": 2.5
+          },
+          {
+            "model_weight": 1.0,
+            "published_weight": 1.0,
+            "temperature_c": 9.1
+          },
+          {
+            "model_weight": 0.5,
+            "published_weight": 0.5,
+            "temperature_c": 9.2
+          },
+          {
+            "model_weight": 0.5,
+            "published_weight": 0.5,
+            "temperature_c": 12.4
+          },
+          {
+            "model_weight": 0.0,
+            "published_weight": 0.0,
+            "temperature_c": 12.5
+          },
+          {
+            "model_weight": 0.0,
+            "published_weight": 0.0,
+            "temperature_c": 15.9
+          },
+          {
+            "model_weight": -0.5,
+            "published_weight": -0.5,
+            "temperature_c": 16.0
+          },
+          {
+            "model_weight": -0.5,
+            "published_weight": -0.5,
+            "temperature_c": 18.0
+          },
+          {
+            "model_weight": -1.0,
+            "published_weight": -1.0,
+            "temperature_c": 18.1
+          },
+          {
+            "model_weight": 0.5,
+            "note": "between published rows: upper row (ENGINEERING_CONVENTION)",
+            "published_weight": null,
+            "temperature_c": 1.45
+          },
+          {
+            "model_weight": 1.0,
+            "note": "between published rows: upper row (ENGINEERING_CONVENTION)",
+            "published_weight": null,
+            "temperature_c": 2.45
+          },
+          {
+            "model_weight": 0.5,
+            "note": "between published rows: upper row (ENGINEERING_CONVENTION)",
+            "published_weight": null,
+            "temperature_c": 9.15
+          },
+          {
+            "model_weight": 0.0,
+            "note": "between published rows: upper row (ENGINEERING_CONVENTION)",
+            "published_weight": null,
+            "temperature_c": 12.45
+          },
+          {
+            "model_weight": -0.5,
+            "note": "between published rows: upper row (ENGINEERING_CONVENTION)",
+            "published_weight": null,
+            "temperature_c": 15.95
+          },
+          {
+            "model_weight": -1.0,
+            "note": "between published rows: upper row (ENGINEERING_CONVENTION)",
+            "published_weight": null,
+            "temperature_c": 18.05
+          },
+          {
+            "model_weight": 0.0,
+            "published_weight": 0.0,
+            "temperature_c": -30.0
+          },
+          {
+            "model_weight": -1.0,
+            "published_weight": -1.0,
+            "temperature_c": 45.0
+          }
+        ]
+      }
+    },
+    "checkpoint_restart": {
+      "method": "checkpoint serialized through JSON (CropGrowthState.to_dict/from_dict), restarted on a new SimulationClock",
+      "rows": [
+        {
+          "checkpoint_has_model_state": true,
+          "checkpoint_round_trip_exact": true,
+          "configuration": "CHILLING_HOURS+DEFAULT",
+          "final_state_identical": true,
+          "release_identical": true,
+          "split_day": 90
+        },
+        {
+          "checkpoint_has_model_state": true,
+          "checkpoint_round_trip_exact": true,
+          "configuration": "CHILLING_HOURS+DEFAULT",
+          "final_state_identical": true,
+          "release_identical": true,
+          "split_day": 150
+        },
+        {
+          "checkpoint_has_model_state": true,
+          "checkpoint_round_trip_exact": true,
+          "configuration": "UTAH+STRICT+SOFTWARE_TEST_ONLY",
+          "final_state_identical": true,
+          "release_identical": true,
+          "split_day": 90
+        },
+        {
+          "checkpoint_has_model_state": true,
+          "checkpoint_round_trip_exact": true,
+          "configuration": "UTAH+STRICT+SOFTWARE_TEST_ONLY",
+          "final_state_identical": true,
+          "release_identical": true,
+          "split_day": 150
+        },
+        {
+          "checkpoint_has_model_state": true,
+          "checkpoint_round_trip_exact": true,
+          "configuration": "DYNAMIC+STRICT+SOFTWARE_TEST_ONLY",
+          "final_state_identical": true,
+          "release_identical": true,
+          "split_day": 90
+        },
+        {
+          "checkpoint_has_model_state": true,
+          "checkpoint_round_trip_exact": true,
+          "configuration": "DYNAMIC+STRICT+SOFTWARE_TEST_ONLY",
+          "final_state_identical": true,
+          "release_identical": true,
+          "split_day": 150
+        }
+      ],
+      "status": "PASS"
+    },
+    "phase534_hash_preservation": {
+      "artifact": "data/phenology/chilling_policy_report.json",
+      "phase534_configuration_hash": "81f79a25fae27485f66a54d9b0f617f0145c5fe8b46808e63ff645afe0c0ffb0",
+      "rows": [
+        {
+          "canonical_identical": true,
+          "configuration_hash_identical": true,
+          "effective_hash_identical": true,
+          "label": "CHILLING_HOURS+DEFAULT"
+        },
+        {
+          "canonical_identical": true,
+          "configuration_hash_identical": true,
+          "effective_hash_identical": true,
+          "label": "CHILLING_HOURS+STRICT"
+        },
+        {
+          "canonical_identical": true,
+          "configuration_hash_identical": true,
+          "effective_hash_identical": true,
+          "label": "UTAH+DEFAULT"
+        },
+        {
+          "canonical_identical": true,
+          "configuration_hash_identical": true,
+          "effective_hash_identical": true,
+          "label": "UTAH+STRICT"
+        },
+        {
+          "canonical_identical": true,
+          "configuration_hash_identical": true,
+          "effective_hash_identical": true,
+          "label": "DYNAMIC+DEFAULT"
+        },
+        {
+          "canonical_identical": true,
+          "configuration_hash_identical": true,
+          "effective_hash_identical": true,
+          "label": "DYNAMIC+STRICT"
+        },
+        {
+          "canonical_identical": true,
+          "configuration_hash_identical": true,
+          "effective_hash_identical": true,
+          "label": "FIXED_DATE+CHILLING_HOURS+STRICT"
+        },
+        {
+          "canonical_identical": true,
+          "configuration_hash_identical": true,
+          "effective_hash_identical": true,
+          "label": "FIXED_DATE+DYNAMIC+STRICT"
+        },
+        {
+          "canonical_identical": true,
+          "configuration_hash_identical": true,
+          "effective_hash_identical": true,
+          "label": "MODEL_DEFINED+DYNAMIC+STRICT"
+        }
+      ],
+      "status": "PASS"
+    },
+    "regression_533": {
+      "baseline_artifact": "data/phenology/chilling_framework_report.json",
+      "baseline_report_hash": "2eee01cfbc22fce1ef2d74235c745a0a7314ba4ad48db0e415d2ea5a3585679e",
+      "rows": [
+        {
+          "crop": "peach",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_20N_WARM_WINTER",
+          "phase533_trajectory_hash": "604d5bbeeb763eac11a8cf5dda900163a622bf9f5680c6f03b63c1ad72e169ac"
+        },
+        {
+          "crop": "apple",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_20N_WARM_WINTER",
+          "phase533_trajectory_hash": "604d5bbeeb763eac11a8cf5dda900163a622bf9f5680c6f03b63c1ad72e169ac"
+        },
+        {
+          "crop": "plum",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_20N_WARM_WINTER",
+          "phase533_trajectory_hash": "604d5bbeeb763eac11a8cf5dda900163a622bf9f5680c6f03b63c1ad72e169ac"
+        },
+        {
+          "crop": "peach",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "phase533_trajectory_hash": "82cab6bcf8648d5081e9f18d75646dd96b3fc0e2563a7ebdc4e792d48be2bc60"
+        },
+        {
+          "crop": "apple",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "phase533_trajectory_hash": "38917ba4af87834de5e2cc23bf24f28b55e0648d86e945780fb46db9bf935bbe"
+        },
+        {
+          "crop": "plum",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "phase533_trajectory_hash": "05a5b47a4f68c5bba84fa930d93d9702f57aa7b00cc57bbd9089441eba7f0e89"
+        },
+        {
+          "crop": "peach",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_50N_CONTINENTAL",
+          "phase533_trajectory_hash": "858b32b09927144823cfa7c8fec9d826f57fc699c1e6a369b4fdf5a2ff9e8864"
+        },
+        {
+          "crop": "apple",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_50N_CONTINENTAL",
+          "phase533_trajectory_hash": "1ac0d78bcc374ed947cb8470bb4645a40e631af2a530d583f805510705108839"
+        },
+        {
+          "crop": "plum",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_50N_CONTINENTAL",
+          "phase533_trajectory_hash": "92dbcda1b6e224c4d783902d8bb28557b1bbb7b32194d54c8a6aa23f022d3005"
+        },
+        {
+          "crop": "peach",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_20S_WARM_WINTER",
+          "phase533_trajectory_hash": "95ea7a089186d61b66581537426e0c151f7a45a297b994387d00c3bab32e91c5"
+        },
+        {
+          "crop": "apple",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_20S_WARM_WINTER",
+          "phase533_trajectory_hash": "95ea7a089186d61b66581537426e0c151f7a45a297b994387d00c3bab32e91c5"
+        },
+        {
+          "crop": "plum",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_20S_WARM_WINTER",
+          "phase533_trajectory_hash": "95ea7a089186d61b66581537426e0c151f7a45a297b994387d00c3bab32e91c5"
+        },
+        {
+          "crop": "peach",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_35S_TEMPERATE",
+          "phase533_trajectory_hash": "3c7eb3f5571dd4cb5ece8911c6d151d4b16eb16626ea02d8ecc2b433fcffcf3c"
+        },
+        {
+          "crop": "apple",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_35S_TEMPERATE",
+          "phase533_trajectory_hash": "dac3b7041b9e39101df844a11df3a4dbad7f3e94dca45cc5d83f5c1d5396da3a"
+        },
+        {
+          "crop": "plum",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_35S_TEMPERATE",
+          "phase533_trajectory_hash": "95848c706601f795471cc43c0be633b6a1af4aea4ff07e9c5676484bdd425ffe"
+        },
+        {
+          "crop": "peach",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_50S_COLD",
+          "phase533_trajectory_hash": "6d9d990fb01f51f515b66d6b7d928dfd98d5e92389d7962999b02ab860d0f6a5"
+        },
+        {
+          "crop": "apple",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_50S_COLD",
+          "phase533_trajectory_hash": "6cc60049eb2356d49374c6828a595e7f2c446e6152ed995fd89ba787d21c6f42"
+        },
+        {
+          "crop": "plum",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_50S_COLD",
+          "phase533_trajectory_hash": "21054f156274371cfa5db5c313285048229a14cf12e2cc1720e11146fcb2e31d"
+        }
+      ],
+      "status": "PASS"
+    },
+    "seasons": {
+      "dormancy_release_forcing_budburst_order": true,
+      "executed_models_release_at_test_requirement": true,
+      "executed_seasons": [
+        "DYNAMIC+STRICT+SOFTWARE_TEST_ONLY",
+        "FIXED_DATE+UTAH+SOFTWARE_TEST_ONLY"
+      ],
+      "fallback_rows_identical_to_chilling_hours": true,
+      "finding_utah_from_record_start": {
+        "classification": "MODEL_BEHAVIOUR (SOFTWARE_RESULT)",
+        "detail": "counting Utah units from the start of the record (synthetic summer peak) accumulates warm-hour negation; the sum stays negative and the test threshold is not reached. Utah practice starts at the most negative sum (MODEL_DEFINED onset), not implemented (OPEN_MODEL_CAPABILITY); the executed Utah season therefore uses an explicit FIXED_DATE protocol instant",
+        "rows": [
+          {
+            "chill_total": -2999.0,
+            "crop": "peach",
+            "outcome": "DORMANCY_NOT_RELEASED"
+          },
+          {
+            "chill_total": -2999.0,
+            "crop": "apple",
+            "outcome": "DORMANCY_NOT_RELEASED"
+          },
+          {
+            "chill_total": -2999.0,
+            "crop": "plum",
+            "outcome": "DORMANCY_NOT_RELEASED"
+          }
+        ]
+      },
+      "location_id": "NH_38N_MEDITERRANEAN",
+      "note": "UTAH/DYNAMIC rows with SOFTWARE_TEST_ONLY use synthetic thresholds; release dates are software results, not predictions",
+      "rows": [
+        {
+          "budburst": "2026-03-08T13:00:00+00:00",
+          "chill_at_release_h": 600.0,
+          "chill_excluded_by_policy_h": 0.0,
+          "chill_total_h": 600.0,
+          "configuration": "CHILLING_HOURS+DEFAULT",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "peach",
+          "days_to_release": 201.33333333333334,
+          "dormancy_release": "2026-02-05T08:00:00+00:00",
+          "elapsed_hash": "25633658838b06a5e8b896d6c132fb9060bbca282d678d7185b10e152c024f11",
+          "finite": true,
+          "first_effective_chill": "2025-11-09T03:00:00+00:00",
+          "forcing_start": "2026-02-05T09:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "CHILLING_HOURS",
+          "outcome": "RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "82cab6bcf8648d5081e9f18d75646dd96b3fc0e2563a7ebdc4e792d48be2bc60"
+        },
+        {
+          "budburst": "2026-03-08T13:00:00+00:00",
+          "chill_at_release_h": 600.0,
+          "chill_excluded_by_policy_h": 0.0,
+          "chill_total_h": 600.0,
+          "configuration": "UTAH+STRICT (no requirement)",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "peach",
+          "days_to_release": 201.33333333333334,
+          "dormancy_release": "2026-02-05T08:00:00+00:00",
+          "elapsed_hash": "25633658838b06a5e8b896d6c132fb9060bbca282d678d7185b10e152c024f11",
+          "finite": true,
+          "first_effective_chill": "2025-11-09T03:00:00+00:00",
+          "forcing_start": "2026-02-05T09:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "CHILLING_HOURS",
+          "outcome": "RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "82cab6bcf8648d5081e9f18d75646dd96b3fc0e2563a7ebdc4e792d48be2bc60"
+        },
+        {
+          "budburst": "2026-03-08T13:00:00+00:00",
+          "chill_at_release_h": 600.0,
+          "chill_excluded_by_policy_h": 0.0,
+          "chill_total_h": 600.0,
+          "configuration": "DYNAMIC+STRICT (no requirement)",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "peach",
+          "days_to_release": 201.33333333333334,
+          "dormancy_release": "2026-02-05T08:00:00+00:00",
+          "elapsed_hash": "25633658838b06a5e8b896d6c132fb9060bbca282d678d7185b10e152c024f11",
+          "finite": true,
+          "first_effective_chill": "2025-11-09T03:00:00+00:00",
+          "forcing_start": "2026-02-05T09:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "CHILLING_HOURS",
+          "outcome": "RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "82cab6bcf8648d5081e9f18d75646dd96b3fc0e2563a7ebdc4e792d48be2bc60"
+        },
+        {
+          "budburst": null,
+          "chill_at_release": null,
+          "chill_excluded_by_policy": null,
+          "chill_total": -2999.0,
+          "chill_unit": "utah_chill_units",
+          "configuration": "UTAH+STRICT+SOFTWARE_TEST_ONLY",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "peach",
+          "days_to_release": null,
+          "dormancy_release": null,
+          "elapsed_hash": "3f95913c6d00bcb0fceabed80c7cc87b79819c4262f72f8342eeab768ab42a12",
+          "finite": true,
+          "first_effective_chill": "2025-10-08T03:00:00+00:00",
+          "forcing_start": null,
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "UTAH",
+          "outcome": "DORMANCY_NOT_RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "b3d7af484c4c7028dc7383d65e69adcf4c0c073ce056ad936c44b0874a2f3234"
+        },
+        {
+          "budburst": "2026-03-15T21:00:00+00:00",
+          "chill_at_release": 50.3371779238817,
+          "chill_excluded_by_policy": null,
+          "chill_total": 50.3371779238817,
+          "chill_unit": "chill_portions",
+          "configuration": "DYNAMIC+STRICT+SOFTWARE_TEST_ONLY",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "peach",
+          "days_to_release": 213.04166666666666,
+          "dormancy_release": "2026-02-17T01:00:00+00:00",
+          "elapsed_hash": "46e6d53e8def5023aed9d0da8d239b5b90dfd496dae521924ce737c5052563b8",
+          "finite": true,
+          "first_effective_chill": "2025-11-20T09:00:00+00:00",
+          "forcing_start": "2026-02-17T02:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "DYNAMIC",
+          "outcome": "RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "054f3e5220982c4b73da32f1b38f444019c7968b1cc6c895590a3e85e6a0c9b7"
+        },
+        {
+          "budburst": "2026-03-24T16:00:00+00:00",
+          "chill_at_release": 1000.0,
+          "chill_excluded_by_policy": null,
+          "chill_total": 1000.0,
+          "chill_unit": "utah_chill_units",
+          "configuration": "FIXED_DATE+UTAH+SOFTWARE_TEST_ONLY",
+          "counting_start": "2025-11-01T00:00:00+00:00",
+          "crop": "peach",
+          "days_to_release": 225.20833333333334,
+          "dormancy_release": "2026-03-01T05:00:00+00:00",
+          "elapsed_hash": "f41d247c529952ff4a95cd51138452c7a8a3f95c2b9e4bc76e7f8c8badbec401",
+          "finite": true,
+          "first_effective_chill": "2025-11-01T00:00:00+00:00",
+          "forcing_start": "2026-03-01T06:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "UTAH",
+          "outcome": "RELEASED",
+          "policy": "FIXED_DATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "bc073ca9c5a732e334f6668880723ade0dc072342702faefdbc618b1f6557764"
+        },
+        {
+          "budburst": "2026-03-06T16:00:00+00:00",
+          "chill_at_release_h": 600.0,
+          "chill_excluded_by_policy_h": 0.0,
+          "chill_total_h": 600.0,
+          "configuration": "CHILLING_HOURS+DEFAULT",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "apple",
+          "days_to_release": 201.33333333333334,
+          "dormancy_release": "2026-02-05T08:00:00+00:00",
+          "elapsed_hash": "d19212c285becb274425a548dfaa320f69d1c1691e94e1209a38a4498c117575",
+          "finite": true,
+          "first_effective_chill": "2025-11-09T03:00:00+00:00",
+          "forcing_start": "2026-02-05T09:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "CHILLING_HOURS",
+          "outcome": "RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "38917ba4af87834de5e2cc23bf24f28b55e0648d86e945780fb46db9bf935bbe"
+        },
+        {
+          "budburst": "2026-03-06T16:00:00+00:00",
+          "chill_at_release_h": 600.0,
+          "chill_excluded_by_policy_h": 0.0,
+          "chill_total_h": 600.0,
+          "configuration": "UTAH+STRICT (no requirement)",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "apple",
+          "days_to_release": 201.33333333333334,
+          "dormancy_release": "2026-02-05T08:00:00+00:00",
+          "elapsed_hash": "d19212c285becb274425a548dfaa320f69d1c1691e94e1209a38a4498c117575",
+          "finite": true,
+          "first_effective_chill": "2025-11-09T03:00:00+00:00",
+          "forcing_start": "2026-02-05T09:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "CHILLING_HOURS",
+          "outcome": "RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "38917ba4af87834de5e2cc23bf24f28b55e0648d86e945780fb46db9bf935bbe"
+        },
+        {
+          "budburst": "2026-03-06T16:00:00+00:00",
+          "chill_at_release_h": 600.0,
+          "chill_excluded_by_policy_h": 0.0,
+          "chill_total_h": 600.0,
+          "configuration": "DYNAMIC+STRICT (no requirement)",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "apple",
+          "days_to_release": 201.33333333333334,
+          "dormancy_release": "2026-02-05T08:00:00+00:00",
+          "elapsed_hash": "d19212c285becb274425a548dfaa320f69d1c1691e94e1209a38a4498c117575",
+          "finite": true,
+          "first_effective_chill": "2025-11-09T03:00:00+00:00",
+          "forcing_start": "2026-02-05T09:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "CHILLING_HOURS",
+          "outcome": "RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "38917ba4af87834de5e2cc23bf24f28b55e0648d86e945780fb46db9bf935bbe"
+        },
+        {
+          "budburst": null,
+          "chill_at_release": null,
+          "chill_excluded_by_policy": null,
+          "chill_total": -2999.0,
+          "chill_unit": "utah_chill_units",
+          "configuration": "UTAH+STRICT+SOFTWARE_TEST_ONLY",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "apple",
+          "days_to_release": null,
+          "dormancy_release": null,
+          "elapsed_hash": "3f95913c6d00bcb0fceabed80c7cc87b79819c4262f72f8342eeab768ab42a12",
+          "finite": true,
+          "first_effective_chill": "2025-10-08T03:00:00+00:00",
+          "forcing_start": null,
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "UTAH",
+          "outcome": "DORMANCY_NOT_RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "b3d7af484c4c7028dc7383d65e69adcf4c0c073ce056ad936c44b0874a2f3234"
+        },
+        {
+          "budburst": "2026-03-14T15:00:00+00:00",
+          "chill_at_release": 50.3371779238817,
+          "chill_excluded_by_policy": null,
+          "chill_total": 50.3371779238817,
+          "chill_unit": "chill_portions",
+          "configuration": "DYNAMIC+STRICT+SOFTWARE_TEST_ONLY",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "apple",
+          "days_to_release": 213.04166666666666,
+          "dormancy_release": "2026-02-17T01:00:00+00:00",
+          "elapsed_hash": "67cda5f63c89ad24db4cbd717f29e01d8a1bd8f2af59b5fa2a1bc88dd465a6d0",
+          "finite": true,
+          "first_effective_chill": "2025-11-20T09:00:00+00:00",
+          "forcing_start": "2026-02-17T02:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "DYNAMIC",
+          "outcome": "RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "588187fe3cddcec2e34b962dffb71371a48f615788488b41b0672cdb1b163b98"
+        },
+        {
+          "budburst": "2026-03-23T14:00:00+00:00",
+          "chill_at_release": 1000.0,
+          "chill_excluded_by_policy": null,
+          "chill_total": 1000.0,
+          "chill_unit": "utah_chill_units",
+          "configuration": "FIXED_DATE+UTAH+SOFTWARE_TEST_ONLY",
+          "counting_start": "2025-11-01T00:00:00+00:00",
+          "crop": "apple",
+          "days_to_release": 225.20833333333334,
+          "dormancy_release": "2026-03-01T05:00:00+00:00",
+          "elapsed_hash": "763d002b23ea7d8ae5445d892be1447044a1e04c8bd52b9028f0b06feceba8cc",
+          "finite": true,
+          "first_effective_chill": "2025-11-01T00:00:00+00:00",
+          "forcing_start": "2026-03-01T06:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "UTAH",
+          "outcome": "RELEASED",
+          "policy": "FIXED_DATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "9da020ece19e4cec79d8b04e79b8c3d7a32ed44592bc9e3ea7d87071bf54eb9f"
+        },
+        {
+          "budburst": "2026-02-28T15:00:00+00:00",
+          "chill_at_release_h": 500.0,
+          "chill_excluded_by_policy_h": 0.0,
+          "chill_total_h": 500.0,
+          "configuration": "CHILLING_HOURS+DEFAULT",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "plum",
+          "days_to_release": 190.20833333333334,
+          "dormancy_release": "2026-01-25T05:00:00+00:00",
+          "elapsed_hash": "1e8e629059581d245019fe17cef5dd23f692eb2c7cdc5f37f36c615a476c7c1f",
+          "finite": true,
+          "first_effective_chill": "2025-11-09T03:00:00+00:00",
+          "forcing_start": "2026-01-25T07:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "CHILLING_HOURS",
+          "outcome": "RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "05a5b47a4f68c5bba84fa930d93d9702f57aa7b00cc57bbd9089441eba7f0e89"
+        },
+        {
+          "budburst": "2026-02-28T15:00:00+00:00",
+          "chill_at_release_h": 500.0,
+          "chill_excluded_by_policy_h": 0.0,
+          "chill_total_h": 500.0,
+          "configuration": "UTAH+STRICT (no requirement)",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "plum",
+          "days_to_release": 190.20833333333334,
+          "dormancy_release": "2026-01-25T05:00:00+00:00",
+          "elapsed_hash": "1e8e629059581d245019fe17cef5dd23f692eb2c7cdc5f37f36c615a476c7c1f",
+          "finite": true,
+          "first_effective_chill": "2025-11-09T03:00:00+00:00",
+          "forcing_start": "2026-01-25T07:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "CHILLING_HOURS",
+          "outcome": "RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "05a5b47a4f68c5bba84fa930d93d9702f57aa7b00cc57bbd9089441eba7f0e89"
+        },
+        {
+          "budburst": "2026-02-28T15:00:00+00:00",
+          "chill_at_release_h": 500.0,
+          "chill_excluded_by_policy_h": 0.0,
+          "chill_total_h": 500.0,
+          "configuration": "DYNAMIC+STRICT (no requirement)",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "plum",
+          "days_to_release": 190.20833333333334,
+          "dormancy_release": "2026-01-25T05:00:00+00:00",
+          "elapsed_hash": "1e8e629059581d245019fe17cef5dd23f692eb2c7cdc5f37f36c615a476c7c1f",
+          "finite": true,
+          "first_effective_chill": "2025-11-09T03:00:00+00:00",
+          "forcing_start": "2026-01-25T07:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "CHILLING_HOURS",
+          "outcome": "RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "05a5b47a4f68c5bba84fa930d93d9702f57aa7b00cc57bbd9089441eba7f0e89"
+        },
+        {
+          "budburst": null,
+          "chill_at_release": null,
+          "chill_excluded_by_policy": null,
+          "chill_total": -2999.0,
+          "chill_unit": "utah_chill_units",
+          "configuration": "UTAH+STRICT+SOFTWARE_TEST_ONLY",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "plum",
+          "days_to_release": null,
+          "dormancy_release": null,
+          "elapsed_hash": "3f95913c6d00bcb0fceabed80c7cc87b79819c4262f72f8342eeab768ab42a12",
+          "finite": true,
+          "first_effective_chill": "2025-10-08T03:00:00+00:00",
+          "forcing_start": null,
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "UTAH",
+          "outcome": "DORMANCY_NOT_RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "b3d7af484c4c7028dc7383d65e69adcf4c0c073ce056ad936c44b0874a2f3234"
+        },
+        {
+          "budburst": "2026-03-15T21:00:00+00:00",
+          "chill_at_release": 50.3371779238817,
+          "chill_excluded_by_policy": null,
+          "chill_total": 50.3371779238817,
+          "chill_unit": "chill_portions",
+          "configuration": "DYNAMIC+STRICT+SOFTWARE_TEST_ONLY",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "plum",
+          "days_to_release": 213.04166666666666,
+          "dormancy_release": "2026-02-17T01:00:00+00:00",
+          "elapsed_hash": "103d40829b5ae529def1df29f3602e5a7d6db497956974c083eb7c95bbd83ed6",
+          "finite": true,
+          "first_effective_chill": "2025-11-20T09:00:00+00:00",
+          "forcing_start": "2026-02-17T02:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "DYNAMIC",
+          "outcome": "RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "d4c0849a4fafdd62ed71b303804e5f7ed36be3ad818efc21a79854d9117fa249"
+        },
+        {
+          "budburst": "2026-03-24T16:00:00+00:00",
+          "chill_at_release": 1000.0,
+          "chill_excluded_by_policy": null,
+          "chill_total": 1000.0,
+          "chill_unit": "utah_chill_units",
+          "configuration": "FIXED_DATE+UTAH+SOFTWARE_TEST_ONLY",
+          "counting_start": "2025-11-01T00:00:00+00:00",
+          "crop": "plum",
+          "days_to_release": 225.20833333333334,
+          "dormancy_release": "2026-03-01T05:00:00+00:00",
+          "elapsed_hash": "e14422a742f0708e59ae69e9916948a94316da348452964f9243c316b446068b",
+          "finite": true,
+          "first_effective_chill": "2025-11-01T00:00:00+00:00",
+          "forcing_start": "2026-03-01T06:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "UTAH",
+          "outcome": "RELEASED",
+          "policy": "FIXED_DATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "e0ea847d4e84b31b95a38feb40ea462ad31afecc19e65835151d2126bf7995b7"
+        }
+      ],
+      "status": "PASS",
+      "units_never_reported_as_hours": true
+    },
+    "twin_integration": {
+      "chilling_hours_identical_to_phase534": true,
+      "deterministic_replay": true,
+      "dormancy_release": {
+        "CHILLING_HOURS+DEFAULT": "2026-02-04T03:00:00+00:00",
+        "DYNAMIC+STRICT+SOFTWARE_TEST_ONLY": "2026-02-14T04:00:00+00:00",
+        "DYNAMIC+STRICT+SOFTWARE_TEST_ONLY replay": "2026-02-14T04:00:00+00:00",
+        "UTAH+STRICT+SOFTWARE_TEST_ONLY": "2026-03-01T03:00:00+00:00",
+        "UTAH+STRICT+SOFTWARE_TEST_ONLY replay": "2026-03-01T03:00:00+00:00",
+        "phase533_default_orchestrator": "2026-02-04T03:00:00+00:00"
+      },
+      "growth_gated_by_release": true,
+      "phase534_committed_default_hash": "d6fe8e88c503d6a9690687ff18db892664dee2a17ad875ccfb5a8992a2f20425",
+      "record": "peach, BASE_SEASON seed 532, 150 days hourly from 2025-11-01T00:00:00+00:00; UTAH/DYNAMIC rows SOFTWARE_TEST_ONLY",
+      "status": "PASS",
+      "trajectory_hashes": {
+        "CHILLING_HOURS+DEFAULT": "d6fe8e88c503d6a9690687ff18db892664dee2a17ad875ccfb5a8992a2f20425",
+        "DYNAMIC+STRICT+SOFTWARE_TEST_ONLY": "1d8901f223007a8894bb0d4b0e71830dd5cf425bf2da53e41cf20ee2b0539b7c",
+        "DYNAMIC+STRICT+SOFTWARE_TEST_ONLY replay": "1d8901f223007a8894bb0d4b0e71830dd5cf425bf2da53e41cf20ee2b0539b7c",
+        "UTAH+STRICT+SOFTWARE_TEST_ONLY": "7d2c7e05a2b7ff74a4785b0dce628f2cfd2747e064fd256f003971ea1d0b5adb",
+        "UTAH+STRICT+SOFTWARE_TEST_ONLY replay": "7d2c7e05a2b7ff74a4785b0dce628f2cfd2747e064fd256f003971ea1d0b5adb",
+        "phase533_default_orchestrator": "d6fe8e88c503d6a9690687ff18db892664dee2a17ad875ccfb5a8992a2f20425"
+      }
+    }
+  },
+  "scientific_claims": [],
+  "scientific_evidence": [
+    {
+      "id": "RICHARDSON_1974",
+      "identifier": "ISSN 0018-5345",
+      "limitations": "original article not retrieved; table taken from the two secondary sources below",
+      "parameters": "Utah bands and weights",
+      "reference": "Richardson, E.A., Seeley, S.D., Walker, D.R. (1974). A model for estimating the completion of rest for 'Redhaven' and 'Elberta' peach trees. HortScience 9(4), 331-332.",
+      "species": "peach ('Redhaven', 'Elberta')",
+      "supports": "Utah formulation: hourly weights per temperature band",
+      "unit": "utah_chill_units",
+      "use": "ACTIVATES_MODEL_PARAMETERS (formulation constants only)"
+    },
+    {
+      "id": "ZHANG_TAYLOR_2011",
+      "identifier": "HortScience 46(3):420-425",
+      "limitations": "pistachio requirement (59 CP) not transferable and not used",
+      "parameters": "Utah table rows; Dynamic slp, tetmlt, a0, a1, e0, e1",
+      "reference": "Zhang, J., Taylor, C. (2011). The Dynamic Model provides the best description of the chill process on 'Sirora' pistachio trees in Australia. HortScience 46(3), 420-425.",
+      "species": "pistachio (context only)",
+      "supports": "Table 1 (Utah chill units per temperature, citing Richardson et al. 1974); Dynamic Model equations and constants (citing Erez et al. 1988; Luedeling et al. 2009)",
+      "unit": "utah_chill_units; chill_portions",
+      "use": "SCIENTIFIC_EVIDENCE for the formulation; no requirement used"
+    },
+    {
+      "id": "LUEDELING_BROWN_2010",
+      "identifier": "doi:10.1007/s00484-010-0352-y",
+      "limitations": "its summary lists only the 15.9 C negative band; the -1 weight above 18 C comes from Zhang & Taylor (2011) Table 1",
+      "parameters": "Dynamic constants",
+      "reference": "Luedeling, E., Brown, P.H. (2010). A global analysis of the comparability of winter chill models for fruit and nut trees. Int. J. Biometeorol. 55, 411-421.",
+      "species": "global comparison",
+      "supports": "Chilling Hours, Utah and Dynamic definitions; Dynamic constants slp=1.6, Tf=277, A0=139500, A1=2.567e18, E0=4153.5, E1=12888.8",
+      "unit": "chill_hours; utah_chill_units; chill_portions",
+      "use": "SCIENTIFIC_EVIDENCE for the formulation"
+    },
+    {
+      "id": "EREZ_1990",
+      "identifier": "Acta Hortic. 276:165-174",
+      "limitations": "original article not retrieved; constants as reported by Luedeling & Brown (2010) and Zhang & Taylor (2011)",
+      "parameters": "Dynamic constants",
+      "reference": "Erez, A., Fishman, S., Linsley-Noakes, G.C., Allan, P. (1990). The dynamic model for rest completion in peach buds. Acta Hortic. 276, 165-174.",
+      "species": "peach",
+      "supports": "Dynamic Model constants and chill-portion formulation",
+      "unit": "chill_portions",
+      "use": "ACTIVATES_MODEL_PARAMETERS (formulation constants only)"
+    },
+    {
+      "id": "FISHMAN_1987",
+      "identifier": "ISSN 0022-5193",
+      "limitations": "original articles not retrieved",
+      "parameters": "none used directly",
+      "reference": "Fishman, S., Erez, A., Couvillon, G.A. (1987a, 1987b). The temperature dependence of dormancy breaking in plants. J. Theor. Biol. 126, 309-321; 124, 473-483.",
+      "species": "peach",
+      "supports": "two-step Dynamic Model structure",
+      "unit": "chill_portions",
+      "use": "SCIENTIFIC_EVIDENCE"
+    },
+    {
+      "id": "CHILLR_REFERENCE_IMPLEMENTATION",
+      "identifier": "CRAN chillR, ChillModels",
+      "limitations": "software, not a scientific source; used to remove implementation ambiguity",
+      "parameters": "kelvin_offset = 273",
+      "reference": "Luedeling, E. chillR: Statistical Methods for Phenology Analysis in Temperate Fruit Trees (R package), Dynamic_Model(); ChillModels (Pertille et al.) dynamic_model() adapted from it.",
+      "species": "n/a",
+      "supports": "hourly loop, Kelvin conversion T + 273, transfer with the previous hour's xi",
+      "unit": "chill_portions",
+      "use": "SOFTWARE_REFERENCE (equivalence test)"
+    }
+  ],
+  "scientific_status": [
+    "PHASE 5.35 COMPLETE",
+    "CHILLING_HOURS IMPLEMENTED, PARAMETERIZED WITH ENGINEERING DEFAULTS",
+    "UTAH IMPLEMENTED (PUBLISHED FORMULATION), UNPARAMETERIZED FOR PROJECT SPECIES",
+    "DYNAMIC IMPLEMENTED (PUBLISHED FORMULATION AND CONSTANTS), UNPARAMETERIZED FOR PROJECT SPECIES",
+    "STRICT FALLBACK PRESERVED",
+    "REAL AGRICULTURAL DATA NOT VERIFIED",
+    "CALIBRATION NOT PERFORMED",
+    "EXPERIMENTAL VALIDATION NOT PERFORMED",
+    "BIOLOGICAL VALIDITY NOT CLAIMED",
+    "FIELD ACCURACY NOT CLAIMED",
+    "DATA ASSIMILATION NOT IMPLEMENTED"
+  ],
+  "section_status": {
+    "analytical_cases": "PASS",
+    "checkpoint_restart": "PASS",
+    "configurations": "PASS",
+    "determinism": "PASS",
+    "evidence": "PASS",
+    "fallback_matrix": "PASS",
+    "model_catalog": "PASS",
+    "negative_cases": "PASS",
+    "parameter_mutation": "PASS",
+    "phase534_hash_preservation": "PASS",
+    "readiness_matrix": "PASS",
+    "regression_533": "PASS",
+    "seasons": "PASS",
+    "static_audit": "PASS",
+    "traceability": "PASS",
+    "twin_integration": "PASS"
+  },
+  "seed": 533,
+  "software_result": {
+    "analytical_cases": {
+      "chilling_hours": {
+        "cases": [
+          {
+            "chill_hours": 0.0,
+            "dt_seconds": 3600.0,
+            "temperature_c": -0.1
+          },
+          {
+            "chill_hours": 1.0,
+            "dt_seconds": 3600.0,
+            "temperature_c": 0.0
+          },
+          {
+            "chill_hours": 1.0,
+            "dt_seconds": 3600.0,
+            "temperature_c": 3.0
+          },
+          {
+            "chill_hours": 1.0,
+            "dt_seconds": 3600.0,
+            "temperature_c": 7.2
+          },
+          {
+            "chill_hours": 0.0,
+            "dt_seconds": 3600.0,
+            "temperature_c": 7.3
+          },
+          {
+            "chill_hours": 0.0,
+            "dt_seconds": 3600.0,
+            "temperature_c": 25.0
+          },
+          {
+            "chill_hours": 0.5,
+            "dt_seconds": 1800.0,
+            "temperature_c": 3.0
+          }
+        ],
+        "passed": true
+      },
+      "dynamic": {
+        "constant_20c_1000h_cp": 0.0,
+        "constant_6c_1000h_cp": 34.20422244205969,
+        "model_total_cp": 49.358704482104486,
+        "one_hour_closed_form_identical": true,
+        "passed": true,
+        "per_hour_identical_to_reference_transcription": true,
+        "portions_irreversible": true,
+        "reference_hours": 1999,
+        "reference_total_cp": 49.358704482104486
+      },
+      "label": "SOFTWARE_TEST_ONLY",
+      "rejections": [
+        {
+          "case": "dt_1800",
+          "error": "MODEL_NOT_APPLICABLE: DYNAMIC is defined on hourly temperatures; dt_seconds must be 3600, got 1800.0",
+          "rejected": true
+        },
+        {
+          "case": "nan",
+          "error": "DYNAMIC: temperature_c must be finite, got nan",
+          "rejected": true
+        },
+        {
+          "case": "below_absolute_zero",
+          "error": "DYNAMIC: temperature_c=-300.0 is at or below absolute zero in the model's Kelvin conversion",
+          "rejected": true
+        },
+        {
+          "case": "negative_intermediate",
+          "error": "DYNAMIC: state must hold a finite non-negative intermediate and a transfer fraction in [0, 1]",
+          "rejected": true
+        },
+        {
+          "case": "utah_dt_1800",
+          "error": "MODEL_NOT_APPLICABLE: UTAH is defined on hourly temperatures; dt_seconds must be 3600, got 1800.0",
+          "rejected": true
+        },
+        {
+          "case": "utah_inf",
+          "error": "UTAH: temperature_c must be finite, got inf",
+          "rejected": true
+        }
+      ],
+      "status": "PASS",
+      "utah": {
+        "monotonic_falling_from_2_5": true,
+        "monotonic_rising_to_9_1": true,
+        "passed": true,
+        "points": [
+          {
+            "model_weight": 0.0,
+            "published_weight": 0.0,
+            "temperature_c": 1.4
+          },
+          {
+            "model_weight": 0.5,
+            "published_weight": 0.5,
+            "temperature_c": 1.5
+          },
+          {
+            "model_weight": 0.5,
+            "published_weight": 0.5,
+            "temperature_c": 2.4
+          },
+          {
+            "model_weight": 1.0,
+            "published_weight": 1.0,
+            "temperature_c": 2.5
+          },
+          {
+            "model_weight": 1.0,
+            "published_weight": 1.0,
+            "temperature_c": 9.1
+          },
+          {
+            "model_weight": 0.5,
+            "published_weight": 0.5,
+            "temperature_c": 9.2
+          },
+          {
+            "model_weight": 0.5,
+            "published_weight": 0.5,
+            "temperature_c": 12.4
+          },
+          {
+            "model_weight": 0.0,
+            "published_weight": 0.0,
+            "temperature_c": 12.5
+          },
+          {
+            "model_weight": 0.0,
+            "published_weight": 0.0,
+            "temperature_c": 15.9
+          },
+          {
+            "model_weight": -0.5,
+            "published_weight": -0.5,
+            "temperature_c": 16.0
+          },
+          {
+            "model_weight": -0.5,
+            "published_weight": -0.5,
+            "temperature_c": 18.0
+          },
+          {
+            "model_weight": -1.0,
+            "published_weight": -1.0,
+            "temperature_c": 18.1
+          },
+          {
+            "model_weight": 0.5,
+            "note": "between published rows: upper row (ENGINEERING_CONVENTION)",
+            "published_weight": null,
+            "temperature_c": 1.45
+          },
+          {
+            "model_weight": 1.0,
+            "note": "between published rows: upper row (ENGINEERING_CONVENTION)",
+            "published_weight": null,
+            "temperature_c": 2.45
+          },
+          {
+            "model_weight": 0.5,
+            "note": "between published rows: upper row (ENGINEERING_CONVENTION)",
+            "published_weight": null,
+            "temperature_c": 9.15
+          },
+          {
+            "model_weight": 0.0,
+            "note": "between published rows: upper row (ENGINEERING_CONVENTION)",
+            "published_weight": null,
+            "temperature_c": 12.45
+          },
+          {
+            "model_weight": -0.5,
+            "note": "between published rows: upper row (ENGINEERING_CONVENTION)",
+            "published_weight": null,
+            "temperature_c": 15.95
+          },
+          {
+            "model_weight": -1.0,
+            "note": "between published rows: upper row (ENGINEERING_CONVENTION)",
+            "published_weight": null,
+            "temperature_c": 18.05
+          },
+          {
+            "model_weight": 0.0,
+            "published_weight": 0.0,
+            "temperature_c": -30.0
+          },
+          {
+            "model_weight": -1.0,
+            "published_weight": -1.0,
+            "temperature_c": 45.0
+          }
+        ]
+      }
+    },
+    "checkpoint_restart": {
+      "method": "checkpoint serialized through JSON (CropGrowthState.to_dict/from_dict), restarted on a new SimulationClock",
+      "rows": [
+        {
+          "checkpoint_has_model_state": true,
+          "checkpoint_round_trip_exact": true,
+          "configuration": "CHILLING_HOURS+DEFAULT",
+          "final_state_identical": true,
+          "release_identical": true,
+          "split_day": 90
+        },
+        {
+          "checkpoint_has_model_state": true,
+          "checkpoint_round_trip_exact": true,
+          "configuration": "CHILLING_HOURS+DEFAULT",
+          "final_state_identical": true,
+          "release_identical": true,
+          "split_day": 150
+        },
+        {
+          "checkpoint_has_model_state": true,
+          "checkpoint_round_trip_exact": true,
+          "configuration": "UTAH+STRICT+SOFTWARE_TEST_ONLY",
+          "final_state_identical": true,
+          "release_identical": true,
+          "split_day": 90
+        },
+        {
+          "checkpoint_has_model_state": true,
+          "checkpoint_round_trip_exact": true,
+          "configuration": "UTAH+STRICT+SOFTWARE_TEST_ONLY",
+          "final_state_identical": true,
+          "release_identical": true,
+          "split_day": 150
+        },
+        {
+          "checkpoint_has_model_state": true,
+          "checkpoint_round_trip_exact": true,
+          "configuration": "DYNAMIC+STRICT+SOFTWARE_TEST_ONLY",
+          "final_state_identical": true,
+          "release_identical": true,
+          "split_day": 90
+        },
+        {
+          "checkpoint_has_model_state": true,
+          "checkpoint_round_trip_exact": true,
+          "configuration": "DYNAMIC+STRICT+SOFTWARE_TEST_ONLY",
+          "final_state_identical": true,
+          "release_identical": true,
+          "split_day": 150
+        }
+      ],
+      "status": "PASS"
+    },
+    "configurations": {
+      "checks": {
+        "default_equals_strict": true,
+        "default_equals_strict_parameterized": true,
+        "executed_models_distinct_effective_hash": true,
+        "fallback_distinct_configuration_hash": true,
+        "fallback_same_effective_hash": true,
+        "round_trip": true
+      },
+      "rows": [
+        {
+          "canonical": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_applied": false,
+              "fallback_policy": "STRICT",
+              "requested_chilling_model": "CHILLING_HOURS",
+              "requested_start_policy": "DORMANCY_STATE",
+              "start_time": null
+            }
+          },
+          "configuration_hash": "6e39f1be5e4a195e7ab16b45c8b59d4d2d606c7f1f4abfb4346444c5f6169f0e",
+          "described": {
+            "effective_chilling_model": "CHILLING_HOURS",
+            "effective_requirement": {
+              "evidence": "ENGINEERING_DEFAULT",
+              "source": "PhenologyProfile.chilling_requirement_hours (per crop)",
+              "unit": "chill_hours",
+              "value": null
+            },
+            "effective_start_policy": "DORMANCY_STATE",
+            "effective_unit": "chill_hours",
+            "fallback_applied": false,
+            "fallback_policy": "STRICT",
+            "fallback_reason": null,
+            "model_parameter_set": "CHILLING_HOURS_PROFILE_THRESHOLDS",
+            "parameterization_status": "ENGINEERING_DEFAULT",
+            "requested_chilling_model": "CHILLING_HOURS",
+            "requested_model_status": "IMPLEMENTED_PARAMETERIZED",
+            "requested_start_policy": "DORMANCY_STATE",
+            "scientifically_active": false,
+            "start_time": null
+          },
+          "effective": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_policy": "STRICT",
+              "start_time": null
+            }
+          },
+          "effective_hash": "58946b6536b0f492b1e10de0c7bf13b1d79d6727428712c5bc72115cf47996db",
+          "label": "CHILLING_HOURS+DEFAULT",
+          "requested": {
+            "dormancy": {
+              "chilling_model": "CHILLING_HOURS",
+              "fallback_policy": "DEFAULT",
+              "start_policy": "DORMANCY_STATE"
+            }
+          },
+          "result_type": "SOFTWARE_RESULT",
+          "round_trip": true
+        },
+        {
+          "canonical": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_applied": false,
+              "fallback_policy": "STRICT",
+              "requested_chilling_model": "CHILLING_HOURS",
+              "requested_start_policy": "DORMANCY_STATE",
+              "start_time": null
+            }
+          },
+          "configuration_hash": "6e39f1be5e4a195e7ab16b45c8b59d4d2d606c7f1f4abfb4346444c5f6169f0e",
+          "described": {
+            "effective_chilling_model": "CHILLING_HOURS",
+            "effective_requirement": {
+              "evidence": "ENGINEERING_DEFAULT",
+              "source": "PhenologyProfile.chilling_requirement_hours (per crop)",
+              "unit": "chill_hours",
+              "value": null
+            },
+            "effective_start_policy": "DORMANCY_STATE",
+            "effective_unit": "chill_hours",
+            "fallback_applied": false,
+            "fallback_policy": "STRICT",
+            "fallback_reason": null,
+            "model_parameter_set": "CHILLING_HOURS_PROFILE_THRESHOLDS",
+            "parameterization_status": "ENGINEERING_DEFAULT",
+            "requested_chilling_model": "CHILLING_HOURS",
+            "requested_model_status": "IMPLEMENTED_PARAMETERIZED",
+            "requested_start_policy": "DORMANCY_STATE",
+            "scientifically_active": false,
+            "start_time": null
+          },
+          "effective": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_policy": "STRICT",
+              "start_time": null
+            }
+          },
+          "effective_hash": "58946b6536b0f492b1e10de0c7bf13b1d79d6727428712c5bc72115cf47996db",
+          "label": "CHILLING_HOURS+STRICT",
+          "requested": {
+            "dormancy": {
+              "chilling_model": "CHILLING_HOURS",
+              "fallback_policy": "STRICT",
+              "start_policy": "DORMANCY_STATE"
+            }
+          },
+          "result_type": "SOFTWARE_RESULT",
+          "round_trip": true
+        },
+        {
+          "canonical": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_applied": true,
+              "fallback_policy": "STRICT",
+              "requested_chilling_model": "UTAH",
+              "requested_start_policy": "DORMANCY_STATE",
+              "start_time": null
+            }
+          },
+          "configuration_hash": "1db6cf68b5b5da3bf2d0cb69d94d1e9ffb742dd7ae7d31f0694ef4421279701b",
+          "described": {
+            "effective_chilling_model": "CHILLING_HOURS",
+            "effective_requirement": {
+              "evidence": "ENGINEERING_DEFAULT",
+              "source": "PhenologyProfile.chilling_requirement_hours (per crop)",
+              "unit": "chill_hours",
+              "value": null
+            },
+            "effective_start_policy": "DORMANCY_STATE",
+            "effective_unit": "chill_hours",
+            "fallback_applied": true,
+            "fallback_policy": "STRICT",
+            "fallback_reason": "REQUESTED_MODEL_NOT_PARAMETERIZED",
+            "model_parameter_set": "CHILLING_HOURS_PROFILE_THRESHOLDS",
+            "parameterization_status": "ENGINEERING_DEFAULT",
+            "requested_chilling_model": "UTAH",
+            "requested_model_status": "IMPLEMENTED_UNPARAMETERIZED",
+            "requested_start_policy": "DORMANCY_STATE",
+            "scientifically_active": false,
+            "start_time": null
+          },
+          "effective": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_policy": "STRICT",
+              "start_time": null
+            }
+          },
+          "effective_hash": "58946b6536b0f492b1e10de0c7bf13b1d79d6727428712c5bc72115cf47996db",
+          "label": "UTAH+STRICT (no requirement)",
+          "requested": {
+            "dormancy": {
+              "chilling_model": "UTAH",
+              "fallback_policy": "STRICT",
+              "start_policy": "DORMANCY_STATE"
+            }
+          },
+          "result_type": "SOFTWARE_RESULT",
+          "round_trip": true
+        },
+        {
+          "canonical": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_applied": true,
+              "fallback_policy": "STRICT",
+              "requested_chilling_model": "DYNAMIC",
+              "requested_start_policy": "DORMANCY_STATE",
+              "start_time": null
+            }
+          },
+          "configuration_hash": "f1d72034255f1ee15c6ff8a9dd541ee21b6a6ac3bac0346437c183e5ef424930",
+          "described": {
+            "effective_chilling_model": "CHILLING_HOURS",
+            "effective_requirement": {
+              "evidence": "ENGINEERING_DEFAULT",
+              "source": "PhenologyProfile.chilling_requirement_hours (per crop)",
+              "unit": "chill_hours",
+              "value": null
+            },
+            "effective_start_policy": "DORMANCY_STATE",
+            "effective_unit": "chill_hours",
+            "fallback_applied": true,
+            "fallback_policy": "STRICT",
+            "fallback_reason": "REQUESTED_MODEL_NOT_PARAMETERIZED",
+            "model_parameter_set": "CHILLING_HOURS_PROFILE_THRESHOLDS",
+            "parameterization_status": "ENGINEERING_DEFAULT",
+            "requested_chilling_model": "DYNAMIC",
+            "requested_model_status": "IMPLEMENTED_UNPARAMETERIZED",
+            "requested_start_policy": "DORMANCY_STATE",
+            "scientifically_active": false,
+            "start_time": null
+          },
+          "effective": {
+            "dormancy": {
+              "effective_chilling_model": "CHILLING_HOURS",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_policy": "STRICT",
+              "start_time": null
+            }
+          },
+          "effective_hash": "58946b6536b0f492b1e10de0c7bf13b1d79d6727428712c5bc72115cf47996db",
+          "label": "DYNAMIC+STRICT (no requirement)",
+          "requested": {
+            "dormancy": {
+              "chilling_model": "DYNAMIC",
+              "fallback_policy": "STRICT",
+              "start_policy": "DORMANCY_STATE"
+            }
+          },
+          "result_type": "SOFTWARE_RESULT",
+          "round_trip": true
+        },
+        {
+          "canonical": {
+            "dormancy": {
+              "chilling_requirement": {
+                "evidence": "SOFTWARE_TEST_ONLY",
+                "unit": "utah_chill_units",
+                "value": 1000.0
+              },
+              "effective_chilling_model": "UTAH",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_applied": false,
+              "fallback_policy": "STRICT",
+              "model_parameter_set": "UTAH_RICHARDSON_1974",
+              "parameterization_status": "SOFTWARE_TEST_ONLY",
+              "requested_chilling_model": "UTAH",
+              "requested_start_policy": "DORMANCY_STATE",
+              "start_time": null
+            }
+          },
+          "configuration_hash": "755c145828354664e7996b4359835e3a078551fae15815751f8576e797034ef1",
+          "described": {
+            "chilling_requirement": {
+              "evidence": "SOFTWARE_TEST_ONLY",
+              "unit": "utah_chill_units",
+              "value": 1000.0
+            },
+            "effective_chilling_model": "UTAH",
+            "effective_requirement": {
+              "evidence": "SOFTWARE_TEST_ONLY",
+              "unit": "utah_chill_units",
+              "value": 1000.0
+            },
+            "effective_start_policy": "DORMANCY_STATE",
+            "effective_unit": "utah_chill_units",
+            "fallback_applied": false,
+            "fallback_policy": "STRICT",
+            "fallback_reason": null,
+            "model_parameter_set": "UTAH_RICHARDSON_1974",
+            "parameterization_status": "SOFTWARE_TEST_ONLY",
+            "requested_chilling_model": "UTAH",
+            "requested_model_status": "IMPLEMENTED_PARAMETERIZED",
+            "requested_start_policy": "DORMANCY_STATE",
+            "scientifically_active": false,
+            "start_time": null
+          },
+          "effective": {
+            "dormancy": {
+              "chilling_requirement": {
+                "evidence": "SOFTWARE_TEST_ONLY",
+                "unit": "utah_chill_units",
+                "value": 1000.0
+              },
+              "effective_chilling_model": "UTAH",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_policy": "STRICT",
+              "model_parameter_set": "UTAH_RICHARDSON_1974",
+              "start_time": null
+            }
+          },
+          "effective_hash": "2e5247a1f9fb2ef1d96f02ff6d5d698c2e6f800b1d91af766f796c1a504538c6",
+          "label": "UTAH+STRICT+SOFTWARE_TEST_ONLY",
+          "requested": {
+            "dormancy": {
+              "chilling_model": "UTAH",
+              "chilling_requirement": {
+                "evidence": "SOFTWARE_TEST_ONLY",
+                "unit": "utah_chill_units",
+                "value": 1000.0
+              },
+              "fallback_policy": "STRICT",
+              "start_policy": "DORMANCY_STATE"
+            }
+          },
+          "result_type": "SOFTWARE_RESULT",
+          "round_trip": true
+        },
+        {
+          "canonical": {
+            "dormancy": {
+              "chilling_requirement": {
+                "evidence": "SOFTWARE_TEST_ONLY",
+                "unit": "chill_portions",
+                "value": 50.0
+              },
+              "effective_chilling_model": "DYNAMIC",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_applied": false,
+              "fallback_policy": "STRICT",
+              "model_parameter_set": "DYNAMIC_EREZ_1990",
+              "parameterization_status": "SOFTWARE_TEST_ONLY",
+              "requested_chilling_model": "DYNAMIC",
+              "requested_start_policy": "DORMANCY_STATE",
+              "start_time": null
+            }
+          },
+          "configuration_hash": "0069810375df32a15c9e4e54aa5c21ffab34601e3bc35d2a2b730a43334bb029",
+          "described": {
+            "chilling_requirement": {
+              "evidence": "SOFTWARE_TEST_ONLY",
+              "unit": "chill_portions",
+              "value": 50.0
+            },
+            "effective_chilling_model": "DYNAMIC",
+            "effective_requirement": {
+              "evidence": "SOFTWARE_TEST_ONLY",
+              "unit": "chill_portions",
+              "value": 50.0
+            },
+            "effective_start_policy": "DORMANCY_STATE",
+            "effective_unit": "chill_portions",
+            "fallback_applied": false,
+            "fallback_policy": "STRICT",
+            "fallback_reason": null,
+            "model_parameter_set": "DYNAMIC_EREZ_1990",
+            "parameterization_status": "SOFTWARE_TEST_ONLY",
+            "requested_chilling_model": "DYNAMIC",
+            "requested_model_status": "IMPLEMENTED_PARAMETERIZED",
+            "requested_start_policy": "DORMANCY_STATE",
+            "scientifically_active": false,
+            "start_time": null
+          },
+          "effective": {
+            "dormancy": {
+              "chilling_requirement": {
+                "evidence": "SOFTWARE_TEST_ONLY",
+                "unit": "chill_portions",
+                "value": 50.0
+              },
+              "effective_chilling_model": "DYNAMIC",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_policy": "STRICT",
+              "model_parameter_set": "DYNAMIC_EREZ_1990",
+              "start_time": null
+            }
+          },
+          "effective_hash": "6f175352e4bdece589e90bcf7fe7c6b04a1dc279080e0f3709c531a80bbf1ac2",
+          "label": "DYNAMIC+STRICT+SOFTWARE_TEST_ONLY",
+          "requested": {
+            "dormancy": {
+              "chilling_model": "DYNAMIC",
+              "chilling_requirement": {
+                "evidence": "SOFTWARE_TEST_ONLY",
+                "unit": "chill_portions",
+                "value": 50.0
+              },
+              "fallback_policy": "STRICT",
+              "start_policy": "DORMANCY_STATE"
+            }
+          },
+          "result_type": "SOFTWARE_RESULT",
+          "round_trip": true
+        },
+        {
+          "canonical": {
+            "dormancy": {
+              "chilling_requirement": {
+                "evidence": "SOFTWARE_TEST_ONLY",
+                "unit": "chill_portions",
+                "value": 50.0
+              },
+              "effective_chilling_model": "DYNAMIC",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_applied": false,
+              "fallback_policy": "STRICT",
+              "model_parameter_set": "DYNAMIC_EREZ_1990",
+              "parameterization_status": "SOFTWARE_TEST_ONLY",
+              "requested_chilling_model": "DYNAMIC",
+              "requested_start_policy": "DORMANCY_STATE",
+              "start_time": null
+            }
+          },
+          "configuration_hash": "0069810375df32a15c9e4e54aa5c21ffab34601e3bc35d2a2b730a43334bb029",
+          "described": {
+            "chilling_requirement": {
+              "evidence": "SOFTWARE_TEST_ONLY",
+              "unit": "chill_portions",
+              "value": 50.0
+            },
+            "effective_chilling_model": "DYNAMIC",
+            "effective_requirement": {
+              "evidence": "SOFTWARE_TEST_ONLY",
+              "unit": "chill_portions",
+              "value": 50.0
+            },
+            "effective_start_policy": "DORMANCY_STATE",
+            "effective_unit": "chill_portions",
+            "fallback_applied": false,
+            "fallback_policy": "STRICT",
+            "fallback_reason": null,
+            "model_parameter_set": "DYNAMIC_EREZ_1990",
+            "parameterization_status": "SOFTWARE_TEST_ONLY",
+            "requested_chilling_model": "DYNAMIC",
+            "requested_model_status": "IMPLEMENTED_PARAMETERIZED",
+            "requested_start_policy": "DORMANCY_STATE",
+            "scientifically_active": false,
+            "start_time": null
+          },
+          "effective": {
+            "dormancy": {
+              "chilling_requirement": {
+                "evidence": "SOFTWARE_TEST_ONLY",
+                "unit": "chill_portions",
+                "value": 50.0
+              },
+              "effective_chilling_model": "DYNAMIC",
+              "effective_start_policy": "DORMANCY_STATE",
+              "fallback_policy": "STRICT",
+              "model_parameter_set": "DYNAMIC_EREZ_1990",
+              "start_time": null
+            }
+          },
+          "effective_hash": "6f175352e4bdece589e90bcf7fe7c6b04a1dc279080e0f3709c531a80bbf1ac2",
+          "label": "DYNAMIC+DEFAULT+SOFTWARE_TEST_ONLY",
+          "requested": {
+            "dormancy": {
+              "chilling_model": "DYNAMIC",
+              "chilling_requirement": {
+                "evidence": "SOFTWARE_TEST_ONLY",
+                "unit": "chill_portions",
+                "value": 50.0
+              },
+              "fallback_policy": "DEFAULT",
+              "start_policy": "DORMANCY_STATE"
+            }
+          },
+          "result_type": "SOFTWARE_RESULT",
+          "round_trip": true
+        },
+        {
+          "canonical": {
+            "dormancy": {
+              "chilling_requirement": {
+                "evidence": "SOFTWARE_TEST_ONLY",
+                "unit": "chill_portions",
+                "value": 50.0
+              },
+              "effective_chilling_model": "DYNAMIC",
+              "effective_start_policy": "FIXED_DATE",
+              "fallback_applied": false,
+              "fallback_policy": "STRICT",
+              "model_parameter_set": "DYNAMIC_EREZ_1990",
+              "parameterization_status": "SOFTWARE_TEST_ONLY",
+              "requested_chilling_model": "DYNAMIC",
+              "requested_start_policy": "FIXED_DATE",
+              "start_time": "2025-11-01T00:00:00+00:00"
+            }
+          },
+          "configuration_hash": "9db56b95250ffeeaef13821b14a13421e30cb579aaa3b6f2fee6f0921542124d",
+          "described": {
+            "chilling_requirement": {
+              "evidence": "SOFTWARE_TEST_ONLY",
+              "unit": "chill_portions",
+              "value": 50.0
+            },
+            "effective_chilling_model": "DYNAMIC",
+            "effective_requirement": {
+              "evidence": "SOFTWARE_TEST_ONLY",
+              "unit": "chill_portions",
+              "value": 50.0
+            },
+            "effective_start_policy": "FIXED_DATE",
+            "effective_unit": "chill_portions",
+            "fallback_applied": false,
+            "fallback_policy": "STRICT",
+            "fallback_reason": null,
+            "model_parameter_set": "DYNAMIC_EREZ_1990",
+            "parameterization_status": "SOFTWARE_TEST_ONLY",
+            "requested_chilling_model": "DYNAMIC",
+            "requested_model_status": "IMPLEMENTED_PARAMETERIZED",
+            "requested_start_policy": "FIXED_DATE",
+            "scientifically_active": false,
+            "start_time": "2025-11-01T00:00:00+00:00"
+          },
+          "effective": {
+            "dormancy": {
+              "chilling_requirement": {
+                "evidence": "SOFTWARE_TEST_ONLY",
+                "unit": "chill_portions",
+                "value": 50.0
+              },
+              "effective_chilling_model": "DYNAMIC",
+              "effective_start_policy": "FIXED_DATE",
+              "fallback_policy": "STRICT",
+              "model_parameter_set": "DYNAMIC_EREZ_1990",
+              "start_time": "2025-11-01T00:00:00+00:00"
+            }
+          },
+          "effective_hash": "a48895797b838ec685be278dcffc8ae2528861d1db5c5992f59bc7c04226d9f5",
+          "label": "FIXED_DATE+DYNAMIC+SOFTWARE_TEST_ONLY",
+          "requested": {
+            "dormancy": {
+              "chilling_model": "DYNAMIC",
+              "chilling_requirement": {
+                "evidence": "SOFTWARE_TEST_ONLY",
+                "unit": "chill_portions",
+                "value": 50.0
+              },
+              "fallback_policy": "STRICT",
+              "start_policy": "FIXED_DATE",
+              "start_time": "2025-11-01T00:00:00+00:00"
+            }
+          },
+          "result_type": "SOFTWARE_RESULT",
+          "round_trip": true
+        },
+        {
+          "canonical": {
+            "dormancy": {
+              "chilling_requirement": {
+                "evidence": "SOFTWARE_TEST_ONLY",
+                "unit": "utah_chill_units",
+                "value": 1000.0
+              },
+              "effective_chilling_model": "UTAH",
+              "effective_start_policy": "FIXED_DATE",
+              "fallback_applied": false,
+              "fallback_policy": "STRICT",
+              "model_parameter_set": "UTAH_RICHARDSON_1974",
+              "parameterization_status": "SOFTWARE_TEST_ONLY",
+              "requested_chilling_model": "UTAH",
+              "requested_start_policy": "FIXED_DATE",
+              "start_time": "2025-11-01T00:00:00+00:00"
+            }
+          },
+          "configuration_hash": "384f22c9206a5d02975decf7c8d9cf2f8ac56977d31b250266e35366f9e4faae",
+          "described": {
+            "chilling_requirement": {
+              "evidence": "SOFTWARE_TEST_ONLY",
+              "unit": "utah_chill_units",
+              "value": 1000.0
+            },
+            "effective_chilling_model": "UTAH",
+            "effective_requirement": {
+              "evidence": "SOFTWARE_TEST_ONLY",
+              "unit": "utah_chill_units",
+              "value": 1000.0
+            },
+            "effective_start_policy": "FIXED_DATE",
+            "effective_unit": "utah_chill_units",
+            "fallback_applied": false,
+            "fallback_policy": "STRICT",
+            "fallback_reason": null,
+            "model_parameter_set": "UTAH_RICHARDSON_1974",
+            "parameterization_status": "SOFTWARE_TEST_ONLY",
+            "requested_chilling_model": "UTAH",
+            "requested_model_status": "IMPLEMENTED_PARAMETERIZED",
+            "requested_start_policy": "FIXED_DATE",
+            "scientifically_active": false,
+            "start_time": "2025-11-01T00:00:00+00:00"
+          },
+          "effective": {
+            "dormancy": {
+              "chilling_requirement": {
+                "evidence": "SOFTWARE_TEST_ONLY",
+                "unit": "utah_chill_units",
+                "value": 1000.0
+              },
+              "effective_chilling_model": "UTAH",
+              "effective_start_policy": "FIXED_DATE",
+              "fallback_policy": "STRICT",
+              "model_parameter_set": "UTAH_RICHARDSON_1974",
+              "start_time": "2025-11-01T00:00:00+00:00"
+            }
+          },
+          "effective_hash": "9a4416af1f5c252de6390351c8ced69c6952b87ccde6bb41a6f58d337a648a6d",
+          "label": "FIXED_DATE+UTAH+SOFTWARE_TEST_ONLY",
+          "requested": {
+            "dormancy": {
+              "chilling_model": "UTAH",
+              "chilling_requirement": {
+                "evidence": "SOFTWARE_TEST_ONLY",
+                "unit": "utah_chill_units",
+                "value": 1000.0
+              },
+              "fallback_policy": "STRICT",
+              "start_policy": "FIXED_DATE",
+              "start_time": "2025-11-01T00:00:00+00:00"
+            }
+          },
+          "result_type": "SOFTWARE_RESULT",
+          "round_trip": true
+        }
+      ],
+      "status": "PASS"
+    },
+    "determinism": {
+      "mismatches": [],
+      "replayed_sections": [
+        "analytical_cases",
+        "checkpoint_restart",
+        "configurations",
+        "evidence",
+        "fallback_matrix",
+        "model_catalog",
+        "negative_cases",
+        "phase534_hash_preservation",
+        "readiness_matrix",
+        "seasons"
+      ],
+      "section_hashes": {
+        "analytical_cases": "f7421e7017fedc1aaed30be6e343c6406dd4c896f483a67df05b083ffc03556d",
+        "checkpoint_restart": "091190a1ed62724a8493e1caf2459976bae7f71aa073f1e9b48be22b0aae57e1",
+        "configurations": "baf8601221c27ea1627296c85190c0eaa1ed3897e23231c795e8486009853a88",
+        "evidence": "8853aee95d80fad1063d0693f604312a7dbc1642aa9095c20a65aa16d579ec07",
+        "fallback_matrix": "9395a639233e9ff62514298eb27b9f1f253a44762aa4886354ae0260e8d846c0",
+        "model_catalog": "255f4de18f2eb52964f0e4e1b0764a81fd4ee3b648c54f7e732012353e5b2203",
+        "negative_cases": "67bbfd41d03c2387e5bfcabf675f984c9a2be1db19f85281e9596790674dc177",
+        "phase534_hash_preservation": "90e67cef677bfee608d33efa1f9fdefa5a3dc2f1ad69b7574ef0c88baed17cd5",
+        "readiness_matrix": "05ca55330ea12382804c37b3bd052356c434ba610d52ec5c83d57f15561b33f3",
+        "seasons": "e81ce522d032dd6d7a660f76ce03ed36ae22c7f79addb3ed239e024f0ad5366c"
+      },
+      "status": "PASS"
+    },
+    "evidence": {
+      "activated_requirement_rows": [],
+      "assessment": {
+        "CHILLING_HOURS": "profile requirements are species-level engineering defaults (Phase 5.33)",
+        "DYNAMIC": "formulation and constants supported; chill-portion rows exist for peach, plum and apple as cultivar-group ranges (one plum cultivar value) and all are NOT_ACTIVATED -> IMPLEMENTED_UNPARAMETERIZED",
+        "UTAH": "formulation supported; no Utah chill-unit requirement for any project species exists in the repository -> IMPLEMENTED_UNPARAMETERIZED"
+      },
+      "references": [
+        {
+          "id": "RICHARDSON_1974",
+          "identifier": "ISSN 0018-5345",
+          "limitations": "original article not retrieved; table taken from the two secondary sources below",
+          "parameters": "Utah bands and weights",
+          "reference": "Richardson, E.A., Seeley, S.D., Walker, D.R. (1974). A model for estimating the completion of rest for 'Redhaven' and 'Elberta' peach trees. HortScience 9(4), 331-332.",
+          "species": "peach ('Redhaven', 'Elberta')",
+          "supports": "Utah formulation: hourly weights per temperature band",
+          "unit": "utah_chill_units",
+          "use": "ACTIVATES_MODEL_PARAMETERS (formulation constants only)"
+        },
+        {
+          "id": "ZHANG_TAYLOR_2011",
+          "identifier": "HortScience 46(3):420-425",
+          "limitations": "pistachio requirement (59 CP) not transferable and not used",
+          "parameters": "Utah table rows; Dynamic slp, tetmlt, a0, a1, e0, e1",
+          "reference": "Zhang, J., Taylor, C. (2011). The Dynamic Model provides the best description of the chill process on 'Sirora' pistachio trees in Australia. HortScience 46(3), 420-425.",
+          "species": "pistachio (context only)",
+          "supports": "Table 1 (Utah chill units per temperature, citing Richardson et al. 1974); Dynamic Model equations and constants (citing Erez et al. 1988; Luedeling et al. 2009)",
+          "unit": "utah_chill_units; chill_portions",
+          "use": "SCIENTIFIC_EVIDENCE for the formulation; no requirement used"
+        },
+        {
+          "id": "LUEDELING_BROWN_2010",
+          "identifier": "doi:10.1007/s00484-010-0352-y",
+          "limitations": "its summary lists only the 15.9 C negative band; the -1 weight above 18 C comes from Zhang & Taylor (2011) Table 1",
+          "parameters": "Dynamic constants",
+          "reference": "Luedeling, E., Brown, P.H. (2010). A global analysis of the comparability of winter chill models for fruit and nut trees. Int. J. Biometeorol. 55, 411-421.",
+          "species": "global comparison",
+          "supports": "Chilling Hours, Utah and Dynamic definitions; Dynamic constants slp=1.6, Tf=277, A0=139500, A1=2.567e18, E0=4153.5, E1=12888.8",
+          "unit": "chill_hours; utah_chill_units; chill_portions",
+          "use": "SCIENTIFIC_EVIDENCE for the formulation"
+        },
+        {
+          "id": "EREZ_1990",
+          "identifier": "Acta Hortic. 276:165-174",
+          "limitations": "original article not retrieved; constants as reported by Luedeling & Brown (2010) and Zhang & Taylor (2011)",
+          "parameters": "Dynamic constants",
+          "reference": "Erez, A., Fishman, S., Linsley-Noakes, G.C., Allan, P. (1990). The dynamic model for rest completion in peach buds. Acta Hortic. 276, 165-174.",
+          "species": "peach",
+          "supports": "Dynamic Model constants and chill-portion formulation",
+          "unit": "chill_portions",
+          "use": "ACTIVATES_MODEL_PARAMETERS (formulation constants only)"
+        },
+        {
+          "id": "FISHMAN_1987",
+          "identifier": "ISSN 0022-5193",
+          "limitations": "original articles not retrieved",
+          "parameters": "none used directly",
+          "reference": "Fishman, S., Erez, A., Couvillon, G.A. (1987a, 1987b). The temperature dependence of dormancy breaking in plants. J. Theor. Biol. 126, 309-321; 124, 473-483.",
+          "species": "peach",
+          "supports": "two-step Dynamic Model structure",
+          "unit": "chill_portions",
+          "use": "SCIENTIFIC_EVIDENCE"
+        },
+        {
+          "id": "CHILLR_REFERENCE_IMPLEMENTATION",
+          "identifier": "CRAN chillR, ChillModels",
+          "limitations": "software, not a scientific source; used to remove implementation ambiguity",
+          "parameters": "kelvin_offset = 273",
+          "reference": "Luedeling, E. chillR: Statistical Methods for Phenology Analysis in Temperate Fruit Trees (R package), Dynamic_Model(); ChillModels (Pertille et al.) dynamic_model() adapted from it.",
+          "species": "n/a",
+          "supports": "hourly loop, Kelvin conversion T + 273, transfer with the previous hour's xi",
+          "unit": "chill_portions",
+          "use": "SOFTWARE_REFERENCE (equivalence test)"
+        }
+      ],
+      "requirement_evidence_rows": [
+        {
+          "activation_status": "NOT_ACTIVATED",
+          "authors": "Drogoudi, P.; Cant\u00edn, C.M.; Brandi, F.; et al.",
+          "crop": "peach",
+          "doi": "10.3390/plants12030584",
+          "id": "peach_chill_portions_001",
+          "maximum": "69",
+          "minimum": "49",
+          "notes": "Dynamic Model; Tabuenca tests.",
+          "parameter": "chill_portions",
+          "reference_cultivar": "14 peach and nectarine cultivars",
+          "result_type": "SCIENTIFIC_EVIDENCE",
+          "source_id": "SRC-011",
+          "unit": "chill_portions",
+          "value": "",
+          "year": "2023"
+        },
+        {
+          "activation_status": "NOT_ACTIVATED",
+          "authors": "Guerrero, B.I.; Fad\u00f3n, E.; Guerra, M.E.; Rodrigo, J.",
+          "crop": "plum",
+          "doi": "10.3389/fpls.2024.1343593",
+          "id": "plum_chill_portions_001",
+          "maximum": "51",
+          "minimum": "26",
+          "notes": "Dynamic Model.",
+          "parameter": "chill_portions",
+          "reference_cultivar": "21 Japanese plum-type cultivars",
+          "result_type": "SCIENTIFIC_EVIDENCE",
+          "source_id": "SRC-014",
+          "unit": "chill_portions",
+          "value": "",
+          "year": "2024"
+        },
+        {
+          "activation_status": "NOT_ACTIVATED",
+          "authors": "Guerrero, B.I.; Fad\u00f3n, E.; Guerra, M.E.; Rodrigo, J.",
+          "crop": "plum",
+          "doi": "10.3389/fpls.2024.1343593",
+          "id": "plum_chill_portions_002",
+          "maximum": "",
+          "minimum": "",
+          "notes": "Lowest cultivar-specific CP reported in article.",
+          "parameter": "chill_portions",
+          "reference_cultivar": "Earliqueen",
+          "result_type": "SCIENTIFIC_EVIDENCE",
+          "source_id": "SRC-014",
+          "unit": "chill_portions",
+          "value": "30",
+          "year": "2024"
+        },
+        {
+          "activation_status": "NOT_ACTIVATED",
+          "authors": "Gonz\u00e1lez Noguer, C.; et al.",
+          "crop": "apple",
+          "doi": "10.3389/fhort.2023.1217689",
+          "id": "apple_chill_portions_001",
+          "maximum": "70",
+          "minimum": "40",
+          "notes": "Review reports range for extensively planted cultivars; do not convert to CH.",
+          "parameter": "chill_portions",
+          "reference_cultivar": "Golden Delicious; Granny Smith; Gala; Fuji",
+          "result_type": "SCIENTIFIC_EVIDENCE",
+          "source_id": "SRC-016",
+          "unit": "chill_portions",
+          "value": "",
+          "year": "2023"
+        },
+        {
+          "activation_status": "NOT_ACTIVATED",
+          "authors": "D\u00edez-Palet, I.; Funes, I.; Sav\u00e9, R.; et al.",
+          "crop": "apple",
+          "doi": "10.3390/agronomy9110760",
+          "id": "apple_chill_portions_002",
+          "maximum": "88",
+          "minimum": "35",
+          "notes": "Range reported in subsequent literature citing D\u00edez-Palet et al.; exact cultivar-level table requires full-text extraction.",
+          "parameter": "chill_portions",
+          "reference_cultivar": "12 apple cultivars",
+          "result_type": "SCIENTIFIC_EVIDENCE",
+          "source_id": "SRC-017",
+          "unit": "chill_portions",
+          "value": "",
+          "year": "2019"
+        }
+      ],
+      "scientific_claims": [],
+      "status": "PASS",
+      "utah_requirement_rows": []
+    },
+    "fallback_matrix": {
+      "distinctions": {
+        "IMPLEMENTED_PARAMETERIZED": "CHILLING_HOURS (profile, engineering default) or UTAH/DYNAMIC with an explicit SOFTWARE_TEST_ONLY requirement",
+        "IMPLEMENTED_UNPARAMETERIZED": "UTAH/DYNAMIC without a requirement in their unit",
+        "NOT_IMPLEMENTED": "no model is in this state since Phase 5.35",
+        "explicit_selection": "requested_chilling_model in the canonical record",
+        "fallback_applied": "requested model IMPLEMENTED_UNPARAMETERIZED -> CHILLING_HOURS under STRICT"
+      },
+      "injected_without_requirement": [
+        {
+          "configuration": null,
+          "injected_model": "UTAH",
+          "outcome": "MODEL_NOT_READY",
+          "silent_fallback": false
+        },
+        {
+          "configuration": null,
+          "injected_model": "DYNAMIC",
+          "outcome": "MODEL_NOT_READY",
+          "silent_fallback": false
+        }
+      ],
+      "rows": [
+        {
+          "case": "CHILLING_HOURS+STRICT",
+          "effective_model": "CHILLING_HOURS",
+          "fallback": "STRICT",
+          "fallback_applied": false,
+          "fallback_reason": null,
+          "parameterization_status": "ENGINEERING_DEFAULT",
+          "requested_model": "CHILLING_HOURS",
+          "requested_model_status": "IMPLEMENTED_PARAMETERIZED",
+          "requirement": null
+        },
+        {
+          "case": "UTAH+STRICT (no requirement)",
+          "effective_model": "CHILLING_HOURS",
+          "fallback": "STRICT",
+          "fallback_applied": true,
+          "fallback_reason": "REQUESTED_MODEL_NOT_PARAMETERIZED",
+          "parameterization_status": "ENGINEERING_DEFAULT",
+          "requested_model": "UTAH",
+          "requested_model_status": "IMPLEMENTED_UNPARAMETERIZED",
+          "requirement": null
+        },
+        {
+          "case": "DYNAMIC+STRICT (no requirement)",
+          "effective_model": "CHILLING_HOURS",
+          "fallback": "STRICT",
+          "fallback_applied": true,
+          "fallback_reason": "REQUESTED_MODEL_NOT_PARAMETERIZED",
+          "parameterization_status": "ENGINEERING_DEFAULT",
+          "requested_model": "DYNAMIC",
+          "requested_model_status": "IMPLEMENTED_UNPARAMETERIZED",
+          "requirement": null
+        },
+        {
+          "case": "UTAH+STRICT+SOFTWARE_TEST_ONLY",
+          "effective_model": "UTAH",
+          "fallback": "STRICT",
+          "fallback_applied": false,
+          "fallback_reason": null,
+          "parameterization_status": "SOFTWARE_TEST_ONLY",
+          "requested_model": "UTAH",
+          "requested_model_status": "IMPLEMENTED_PARAMETERIZED",
+          "requirement": {
+            "evidence": "SOFTWARE_TEST_ONLY",
+            "unit": "utah_chill_units",
+            "value": 1000.0
+          }
+        },
+        {
+          "case": "DYNAMIC+STRICT+SOFTWARE_TEST_ONLY",
+          "effective_model": "DYNAMIC",
+          "fallback": "STRICT",
+          "fallback_applied": false,
+          "fallback_reason": null,
+          "parameterization_status": "SOFTWARE_TEST_ONLY",
+          "requested_model": "DYNAMIC",
+          "requested_model_status": "IMPLEMENTED_PARAMETERIZED",
+          "requirement": {
+            "evidence": "SOFTWARE_TEST_ONLY",
+            "unit": "chill_portions",
+            "value": 50.0
+          }
+        }
+      ],
+      "status": "PASS"
+    },
+    "model_catalog": {
+      "models_available": [
+        "CHILLING_HOURS",
+        "UTAH",
+        "DYNAMIC"
+      ],
+      "models_blocked": [
+        "UTAH",
+        "DYNAMIC"
+      ],
+      "models_implemented": [
+        "CHILLING_HOURS",
+        "UTAH",
+        "DYNAMIC"
+      ],
+      "models_parameterized": [
+        "CHILLING_HOURS"
+      ],
+      "models_supported": [
+        "CHILLING_HOURS"
+      ],
+      "rows": [
+        {
+          "implemented": true,
+          "model": "CHILLING_HOURS",
+          "model_parameter_set": "CHILLING_HOURS_PROFILE_THRESHOLDS",
+          "parameterized_for_species": true,
+          "requirement_source": "PhenologyProfile.chilling_requirement_hours (ENGINEERING_DEFAULT)",
+          "scientifically_active": false,
+          "state": "scalar chill hours (CropGrowthState.chilling_hours)",
+          "status_without_requirement": "IMPLEMENTED_PARAMETERIZED",
+          "supported_without_explicit_requirement": true,
+          "thermal_input": "air temperature (C)",
+          "time_step": "per simulation step, weighted by dt (hourly steps give whole hours)",
+          "traceability": "project CHILLING_HOURS rule (PhenologyProfile chilling_min/max_temperature_c); Weinberger (1950) counted hours below 7.2 C",
+          "unit": "chill_hours",
+          "validity": "hours with air temperature in [lower, upper] C count; no negation by warm hours"
+        },
+        {
+          "implemented": true,
+          "model": "UTAH",
+          "model_parameter_set": "UTAH_RICHARDSON_1974",
+          "parameterized_for_species": false,
+          "requirement_source": "explicit configuration only (SOFTWARE_TEST_ONLY); no activated species requirement",
+          "scientifically_active": false,
+          "state": "scalar Utah chill units (CropGrowthState.chilling_state)",
+          "status_without_requirement": "IMPLEMENTED_UNPARAMETERIZED",
+          "supported_without_explicit_requirement": false,
+          "thermal_input": "hourly air temperature (C)",
+          "time_step": "hourly only (dt_seconds == 3600)",
+          "traceability": "Richardson, Seeley & Walker (1974) HortScience 9:331-332; table as in Zhang & Taylor (2011) HortScience 46:420-425",
+          "unit": "utah_chill_units",
+          "validity": "published weight table; warm hours subtract units; the running sum can be negative"
+        },
+        {
+          "implemented": true,
+          "model": "DYNAMIC",
+          "model_parameter_set": "DYNAMIC_EREZ_1990",
+          "parameterized_for_species": false,
+          "requirement_source": "explicit configuration only (SOFTWARE_TEST_ONLY); no activated species requirement",
+          "scientifically_active": false,
+          "state": "intermediate product, previous transfer fraction and chill portions (CropGrowthState.chilling_state)",
+          "status_without_requirement": "IMPLEMENTED_UNPARAMETERIZED",
+          "supported_without_explicit_requirement": false,
+          "thermal_input": "hourly air temperature (C), converted as T + 273",
+          "time_step": "hourly only (dt_seconds == 3600)",
+          "traceability": "Fishman, Erez & Couvillon (1987) J. Theor. Biol. 124:473-483, 126:309-321; Erez et al. (1990) Acta Hortic. 276:165-174; constants as in Luedeling & Brown (2010) doi:10.1007/s00484-010-0352-y",
+          "unit": "chill_portions",
+          "validity": "two-step process: reversible intermediate, irreversible chill portions"
+        }
+      ],
+      "status": "PASS",
+      "units_distinct": true
+    },
+    "negative_cases": {
+      "rows": [
+        {
+          "case": "unknown_model",
+          "deterministic_message": true,
+          "error": "dormancy.chilling_model: unknown value 'NORTH_CAROLINA'; allowed: CHILLING_HOURS, UTAH, DYNAMIC",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "unknown_unit",
+          "deterministic_message": true,
+          "error": "dormancy.chilling_requirement.unit: unknown value 'chill_minutes'; allowed: chill_hours, utah_chill_units, chill_portions",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "incompatible_requirement_dynamic_in_hours",
+          "deterministic_message": true,
+          "error": "dormancy.chilling_requirement.unit: model DYNAMIC expects 'chill_portions', received 'chill_hours'",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "incompatible_requirement_utah_in_hours",
+          "deterministic_message": true,
+          "error": "dormancy.chilling_requirement.unit: model UTAH expects 'utah_chill_units', received 'chill_hours'",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "incompatible_requirement_utah_in_portions",
+          "deterministic_message": true,
+          "error": "dormancy.chilling_requirement.unit: model UTAH expects 'utah_chill_units', received 'chill_portions'",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "explicit_requirement_for_chilling_hours",
+          "deterministic_message": true,
+          "error": "dormancy.chilling_requirement: model CHILLING_HOURS takes its requirement from the phenology profile (chill_hours); an explicit requirement is not accepted",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "requirement_missing_value",
+          "deterministic_message": true,
+          "error": "dormancy.chilling_requirement is incomplete; missing: value",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "requirement_missing_evidence",
+          "deterministic_message": true,
+          "error": "dormancy.chilling_requirement is incomplete; missing: evidence",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "requirement_unknown_field",
+          "deterministic_message": true,
+          "error": "dormancy.chilling_requirement has unknown fields: cultivar",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "requirement_wrong_type_value",
+          "deterministic_message": true,
+          "error": "dormancy.chilling_requirement.value must be a number, got str",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "requirement_bool_value",
+          "deterministic_message": true,
+          "error": "dormancy.chilling_requirement.value must be a number, got bool",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "requirement_not_a_mapping",
+          "deterministic_message": true,
+          "error": "dormancy.chilling_requirement must be a mapping with value, unit, evidence, got float",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "requirement_out_of_domain_zero",
+          "deterministic_message": true,
+          "error": "dormancy.chilling_requirement.value must be a finite number > 0, got 0.0",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "requirement_out_of_domain_negative",
+          "deterministic_message": true,
+          "error": "dormancy.chilling_requirement.value must be a finite number > 0, got -5.0",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "requirement_out_of_domain_nan",
+          "deterministic_message": true,
+          "error": "dormancy.chilling_requirement.value must be a finite number > 0, got nan",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "requirement_unactivated_literature_evidence",
+          "deterministic_message": true,
+          "error": "dormancy.chilling_requirement.evidence: 'LITERATURE' is not accepted; no activated scientific requirement exists for DYNAMIC (literature rows are NOT_ACTIVATED); allowed: SOFTWARE_TEST_ONLY",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "requirement_engineering_default_evidence",
+          "deterministic_message": true,
+          "error": "dormancy.chilling_requirement.evidence: 'ENGINEERING_DEFAULT' is not accepted; no activated scientific requirement exists for DYNAMIC (literature rows are NOT_ACTIVATED); allowed: SOFTWARE_TEST_ONLY",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "ambiguous_request_and_canonical_field",
+          "deterministic_message": true,
+          "error": "dormancy configuration is ambiguous: both 'chilling_model' and 'requested_chilling_model' given",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "duplicated_requirement_field",
+          "deterministic_message": true,
+          "error": "dormancy configuration has a duplicated field: 'value'",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "duplicated_configuration_field",
+          "deterministic_message": true,
+          "error": "dormancy configuration has a duplicated field: 'chilling_model'",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "invalid_fallback",
+          "deterministic_message": true,
+          "error": "dormancy.fallback_policy: unknown value 'NEAREST_MODEL'; allowed: DEFAULT, STRICT",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "incompatible_start_policy_effective_onset",
+          "deterministic_message": true,
+          "error": "dormancy.start_policy: EFFECTIVE_CHILL_ONSET cannot be combined with an executed DYNAMIC model; allowed: DORMANCY_STATE, FIXED_DATE",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "incompatible_start_policy_model_defined",
+          "deterministic_message": true,
+          "error": "dormancy.start_policy: MODEL_DEFINED cannot be combined with an executed UTAH model; allowed: DORMANCY_STATE, FIXED_DATE",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "inconsistent_canonical_parameter_set",
+          "deterministic_message": true,
+          "error": "dormancy configuration is inconsistent: model_parameter_set/parameterization_status must be 'DYNAMIC_EREZ_1990'/'SOFTWARE_TEST_ONLY' for DYNAMIC",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "inconsistent_canonical_parameterization_status",
+          "deterministic_message": true,
+          "error": "dormancy configuration is inconsistent: model_parameter_set/parameterization_status must be 'DYNAMIC_EREZ_1990'/'SOFTWARE_TEST_ONLY' for DYNAMIC",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "inconsistent_canonical_fallback_flag",
+          "deterministic_message": true,
+          "error": "dormancy configuration is inconsistent: stated effective fields differ from the STRICT resolution of the request",
+          "names_field": true,
+          "rejected": true
+        },
+        {
+          "case": "incomplete_canonical_parameterized_block",
+          "deterministic_message": true,
+          "error": "dormancy configuration is incomplete; missing: parameterization_status",
+          "names_field": true,
+          "rejected": true
+        }
+      ],
+      "status": "PASS"
+    },
+    "parameter_mutation": {
+      "after": {
+        "configurations": "442389634f46e810e5781a20cf32ab421fd0e1e5d9474ae32f5f4b66c329af94",
+        "default_configuration": "6e39f1be5e4a195e7ab16b45c8b59d4d2d606c7f1f4abfb4346444c5f6169f0e",
+        "model_constants": "6c283636515ab3b262540b9b8db6f9418c8b577a535bdc5ed9659cebef881a5e",
+        "parameter_registry": "e09e90f08e754a7d0373c8da4461388a350b53e3dcb9a5ea4297ddeb3ea0db1d",
+        "parameter_sets": "185df90d72b92fb913dc5faef9b998fdbc4b0884437b2e2e26202eb86e8f06b5",
+        "phenology_profiles": "256751c89b23b16befab98061ac33e5c2f467f92dcf1bef323d37eef89f78f79",
+        "weather_profiles": "0ae009290c1d4cb7cdf840955366180f91d8601a3d1ea734be0f07050286e14a"
+      },
+      "before": {
+        "configurations": "442389634f46e810e5781a20cf32ab421fd0e1e5d9474ae32f5f4b66c329af94",
+        "default_configuration": "6e39f1be5e4a195e7ab16b45c8b59d4d2d606c7f1f4abfb4346444c5f6169f0e",
+        "model_constants": "6c283636515ab3b262540b9b8db6f9418c8b577a535bdc5ed9659cebef881a5e",
+        "parameter_registry": "e09e90f08e754a7d0373c8da4461388a350b53e3dcb9a5ea4297ddeb3ea0db1d",
+        "parameter_sets": "185df90d72b92fb913dc5faef9b998fdbc4b0884437b2e2e26202eb86e8f06b5",
+        "phenology_profiles": "256751c89b23b16befab98061ac33e5c2f467f92dcf1bef323d37eef89f78f79",
+        "weather_profiles": "0ae009290c1d4cb7cdf840955366180f91d8601a3d1ea734be0f07050286e14a"
+      },
+      "status": "PASS"
+    },
+    "phase534_hash_preservation": {
+      "artifact": "data/phenology/chilling_policy_report.json",
+      "phase534_configuration_hash": "81f79a25fae27485f66a54d9b0f617f0145c5fe8b46808e63ff645afe0c0ffb0",
+      "rows": [
+        {
+          "canonical_identical": true,
+          "configuration_hash_identical": true,
+          "effective_hash_identical": true,
+          "label": "CHILLING_HOURS+DEFAULT"
+        },
+        {
+          "canonical_identical": true,
+          "configuration_hash_identical": true,
+          "effective_hash_identical": true,
+          "label": "CHILLING_HOURS+STRICT"
+        },
+        {
+          "canonical_identical": true,
+          "configuration_hash_identical": true,
+          "effective_hash_identical": true,
+          "label": "UTAH+DEFAULT"
+        },
+        {
+          "canonical_identical": true,
+          "configuration_hash_identical": true,
+          "effective_hash_identical": true,
+          "label": "UTAH+STRICT"
+        },
+        {
+          "canonical_identical": true,
+          "configuration_hash_identical": true,
+          "effective_hash_identical": true,
+          "label": "DYNAMIC+DEFAULT"
+        },
+        {
+          "canonical_identical": true,
+          "configuration_hash_identical": true,
+          "effective_hash_identical": true,
+          "label": "DYNAMIC+STRICT"
+        },
+        {
+          "canonical_identical": true,
+          "configuration_hash_identical": true,
+          "effective_hash_identical": true,
+          "label": "FIXED_DATE+CHILLING_HOURS+STRICT"
+        },
+        {
+          "canonical_identical": true,
+          "configuration_hash_identical": true,
+          "effective_hash_identical": true,
+          "label": "FIXED_DATE+DYNAMIC+STRICT"
+        },
+        {
+          "canonical_identical": true,
+          "configuration_hash_identical": true,
+          "effective_hash_identical": true,
+          "label": "MODEL_DEFINED+DYNAMIC+STRICT"
+        }
+      ],
+      "status": "PASS"
+    },
+    "readiness_matrix": {
+      "rows": [
+        {
+          "crop": "grape",
+          "diagnostic": null,
+          "evidence": "ENGINEERING_DEFAULT",
+          "model": "CHILLING_HOURS",
+          "requirement": 400.0,
+          "scientific_execution": "ENGINEERING_DEFAULT_ONLY",
+          "status": "IMPLEMENTED_PARAMETERIZED",
+          "unit": "chill_hours"
+        },
+        {
+          "crop": "grape",
+          "diagnostic": "MODEL_NOT_READY: chilling model UTAH is implemented but has no requirement in utah_chill_units; no species requirement is activated",
+          "evidence": "NONE_ACTIVATED",
+          "model": "UTAH",
+          "requirement": null,
+          "scientific_execution": "BLOCKED",
+          "status": "IMPLEMENTED_UNPARAMETERIZED",
+          "unit": "utah_chill_units"
+        },
+        {
+          "crop": "grape",
+          "diagnostic": "MODEL_NOT_READY: chilling model DYNAMIC is implemented but has no requirement in chill_portions; no species requirement is activated",
+          "evidence": "NONE_ACTIVATED",
+          "model": "DYNAMIC",
+          "requirement": null,
+          "scientific_execution": "BLOCKED",
+          "status": "IMPLEMENTED_UNPARAMETERIZED",
+          "unit": "chill_portions"
+        },
+        {
+          "crop": "peach",
+          "diagnostic": null,
+          "evidence": "ENGINEERING_DEFAULT",
+          "model": "CHILLING_HOURS",
+          "requirement": 600.0,
+          "scientific_execution": "ENGINEERING_DEFAULT_ONLY",
+          "status": "IMPLEMENTED_PARAMETERIZED",
+          "unit": "chill_hours"
+        },
+        {
+          "crop": "peach",
+          "diagnostic": "MODEL_NOT_READY: chilling model UTAH is implemented but has no requirement in utah_chill_units; no species requirement is activated",
+          "evidence": "NONE_ACTIVATED",
+          "model": "UTAH",
+          "requirement": null,
+          "scientific_execution": "BLOCKED",
+          "status": "IMPLEMENTED_UNPARAMETERIZED",
+          "unit": "utah_chill_units"
+        },
+        {
+          "crop": "peach",
+          "diagnostic": "MODEL_NOT_READY: chilling model DYNAMIC is implemented but has no requirement in chill_portions; no species requirement is activated",
+          "evidence": "NONE_ACTIVATED",
+          "model": "DYNAMIC",
+          "requirement": null,
+          "scientific_execution": "BLOCKED",
+          "status": "IMPLEMENTED_UNPARAMETERIZED",
+          "unit": "chill_portions"
+        },
+        {
+          "crop": "plum",
+          "diagnostic": null,
+          "evidence": "ENGINEERING_DEFAULT",
+          "model": "CHILLING_HOURS",
+          "requirement": 500.0,
+          "scientific_execution": "ENGINEERING_DEFAULT_ONLY",
+          "status": "IMPLEMENTED_PARAMETERIZED",
+          "unit": "chill_hours"
+        },
+        {
+          "crop": "plum",
+          "diagnostic": "MODEL_NOT_READY: chilling model UTAH is implemented but has no requirement in utah_chill_units; no species requirement is activated",
+          "evidence": "NONE_ACTIVATED",
+          "model": "UTAH",
+          "requirement": null,
+          "scientific_execution": "BLOCKED",
+          "status": "IMPLEMENTED_UNPARAMETERIZED",
+          "unit": "utah_chill_units"
+        },
+        {
+          "crop": "plum",
+          "diagnostic": "MODEL_NOT_READY: chilling model DYNAMIC is implemented but has no requirement in chill_portions; no species requirement is activated",
+          "evidence": "NONE_ACTIVATED",
+          "model": "DYNAMIC",
+          "requirement": null,
+          "scientific_execution": "BLOCKED",
+          "status": "IMPLEMENTED_UNPARAMETERIZED",
+          "unit": "chill_portions"
+        },
+        {
+          "crop": "apple",
+          "diagnostic": null,
+          "evidence": "ENGINEERING_DEFAULT",
+          "model": "CHILLING_HOURS",
+          "requirement": 600.0,
+          "scientific_execution": "ENGINEERING_DEFAULT_ONLY",
+          "status": "IMPLEMENTED_PARAMETERIZED",
+          "unit": "chill_hours"
+        },
+        {
+          "crop": "apple",
+          "diagnostic": "MODEL_NOT_READY: chilling model UTAH is implemented but has no requirement in utah_chill_units; no species requirement is activated",
+          "evidence": "NONE_ACTIVATED",
+          "model": "UTAH",
+          "requirement": null,
+          "scientific_execution": "BLOCKED",
+          "status": "IMPLEMENTED_UNPARAMETERIZED",
+          "unit": "utah_chill_units"
+        },
+        {
+          "crop": "apple",
+          "diagnostic": "MODEL_NOT_READY: chilling model DYNAMIC is implemented but has no requirement in chill_portions; no species requirement is activated",
+          "evidence": "NONE_ACTIVATED",
+          "model": "DYNAMIC",
+          "requirement": null,
+          "scientific_execution": "BLOCKED",
+          "status": "IMPLEMENTED_UNPARAMETERIZED",
+          "unit": "chill_portions"
+        }
+      ],
+      "status": "PASS"
+    },
+    "regression_533": {
+      "baseline_artifact": "data/phenology/chilling_framework_report.json",
+      "baseline_report_hash": "2eee01cfbc22fce1ef2d74235c745a0a7314ba4ad48db0e415d2ea5a3585679e",
+      "rows": [
+        {
+          "crop": "peach",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_20N_WARM_WINTER",
+          "phase533_trajectory_hash": "604d5bbeeb763eac11a8cf5dda900163a622bf9f5680c6f03b63c1ad72e169ac"
+        },
+        {
+          "crop": "apple",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_20N_WARM_WINTER",
+          "phase533_trajectory_hash": "604d5bbeeb763eac11a8cf5dda900163a622bf9f5680c6f03b63c1ad72e169ac"
+        },
+        {
+          "crop": "plum",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_20N_WARM_WINTER",
+          "phase533_trajectory_hash": "604d5bbeeb763eac11a8cf5dda900163a622bf9f5680c6f03b63c1ad72e169ac"
+        },
+        {
+          "crop": "peach",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "phase533_trajectory_hash": "82cab6bcf8648d5081e9f18d75646dd96b3fc0e2563a7ebdc4e792d48be2bc60"
+        },
+        {
+          "crop": "apple",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "phase533_trajectory_hash": "38917ba4af87834de5e2cc23bf24f28b55e0648d86e945780fb46db9bf935bbe"
+        },
+        {
+          "crop": "plum",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "phase533_trajectory_hash": "05a5b47a4f68c5bba84fa930d93d9702f57aa7b00cc57bbd9089441eba7f0e89"
+        },
+        {
+          "crop": "peach",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_50N_CONTINENTAL",
+          "phase533_trajectory_hash": "858b32b09927144823cfa7c8fec9d826f57fc699c1e6a369b4fdf5a2ff9e8864"
+        },
+        {
+          "crop": "apple",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_50N_CONTINENTAL",
+          "phase533_trajectory_hash": "1ac0d78bcc374ed947cb8470bb4645a40e631af2a530d583f805510705108839"
+        },
+        {
+          "crop": "plum",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "NH_50N_CONTINENTAL",
+          "phase533_trajectory_hash": "92dbcda1b6e224c4d783902d8bb28557b1bbb7b32194d54c8a6aa23f022d3005"
+        },
+        {
+          "crop": "peach",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_20S_WARM_WINTER",
+          "phase533_trajectory_hash": "95ea7a089186d61b66581537426e0c151f7a45a297b994387d00c3bab32e91c5"
+        },
+        {
+          "crop": "apple",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_20S_WARM_WINTER",
+          "phase533_trajectory_hash": "95ea7a089186d61b66581537426e0c151f7a45a297b994387d00c3bab32e91c5"
+        },
+        {
+          "crop": "plum",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_20S_WARM_WINTER",
+          "phase533_trajectory_hash": "95ea7a089186d61b66581537426e0c151f7a45a297b994387d00c3bab32e91c5"
+        },
+        {
+          "crop": "peach",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_35S_TEMPERATE",
+          "phase533_trajectory_hash": "3c7eb3f5571dd4cb5ece8911c6d151d4b16eb16626ea02d8ecc2b433fcffcf3c"
+        },
+        {
+          "crop": "apple",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_35S_TEMPERATE",
+          "phase533_trajectory_hash": "dac3b7041b9e39101df844a11df3a4dbad7f3e94dca45cc5d83f5c1d5396da3a"
+        },
+        {
+          "crop": "plum",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_35S_TEMPERATE",
+          "phase533_trajectory_hash": "95848c706601f795471cc43c0be633b6a1af4aea4ff07e9c5676484bdd425ffe"
+        },
+        {
+          "crop": "peach",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_50S_COLD",
+          "phase533_trajectory_hash": "6d9d990fb01f51f515b66d6b7d928dfd98d5e92389d7962999b02ab860d0f6a5"
+        },
+        {
+          "crop": "apple",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_50S_COLD",
+          "phase533_trajectory_hash": "6cc60049eb2356d49374c6828a595e7f2c446e6152ed995fd89ba787d21c6f42"
+        },
+        {
+          "crop": "plum",
+          "default_identical": true,
+          "dynamic_fallback_identical": true,
+          "location_id": "SH_50S_COLD",
+          "phase533_trajectory_hash": "21054f156274371cfa5db5c313285048229a14cf12e2cc1720e11146fcb2e31d"
+        }
+      ],
+      "status": "PASS"
+    },
+    "seasons": {
+      "dormancy_release_forcing_budburst_order": true,
+      "executed_models_release_at_test_requirement": true,
+      "executed_seasons": [
+        "DYNAMIC+STRICT+SOFTWARE_TEST_ONLY",
+        "FIXED_DATE+UTAH+SOFTWARE_TEST_ONLY"
+      ],
+      "fallback_rows_identical_to_chilling_hours": true,
+      "finding_utah_from_record_start": {
+        "classification": "MODEL_BEHAVIOUR (SOFTWARE_RESULT)",
+        "detail": "counting Utah units from the start of the record (synthetic summer peak) accumulates warm-hour negation; the sum stays negative and the test threshold is not reached. Utah practice starts at the most negative sum (MODEL_DEFINED onset), not implemented (OPEN_MODEL_CAPABILITY); the executed Utah season therefore uses an explicit FIXED_DATE protocol instant",
+        "rows": [
+          {
+            "chill_total": -2999.0,
+            "crop": "peach",
+            "outcome": "DORMANCY_NOT_RELEASED"
+          },
+          {
+            "chill_total": -2999.0,
+            "crop": "apple",
+            "outcome": "DORMANCY_NOT_RELEASED"
+          },
+          {
+            "chill_total": -2999.0,
+            "crop": "plum",
+            "outcome": "DORMANCY_NOT_RELEASED"
+          }
+        ]
+      },
+      "location_id": "NH_38N_MEDITERRANEAN",
+      "note": "UTAH/DYNAMIC rows with SOFTWARE_TEST_ONLY use synthetic thresholds; release dates are software results, not predictions",
+      "rows": [
+        {
+          "budburst": "2026-03-08T13:00:00+00:00",
+          "chill_at_release_h": 600.0,
+          "chill_excluded_by_policy_h": 0.0,
+          "chill_total_h": 600.0,
+          "configuration": "CHILLING_HOURS+DEFAULT",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "peach",
+          "days_to_release": 201.33333333333334,
+          "dormancy_release": "2026-02-05T08:00:00+00:00",
+          "elapsed_hash": "25633658838b06a5e8b896d6c132fb9060bbca282d678d7185b10e152c024f11",
+          "finite": true,
+          "first_effective_chill": "2025-11-09T03:00:00+00:00",
+          "forcing_start": "2026-02-05T09:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "CHILLING_HOURS",
+          "outcome": "RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "82cab6bcf8648d5081e9f18d75646dd96b3fc0e2563a7ebdc4e792d48be2bc60"
+        },
+        {
+          "budburst": "2026-03-08T13:00:00+00:00",
+          "chill_at_release_h": 600.0,
+          "chill_excluded_by_policy_h": 0.0,
+          "chill_total_h": 600.0,
+          "configuration": "UTAH+STRICT (no requirement)",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "peach",
+          "days_to_release": 201.33333333333334,
+          "dormancy_release": "2026-02-05T08:00:00+00:00",
+          "elapsed_hash": "25633658838b06a5e8b896d6c132fb9060bbca282d678d7185b10e152c024f11",
+          "finite": true,
+          "first_effective_chill": "2025-11-09T03:00:00+00:00",
+          "forcing_start": "2026-02-05T09:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "CHILLING_HOURS",
+          "outcome": "RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "82cab6bcf8648d5081e9f18d75646dd96b3fc0e2563a7ebdc4e792d48be2bc60"
+        },
+        {
+          "budburst": "2026-03-08T13:00:00+00:00",
+          "chill_at_release_h": 600.0,
+          "chill_excluded_by_policy_h": 0.0,
+          "chill_total_h": 600.0,
+          "configuration": "DYNAMIC+STRICT (no requirement)",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "peach",
+          "days_to_release": 201.33333333333334,
+          "dormancy_release": "2026-02-05T08:00:00+00:00",
+          "elapsed_hash": "25633658838b06a5e8b896d6c132fb9060bbca282d678d7185b10e152c024f11",
+          "finite": true,
+          "first_effective_chill": "2025-11-09T03:00:00+00:00",
+          "forcing_start": "2026-02-05T09:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "CHILLING_HOURS",
+          "outcome": "RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "82cab6bcf8648d5081e9f18d75646dd96b3fc0e2563a7ebdc4e792d48be2bc60"
+        },
+        {
+          "budburst": null,
+          "chill_at_release": null,
+          "chill_excluded_by_policy": null,
+          "chill_total": -2999.0,
+          "chill_unit": "utah_chill_units",
+          "configuration": "UTAH+STRICT+SOFTWARE_TEST_ONLY",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "peach",
+          "days_to_release": null,
+          "dormancy_release": null,
+          "elapsed_hash": "3f95913c6d00bcb0fceabed80c7cc87b79819c4262f72f8342eeab768ab42a12",
+          "finite": true,
+          "first_effective_chill": "2025-10-08T03:00:00+00:00",
+          "forcing_start": null,
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "UTAH",
+          "outcome": "DORMANCY_NOT_RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "b3d7af484c4c7028dc7383d65e69adcf4c0c073ce056ad936c44b0874a2f3234"
+        },
+        {
+          "budburst": "2026-03-15T21:00:00+00:00",
+          "chill_at_release": 50.3371779238817,
+          "chill_excluded_by_policy": null,
+          "chill_total": 50.3371779238817,
+          "chill_unit": "chill_portions",
+          "configuration": "DYNAMIC+STRICT+SOFTWARE_TEST_ONLY",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "peach",
+          "days_to_release": 213.04166666666666,
+          "dormancy_release": "2026-02-17T01:00:00+00:00",
+          "elapsed_hash": "46e6d53e8def5023aed9d0da8d239b5b90dfd496dae521924ce737c5052563b8",
+          "finite": true,
+          "first_effective_chill": "2025-11-20T09:00:00+00:00",
+          "forcing_start": "2026-02-17T02:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "DYNAMIC",
+          "outcome": "RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "054f3e5220982c4b73da32f1b38f444019c7968b1cc6c895590a3e85e6a0c9b7"
+        },
+        {
+          "budburst": "2026-03-24T16:00:00+00:00",
+          "chill_at_release": 1000.0,
+          "chill_excluded_by_policy": null,
+          "chill_total": 1000.0,
+          "chill_unit": "utah_chill_units",
+          "configuration": "FIXED_DATE+UTAH+SOFTWARE_TEST_ONLY",
+          "counting_start": "2025-11-01T00:00:00+00:00",
+          "crop": "peach",
+          "days_to_release": 225.20833333333334,
+          "dormancy_release": "2026-03-01T05:00:00+00:00",
+          "elapsed_hash": "f41d247c529952ff4a95cd51138452c7a8a3f95c2b9e4bc76e7f8c8badbec401",
+          "finite": true,
+          "first_effective_chill": "2025-11-01T00:00:00+00:00",
+          "forcing_start": "2026-03-01T06:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "UTAH",
+          "outcome": "RELEASED",
+          "policy": "FIXED_DATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "bc073ca9c5a732e334f6668880723ade0dc072342702faefdbc618b1f6557764"
+        },
+        {
+          "budburst": "2026-03-06T16:00:00+00:00",
+          "chill_at_release_h": 600.0,
+          "chill_excluded_by_policy_h": 0.0,
+          "chill_total_h": 600.0,
+          "configuration": "CHILLING_HOURS+DEFAULT",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "apple",
+          "days_to_release": 201.33333333333334,
+          "dormancy_release": "2026-02-05T08:00:00+00:00",
+          "elapsed_hash": "d19212c285becb274425a548dfaa320f69d1c1691e94e1209a38a4498c117575",
+          "finite": true,
+          "first_effective_chill": "2025-11-09T03:00:00+00:00",
+          "forcing_start": "2026-02-05T09:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "CHILLING_HOURS",
+          "outcome": "RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "38917ba4af87834de5e2cc23bf24f28b55e0648d86e945780fb46db9bf935bbe"
+        },
+        {
+          "budburst": "2026-03-06T16:00:00+00:00",
+          "chill_at_release_h": 600.0,
+          "chill_excluded_by_policy_h": 0.0,
+          "chill_total_h": 600.0,
+          "configuration": "UTAH+STRICT (no requirement)",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "apple",
+          "days_to_release": 201.33333333333334,
+          "dormancy_release": "2026-02-05T08:00:00+00:00",
+          "elapsed_hash": "d19212c285becb274425a548dfaa320f69d1c1691e94e1209a38a4498c117575",
+          "finite": true,
+          "first_effective_chill": "2025-11-09T03:00:00+00:00",
+          "forcing_start": "2026-02-05T09:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "CHILLING_HOURS",
+          "outcome": "RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "38917ba4af87834de5e2cc23bf24f28b55e0648d86e945780fb46db9bf935bbe"
+        },
+        {
+          "budburst": "2026-03-06T16:00:00+00:00",
+          "chill_at_release_h": 600.0,
+          "chill_excluded_by_policy_h": 0.0,
+          "chill_total_h": 600.0,
+          "configuration": "DYNAMIC+STRICT (no requirement)",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "apple",
+          "days_to_release": 201.33333333333334,
+          "dormancy_release": "2026-02-05T08:00:00+00:00",
+          "elapsed_hash": "d19212c285becb274425a548dfaa320f69d1c1691e94e1209a38a4498c117575",
+          "finite": true,
+          "first_effective_chill": "2025-11-09T03:00:00+00:00",
+          "forcing_start": "2026-02-05T09:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "CHILLING_HOURS",
+          "outcome": "RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "38917ba4af87834de5e2cc23bf24f28b55e0648d86e945780fb46db9bf935bbe"
+        },
+        {
+          "budburst": null,
+          "chill_at_release": null,
+          "chill_excluded_by_policy": null,
+          "chill_total": -2999.0,
+          "chill_unit": "utah_chill_units",
+          "configuration": "UTAH+STRICT+SOFTWARE_TEST_ONLY",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "apple",
+          "days_to_release": null,
+          "dormancy_release": null,
+          "elapsed_hash": "3f95913c6d00bcb0fceabed80c7cc87b79819c4262f72f8342eeab768ab42a12",
+          "finite": true,
+          "first_effective_chill": "2025-10-08T03:00:00+00:00",
+          "forcing_start": null,
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "UTAH",
+          "outcome": "DORMANCY_NOT_RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "b3d7af484c4c7028dc7383d65e69adcf4c0c073ce056ad936c44b0874a2f3234"
+        },
+        {
+          "budburst": "2026-03-14T15:00:00+00:00",
+          "chill_at_release": 50.3371779238817,
+          "chill_excluded_by_policy": null,
+          "chill_total": 50.3371779238817,
+          "chill_unit": "chill_portions",
+          "configuration": "DYNAMIC+STRICT+SOFTWARE_TEST_ONLY",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "apple",
+          "days_to_release": 213.04166666666666,
+          "dormancy_release": "2026-02-17T01:00:00+00:00",
+          "elapsed_hash": "67cda5f63c89ad24db4cbd717f29e01d8a1bd8f2af59b5fa2a1bc88dd465a6d0",
+          "finite": true,
+          "first_effective_chill": "2025-11-20T09:00:00+00:00",
+          "forcing_start": "2026-02-17T02:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "DYNAMIC",
+          "outcome": "RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "588187fe3cddcec2e34b962dffb71371a48f615788488b41b0672cdb1b163b98"
+        },
+        {
+          "budburst": "2026-03-23T14:00:00+00:00",
+          "chill_at_release": 1000.0,
+          "chill_excluded_by_policy": null,
+          "chill_total": 1000.0,
+          "chill_unit": "utah_chill_units",
+          "configuration": "FIXED_DATE+UTAH+SOFTWARE_TEST_ONLY",
+          "counting_start": "2025-11-01T00:00:00+00:00",
+          "crop": "apple",
+          "days_to_release": 225.20833333333334,
+          "dormancy_release": "2026-03-01T05:00:00+00:00",
+          "elapsed_hash": "763d002b23ea7d8ae5445d892be1447044a1e04c8bd52b9028f0b06feceba8cc",
+          "finite": true,
+          "first_effective_chill": "2025-11-01T00:00:00+00:00",
+          "forcing_start": "2026-03-01T06:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "UTAH",
+          "outcome": "RELEASED",
+          "policy": "FIXED_DATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "9da020ece19e4cec79d8b04e79b8c3d7a32ed44592bc9e3ea7d87071bf54eb9f"
+        },
+        {
+          "budburst": "2026-02-28T15:00:00+00:00",
+          "chill_at_release_h": 500.0,
+          "chill_excluded_by_policy_h": 0.0,
+          "chill_total_h": 500.0,
+          "configuration": "CHILLING_HOURS+DEFAULT",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "plum",
+          "days_to_release": 190.20833333333334,
+          "dormancy_release": "2026-01-25T05:00:00+00:00",
+          "elapsed_hash": "1e8e629059581d245019fe17cef5dd23f692eb2c7cdc5f37f36c615a476c7c1f",
+          "finite": true,
+          "first_effective_chill": "2025-11-09T03:00:00+00:00",
+          "forcing_start": "2026-01-25T07:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "CHILLING_HOURS",
+          "outcome": "RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "05a5b47a4f68c5bba84fa930d93d9702f57aa7b00cc57bbd9089441eba7f0e89"
+        },
+        {
+          "budburst": "2026-02-28T15:00:00+00:00",
+          "chill_at_release_h": 500.0,
+          "chill_excluded_by_policy_h": 0.0,
+          "chill_total_h": 500.0,
+          "configuration": "UTAH+STRICT (no requirement)",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "plum",
+          "days_to_release": 190.20833333333334,
+          "dormancy_release": "2026-01-25T05:00:00+00:00",
+          "elapsed_hash": "1e8e629059581d245019fe17cef5dd23f692eb2c7cdc5f37f36c615a476c7c1f",
+          "finite": true,
+          "first_effective_chill": "2025-11-09T03:00:00+00:00",
+          "forcing_start": "2026-01-25T07:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "CHILLING_HOURS",
+          "outcome": "RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "05a5b47a4f68c5bba84fa930d93d9702f57aa7b00cc57bbd9089441eba7f0e89"
+        },
+        {
+          "budburst": "2026-02-28T15:00:00+00:00",
+          "chill_at_release_h": 500.0,
+          "chill_excluded_by_policy_h": 0.0,
+          "chill_total_h": 500.0,
+          "configuration": "DYNAMIC+STRICT (no requirement)",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "plum",
+          "days_to_release": 190.20833333333334,
+          "dormancy_release": "2026-01-25T05:00:00+00:00",
+          "elapsed_hash": "1e8e629059581d245019fe17cef5dd23f692eb2c7cdc5f37f36c615a476c7c1f",
+          "finite": true,
+          "first_effective_chill": "2025-11-09T03:00:00+00:00",
+          "forcing_start": "2026-01-25T07:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "CHILLING_HOURS",
+          "outcome": "RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "05a5b47a4f68c5bba84fa930d93d9702f57aa7b00cc57bbd9089441eba7f0e89"
+        },
+        {
+          "budburst": null,
+          "chill_at_release": null,
+          "chill_excluded_by_policy": null,
+          "chill_total": -2999.0,
+          "chill_unit": "utah_chill_units",
+          "configuration": "UTAH+STRICT+SOFTWARE_TEST_ONLY",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "plum",
+          "days_to_release": null,
+          "dormancy_release": null,
+          "elapsed_hash": "3f95913c6d00bcb0fceabed80c7cc87b79819c4262f72f8342eeab768ab42a12",
+          "finite": true,
+          "first_effective_chill": "2025-10-08T03:00:00+00:00",
+          "forcing_start": null,
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "UTAH",
+          "outcome": "DORMANCY_NOT_RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "b3d7af484c4c7028dc7383d65e69adcf4c0c073ce056ad936c44b0874a2f3234"
+        },
+        {
+          "budburst": "2026-03-15T21:00:00+00:00",
+          "chill_at_release": 50.3371779238817,
+          "chill_excluded_by_policy": null,
+          "chill_total": 50.3371779238817,
+          "chill_unit": "chill_portions",
+          "configuration": "DYNAMIC+STRICT+SOFTWARE_TEST_ONLY",
+          "counting_start": "2025-07-19T01:00:00+00:00",
+          "crop": "plum",
+          "days_to_release": 213.04166666666666,
+          "dormancy_release": "2026-02-17T01:00:00+00:00",
+          "elapsed_hash": "103d40829b5ae529def1df29f3602e5a7d6db497956974c083eb7c95bbd83ed6",
+          "finite": true,
+          "first_effective_chill": "2025-11-20T09:00:00+00:00",
+          "forcing_start": "2026-02-17T02:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "DYNAMIC",
+          "outcome": "RELEASED",
+          "policy": "DORMANCY_STATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "d4c0849a4fafdd62ed71b303804e5f7ed36be3ad818efc21a79854d9117fa249"
+        },
+        {
+          "budburst": "2026-03-24T16:00:00+00:00",
+          "chill_at_release": 1000.0,
+          "chill_excluded_by_policy": null,
+          "chill_total": 1000.0,
+          "chill_unit": "utah_chill_units",
+          "configuration": "FIXED_DATE+UTAH+SOFTWARE_TEST_ONLY",
+          "counting_start": "2025-11-01T00:00:00+00:00",
+          "crop": "plum",
+          "days_to_release": 225.20833333333334,
+          "dormancy_release": "2026-03-01T05:00:00+00:00",
+          "elapsed_hash": "e14422a742f0708e59ae69e9916948a94316da348452964f9243c316b446068b",
+          "finite": true,
+          "first_effective_chill": "2025-11-01T00:00:00+00:00",
+          "forcing_start": "2026-03-01T06:00:00+00:00",
+          "hemisphere": "NORTHERN",
+          "label": "SOFTWARE_TEST_ONLY",
+          "latitude": 38.0,
+          "location_id": "NH_38N_MEDITERRANEAN",
+          "longitude": -1.1,
+          "model": "UTAH",
+          "outcome": "RELEASED",
+          "policy": "FIXED_DATE",
+          "record_days": 365,
+          "record_start": "2025-07-19T00:00:00+00:00",
+          "result_type": "SOFTWARE_RESULT",
+          "trajectory_hash": "e0ea847d4e84b31b95a38feb40ea462ad31afecc19e65835151d2126bf7995b7"
+        }
+      ],
+      "status": "PASS",
+      "units_never_reported_as_hours": true
+    },
+    "static_audit": {
+      "files": [
+        "src/agri_twin/domain/chilling_models.py",
+        "src/agri_twin/domain/phenology.py",
+        "src/agri_twin/domain/models.py",
+        "src/agri_twin/domain/parameter_audit.py",
+        "src/agri_twin/application/chilling_models_framework.py",
+        "src/agri_twin/application/chilling_policy.py",
+        "src/agri_twin/application/dormancy_chilling_framework.py"
+      ],
+      "findings": [],
+      "new_core_classes": [],
+      "project_static_audit": {
+        "duplicate_core_classes": {},
+        "missing_core_classes": [],
+        "status": "PASS",
+        "violations": []
+      },
+      "rules": {
+        "forbidden_call_prefixes": [
+          "random.",
+          "np.random.",
+          "numpy.random."
+        ],
+        "forbidden_calls": [
+          "date.today",
+          "datetime.now",
+          "datetime.today",
+          "datetime.utcnow",
+          "perf_counter",
+          "sleep",
+          "time.monotonic",
+          "time.perf_counter",
+          "time.sleep",
+          "time.time"
+        ],
+        "forbidden_imports": [
+          "aiohttp",
+          "http",
+          "httpx",
+          "random",
+          "requests",
+          "serial",
+          "socket",
+          "urllib"
+        ]
+      },
+      "singleton_classes": {
+        "DormancyChillingController": [
+          "agri_twin/domain/phenology.py"
+        ],
+        "ParameterRegistry": [
+          "agri_twin/domain/parameter_audit.py"
+        ],
+        "PhenologyEngine": [
+          "agri_twin/domain/phenology.py"
+        ],
+        "SimulationClock": [
+          "agri_twin/application/clock.py"
+        ],
+        "SimulationScheduler": [
+          "agri_twin/application/scheduler.py"
+        ],
+        "WeatherEngine": [
+          "agri_twin/application/weather.py"
+        ]
+      },
+      "status": "PASS",
+      "unique_core_classes": true
+    },
+    "traceability": {
+      "model_parameter_records": [
+        {
+          "calibration_allowed": false,
+          "calibration_status": "fixed",
+          "parameter_id": "phenology.utah.band_1.weight",
+          "source_reference": "Richardson, Seeley & Walker (1974) HortScience 9:331-332; table as in Zhang & Taylor (2011) HortScience 46:420-425, Table 1",
+          "source_type": "literature",
+          "unit": "utah_chill_units_per_hour",
+          "value": 0.0
+        },
+        {
+          "calibration_allowed": false,
+          "calibration_status": "fixed",
+          "parameter_id": "phenology.utah.band_1.upper_c",
+          "source_reference": "Richardson, Seeley & Walker (1974) HortScience 9:331-332; table as in Zhang & Taylor (2011) HortScience 46:420-425, Table 1",
+          "source_type": "literature",
+          "unit": "degC",
+          "value": 1.4
+        },
+        {
+          "calibration_allowed": false,
+          "calibration_status": "fixed",
+          "parameter_id": "phenology.utah.band_2.weight",
+          "source_reference": "Richardson, Seeley & Walker (1974) HortScience 9:331-332; table as in Zhang & Taylor (2011) HortScience 46:420-425, Table 1",
+          "source_type": "literature",
+          "unit": "utah_chill_units_per_hour",
+          "value": 0.5
+        },
+        {
+          "calibration_allowed": false,
+          "calibration_status": "fixed",
+          "parameter_id": "phenology.utah.band_2.upper_c",
+          "source_reference": "Richardson, Seeley & Walker (1974) HortScience 9:331-332; table as in Zhang & Taylor (2011) HortScience 46:420-425, Table 1",
+          "source_type": "literature",
+          "unit": "degC",
+          "value": 2.4
+        },
+        {
+          "calibration_allowed": false,
+          "calibration_status": "fixed",
+          "parameter_id": "phenology.utah.band_3.weight",
+          "source_reference": "Richardson, Seeley & Walker (1974) HortScience 9:331-332; table as in Zhang & Taylor (2011) HortScience 46:420-425, Table 1",
+          "source_type": "literature",
+          "unit": "utah_chill_units_per_hour",
+          "value": 1.0
+        },
+        {
+          "calibration_allowed": false,
+          "calibration_status": "fixed",
+          "parameter_id": "phenology.utah.band_3.upper_c",
+          "source_reference": "Richardson, Seeley & Walker (1974) HortScience 9:331-332; table as in Zhang & Taylor (2011) HortScience 46:420-425, Table 1",
+          "source_type": "literature",
+          "unit": "degC",
+          "value": 9.1
+        },
+        {
+          "calibration_allowed": false,
+          "calibration_status": "fixed",
+          "parameter_id": "phenology.utah.band_4.weight",
+          "source_reference": "Richardson, Seeley & Walker (1974) HortScience 9:331-332; table as in Zhang & Taylor (2011) HortScience 46:420-425, Table 1",
+          "source_type": "literature",
+          "unit": "utah_chill_units_per_hour",
+          "value": 0.5
+        },
+        {
+          "calibration_allowed": false,
+          "calibration_status": "fixed",
+          "parameter_id": "phenology.utah.band_4.upper_c",
+          "source_reference": "Richardson, Seeley & Walker (1974) HortScience 9:331-332; table as in Zhang & Taylor (2011) HortScience 46:420-425, Table 1",
+          "source_type": "literature",
+          "unit": "degC",
+          "value": 12.4
+        },
+        {
+          "calibration_allowed": false,
+          "calibration_status": "fixed",
+          "parameter_id": "phenology.utah.band_5.weight",
+          "source_reference": "Richardson, Seeley & Walker (1974) HortScience 9:331-332; table as in Zhang & Taylor (2011) HortScience 46:420-425, Table 1",
+          "source_type": "literature",
+          "unit": "utah_chill_units_per_hour",
+          "value": 0.0
+        },
+        {
+          "calibration_allowed": false,
+          "calibration_status": "fixed",
+          "parameter_id": "phenology.utah.band_5.upper_c",
+          "source_reference": "Richardson, Seeley & Walker (1974) HortScience 9:331-332; table as in Zhang & Taylor (2011) HortScience 46:420-425, Table 1",
+          "source_type": "literature",
+          "unit": "degC",
+          "value": 15.9
+        },
+        {
+          "calibration_allowed": false,
+          "calibration_status": "fixed",
+          "parameter_id": "phenology.utah.band_6.weight",
+          "source_reference": "Richardson, Seeley & Walker (1974) HortScience 9:331-332; table as in Zhang & Taylor (2011) HortScience 46:420-425, Table 1",
+          "source_type": "literature",
+          "unit": "utah_chill_units_per_hour",
+          "value": -0.5
+        },
+        {
+          "calibration_allowed": false,
+          "calibration_status": "fixed",
+          "parameter_id": "phenology.utah.band_6.upper_c",
+          "source_reference": "Richardson, Seeley & Walker (1974) HortScience 9:331-332; table as in Zhang & Taylor (2011) HortScience 46:420-425, Table 1",
+          "source_type": "literature",
+          "unit": "degC",
+          "value": 18.0
+        },
+        {
+          "calibration_allowed": false,
+          "calibration_status": "fixed",
+          "parameter_id": "phenology.utah.band_7.weight",
+          "source_reference": "Richardson, Seeley & Walker (1974) HortScience 9:331-332; table as in Zhang & Taylor (2011) HortScience 46:420-425, Table 1",
+          "source_type": "literature",
+          "unit": "utah_chill_units_per_hour",
+          "value": -1.0
+        },
+        {
+          "calibration_allowed": false,
+          "calibration_status": "fixed",
+          "parameter_id": "phenology.dynamic.e0",
+          "source_reference": "Erez, Fishman, Linsley-Noakes & Allan (1990) Acta Hortic. 276:165-174; constants as in Luedeling & Brown (2010) doi:10.1007/s00484-010-0352-y",
+          "source_type": "literature",
+          "unit": "K",
+          "value": 4153.5
+        },
+        {
+          "calibration_allowed": false,
+          "calibration_status": "fixed",
+          "parameter_id": "phenology.dynamic.e1",
+          "source_reference": "Erez, Fishman, Linsley-Noakes & Allan (1990) Acta Hortic. 276:165-174; constants as in Luedeling & Brown (2010) doi:10.1007/s00484-010-0352-y",
+          "source_type": "literature",
+          "unit": "K",
+          "value": 12888.8
+        },
+        {
+          "calibration_allowed": false,
+          "calibration_status": "fixed",
+          "parameter_id": "phenology.dynamic.a0",
+          "source_reference": "Erez, Fishman, Linsley-Noakes & Allan (1990) Acta Hortic. 276:165-174; constants as in Luedeling & Brown (2010) doi:10.1007/s00484-010-0352-y",
+          "source_type": "literature",
+          "unit": "h-1",
+          "value": 139500.0
+        },
+        {
+          "calibration_allowed": false,
+          "calibration_status": "fixed",
+          "parameter_id": "phenology.dynamic.a1",
+          "source_reference": "Erez, Fishman, Linsley-Noakes & Allan (1990) Acta Hortic. 276:165-174; constants as in Luedeling & Brown (2010) doi:10.1007/s00484-010-0352-y",
+          "source_type": "literature",
+          "unit": "h-1",
+          "value": 2.567e+18
+        },
+        {
+          "calibration_allowed": false,
+          "calibration_status": "fixed",
+          "parameter_id": "phenology.dynamic.slope",
+          "source_reference": "Erez, Fishman, Linsley-Noakes & Allan (1990) Acta Hortic. 276:165-174; constants as in Luedeling & Brown (2010) doi:10.1007/s00484-010-0352-y",
+          "source_type": "literature",
+          "unit": "K-1",
+          "value": 1.6
+        },
+        {
+          "calibration_allowed": false,
+          "calibration_status": "fixed",
+          "parameter_id": "phenology.dynamic.tf",
+          "source_reference": "Erez, Fishman, Linsley-Noakes & Allan (1990) Acta Hortic. 276:165-174; constants as in Luedeling & Brown (2010) doi:10.1007/s00484-010-0352-y",
+          "source_type": "literature",
+          "unit": "K",
+          "value": 277.0
+        },
+        {
+          "calibration_allowed": false,
+          "calibration_status": "fixed",
+          "parameter_id": "phenology.dynamic.kelvin_offset",
+          "source_reference": "Erez, Fishman, Linsley-Noakes & Allan (1990) Acta Hortic. 276:165-174; constants as in Luedeling & Brown (2010) doi:10.1007/s00484-010-0352-y",
+          "source_type": "literature",
+          "unit": "K",
+          "value": 273.0
+        }
+      ],
+      "note": "only parameters used by the implemented formulations are registered; no Utah or chill-portion requirement is registered or activated",
+      "problems": [],
+      "requirement_records_in_utah_units_or_portions": [],
+      "status": "PASS"
+    },
+    "twin_integration": {
+      "chilling_hours_identical_to_phase534": true,
+      "deterministic_replay": true,
+      "dormancy_release": {
+        "CHILLING_HOURS+DEFAULT": "2026-02-04T03:00:00+00:00",
+        "DYNAMIC+STRICT+SOFTWARE_TEST_ONLY": "2026-02-14T04:00:00+00:00",
+        "DYNAMIC+STRICT+SOFTWARE_TEST_ONLY replay": "2026-02-14T04:00:00+00:00",
+        "UTAH+STRICT+SOFTWARE_TEST_ONLY": "2026-03-01T03:00:00+00:00",
+        "UTAH+STRICT+SOFTWARE_TEST_ONLY replay": "2026-03-01T03:00:00+00:00",
+        "phase533_default_orchestrator": "2026-02-04T03:00:00+00:00"
+      },
+      "growth_gated_by_release": true,
+      "phase534_committed_default_hash": "d6fe8e88c503d6a9690687ff18db892664dee2a17ad875ccfb5a8992a2f20425",
+      "record": "peach, BASE_SEASON seed 532, 150 days hourly from 2025-11-01T00:00:00+00:00; UTAH/DYNAMIC rows SOFTWARE_TEST_ONLY",
+      "status": "PASS",
+      "trajectory_hashes": {
+        "CHILLING_HOURS+DEFAULT": "d6fe8e88c503d6a9690687ff18db892664dee2a17ad875ccfb5a8992a2f20425",
+        "DYNAMIC+STRICT+SOFTWARE_TEST_ONLY": "1d8901f223007a8894bb0d4b0e71830dd5cf425bf2da53e41cf20ee2b0539b7c",
+        "DYNAMIC+STRICT+SOFTWARE_TEST_ONLY replay": "1d8901f223007a8894bb0d4b0e71830dd5cf425bf2da53e41cf20ee2b0539b7c",
+        "UTAH+STRICT+SOFTWARE_TEST_ONLY": "7d2c7e05a2b7ff74a4785b0dce628f2cfd2747e064fd256f003971ea1d0b5adb",
+        "UTAH+STRICT+SOFTWARE_TEST_ONLY replay": "7d2c7e05a2b7ff74a4785b0dce628f2cfd2747e064fd256f003971ea1d0b5adb",
+        "phase533_default_orchestrator": "d6fe8e88c503d6a9690687ff18db892664dee2a17ad875ccfb5a8992a2f20425"
+      }
+    }
+  },
+  "species": [
+    "peach",
+    "apple",
+    "plum"
+  ],
+  "status": "PASS",
+  "tests": {
+    "manual": "manual_phase5_35_chilling_models_test.py",
+    "suites": [
+      "tests/test_chilling_models.py",
+      "tests/test_chilling_policy.py",
+      "tests/test_dormancy_chilling_framework.py"
+    ]
+  },
+  "version": "5.35.0"
+}

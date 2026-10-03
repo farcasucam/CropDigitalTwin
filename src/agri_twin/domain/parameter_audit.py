@@ -9,6 +9,8 @@ from dataclasses import asdict, dataclass, replace
 from pathlib import Path
 from typing import Any, Iterable
 
+from agri_twin.domain.chilling_models import DYNAMIC_PARAMETERS, UTAH_BANDS
+
 
 class ParameterAuditError(ValueError):
     """Raised when a parameter registry entry violates its contract."""
@@ -244,10 +246,21 @@ class ParameterRegistry:
         records += [
             cls._record("phenology.chilling_hours.lower_threshold", "Chilling Hours lower threshold", "Lower air temperature counted by the Chilling Hours rule", "biological", "runtime_code", None, None, None, "degC", 0.0, None, None, "engineering_default", None, "phenology.py:PhenologyProfile.chilling_min_temperature_c", "low", "medium", "fixed", False, "none (model definition)", "0-7.2 C variant of the Chilling Hours rule; Weinberger (1950) counted hours below 7.2 C"),
             cls._record("phenology.chilling_hours.upper_threshold", "Chilling Hours upper threshold", "Upper air temperature counted by the Chilling Hours rule", "biological", "runtime_code", None, None, None, "degC", 7.2, None, None, "engineering_default", None, "phenology.py:PhenologyProfile.chilling_max_temperature_c", "low", "medium", "fixed", False, "none (model definition)", "7.2 C (45 F) threshold of the Chilling Hours rule (Weinberger 1950)"),
-            cls._record("phenology.chilling_model", "Chilling model", "Active HOW-TO-COUNT chilling model", "biological", "runtime_code", None, None, None, "categorical", "CHILLING_HOURS", None, None, "engineering_default", None, "phenology.py:ChillingModel", "low", "low", "not_applicable", False, "model comparison against cultivar release observations", "Utah and Dynamic declared, not implemented; no universal model selected"),
-            cls._record("phenology.chilling_fallback_policy", "Chilling model fallback policy", "Policy applied when the requested chilling model is not implemented", "biological", "runtime_code", None, None, None, "categorical", "STRICT", None, None, "engineering_default", None, "phenology.py:canonicalize_dormancy_configuration", "low", "low", "not_applicable", False, "none (software policy)", "DEFAULT is an alias of STRICT; UTAH/DYNAMIC requests resolve explicitly to CHILLING_HOURS with requested model and fallback_applied recorded; thresholds, requirements and start policy unchanged"),
+            cls._record("phenology.chilling_model", "Chilling model", "Active HOW-TO-COUNT chilling model", "biological", "runtime_code", None, None, None, "categorical", "CHILLING_HOURS", None, None, "engineering_default", None, "phenology.py:ChillingModel", "low", "low", "not_applicable", False, "model comparison against cultivar release observations", "Utah and Dynamic implemented (Phase 5.35) but unparameterized: no requirement in Utah units or chill portions is activated; no universal model selected"),
+            cls._record("phenology.chilling_fallback_policy", "Chilling model fallback policy", "Policy applied when the requested chilling model has no requirement in its own unit", "biological", "runtime_code", None, None, None, "categorical", "STRICT", None, None, "engineering_default", None, "phenology.py:canonicalize_dormancy_configuration", "low", "low", "not_applicable", False, "none (software policy)", "DEFAULT is an alias of STRICT; UTAH/DYNAMIC requests without a requirement in their own unit resolve explicitly to CHILLING_HOURS with requested model and fallback_applied recorded; thresholds, requirements and start policy unchanged"),
             cls._record("phenology.chilling_start_policy", "Chilling start policy", "Default WHEN-TO-COUNT policy", "biological", "runtime_code", None, None, None, "categorical", "DORMANCY_STATE", None, None, "engineering_default", None, "phenology.py:ChillingStartPolicy", "low", "low", "not_applicable", False, "dormancy-onset observations per site and cultivar", "no universal calendar start date; FIXED_DATE only with an explicit configured instant"),
         ]
+        # Phase 5.35: published constants of the Utah and Dynamic formulations (model definitions, never tuned).
+        utah_reference = "Richardson, Seeley & Walker (1974) HortScience 9:331-332; table as in Zhang & Taylor (2011) HortScience 46:420-425, Table 1"
+        for index, (upper, weight) in enumerate(UTAH_BANDS, start=1):
+            records.append(cls._record(f"phenology.utah.band_{index}.weight", f"Utah band {index} weight", "Utah chill units per hour in this temperature band", "biological", "runtime_code", None, None, None, "utah_chill_units_per_hour", weight, None, None, "literature", utah_reference, "chilling_models.py:UTAH_BANDS", "medium", "medium", "fixed", False, "none (model definition)", "used only when UTAH executes; Utah units are never chill hours"))
+            if math.isfinite(upper):
+                records.append(cls._record(f"phenology.utah.band_{index}.upper_c", f"Utah band {index} upper bound", "Upper air temperature of this Utah band (lower-exclusive, upper-inclusive)", "biological", "runtime_code", None, None, None, "degC", upper, None, None, "literature", utah_reference, "chilling_models.py:UTAH_BANDS", "medium", "medium", "fixed", False, "none (model definition)", "published 0.1 C table rows; readings between rows use the upper-row ENGINEERING_CONVENTION"))
+        dynamic_reference = "Erez, Fishman, Linsley-Noakes & Allan (1990) Acta Hortic. 276:165-174; constants as in Luedeling & Brown (2010) doi:10.1007/s00484-010-0352-y"
+        dynamic_units = {"e0": "K", "e1": "K", "a0": "h-1", "a1": "h-1", "slope": "K-1", "tf": "K", "kelvin_offset": "K"}
+        for name, value in asdict(DYNAMIC_PARAMETERS).items():
+            note = "Kelvin conversion T + 273 of the chillR reference implementation (software convention)" if name == "kelvin_offset" else "used only when DYNAMIC executes; output in chill portions"
+            records.append(cls._record(f"phenology.dynamic.{name}", f"Dynamic Model {name}", f"Dynamic Model constant {name}", "biological", "runtime_code", None, None, None, dynamic_units[name], value, None, None, "literature", dynamic_reference, "chilling_models.py:DynamicModelParameters", "medium", "medium", "fixed", False, "none (model definition)", note))
         return records
 
     def audit(self) -> ParameterAudit:

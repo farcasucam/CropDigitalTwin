@@ -206,16 +206,17 @@ class ChillingPolicySuite:
         profile = PhenologyEngine().profile_for("peach")
         rows = []
         for model in (ChillingModelType.UTAH, ChillingModelType.DYNAMIC):
+            # Phase 5.35: the formulations exist, but without a requirement in their unit they cannot decide release.
             try:
-                ChillingModel(model).increment(4.0, profile, 3600.0)
+                ChillingModel(model).required(profile)
                 raised = False
-            except PhenologyError:
-                raised = True
+            except PhenologyError as exc:
+                raised = "MODEL_NOT_READY" in str(exc)
             injected = run_dormancy_season("peach", lambda _t: WeatherState(4.0, 70.0, 0.0, 2.0, 180.0, 0.0, 1013.0), datetime(2026, 1, 1, tzinfo=UTC), 1, model=ChillingModel(model))
-            rows.append({"model": model.value, "implementation_raises_model_not_supported": raised, "injected_implementation_outcome": injected.outcome.value, "injected_configuration": injected.configuration})
-        passed = all(row["implementation_raises_model_not_supported"] and row["injected_implementation_outcome"] == "MODEL_NOT_SUPPORTED" and row["injected_configuration"] is None for row in rows)
+            rows.append({"model": model.value, "unparameterized_raises_model_not_ready": raised, "injected_implementation_outcome": injected.outcome.value, "injected_configuration": injected.configuration})
+        passed = all(row["unparameterized_raises_model_not_ready"] and row["injected_implementation_outcome"] == "MODEL_NOT_READY" and row["injected_configuration"] is None for row in rows)
         return {"status": "PASS" if passed else "FAIL", "rows": rows, "supported_models": sorted(model.value for model in SUPPORTED_CHILLING_MODELS),
-                "note": "no Utah or Dynamic formula exists; the STRICT fallback applies only to configuration requests, never to an injected implementation (Phase 5.33 path)"}
+                "note": "since Phase 5.35 Utah/Dynamic formulations exist but no requirement is activated; the STRICT fallback applies only to configuration requests, never to an injected model (MODEL_NOT_READY, Phase 5.33 path)"}
 
     # -- behaviour ------------------------------------------------------------------------
 

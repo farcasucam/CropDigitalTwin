@@ -10,7 +10,8 @@ from dataclasses import dataclass, replace
 from datetime import datetime, timedelta, timezone
 from enum import StrEnum
 
-from agri_twin.domain.models import CropGrowthState, WeatherState
+from agri_twin.domain.chilling_models import ChillingModelError, dynamic_step, utah_step
+from agri_twin.domain.models import ChillingAccumulation, CropGrowthState, WeatherState
 
 
 class PhenologyError(ValueError):
@@ -80,27 +81,155 @@ class ChillingStartPolicyType(StrEnum):
     ENVIRONMENTAL_WINDOW = "ENVIRONMENTAL_WINDOW"
 
 
+class ChillingUnit(StrEnum):
+    """Accumulation units; never interchangeable or converted."""
+
+    CHILL_HOURS = "chill_hours"
+    UTAH_CHILL_UNITS = "utah_chill_units"
+    CHILL_PORTIONS = "chill_portions"
+
+
+class ChillingModelStatus(StrEnum):
+    NOT_IMPLEMENTED = "NOT_IMPLEMENTED"
+    IMPLEMENTED_UNPARAMETERIZED = "IMPLEMENTED_UNPARAMETERIZED"  # formulation + constants, no requirement in its unit
+    IMPLEMENTED_PARAMETERIZED = "IMPLEMENTED_PARAMETERIZED"
+
+
+class RequirementEvidence(StrEnum):
+    """Provenance of a chilling requirement. No activated scientific requirement exists."""
+
+    ENGINEERING_DEFAULT = "ENGINEERING_DEFAULT"  # PhenologyProfile chilling_requirement_hours
+    SOFTWARE_TEST_ONLY = "SOFTWARE_TEST_ONLY"  # explicit synthetic threshold for software qualification
+
+
+@dataclass(frozen=True, slots=True)
+class ChillingModelSpec:
+    unit: ChillingUnit
+    thermal_input: str
+    time_step: str
+    validity: str
+    state: str
+    parameter_set: str
+    traceability: str
+
+
+MODEL_SPECS: dict[ChillingModelType, ChillingModelSpec] = {
+    ChillingModelType.CHILLING_HOURS: ChillingModelSpec(
+        ChillingUnit.CHILL_HOURS, "air temperature (C)", "per simulation step, weighted by dt (hourly steps give whole hours)",
+        "hours with air temperature in [lower, upper] C count; no negation by warm hours", "scalar chill hours (CropGrowthState.chilling_hours)",
+        "CHILLING_HOURS_PROFILE_THRESHOLDS",
+        "project CHILLING_HOURS rule (PhenologyProfile chilling_min/max_temperature_c); Weinberger (1950) counted hours below 7.2 C"),
+    ChillingModelType.UTAH: ChillingModelSpec(
+        ChillingUnit.UTAH_CHILL_UNITS, "hourly air temperature (C)", "hourly only (dt_seconds == 3600)",
+        "published weight table; warm hours subtract units; the running sum can be negative", "scalar Utah chill units (CropGrowthState.chilling_state)",
+        "UTAH_RICHARDSON_1974", "Richardson, Seeley & Walker (1974) HortScience 9:331-332; table as in Zhang & Taylor (2011) HortScience 46:420-425"),
+    ChillingModelType.DYNAMIC: ChillingModelSpec(
+        ChillingUnit.CHILL_PORTIONS, "hourly air temperature (C), converted as T + 273", "hourly only (dt_seconds == 3600)",
+        "two-step process: reversible intermediate, irreversible chill portions", "intermediate product, previous transfer fraction and chill portions (CropGrowthState.chilling_state)",
+        "DYNAMIC_EREZ_1990", "Fishman, Erez & Couvillon (1987) J. Theor. Biol. 124:473-483, 126:309-321; Erez et al. (1990) Acta Hortic. 276:165-174; constants as in Luedeling & Brown (2010) doi:10.1007/s00484-010-0352-y"),
+}
+STATEFUL_START_POLICIES = frozenset({ChillingStartPolicyType.DORMANCY_STATE, ChillingStartPolicyType.FIXED_DATE})
+
+
+@dataclass(frozen=True, slots=True)
+class ChillingRequirement:
+    """Release requirement expressed in the unit of the model that counts it."""
+
+    value: float
+    unit: ChillingUnit
+    evidence: RequirementEvidence
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.unit, ChillingUnit) or not isinstance(self.evidence, RequirementEvidence):
+            raise PhenologyError("ChillingRequirement unit and evidence must be ChillingUnit and RequirementEvidence")
+        if isinstance(self.value, bool) or not isinstance(self.value, (int, float)) or not math.isfinite(self.value) or self.value <= 0:
+            raise PhenologyError(f"dormancy.chilling_requirement.value must be a finite number > 0, got {self.value!r}")
+
+    def to_dict(self) -> dict[str, object]:
+        return {"value": float(self.value), "unit": self.unit.value, "evidence": self.evidence.value}
+
+
 @dataclass(frozen=True, slots=True)
 class ChillingModel:
-    """HOW TO COUNT. Only the Chilling Hours rule already used by the project is
-    implemented; Utah and Dynamic are declared for traceability, not implemented."""
+    """HOW TO COUNT. CHILLING_HOURS, UTAH and DYNAMIC share one contract: a thermal
+    input, a unit, an hourly (or dt-weighted) update, a state and deterministic errors.
+
+    CHILLING_HOURS takes its requirement from the phenology profile (chill hours).
+    UTAH and DYNAMIC are implemented formulations with published constants but no
+    activated species requirement: they execute only with an explicit requirement in
+    their own unit, otherwise they are IMPLEMENTED_UNPARAMETERIZED (MODEL_NOT_READY).
+    """
 
     model_type: ChillingModelType = ChillingModelType.CHILLING_HOURS
-    unit: str = "chill_hours"
-    temperature_resolution: str = "per simulation step, weighted by dt (hourly steps give whole hours)"
-    applicability: str = "hours with air temperature in [lower, upper] C count; no negation by warm hours"
-    traceability: str = "project CHILLING_HOURS rule (PhenologyProfile chilling_min/max_temperature_c); Weinberger (1950) counted hours below 7.2 C"
+    requirement: ChillingRequirement | None = None
+
+    def __post_init__(self) -> None:
+        if self.requirement is None:
+            return
+        if self.model_type is ChillingModelType.CHILLING_HOURS:
+            raise PhenologyError("dormancy.chilling_requirement: model CHILLING_HOURS takes its requirement from the phenology profile (chill_hours); an explicit requirement is not accepted")
+        if self.requirement.unit is not self.unit:
+            raise PhenologyError(f"dormancy.chilling_requirement.unit: model {self.model_type.value} expects '{self.unit.value}', received '{self.requirement.unit.value}'")
+
+    @property
+    def spec(self) -> ChillingModelSpec:
+        return MODEL_SPECS[self.model_type]
+
+    @property
+    def unit(self) -> ChillingUnit:
+        return self.spec.unit
 
     @property
     def implemented(self) -> bool:
-        return self.model_type is ChillingModelType.CHILLING_HOURS
+        """The formulation is implemented (all three models since Phase 5.35)."""
+        return self.model_type in MODEL_SPECS
+
+    @property
+    def ready(self) -> bool:
+        """A requirement in the model's own unit is available, so release can be decided."""
+        return self.model_type is ChillingModelType.CHILLING_HOURS or self.requirement is not None
+
+    @property
+    def status(self) -> ChillingModelStatus:
+        if not self.implemented:
+            return ChillingModelStatus.NOT_IMPLEMENTED
+        return ChillingModelStatus.IMPLEMENTED_PARAMETERIZED if self.ready else ChillingModelStatus.IMPLEMENTED_UNPARAMETERIZED
+
+    def required(self, profile: PhenologyProfile) -> float:
+        if self.model_type is ChillingModelType.CHILLING_HOURS:
+            return profile.chilling_requirement_hours
+        if self.requirement is None:
+            raise PhenologyError(f"MODEL_NOT_READY: chilling model {self.model_type.value} is implemented but has no requirement in {self.unit.value}; no species requirement is activated")
+        return self.requirement.value
 
     def increment(self, temperature_c: float, profile: PhenologyProfile, dt_seconds: float) -> float:
-        if not self.implemented:
-            raise PhenologyError(f"MODEL_NOT_SUPPORTED: chilling model {self.model_type.value} is not implemented")
-        if profile.chilling_min_temperature_c <= temperature_c <= profile.chilling_max_temperature_c:
-            return dt_seconds / 3600.0
-        return 0.0
+        """Stateless per-step contribution (CHILLING_HOURS, UTAH); DYNAMIC needs ``accumulate``."""
+        if self.model_type is ChillingModelType.CHILLING_HOURS:
+            if profile.chilling_min_temperature_c <= temperature_c <= profile.chilling_max_temperature_c:
+                return dt_seconds / 3600.0
+            return 0.0
+        if self.model_type is ChillingModelType.UTAH:
+            try:
+                return utah_step(0.0, temperature_c, dt_seconds)
+            except ChillingModelError as exc:
+                raise PhenologyError(str(exc)) from None
+        raise PhenologyError("DYNAMIC is stateful (intermediate product); use ChillingModel.accumulate")
+
+    def initial(self, chilling_hours: float = 0.0) -> ChillingAccumulation:
+        accumulated = chilling_hours if self.model_type is ChillingModelType.CHILLING_HOURS else 0.0
+        return ChillingAccumulation(self.model_type.value, self.unit.value, accumulated)
+
+    def accumulate(self, chill: ChillingAccumulation, temperature_c: float, profile: PhenologyProfile, dt_seconds: float) -> ChillingAccumulation:
+        """The single accumulation path of every model."""
+        if chill.model != self.model_type.value or chill.unit != self.unit.value:
+            raise PhenologyError(f"chilling state holds {chill.model}/{chill.unit}; model {self.model_type.value} counts {self.unit.value}")
+        if self.model_type is not ChillingModelType.DYNAMIC:
+            return replace(chill, accumulated=chill.accumulated + self.increment(temperature_c, profile, dt_seconds))
+        try:
+            step = dynamic_step(chill.intermediate, chill.previous_transfer_fraction, temperature_c, dt_seconds)
+        except ChillingModelError as exc:
+            raise PhenologyError(str(exc)) from None
+        return ChillingAccumulation(chill.model, chill.unit, chill.accumulated + step.portion, step.intermediate, step.transfer_fraction)
 
 
 @dataclass(frozen=True, slots=True)
@@ -145,10 +274,14 @@ class ChillingFallbackPolicy(StrEnum):
 
 
 FALLBACK_POLICY_ALIASES = {"DEFAULT": ChillingFallbackPolicy.STRICT, "STRICT": ChillingFallbackPolicy.STRICT}
+# Models executable without an explicit requirement (their requirement is in the profile).
 SUPPORTED_CHILLING_MODELS = frozenset({ChillingModelType.CHILLING_HOURS})
 STRICT_FALLBACK_MODEL = ChillingModelType.CHILLING_HOURS
+FALLBACK_REASON = "REQUESTED_MODEL_NOT_PARAMETERIZED"
 _REQUEST_KEYS = ("start_policy", "chilling_model", "fallback_policy")
 _CANONICAL_KEYS = ("requested_start_policy", "effective_start_policy", "start_time", "requested_chilling_model", "effective_chilling_model", "fallback_policy", "fallback_applied")
+_PARAMETERIZED_KEYS = ("chilling_requirement", "model_parameter_set", "parameterization_status")
+_REQUIREMENT_KEYS = ("value", "unit", "evidence")
 _EQUIVALENT_KEYS = {"start_policy": "requested_start_policy", "chilling_model": "requested_chilling_model"}
 
 
@@ -161,14 +294,49 @@ def _enum_value(enum: type[StrEnum], field_name: str, raw: object) -> StrEnum:
         raise PhenologyError(f"dormancy.{field_name}: unknown value {raw!r}; allowed: {', '.join(item.value for item in enum)}") from None
 
 
+def _requirement(raw: object, model: ChillingModelType) -> ChillingRequirement:
+    """Parse ``chilling_requirement`` for ``model``; the unit must be the model's own unit."""
+    if not isinstance(raw, Mapping):
+        raise PhenologyError(f"dormancy.chilling_requirement must be a mapping with {', '.join(_REQUIREMENT_KEYS)}, got {type(raw).__name__}")
+    keys = set(raw)
+    if keys - set(_REQUIREMENT_KEYS):
+        raise PhenologyError(f"dormancy.chilling_requirement has unknown fields: {', '.join(sorted(keys - set(_REQUIREMENT_KEYS)))}")
+    if set(_REQUIREMENT_KEYS) - keys:
+        raise PhenologyError(f"dormancy.chilling_requirement is incomplete; missing: {', '.join(sorted(set(_REQUIREMENT_KEYS) - keys))}")
+    if model is ChillingModelType.CHILLING_HOURS:
+        raise PhenologyError("dormancy.chilling_requirement: model CHILLING_HOURS takes its requirement from the phenology profile (chill_hours); an explicit requirement is not accepted")
+    unit = _enum_value(ChillingUnit, "chilling_requirement.unit", raw["unit"])
+    expected = MODEL_SPECS[model].unit
+    if unit is not expected:
+        raise PhenologyError(f"dormancy.chilling_requirement.unit: model {model.value} expects '{expected.value}', received '{unit.value}'")
+    evidence = raw["evidence"]
+    if not isinstance(evidence, str):
+        raise PhenologyError(f"dormancy.chilling_requirement.evidence must be a string, got {type(evidence).__name__}")
+    if evidence != RequirementEvidence.SOFTWARE_TEST_ONLY.value:
+        raise PhenologyError(f"dormancy.chilling_requirement.evidence: {evidence!r} is not accepted; no activated scientific requirement exists for {model.value} "
+                             f"(literature rows are NOT_ACTIVATED); allowed: {RequirementEvidence.SOFTWARE_TEST_ONLY.value}")
+    value = raw["value"]
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise PhenologyError(f"dormancy.chilling_requirement.value must be a number, got {type(value).__name__}")
+    return ChillingRequirement(float(value), unit, RequirementEvidence.SOFTWARE_TEST_ONLY)
+
+
+def _check_start_policy(start_policy: ChillingStartPolicyType, model: ChillingModelType) -> None:
+    if model is not ChillingModelType.CHILLING_HOURS and start_policy not in STATEFUL_START_POLICIES:
+        allowed = ", ".join(sorted(policy.value for policy in STATEFUL_START_POLICIES))
+        raise PhenologyError(f"dormancy.start_policy: {start_policy.value} cannot be combined with an executed {model.value} model; allowed: {allowed}")
+
+
 @dataclass(frozen=True, slots=True)
 class DormancyConfiguration:
     """Canonical dormancy / chilling configuration (requested + effective + fallback).
 
-    Built only by ``canonicalize_dormancy_configuration``. Unsupported chilling
-    models resolve through the STRICT fallback to CHILLING_HOURS; the request is
-    kept for traceability. The start policy, profile requirement and thresholds
-    are never changed by the fallback.
+    Built only by ``canonicalize_dormancy_configuration``. A requested UTAH or DYNAMIC
+    model without a requirement in its own unit is IMPLEMENTED_UNPARAMETERIZED and
+    resolves through the STRICT fallback to CHILLING_HOURS (Phase 5.34 behaviour);
+    the request is kept for traceability. With an explicit requirement it executes.
+    The start policy, profile requirement and thresholds are never changed by the
+    fallback. Without a requirement the JSON is exactly the Phase 5.34 form.
     """
 
     requested_start_policy: ChillingStartPolicyType
@@ -178,6 +346,7 @@ class DormancyConfiguration:
     effective_chilling_model: ChillingModelType
     fallback_policy: ChillingFallbackPolicy
     fallback_applied: bool
+    requirement: ChillingRequirement | None = None
 
     def __post_init__(self) -> None:
         typed = (
@@ -185,15 +354,34 @@ class DormancyConfiguration:
             (self.requested_chilling_model, ChillingModelType), (self.effective_chilling_model, ChillingModelType),
             (self.fallback_policy, ChillingFallbackPolicy), (self.fallback_applied, bool),
         )
-        if not all(isinstance(value, kind) for value, kind in typed):
+        if not all(isinstance(value, kind) for value, kind in typed) or not (self.requirement is None or isinstance(self.requirement, ChillingRequirement)):
             raise PhenologyError("DormancyConfiguration fields have wrong types; build it with canonicalize_dormancy_configuration")
-        unsupported = self.requested_chilling_model not in SUPPORTED_CHILLING_MODELS
-        if (self.fallback_applied != unsupported or self.effective_chilling_model is not (STRICT_FALLBACK_MODEL if unsupported else self.requested_chilling_model)
-                or self.effective_start_policy is not self.requested_start_policy):
+        unparameterized = self.requested_chilling_model not in SUPPORTED_CHILLING_MODELS and self.requirement is None
+        expected_model = STRICT_FALLBACK_MODEL if unparameterized else self.requested_chilling_model
+        if self.fallback_applied != unparameterized or self.effective_chilling_model is not expected_model or self.effective_start_policy is not self.requested_start_policy:
             raise PhenologyError("DormancyConfiguration is inconsistent with the STRICT fallback; build it with canonicalize_dormancy_configuration")
+        ChillingModel(self.effective_chilling_model, self.requirement)  # unit / model compatibility
+        if self.requirement is not None:
+            _check_start_policy(self.effective_start_policy, self.effective_chilling_model)
+
+    @property
+    def model_parameter_set(self) -> str:
+        return MODEL_SPECS[self.effective_chilling_model].parameter_set
+
+    @property
+    def parameterization_status(self) -> RequirementEvidence:
+        return self.requirement.evidence if self.requirement is not None else RequirementEvidence.ENGINEERING_DEFAULT
+
+    @property
+    def requested_model_status(self) -> ChillingModelStatus:
+        return ChillingModel(self.requested_chilling_model, self.requirement).status
+
+    @property
+    def fallback_reason(self) -> str | None:
+        return FALLBACK_REASON if self.fallback_applied else None
 
     def to_dict(self) -> dict[str, object]:
-        return {"dormancy": {
+        inner: dict[str, object] = {
             "requested_start_policy": self.requested_start_policy.value,
             "effective_start_policy": self.effective_start_policy.value,
             "start_time": self.start_time.isoformat() if self.start_time is not None else None,
@@ -201,12 +389,26 @@ class DormancyConfiguration:
             "effective_chilling_model": self.effective_chilling_model.value,
             "fallback_policy": self.fallback_policy.value,
             "fallback_applied": self.fallback_applied,
-        }}
+        }
+        if self.requirement is not None:
+            inner.update({"chilling_requirement": self.requirement.to_dict(), "model_parameter_set": self.model_parameter_set,
+                          "parameterization_status": self.parameterization_status.value})
+        return {"dormancy": inner}
 
     def effective_dict(self) -> dict[str, object]:
         """What the controller runs; requests and fallback metadata excluded."""
         inner = self.to_dict()["dormancy"]
-        return {"dormancy": {key: inner[key] for key in ("effective_start_policy", "start_time", "effective_chilling_model", "fallback_policy")}}
+        keys = ("effective_start_policy", "start_time", "effective_chilling_model", "fallback_policy", "chilling_requirement", "model_parameter_set")
+        return {"dormancy": {key: inner[key] for key in keys if key in inner}}
+
+    def describe(self) -> dict[str, object]:
+        """Full derived view (deterministic function of the canonical record)."""
+        unit = MODEL_SPECS[self.effective_chilling_model].unit.value
+        requirement = self.requirement.to_dict() if self.requirement is not None else {"value": None, "unit": unit, "evidence": RequirementEvidence.ENGINEERING_DEFAULT.value,
+                                                                                         "source": "PhenologyProfile.chilling_requirement_hours (per crop)"}
+        return {**self.to_dict()["dormancy"], "requested_model_status": self.requested_model_status.value, "fallback_reason": self.fallback_reason,
+                "effective_unit": unit, "effective_requirement": requirement, "model_parameter_set": self.model_parameter_set,
+                "parameterization_status": self.parameterization_status.value, "scientifically_active": False}
 
     def to_json(self) -> str:
         return json.dumps(self.to_dict(), sort_keys=True, separators=(",", ":"))
@@ -231,23 +433,24 @@ class DormancyConfiguration:
         return ChillingStartPolicy(self.effective_start_policy, self.start_time, "canonical DormancyConfiguration")
 
     def chilling_model(self) -> ChillingModel:
-        return ChillingModel(self.effective_chilling_model)
+        return ChillingModel(self.effective_chilling_model, self.requirement)
 
     def audit_entries(self) -> tuple[dict[str, object], ...]:
         """Configuration trace; engineering configuration, never literature or calibration."""
-        inner = self.to_dict()["dormancy"]
-        keys = ("requested_chilling_model", "effective_chilling_model", "fallback_policy", "fallback_applied", "requested_start_policy", "effective_start_policy", "start_time")
-        return tuple({"field": key, "value": inner[key], "source_type": "engineering_configuration", "calibration_status": "not_applicable"} for key in keys)
+        described = self.describe()
+        keys = ("requested_chilling_model", "effective_chilling_model", "fallback_policy", "fallback_applied", "requested_start_policy", "effective_start_policy", "start_time",
+                "requested_model_status", "fallback_reason", "effective_unit", "effective_requirement", "model_parameter_set", "parameterization_status")
+        return tuple({"field": key, "value": described[key], "source_type": "engineering_configuration", "calibration_status": "not_applicable"} for key in keys)
 
 
 def canonicalize_dormancy_configuration(document: object) -> DormancyConfiguration:
     """The single canonicalization path for dormancy configuration.
 
     Accepts the request form ``{"dormancy": {start_policy, chilling_model,
-    fallback_policy[, start_time]}}`` or the canonical form produced by
-    ``DormancyConfiguration.to_dict`` (round trip). Aliases (DEFAULT -> STRICT)
-    are resolved, values validated, unsupported models resolved by the STRICT
-    fallback, and ambiguous, duplicated, missing or unknown fields rejected.
+    fallback_policy[, start_time][, chilling_requirement]}}`` or the canonical form
+    produced by ``DormancyConfiguration.to_dict`` (round trip). Aliases (DEFAULT ->
+    STRICT) are resolved, values and units validated, unparameterized models resolved
+    by the STRICT fallback, and ambiguous, duplicated, missing or unknown fields rejected.
     """
     if isinstance(document, DormancyConfiguration):
         return document
@@ -261,12 +464,14 @@ def canonicalize_dormancy_configuration(document: object) -> DormancyConfigurati
         if short in keys and long in keys:
             raise PhenologyError(f"dormancy configuration is ambiguous: both {short!r} and {long!r} given")
     canonical = bool(keys & set(_CANONICAL_KEYS) - {"start_time", "fallback_policy"})
-    allowed = set(_CANONICAL_KEYS) if canonical else set(_REQUEST_KEYS) | {"start_time"}
+    allowed = set(_CANONICAL_KEYS) | set(_PARAMETERIZED_KEYS) if canonical else set(_REQUEST_KEYS) | {"start_time", "chilling_requirement"}
     required = set(_CANONICAL_KEYS) if canonical else set(_REQUEST_KEYS)
     if keys - allowed:
         raise PhenologyError(f"dormancy configuration has unknown fields: {', '.join(sorted(keys - allowed))}")
     if required - keys:
         raise PhenologyError(f"dormancy configuration is incomplete; missing: {', '.join(sorted(required - keys))}")
+    if canonical and keys & set(_PARAMETERIZED_KEYS) and set(_PARAMETERIZED_KEYS) - keys:
+        raise PhenologyError(f"dormancy configuration is incomplete; missing: {', '.join(sorted(set(_PARAMETERIZED_KEYS) - keys))}")
     start_key, model_key = ("requested_start_policy", "requested_chilling_model") if canonical else ("start_policy", "chilling_model")
     start_policy = _enum_value(ChillingStartPolicyType, start_key, body[start_key])
     requested_model = _enum_value(ChillingModelType, model_key, body[model_key])
@@ -290,9 +495,12 @@ def canonicalize_dormancy_configuration(document: object) -> DormancyConfigurati
         raise PhenologyError(f"dormancy.start_time: {exc}") from None
     if start_time is not None:
         start_time = start_time.astimezone(timezone.utc)  # one representation per instant
-    fallback_applied = requested_model not in SUPPORTED_CHILLING_MODELS
+    requirement = _requirement(body["chilling_requirement"], requested_model) if "chilling_requirement" in body else None
+    if requirement is not None:
+        _check_start_policy(start_policy, requested_model)
+    fallback_applied = requested_model not in SUPPORTED_CHILLING_MODELS and requirement is None
     effective_model = STRICT_FALLBACK_MODEL if fallback_applied else requested_model
-    result = DormancyConfiguration(start_policy, start_policy, start_time, requested_model, effective_model, fallback, fallback_applied)
+    result = DormancyConfiguration(start_policy, start_policy, start_time, requested_model, effective_model, fallback, fallback_applied, requirement)
     if canonical:
         if not isinstance(body["fallback_applied"], bool):
             raise PhenologyError(f"dormancy.fallback_applied must be a boolean, got {type(body['fallback_applied']).__name__}")
@@ -300,6 +508,9 @@ def canonicalize_dormancy_configuration(document: object) -> DormancyConfigurati
         effective_stated = _enum_value(ChillingModelType, "effective_chilling_model", body["effective_chilling_model"])
         if (effective_start, effective_stated, body["fallback_applied"]) != (result.effective_start_policy, result.effective_chilling_model, result.fallback_applied):
             raise PhenologyError("dormancy configuration is inconsistent: stated effective fields differ from the STRICT resolution of the request")
+        if requirement is not None and (body["model_parameter_set"], body["parameterization_status"]) != (result.model_parameter_set, result.parameterization_status.value):
+            raise PhenologyError(f"dormancy configuration is inconsistent: model_parameter_set/parameterization_status must be "
+                                 f"{result.model_parameter_set!r}/{result.parameterization_status.value!r} for {effective_model.value}")
     return result
 
 
@@ -328,13 +539,13 @@ class DormancyChillingController:
     """Dormancy / chilling layer used by PhenologyEngine (not a second phenology engine).
 
     WHEN TO COUNT (start policy) + HOW TO COUNT (chilling model) + HOW MUCH IS REQUIRED
-    (profile requirement) -> dormancy state. Time comes only from the caller's
-    SimulationClock instant; no latitude, hemisphere or calendar month is used.
+    (requirement in the model's unit) -> dormancy state. Time comes only from the
+    caller's SimulationClock instant; no latitude, hemisphere or calendar month is used.
 
     Model selection goes through a canonical ``DormancyConfiguration`` (the only
     path with the STRICT fallback). Direct ``policy``/``model`` injection is kept
-    for Phase 5.33 compatibility: an injected unimplemented model is not a
-    selection and still reports MODEL_NOT_SUPPORTED, never a silent fallback.
+    for Phase 5.33 compatibility: an injected model without a requirement in its
+    unit is not a selection and reports MODEL_NOT_READY, never a silent fallback.
     """
 
     def __init__(self, policy: ChillingStartPolicy | None = None, model: ChillingModel | None = None, *, configuration: DormancyConfiguration | Mapping[str, object] | None = None) -> None:
@@ -350,16 +561,33 @@ class DormancyChillingController:
         self.policy = policy or ChillingStartPolicy()
         self.model = model or ChillingModel()
         self.configuration = None
-        if self.model.implemented:
+        if self.model.ready:
             self.configuration = canonicalize_dormancy_configuration({"dormancy": {
                 "start_policy": self.policy.policy_type.value, "chilling_model": self.model.model_type.value, "fallback_policy": "STRICT",
                 **({"start_time": self.policy.start_time.isoformat()} if self.policy.start_time is not None else {}),
+                **({"chilling_requirement": self.model.requirement.to_dict()} if self.model.requirement is not None else {}),
             }})
 
-    def advance(self, chilling_hours: float, profile: PhenologyProfile, weather: WeatherState, simulation_time: datetime, dt_seconds: float) -> tuple[float, bool]:
+    def chill_state(self, state: CropGrowthState) -> ChillingAccumulation:
+        """The accumulation carried by ``state`` for this controller's model."""
+        if self.model.model_type is ChillingModelType.CHILLING_HOURS:
+            if state.chilling_state is not None:
+                raise PhenologyError(f"crop state holds {state.chilling_state.model} chill ({state.chilling_state.unit}); model CHILLING_HOURS counts chill_hours")
+            return self.model.initial(state.chilling_hours)
+        if state.chilling_hours != 0.0:
+            raise PhenologyError(f"crop state holds chill_hours; model {self.model.model_type.value} counts {self.model.unit.value}")
+        return state.chilling_state if state.chilling_state is not None else self.model.initial()
+
+    def step(self, state: CropGrowthState, profile: PhenologyProfile, weather: WeatherState, simulation_time: datetime, dt_seconds: float) -> tuple[float, ChillingAccumulation | None, bool]:
+        """One endodormant step: (chilling_hours, chilling_state, dormancy_released)."""
+        requirement = self.model.required(profile)
+        chill = self.chill_state(state)
         if self.policy.counting(simulation_time):
-            chilling_hours += self.model.increment(weather.temperature_c, profile, dt_seconds)
-        return chilling_hours, chilling_hours >= profile.chilling_requirement_hours
+            chill = self.model.accumulate(chill, weather.temperature_c, profile, dt_seconds)
+        released = chill.accumulated >= requirement
+        if self.model.model_type is ChillingModelType.CHILLING_HOURS:
+            return chill.accumulated, None, released
+        return state.chilling_hours, chill, released
 
 
 class PhenologyEngine:
@@ -409,11 +637,12 @@ class PhenologyEngine:
         chilling = state.chilling_hours
         dormancy_released = state.dormancy_released
         if profile.perennial and not dormancy_released:
-            chilling, dormancy_released = self.dormancy.advance(chilling, profile, weather, simulation_time, dt_seconds)
+            chilling, chill_state, dormancy_released = self.dormancy.step(state, profile, weather, simulation_time, dt_seconds)
             return replace(
                 state,
                 simulation_time=simulation_time,
                 chilling_hours=chilling,
+                chilling_state=chill_state,
                 dormancy_released=dormancy_released,
                 phenology_model=profile.evidence_level.value,
             )

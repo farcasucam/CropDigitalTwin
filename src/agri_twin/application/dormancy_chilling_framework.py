@@ -43,6 +43,7 @@ from agri_twin.domain.phenology import (
     ChillingModelType,
     ChillingStartPolicy,
     ChillingStartPolicyType,
+    ChillingUnit,
     DormancyChillingController,
     DormancyConfiguration,
     PhenologyEngine,
@@ -65,6 +66,7 @@ class DormancyOutcome(StrEnum):
     INSUFFICIENT_TEMPORAL_CONTEXT = "INSUFFICIENT_TEMPORAL_CONTEXT"
     DORMANCY_NOT_RELEASED = "DORMANCY_NOT_RELEASED"
     MODEL_NOT_SUPPORTED = "MODEL_NOT_SUPPORTED"
+    MODEL_NOT_READY = "MODEL_NOT_READY"
 
 
 def hemisphere(latitude: float) -> str:
@@ -155,7 +157,7 @@ class DormancySeasonResult:
     first_effective_chill: datetime | None
     chill_total: float
     chill_at_release: float | None
-    chill_excluded_by_policy_hours: float
+    chill_excluded_by_policy_hours: float | None
     dormancy_release: datetime | None
     forcing_start: datetime | None
     budburst: datetime | None
@@ -164,16 +166,22 @@ class DormancySeasonResult:
     finite: bool
     final_state: CropGrowthState | None = field(default=None, compare=False)
     elapsed_hash: str = ""
-    # Canonical requested/effective configuration (Phase 5.34); None only for an injected unimplemented model.
+    # Canonical requested/effective configuration (Phase 5.34); None only for an injected model that cannot run.
     configuration: DormancyConfiguration | None = field(default=None, compare=False)
+    # Accumulation unit (Phase 5.35); Utah units and chill portions are never reported as hours.
+    chill_unit: str = ChillingUnit.CHILL_HOURS.value
 
     def to_dict(self) -> dict[str, Any]:
         iso = lambda value: value.isoformat() if value is not None else None
+        if self.chill_unit == ChillingUnit.CHILL_HOURS.value:
+            chill = {"chill_total_h": self.chill_total, "chill_at_release_h": self.chill_at_release, "chill_excluded_by_policy_h": self.chill_excluded_by_policy_hours}
+        else:
+            chill = {"chill_unit": self.chill_unit, "chill_total": self.chill_total, "chill_at_release": self.chill_at_release, "chill_excluded_by_policy": None}
         return {
             "crop": self.crop, "location_id": self.location_id, "hemisphere": self.hemisphere, "latitude": self.latitude, "longitude": self.longitude,
             "policy": self.policy, "model": self.model, "record_start": iso(self.record_start), "record_days": self.record_days,
             "counting_start": iso(self.counting_start), "first_effective_chill": iso(self.first_effective_chill),
-            "chill_total_h": self.chill_total, "chill_at_release_h": self.chill_at_release, "chill_excluded_by_policy_h": self.chill_excluded_by_policy_hours,
+            **chill,
             "dormancy_release": iso(self.dormancy_release), "forcing_start": iso(self.forcing_start), "budburst": iso(self.budburst),
             "days_to_release": (self.dormancy_release - self.record_start).total_seconds() / 86400.0 if self.dormancy_release else None,
             "outcome": self.outcome.value, "trajectory_hash": self.trajectory_hash, "elapsed_hash": self.elapsed_hash, "finite": self.finite,
@@ -182,6 +190,13 @@ class DormancySeasonResult:
 
 
 WeatherSource = Callable[[datetime], WeatherState]
+
+
+def chill_value(state: CropGrowthState, unit: str) -> float:
+    """Accumulated chill of ``state`` in ``unit`` (chill hours or the model state)."""
+    if unit == ChillingUnit.CHILL_HOURS.value:
+        return state.chilling_hours
+    return state.chilling_state.accumulated if state.chilling_state is not None else 0.0
 
 
 def run_dormancy_season(crop: str, weather: WeatherSource, start: datetime, days: int, *, policy: ChillingStartPolicy | None = None, model: ChillingModel | None = None, location: SyntheticLocation | None = None, initial: CropGrowthState | None = None, configuration: DormancyConfiguration | Mapping[str, Any] | None = None) -> DormancySeasonResult:
@@ -195,15 +210,18 @@ def run_dormancy_season(crop: str, weather: WeatherSource, start: datetime, days
     else:
         controller = DormancyChillingController(policy or ChillingStartPolicy(), model or ChillingModel())
     policy, model = controller.policy, controller.model
+    unit = model.unit.value
+    hours = unit == ChillingUnit.CHILL_HOURS.value
     engine = PhenologyEngine(dormancy=controller)
     profile = engine.profile_for(crop)
     base = dict(crop=crop, location_id=location.location_id if location else None, hemisphere=location.hemisphere if location else None,
                 latitude=location.latitude if location else None, longitude=location.longitude if location else None,
                 policy=policy.policy_type.value, model=model.model_type.value, record_start=start, record_days=days)
-    if not policy.implemented or not model.implemented:
-        return DormancySeasonResult(**base, counting_start=None, first_effective_chill=None, chill_total=0.0, chill_at_release=None, chill_excluded_by_policy_hours=0.0,
-                                    dormancy_release=None, forcing_start=None, budburst=None, outcome=DormancyOutcome.MODEL_NOT_SUPPORTED, trajectory_hash=_hash([]), finite=True,
-                                    configuration=controller.configuration)
+    blocked = DormancyOutcome.MODEL_NOT_SUPPORTED if not policy.implemented else DormancyOutcome.MODEL_NOT_READY if not model.ready else None
+    if blocked is not None:
+        return DormancySeasonResult(**base, counting_start=None, first_effective_chill=None, chill_total=0.0, chill_at_release=None, chill_excluded_by_policy_hours=0.0 if hours else None,
+                                    dormancy_release=None, forcing_start=None, budburst=None, outcome=blocked, trajectory_hash=_hash([]), finite=True,
+                                    configuration=controller.configuration, chill_unit=unit)
     clock = SimulationClock(start)
     scheduler = SimulationScheduler(clock, DT)
     record: dict[str, Any] = {"state": initial or initial_dormant_state(crop, start), "first_effective": None, "counting_start": None, "excluded": 0.0,
@@ -213,25 +231,27 @@ def run_dormancy_season(crop: str, weather: WeatherSource, start: datetime, days
         state = record["state"]
         forcing = weather(timestamp)
         was_dormant = not state.dormancy_released
-        effective = profile.chilling_min_temperature_c <= forcing.temperature_c <= profile.chilling_max_temperature_c
         if was_dormant:
             if policy.counting(timestamp):
                 record["counting_start"] = record["counting_start"] or timestamp
-            elif effective:
+            elif hours and profile.chilling_min_temperature_c <= forcing.temperature_c <= profile.chilling_max_temperature_c:
                 record["excluded"] += DT / 3600.0
         new = engine.advance(state, forcing, timestamp, DT)
-        if was_dormant and new.chilling_hours > state.chilling_hours and record["first_effective"] is None:
+        before, after = chill_value(state, unit), chill_value(new, unit)
+        if was_dormant and after > before and record["first_effective"] is None:
             record["first_effective"] = timestamp
         if was_dormant and new.dormancy_released:
-            record["release"], record["chill_at_release"] = timestamp, new.chilling_hours
+            record["release"], record["chill_at_release"] = timestamp, after
         if not was_dormant and record["forcing"] is None and new.gdd_accumulated > state.gdd_accumulated:
             record["forcing"] = timestamp
         if record["budburst"] is None and new.current_stage == "vegetative_growth":
             record["budburst"] = timestamp
-        record["finite"] = record["finite"] and all(math.isfinite(v) for v in (new.chilling_hours, new.gdd_accumulated, new.maturity_index))
-        record["digest"].update(repr((timestamp.isoformat(), new.chilling_hours, new.gdd_accumulated, new.current_stage, new.dormancy_released)).encode("ascii"))
+        record["finite"] = record["finite"] and all(math.isfinite(v) for v in (new.chilling_hours, after, new.gdd_accumulated, new.maturity_index))
+        # Chill-hour rows keep the Phase 5.33 fingerprint bytes; other units append their model state.
+        extra = () if hours else (new.chilling_state.accumulated, new.chilling_state.intermediate, new.chilling_state.previous_transfer_fraction)
+        record["digest"].update(repr((timestamp.isoformat(), new.chilling_hours, new.gdd_accumulated, new.current_stage, new.dormancy_released, *extra)).encode("ascii"))
         # Calendar-free fingerprint: the same trajectory as a function of elapsed hours.
-        record["elapsed"].update(repr(((timestamp - start).total_seconds() / 3600.0, new.chilling_hours, new.gdd_accumulated, new.current_stage, new.dormancy_released)).encode("ascii"))
+        record["elapsed"].update(repr(((timestamp - start).total_seconds() / 3600.0, new.chilling_hours, new.gdd_accumulated, new.current_stage, new.dormancy_released, *extra)).encode("ascii"))
         record["state"] = new
 
     scheduler.register("dormancy-chilling", DT, tick)
@@ -241,16 +261,16 @@ def run_dormancy_season(crop: str, weather: WeatherSource, start: datetime, days
     context_complete = first is not None and (first - start).total_seconds() / 3600.0 >= CONTEXT_LEAD_HOURS
     if released:
         outcome = DormancyOutcome.RELEASED if context_complete else DormancyOutcome.RELEASED_INCOMPLETE_CONTEXT
-    elif final.chilling_hours == 0.0 and first is None:
+    elif chill_value(final, unit) <= 0.0 and first is None:
         outcome = DormancyOutcome.NO_CHILL
     elif not context_complete:
         outcome = DormancyOutcome.INSUFFICIENT_TEMPORAL_CONTEXT
     else:
         outcome = DormancyOutcome.DORMANCY_NOT_RELEASED
-    return DormancySeasonResult(**base, counting_start=record["counting_start"], first_effective_chill=first, chill_total=final.chilling_hours, chill_at_release=record["chill_at_release"],
-                                chill_excluded_by_policy_hours=record["excluded"], dormancy_release=record["release"], forcing_start=record["forcing"], budburst=record["budburst"],
+    return DormancySeasonResult(**base, counting_start=record["counting_start"], first_effective_chill=first, chill_total=chill_value(final, unit), chill_at_release=record["chill_at_release"],
+                                chill_excluded_by_policy_hours=record["excluded"] if hours else None, dormancy_release=record["release"], forcing_start=record["forcing"], budburst=record["budburst"],
                                 outcome=outcome, trajectory_hash=record["digest"].hexdigest(), finite=record["finite"], final_state=final, elapsed_hash=record["elapsed"].hexdigest(),
-                                configuration=controller.configuration)
+                                configuration=controller.configuration, chill_unit=unit)
 
 
 def location_weather(location: SyntheticLocation, seed: int = DEFAULT_SEED, **profile_changes: float) -> WeatherSource:

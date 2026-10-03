@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 import math
-from dataclasses import asdict, dataclass, field
+from collections.abc import Mapping
+from dataclasses import asdict, dataclass, field, replace
 from datetime import datetime, timedelta
 
 
@@ -111,6 +112,45 @@ class CropState:
 
 
 @dataclass(frozen=True, slots=True)
+class ChillingAccumulation:
+    """Chill accumulated by a model whose unit is not chill hours.
+
+    Utah chill units (the running sum can be negative) or Dynamic Model chill
+    portions; ``intermediate`` and ``previous_transfer_fraction`` are the Dynamic
+    Model's internal state and stay 0 for stateless models. Serializable so that
+    checkpoint/restart carries the full chilling state.
+    """
+
+    model: str
+    unit: str
+    accumulated: float = 0.0
+    intermediate: float = 0.0
+    previous_transfer_fraction: float = 0.0
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.model, str) or not self.model or not isinstance(self.unit, str) or not self.unit:
+            raise ValueError("chilling model and unit must be set")
+        for name in ("accumulated", "intermediate", "previous_transfer_fraction"):
+            value = getattr(self, name)
+            if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
+                raise ValueError(f"chilling {name} must be finite")
+        if self.intermediate < 0:
+            raise ValueError("chilling intermediate must be non-negative")
+        _in_range("previous_transfer_fraction", self.previous_transfer_fraction, 0.0, 1.0)
+
+    def to_dict(self) -> dict[str, object]:
+        return {"model": str(self.model), "unit": str(self.unit), "accumulated": self.accumulated, "intermediate": self.intermediate,
+                "previous_transfer_fraction": self.previous_transfer_fraction}
+
+    @classmethod
+    def from_dict(cls, payload: Mapping[str, object]) -> "ChillingAccumulation":
+        expected = {"model", "unit", "accumulated", "intermediate", "previous_transfer_fraction"}
+        if set(payload) != expected:
+            raise ValueError(f"chilling state fields must be exactly {sorted(expected)}")
+        return cls(**payload)  # type: ignore[arg-type]
+
+
+@dataclass(frozen=True, slots=True)
 class CropGrowthState:
     """Persistent crop state at an explicit SimulationClock instant.
 
@@ -153,10 +193,14 @@ class CropGrowthState:
     heat_exposure_hours: float = 0.0
     heat_damage: float = 0.0
     irreversible_damage: float = 0.0
+    # Non-chill-hour chilling state (Utah units, Dynamic portions); None for Chilling Hours.
+    chilling_state: ChillingAccumulation | None = None
 
     def __post_init__(self) -> None:
         if self.simulation_time.tzinfo is None:
             raise ValueError("simulation_time must be timezone-aware")
+        if self.chilling_state is not None and not isinstance(self.chilling_state, ChillingAccumulation):
+            raise ValueError("chilling_state must be a ChillingAccumulation or None")
         if not self.crop_key or not self.variety or not self.current_stage:
             raise ValueError("crop_key, variety and current_stage must be set")
         for name in (
@@ -203,13 +247,30 @@ class CropGrowthState:
             raise ValueError("dt_seconds must be finite and non-negative")
         if simulation_time != self.simulation_time + timedelta(seconds=dt_seconds):
             raise ValueError("simulation_time must advance by dt_seconds")
-        return CropGrowthState(**(self.to_dict() | {"simulation_time": simulation_time}))
+        return replace(self, simulation_time=simulation_time)
 
     def to_dict(self) -> dict[str, object]:
-        """Return a JSON-ready representation using ISO 8601 simulation time."""
+        """Return a JSON-ready representation using ISO 8601 simulation time.
+
+        ``chilling_state`` appears only when set, so Chilling Hours states keep
+        their historical representation.
+        """
         payload = asdict(self)
         payload["simulation_time"] = self.simulation_time.isoformat()
+        if self.chilling_state is None:
+            del payload["chilling_state"]
+        else:
+            payload["chilling_state"] = self.chilling_state.to_dict()
         return payload
+
+    @classmethod
+    def from_dict(cls, payload: Mapping[str, object]) -> "CropGrowthState":
+        """Inverse of ``to_dict`` (checkpoint restore)."""
+        values = dict(payload)
+        values["simulation_time"] = datetime.fromisoformat(str(values["simulation_time"]))
+        if values.get("chilling_state") is not None:
+            values["chilling_state"] = ChillingAccumulation.from_dict(values["chilling_state"])  # type: ignore[arg-type]
+        return cls(**values)  # type: ignore[arg-type]
 
 
 @dataclass(frozen=True, slots=True)
