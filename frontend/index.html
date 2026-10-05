@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Agri-Twin · Interactive simulation</title>
+  <link rel="stylesheet" href="styles.css?v=20261005-stage-semantic-colors">
+  <script src="app.js?v=20261005-stage-semantic-colors" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to simulation</a>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Agri-Twin home">
+      <span class="brand-mark" aria-hidden="true">AT</span>
+      <span><strong>Agri-Twin</strong><small>Interactive simulation · Phase 5.38</small></span>
+    </a>
+    <span class="local-badge"><span aria-hidden="true">●</span> Local session</span>
+  </header>
+
+  <main id="main">
+    <section class="intro">
+      <div>
+        <p class="eyebrow">Crop digital twin</p>
+        <h1>Simulation workspace</h1>
+        <p class="lede">Configure a deterministic run, follow its execution and inspect the API trajectory.</p>
+      </div>
+      <div class="contract-chip"><span>API contract</span><strong id="api-version">Loading…</strong></div>
+    </section>
+
+    <div id="global-error" class="alert error-alert" role="alert" hidden></div>
+
+    <section class="workspace-grid" aria-label="Simulation workspace">
+      <form id="configuration-form" class="panel configuration-panel">
+        <div class="panel-heading">
+          <div><p class="eyebrow">Setup</p><h2>Simulation configuration</h2></div>
+        </div>
+        <div class="form-grid">
+          <label for="crop">Crop</label>
+          <select id="crop" name="crop" required></select>
+
+          <label for="variety">Configured variety</label>
+          <select id="variety" name="variety" required aria-describedby="variety-help"></select>
+          <small id="variety-help" class="field-help">Only varieties configured by the backend are selectable.</small>
+
+          <label for="environment">Environment</label>
+          <select id="environment" name="environment" required></select>
+
+          <label for="plot">Configured plot</label>
+          <select id="plot" name="plot" required></select>
+
+          <label for="scenario">Scenario</label>
+          <select id="scenario" name="scenario" required></select>
+          <small class="field-help full-width">Scenarios use synthetic forcing; they do not represent real climatology.</small>
+
+          <label for="horizon">Time horizon</label>
+          <select id="horizon" name="horizon">
+            <option value="short">Short run · 7 simulated days</option>
+            <option value="season">Full synthetic season</option>
+          </select>
+          <p id="period-summary" class="field-help full-width" aria-live="polite"></p>
+
+          <fieldset class="option-fieldset full-width">
+            <legend>Execution options</legend>
+            <label class="check-row" for="trajectory-hash">
+              <input id="trajectory-hash" type="checkbox" checked>
+              <span>Compute full trajectory hash</span>
+            </label>
+            <p class="field-help">Default is enabled. When disabled, the API still returns its request/configuration hashes.</p>
+          </fieldset>
+
+          <fieldset id="dormancy-options" class="option-fieldset full-width">
+            <legend>Dormancy and chilling</legend>
+            <label class="check-row" for="use-dormancy">
+              <input id="use-dormancy" type="checkbox">
+              <span>Request a chilling model (backend resolves effective model)</span>
+            </label>
+            <label for="chilling-model">Requested model</label>
+            <select id="chilling-model" name="chilling-model" disabled></select>
+            <p id="dormancy-status" class="field-help" aria-live="polite">Dormancy is not overridden; the canonical backend default applies.</p>
+          </fieldset>
+        </div>
+        <section class="plot-details" aria-labelledby="plot-details-heading" aria-live="polite">
+          <div class="plot-details-heading">
+            <div><p class="eyebrow">Farm configuration</p><h3 id="plot-details-heading">Selected plot details</h3></div>
+            <span id="plot-details-status" class="plot-source-tag">Loading</span>
+          </div>
+          <dl id="plot-details-list" class="plot-details-list"></dl>
+          <p id="plot-details-note" class="field-help"></p>
+          <a id="plot-map-link" class="button secondary map-link" target="_blank" rel="noopener noreferrer" hidden>
+            View location on OpenStreetMap
+          </a>
+          <p id="plot-map-privacy" class="field-help" hidden>
+            Free to view; requires internet. The selected coordinates are sent to OpenStreetMap only if you open the map.
+          </p>
+        </section>
+        <div class="plan-box" aria-live="polite">
+          <div><span>Execution class</span><strong id="execution-mode">Choose a configuration</strong></div>
+          <div><span>Advisory estimate</span><strong id="execution-estimate">—</strong></div>
+          <p id="plan-basis"></p>
+        </div>
+        <button id="simulate-button" class="button primary" type="submit" disabled>Simulate</button>
+        <p class="field-help">Long classifications are run by a local in-process adapter. No distributed/background service is configured.</p>
+      </form>
+
+      <section class="panel execution-panel" aria-labelledby="execution-heading">
+        <div class="panel-heading">
+          <div><p class="eyebrow">Execution</p><h2 id="execution-heading">Run status</h2></div>
+          <span id="status-pill" class="status-pill" data-status="IDLE">Idle</span>
+        </div>
+        <div class="execution-summary">
+          <div><span>Simulation ID</span><strong id="simulation-id">No run yet</strong></div>
+          <div><span>Simulated time</span><strong id="simulated-time">—</strong></div>
+          <div><span>Current stage</span><strong id="current-stage">—</strong></div>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>Operational progress</span><strong id="progress-text">Not started</strong></div>
+          <progress id="progress-bar" max="1" value="0" aria-label="Simulation execution progress"></progress>
+        </div>
+        <div class="execution-actions">
+          <button id="cancel-button" class="button secondary" type="button" disabled>Cancel run</button>
+          <button id="resume-button" class="button secondary" type="button" disabled>Resume from checkpoint</button>
+        </div>
+        <p id="checkpoint-info" class="field-help" aria-live="polite">No checkpoint has been returned.</p>
+        <p class="field-help">Progress and elapsed time are operational telemetry, not scientific evidence.</p>
+        <div id="error-panel" class="alert error-alert" role="alert" hidden></div>
+      </section>
+    </section>
+
+    <section id="result-section" class="results" aria-labelledby="results-heading" hidden>
+      <div class="section-heading">
+        <div><p class="eyebrow">Output</p><h2 id="results-heading">Simulation result</h2></div>
+        <span id="result-classification" class="classification-tag">—</span>
+      </div>
+      <div class="results-grid">
+        <article class="panel">
+          <h3>Run summary</h3>
+          <dl id="result-summary" class="summary-list"></dl>
+          <div class="hash-list">
+            <div><span>Configuration hash</span><code id="configuration-hash">—</code></div>
+            <div><span>Trajectory hash</span><code id="trajectory-hash">—</code></div>
+            <div><span>Hash setting</span><strong id="hash-setting">—</strong></div>
+          </div>
+        </article>
+        <article class="panel">
+          <h3>Final state</h3>
+          <p class="field-help">Only state values and variables provided by the API are shown.</p>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th scope="col">Variable</th><th scope="col">Value</th><th scope="col">Unit</th></tr></thead>
+              <tbody id="final-state"></tbody>
+            </table>
+          </div>
+        </article>
+      </div>
+
+      <section class="panel availability-panel">
+        <div class="panel-heading"><div><p class="eyebrow">Contract catalogue</p><h3>Variable availability</h3></div></div>
+        <div id="availability-list" class="availability-grid"></div>
+      </section>
+
+      <section class="chart-section" aria-labelledby="charts-heading">
+        <div class="section-heading">
+          <div><p class="eyebrow">Trajectory</p><h2 id="charts-heading">Explore the simulation</h2></div>
+          <p class="section-note">Values and timestamps come directly from the API trajectory. Lines connect reported points only.</p>
+        </div>
+        <div id="chart-grid" class="chart-grid"></div>
+        <div class="panel stage-panel">
+          <h3>Phenological stages from API</h3>
+          <p class="field-help">Establishment: soil; vegetative growth: leaf green; yield maturation: ripe gold; post-harvest dormancy: winter slate. Colors match the subtle chart bands. No additional stages are inferred.</p>
+          <ol id="stage-timeline" class="stage-timeline"></ol>
+        </div>
+      </section>
+
+      <section class="results-grid">
+        <article class="panel warning-panel">
+          <h3>Software / execution warnings</h3>
+          <ul id="warnings-list"><li>No warnings reported.</li></ul>
+          <p class="field-help">Warnings describe configuration or software behavior; they are not biological evidence.</p>
+        </article>
+        <article class="panel scientific-panel">
+          <h3>Scientific status</h3>
+          <ul>
+            <li>Real agricultural data verified: <strong>No</strong></li>
+            <li>Calibration performed: <strong>No</strong></li>
+            <li>Experimental validation performed: <strong>No</strong></li>
+            <li>Biological validity claimed: <strong>No</strong></li>
+            <li>Field accuracy claimed: <strong>No</strong></li>
+            <li>Data assimilation implemented: <strong>No</strong></li>
+          </ul>
+          <p id="scientific-statement" class="field-help"></p>
+          <p class="greenhouse-note">Actuated greenhouse operation is not exposed by API 5.37.</p>
+        </article>
+      </section>
+      <section class="panel performance-panel">
+        <h3>Performance observations</h3>
+        <p class="field-help">UX timings are operational measurements and are excluded from scientific hashes.</p>
+        <dl id="performance-metrics" class="metrics-grid"></dl>
+      </section>
+    </section>
+    <footer><span>Agri-Twin · API-owned science, frontend-only presentation</span><span id="adapter-note"></span></footer>
+  </main>
+</body>
+</html>
