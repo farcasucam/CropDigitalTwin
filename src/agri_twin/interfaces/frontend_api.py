@@ -1,0 +1,319 @@
+"""Local HTTP adapter for the Phase 5.37 interactive simulation contract."""
+
+from __future__ import annotations
+
+import json
+import logging
+import threading
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+from typing import Any, Callable
+from urllib.parse import urlparse
+
+from agri_twin.application.interactive_simulation import (
+    ErrorCode,
+    SCIENTIFIC_STATUS,
+    SimulationApiError,
+    SimulationError,
+    InteractiveSimulationService,
+    canonicalize_request,
+    contract_description,
+    plan_execution,
+)
+from agri_twin.application.scientific_benchmark import PERENNIAL_CROPS
+
+LOGGER = logging.getLogger(__name__)
+FRONTEND_ROOT = Path(__file__).resolve().parents[3] / "frontend"
+MAX_REQUEST_BYTES = 1_000_000
+POLL_INTERVAL_MS = 750
+
+
+class InteractiveFrontendAdapter:
+    """Present a narrow, JSON-friendly HTTP surface over the canonical 5.37 service."""
+
+    def __init__(self, *, timer: Callable[[], float] | None = None) -> None:
+        self._timer = timer
+        self.service = InteractiveSimulationService(timer=timer)
+        self._lock = threading.RLock()
+        self._workers: dict[str, threading.Thread] = {}
+        self._worker_errors: dict[str, str] = {}
+
+    def _tick(self) -> float | None:
+        return self._timer() if self._timer is not None else None
+
+    def _elapsed(self, started: float | None) -> float | None:
+        return self._timer() - started if started is not None and self._timer is not None else None
+
+    def capabilities(self) -> dict[str, Any]:
+        contract = contract_description()
+        crop_defaults: dict[str, Any] = {}
+        environments: dict[str, list[str]] = {}
+        varieties: dict[str, list[str]] = {}
+        for crop in contract["crops"]:
+            canonical = canonicalize_request({"crop": crop})
+            varieties[crop] = [canonical.variety]
+            crop_defaults[crop] = {
+                "variety": canonical.variety,
+                "plot": canonical.plot,
+                "default_environment": canonical.environment,
+                "start_time": canonical.start_time.isoformat(),
+                "end_time": canonical.end_time.isoformat(),
+                "dormancy_applicable": crop in PERENNIAL_CROPS,
+            }
+            supported = []
+            for environment in contract["environments"]:
+                try:
+                    canonicalize_request({"crop": crop, "environment": environment})
+                except SimulationApiError:
+                    continue
+                supported.append(environment)
+            environments[crop] = supported
+        contract["crop_defaults"] = crop_defaults
+        contract["crop_environments"] = environments
+        contract["crop_varieties"] = varieties
+        contract["perennial_crops"] = sorted(PERENNIAL_CROPS)
+        contract["scientific_status"] = dict(SCIENTIFIC_STATUS)
+        contract["poll_interval_ms"] = POLL_INTERVAL_MS
+        contract["execution_adapter"] = "SYNCHRONOUS_IN_PROCESS_THREAD (local only; not durable or distributed)"
+        return contract
+
+    @staticmethod
+    def plan(request: Any) -> dict[str, Any]:
+        canonical = canonicalize_request(request)
+        return {
+            "request": canonical.to_dict(),
+            "request_hash": canonical.request_hash,
+            "plan": plan_execution(canonical).to_dict(),
+        }
+
+    def create(self, request: Any) -> dict[str, Any]:
+        return self.service.create_simulation(request).to_dict()
+
+    def start(self, simulation_id: str) -> dict[str, Any]:
+        with self._lock:
+            response = self.service.get_simulation(simulation_id)
+            if response.execution_status.value == "CREATED":
+                worker = self._workers.get(simulation_id)
+                if worker is None or not worker.is_alive():
+                    worker = threading.Thread(
+                        target=self._run,
+                        args=(simulation_id,),
+                        name=f"agri-sim-{simulation_id}",
+                        daemon=True,
+                    )
+                    self._workers[simulation_id] = worker
+                    worker.start()
+        return self.service.get_simulation(simulation_id).to_dict()
+
+    def _run(self, simulation_id: str) -> None:
+        try:
+            self.service.start_simulation(simulation_id)
+        except SimulationApiError as exc:
+            response = self.service.get_simulation(simulation_id)
+            if response.execution_status.value != "CANCELLED":
+                LOGGER.error("Simulation worker %s could not start: %s", simulation_id, exc)
+        except Exception:
+            LOGGER.exception("Unexpected simulation adapter failure for %s", simulation_id)
+            with self._lock:
+                self._worker_errors[simulation_id] = (
+                    "The in-process execution adapter failed unexpectedly; technical details are recorded in the local server log."
+                )
+        finally:
+            with self._lock:
+                self._workers.pop(simulation_id, None)
+
+    def get(self, simulation_id: str) -> dict[str, Any]:
+        with self._lock:
+            worker_error = self._worker_errors.get(simulation_id)
+        if worker_error is not None:
+            raise SimulationApiError(
+                (
+                    SimulationError(
+                        ErrorCode.INTERNAL_EXECUTION_ERROR,
+                        worker_error,
+                    ),
+                )
+            )
+        return self.service.get_simulation(simulation_id).to_dict()
+
+    def progress(self, simulation_id: str) -> dict[str, Any]:
+        return self.service.get_simulation_progress(simulation_id).to_dict()
+
+    def cancel(self, simulation_id: str) -> dict[str, Any]:
+        return self.service.cancel_simulation(simulation_id).to_dict()
+
+    def resume(self, request: Any) -> dict[str, Any]:
+        response = self.service.resume_simulation(request)
+        self.start(response.simulation_id)
+        return self.get(response.simulation_id)
+
+    def result(self, simulation_id: str) -> dict[str, Any]:
+        return self.service.get_simulation_result(simulation_id).to_dict()
+
+
+class FrontendRequestHandler(BaseHTTPRequestHandler):
+    """Serve the bundled UI and its same-origin JSON API; no arbitrary file paths."""
+
+    adapter = InteractiveFrontendAdapter()
+    server_version = "AgriTwinFrontend/5.38"
+
+    def do_GET(self) -> None:
+        path = urlparse(self.path).path
+        if path == "/api/capabilities":
+            self._json(200, self.adapter.capabilities())
+            return
+        if path.startswith("/api/simulations/"):
+            try:
+                simulation_id, suffix = self._simulation_route(path)
+                if suffix == "":
+                    payload = self.adapter.get(simulation_id)
+                elif suffix == "progress":
+                    payload = self.adapter.progress(simulation_id)
+                elif suffix == "result":
+                    payload = self.adapter.result(simulation_id)
+                else:
+                    self._json(404, {"errors": [{"code": "NOT_FOUND", "message": "Unknown API route", "path": None}]})
+                    return
+            except SimulationApiError as exc:
+                self._api_error(exc)
+                return
+            self._json(200, payload)
+            return
+        self._static(path)
+
+    def do_POST(self) -> None:
+        path = urlparse(self.path).path
+        try:
+            body = self._read_json()
+            if path == "/api/plan":
+                payload = self.adapter.plan(body)
+            elif path == "/api/simulations":
+                payload = self.adapter.create(body)
+            elif path.startswith("/api/simulations/") and path.endswith("/start"):
+                payload = self.adapter.start(self._simulation_route(path)[0])
+            elif path.startswith("/api/simulations/") and path.endswith("/cancel"):
+                payload = self.adapter.cancel(self._simulation_route(path)[0])
+            elif path == "/api/simulations/resume":
+                payload = self.adapter.resume(body)
+            else:
+                self._json(404, {"errors": [{"code": "NOT_FOUND", "message": "Unknown API route", "path": None}]})
+                return
+        except SimulationApiError as exc:
+            self._api_error(exc)
+            return
+        except (UnicodeDecodeError, json.JSONDecodeError, ValueError) as exc:
+            self._json(400, {"errors": [{"code": "INVALID_REQUEST", "message": str(exc), "path": None}]})
+            return
+        self._json(200, payload)
+
+    def log_message(self, format: str, *args: Any) -> None:
+        LOGGER.info("%s - %s", self.address_string(), format % args)
+
+    def _read_json(self) -> Any:
+        raw_length = self.headers.get("Content-Length")
+        if raw_length is None:
+            raise ValueError("Content-Length header is required")
+        try:
+            length = int(raw_length)
+        except ValueError:
+            raise ValueError("Content-Length must be an integer") from None
+        if not 0 <= length <= MAX_REQUEST_BYTES:
+            raise ValueError(f"Request body must not exceed {MAX_REQUEST_BYTES} bytes")
+        raw = self.rfile.read(length)
+        return json.loads(raw.decode("utf-8"))
+
+    def _simulation_route(self, path: str) -> tuple[str, str]:
+        parts = path.split("/")
+        if len(parts) < 4 or not parts[3] or parts[3] in {".", ".."}:
+            raise SimulationApiError(
+                (SimulationError(ErrorCode.INVALID_REQUEST, "A simulation id is required", "simulation_id"),)
+            )
+        return parts[3], "/".join(parts[4:])
+
+    def _static(self, path: str) -> None:
+        if path == "/":
+            path = "/index.html"
+        files = {
+            "/index.html": ("index.html", "text/html; charset=utf-8"),
+            "/styles.css": ("styles.css", "text/css; charset=utf-8"),
+            "/app.js": ("app.js", "text/javascript; charset=utf-8"),
+        }
+        target = files.get(path)
+        if target is None:
+            self._json(404, {"errors": [{"code": "NOT_FOUND", "message": "Not found", "path": None}]})
+            return
+        filename, content_type = target
+        try:
+            content = (FRONTEND_ROOT / filename).read_bytes()
+        except OSError:
+            self._json(500, {"errors": [{"code": "FRONTEND_NOT_READY", "message": "Frontend asset is unavailable", "path": None}]})
+            return
+        self.send_response(200)
+        self.send_header("Content-Type", content_type)
+        self.send_header("Content-Length", str(len(content)))
+        self.send_header("X-Content-Type-Options", "nosniff")
+        self.send_header("Content-Security-Policy", "default-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'")
+        self.send_header("X-Frame-Options", "DENY")
+        self.end_headers()
+        self.wfile.write(content)
+
+    def _api_error(self, error: SimulationApiError) -> None:
+        if error.errors and error.errors[0].code is ErrorCode.INTERNAL_EXECUTION_ERROR:
+            status = 500
+        elif error.errors and error.errors[0].path == "simulation_id" and "unknown simulation id" in str(error).lower():
+            status = 404
+        else:
+            status = 400
+        self._json(status, error.to_dict())
+
+    def _json(self, status: int, payload: Any) -> None:
+        started = self.adapter._tick()
+        encoded = json.dumps(payload, separators=(",", ":"), allow_nan=False).encode("utf-8")
+        serialization_seconds = self.adapter._elapsed(started)
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json; charset=utf-8")
+        self.send_header("Content-Length", str(len(encoded)))
+        self.send_header("Cache-Control", "no-store")
+        self.send_header("X-Content-Type-Options", "nosniff")
+        if serialization_seconds is not None:
+            self.send_header("X-Serialization-Seconds", f"{serialization_seconds:.6f}")
+        self.end_headers()
+        self.wfile.write(encoded)
+
+
+def serve(
+    host: str = "127.0.0.1",
+    port: int = 8765,
+    *,
+    timer: Callable[[], float] | None = None,
+) -> None:
+    if host not in {"127.0.0.1", "localhost"}:
+        raise ValueError("The development frontend server may only bind to loopback")
+
+    class ServerHandler(FrontendRequestHandler):
+        pass
+
+    ServerHandler.adapter = InteractiveFrontendAdapter(timer=timer)
+    server = ThreadingHTTPServer((host, port), ServerHandler)
+    LOGGER.info("Agri-Twin frontend ready at http://%s:%s", host, port)
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        LOGGER.info("Stopping Agri-Twin frontend server")
+    finally:
+        server.server_close()
+
+
+def main() -> None:
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Run the local Agri-Twin Phase 5.38 frontend")
+    parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--port", type=int, default=8765)
+    arguments = parser.parse_args()
+    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+    serve(arguments.host, arguments.port)
+
+
+if __name__ == "__main__":
+    main()

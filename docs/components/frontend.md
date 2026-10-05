@@ -1,5 +1,20 @@
 # Frontend Web
 
+## Estado implementado en Phase 5.38
+
+La aplicación inicial de simulación vive en `frontend/` y consume únicamente
+el adaptador HTTP local `agri_twin.interfaces.frontend_api`, que delega en
+`InteractiveSimulationService` (Phase 5.37). La UI está implementada con HTML,
+CSS y JavaScript nativos; no contiene lógica científica. La guía operativa y
+sus limitaciones están en
+[`docs/phase5_38_frontend_simulation.md`](../phase5_38_frontend_simulation.md).
+
+Esta entrega no incluye actuadores, WebSocket, alarmas, Semantic Panel ni
+control por eventos. Los apartados posteriores describen superficies futuras
+del frontend general, no capacidades disponibles en la pantalla de simulación
+actual. La operación greenhouse actuada tampoco está expuesta por el contrato
+5.37.
+
 ## Objetivo
 
 Visualización gráfica en tiempo real y control interactivo del gemelo.

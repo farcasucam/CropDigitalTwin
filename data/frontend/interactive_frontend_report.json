@@ -1,0 +1,122 @@
+{
+  "accessibility_status": "PASS",
+  "api_contract_version": "1.0",
+  "browser_smoke_status": "PASS",
+  "checks": {
+    "accessibility_and_responsive_basics": true,
+    "checkpoint_resume_matches_full_run": true,
+    "configuration_immutability": true,
+    "contract_capabilities_available": true,
+    "deterministic_response_and_hashes": true,
+    "e2e_dynamic_strict_fallback": true,
+    "e2e_lettuce_full_season": true,
+    "e2e_peach_dormancy": true,
+    "e2e_tomato_greenhouse": true,
+    "e2e_tomato_outdoor_short": true,
+    "fallback_is_visible": true,
+    "http_end_to_end_completed": true,
+    "resumed_checkpoint_is_backend_checkpoint": true,
+    "scientific_status_is_unqualified": true,
+    "static_assets_present": true,
+    "static_domain_audit": true,
+    "supported_crop_set": true
+  },
+  "determinism_status": "PASS",
+  "deterministic_hash": "e433131c24ff9be07ba8c45b2fc78d110ab3f84f227311a281d64def8aea9dcf",
+  "e2e_cases": {
+    "dynamic_strict_fallback": "COMPLETED",
+    "lettuce_full_season": "COMPLETED",
+    "peach_dormancy": "COMPLETED",
+    "tomato_greenhouse": "COMPLETED",
+    "tomato_outdoor_short": "COMPLETED"
+  },
+  "end_to_end_status": "PASS",
+  "frontend_build_status": "PASS (static assets; no build pipeline required)",
+  "frontend_test_status": "PASS",
+  "full_regression": {
+    "passed": 1224,
+    "skipped": 12,
+    "status": "PASS"
+  },
+  "full_regression_status": "PASS",
+  "full_regression_summary": "1224 passed, 12 skipped, 0 failed",
+  "performance_observations": {
+    "API_TIME": {
+      "adapter_short_end_to_end_seconds": 0.01845080009661615,
+      "http_short_end_to_end_seconds_including_model_and_polling": 0.043004299979656935,
+      "http_short_total_request_round_trips_seconds": 0.04287250014021993
+    },
+    "FRONTEND_RENDER_TIME": {
+      "full_season_milliseconds": 80.5,
+      "measurement_status": "MEASURED_IN_BROWSER",
+      "short_run_milliseconds": 66.2
+    },
+    "MODEL_TIME": {
+      "adapter_short_seconds": 0.007858900120481849,
+      "direct_full_season_seconds": 1.2649089000187814,
+      "direct_short_seconds": 0.010442500002682209,
+      "http_short_seconds": 0.007821799954399467
+    },
+    "SERIALIZATION_TIME": {
+      "http_response_seconds": 0.000406,
+      "local_json_deserialization_seconds": 0.0003696000203490257,
+      "local_json_seconds": 0.0004453998990356922,
+      "serialized_response_bytes": 24498
+    },
+    "classification": "OPERATIONAL_SOFTWARE_MEASUREMENT_NOT_SCIENTIFIC_EVIDENCE"
+  },
+  "responsive_status": "PASS",
+  "responsive_viewports_smoke_tested": [
+    1440,
+    768,
+    390
+  ],
+  "scientific_evidence": [],
+  "scientific_status": {
+    "BIOLOGICAL_VALIDITY_CLAIMED": false,
+    "CALIBRATION_PERFORMED": false,
+    "DATA_ASSIMILATION_IMPLEMENTED": false,
+    "EXPERIMENTAL_VALIDATION_PERFORMED": false,
+    "FIELD_ACCURACY_CLAIMED": false,
+    "REAL_VERIFIED": 0,
+    "forcing_classification": "SYNTHETIC",
+    "parameter_status": "ENGINEERING_DEFAULTS_UNCALIBRATED",
+    "result_type": "SOFTWARE_SIMULATION",
+    "statement": "Deterministic output of the implemented mechanistic-simplified model under synthetic forcing; software behaviour only, not a prediction, calibration or validated agronomic result."
+  },
+  "status": "PASS",
+  "supported_crops": [
+    "tomato",
+    "lettuce",
+    "pepper",
+    "grape",
+    "peach",
+    "plum",
+    "apple"
+  ],
+  "supported_environments": {
+    "greenhouse": "passive_greenhouse",
+    "outdoor": "outdoor"
+  },
+  "supported_execution_modes": [
+    "INTERACTIVE",
+    "INTERACTIVE_WITH_PROGRESS",
+    "BACKGROUND"
+  ],
+  "supported_scenarios": [
+    "BASE_SEASON",
+    "HOT_SEASON",
+    "COLD_SEASON",
+    "LOW_RADIATION",
+    "HIGH_RADIATION",
+    "DRY_SEASON",
+    "HUMID_SEASON",
+    "HEAT_WAVE",
+    "COLD_WAVE",
+    "HEAT_WAVE_WITH_DRYNESS",
+    "HIGH_RADIATION_WITH_LOW_WATER",
+    "RECOVERY_AFTER_STRESS",
+    "WIND_SPELL",
+    "RAIN_SPELL"
+  ]
+}
