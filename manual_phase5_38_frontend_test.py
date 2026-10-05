@@ -153,17 +153,21 @@ def main() -> int:
     print("Phase 5.38 frontend tests")
     pytest_status = pytest.main(["-q", str(ROOT / "tests" / "test_frontend_api.py")])
     capabilities = InteractiveFrontendAdapter().capabilities()
+<<<<<<< HEAD
     tomato_plot = capabilities["plot_details"]["tomato"]
     apple_plot = capabilities["plot_details"]["apple"]
     app_script = (ROOT / "frontend" / "app.js").read_text(encoding="utf-8")
     frontend_styles = (ROOT / "frontend" / "styles.css").read_text(encoding="utf-8")
     frontend_html = (ROOT / "frontend" / "index.html").read_text(encoding="utf-8")
+=======
+>>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
     before = configuration_fingerprint(ROOT)
     checks: dict[str, bool] = {
         "static_assets_present": all((ROOT / "frontend" / name).is_file() for name in ("index.html", "app.js", "styles.css")),
         "contract_capabilities_available": capabilities["api_version"] == contract_description()["api_version"],
         "supported_crop_set": set(capabilities["crops"]) == {"tomato", "lettuce", "pepper", "grape", "peach", "plum", "apple"},
         "scientific_status_is_unqualified": capabilities["scientific_status"] == dict(SCIENTIFIC_STATUS),
+<<<<<<< HEAD
         "configured_plot_details_include_coordinates": tomato_plot["metadata_status"] == "CONFIGURED"
         and tomato_plot["plot_id"] == "plot_12010"
         and tomato_plot["coordinates"]["latitude"] == 37.89215
@@ -181,6 +185,8 @@ def main() -> int:
             for stage in ("establishment", "vegetative_growth", "yield_maturation", "post_harvest_dormancy")
         )
         and "color: STAGE_COLORS[previous] || UNKNOWN_STAGE_COLOR" in app_script,
+=======
+>>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
     }
     adapter = InteractiveFrontendAdapter(timer=time.perf_counter)
     e2e_cases = [

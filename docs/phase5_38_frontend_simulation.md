@@ -95,6 +95,7 @@ short run is seven simulated days; full season uses the canonical campaign end.
 The API remains authoritative for validity and returns the structured error if
 a request is rejected.
 
+<<<<<<< HEAD
 The selected plot panel displays metadata only when the canonical plot ID has a
 matching entry in `src/farm_config.json`; otherwise it identifies the plot as
 a simulation ID with no farm metadata. Configured details include the name,
@@ -105,6 +106,8 @@ requests are loaded automatically. Coordinates are sent to OpenStreetMap only
 when the user opens the link. Configuration metadata is not verification of
 the current field location or conditions.
 
+=======
+>>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
 Chilling model selection is available for crops whose API-backed capability
 marks dormancy applicable. The UI sends the requested model and `STRICT`
 fallback policy. Requested/effective model and fallback status are taken from
@@ -132,6 +135,7 @@ interpolate, derive, or recalculate values. SVG point tooltips and textual
 summaries are available to assist inspection and screen-reader use; categorical
 phenological stages are displayed as API-reported stage intervals. A
 `NOT_SUPPORTED` availability explanation comes from the API catalogue.
+<<<<<<< HEAD
 The stage timeline uses stage-specific, subtle colors and swatches for the
 API-reported phases: earth/ochre for establishment, leaf green for vegetative
 growth, ripe gold for yield maturation, and cool slate for post-harvest
@@ -144,6 +148,8 @@ Charts label their horizontal axis from the API's simulated timestamps: short
 horizons show UTC day and hour; longer horizons show spaced UTC dates. The
 vertical axis shows five numeric graduations in the variable's reported unit.
 Setup is a single configuration form, not a multi-step wizard.
+=======
+>>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
 
 Greenhouse results can display indoor variables when available. Actuator
 commands and actuated-greenhouse behavior are not exposed by 5.37 and are not
@@ -182,8 +188,12 @@ The reproducible phase report is
 
 ## Tests and limitations
 
+<<<<<<< HEAD
 `tests/test_frontend_api.py` exercises plot metadata projection and map-link
 privacy, the capabilities/plan adapter, all
+=======
+`tests/test_frontend_api.py` exercises the capabilities/plan adapter, all
+>>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
 execution states that can be deterministically reached, structured errors,
 hash settings, result availability, checkpoint/resume equivalence, static
 frontend constraints, accessibility/responsive markers and an actual local
