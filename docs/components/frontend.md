@@ -9,7 +9,6 @@ CSS y JavaScript nativos; no contiene lógica científica. La guía operativa y
 sus limitaciones están en
 [`docs/phase5_38_frontend_simulation.md`](../phase5_38_frontend_simulation.md).
 
-<<<<<<< HEAD
 La pantalla de simulación muestra los datos disponibles de la parcela
 seleccionada en `src/farm_config.json`. Si no existe una ficha configurada,
 indica expresamente que no hay metadatos ni coordenadas, sin inferirlos. Cuando
@@ -18,8 +17,6 @@ envía la ubicación a servicios externos hasta que se abre ese enlace. La ficha
 describe la configuración local, no verifica la ubicación ni el estado actual
 del campo.
 
-=======
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
 Esta entrega no incluye actuadores, WebSocket, alarmas, Semantic Panel ni
 control por eventos. Los apartados posteriores describen superficies futuras
 del frontend general, no capacidades disponibles en la pantalla de simulación

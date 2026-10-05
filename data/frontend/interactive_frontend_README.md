@@ -1,10 +1,6 @@
 # Phase 5.38 frontend report
 
-<<<<<<< HEAD
 Status: **INCOMPLETE**
-=======
-Status: **PASS**
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
 
 This report is produced by `manual_phase5_38_frontend_test.py`. Its deterministic
 hash covers contract, software checks and their outcomes. Machine-dependent
@@ -13,11 +9,7 @@ No timestamp is added to the report.
 
 - Frontend test suite: PASS
 - Frontend build: PASS (static assets; no build pipeline required)
-<<<<<<< HEAD
 - Full regression: NOT_RUN
-=======
-- Full regression: PASS
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
 - Browser UI smoke: PASS
 - API contract: 1.0
 - Supported crops: tomato, lettuce, pepper, grape, peach, plum, apple

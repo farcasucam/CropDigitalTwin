@@ -6,10 +6,7 @@
     "accessibility_and_responsive_basics": true,
     "checkpoint_resume_matches_full_run": true,
     "configuration_immutability": true,
-<<<<<<< HEAD
     "configured_plot_details_include_coordinates": true,
-=======
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
     "contract_capabilities_available": true,
     "deterministic_response_and_hashes": true,
     "e2e_dynamic_strict_fallback": true,
@@ -19,28 +16,18 @@
     "e2e_tomato_outdoor_short": true,
     "fallback_is_visible": true,
     "http_end_to_end_completed": true,
-<<<<<<< HEAD
     "map_link_is_optional_and_privacy_disclosed": true,
     "phenological_stage_colors_follow_plant_phase": true,
     "phenological_stages_have_compact_color_matched_chart_bands": true,
-=======
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
     "resumed_checkpoint_is_backend_checkpoint": true,
     "scientific_status_is_unqualified": true,
     "static_assets_present": true,
     "static_domain_audit": true,
-<<<<<<< HEAD
     "supported_crop_set": true,
     "unconfigured_plot_details_do_not_invent_coordinates": true
   },
   "determinism_status": "PASS",
   "deterministic_hash": "97fd3111194c58b8090e29006a3d35ee8fcfe66c15e807641db73b0c6b557697",
-=======
-    "supported_crop_set": true
-  },
-  "determinism_status": "PASS",
-  "deterministic_hash": "e433131c24ff9be07ba8c45b2fc78d110ab3f84f227311a281d64def8aea9dcf",
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
   "e2e_cases": {
     "dynamic_strict_fallback": "COMPLETED",
     "lettuce_full_season": "COMPLETED",
@@ -52,7 +39,6 @@
   "frontend_build_status": "PASS (static assets; no build pipeline required)",
   "frontend_test_status": "PASS",
   "full_regression": {
-<<<<<<< HEAD
     "passed": null,
     "skipped": null,
     "status": "NOT_RUN"
@@ -81,36 +67,6 @@
       "local_json_deserialization_seconds": 0.0008765999227762222,
       "local_json_seconds": 0.0011168001219630241,
       "serialized_response_bytes": 24499
-=======
-    "passed": 1224,
-    "skipped": 12,
-    "status": "PASS"
-  },
-  "full_regression_status": "PASS",
-  "full_regression_summary": "1224 passed, 12 skipped, 0 failed",
-  "performance_observations": {
-    "API_TIME": {
-      "adapter_short_end_to_end_seconds": 0.01845080009661615,
-      "http_short_end_to_end_seconds_including_model_and_polling": 0.043004299979656935,
-      "http_short_total_request_round_trips_seconds": 0.04287250014021993
-    },
-    "FRONTEND_RENDER_TIME": {
-      "full_season_milliseconds": 80.5,
-      "measurement_status": "MEASURED_IN_BROWSER",
-      "short_run_milliseconds": 66.2
-    },
-    "MODEL_TIME": {
-      "adapter_short_seconds": 0.007858900120481849,
-      "direct_full_season_seconds": 1.2649089000187814,
-      "direct_short_seconds": 0.010442500002682209,
-      "http_short_seconds": 0.007821799954399467
-    },
-    "SERIALIZATION_TIME": {
-      "http_response_seconds": 0.000406,
-      "local_json_deserialization_seconds": 0.0003696000203490257,
-      "local_json_seconds": 0.0004453998990356922,
-      "serialized_response_bytes": 24498
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
     },
     "classification": "OPERATIONAL_SOFTWARE_MEASUREMENT_NOT_SCIENTIFIC_EVIDENCE"
   },
@@ -133,11 +89,7 @@
     "result_type": "SOFTWARE_SIMULATION",
     "statement": "Deterministic output of the implemented mechanistic-simplified model under synthetic forcing; software behaviour only, not a prediction, calibration or validated agronomic result."
   },
-<<<<<<< HEAD
   "status": "INCOMPLETE",
-=======
-  "status": "PASS",
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
   "supported_crops": [
     "tomato",
     "lettuce",

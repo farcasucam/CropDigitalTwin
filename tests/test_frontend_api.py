@@ -59,7 +59,6 @@ def test_capabilities_expose_canonical_crop_defaults(crop: str) -> None:
     assert defaults["end_time"] == canonical.end_time.isoformat()
 
 
-<<<<<<< HEAD
 def test_capabilities_expose_configured_plot_details_and_coordinates() -> None:
     details = InteractiveFrontendAdapter().capabilities()["plot_details"]["tomato"]
     assert details == {
@@ -101,8 +100,6 @@ def test_plot_details_ui_uses_optional_external_map_link() -> None:
     assert "selected coordinates are sent to OpenStreetMap only if you open the map" in html
 
 
-=======
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
 @pytest.mark.parametrize(
     ("crop", "environment", "expected"),
     [
@@ -359,7 +356,6 @@ def test_html_exposes_labeled_keyboard_accessible_controls_and_live_states() -> 
     assert 'marker.setAttribute("aria-label"' in app
 
 
-<<<<<<< HEAD
 def test_setup_panel_has_no_misleading_step_number() -> None:
     html = (FRONTEND / "index.html").read_text(encoding="utf-8")
     assert 'class="step-tag"' not in html
@@ -407,8 +403,6 @@ def test_phenological_stage_colors_are_keyed_to_plant_stage_meaning() -> None:
     assert "color: STAGE_COLORS[previous] || UNKNOWN_STAGE_COLOR" in app
 
 
-=======
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
 def test_frontend_preserves_structured_error_codes_and_paths_as_text() -> None:
     app = (FRONTEND / "app.js").read_text(encoding="utf-8")
     assert "item.code" in app
@@ -417,7 +411,6 @@ def test_frontend_preserves_structured_error_codes_and_paths_as_text() -> None:
     assert "innerHTML" not in app
 
 
-<<<<<<< HEAD
 def test_svg_trajectory_path_disables_default_black_fill_explicitly() -> None:
     app = (FRONTEND / "app.js").read_text(encoding="utf-8")
     assert 'class: "chart-line", fill: "none"' in app
@@ -427,8 +420,6 @@ def test_svg_trajectory_path_disables_default_black_fill_explicitly() -> None:
     assert ".chart-line { fill: none;" in styles
 
 
-=======
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
 def test_frontend_requests_hash_by_default_and_does_not_calculate_hashes() -> None:
     app = (FRONTEND / "app.js").read_text(encoding="utf-8")
     html = (FRONTEND / "index.html").read_text(encoding="utf-8")

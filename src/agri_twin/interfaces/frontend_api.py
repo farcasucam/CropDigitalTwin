@@ -21,10 +21,7 @@ from agri_twin.application.interactive_simulation import (
     plan_execution,
 )
 from agri_twin.application.scientific_benchmark import PERENNIAL_CROPS
-<<<<<<< HEAD
 from agri_twin.domain.farm import FarmConfigRepository
-=======
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
 
 LOGGER = logging.getLogger(__name__)
 FRONTEND_ROOT = Path(__file__).resolve().parents[3] / "frontend"
@@ -41,10 +38,7 @@ class InteractiveFrontendAdapter:
         self._lock = threading.RLock()
         self._workers: dict[str, threading.Thread] = {}
         self._worker_errors: dict[str, str] = {}
-<<<<<<< HEAD
         self._farm_config = FarmConfigRepository(FRONTEND_ROOT.parent / "src" / "farm_config.json")
-=======
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
 
     def _tick(self) -> float | None:
         return self._timer() if self._timer is not None else None
@@ -55,15 +49,10 @@ class InteractiveFrontendAdapter:
     def capabilities(self) -> dict[str, Any]:
         contract = contract_description()
         crop_defaults: dict[str, Any] = {}
-<<<<<<< HEAD
         plot_details: dict[str, dict[str, Any]] = {}
         environments: dict[str, list[str]] = {}
         varieties: dict[str, list[str]] = {}
         configured_plots = {plot.plot_id: plot for plot in self._farm_config.plots}
-=======
-        environments: dict[str, list[str]] = {}
-        varieties: dict[str, list[str]] = {}
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
         for crop in contract["crops"]:
             canonical = canonicalize_request({"crop": crop})
             varieties[crop] = [canonical.variety]
@@ -75,7 +64,6 @@ class InteractiveFrontendAdapter:
                 "end_time": canonical.end_time.isoformat(),
                 "dormancy_applicable": crop in PERENNIAL_CROPS,
             }
-<<<<<<< HEAD
             configured_plot = configured_plots.get(canonical.plot)
             if configured_plot is None:
                 plot_details[crop] = {
@@ -107,8 +95,6 @@ class InteractiveFrontendAdapter:
                     "metadata_status": "CONFIGURED",
                     "metadata_source": "src/farm_config.json",
                 }
-=======
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
             supported = []
             for environment in contract["environments"]:
                 try:
@@ -118,10 +104,7 @@ class InteractiveFrontendAdapter:
                 supported.append(environment)
             environments[crop] = supported
         contract["crop_defaults"] = crop_defaults
-<<<<<<< HEAD
         contract["plot_details"] = plot_details
-=======
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
         contract["crop_environments"] = environments
         contract["crop_varieties"] = varieties
         contract["perennial_crops"] = sorted(PERENNIAL_CROPS)

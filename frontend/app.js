@@ -60,7 +60,6 @@ const VARIABLE_LABELS = {
   chilling_accumulated: "Accumulated chilling",
 };
 
-<<<<<<< HEAD
 const STAGE_COLORS = {
   establishment: { band: "#f2e7ce", border: "#a77a35", card: "#faf5e9" },
   vegetative_growth: { band: "#dcefe3", border: "#4d8757", card: "#eff7f0" },
@@ -69,8 +68,6 @@ const STAGE_COLORS = {
 };
 const UNKNOWN_STAGE_COLOR = { band: "#e8ece9", border: "#75827a", card: "#f4f6f4" };
 
-=======
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
 function node(tag, className, text) {
   const element = document.createElement(tag);
   if (className) element.className = className;
@@ -177,11 +174,7 @@ async function refreshPlan() {
     $("#plan-basis").textContent = planned.plan.basis;
     const defaults = state.capabilities.crop_defaults[$("#crop").value];
     $("#period-summary").textContent =
-<<<<<<< HEAD
       `${formatTimestampRange(planned.request.start_time, planned.request.end_time)} · ${planned.plan.total_steps} hourly steps`;
-=======
-      `${planned.request.start_time} → ${planned.request.end_time} · ${planned.plan.total_steps} hourly steps`;
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
     $("#simulate-button").disabled = false;
     $("#error-panel").hidden = true;
     $("#error-panel").replaceChildren();
@@ -208,7 +201,6 @@ function updateEnvironmentOptions() {
     : supported[0] || "";
 }
 
-<<<<<<< HEAD
 function updatePlotDetails() {
   const crop = $("#crop").value;
   const plotId = $("#plot").value;
@@ -278,18 +270,13 @@ function detailRow(label, value) {
   return fragment;
 }
 
-=======
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
 function updateCropConfiguration() {
   const crop = $("#crop").value;
   const defaults = state.capabilities.crop_defaults[crop];
   replaceOptions($("#variety"), state.capabilities.crop_varieties[crop]);
   $("#variety").value = defaults.variety;
   replaceOptions($("#plot"), [defaults.plot]);
-<<<<<<< HEAD
   updatePlotDetails();
-=======
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
   updateEnvironmentOptions();
   const dormancy = Boolean(defaults.dormancy_applicable);
   $("#use-dormancy").disabled = !dormancy;
@@ -362,11 +349,7 @@ function renderResult(response) {
     ["Variety", request.variety],
     ["Environment", request.environment],
     ["Scenario", request.scenario],
-<<<<<<< HEAD
     ["Period", formatTimestampRange(result.start || request.start_time, result.end)],
-=======
-    ["Period", `${result.start || request.start_time || "—"} → ${result.end || "—"}`],
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
     ["Execution status", response.execution_status],
     ["Execution class", plan.mode],
     ["Completed", result.complete ? "Complete" : "Partial (cancelled)"],
@@ -435,7 +418,6 @@ function renderAvailability(result) {
   }
 }
 
-<<<<<<< HEAD
 function chartSvg(name, values, times, unit, stageSegments = []) {
   const width = 640;
   const height = 280;
@@ -443,31 +425,17 @@ function chartSvg(name, values, times, unit, stageSegments = []) {
   const right = 18;
   const top = 15;
   const bottom = 66;
-=======
-function chartSvg(name, values, times, unit) {
-  const width = 640;
-  const height = 210;
-  const left = 52;
-  const right = 18;
-  const top = 15;
-  const bottom = 29;
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
   const numeric = values.map(Number);
   const min = Math.min(...numeric);
   const max = Math.max(...numeric);
   const pad = min === max ? Math.max(1, Math.abs(min) * 0.05) : (max - min) * 0.06;
-<<<<<<< HEAD
   const low = min >= 0 ? Math.max(0, min - pad) : min - pad;
-=======
-  const low = min - pad;
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
   const high = max + pad;
   const plotWidth = width - left - right;
   const plotHeight = height - top - bottom;
   const x = (index) => left + (numeric.length <= 1 ? 0 : index * plotWidth / (numeric.length - 1));
   const y = (value) => top + (high - value) * plotHeight / (high - low);
   const points = numeric.map((value, index) => `${index ? "L" : "M"}${x(index).toFixed(2)},${y(value).toFixed(2)}`).join(" ");
-<<<<<<< HEAD
   const svgNode = (tag, attributes = {}) => {
     const element = document.createElementNS("http://www.w3.org/2000/svg", tag);
     for (const [key, value] of Object.entries(attributes)) element.setAttribute(key, String(value));
@@ -599,38 +567,6 @@ function chartSvg(name, values, times, unit) {
   const stride = Math.max(1, Math.ceil(numeric.length / markerCount));
   for (let index = 0; index < numeric.length; index += stride) {
     const marker = svgNode("circle", { class: "chart-marker", cx: x(index), cy: y(numeric[index]), r: 3 });
-=======
-  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
-  svg.setAttribute("role", "img");
-  svg.setAttribute("aria-label", `${name}: ${numeric.length} reported API samples, ${formatValue(min)} to ${formatValue(max)} ${unit}`);
-  const desc = document.createElementNS(svg.namespaceURI, "desc");
-  desc.textContent = `Trajectory of ${name}; all ${numeric.length} values are plotted in API order without interpolation.`;
-  svg.append(desc);
-  const axis = document.createElementNS(svg.namespaceURI, "path");
-  axis.setAttribute("class", "chart-axis");
-  axis.setAttribute("d", `M${left},${top}V${height - bottom}H${width - right}`);
-  svg.append(axis);
-  const line = document.createElementNS(svg.namespaceURI, "path");
-  line.setAttribute("class", "chart-line");
-  line.setAttribute("d", points);
-  svg.append(line);
-  const yLabel = document.createElementNS(svg.namespaceURI, "text");
-  yLabel.setAttribute("x", "4");
-  yLabel.setAttribute("y", "13");
-  yLabel.setAttribute("fill", "#64766e");
-  yLabel.setAttribute("font-size", "11");
-  yLabel.textContent = unit || "";
-  svg.append(yLabel);
-  const markerCount = Math.min(numeric.length, 90);
-  const stride = Math.max(1, Math.ceil(numeric.length / markerCount));
-  for (let index = 0; index < numeric.length; index += stride) {
-    const marker = document.createElementNS(svg.namespaceURI, "circle");
-    marker.setAttribute("class", "chart-marker");
-    marker.setAttribute("cx", x(index));
-    marker.setAttribute("cy", y(numeric[index]));
-    marker.setAttribute("r", "3");
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
     marker.setAttribute("tabindex", "0");
     marker.setAttribute("aria-label", `${name}, ${times?.[index] || `sample ${index + 1}`}: ${formatValue(numeric[index])} ${unit || ""}`);
     const title = document.createElementNS(svg.namespaceURI, "title");
@@ -641,7 +577,6 @@ function chartSvg(name, values, times, unit) {
   return svg;
 }
 
-<<<<<<< HEAD
 function formatAxisValue(value, step) {
   const decimals = Math.max(0, Math.min(4, Math.ceil(-Math.log10(Math.abs(step) || 1))));
   return new Intl.NumberFormat("en-GB", {
@@ -650,8 +585,6 @@ function formatAxisValue(value, step) {
   }).format(value);
 }
 
-=======
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
 function renderCharts(result) {
   const container = $("#chart-grid");
   container.replaceChildren();
@@ -661,10 +594,7 @@ function renderCharts(result) {
     return;
   }
   const availability = new Map((result.variables || []).map((item) => [item.name, item]));
-<<<<<<< HEAD
   const stageSegments = getStageSegments(trajectory);
-=======
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
   let chartCount = 0;
   for (const chart of CHARTS) {
     const names = chart.names.filter((name) => availability.get(name)?.availability === "AVAILABLE"
@@ -678,17 +608,8 @@ function renderCharts(result) {
       card.append(node("h3", "", title));
       card.append(node("p", "", `${variable.description || variable.name} · ${variable.unit || "unit not specified"}`));
       const wrap = node("div", "chart-wrap");
-<<<<<<< HEAD
       wrap.append(chartSvg(title, trajectory[name], trajectory.time || [], variable.unit, stageSegments));
       card.append(wrap);
-=======
-      wrap.append(chartSvg(title, trajectory[name], trajectory.time || [], variable.unit));
-      card.append(wrap);
-      const caption = node("div", "chart-caption");
-      caption.append(node("span", "", trajectory.time?.[0] || "First API sample"));
-      caption.append(node("span", "", trajectory.time?.[trajectory.time.length - 1] || "Last API sample"));
-      card.append(caption);
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
       container.append(card);
       chartCount += 1;
     }
@@ -700,7 +621,6 @@ function renderStages(result) {
   const list = $("#stage-timeline");
   list.replaceChildren();
   const trajectory = result.trajectory;
-<<<<<<< HEAD
   const segments = getStageSegments(trajectory);
   if (!segments.length) {
     list.append(node("li", "", "No stage trajectory was returned."));
@@ -715,37 +635,10 @@ function renderStages(result) {
     swatch.style.setProperty("--stage-color", segment.color.border);
     swatch.setAttribute("aria-hidden", "true");
     item.append(swatch, node("strong", "", String(segment.stage)), dates);
-=======
-  const stages = trajectory?.crop_stage;
-  if (!Array.isArray(stages) || !stages.length) {
-    list.append(node("li", "", "No stage trajectory was returned."));
-    return;
-  }
-  let previous;
-  let stageStart = 0;
-  const segments = [];
-  for (let index = 0; index <= stages.length; index += 1) {
-    const stage = stages[index];
-    if (index === 0) {
-      previous = stage;
-      continue;
-    }
-    if (stage !== previous) {
-      segments.push({ stage: previous, start: trajectory.time?.[stageStart], end: trajectory.time?.[index - 1] });
-      previous = stage;
-      stageStart = index;
-    }
-  }
-  for (const segment of segments) {
-    const item = node("li");
-    item.append(node("strong", "", String(segment.stage)));
-    item.append(node("span", "", `${segment.start || "—"} → ${segment.end || "—"}`));
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
     list.append(item);
   }
 }
 
-<<<<<<< HEAD
 function getStageSegments(trajectory) {
   const stages = trajectory?.crop_stage;
   if (!Array.isArray(stages) || !stages.length) return [];
@@ -794,8 +687,6 @@ function formatTimestampRange(start, end) {
   return `${compact(startDate)} → ${compact(endDate)} UTC`;
 }
 
-=======
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
 function renderWarnings(warnings) {
   const list = $("#warnings-list");
   list.replaceChildren();
@@ -910,10 +801,7 @@ async function initialize() {
     replaceOptions($("#chilling-model"), state.capabilities.chilling_models);
     $("#crop").addEventListener("change", updateCropConfiguration);
     $("#environment").addEventListener("change", () => void refreshPlan());
-<<<<<<< HEAD
     $("#plot").addEventListener("change", updatePlotDetails);
-=======
->>>>>>> 03c25fbf473b381ba50ae6376a578e256ebae33e
     $("#scenario").addEventListener("change", () => void refreshPlan());
     $("#horizon").addEventListener("change", () => void refreshPlan());
     $("#trajectory-hash").addEventListener("change", () => void refreshPlan());
