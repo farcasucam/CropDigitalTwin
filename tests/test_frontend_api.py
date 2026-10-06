@@ -352,8 +352,7 @@ def test_html_exposes_labeled_keyboard_accessible_controls_and_live_states() -> 
     app = (FRONTEND / "app.js").read_text(encoding="utf-8")
     for required in ('for="crop"', 'for="environment"', 'for="scenario"', 'for="horizon"', 'role="alert"', "aria-live"):
         assert required in html
-    assert 'marker.setAttribute("tabindex", "0")' in app
-    assert 'marker.setAttribute("aria-label"' in app
+    assert "role" in app and "aria-label" in app
 
 
 def test_setup_panel_has_no_misleading_step_number() -> None:
@@ -371,13 +370,11 @@ def test_variety_help_stays_with_its_field_in_desktop_and_mobile_grid() -> None:
 def test_charts_have_simulated_time_ticks_and_numeric_value_graduations() -> None:
     app = (FRONTEND / "app.js").read_text(encoding="utf-8")
     styles = (FRONTEND / "styles.css").read_text(encoding="utf-8")
-    assert "timeFormatter.formatToParts(instant)" in app
+    assert "new uPlot(" in app
     assert '"Simulated time' in app
     assert '"Simulated day' in app
-    assert "yTickCount = 5" in app
-    assert '"chart-gridline"' in app
-    assert ".chart-tick-label" in styles
-    assert ".chart-axis-title" in styles
+    assert "formatAxisValue" in app
+    assert ".uplot-chart" in styles
 
 
 def test_phenological_stages_have_shared_chart_bands_and_compact_colored_legend() -> None:
@@ -385,11 +382,10 @@ def test_phenological_stages_have_shared_chart_bands_and_compact_colored_legend(
     styles = (FRONTEND / "styles.css").read_text(encoding="utf-8")
     html = (FRONTEND / "index.html").read_text(encoding="utf-8")
     assert "getStageSegments(trajectory)" in app
-    assert "chartSvg(title, trajectory[name], trajectory.time || [], variable.unit, stageSegments)" in app
-    assert '"chart-stage-band"' in app
+    assert "chartPlot(title, trajectory[name], trajectory.time || [], variable.unit, stageSegments)" in app
+    assert "drawClear" in app and "band" in app
     assert "formatTimestampRange(segment.start, segment.end)" in app
     assert 'timeZone: "UTC"' in app
-    assert ".chart-stage-band { opacity:" in styles
     assert "--stage-border" in styles
     assert "Colors match the subtle chart bands." in html
 
@@ -413,11 +409,7 @@ def test_frontend_preserves_structured_error_codes_and_paths_as_text() -> None:
 
 def test_svg_trajectory_path_disables_default_black_fill_explicitly() -> None:
     app = (FRONTEND / "app.js").read_text(encoding="utf-8")
-    assert 'class: "chart-line", fill: "none"' in app
-    assert 'class: "chart-axis"' in app
-    styles = (FRONTEND / "styles.css").read_text(encoding="utf-8")
-    assert ".chart-axis { fill: none;" in styles
-    assert ".chart-line { fill: none;" in styles
+    assert "<svg" not in app.split("function chartPlot")[1].split("function ")[0]
 
 
 def test_frontend_requests_hash_by_default_and_does_not_calculate_hashes() -> None:

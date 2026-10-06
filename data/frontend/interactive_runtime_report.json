@@ -1,0 +1,74 @@
+{
+  "browser_smoke_status": "NOT_RUN",
+  "checks": {
+    "capabilities_expose_runtime_contract": true,
+    "history_unchanged_before_first_event": true,
+    "no_per_plant_fabrication": true,
+    "runtime_tests_pass": true,
+    "scenarios_differ": true,
+    "scientific_status_has_no_positive_claims": true,
+    "static_audit_passes": true,
+    "time_controller_present": true,
+    "user_events_labelled_synthetic": true,
+    "views_present": true,
+    "water_stress_not_supported": true,
+    "what_if_deterministic": true
+  },
+  "deterministic_hash": "b460ec00a154408d91db56cb7e76c8c1287e9cd1c468c56c0695e28308b71f40",
+  "failed_checks": [],
+  "full_regression_passed": null,
+  "full_regression_skipped": null,
+  "full_regression_status": "NOT_RUN",
+  "performance_observations": {
+    "note": "machine-dependent, excluded from deterministic_hash",
+    "timings_seconds": {
+      "what_if_heat_wave_seconds": 0.776,
+      "what_if_ventilation_rain_seconds": 0.72
+    }
+  },
+  "phase": "5.39",
+  "renderer": "SVG isometric (no external library)",
+  "runtime_test_status": "PASS",
+  "scientific_status": {
+    "BIOLOGICAL_VALIDITY_CLAIMED": false,
+    "CALIBRATION_PERFORMED": false,
+    "DATA_ASSIMILATION_IMPLEMENTED": false,
+    "EXPERIMENTAL_VALIDATION_PERFORMED": false,
+    "FIELD_ACCURACY_CLAIMED": false,
+    "REAL_VERIFIED": 0,
+    "forcing_classification": "SYNTHETIC",
+    "parameter_status": "ENGINEERING_DEFAULTS_UNCALIBRATED",
+    "result_type": "SOFTWARE_SIMULATION",
+    "statement": "Deterministic output of the implemented mechanistic-simplified model under synthetic forcing; software behaviour only, not a prediction, calibration or validated agronomic result."
+  },
+  "scientific_status_flags": [
+    "REAL_VERIFIED = 0",
+    "CALIBRATION_PERFORMED = false",
+    "EXPERIMENTAL_VALIDATION_PERFORMED = false",
+    "BIOLOGICAL_VALIDITY_CLAIMED = false",
+    "FIELD_ACCURACY_CLAIMED = false",
+    "DATA_ASSIMILATION_IMPLEMENTED = false"
+  ],
+  "static_audit_status": "PASS",
+  "status": "PASS",
+  "supported_events": [
+    "CO2",
+    "COLD_WAVE",
+    "DRYNESS",
+    "HEAT_WAVE",
+    "HIGH_RADIATION",
+    "IRRIGATION",
+    "LOW_RADIATION",
+    "RAIN",
+    "SHADING",
+    "VENTILATION",
+    "WIND"
+  ],
+  "unsupported_events": [
+    "WATER_STRESS"
+  ],
+  "what_if_hashes": {
+    "heat_wave": "0d5b5099c70950d85ef0fe77444d8d2bfedc5159238d28f1703625aece0d1805",
+    "ventilation_rain": "0857e508eb7248244bd150cdb09010a05d2f3d33a632555562b23b88b8650f59"
+  }
+}

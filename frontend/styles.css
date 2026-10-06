@@ -192,3 +192,55 @@ footer { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
+
+.runtime-panel { margin-top: 1.2rem; }
+.runtime-banner { padding: .6rem .8rem; border-left: 4px solid var(--amber); background: var(--amber-bg); border-radius: 8px; font-size: .82rem; }
+.runtime-controls, .runtime-actions, .iso-toolbar { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin: .6rem 0; }
+.runtime-form label { display: grid; gap: .2rem; font-size: .8rem; font-weight: 650; }
+.runtime-event-fields { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .6rem; margin-top: .6rem; }
+.runtime-form input, .runtime-form select, .iso-toolbar select { padding: .4rem; border: 1px solid var(--line); border-radius: 8px; }
+.event-list { padding-left: 1.1rem; font-size: .8rem; }
+.link-button { border: 0; background: none; color: var(--green-dark); text-decoration: underline; cursor: pointer; }
+.preview-box { padding: .7rem; border: 1px dashed var(--green); border-radius: 10px; font-size: .8rem; }
+.iso-wrap { border: 1px solid var(--line); border-radius: 14px; background: #f8fbf8; overflow: hidden; touch-action: pan-y; position: relative; }
+#iso-svg { width: 100%; height: auto; max-height: 440px; display: block; cursor: grab; }
+.iso-toolbar button { padding: .35rem .7rem; border: 1px solid var(--line); border-radius: 8px; background: #fff; cursor: pointer; }
+.iso-toolbar button.active { background: var(--mint); border-color: var(--green); }
+.iso-toolbar input[type="range"] { flex: 1 1 160px; }
+.iso-part { cursor: pointer; }
+.iso-part.selected { stroke: #123b2c; stroke-width: 3; }
+.chart-card svg { width: 100%; height: auto; }
+@media (max-width: 900px) { .runtime-event-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .runtime-event-fields { grid-template-columns: 1fr; } }
+
+/* Phase 5.40 visual simulation */
+.iso-tooltip { position: absolute; z-index: 5; max-width: 190px; padding: .4rem .55rem; background: #17352d; color: #fff; border-radius: 8px; font-size: .72rem; pointer-events: none; }
+.iso-tooltip[hidden] { display: none; }
+.iso-wrap:focus-visible, .iso-part:focus-visible { outline: 3px solid #1b6fb5; outline-offset: 2px; }
+.layer-toggles, .chart-variables { display: flex; flex-wrap: wrap; gap: .4rem .9rem; border: 1px solid var(--line); border-radius: 10px; padding: .4rem .7rem; margin: .5rem 0; min-width: 0; }
+.layer-toggles legend, .chart-variables legend { font-size: .75rem; font-weight: 650; padding: 0 .3rem; }
+.check { display: inline-flex; align-items: center; gap: .3rem; font-size: .8rem; }
+.chart-variables > div { display: flex; flex-wrap: wrap; gap: .3rem .9rem; }
+.chart-controls { display: flex; flex-wrap: wrap; gap: .6rem 1rem; align-items: center; }
+.charts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
+.chart-item { margin: 0; min-width: 0; padding: .5rem; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); overflow: hidden; }
+.chart-item figcaption { font-size: .78rem; font-weight: 650; margin-bottom: .2rem; }
+.chart-canvas { max-width: 100%; overflow: hidden; }
+.table-wrap { overflow-x: auto; max-width: 100%; margin: .6rem 0; }
+.data-table { border-collapse: collapse; width: 100%; font-size: .75rem; }
+.data-table caption { text-align: left; font-weight: 650; padding: .3rem 0; }
+.data-table th, .data-table td { border-bottom: 1px solid var(--line); padding: .25rem .5rem; text-align: left; vertical-align: top; }
+.session-json { width: 100%; box-sizing: border-box; font-family: ui-monospace, Consolas, monospace; font-size: .72rem; border: 1px solid var(--line); border-radius: 8px; padding: .5rem; }
+@media (max-width: 900px) { .charts { grid-template-columns: 1fr; } }
+@media (max-width: 620px) {
+  .iso-toolbar { gap: .4rem; }
+  .iso-toolbar button, .iso-toolbar select { min-height: 40px; }
+  .iso-toolbar input[type="range"] { flex-basis: 100%; }
+}
+
+#replay-verdict, #layer-status, #chart-status { overflow-wrap: anywhere; word-break: break-word; }
+
+
+.uplot-chart { width: 100%; min-width: 0; overflow: hidden; }
+.uplot-chart .uplot { max-width: 100%; }
+

@@ -3,7 +3,7 @@
 SOFTWARE_RESULT: contract, determinism, checkpoint/resume, cancellation, error, result, immutability and static-audit checks.
 PERFORMANCE_MEASUREMENT: machine-dependent timings, never hashed. SCIENTIFIC_EVIDENCE: none.
 
-- status: `PASS`; deterministic hash: `74811542b9194953e1412f09edcfd64dbd9c355a1a1bd273451058fde5687aac`; API version `1.0`
+- status: `PASS`; deterministic hash: `0db743e51025857148063253eb5f59530836e2591d47d067f3752045bbb99ddd`; API version `1.0`
 
 ## Sections
 
@@ -49,11 +49,11 @@ PERFORMANCE_MEASUREMENT: machine-dependent timings, never hashed. SCIENTIFIC_EVI
 
 | Case | Steps | Direct | API simulation | API overhead | Overhead % | With trajectory hash % | to_json | Bytes |
 |---|---|---|---|---|---|---|---|---|
-| tomato_outdoor_7d | 168 | 0.052 | 0.054 | 0.0062 | 11.9 | 44.9 | 0.004 | 75860 |
-| lettuce_greenhouse_full_season | 1008 | 0.347 | 0.331 | 0.0065 | 1.9 | 30.6 | 0.024 | 433611 |
-| tomato_outdoor_full_season | 3744 | 1.226 | 1.200 | 0.0402 | 3.3 | 35.9 | 0.081 | 1317384 |
+| tomato_outdoor_7d | 168 | 0.068 | 0.061 | -0.0034 | -5.0 | 20.7 | 0.005 | 75860 |
+| lettuce_greenhouse_full_season | 1008 | 0.374 | 0.383 | 0.0317 | 8.5 | 39.6 | 0.029 | 433612 |
+| tomato_outdoor_full_season | 3744 | 1.442 | 1.481 | 0.1346 | 9.3 | 33.2 | 0.102 | 1317389 |
 
-Canonicalization per request: 0.048 ms.
+Canonicalization per request: 0.080 ms.
 
 ## Limitations
 

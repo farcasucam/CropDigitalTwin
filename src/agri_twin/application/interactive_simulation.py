@@ -26,7 +26,7 @@ import ast
 import hashlib
 import json
 import math
-from dataclasses import dataclass, field, fields
+from dataclasses import dataclass, field, fields, replace
 from datetime import datetime, timedelta, timezone
 from enum import StrEnum
 from pathlib import Path
@@ -43,6 +43,7 @@ from agri_twin.application.integrated_synthetic_validation import (
 )
 from agri_twin.application.orchestrator import CropSimulationSnapshot
 from agri_twin.application.providers import SyntheticWeatherProvider
+from agri_twin.application.runtime_events import RuntimeEvent, RuntimeEventError, event_sequence_hash, parse_runtime_events
 from agri_twin.application.scenarios import Scenario, ScenarioError, ScenarioRunner
 from agri_twin.application.scientific_benchmark import KNOWN_CROPS, KNOWN_VARIETIES, PERENNIAL_CROPS
 from agri_twin.application.seasonal_synthetic_campaign import (
@@ -89,7 +90,7 @@ SCENARIOS = (*MANDATORY_SCENARIOS, *SUPPLEMENTARY_SCENARIOS)
 ENVIRONMENTS = {"outdoor": "outdoor", "greenhouse": "passive_greenhouse"}  # API name -> orchestrator greenhouse_mode
 WEATHER_SOURCES = ("SYNTHETIC_SEASONAL",)
 WEATHER_GENERATOR = "WeatherEngine(seasonal + daily variability, seeded) + ScenarioEvent overlays (Phase 5.32)"
-REQUEST_FIELDS = ("api_version", "crop", "variety", "environment", "plot", "scenario", "start_time", "end_time", "seed", "weather", "dormancy", "checkpoint", "options")
+REQUEST_FIELDS = ("api_version", "crop", "variety", "environment", "plot", "scenario", "start_time", "end_time", "seed", "weather", "dormancy", "checkpoint", "options", "runtime_events")
 WEATHER_FIELDS = ("source", "profile_overrides")
 OPTION_FIELDS = ("progress_interval_steps", "require_requested_chilling_model", "include_trajectory", "compute_trajectory_hash", "variables")
 CHECKPOINT_FIELDS = ("format", "simulation_time", "payload", "sha256", "resume_hash")
@@ -358,6 +359,7 @@ class SimulationRequest:
     checkpoint: SimulationCheckpoint | None = None
     options: ExecutionOptions = ExecutionOptions()
     api_version: str = API_VERSION
+    runtime_events: tuple[RuntimeEvent, ...] = ()  # Phase 5.39: user-defined future events (empty: unchanged 5.37 behaviour)
 
     @property
     def total_steps(self) -> int:
@@ -367,12 +369,15 @@ class SimulationRequest:
         return {"source": self.weather_source, "profile_overrides": dict(self.profile_overrides)}
 
     def to_dict(self) -> dict[str, Any]:
-        return {
+        document = {
             "api_version": self.api_version, "crop": self.crop, "variety": self.variety, "environment": self.environment, "plot": self.plot,
             "scenario": self.scenario, "start_time": self.start_time.isoformat(), "end_time": self.end_time.isoformat(), "seed": self.seed,
             "weather": self.weather_dict(), "dormancy": self.dormancy.to_dict()["dormancy"],
             "checkpoint": self.checkpoint.to_dict() if self.checkpoint is not None else None, "options": self.options.to_dict(),
         }
+        if self.runtime_events:
+            document["runtime_events"] = [event.request_dict() for event in self.runtime_events]
+        return document
 
     def canonical_json(self) -> str:
         return _canonical_json(self.to_dict())
@@ -589,7 +594,14 @@ def canonicalize_request(document: SimulationRequest | Mapping[str, Any]) -> Sim
         raise _fail(ErrorCode.MODEL_NOT_READY, f"requested chilling model {dormancy.requested_chilling_model.value} is {dormancy.requested_model_status.value}: "
                                                f"no requirement in {MODEL_SPECS[dormancy.requested_chilling_model].unit.value}; the STRICT fallback would run "
                                                f"{dormancy.effective_chilling_model.value} and the request forbids it", "dormancy.chilling_model")
-    request = SimulationRequest(crop, variety, environment, plot.plot_id, scenario, start, end, seed, source, overrides, dormancy, checkpoint, options)
+    try:
+        base_ids = [event.event_id for event in build_campaign(crop, environment, scenario, seed=seed).scenario.events] if document.get("runtime_events") else []
+        runtime_events = parse_runtime_events(document.get("runtime_events"), environment=environment, earliest=start, latest=campaign_end, reserved_ids=base_ids)
+    except RuntimeEventError as exc:
+        raise _fail(ErrorCode(exc.kind), exc.message, exc.path) from None
+    except ScenarioError as exc:
+        raise _fail(ErrorCode.INVALID_CONFIGURATION, str(exc)) from None
+    request = SimulationRequest(crop, variety, environment, plot.plot_id, scenario, start, end, seed, source, overrides, dormancy, checkpoint, options, runtime_events=runtime_events)
     if checkpoint is not None:
         if checkpoint.resume_hash != request.resume_hash:
             raise _fail(ErrorCode.INVALID_CHECKPOINT, "checkpoint was produced by a different configuration (crop, environment, scenario, seed, weather or dormancy differ)", "checkpoint.resume_hash")
@@ -751,6 +763,7 @@ class _Execution:
     warnings: tuple[SimulationWarning, ...]
     status: ExecutionStatus = ExecutionStatus.CREATED
     cancel_requested: bool = False
+    pause_requested: bool = False
     completed_steps: int = 0
     last_snapshot: CropSimulationSnapshot | None = None
     snapshots: tuple[CropSimulationSnapshot, ...] = ()
@@ -794,7 +807,8 @@ class InteractiveSimulationService:
         canonicalized = self._tick()
         spec, scenario = self._prepare(canonical)
         self._sequence += 1
-        simulation_id = f"sim-{self._sequence:06d}-{canonical.request_hash[:12]}"
+        sequence = self._sequence
+        simulation_id = f"sim-{sequence:06d}-{canonical.request_hash[:12]}"
         execution = _Execution(simulation_id, canonical, spec, scenario, effective_configuration(canonical, spec, scenario), plan_execution(canonical), _configuration_warnings(canonical))
         if started is not None and canonicalized is not None:
             execution.timings["canonicalization_seconds"] = canonicalized - started
@@ -831,6 +845,11 @@ class InteractiveSimulationService:
                 scenario = resumed_scenario(scenario, restart_time, crop, soil, microclimate)
             except ScenarioError as exc:
                 raise _fail(ErrorCode.INVALID_CHECKPOINT, str(exc), "checkpoint.simulation_time") from None
+        if request.runtime_events:
+            try:
+                scenario = replace(scenario, events=scenario.events + tuple(event.to_scenario_event() for event in request.runtime_events))
+            except ScenarioError as exc:
+                raise _fail(ErrorCode.INVALID_CONFIGURATION, str(exc), "runtime_events") from None
         return spec, scenario
 
     # -- queries --------------------------------------------------------------------
@@ -863,12 +882,25 @@ class InteractiveSimulationService:
 
     def cancel_simulation(self, simulation_id: str) -> SimulationResponse:
         """Cooperative cancellation, observed at the next step boundary (no thread, no scheduler)."""
+        return self._stop(simulation_id, pause=False)
+
+    def pause_simulation(self, simulation_id: str) -> SimulationResponse:
+        """Cooperative pause: the same step-boundary stop as cancellation, recorded as ``PAUSED``.
+
+        The existing execution contract has one run per execution and no suspended status, so a
+        pause ends the execution (status CANCELLED, termination PAUSED) and returns the checkpoint
+        of the last completed step; resuming is a new execution from that checkpoint.
+        """
+        return self._stop(simulation_id, pause=True)
+
+    def _stop(self, simulation_id: str, *, pause: bool) -> SimulationResponse:
         execution = self._execution(simulation_id)
         if execution.status in TERMINAL_STATUSES:
             raise _fail(ErrorCode.INVALID_REQUEST, f"simulation is already {execution.status.value}", "simulation_id")
         execution.cancel_requested = True
+        execution.pause_requested = pause
         if execution.status is ExecutionStatus.CREATED:
-            execution.status, execution.termination = ExecutionStatus.CANCELLED, "CANCELLED_BEFORE_START"
+            execution.status, execution.termination = ExecutionStatus.CANCELLED, "PAUSED_BEFORE_START" if pause else "CANCELLED_BEFORE_START"
             execution.errors = (_cancellation_error(execution),)
             execution.response = self._response(execution)
             return execution.response
@@ -897,7 +929,7 @@ class InteractiveSimulationService:
                 execution.termination = "LISTENER_FAILED"
                 return False
             if execution.cancel_requested:
-                execution.termination = "CANCELLED"
+                execution.termination = "PAUSED" if execution.pause_requested else "CANCELLED"
                 return False
             return True
 
@@ -915,7 +947,7 @@ class InteractiveSimulationService:
         elif execution.termination == "LISTENER_FAILED":
             execution.status = ExecutionStatus.FAILED
             execution.errors = (SimulationError(ErrorCode.INTERNAL_EXECUTION_ERROR, f"progress listener raised: {execution.listener_error}; the model state was not affected"),)
-        elif execution.termination == "CANCELLED":
+        elif execution.termination in ("CANCELLED", "PAUSED"):
             execution.status = ExecutionStatus.CANCELLED
             execution.errors = (_cancellation_error(execution),)
         elif execution.termination == "HORIZON_REACHED" or (result.status == "SUCCESS" and len(result.snapshots) == total):
@@ -950,6 +982,8 @@ class InteractiveSimulationService:
         result = checkpoint = None
         hashes: dict[str, str | None] = {"request_hash": request.request_hash, "configuration_hash": _hash(execution.effective), "resume_hash": request.resume_hash,
                                          "trajectory_hash": None, "result_hash": None, "checkpoint_sha256": None}
+        if request.runtime_events:
+            hashes["event_sequence_hash"] = event_sequence_hash(request.runtime_events)
         warnings = execution.warnings
         if execution.status in TERMINAL_STATUSES and execution.snapshots:
             projected = self._tick()
@@ -970,6 +1004,9 @@ class InteractiveSimulationService:
 
 
 def _cancellation_error(execution: _Execution) -> SimulationError:
+    if execution.pause_requested:
+        return SimulationError(ErrorCode.CANCELLATION_REQUESTED, f"paused on request after {execution.completed_steps}/{execution.plan.total_steps} steps; the execution ended at a step "
+                                                                 "boundary and its checkpoint can be resumed. Operational stop, not a model or scientific failure.")
     return SimulationError(ErrorCode.CANCELLATION_REQUESTED, f"cancelled on request after {execution.completed_steps}/{execution.plan.total_steps} steps; the simulation did not finish. "
                                                              "Operational stop, not a model or scientific failure.")
 
@@ -984,8 +1021,9 @@ def _weather_factory(request: SimulationRequest) -> Callable[[Scenario], Synthet
 def effective_configuration(request: SimulationRequest, spec: CampaignSpec, scenario: Scenario) -> dict[str, Any]:
     """Resolved configuration actually executed (deterministic, hashed as configuration_hash)."""
     _, campaign_start, campaign_end = campaign_cycle(request.crop)
+    runtime_ids = {event.event_id for event in request.runtime_events}
     effective_dormancy = request.dormancy.describe()
-    return {
+    effective = {
         "crop": request.crop, "variety": request.variety, "plot": request.plot, "environment": request.environment,
         "greenhouse_mode": ENVIRONMENTS[request.environment], "scenario": request.scenario, "seed": request.seed,
         "period": {"campaign_start": campaign_start.isoformat(), "campaign_end": campaign_end.isoformat(), "start": request.start_time.isoformat(),
@@ -997,7 +1035,7 @@ def effective_configuration(request: SimulationRequest, spec: CampaignSpec, scen
                     "profile": effective_profile(request.scenario, request.profile_overrides), "profile_overrides": dict(request.profile_overrides),
                     "classification": "SYNTHETIC_FORCING", "represents_real_climatology": False},
         "scenario_events": [{"event_id": event.event_id, "event_type": event.event_type, "start": event.start.isoformat(), "end": event.end.isoformat(),
-                             "intensity": event.intensity, "parameters": dict(event.parameters)} for event in scenario.events],
+                             "intensity": event.intensity, "parameters": dict(event.parameters)} for event in scenario.events if event.event_id not in runtime_ids],
         "irrigation_factor": IRRIGATION_FACTOR.get(request.scenario, 1.0),
         "dormancy": effective_dormancy, "dormancy_applicable": request.crop in PERENNIAL_CROPS,
         "chilling_unit": MODEL_SPECS[request.dormancy.effective_chilling_model].unit.value,
@@ -1005,6 +1043,10 @@ def effective_configuration(request: SimulationRequest, spec: CampaignSpec, scen
                   "parameter_status": SCIENTIFIC_STATUS["parameter_status"]},
         "scenario_config_hash": scenario.config_hash(),
     }
+    if request.runtime_events:
+        effective["runtime_events"] = [event.to_dict() | {"provenance": "USER_DEFINED_EVENT", "classification": "USER_DEFINED_SYNTHETIC_FORCING"} for event in request.runtime_events]
+        effective["event_sequence_hash"] = event_sequence_hash(request.runtime_events)
+    return effective
 
 
 def _configuration_warnings(request: SimulationRequest) -> tuple[SimulationWarning, ...]:
@@ -1228,7 +1270,7 @@ class InteractiveSimulationApiSuite:
             "defaults_from_existing_configuration": (defaults.variety, defaults.plot, defaults.environment, defaults.scenario, defaults.seed, defaults.dormancy)
             == (KNOWN_VARIETIES["tomato"], plot.plot_id, plot.environment, DEFAULT_SCENARIO, DEFAULT_SEED, DEFAULT_DORMANCY_CONFIGURATION),
             "different_requests_different_hash": len({canonicalize_request({"crop": "tomato", "seed": seed}).request_hash for seed in (1, 2)}) == 2,
-            "no_execution_timestamp_in_request": set(first.to_dict()) == set(REQUEST_FIELDS),
+            "no_execution_timestamp_in_request": set(first.to_dict()) == set(REQUEST_FIELDS) - {"runtime_events"},  # runtime_events is serialised only when present (5.39)
         }
         return {"status": "PASS" if all(checks.values()) else "FAIL", "checks": checks, "example_canonical_json": first.canonical_json(), "example_request_hash": first.request_hash}
 

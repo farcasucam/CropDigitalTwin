@@ -10,6 +10,8 @@ from pathlib import Path
 from typing import Any, Callable
 from urllib.parse import urlparse
 
+from agri_twin.application.interactive_runtime import InteractiveRuntimeService
+from agri_twin.application.runtime_replay import RuntimeReplayService
 from agri_twin.application.interactive_simulation import (
     ErrorCode,
     SCIENTIFIC_STATUS,
@@ -35,6 +37,8 @@ class InteractiveFrontendAdapter:
     def __init__(self, *, timer: Callable[[], float] | None = None) -> None:
         self._timer = timer
         self.service = InteractiveSimulationService(timer=timer)
+        self.runtime = InteractiveRuntimeService(InteractiveSimulationService(timer=timer))
+        self.replay_service = RuntimeReplayService(self.runtime)
         self._lock = threading.RLock()
         self._workers: dict[str, threading.Thread] = {}
         self._worker_errors: dict[str, str] = {}
@@ -109,6 +113,7 @@ class InteractiveFrontendAdapter:
         contract["crop_varieties"] = varieties
         contract["perennial_crops"] = sorted(PERENNIAL_CROPS)
         contract["scientific_status"] = dict(SCIENTIFIC_STATUS)
+        contract["runtime"] = self.runtime.contract()
         contract["poll_interval_ms"] = POLL_INTERVAL_MS
         contract["execution_adapter"] = "SYNCHRONOUS_IN_PROCESS_THREAD (local only; not durable or distributed)"
         return contract
@@ -178,6 +183,24 @@ class InteractiveFrontendAdapter:
     def cancel(self, simulation_id: str) -> dict[str, Any]:
         return self.service.cancel_simulation(simulation_id).to_dict()
 
+    def pause(self, simulation_id: str) -> dict[str, Any]:
+        return self.service.pause_simulation(simulation_id).to_dict()
+
+    def runtime_contract(self) -> dict[str, Any]:
+        return self.runtime.contract()
+
+    def runtime_preview(self, document: Any) -> dict[str, Any]:
+        return self.runtime.preview_events(document)
+
+    def runtime_what_if(self, document: Any) -> dict[str, Any]:
+        return self.runtime.what_if(document)
+
+    def runtime_record(self, document: Any) -> dict[str, Any]:
+        return self.replay_service.record(document)
+
+    def runtime_replay(self, session: Any) -> dict[str, Any]:
+        return self.replay_service.replay(session)
+
     def resume(self, request: Any) -> dict[str, Any]:
         response = self.service.resume_simulation(request)
         self.start(response.simulation_id)
@@ -197,6 +220,9 @@ class FrontendRequestHandler(BaseHTTPRequestHandler):
         path = urlparse(self.path).path
         if path == "/api/capabilities":
             self._json(200, self.adapter.capabilities())
+            return
+        if path == "/api/runtime/contract":
+            self._json(200, self.adapter.runtime_contract())
             return
         if path.startswith("/api/simulations/"):
             try:
@@ -229,6 +255,16 @@ class FrontendRequestHandler(BaseHTTPRequestHandler):
                 payload = self.adapter.start(self._simulation_route(path)[0])
             elif path.startswith("/api/simulations/") and path.endswith("/cancel"):
                 payload = self.adapter.cancel(self._simulation_route(path)[0])
+            elif path.startswith("/api/simulations/") and path.endswith("/pause"):
+                payload = self.adapter.pause(self._simulation_route(path)[0])
+            elif path == "/api/runtime/preview":
+                payload = self.adapter.runtime_preview(body)
+            elif path == "/api/runtime/what-if":
+                payload = self.adapter.runtime_what_if(body)
+            elif path == "/api/runtime/record":
+                payload = self.adapter.runtime_record(body)
+            elif path == "/api/runtime/replay":
+                payload = self.adapter.runtime_replay(body)
             elif path == "/api/simulations/resume":
                 payload = self.adapter.resume(body)
             else:
@@ -273,6 +309,11 @@ class FrontendRequestHandler(BaseHTTPRequestHandler):
             "/index.html": ("index.html", "text/html; charset=utf-8"),
             "/styles.css": ("styles.css", "text/css; charset=utf-8"),
             "/app.js": ("app.js", "text/javascript; charset=utf-8"),
+            "/runtime.js": ("runtime.js", "text/javascript; charset=utf-8"),
+            "/visual_state.js": ("visual_state.js", "text/javascript; charset=utf-8"),
+            "/visual.js": ("visual.js", "text/javascript; charset=utf-8"),
+            "/vendor/uPlot.iife.min.js": ("vendor/uPlot.iife.min.js", "text/javascript; charset=utf-8"),
+            "/vendor/uPlot.min.css": ("vendor/uPlot.min.css", "text/css; charset=utf-8"),
         }
         target = files.get(path)
         if target is None:

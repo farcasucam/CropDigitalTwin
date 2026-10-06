@@ -10,7 +10,7 @@ No timestamp is added to the report.
 - Frontend test suite: PASS
 - Frontend build: PASS (static assets; no build pipeline required)
 - Full regression: NOT_RUN
-- Browser UI smoke: PASS
+- Browser UI smoke: NOT_RUN
 - API contract: 1.0
 - Supported crops: tomato, lettuce, pepper, grape, peach, plum, apple
 - E2E checks: PASS

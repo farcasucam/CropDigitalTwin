@@ -5,15 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
   <title>Agri-Twin · Interactive simulation</title>
-  <link rel="stylesheet" href="styles.css?v=20261005-stage-semantic-colors">
-  <script src="app.js?v=20261005-stage-semantic-colors" defer></script>
+  <link rel="stylesheet" href="vendor/uPlot.min.css?v=1.6.32">
+  <link rel="stylesheet" href="styles.css?v=20261102-visual7">
+  <script src="app.js?v=20261102-visual7" defer></script>
+  <script src="vendor/uPlot.iife.min.js?v=1.6.32" defer></script>
+  <script src="visual_state.js?v=20261102-visual7" defer></script>
+  <script src="visual.js?v=20261102-visual7" defer></script>
+  <script src="runtime.js?v=20261102-visual7" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to simulation</a>
   <header class="topbar">
     <a class="brand" href="/" aria-label="Agri-Twin home">
       <span class="brand-mark" aria-hidden="true">AT</span>
-      <span><strong>Agri-Twin</strong><small>Interactive simulation · Phase 5.38</small></span>
+      <span><strong>Agri-Twin</strong><small>Interactive simulation · Phase 5.40</small></span>
     </a>
     <span class="local-badge"><span aria-hidden="true">●</span> Local session</span>
   </header>
@@ -197,6 +202,100 @@
         <p class="field-help">UX timings are operational measurements and are excluded from scientific hashes.</p>
         <dl id="performance-metrics" class="metrics-grid"></dl>
       </section>
+    </section>
+    <section id="runtime-section" class="panel runtime-panel" aria-labelledby="runtime-heading">
+      <h2 id="runtime-heading">Runtime events &amp; what-if</h2>
+      <p class="runtime-banner" role="note"><strong>USER-DEFINED SYNTHETIC FORCING.</strong> Events are inputs to the existing backend simulation, applied only from the branch point onward. They are not observations; no calibration, validation or real-data claim is made. The interface only displays what the API returns.</p>
+      <div class="runtime-controls">
+        <button id="pause-button" class="button secondary" type="button" disabled>Pause (checkpoint)</button>
+        <span class="field-help">Pause stops the run at a completed step and returns a checkpoint; “Resume from checkpoint” continues it.</span>
+      </div>
+      <form id="whatif-form" class="runtime-form" autocomplete="off">
+        <label>Branch point <span id="branch-label" class="field-help"></span>
+          <input id="branch-range" type="range" min="1" max="2" value="1">
+        </label>
+        <div class="runtime-event-fields">
+          <label>Event type <select id="event-type"></select></label>
+          <label>Start (h after branch) <input id="event-start" type="number" min="0" step="1" value="24"></label>
+          <label>Duration (h) <input id="event-duration" type="number" min="1" step="1" value="48"></label>
+          <label><span id="event-intensity-label">Intensity</span> <input id="event-intensity" type="number" step="any"></label>
+          <label>Ramp (h) <input id="event-ramp" type="number" min="0" step="1" value="0"></label>
+        </div>
+        <p id="event-help" class="field-help"></p>
+        <div class="runtime-actions">
+          <button id="event-add" class="button secondary" type="button">Add event</button>
+          <button id="event-preview" class="button secondary" type="button">Preview</button>
+          <button id="whatif-run" class="button" type="submit">Run what-if (new branch)</button>
+        </div>
+      </form>
+      <ul id="event-list" class="event-list"></ul>
+      <div id="runtime-error" class="error-panel" role="alert" hidden></div>
+      <div id="preview-box" class="preview-box" hidden></div>
+      <div id="whatif-result" hidden>
+        <h3>Baseline vs intervention</h3>
+        <p id="whatif-summary" class="field-help"></p>
+        <h3>Charts</h3>
+        <div class="chart-controls">
+          <fieldset class="chart-variables"><legend>Variables</legend><div id="chart-variables"></div></fieldset>
+          <label>Horizon <select id="chart-horizon"><option value="full">Full run</option><option value="checkpoint">From checkpoint</option><option value="window">Checkpoint −3 d / +7 d</option><option value="last7">Last 7 days</option></select></label>
+          <button type="button" id="chart-reset">Reset zoom</button>
+          <label class="check"><input type="checkbox" id="chart-place"> Click chart to add event</label>
+        </div>
+        <p id="chart-status" class="field-help" role="status"></p>
+        <div id="charts" class="charts"></div>
+        <p class="field-help">Blue: baseline · orange dashed: intervention (USER-DEFINED SYNTHETIC FORCING) · shaded regions: events (solid = reached, dashed = future, grey = draft) · dark dashed line: checkpoint · dark line: play-head. Drag on a chart to zoom; zoom and cursor are linked.</p>
+        <div id="event-table" class="table-wrap"></div>
+        <div id="delta-table" class="table-wrap"></div>
+        <h3>Timeline</h3>
+        <div id="timeline" class="chart-card"></div>
+        <h3>Spatial view (read-only)</h3>
+        <div class="iso-toolbar" role="toolbar" aria-label="Spatial view controls">
+          <span class="seg" role="group" aria-label="View">
+            <button type="button" data-view="TOP">Top</button><button type="button" data-view="ISOMETRIC" class="active">Isometric</button><button type="button" data-view="DETAIL">Detail</button>
+          </span>
+          <label>Branch <select id="iso-branch"><option value="intervention">intervention</option><option value="baseline">baseline</option></select></label>
+          <button type="button" id="iso-zoom-out" aria-label="Zoom out">−</button>
+          <button type="button" id="iso-zoom-in" aria-label="Zoom in">+</button>
+          <button type="button" id="iso-reset">Reset view</button>
+        </div>
+        <fieldset class="layer-toggles"><legend>Layers</legend>
+          <label class="check"><input type="checkbox" data-layer="crop" checked> Crop</label>
+          <label class="check"><input type="checkbox" data-layer="soil" checked> Soil</label>
+          <label class="check"><input type="checkbox" data-layer="water" checked> Water</label>
+          <label class="check"><input type="checkbox" data-layer="temperature"> Temperature</label>
+          <label class="check"><input type="checkbox" data-layer="radiation"> Radiation</label>
+          <label class="check"><input type="checkbox" data-layer="vpd"> VPD</label>
+          <label class="check"><input type="checkbox" data-layer="co2"> CO2</label>
+          <label class="check"><input type="checkbox" data-layer="events" checked> Events</label>
+        </fieldset>
+        <div id="iso-wrap" class="iso-wrap" tabindex="0" role="group" aria-label="Spatial view. Space or K plays, arrow keys step one hour, Home restarts"><div id="iso-tooltip" class="iso-tooltip" role="tooltip" hidden></div><svg id="iso-svg" role="img" aria-label="Isometric view of the plot state at the selected simulation time" viewBox="0 0 640 380"></svg></div>
+        <div class="iso-toolbar time-controller" role="toolbar" aria-label="Time controller (presentation only)">
+          <button type="button" id="tc-restart">⏮ Restart</button>
+          <button type="button" id="tc-back" aria-label="Step backward">⏮ −1 h</button>
+          <button type="button" id="tc-play" aria-pressed="false">▶ Play</button>
+          <button type="button" id="tc-fwd" aria-label="Step forward">+1 h ⏭</button>
+          <label>Speed (simulated h per second) <select id="tc-speed"></select></label>
+          <button type="button" id="tc-event">Jump to event</button>
+          <button type="button" id="tc-checkpoint">Jump to checkpoint</button>
+          <input id="tc-slider" type="range" min="0" max="0" value="0" aria-label="Simulation time">
+          <output id="tc-time" aria-live="off"></output>
+          <span id="fps-meter" class="field-help"></span>
+        </div>
+        <p id="layer-status" class="field-help" role="status" aria-live="polite"></p>
+        <dl id="iso-readout" class="metrics-grid"></dl>
+        <h3>Detail</h3>
+        <label>Inspect <select id="detail-target"><option value="crop">Crop</option><option value="plot">Plot</option><option value="greenhouse">Greenhouse</option><option value="soil">Soil</option></select></label>
+        <div id="detail-panel" class="table-wrap"></div>
+        <h3>Record / replay session</h3>
+        <p class="field-help">A session stores the configuration, event sequence, seed, checkpoints and hashes (not a screenshot). Replay re-runs the backend and checks that events, checkpoints, trajectory hashes and the final state are reproduced.</p>
+        <div class="runtime-actions"><button type="button" id="session-record" class="button secondary">Record session</button><button type="button" id="session-replay" class="button secondary">Replay session</button></div>
+        <textarea id="session-json" class="session-json" rows="6" aria-label="Recorded session (JSON)" spellcheck="false"></textarea>
+        <p id="replay-verdict" class="field-help" role="status"></p>
+        <p class="field-help">Playback is presentation only: it never changes the simulation. The plot is shown as a lumped canopy; no per-plant state is created.</p>
+        <details><summary>Variable → visual mapping</summary><ul id="iso-mapping"></ul></details>
+        <details><summary>Provenance and hashes</summary><pre id="whatif-provenance"></pre></details>
+        <dl id="runtime-perf" class="metrics-grid"></dl>
+      </div>
     </section>
     <footer><span>Agri-Twin · API-owned science, frontend-only presentation</span><span id="adapter-note"></span></footer>
   </main>

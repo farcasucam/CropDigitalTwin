@@ -313,6 +313,7 @@ function updateExecution(response) {
     ? `${completed.toLocaleString()} / ${total.toLocaleString()} steps · ${(fraction * 100).toFixed(1)}%`
     : status || "Not started";
   $("#cancel-button").disabled = !["CREATED", "RUNNING"].includes(status);
+  window.onRuntimeExecution?.(response);
   const checkpoint = response.checkpoint;
   const cropDefault = state.capabilities.crop_defaults[state.request?.crop];
   $("#resume-button").disabled = !(status === "CANCELLED" && checkpoint && cropDefault
@@ -418,163 +419,64 @@ function renderAvailability(result) {
   }
 }
 
-function chartSvg(name, values, times, unit, stageSegments = []) {
-  const width = 640;
-  const height = 280;
-  const left = 74;
-  const right = 18;
-  const top = 15;
-  const bottom = 66;
+function chartPlot(name, values, times, unit, stageSegments = []) {
   const numeric = values.map(Number);
-  const min = Math.min(...numeric);
-  const max = Math.max(...numeric);
-  const pad = min === max ? Math.max(1, Math.abs(min) * 0.05) : (max - min) * 0.06;
-  const low = min >= 0 ? Math.max(0, min - pad) : min - pad;
-  const high = max + pad;
-  const plotWidth = width - left - right;
-  const plotHeight = height - top - bottom;
-  const x = (index) => left + (numeric.length <= 1 ? 0 : index * plotWidth / (numeric.length - 1));
-  const y = (value) => top + (high - value) * plotHeight / (high - low);
-  const points = numeric.map((value, index) => `${index ? "L" : "M"}${x(index).toFixed(2)},${y(value).toFixed(2)}`).join(" ");
-  const svgNode = (tag, attributes = {}) => {
-    const element = document.createElementNS("http://www.w3.org/2000/svg", tag);
-    for (const [key, value] of Object.entries(attributes)) element.setAttribute(key, String(value));
-    return element;
-  };
-  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
-  svg.setAttribute("role", "img");
+  const seconds = numeric.map((_, index) => {
+    const parsed = times?.[index] ? Date.parse(times[index]) / 1000 : NaN;
+    return Number.isFinite(parsed) ? parsed : index;
+  });
   const firstTime = times?.[0];
   const lastTime = times?.[times.length - 1];
-  const durationHours = firstTime && lastTime
-    ? (Date.parse(lastTime) - Date.parse(firstTime)) / 3_600_000
-    : 0;
-  const includeHour = durationHours <= 72;
-  svg.setAttribute(
+  const min = Math.min(...numeric);
+  const max = Math.max(...numeric);
+  const holder = node("div", "uplot-chart");
+  holder.setAttribute("role", "img");
+  holder.setAttribute(
     "aria-label",
     `${name}: ${numeric.length} reported API samples, ${formatValue(min)} to ${formatValue(max)} ${unit}, simulated time ${formatTimestampRange(firstTime, lastTime)}. Phenological stages are shown as subtle background bands and described in the stage timeline.`,
   );
-  const desc = document.createElementNS(svg.namespaceURI, "desc");
-  desc.textContent = `Trajectory of ${name}; all ${numeric.length} values are plotted in API order without interpolation. Subtle background bands mark the API-reported phenological stages. The horizontal axis shows simulated time in UTC. The vertical axis is graduated in ${unit || "the variable's reported unit"}.`;
-  svg.append(desc);
-  const bottomY = height - bottom;
-  const rightX = width - right;
-  for (const segment of stageSegments) {
-    const bandStart = segment.startIndex === 0
-      ? left
-      : (x(segment.startIndex - 1) + x(segment.startIndex)) / 2;
-    const bandEnd = segment.endIndex === numeric.length - 1
-      ? rightX
-      : (x(segment.endIndex) + x(segment.endIndex + 1)) / 2;
-    svg.append(svgNode("rect", {
-      class: "chart-stage-band",
-      x: bandStart,
-      y: top,
-      width: Math.max(0, bandEnd - bandStart),
-      height: plotHeight,
-      fill: segment.color.band,
-      "aria-hidden": "true",
-    }));
+  if (!window.uPlot) {
+    holder.append(node("p", "field-help", "The chart library is unavailable."));
+    return holder;
   }
-  const yTickCount = 5;
-  const tickValues = Array.from(
-    { length: yTickCount },
-    (_, index) => high - (index * (high - low)) / (yTickCount - 1),
-  );
-  const tickStep = (high - low) / (yTickCount - 1);
-  for (let index = 0; index < yTickCount; index += 1) {
-    const tickY = y(tickValues[index]);
-    svg.append(svgNode("line", {
-      class: index === yTickCount - 1 ? "chart-axis" : "chart-gridline",
-      x1: left,
-      y1: tickY,
-      x2: rightX,
-      y2: tickY,
-    }));
-    const label = svgNode("text", {
-      class: "chart-tick-label y-tick-label",
-      x: left - 9,
-      y: tickY + 4,
-      "text-anchor": "end",
-    });
-    label.textContent = formatAxisValue(tickValues[index], tickStep);
-    svg.append(label);
-  }
-  svg.append(svgNode("line", {
-    class: "chart-axis",
-    x1: left,
-    y1: top,
-    x2: left,
-    y2: bottomY,
-  }));
-  const yLabel = svgNode("text", { class: "chart-unit-label", x: left, y: 10 });
-  yLabel.textContent = unit || "";
-  svg.append(yLabel);
-  const tickCount = Math.min(6, Math.max(2, numeric.length));
-  const timeIndices = [...new Set(
-    Array.from({ length: tickCount }, (_, index) =>
-      Math.round((index * (numeric.length - 1)) / (tickCount - 1)),
-    ),
-  )];
-  const timeFormatter = new Intl.DateTimeFormat("en-GB", {
-    day: "2-digit",
-    month: "short",
-    ...(includeHour ? { hour: "2-digit", minute: "2-digit", hourCycle: "h23" } : {}),
-    timeZone: "UTC",
-  });
-  for (const index of timeIndices) {
-    const tickX = x(index);
-    svg.append(svgNode("line", {
-      class: "chart-axis",
-      x1: tickX,
-      y1: bottomY,
-      x2: tickX,
-      y2: bottomY + 5,
-    }));
-    const tickLabel = svgNode("text", {
-      class: "chart-tick-label x-tick-label",
-      x: tickX,
-      y: bottomY + 19,
-      "text-anchor": index === 0 ? "start" : index === numeric.length - 1 ? "end" : "middle",
-    });
-    const instant = times?.[index] ? new Date(times[index]) : null;
-    if (instant && Number.isFinite(instant.getTime())) {
-      const parts = timeFormatter.formatToParts(instant);
-      const dateLabel = parts.filter((part) => ["day", "month"].includes(part.type)).map((part) => part.value).join(" ");
-      tickLabel.textContent = dateLabel;
-      if (includeHour) {
-        const hourLabel = parts.filter((part) => ["hour", "minute"].includes(part.type)).map((part) => part.value).join(":");
-        const hour = svgNode("tspan", { x: tickX, dy: 14, class: "x-tick-hour" });
-        hour.textContent = `${hourLabel} UTC`;
-        tickLabel.append(hour);
-      }
-    } else {
-      tickLabel.textContent = `Step ${index + 1}`;
+  const half = (index) => (seconds[index + 1] !== undefined ? (seconds[index + 1] - seconds[index]) / 2 : (seconds[index] - (seconds[index - 1] ?? seconds[index])) / 2);
+  const bands = (u) => {
+    const { left, top, width, height } = u.bbox;
+    u.ctx.save();
+    for (const segment of stageSegments) {
+      const from = u.valToPos(seconds[segment.startIndex] - (segment.startIndex === 0 ? 0 : half(segment.startIndex - 1)), "x", true);
+      const to = u.valToPos(seconds[segment.endIndex] + half(segment.endIndex), "x", true);
+      const x0 = Math.max(left, from);
+      const x1 = Math.min(left + width, to);
+      if (x1 <= x0) continue;
+      u.ctx.fillStyle = segment.color.band;
+      u.ctx.fillRect(x0, top, x1 - x0, height);
     }
-    svg.append(tickLabel);
+    u.ctx.restore();
+  };
+  const options = {
+    width: 640,
+    height: 280,
+    tzDate: (ts) => uPlot.tzDate(new Date(ts * 1e3), "Etc/UTC"),
+    legend: { show: true },
+    cursor: { drag: { x: true, y: false } },
+    scales: { x: { time: true } },
+    axes: [
+      { label: Date.parse(lastTime) - Date.parse(firstTime) <= 72 * 3_600_000 ? "Simulated time · UTC" : "Simulated day · UTC", labelSize: 20, size: 46 },
+      { label: unit || "", size: 62, values: (u, ticks) => ticks.map((tick) => formatAxisValue(tick, ticks.length > 1 ? ticks[1] - ticks[0] : 1)) },
+    ],
+    series: [{}, { label: unit ? `${name} (${unit})` : name, stroke: "#237a4b", width: 2, points: { show: numeric.length <= 200, size: 5 } }],
+    hooks: { drawClear: [bands] },
+  };
+  const plot = new uPlot(options, [seconds, numeric], holder);
+  if (typeof ResizeObserver === "function") {
+    new ResizeObserver(() => {
+      const width = Math.floor(holder.clientWidth);
+      if (width > 40 && width !== plot.width) plot.setSize({ width, height: 280 });
+    }).observe(holder);
   }
-  const xLabel = svgNode("text", {
-    class: "chart-axis-title",
-    x: left + plotWidth / 2,
-    y: height - 5,
-    "text-anchor": "middle",
-  });
-  xLabel.textContent = includeHour ? "Simulated time · UTC" : "Simulated day · UTC";
-  svg.append(xLabel);
-  const line = svgNode("path", { class: "chart-line", fill: "none", d: points });
-  svg.append(line);
-  const markerCount = Math.min(numeric.length, 90);
-  const stride = Math.max(1, Math.ceil(numeric.length / markerCount));
-  for (let index = 0; index < numeric.length; index += stride) {
-    const marker = svgNode("circle", { class: "chart-marker", cx: x(index), cy: y(numeric[index]), r: 3 });
-    marker.setAttribute("tabindex", "0");
-    marker.setAttribute("aria-label", `${name}, ${times?.[index] || `sample ${index + 1}`}: ${formatValue(numeric[index])} ${unit || ""}`);
-    const title = document.createElementNS(svg.namespaceURI, "title");
-    title.textContent = `${times?.[index] || `sample ${index + 1}`}: ${formatValue(numeric[index])} ${unit || ""}`;
-    marker.append(title);
-    svg.append(marker);
-  }
-  return svg;
+  holder.addEventListener("dblclick", () => plot.setScale("x", { min: seconds[0], max: seconds[seconds.length - 1] }));
+  return holder;
 }
 
 function formatAxisValue(value, step) {
@@ -608,7 +510,7 @@ function renderCharts(result) {
       card.append(node("h3", "", title));
       card.append(node("p", "", `${variable.description || variable.name} · ${variable.unit || "unit not specified"}`));
       const wrap = node("div", "chart-wrap");
-      wrap.append(chartSvg(title, trajectory[name], trajectory.time || [], variable.unit, stageSegments));
+      wrap.append(chartPlot(title, trajectory[name], trajectory.time || [], variable.unit, stageSegments));
       card.append(wrap);
       container.append(card);
       chartCount += 1;
@@ -818,6 +720,7 @@ async function initialize() {
     $("#cancel-button").addEventListener("click", () => void cancelCurrent());
     $("#resume-button").addEventListener("click", () => void resumeCurrent());
     updateCropConfiguration();
+    window.initRuntime?.();
   } catch (error) {
     setGlobalError(error.payload ? JSON.stringify(error.payload) : error.message);
   }

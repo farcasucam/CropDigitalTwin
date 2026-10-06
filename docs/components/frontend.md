@@ -1,5 +1,15 @@
 # Frontend Web
 
+## Estado implementado en Phase 5.40
+
+Vista isométrica SVG dirigida por VisualState, gráficas uPlot locales con eventos, tabla de eventos, comparación Δ, panel DETAIL y grabación/reproducción de sesiones. Solo presentación; ver [phase5_40](../phase5_40_interactive_visual_simulation.md).
+
+## Estado implementado en Phase 5.39
+
+Panel "Runtime what-if" (`frontend/runtime.js`): eventos sintéticos definidos por el usuario (USER-DEFINED SYNTHETIC
+FORCING), ramas baseline/intervención desde un checkpoint, línea de tiempo de eventos, vista SVG isométrica/TOP/DETAIL
+de solo lectura y controlador temporal. Detalles: `docs/phase5_39_interactive_runtime_and_visualization.md`.
+
 ## Estado implementado en Phase 5.38
 
 La aplicación inicial de simulación vive en `frontend/` y consume únicamente

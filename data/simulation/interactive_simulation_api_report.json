@@ -92,7 +92,8 @@
       "weather",
       "dormancy",
       "checkpoint",
-      "options"
+      "options",
+      "runtime_events"
     ],
     "scenarios": [
       "BASE_SEASON",
@@ -362,7 +363,7 @@
     ]
   },
   "data_assimilation_implemented": false,
-  "deterministic_hash": "74811542b9194953e1412f09edcfd64dbd9c355a1a1bd273451058fde5687aac",
+  "deterministic_hash": "0db743e51025857148063253eb5f59530836e2591d47d067f3752045bbb99ddd",
   "experimental_validation_performed": false,
   "field_accuracy_claimed": false,
   "limitations": [
@@ -375,75 +376,75 @@
     "one configured variety and plot per crop (the existing synthetic plots); other varieties are rejected, never invented"
   ],
   "performance_measurement": {
-    "canonicalization_seconds_per_request": 4.75000124424696e-05,
+    "canonicalization_seconds_per_request": 8.039991371333599e-05,
     "classification": "PERFORMANCE_MEASUREMENT",
     "method": "caller-injected timer (time.perf_counter in the manual and tests), minimum of sequential repeats; direct = ScenarioRunner with the same horizon observer; machine-dependent, never hashed",
     "repeats": 3,
     "rows": [
       {
         "API_OVERHEAD": {
-          "api_total_minus_direct_seconds": 0.006244499934837222,
-          "canonicalization_seconds": 4.679989069700241e-05,
-          "preparation_seconds": 0.0003355999942868948,
-          "relative_to_direct": 0.11897118234663444,
-          "result_projection_seconds": 0.0009282000828534365
+          "api_total_minus_direct_seconds": -0.003427100135013461,
+          "canonicalization_seconds": 5.4900068789720535e-05,
+          "preparation_seconds": 0.0003410999197512865,
+          "relative_to_direct": -0.050101019740205116,
+          "result_projection_seconds": 0.0009683000389486551
         },
         "OPTIONAL_TRAJECTORY_HASH": {
-          "api_total_minus_direct_seconds": 0.023559199878945947,
-          "relative_to_direct": 0.44885353414803897,
-          "result_projection_with_hash_seconds": 0.016974999802187085
+          "api_total_minus_direct_seconds": 0.014128500130027533,
+          "relative_to_direct": 0.2065455446376152,
+          "result_projection_with_hash_seconds": 0.018130999989807606
         },
         "SERIALIZATION_TIME": {
           "response_bytes": 75860,
-          "to_json_seconds": 0.0037742999847978354
+          "to_json_seconds": 0.004852799931541085
         },
-        "SIMULATION_TIME": 0.05432980018667877,
+        "SIMULATION_TIME": 0.06099459994584322,
         "case": "tomato_outdoor_7d",
-        "direct_execution_seconds": 0.05248750001192093,
+        "direct_execution_seconds": 0.06840380001813173,
         "steps": 168
       },
       {
         "API_OVERHEAD": {
-          "api_total_minus_direct_seconds": 0.006467100000008941,
-          "canonicalization_seconds": 7.00000673532486e-05,
-          "preparation_seconds": 0.0003791998606175184,
-          "relative_to_direct": 0.01861920048066525,
-          "result_projection_seconds": 0.005891100037842989
+          "api_total_minus_direct_seconds": 0.031727599911391735,
+          "canonicalization_seconds": 7.369997911155224e-05,
+          "preparation_seconds": 0.00040460005402565,
+          "relative_to_direct": 0.08476180984487906,
+          "result_projection_seconds": 0.006212200038135052
         },
         "OPTIONAL_TRAJECTORY_HASH": {
-          "api_total_minus_direct_seconds": 0.1064551998861134,
-          "relative_to_direct": 0.3064914272063364,
-          "result_projection_with_hash_seconds": 0.09981460007838905
+          "api_total_minus_direct_seconds": 0.14811329985968769,
+          "relative_to_direct": 0.3956918075513422,
+          "result_projection_with_hash_seconds": 0.11392290005460382
         },
         "SERIALIZATION_TIME": {
-          "response_bytes": 433611,
-          "to_json_seconds": 0.023732899921014905
+          "response_bytes": 433612,
+          "to_json_seconds": 0.02875459985807538
         },
-        "SIMULATION_TIME": 0.3309399001300335,
+        "SIMULATION_TIME": 0.38321870006620884,
         "case": "lettuce_greenhouse_full_season",
-        "direct_execution_seconds": 0.3473350000567734,
+        "direct_execution_seconds": 0.37431480013765395,
         "steps": 1008
       },
       {
         "API_OVERHEAD": {
-          "api_total_minus_direct_seconds": 0.04017890011891723,
-          "canonicalization_seconds": 5.360017530620098e-05,
-          "preparation_seconds": 0.00033179996535182,
-          "relative_to_direct": 0.03277049683888682,
-          "result_projection_seconds": 0.02087750006467104
+          "api_total_minus_direct_seconds": 0.13458550022915006,
+          "canonicalization_seconds": 6.489991210401058e-05,
+          "preparation_seconds": 0.00037729996256530285,
+          "relative_to_direct": 0.09330819442418577,
+          "result_projection_seconds": 0.027874399907886982
         },
         "OPTIONAL_TRAJECTORY_HASH": {
-          "api_total_minus_direct_seconds": 0.44062950019724667,
-          "relative_to_direct": 0.35938384576474763,
-          "result_projection_with_hash_seconds": 0.38370190002024174
+          "api_total_minus_direct_seconds": 0.47951270011253655,
+          "relative_to_direct": 0.33244639411219434,
+          "result_projection_with_hash_seconds": 0.4478937000967562
         },
         "SERIALIZATION_TIME": {
-          "response_bytes": 1317384,
-          "to_json_seconds": 0.08126090001314878
+          "response_bytes": 1317389,
+          "to_json_seconds": 0.10204059979878366
         },
-        "SIMULATION_TIME": 1.199886600021273,
+        "SIMULATION_TIME": 1.4805175000801682,
         "case": "tomato_outdoor_full_season",
-        "direct_execution_seconds": 1.2260692999698222,
+        "direct_execution_seconds": 1.4423759998753667,
         "steps": 3744
       }
     ]
@@ -876,7 +877,7 @@
           "code": "INVALID_REQUEST",
           "expected_code": "INVALID_REQUEST",
           "expected_path": "latitude",
-          "message": "unknown fields: latitude; allowed: api_version, crop, variety, environment, plot, scenario, start_time, end_time, seed, weather, dormancy, checkpoint, options",
+          "message": "unknown fields: latitude; allowed: api_version, crop, variety, environment, plot, scenario, start_time, end_time, seed, weather, dormancy, checkpoint, options, runtime_events",
           "passed": true,
           "path": "latitude"
         },
@@ -1455,7 +1456,7 @@
       "project_static_audit": {
         "duplicate_core_classes": {},
         "missing_core_classes": [],
-        "scanned_files": 60,
+        "scanned_files": 63,
         "status": "PASS",
         "violations": []
       },

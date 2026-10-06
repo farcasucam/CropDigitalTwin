@@ -1,7 +1,7 @@
 {
   "accessibility_status": "PASS",
   "api_contract_version": "1.0",
-  "browser_smoke_status": "PASS",
+  "browser_smoke_status": "NOT_RUN",
   "checks": {
     "accessibility_and_responsive_basics": true,
     "checkpoint_resume_matches_full_run": true,
@@ -27,7 +27,7 @@
     "unconfigured_plot_details_do_not_invent_coordinates": true
   },
   "determinism_status": "PASS",
-  "deterministic_hash": "97fd3111194c58b8090e29006a3d35ee8fcfe66c15e807641db73b0c6b557697",
+  "deterministic_hash": "da81d79aa87c11ec907757a1d7d9e455e1f111ac94b2d7ba3ef0e3978f8f835f",
   "e2e_cases": {
     "dynamic_strict_fallback": "COMPLETED",
     "lettuce_full_season": "COMPLETED",
@@ -47,9 +47,9 @@
   "full_regression_summary": "NOT_RUN",
   "performance_observations": {
     "API_TIME": {
-      "adapter_short_end_to_end_seconds": 0.022574099944904447,
-      "http_short_end_to_end_seconds_including_model_and_polling": 0.04732959996908903,
-      "http_short_total_request_round_trips_seconds": 0.047221200075000525
+      "adapter_short_end_to_end_seconds": 0.01841180003248155,
+      "http_short_end_to_end_seconds_including_model_and_polling": 0.038233299972489476,
+      "http_short_total_request_round_trips_seconds": 0.038125199964269996
     },
     "FRONTEND_RENDER_TIME": {
       "full_season_milliseconds": null,
@@ -57,25 +57,21 @@
       "short_run_milliseconds": null
     },
     "MODEL_TIME": {
-      "adapter_short_seconds": 0.008183900034055114,
-      "direct_full_season_seconds": 1.4091501999646425,
-      "direct_short_seconds": 0.007923000026494265,
-      "http_short_seconds": 0.008948199916630983
+      "adapter_short_seconds": 0.008851299993693829,
+      "direct_full_season_seconds": 1.4882713998667896,
+      "direct_short_seconds": 0.008499300107359886,
+      "http_short_seconds": 0.008143699960783124
     },
     "SERIALIZATION_TIME": {
-      "http_response_seconds": 0.000401,
-      "local_json_deserialization_seconds": 0.0008765999227762222,
-      "local_json_seconds": 0.0011168001219630241,
+      "http_response_seconds": 0.000445,
+      "local_json_deserialization_seconds": 0.0003595000598579645,
+      "local_json_seconds": 0.00045030005276203156,
       "serialized_response_bytes": 24499
     },
     "classification": "OPERATIONAL_SOFTWARE_MEASUREMENT_NOT_SCIENTIFIC_EVIDENCE"
   },
-  "responsive_status": "PASS",
-  "responsive_viewports_smoke_tested": [
-    1440,
-    768,
-    390
-  ],
+  "responsive_status": "NOT_RUN",
+  "responsive_viewports_smoke_tested": [],
   "scientific_evidence": [],
   "scientific_status": {
     "BIOLOGICAL_VALIDITY_CLAIMED": false,

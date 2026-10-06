@@ -278,6 +278,20 @@ from agri_twin.application.interactive_simulation import (
     canonicalize_request,
     plan_execution,
 )
+from agri_twin.application.runtime_events import (
+    EventSpec,
+    RuntimeEvent,
+    RuntimeEventError,
+    event_contract,
+    event_sequence_hash,
+    parse_runtime_events,
+)
+from agri_twin.application.interactive_runtime import (
+    InteractiveRuntimeService,
+    compare_branches,
+    static_audit_runtime,
+)
+from agri_twin.application.runtime_replay import RuntimeReplayService
 from agri_twin.application.chilling_models_framework import (
     ChillingModelsReport,
     ChillingModelsSuite,
@@ -439,6 +453,16 @@ __all__ = [
     "SimulationWarning",
     "canonicalize_request",
     "plan_execution",
+    "EventSpec",
+    "RuntimeEvent",
+    "RuntimeEventError",
+    "event_contract",
+    "event_sequence_hash",
+    "parse_runtime_events",
+    "InteractiveRuntimeService",
+    "RuntimeReplayService",
+    "compare_branches",
+    "static_audit_runtime",
     "DormancyChillingFrameworkSuite",
     "DormancyOutcome",
     "SyntheticLocation",

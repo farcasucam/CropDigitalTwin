@@ -1,0 +1,56 @@
+{
+  "PERFORMANCE_RESULT": {
+    "desktop_fps": 60.0,
+    "narrow_viewport_fps": 60.0,
+    "note": "machine-dependent, excluded from deterministic_hash",
+    "overflow_checks": "yes",
+    "record_and_replay_seconds": 1.802
+  },
+  "SCIENTIFIC_EVIDENCE": {
+    "flags": [
+      "REAL_VERIFIED = 0",
+      "CALIBRATION_PERFORMED = false",
+      "EXPERIMENTAL_VALIDATION_PERFORMED = false",
+      "BIOLOGICAL_VALIDITY_CLAIMED = false",
+      "FIELD_ACCURACY_CLAIMED = false",
+      "DATA_ASSIMILATION_IMPLEMENTED = false"
+    ],
+    "produced": false,
+    "scientific_status": {
+      "BIOLOGICAL_VALIDITY_CLAIMED": false,
+      "CALIBRATION_PERFORMED": false,
+      "DATA_ASSIMILATION_IMPLEMENTED": false,
+      "EXPERIMENTAL_VALIDATION_PERFORMED": false,
+      "FIELD_ACCURACY_CLAIMED": false,
+      "REAL_VERIFIED": 0,
+      "forcing_classification": "SYNTHETIC",
+      "parameter_status": "ENGINEERING_DEFAULTS_UNCALIBRATED",
+      "result_type": "SOFTWARE_SIMULATION",
+      "statement": "Deterministic output of the implemented mechanistic-simplified model under synthetic forcing; software behaviour only, not a prediction, calibration or validated agronomic result."
+    }
+  },
+  "SOFTWARE_RESULT": {
+    "browser_smoke_status": "PASS",
+    "full_regression_passed": 1364,
+    "full_regression_skipped": 12,
+    "full_regression_status": "PASS",
+    "replay_status": "MATCH",
+    "static_audit": "PASS",
+    "visual_tests": "PASS"
+  },
+  "checks": {
+    "assets_local": true,
+    "layers_present": true,
+    "record_deterministic": true,
+    "replay_matches": true,
+    "scientific_status_has_no_positive_claims": true,
+    "static_audit_passes": true,
+    "visual_tests_pass": true
+  },
+  "deterministic_hash": "0020f846663c3c31aa793b4037023f2bb1c3354ab72d71212586f40c80185383",
+  "failed_checks": [],
+  "phase": "5.40",
+  "renderer": "SVG isometric + vendored uPlot (MIT, offline)",
+  "session_hash": "cbf372a225b6efe4a56b002711603a94f6361850273a9ef50fd3e0b684940a6c",
+  "status": "PASS"
+}
