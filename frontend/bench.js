@@ -340,8 +340,12 @@
     const lock = el("div", "tl-lock"); lock.style.width = `${(100 * MIN_AT_HOURS) / total}%`; lock.title = "The first simulated day is history: events start after it";
     rows.append(lock);
     if (!bench.events.length) rows.append(el("p", "tl-empty", "No interventions yet. Add one from the list on the left, then drag its bar here."));
-    bench.events.forEach((event, index) => {
-      const row = el("div", "tl-row"), bar = el("div", "tl-bar");
+    const laneEnds = [], lanes = [];
+    bench.events.map((event, index) => ({ event, index })).sort((a, b) => a.event.atHours - b.event.atHours).forEach(({ event, index }) => {
+      let lane = laneEnds.findIndex((end) => end <= event.atHours);
+      if (lane < 0) { lane = laneEnds.length; laneEnds.push(0); lanes.push(el("div", "tl-row")); rows.append(lanes[lane]); }
+      laneEnds[lane] = event.atHours + Math.max(event.hours, total * 0.12);  // leave room for the name beside a narrow bar
+      const row = lanes[lane], bar = el("div", "tl-bar");
       bar.append(el("span", "tl-label", label(event.type.toLowerCase()).replace(/\b\w/g, (c) => c.toUpperCase())));
       bar.dataset.index = String(index); bar.style.setProperty("--hue", String(hueFor(event.type))); bar.tabIndex = 0;
       const left = el("i", "tl-grip"), right = el("i", "tl-grip right");
@@ -355,7 +359,7 @@
         eventsChanged();
         const again = $(`.tl-bar[data-index="${index}"]`); if (again) again.focus();
       });
-      row.append(bar); rows.append(row); positionBar(bar, event);
+      row.append(bar); positionBar(bar, event);
     });
     movePlayhead();
     drawActuation();
@@ -610,7 +614,7 @@
     while (["CREATED", "RUNNING"].includes(response.execution_status)) {
       const progress = response.progress;
       if (progress && progress.total_steps) setStatus(`Running… ${progress.completed_steps}/${progress.total_steps} steps`, "running");
-      await new Promise((resolve) => window.setTimeout(resolve, bench.caps.poll_interval_ms || 500));
+      await new Promise((resolve) => window.setTimeout(resolve, 120));  // the server is local: poll quickly instead of the advertised interval
       response = await api(`/api/simulations/${encodeURIComponent(response.simulation_id)}`);
     }
     if (response.execution_status !== "COMPLETED") { const error = new Error("The run did not complete"); error.payload = { errors: response.errors }; throw error; }
@@ -954,8 +958,8 @@
       $("#autorun").checked = false;
       $("#run").disabled = false;
       window.__bench = bench;  // handle for scripted checks
-      setStatus("Ready", "ready");
-      void runExperiment();
+      if (bench.config.horizon === "season" || bench.events.length > 1) setStatus("Ready: press Run (a full season or several events takes a few seconds)", "ready");
+      else void runExperiment();
     } catch (error) {
       showError(error);
       setStatus("Could not load the API", "error");
