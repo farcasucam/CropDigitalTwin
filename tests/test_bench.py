@@ -89,3 +89,21 @@ def test_capabilities_expose_the_backends(server):
     with urllib.request.urlopen(server + "/api/capabilities", timeout=60) as response:
         payload = json.loads(response.read())
     assert [item["id"] for item in payload["greenhouse_backends"]] == ["SIMPLIFIED", "ENERGYPLUS"]
+
+
+def test_capabilities_expose_climate_control_with_thresholds_from_the_crop_catalogue(server):
+    import json
+
+    with urllib.request.urlopen(server + "/api/capabilities", timeout=60) as response:
+        control = json.loads(response.read())["climate_control"]
+    assert [item["id"] for item in control["actuators"]] == ["shade", "vents", "extractors", "cooling", "heating", "irrigation"]
+    assert {item["id"]: item["layer"] for item in control["actuators"]} == {"shade": "PASSIVE", "vents": "PASSIVE", "extractors": "ACTIVE", "cooling": "ACTIVE", "heating": "ACTIVE", "irrigation": "PASSIVE"}
+    assert control["stage_thresholds"]["tomato"]["yield_maturation"]["max_temp_c"] == 32.0
+    assert "USER_DEFINED" in control["equipment_status"] and "NOT_VALIDATED" in control["design_status"]
+
+
+def test_the_bench_offers_climate_control_without_assuming_any_equipment():
+    assert "Climate control" in HTML and "(not sourced)" in HTML and "Passive first" in HTML
+    assert "Nothing is assumed" in HTML and "ILLUSTRATIVE_EQUIPMENT" in JS
+    assert 'placeholder = "not defined"' in JS  # an empty equipment field stays undefined; the request only carries numbers the user typed
+    assert 'bench.config.backend === "ENERGYPLUS"' in JS  # the controller cannot act on a precomputed EnergyPlus timeline

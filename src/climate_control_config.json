@@ -1,0 +1,18 @@
+{
+  "contract": "climate_control_design",
+  "version": "1.0",
+  "evidence_status": "DESIGN_CONVENTION_NOT_VALIDATED",
+  "note": "Algorithm design conventions of the passive-first climate controller. They are not agronomic values and not measurements. Crop thresholds (temperature range, critical heat/frost, radiation, soil water, shading reduction) are read per stage from crop_config.json; equipment (capacity, COP, fan power) is supplied by the user per request.",
+  "design": {
+    "vents_full_at": 0.3,
+    "extractors_full_at": 0.6,
+    "meaning": "fractions of the hot band [max_temp_c .. critical_heat_c] of the current stage at which the passive vents reach full opening and the extractors reach full speed; HVAC cooling covers the rest. Active equipment therefore only works once the passive tier is exhausted. hvac_gain (0..1] is the fraction of the distance between the HVAC-free equilibrium temperature (estimated from the greenhouse conductance and the HVAC power of the previous step) and the target that the HVAC power closes in one step.",
+    "hvac_gain": 0.9
+  },
+  "crop_thresholds_used": {
+    "cooling": "stress_thresholds.max_temp_c, stress_thresholds.critical_heat_c",
+    "heating": "stress_thresholds.min_temp_c, stress_thresholds.critical_frost_c",
+    "shade": "solar_radiation_thresholds.optimal_max_w_m2, solar_radiation_thresholds.photoinhibition_w_m2, irrigation.shading_reduction_pct",
+    "irrigation": "vwc_thresholds.optimal_min, irrigation.target_vwc_after_irrigation"
+  }
+}

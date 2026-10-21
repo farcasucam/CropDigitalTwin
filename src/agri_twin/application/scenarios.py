@@ -203,12 +203,14 @@ class ScenarioRunner:
         self.base_weather_factory = base_weather_factory
 
     def run(self, scenario: Scenario, *, phenology: PhenologyEngine | None = None, observer: Callable[[CropSimulationSnapshot, int], bool] | None = None,
-            greenhouse_engine_factory: Callable[[Scenario, WeatherProvider], object] | None = None) -> ScenarioResult:
+            greenhouse_engine_factory: Callable[[Scenario, WeatherProvider], object] | None = None, control: object | None = None) -> ScenarioResult:
         """Run the scenario step by step.
 
         ``phenology`` optionally configures the orchestrator's PhenologyEngine (for
         example a canonical DormancyConfiguration); None keeps the default engine.
         ``greenhouse_engine_factory`` optionally builds a replacement greenhouse engine from the scenario and its weather provider.
+        ``control`` optionally is a ``ControlSession``: at each step its commands are computed from the state at the start of the step; manual
+        events on the same actuator replace them. None keeps the unchanged historical behaviour.
         ``observer`` is called after every completed step with the snapshot and the
         number of completed steps; returning False stops the run cooperatively at that
         step boundary (status ``STOPPED``, snapshots up to and including that step).
@@ -229,7 +231,11 @@ class ScenarioRunner:
                 irrigation = self._irrigation(active)
                 actuators = self._actuators(active)
                 fertilization = self._fertilization(active)
-                snapshots.append(orchestrator.step(dt, actuators, irrigation, fertilization))
+                record = None
+                if control is not None:
+                    actuators, planned_irrigation, record = control.plan(orchestrator, provider, current, dt, actuators)
+                    irrigation = irrigation or planned_irrigation  # a manual irrigation event wins over the controller
+                snapshots.append(orchestrator.step(dt, actuators, irrigation, fertilization, record))
                 current += timedelta(seconds=dt)
                 if observer is not None and not observer(snapshots[-1], len(snapshots)):
                     return ScenarioResult(scenario.scenario_id, scenario.config_hash(), "STOPPED", tuple(snapshots), scenario.events, seed=scenario.seed)

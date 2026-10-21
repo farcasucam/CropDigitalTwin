@@ -13,6 +13,7 @@ from urllib.parse import urlparse
 from agri_twin.application.greenhouse_catalogue import build_greenhouse_catalogue
 from agri_twin.application.interactive_runtime import InteractiveRuntimeService
 from agri_twin.application.runtime_replay import RuntimeReplayService
+from agri_twin.application.climate_control import capabilities as climate_control_capabilities
 from agri_twin.application.interactive_simulation import (
     ErrorCode,
     SCIENTIFIC_STATUS,
@@ -118,6 +119,7 @@ class InteractiveFrontendAdapter:
         contract["scientific_status"] = dict(SCIENTIFIC_STATUS)
         contract["runtime"] = self.runtime.contract()
         contract["greenhouse_backends"] = self.greenhouse_backends()
+        contract["climate_control"] = climate_control_capabilities()
         contract["poll_interval_ms"] = POLL_INTERVAL_MS
         contract["execution_adapter"] = "SYNCHRONOUS_IN_PROCESS_THREAD (local only; not durable or distributed)"
         return contract

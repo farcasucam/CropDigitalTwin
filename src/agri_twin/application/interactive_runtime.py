@@ -110,7 +110,7 @@ class InteractiveRuntimeService:
             spec = event.spec
             affected = []
             for name in spec.affected_variables:
-                availability = variable_availability(VARIABLE_INDEX[name], canonical.crop, canonical.environment, canonical.backend)
+                availability = variable_availability(VARIABLE_INDEX[name], canonical.crop, canonical.environment, canonical.backend, canonical.control is not None)
                 affected.append({"variable": name, "unit": VARIABLE_INDEX[name].unit, "availability": availability.value})
             rows.append({**event.to_dict(), "supported": True, "support": "SUPPORTED", "provenance": SOURCE_USER_EVENT, "classification": FORCING_CLASSIFICATION,
                          "scenario_event_type": spec.scenario_type, "intensity_parameter": spec.primary_parameter, "intensity_unit": spec.unit,

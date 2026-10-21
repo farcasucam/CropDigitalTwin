@@ -19,7 +19,8 @@
     radiation_w_m2: "Radiation at the crop", co2_ppm: "CO2", leaf_area_index: "Leaf area index", biomass_total_g_m2: "Total biomass", biomass_fruit_g_m2: "Fruit biomass",
     water_stress: "Water stress", heat_stress: "Heat stress", cold_stress: "Cold stress", vpd_stress: "VPD stress", accumulated_stress: "Accumulated stress",
     soil_water_vwc_m3_m3: "Soil water content", greenhouse_ventilation_fraction: "Vent opening", greenhouse_shading_fraction: "Shade screen",
-    greenhouse_heating_kw: "Heating power", greenhouse_cooling_kw: "Cooling power", transpiration_mm: "Transpiration", irrigation_mm: "Irrigation", precipitation_mm: "Precipitation",
+    greenhouse_heating_kw: "Heating power", greenhouse_cooling_kw: "Cooling power", control_vent_opening: "Vent opening (command)", control_extractor_level: "Extractor speed (command)",
+    control_electric_kw: "Electric power (estimate)", control_energy_kwh: "Energy per step (estimate)", control_energy_kwh_cumulative: "Energy, cumulative (estimate)", transpiration_mm: "Transpiration", irrigation_mm: "Irrigation", precipitation_mm: "Precipitation",
   };
   // quick events: defaults chosen inside the API limits; the contract still decides what is allowed
   const PRESETS = [
@@ -42,6 +43,7 @@
   const bench = {
     caps: null, catalogue: null,
     config: { crop: "tomato", environment: "greenhouse", scenario: "BASE_SEASON", horizon: "month", backend: "SIMPLIFIED", layout: null, view: "ISOMETRIC",
+      control: { actuators: { shade: "OFF", vents: "OFF", extractors: "OFF", cooling: "OFF", heating: "OFF", irrigation: "OFF" }, equipment: {}, schedules: [] }, controlCharts: false,
       layers: { crop: true, soil: true, water: true, temperature: true, radiation: true, vpd: false, co2: false, events: true }, charts: CHART_DEFAULT.slice() },
     events: [], run: null, serial: 0, running: false, position: 0, playing: false, speed: 24, lastFrame: 0, lastReadout: 0,
     scenes: {}, charts: [], autoTimer: null, observers: [],
@@ -100,6 +102,8 @@
       if (!saved) return;
       Object.assign(bench.config, saved.config || {});
       bench.config.layers = { ...bench.config.layers, ...((saved.config || {}).layers || {}) };
+      const control = (saved.config || {}).control;
+      if (control) bench.config.control = { actuators: { ...bench.config.control.actuators, ...(control.actuators || {}) }, equipment: control.equipment || {}, schedules: Array.isArray(control.schedules) ? control.schedules : [] };
       if (Array.isArray(saved.events)) bench.events = saved.events.filter((event) => isNumber(event.atHours));  // events saved before per-event dates are dropped
       if (SPEEDS.includes(saved.speed)) bench.speed = saved.speed;
     } catch { /* ignore corrupt storage */ }
@@ -130,6 +134,8 @@
       const c = bench.config.layout;
       request.greenhouse = { backend: "ENERGYPLUS", layout: { typology: c.typology, span_m: c.span, ridge_rise_m: c.rise, gutter_height_m: c.gutter, pillar_spacing_m: c.pillar, n_spans: c.spans, n_bays: c.bays } };
     }
+    const control = controlDocument();
+    if (control) request.control = control;
     return request;
   }
   function eventDocuments() {
@@ -148,8 +154,8 @@
     setOptions($("#crop"), caps.crops.map((crop) => [crop, crop]), bench.config.crop);
     setOptions($("#scenario"), caps.scenarios.map((name) => [name, name.replace(/_/g, " ").toLowerCase()]), bench.config.scenario);
     refreshEnvironment();
-    $("#crop").addEventListener("change", () => { bench.config.crop = $("#crop").value; refreshEnvironment(); fitBranch(); changed(); });
-    $("#environment").addEventListener("change", () => { bench.config.environment = $("#environment").value; syncGreenhouseGroup(); pruneEvents(); renderEvents(); renderPresets(); changed(); });
+    $("#crop").addEventListener("change", () => { bench.config.crop = $("#crop").value; refreshEnvironment(); fitBranch(); renderControl(); changed(); });
+    $("#environment").addEventListener("change", () => { bench.config.environment = $("#environment").value; syncGreenhouseGroup(); pruneEvents(); renderEvents(); renderPresets(); renderControl(); changed(); });
     $("#scenario").addEventListener("change", () => { bench.config.scenario = $("#scenario").value; changed(); });
     $$("[data-horizon]").forEach((button) => button.addEventListener("click", () => { bench.config.horizon = button.dataset.horizon; fitBranch(); changed(); }));
     $$("[data-view]").forEach((button) => button.addEventListener("click", () => { bench.config.view = button.dataset.view; syncPressed("[data-view]", "view"); configureScenes(); renderFrame(true); save(); }));
@@ -199,7 +205,7 @@
       button.disabled = !info.available;
       button.title = info.available ? info.note : info.reason;
       button.setAttribute("aria-pressed", String(bench.config.backend === info.id));
-      button.addEventListener("click", () => { bench.config.backend = info.id; pruneEvents(); renderBackend(); renderEvents(); renderPresets(); changed(); });
+      button.addEventListener("click", () => { bench.config.backend = info.id; pruneEvents(); renderBackend(); renderEvents(); renderPresets(); renderControl(); changed(); });
       group.append(button);
     }
     const info = backendInfo(bench.config.backend);
@@ -335,7 +341,8 @@
     rows.append(lock);
     if (!bench.events.length) rows.append(el("p", "tl-empty", "No interventions yet. Add one from the list on the left, then drag its bar here."));
     bench.events.forEach((event, index) => {
-      const row = el("div", "tl-row"), bar = el("div", "tl-bar", label(event.type.toLowerCase()).replace(/\b\w/g, (c) => c.toUpperCase()));
+      const row = el("div", "tl-row"), bar = el("div", "tl-bar");
+      bar.append(el("span", "tl-label", label(event.type.toLowerCase()).replace(/\b\w/g, (c) => c.toUpperCase())));
       bar.dataset.index = String(index); bar.style.setProperty("--hue", String(hueFor(event.type))); bar.tabIndex = 0;
       const left = el("i", "tl-grip"), right = el("i", "tl-grip right");
       left.dataset.edge = "left"; right.dataset.edge = "right";
@@ -351,10 +358,12 @@
       row.append(bar); rows.append(row); positionBar(bar, event);
     });
     movePlayhead();
+    drawActuation();
   }
   function positionBar(bar, event) {
     const total = horizonHours();
     bar.style.left = `${(100 * event.atHours) / total}%`; bar.style.width = `${Math.max(0.8, (100 * event.hours) / total)}%`;
+    bar.classList.toggle("narrow", (100 * event.hours) / total < 9);  // too short to hold its name: the name sits beside the bar
     bar.title = `${stamp(eventStartMs(event))} → ${stamp(eventStartMs(event) + event.hours * HOUR)} UTC`;
   }
   function placeEvent(event, next, mode) {
@@ -412,6 +421,140 @@
     const hours = (Date.parse(bench.run.times[Math.floor(bench.position)]) - startMs()) / HOUR;
     head.hidden = false; head.style.left = `${clamp((100 * hours) / horizonHours(), 0, 100)}%`;
   }
+
+  // ---- climate control ----------------------------------------------------------------------------------------------
+  // Each actuator is OFF, AUTO (passive-first rules over the crop's stage thresholds) or SCHEDULE (daily window in a date range).
+  // Equipment is the user's own site inventory: nothing is assumed, an empty field makes that actuator unavailable.
+  const THRESHOLD_KEYS = {
+    shade: ["optimal_max_w_m2", "photoinhibition_w_m2", "shading_reduction_pct"], vents: ["max_temp_c", "critical_heat_c"], extractors: ["max_temp_c", "critical_heat_c"],
+    cooling: ["max_temp_c", "critical_heat_c"], heating: ["min_temp_c"], irrigation: ["vwc_optimal_min", "target_vwc_after_irrigation"],
+  };
+  const ILLUSTRATIVE_EQUIPMENT = { vent_max_ach: 30, extractor_max_ach: 20, extractor_power_kw: 1.5, cooling_capacity_kw: 15, cooling_cop: 3, heating_capacity_kw: 15, heating_efficiency: 0.9, irrigation_max_mm_step: 3 };
+  const controlInfo = () => bench.caps.climate_control;
+  function controlAllowed(actuator) {
+    if (bench.config.backend === "ENERGYPLUS") return false;
+    return bench.config.environment === "greenhouse" || actuator === "irrigation";
+  }
+  function controlDocument() {
+    const control = bench.config.control, actuators = {};
+    for (const info of controlInfo().actuators) if (controlAllowed(info.id) && control.actuators[info.id] !== "OFF") actuators[info.id] = control.actuators[info.id];
+    if (!Object.keys(actuators).length) return null;
+    const equipment = {};
+    for (const [key, value] of Object.entries(control.equipment)) if (isNumber(value)) equipment[key] = value;
+    const schedules = control.schedules.filter((item) => actuators[item.actuator] === "SCHEDULE");
+    return { actuators, equipment, schedules };
+  }
+  function controlActive() { return Boolean(bench.caps && controlDocument()); }
+  function renderControl() {
+    const host = $("#control-actuators");
+    if (!host || !bench.caps) return;
+    const control = bench.config.control, info = controlInfo(), blocked = bench.config.backend === "ENERGYPLUS";
+    host.replaceChildren();
+    for (const actuator of info.actuators) {
+      const row = el("div", "ctl-row"), name = el("span", "ctl-name", actuator.label), badge = el("span", `ctl-badge ${actuator.layer.toLowerCase()}`, actuator.layer === "PASSIVE" ? "passive" : "uses energy");
+      name.title = actuator.rule;
+      const select = el("select"), allowed = controlAllowed(actuator.id);
+      setOptions(select, info.modes.map((mode) => [mode, mode === "OFF" ? "Off" : mode === "AUTO" ? "Automatic" : "Schedule"]), allowed ? control.actuators[actuator.id] : "OFF");
+      select.disabled = !allowed; select.setAttribute("aria-label", `${actuator.label} mode`);
+      select.addEventListener("change", () => { control.actuators[actuator.id] = select.value; renderControl(); changed(); });
+      row.append(name, badge, select); host.append(row);
+    }
+    const equipment = $("#control-equipment");
+    equipment.replaceChildren();
+    for (const item of info.equipment) {
+      const used = controlAllowed(item.actuator) && control.actuators[item.actuator] !== "OFF";
+      const wrap = el("label", used ? "" : "dim", `${item.label} (${item.unit})`), input = el("input");
+      input.type = "number"; input.min = "0"; input.step = "any"; input.placeholder = "not defined";
+      input.value = isNumber(control.equipment[item.id]) ? String(control.equipment[item.id]) : "";
+      input.addEventListener("change", () => { control.equipment[item.id] = input.value === "" ? null : Number(input.value); renderControl(); changed(); });
+      wrap.append(input); equipment.append(wrap);
+    }
+    renderSchedules();
+    const notes = [];
+    if (blocked) notes.push("The EnergyPlus backend runs as a precomputed timeline and cannot react to a controller: switch to the simplified model to use climate control.");
+    else {
+      if (bench.config.environment !== "greenhouse") notes.push("Open field: only irrigation can be controlled.");
+      for (const item of info.equipment) {
+        const needed = controlAllowed(item.actuator) && control.actuators[item.actuator] !== "OFF" && !isNumber(control.equipment[item.id]);
+        if (needed) notes.push(`${item.label} is not defined${/cop|efficiency|power/i.test(item.id) ? ": energy cannot be estimated" : ": that actuator stays unavailable"}.`);
+      }
+      const missing = new Set();
+      for (const [stage, thresholds] of Object.entries(info.stage_thresholds[bench.config.crop] || {})) {
+        for (const actuator of info.actuators) {
+          if (controlAllowed(actuator.id) && control.actuators[actuator.id] === "AUTO" && THRESHOLD_KEYS[actuator.id].some((key) => thresholds[key] === null)) missing.add(`${actuator.label} in stage ${stage}`);
+        }
+      }
+      if (missing.size) notes.push(`The crop catalogue has no thresholds for: ${[...missing].join("; ")}. Those rules do not act (nothing is invented).`);
+    }
+    $("#control-note").textContent = notes.join(" ");
+    $("#control-note").hidden = !notes.length;
+    $("#control-summary").textContent = controlActive() ? "on" : "off";
+  }
+  function renderSchedules() {
+    const host = $("#control-schedules"), control = bench.config.control;
+    host.replaceChildren();
+    control.schedules.forEach((item, index) => {
+      const card = el("li", "event ctl-schedule"), head = el("header");
+      const remove = el("button", "", "Remove"); remove.type = "button";
+      remove.addEventListener("click", () => { control.schedules.splice(index, 1); renderControl(); changed(); });
+      const mode = control.actuators[item.actuator];
+      head.append(el("span", "", `${controlInfo().actuators.find((a) => a.id === item.actuator).label}${mode === "SCHEDULE" ? "" : " (inactive: set it to Schedule)"}`), remove);
+      card.append(head);
+      const grid = el("div", "grid2");
+      const field = (text, key, type, props = {}) => {
+        const wrap = el("label", "", text), input = el("input"); input.type = type; Object.assign(input, props); input.value = String(item[key]);
+        input.addEventListener("change", () => { item[key] = type === "number" ? Number(input.value) : input.value; renderControl(); changed(); });
+        wrap.append(input); grid.append(wrap);
+      };
+      const select = el("label", "wide", "Actuator"), choice = el("select");
+      setOptions(choice, controlInfo().actuators.map((a) => [a.id, a.label]), item.actuator);
+      choice.addEventListener("change", () => { item.actuator = choice.value; renderControl(); changed(); });
+      select.append(choice); grid.append(select);
+      field("From (month-day)", "from_day", "text", { pattern: "[0-9]{2}-[0-9]{2}", placeholder: "06-15" });
+      field("To (month-day)", "to_day", "text", { pattern: "[0-9]{2}-[0-9]{2}", placeholder: "09-15" });
+      field("Every day from (UTC h)", "start_hour", "number", { min: 0, max: 23, step: 1 });
+      field("until (UTC h)", "end_hour", "number", { min: 0, max: 24, step: 1 });
+      field(item.actuator === "irrigation" ? "Amount (mm per step)" : "Level (0-1 of capacity)", "value", "number", { min: 0, max: item.actuator === "irrigation" ? 100 : 1, step: 0.05 });
+      card.append(grid); host.append(card);
+    });
+  }
+  function bindControl() {
+    $("#add-schedule").addEventListener("click", () => {
+      const scheduled = controlInfo().actuators.find((a) => bench.config.control.actuators[a.id] === "SCHEDULE") || controlInfo().actuators[0];
+      bench.config.control.actuators[scheduled.id] = "SCHEDULE";
+      bench.config.control.schedules.push({ actuator: scheduled.id, from_day: "06-15", to_day: "09-15", start_hour: 11, end_hour: 17, value: scheduled.id === "irrigation" ? 1 : 0.6 });
+      renderControl(); changed();
+    });
+    $("#load-illustrative").addEventListener("click", () => { bench.config.control.equipment = { ...ILLUSTRATIVE_EQUIPMENT }; renderControl(); changed(); });
+    $("#clear-equipment").addEventListener("click", () => { bench.config.control.equipment = {}; renderControl(); changed(); });
+    renderControl();
+  }
+  // actuation tracks under the event bars: what the controller (or a manual event) really did, read from the returned series
+  const TRACKS = [["Shade", "greenhouse_shading_fraction", 38], ["Vents", "control_vent_opening", 205], ["Extractors", "control_extractor_level", 275], ["HVAC cooling", "greenhouse_cooling_kw", 200], ["HVAC heating", "greenhouse_heating_kw", 15]];
+  function drawActuation() {
+    const canvas = $("#tl-actuation"), box = $("#tl-rows");
+    if (!canvas) return;
+    const run = bench.run, tracks = run ? TRACKS.filter(([, name]) => run.series.baseline[name] && controlActive()) : [];
+    canvas.hidden = !tracks.length;
+    if (!tracks.length) return;
+    const width = Math.max(1, Math.floor(box.getBoundingClientRect().width)), height = tracks.length * 12, ratio = window.devicePixelRatio || 1;
+    canvas.style.height = `${height}px`; canvas.width = Math.floor(width * ratio); canvas.height = Math.floor(height * ratio);
+    const ctx = canvas.getContext("2d"); ctx.scale(ratio, ratio); ctx.clearRect(0, 0, width, height);
+    const total = horizonHours(), t0 = Date.parse(run.times[0]), series = run.series.intervention;
+    tracks.forEach(([text, name, hue], row) => {
+      const values = series[name], top = Math.max(0, ...values.filter(isNumber)) || 1;
+      ctx.fillStyle = `hsl(${hue} 15% 94%)`; ctx.fillRect(0, row * 12, width, 10);
+      const columns = new Array(width).fill(0);
+      values.forEach((value, index) => {
+        if (!isNumber(value)) return;
+        const x = Math.floor((((Date.parse(run.times[index]) - t0) / HOUR) / total) * width);
+        if (x >= 0 && x < width) columns[x] = Math.max(columns[x], value / top);
+      });
+      columns.forEach((level, x) => { if (level > 0.02) { ctx.fillStyle = `hsl(${hue} 65% 45% / ${(0.25 + 0.75 * level).toFixed(2)})`; ctx.fillRect(x, row * 12, 1.5, 10); } });
+      ctx.fillStyle = "#17352d"; ctx.font = "9px system-ui, sans-serif"; ctx.fillText(name.endsWith("_kw") ? `${text} (max ${fmt(top)} kW)` : text, 4, row * 12 + 8);
+    });
+  }
+
 
   // ---- running ----------------------------------------------------------------------------------------------------
   function changed() {
@@ -503,6 +646,7 @@
     configureScenes();
     buildChartPicks();
     buildCharts();
+    drawActuation();
     renderDelta();
     renderInfo();
     renderFrame(true);
@@ -557,13 +701,23 @@
     const host = $(`#read-${name}`);
     host.replaceChildren();
     const row = (title, value, unit) => { const wrap = el("div"); wrap.append(el("dt", "", title)); const dd = el("dd", isNumber(value) ? "" : "na", isNumber(value) ? `${fmt(value)}${unit ? ` ${unit}` : ""}` : "n/a"); wrap.append(dd); host.append(wrap); };
-    if (state.events.length) { const banner = el("div", "banner"); banner.append(el("dt", "", `EVENT ACTIVE: ${state.events.join(", ")}`)); host.append(banner); }
+    // the banner slot always exists, so an event starting or ending never moves the rest of the page
+    const banner = el("div", state.events.length ? "banner" : "banner idle"); banner.append(el("dt", "", state.events.length ? `EVENT ACTIVE: ${state.events.join(", ")}` : "No event active")); host.append(banner);
     row("Outdoor T", state.outdoor.temp_c, "°C");
     if (state.indoor) {
       row("Indoor T", state.indoor.temp_c, "°C"); row("Indoor RH", state.indoor.rh_pct, "%"); row("VPD", state.indoor.vpd_kpa, "kPa");
-      row("CO2", state.indoor.co2_ppm, "ppm"); row("Vents", state.actuators.vent_opening === null ? null : state.actuators.vent_opening * 100, "%");
+      row("CO2", state.indoor.co2_ppm, "ppm"); row("Air exchanged", state.actuators.vent_opening === null ? null : state.actuators.vent_opening * 100, "%");
       row("Shade", state.actuators.screen_deployed === null ? null : state.actuators.screen_deployed * 100, "%"); row("Heating", state.actuators.heating_kw, "kW");
     } else { row("Humidity", state.outdoor.rh_pct, "%"); row("Radiation", state.outdoor.radiation_w_m2, "W/m²"); row("Rain", state.outdoor.rain_mm_h, "mm/h"); }
+    const series = bench.run.series[name], at = Math.floor(bench.position);
+    if (series.control_layer) {
+      const value = (key) => (series[key] ? series[key][at] : null);
+      row("Control layer", null, ""); host.lastChild.lastChild.textContent = value("control_layer") === "PASSIVE" ? "passive only" : value("control_layer") === "ACTIVE" ? "uses energy" : "idle";
+      row("Vent command", isNumber(value("control_vent_opening")) ? value("control_vent_opening") * 100 : null, "%");
+      row("Extractors", isNumber(value("control_extractor_level")) ? value("control_extractor_level") * 100 : null, "%");
+      row("HVAC", isNumber(value("greenhouse_cooling_kw")) ? value("greenhouse_cooling_kw") - value("greenhouse_heating_kw") : null, "kW (− heating)");
+      row("Energy (est.)", value("control_energy_kwh_cumulative"), "kWh");
+    }
     row("LAI", state.crop.lai, ""); row("Water stress", state.crop.water_stress, ""); row("Heat stress", state.crop.heat_stress, "");
     row("Stage", null, ""); host.lastChild.lastChild.textContent = state.stage || "n/a";
   }
@@ -575,6 +729,10 @@
   function buildChartPicks() {
     const host = $("#chart-picks"), names = availableNumeric();
     bench.config.charts = bench.config.charts.filter((name) => names.includes(name));
+    if (controlActive() && !bench.config.controlCharts) {  // first run with control: show what it does
+      for (const name of ["control_vent_opening", "greenhouse_cooling_kw", "greenhouse_heating_kw", "control_energy_kwh_cumulative"]) if (names.includes(name) && !bench.config.charts.includes(name)) bench.config.charts.push(name);
+      bench.config.controlCharts = true;
+    }
     if (!bench.config.charts.length) bench.config.charts = CHART_DEFAULT.filter((name) => names.includes(name)).slice(0, 4);
     host.replaceChildren();
     for (const name of names) {
@@ -680,7 +838,7 @@
     const width = Math.floor(chart.body.getBoundingClientRect().width);
     if (width > 0 && Math.abs(width - chart.plot.width) > 1) { chart.plot.setSize({ width, height: 160 }); moveCursors(); }
   }
-  window.addEventListener("resize", () => { bench.charts.forEach(fitChart); renderTimeline(); });
+  window.addEventListener("resize", () => { bench.charts.forEach(fitChart); renderTimeline(); drawActuation(); });
 
   // ---- comparison table and info -----------------------------------------------------------------------------------------
   function summarize(values, from) {
@@ -784,7 +942,7 @@
       bench.caps = caps; bench.catalogue = catalogue;
       restore();
       if (!caps.crops.includes(bench.config.crop)) bench.config.crop = caps.crops[0];
-      buildSetup(); initLayout(); renderBackend(); renderPresets(); renderEvents(); bindTransport();
+      buildSetup(); initLayout(); renderBackend(); renderPresets(); renderEvents(); bindTransport(); bindControl();
       $("#autorun").checked = false;
       $("#run").disabled = false;
       window.__bench = bench;  // handle for scripted checks

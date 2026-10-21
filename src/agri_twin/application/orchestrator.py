@@ -49,6 +49,7 @@ class CropSimulationSnapshot:
     outdoor_weather: WeatherState | None = None
     co2_factor: float = 1.0
     water_balance: WaterBalanceResult | None = None
+    control: object | None = None  # ControlRecord of the step when a climate controller drove the actuators (None otherwise)
 
 
 class CropDigitalTwinOrchestrator:
@@ -86,13 +87,13 @@ class CropDigitalTwinOrchestrator:
             return weather
         return WeatherState(indoor.temperature_c, indoor.relative_humidity_pct, indoor.radiation_w_m2, weather.wind_speed_m_s, weather.wind_direction_deg, 0.0, indoor.pressure_hpa)
 
-    def step(self, dt_seconds: float, actuators: Mapping[str, ActuatorControl] | None = None, irrigation: IrrigationRequest | None = None, fertilization: FertilizationRequest | None = None) -> CropSimulationSnapshot:
+    def step(self, dt_seconds: float, actuators: Mapping[str, ActuatorControl] | None = None, irrigation: IrrigationRequest | None = None, fertilization: FertilizationRequest | None = None, control: object | None = None) -> CropSimulationSnapshot:
         if not math.isfinite(dt_seconds) or dt_seconds <= 0:
             raise CropSimulationError("dt_seconds must be positive and finite")
         self.clock.advance(dt_seconds)
-        return self.step_at(self.clock.now(), dt_seconds, actuators, irrigation, fertilization)
+        return self.step_at(self.clock.now(), dt_seconds, actuators, irrigation, fertilization, control)
 
-    def step_at(self, simulation_time: datetime, dt_seconds: float, actuators: Mapping[str, ActuatorControl] | None = None, irrigation: IrrigationRequest | None = None, fertilization: FertilizationRequest | None = None) -> CropSimulationSnapshot:
+    def step_at(self, simulation_time: datetime, dt_seconds: float, actuators: Mapping[str, ActuatorControl] | None = None, irrigation: IrrigationRequest | None = None, fertilization: FertilizationRequest | None = None, control: object | None = None) -> CropSimulationSnapshot:
         if simulation_time.tzinfo is None or not math.isfinite(dt_seconds) or dt_seconds <= 0:
             raise CropSimulationError("simulation time and dt_seconds are invalid")
         weather = self.weather_engine.generate(simulation_time)
@@ -114,7 +115,7 @@ class CropDigitalTwinOrchestrator:
         self.crop = replace(actual, soil_water_vwc=water_result.soil.vwc_m3_m3, water_stress=water_result.water_stress, nutrient_status=nutrient_result.nutrient_status, harvest_ready=harvest_ready)
         self.soil = water_result.soil
         self.microclimate = microclimate.indoor_state
-        snapshot = CropSimulationSnapshot(simulation_time, crop_weather, microclimate.environment, microclimate, self.crop, self.soil, potential_growth, actual_growth, combined, harvest_ready, weather, co2_factor, water_result)
+        snapshot = CropSimulationSnapshot(simulation_time, crop_weather, microclimate.environment, microclimate, self.crop, self.soil, potential_growth, actual_growth, combined, harvest_ready, weather, co2_factor, water_result, control)
         self.last_snapshot = snapshot
         return snapshot
 

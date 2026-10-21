@@ -32,6 +32,12 @@ from enum import StrEnum
 from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
 
+from agri_twin.application.climate_control import (
+    ClimateControlRequestError,
+    ControlSession,
+    describe as describe_climate_control,
+    parse_control,
+)
 from agri_twin.application.greenhouse_backend import (
     GreenhouseBackendError,
     GreenhouseBackendRequest,
@@ -75,6 +81,7 @@ from agri_twin.application.synthetic_dataset import SyntheticReferenceDatasetGen
 from agri_twin.application.twin_state import TwinState
 from agri_twin.application.weather import WeatherEngine
 from agri_twin.domain.calibration import ParameterSet
+from agri_twin.domain.climate_control import ClimateControlConfig
 from agri_twin.domain.greenhouse import PROFILES as GREENHOUSE_PROFILES
 from agri_twin.domain.greenhouse import GreenhouseConfiguration
 from agri_twin.domain.parameter_audit import ParameterRegistry
@@ -100,7 +107,7 @@ SCENARIOS = (*MANDATORY_SCENARIOS, *SUPPLEMENTARY_SCENARIOS)
 ENVIRONMENTS = {"outdoor": "outdoor", "greenhouse": "passive_greenhouse"}  # API name -> orchestrator greenhouse_mode
 WEATHER_SOURCES = ("SYNTHETIC_SEASONAL",)
 WEATHER_GENERATOR = "WeatherEngine(seasonal + daily variability, seeded) + ScenarioEvent overlays (Phase 5.32)"
-REQUEST_FIELDS = ("api_version", "crop", "variety", "environment", "plot", "scenario", "start_time", "end_time", "seed", "weather", "dormancy", "checkpoint", "options", "runtime_events", "greenhouse")
+REQUEST_FIELDS = ("api_version", "crop", "variety", "environment", "plot", "scenario", "start_time", "end_time", "seed", "weather", "dormancy", "checkpoint", "options", "runtime_events", "greenhouse", "control")
 WEATHER_FIELDS = ("source", "profile_overrides")
 OPTION_FIELDS = ("progress_interval_steps", "require_requested_chilling_model", "include_trajectory", "compute_trajectory_hash", "variables")
 CHECKPOINT_FIELDS = ("format", "simulation_time", "payload", "sha256", "resume_hash")
@@ -287,6 +294,18 @@ VARIABLES: tuple[VariableSpec, ...] = (
                  lambda s: s.microclimate.indoor_state.heating_kw, "no greenhouse in outdoor runs"),
     VariableSpec("greenhouse_cooling_kw", "kW", "microclimate.indoor_state.cooling_kw", "greenhouse cooling power", "GREENHOUSE",
                  lambda s: s.microclimate.indoor_state.cooling_kw, "no greenhouse in outdoor runs"),
+    VariableSpec("control_vent_opening", "fraction", "control.vents", "vent opening commanded by the climate controller (fraction of the vent capacity)", "CONTROL",
+                 lambda s: s.control.decision.vents if s.control is not None else 0.0, "no climate controller in this run"),
+    VariableSpec("control_extractor_level", "fraction", "control.extractors", "extractor speed commanded by the climate controller (fraction of full speed)", "CONTROL",
+                 lambda s: s.control.decision.extractors if s.control is not None else 0.0, "no climate controller in this run"),
+    VariableSpec("control_layer", "-", "control.layer", "control layer acting in the step: PASSIVE (screen, vents), ACTIVE (extractors, HVAC) or NONE", "CONTROL",
+                 lambda s: s.control.layer if s.control is not None else "NONE", "no climate controller in this run"),
+    VariableSpec("control_electric_kw", "kW", "control.electric_kw", "estimated electric/fuel input power of the active equipment (null when an efficiency is not defined)", "CONTROL",
+                 lambda s: s.control.electric_kw if s.control is not None else 0.0, "no climate controller in this run"),
+    VariableSpec("control_energy_kwh", "kWh_per_step", "control.energy_kwh", "estimated energy of the step (null when an efficiency is not defined)", "CONTROL",
+                 lambda s: s.control.energy_kwh if s.control is not None else 0.0, "no climate controller in this run"),
+    VariableSpec("control_energy_kwh_cumulative", "kWh", "control.energy_kwh", "running sum of the estimated energy; null from the first step whose energy is not estimable", "CONTROL",
+                 lambda s: None, "no climate controller in this run"),
     VariableSpec("dormancy_released", "bool", "crop.dormancy_released", "endodormancy released", "PERENNIAL", lambda s: s.crop.dormancy_released,
                  "annual crops have no endodormancy"),
     VariableSpec("chilling_accumulated", "effective chilling model unit", "crop.chilling_hours | crop.chilling_state.accumulated",
@@ -306,9 +325,11 @@ FLUX_TOTALS = ("irrigation_mm", "precipitation_mm", "drainage_mm", "transpiratio
 BACKEND_UNSUPPORTED_VARIABLES = {"ENERGYPLUS": {"co2_ppm": "the EnergyPlus backend does not model CO2 (no value is fabricated)"}}
 
 
-def variable_availability(spec: VariableSpec, crop: str, environment: str, backend: str = "SIMPLIFIED") -> Availability:
+def variable_availability(spec: VariableSpec, crop: str, environment: str, backend: str = "SIMPLIFIED", control: bool = False) -> Availability:
     if spec.scope == "NONE":
         return Availability.NOT_SUPPORTED
+    if spec.scope == "CONTROL":
+        return Availability.AVAILABLE if control else Availability.NOT_APPLICABLE
     if spec.name in BACKEND_UNSUPPORTED_VARIABLES.get(backend, {}) and environment == "greenhouse":
         return Availability.NOT_SUPPORTED
     if spec.scope == "GREENHOUSE" and environment != "greenhouse":
@@ -376,6 +397,7 @@ class SimulationRequest:
     api_version: str = API_VERSION
     runtime_events: tuple[RuntimeEvent, ...] = ()  # Phase 5.39: user-defined future events (empty: unchanged 5.37 behaviour)
     greenhouse: GreenhouseBackendRequest | None = None  # Phase 5.41: None = simplified backend (unchanged hashes); ENERGYPLUS otherwise
+    control: ClimateControlConfig | None = None  # Phase 5.42: None = no climate controller (unchanged hashes)
 
     @property
     def backend(self) -> str:
@@ -399,6 +421,8 @@ class SimulationRequest:
             document["runtime_events"] = [event.request_dict() for event in self.runtime_events]
         if self.greenhouse is not None:
             document["greenhouse"] = self.greenhouse.to_dict()
+        if self.control is not None:
+            document["control"] = self.control.to_dict()
         return document
 
     def canonical_json(self) -> str:
@@ -416,6 +440,8 @@ class SimulationRequest:
                     "campaign_start": cycle_start.isoformat(), "timestep_seconds": TIMESTEP_SECONDS}
         if self.greenhouse is not None:  # a checkpoint never resumes under another backend or layout
             identity["greenhouse"] = self.greenhouse.to_dict()
+        if self.control is not None:  # a checkpoint never resumes under another control strategy
+            identity["control"] = self.control.to_dict()
         return identity
 
     @property
@@ -630,7 +656,11 @@ def canonicalize_request(document: SimulationRequest | Mapping[str, Any]) -> Sim
         greenhouse = parse_greenhouse_backend(document.get("greenhouse"), environment, tuple(event.event_type for event in runtime_events))
     except GreenhouseBackendError as exc:
         raise _fail(ErrorCode(exc.kind), exc.message, exc.path) from None
-    request = SimulationRequest(crop, variety, environment, plot.plot_id, scenario, start, end, seed, source, overrides, dormancy, checkpoint, options, runtime_events=runtime_events, greenhouse=greenhouse)
+    try:
+        control = parse_control(document.get("control"), environment, greenhouse.backend if greenhouse is not None else "SIMPLIFIED")
+    except ClimateControlRequestError as exc:
+        raise _fail(ErrorCode(exc.kind), exc.message, exc.path) from None
+    request = SimulationRequest(crop, variety, environment, plot.plot_id, scenario, start, end, seed, source, overrides, dormancy, checkpoint, options, runtime_events=runtime_events, greenhouse=greenhouse, control=control)
     if checkpoint is not None:
         if checkpoint.resume_hash != request.resume_hash:
             raise _fail(ErrorCode.INVALID_CHECKPOINT, "checkpoint was produced by a different configuration (crop, environment, scenario, seed, weather or dormancy differ)", "checkpoint.resume_hash")
@@ -968,6 +998,8 @@ class InteractiveSimulationService:
         phenology = None if request.dormancy == DEFAULT_DORMANCY_CONFIGURATION else PhenologyEngine(dormancy=DormancyChillingController(configuration=request.dormancy))
         runner = ScenarioRunner(_weather_factory(request))
         engine_arguments: dict[str, Any] = {}
+        if request.control is not None:
+            engine_arguments["control"] = ControlSession(request.control, request.crop)
         if request.greenhouse is not None:
             try:
                 timeline = build_timeline(request.greenhouse, request.plot, with_runtime_events(execution.spec.scenario, request.runtime_events), _weather_factory(request), request.end_time)
@@ -1089,6 +1121,8 @@ def effective_configuration(request: SimulationRequest, spec: CampaignSpec, scen
     }
     if request.greenhouse is not None:
         effective["greenhouse_backend"] = describe_greenhouse_backend(request.greenhouse)
+    if request.control is not None:
+        effective["climate_control"] = describe_climate_control(request.control)
     if request.runtime_events:
         effective["runtime_events"] = [event.to_dict() | {"provenance": "USER_DEFINED_EVENT", "classification": "USER_DEFINED_SYNTHETIC_FORCING"} for event in request.runtime_events]
         effective["event_sequence_hash"] = event_sequence_hash(request.runtime_events)
@@ -1115,18 +1149,28 @@ def _behaviour_warnings(execution: _Execution) -> tuple[SimulationWarning, ...]:
     return ()
 
 
+def _cumulative_energy(snapshots: Sequence[CropSimulationSnapshot]) -> list[float | None]:
+    total: float | None = 0.0
+    cumulative: list[float | None] = []
+    for snapshot in snapshots:
+        step = snapshot.control.energy_kwh if snapshot.control is not None else 0.0
+        total = None if total is None or step is None else total + step
+        cumulative.append(total)
+    return cumulative
+
+
 def project_result(execution: _Execution) -> SimulationResult:
     request, snapshots = execution.request, execution.snapshots
     selected = request.options.variables or tuple(spec.name for spec in VARIABLES)
     catalogue, series = [], {}
     for name in selected:
         spec = VARIABLE_INDEX[name]
-        availability = variable_availability(spec, request.crop, request.environment, request.backend)
+        availability = variable_availability(spec, request.crop, request.environment, request.backend, request.control is not None)
         unit = MODEL_SPECS[request.dormancy.effective_chilling_model].unit.value if name == "chilling_accumulated" else spec.unit
         catalogue.append({"name": name, "unit": unit, "availability": availability.value, "source": spec.source, "description": spec.description,
                           "reason": None if availability is Availability.AVAILABLE else BACKEND_UNSUPPORTED_VARIABLES.get(request.backend, {}).get(name, spec.reason)})
         if availability is Availability.AVAILABLE and request.options.include_trajectory:
-            series[name] = [spec.getter(snapshot) for snapshot in snapshots]  # type: ignore[misc]
+            series[name] = _cumulative_energy(snapshots) if name == "control_energy_kwh_cumulative" else [spec.getter(snapshot) for snapshot in snapshots]  # type: ignore[misc]
     trajectory = {"time": [snapshot.simulation_time.isoformat() for snapshot in snapshots], **series} if request.options.include_trajectory else None
     totals = {name: math.fsum(VARIABLE_INDEX[name].getter(snapshot) for snapshot in snapshots) for name in FLUX_TOTALS}  # type: ignore[misc]
     final_state = twin_state_from_snapshot(snapshots[-1], execution.spec).to_dict()

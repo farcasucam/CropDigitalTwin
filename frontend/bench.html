@@ -7,13 +7,13 @@
   <title>Agri-Twin · Experiment bench</title>
   <link rel="stylesheet" href="vendor/uPlot.min.css?v=1.6.32">
   <link rel="stylesheet" href="vendor/isokit.css?v=1">
-  <link rel="stylesheet" href="bench.css?v=3">
+  <link rel="stylesheet" href="bench.css?v=4">
   <script src="vendor/uPlot.iife.min.js?v=1.6.32" defer></script>
   <script src="vendor/isokit.iife.js?v=1" defer></script>
   <script src="visual_state.js?v=20261102-visual7" defer></script>
   <script src="scene_state.js?v=20261102-scene1" defer></script>
   <script src="iso_scene.js?v=20261102-scene2" defer></script>
-  <script src="bench.js?v=3" defer></script>
+  <script src="bench.js?v=4" defer></script>
 </head>
 <body class="iso" data-theme="light">
   <header class="bar">
@@ -55,8 +55,24 @@
         <p class="hint">Events are user-defined synthetic forcing. Each has its own date: drag its bar on the timeline above the results. The baseline never includes events; both runs share the history before the earliest one.</p>
       </details>
 
+      <details class="group" id="control-group">
+        <summary>3 · Climate control <span id="control-summary" class="pill">off</span></summary>
+        <p class="hint">Passive first: screens and vents act before extractors and HVAC, which spend energy. Automatic rules use the crop's own thresholds for its current stage (from the crop catalogue); a schedule repeats a daily window over a range of dates. A manual event on the timeline overrides the controller for that actuator.</p>
+        <div id="control-actuators" class="ctl-list"></div>
+        <details class="sub"><summary>Equipment (your installation)</summary>
+          <p class="hint">Nothing is assumed: an empty field leaves that actuator unavailable (or its energy not estimable). Energy is an estimate from these values, not a measurement.</p>
+          <div id="control-equipment" class="grid2 ctl-equipment"></div>
+          <div class="chips"><button id="load-illustrative" class="chip" type="button" title="Values to try the simulator; they do not describe any real installation">Fill with illustrative values (not sourced)</button><button id="clear-equipment" class="chip" type="button">Clear</button></div>
+        </details>
+        <details class="sub"><summary>Daily schedules</summary>
+          <ul id="control-schedules" class="events" aria-label="Schedules"></ul>
+          <button id="add-schedule" class="chip" type="button">Add a schedule</button>
+        </details>
+        <p id="control-note" class="hint ctl-warn" hidden></p>
+      </details>
+
       <details class="group" id="greenhouse-group">
-        <summary>3 · Greenhouse model</summary>
+        <summary>4 · Greenhouse model</summary>
         <div class="field"><span class="label">Thermal backend</span>
           <span class="seg" id="backend" role="group" aria-label="Thermal backend"></span>
         </div>
@@ -120,6 +136,7 @@
         <div class="tl-track">
           <div id="tl-axis" class="tl-axis" title="Click or drag to move through time"></div>
           <div id="tl-rows" class="tl-rows"></div>
+          <canvas id="tl-actuation" class="tl-actuation" hidden aria-label="What the actuators did over time"></canvas>
           <div id="tl-head" class="tl-head" hidden aria-hidden="true"><i class="tl-knob"></i></div>
         </div>
         <p class="hint">Click or drag along the dates to move through time. Drag an event bar to move it, drag its edges to resize it (arrow keys move it, Shift+arrows resize it).</p>
