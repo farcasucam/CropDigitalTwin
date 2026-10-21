@@ -48,10 +48,27 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .event header { display: flex; justify-content: space-between; align-items: center; font-weight: 650; font-size: .84rem; }
 .event header button { border: 0; background: none; color: var(--red); font-size: .78rem; }
 .event .grid2 label { margin: .25rem 0; }
+.event .grid2 label.wide { grid-column: 1 / -1; }
 .event .when { font-size: .74rem; color: var(--muted); }
 .event[data-invalid="true"] { border-color: var(--red); }
 
 .stage { display: grid; gap: .9rem; min-width: 0; }
+.timeline { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: .5rem .8rem .7rem; }
+.timeline header { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .3rem .8rem; align-items: baseline; margin-bottom: .3rem; }
+.tl-track { position: relative; }
+.tl-axis { position: relative; height: 1.2rem; border-bottom: 1px solid var(--line); font-size: .7rem; color: var(--muted); }
+.tl-tick { position: absolute; top: 0; transform: translateX(-50%); padding-bottom: .15rem; }
+.tl-tick::after { content: ""; position: absolute; left: 50%; top: 100%; height: 5px; border-left: 1px solid var(--line); }
+.tl-rows { position: relative; min-height: 2.4rem; padding: .3rem 0; display: grid; gap: .25rem; touch-action: none; }
+.tl-lock { position: absolute; left: 0; top: 0; bottom: 0; background: repeating-linear-gradient(135deg, #eef2ef 0 5px, #e3e9e5 5px 10px); border-radius: 4px; pointer-events: none; }
+.tl-empty { margin: 0; align-self: center; text-align: center; color: var(--muted); font-size: .8rem; }
+.tl-row { position: relative; height: 1.7rem; }
+.tl-bar { position: absolute; top: 0; height: 100%; display: flex; align-items: center; padding: 0 .6rem; border-radius: 7px; cursor: grab; user-select: none; overflow: hidden; white-space: nowrap; font-size: .76rem; font-weight: 650; color: #fff; background: hsl(var(--hue) 55% 42%); box-shadow: 0 1px 3px rgba(0,0,0,.25); }
+.tl-bar:active { cursor: grabbing; }
+.tl-grip { position: absolute; top: 0; bottom: 0; width: 9px; cursor: ew-resize; background: rgba(255,255,255,.28); }
+.tl-grip { left: 0; } .tl-grip.right { left: auto; right: 0; }
+.tl-head { position: absolute; top: 0; bottom: 0; width: 0; border-left: 2px solid var(--ink); pointer-events: none; opacity: .7; }
+
 .empty { background: var(--card); border: 1px dashed var(--line); border-radius: 12px; padding: 2rem; text-align: center; color: var(--muted); }
 .scenes { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: .8rem; }
 .scene-card { margin: 0; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: .6rem; min-width: 0; }
@@ -80,7 +97,7 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .chart-card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: .5rem .6rem .3rem; min-width: 0; }
 .chart-card header { display: flex; justify-content: space-between; gap: .5rem; font-size: .8rem; margin-bottom: .2rem; }
 .chart-card header span { color: var(--muted); font-variant-numeric: tabular-nums; }
-.chart-body { position: relative; }
+.chart-body { position: relative; min-width: 0; overflow: hidden; }
 .cursor-line { position: absolute; top: 0; bottom: 30px; width: 0; border-left: 2px solid rgba(23,53,45,.65); pointer-events: none; }
 .key-b { color: var(--blue); } .key-i { color: var(--orange); }
 

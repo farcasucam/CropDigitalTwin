@@ -232,16 +232,20 @@
     }
     applyView();
 
-    let lastPlantKey = "", lastRainKey = "";
-    function update(s, layers) {
+    let lastPlantKey = "", lastRainKey = "", smoothSun = null;
+    // `calm` (fast playback): day and night alternate faster than the eye can follow, so the sky shows the running mean of the light and a noon sun
+    // instead of strobing. Presentation only; the state itself is untouched.
+    function update(s, layers, calm) {
       layers = layers || {};
       const on = (name) => layers[name] !== false;
       const o = s.outdoor, ind = s.indoor, act = s.actuators, c = s.crop;
       // sky, sun, rain
-      const sunLevel = s.levels.radiation === null ? 0.5 : s.levels.radiation;
+      const rawSun = s.levels.radiation === null ? 0.5 : s.levels.radiation;
+      smoothSun = calm && smoothSun !== null ? smoothSun + (rawSun - smoothSun) * 0.04 : rawSun;
+      const sunLevel = smoothSun;
       skyRect.setAttribute("fill", `hsl(${lerp(228, 205, sunLevel).toFixed(0)} ${lerp(38, 70, sunLevel).toFixed(0)}% ${lerp(14, 90, sunLevel).toFixed(0)}%)`);
       skyRect.setAttribute("opacity", "0.55");
-      const day = clamp((s.hour - 6) / 12);
+      const day = calm ? 0.5 : clamp((s.hour - 6) / 12);
       sun.setAttribute("cx", (80 + (W - 160) * day).toFixed(0)); sun.setAttribute("cy", (150 - 110 * Math.sin(Math.PI * day)).toFixed(0));
       sun.style.display = on("radiation") && s.levels.radiation !== null ? "" : "none";
       sun.setAttribute("r", (8 + 8 * sunLevel).toFixed(1)); sun.setAttribute("opacity", (0.25 + 0.75 * sunLevel).toFixed(2));

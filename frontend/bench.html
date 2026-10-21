@@ -7,13 +7,13 @@
   <title>Agri-Twin · Experiment bench</title>
   <link rel="stylesheet" href="vendor/uPlot.min.css?v=1.6.32">
   <link rel="stylesheet" href="vendor/isokit.css?v=1">
-  <link rel="stylesheet" href="bench.css?v=1">
+  <link rel="stylesheet" href="bench.css?v=2">
   <script src="vendor/uPlot.iife.min.js?v=1.6.32" defer></script>
   <script src="vendor/isokit.iife.js?v=1" defer></script>
   <script src="visual_state.js?v=20261102-visual7" defer></script>
   <script src="scene_state.js?v=20261102-scene1" defer></script>
-  <script src="iso_scene.js?v=20261102-scene1" defer></script>
-  <script src="bench.js?v=1" defer></script>
+  <script src="iso_scene.js?v=20261102-scene2" defer></script>
+  <script src="bench.js?v=2" defer></script>
 </head>
 <body class="iso" data-theme="light">
   <header class="bar">
@@ -48,15 +48,11 @@
 
       <details open class="group">
         <summary>2 · Intervention</summary>
-        <label>Starts after day <output id="branch-out"></output>
-          <input id="branch" type="range" min="1" max="6" value="3" aria-describedby="branch-date">
-        </label>
-        <p id="branch-date" class="hint"></p>
         <div class="field"><span class="label">Add an event</span>
           <div id="presets" class="chips" role="group" aria-label="Event presets"></div>
         </div>
         <ul id="events" class="events" aria-label="Events"></ul>
-        <p class="hint">Events are user-defined synthetic forcing applied from the start day onward; the baseline never includes them.</p>
+        <p class="hint">Events are user-defined synthetic forcing. Each has its own date: drag its bar on the timeline above the results. The baseline never includes events; both runs share the history before the earliest one.</p>
       </details>
 
       <details class="group" id="greenhouse-group">
@@ -96,6 +92,14 @@
     </aside>
 
     <section class="stage" aria-label="Results">
+      <section id="timeline" class="timeline" aria-label="Intervention timeline">
+        <header><strong>Intervention timeline</strong><span class="hint">Drag a bar to move it, drag its edges to resize it (arrow keys move it, Shift+arrows resize it).</span></header>
+        <div class="tl-track">
+          <div id="tl-axis" class="tl-axis" aria-hidden="true"></div>
+          <div id="tl-rows" class="tl-rows"></div>
+          <div id="tl-head" class="tl-head" hidden aria-hidden="true"></div>
+        </div>
+      </section>
       <div id="empty" class="empty">Pick a scenario and press <strong>Run</strong>. Without events you get a single run; add an event to compare it with the baseline side by side.</div>
       <div id="scenes" class="scenes" hidden>
         <figure class="scene-card" id="card-baseline">

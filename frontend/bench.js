@@ -9,6 +9,8 @@
   const HOUR = 3600000, DAY = 86400000;
   const V = window.VisualState, S = window.SceneState;
   const SPEEDS = [1, 6, 24, 72, 168];
+  const MIN_AT_HOURS = 24;  // the what-if checkpoint needs at least one simulated day of history
+  const CALM_SPEED = 24;    // from this speed on a day/night cycle is faster than the eye can follow: the sky stays steady
   const STORAGE_KEY = "agri-twin-bench-v1";
   const LAYERS = [["crop", "Crop"], ["soil", "Soil"], ["water", "Water"], ["temperature", "Temperature tint"], ["radiation", "Sun"], ["vpd", "VPD haze"], ["co2", "CO2"], ["events", "Events"]];
   const CHART_DEFAULT = ["temperature_c", "relative_humidity_pct", "greenhouse_ventilation_fraction", "heat_stress", "biomass_total_g_m2"];
@@ -39,10 +41,10 @@
 
   const bench = {
     caps: null, catalogue: null,
-    config: { crop: "tomato", environment: "greenhouse", scenario: "BASE_SEASON", horizon: "month", backend: "SIMPLIFIED", layout: null, branchDay: null, view: "ISOMETRIC",
+    config: { crop: "tomato", environment: "greenhouse", scenario: "BASE_SEASON", horizon: "month", backend: "SIMPLIFIED", layout: null, view: "ISOMETRIC",
       layers: { crop: true, soil: true, water: true, temperature: true, radiation: true, vpd: false, co2: false, events: true }, charts: CHART_DEFAULT.slice() },
     events: [], run: null, serial: 0, running: false, position: 0, playing: false, speed: 24, lastFrame: 0, lastReadout: 0,
-    scenes: {}, charts: [], autoTimer: null,
+    scenes: {}, charts: [], autoTimer: null, observers: [],
   };
 
   // ---- helpers ---------------------------------------------------------------------------------------------
@@ -98,7 +100,7 @@
       if (!saved) return;
       Object.assign(bench.config, saved.config || {});
       bench.config.layers = { ...bench.config.layers, ...((saved.config || {}).layers || {}) };
-      if (Array.isArray(saved.events)) bench.events = saved.events;
+      if (Array.isArray(saved.events)) bench.events = saved.events.filter((event) => isNumber(event.atHours));  // events saved before per-event dates are dropped
       if (SPEEDS.includes(saved.speed)) bench.speed = saved.speed;
     } catch { /* ignore corrupt storage */ }
   }
@@ -112,7 +114,12 @@
     return Math.min(cropEnd, start + days * DAY);
   }
   const horizonDays = () => Math.floor((endMs() - startMs()) / DAY);
-  const branchMs = () => startMs() + bench.config.branchDay * DAY;
+  const horizonHours = () => Math.floor((endMs() - startMs()) / HOUR);
+  // Every event owns its absolute start (hours since the cycle start). The fork point is the earliest event, never a shared slider.
+  const branchHours = () => Math.max(MIN_AT_HOURS, bench.events.length ? Math.min(...bench.events.map((event) => event.atHours)) : MIN_AT_HOURS);
+  const branchMs = () => startMs() + branchHours() * HOUR;
+  const eventStartMs = (event) => startMs() + event.atHours * HOUR;
+  const stamp = (ms) => iso(ms).slice(0, 16).replace("T", " ");
   const specFor = (type) => bench.caps.runtime.supported.find((item) => item.event_type === type);
   const backendInfo = (id) => bench.caps.greenhouse_backends.find((item) => item.id === id);
 
@@ -127,7 +134,7 @@
   }
   function eventDocuments() {
     return bench.events.map((event) => {
-      const document = { event_type: event.type, start_simulation_time: iso(branchMs() + event.startHours * HOUR), duration_hours: event.hours };
+      const document = { event_type: event.type, start_simulation_time: iso(eventStartMs(event)), duration_hours: event.hours };
       const spec = specFor(event.type);
       if (spec && spec.maximum !== null && spec.maximum !== undefined && !(spec.minimum === 0 && spec.maximum === 0)) document.intensity = event.intensity;
       if (spec && spec.ramp_supported && event.ramp > 0) document.ramp_hours = event.ramp;
@@ -146,13 +153,12 @@
     $("#scenario").addEventListener("change", () => { bench.config.scenario = $("#scenario").value; changed(); });
     $$("[data-horizon]").forEach((button) => button.addEventListener("click", () => { bench.config.horizon = button.dataset.horizon; fitBranch(); changed(); }));
     $$("[data-view]").forEach((button) => button.addEventListener("click", () => { bench.config.view = button.dataset.view; syncPressed("[data-view]", "view"); configureScenes(); renderFrame(true); save(); }));
-    $("#branch").addEventListener("input", () => { bench.config.branchDay = Number($("#branch").value); updateBranchText(); renderEvents(); drawTicks(); redrawCharts(); });
-    $("#branch").addEventListener("change", () => changed());
     $("#run").addEventListener("click", () => void runExperiment());
     $("#autorun").addEventListener("change", save);
     fitBranch();
     syncPressed("[data-horizon]", "horizon");
     syncPressed("[data-view]", "view");
+    $("#timeline").addEventListener("pointerdown", onTimelinePointer);
   }
 
   function refreshEnvironment() {
@@ -171,18 +177,15 @@
     $$(selector).forEach((button) => button.setAttribute("aria-pressed", String(button.dataset[key] === bench.config[key])));
   }
   function fitBranch() {
-    const days = horizonDays(), input = $("#branch");
-    input.max = String(Math.max(1, days - 1));
-    if (bench.config.branchDay === null || bench.config.branchDay > days - 1 || bench.config.branchDay < 1) bench.config.branchDay = Math.max(1, Math.round(days * 0.4));
-    input.value = String(bench.config.branchDay);
+    const days = horizonDays(), total = horizonHours();
+    for (const event of bench.events) {
+      event.atHours = clamp(event.atHours, MIN_AT_HOURS, Math.max(MIN_AT_HOURS, total - 1));
+      event.hours = clamp(event.hours, 1, Math.max(1, total - event.atHours));
+    }
     syncPressed("[data-horizon]", "horizon");
-    updateBranchText();
+    renderEvents(); renderTimeline();
     const start = startMs();
     $("#period").textContent = `Synthetic cycle ${iso(start).slice(0, 10)} → ${iso(endMs()).slice(0, 10)} · ${days} simulated days · weather is synthetic forcing`;
-  }
-  function updateBranchText() {
-    $("#branch-out").textContent = `${bench.config.branchDay} of ${horizonDays()}`;
-    $("#branch-date").textContent = `Branch point ${iso(branchMs()).slice(0, 16).replace("T", " ")} UTC; history before it is identical in both runs.`;
   }
 
   // greenhouse model + layout
@@ -262,12 +265,18 @@
       host.append(button);
     }
   }
-  function pruneEvents() { bench.events = bench.events.filter((event) => presetAllowed({ type: event.type })); }
+  function pruneEvents() { bench.events = bench.events.filter((event) => presetAllowed({ type: event.type })); renderTimeline(); }
   function addEvent(preset) {
-    const remaining = Math.max(1, Math.floor((endMs() - branchMs()) / HOUR));
-    bench.events.push({ id: `${preset.id}-${bench.events.length + 1}-${bench.serial}`, type: preset.type, startHours: 0, hours: Math.min(preset.hours, remaining), intensity: preset.intensity ?? 0, ramp: preset.ramp || 0 });
-    renderEvents(); drawTicks(); redrawCharts(); changed();
+    const total = horizonHours();
+    // a new event starts where the playhead is (when a run is open) or a few days in, snapped to a whole day
+    const head = bench.run ? Math.round((Date.parse(bench.run.times[Math.floor(bench.position)]) - startMs()) / HOUR) : Math.round(total * 0.3);
+    const atHours = clamp(Math.round(head / 24) * 24, MIN_AT_HOURS, Math.max(MIN_AT_HOURS, total - 1));
+    bench.events.push({ id: `${preset.id}-${bench.events.length + 1}-${bench.serial}`, type: preset.type, atHours, hours: clamp(preset.hours, 1, Math.max(1, total - atHours)), intensity: preset.intensity ?? 0, ramp: preset.ramp || 0 });
+    eventsChanged();
   }
+  function eventsChanged() { renderEvents(); renderTimeline(); drawTicks(); redrawCharts(); changed(); }
+  const eventInvalid = (event, spec, hasIntensity) => event.atHours < MIN_AT_HOURS || event.atHours + event.hours > horizonHours()
+    || (hasIntensity && (event.intensity < spec.minimum || event.intensity > spec.maximum || (spec.minimum_exclusive && event.intensity <= spec.minimum)));
   function renderEvents() {
     const host = $("#events");
     host.replaceChildren();
@@ -275,14 +284,14 @@
       const spec = specFor(event.type);
       const hasIntensity = spec && spec.maximum !== null && spec.maximum !== undefined && !(spec.minimum === 0 && spec.maximum === 0);
       const item = el("li", "event");
-      const remaining = Math.max(1, Math.floor((endMs() - branchMs()) / HOUR));
-      const invalid = event.startHours + event.hours > remaining || (hasIntensity && (event.intensity < spec.minimum || event.intensity > spec.maximum || (spec.minimum_exclusive && event.intensity <= spec.minimum)));
+      const remaining = Math.max(1, horizonHours() - event.atHours);
+      const invalid = eventInvalid(event, spec, hasIntensity);
       item.dataset.invalid = String(Boolean(invalid));
       const head = el("header");
       head.append(el("span", "", `${label(event.type.toLowerCase()).replace(/\b\w/g, (c) => c.toUpperCase())}`));
       const remove = el("button", "", "Remove");
       remove.type = "button";
-      remove.addEventListener("click", () => { bench.events.splice(index, 1); renderEvents(); drawTicks(); redrawCharts(); changed(); });
+      remove.addEventListener("click", () => { bench.events.splice(index, 1); eventsChanged(); });
       head.append(remove);
       item.append(head);
       const grid = el("div", "grid2");
@@ -290,17 +299,98 @@
         const wrap = el("label", "", name), input = el("input");
         input.type = "number"; input.min = String(min); input.step = String(step); if (max !== null) input.max = String(max);
         input.value = String(event[key]); input.disabled = !enabled;
-        input.addEventListener("change", () => { event[key] = Number(input.value); renderEvents(); drawTicks(); redrawCharts(); changed(); });
+        input.addEventListener("change", () => { event[key] = Number(input.value); eventsChanged(); });
         wrap.append(input); grid.append(wrap);
       };
-      field("Starts (h after branch)", "startHours", 0, remaining - 1, 1);
+      const when = el("label", "wide", "Starts (UTC)"), start = el("input");
+      start.type = "datetime-local"; start.step = "3600"; start.min = iso(startMs() + MIN_AT_HOURS * HOUR).slice(0, 16); start.max = iso(endMs() - HOUR).slice(0, 16);
+      start.value = iso(eventStartMs(event)).slice(0, 16);
+      start.addEventListener("change", () => { const ms = Date.parse(`${start.value}:00Z`); if (Number.isFinite(ms)) { event.atHours = Math.round((ms - startMs()) / HOUR); eventsChanged(); } });
+      when.append(start); grid.append(when);
       field("Duration (h)", "hours", 1, remaining, 1);
       if (hasIntensity) field(`Intensity (${INTENSITY_UNITS[event.type] || "value"})`, "intensity", spec.minimum, spec.maximum, spec.maximum <= 1 ? 0.05 : 0.5);
       if (spec && spec.ramp_supported) field("Ramp (h)", "ramp", 0, 168, 1);
       item.append(grid);
-      item.append(el("div", "when", `${iso(branchMs() + event.startHours * HOUR).slice(0, 16).replace("T", " ")} → ${iso(branchMs() + (event.startHours + event.hours) * HOUR).slice(0, 16).replace("T", " ")} UTC${invalid ? " · outside the allowed range" : ""}`));
+      item.append(el("div", "when", `${stamp(eventStartMs(event))} → ${stamp(eventStartMs(event) + event.hours * HOUR)} UTC${invalid ? " · outside the allowed range" : ""}`));
       host.append(item);
     });
+  }
+
+  // ---- intervention timeline ------------------------------------------------------------------------------------------
+  // One bar per event on the cycle's own date axis. Drag a bar to move it, drag its edges to change the duration.
+  const hueFor = (type) => Math.max(0, PRESETS.findIndex((preset) => preset.type === type)) * 33;
+  function snapHours() { const days = horizonDays(); return days <= 10 ? 1 : days <= 45 ? 6 : 24; }
+  function renderTimeline() {
+    const axis = $("#tl-axis"), rows = $("#tl-rows");
+    if (!axis || !bench.caps) return;
+    const total = horizonHours(), days = horizonDays(), step = Math.max(1, Math.ceil(days / 8));
+    axis.replaceChildren();
+    for (let day = 0; day <= days; day += step) {
+      const tick = el("span", "tl-tick", new Date(startMs() + day * DAY).toISOString().slice(5, 10));
+      tick.style.left = `${(100 * day * 24) / total}%`;
+      axis.append(tick);
+    }
+    rows.replaceChildren();
+    const lock = el("div", "tl-lock"); lock.style.width = `${(100 * MIN_AT_HOURS) / total}%`; lock.title = "The first simulated day is history: events start after it";
+    rows.append(lock);
+    if (!bench.events.length) rows.append(el("p", "tl-empty", "No interventions yet. Add one from the list on the left, then drag its bar here."));
+    bench.events.forEach((event, index) => {
+      const row = el("div", "tl-row"), bar = el("div", "tl-bar", label(event.type.toLowerCase()).replace(/\b\w/g, (c) => c.toUpperCase()));
+      bar.dataset.index = String(index); bar.style.setProperty("--hue", String(hueFor(event.type))); bar.tabIndex = 0;
+      const left = el("i", "tl-grip"), right = el("i", "tl-grip right");
+      left.dataset.edge = "left"; right.dataset.edge = "right";
+      bar.append(left, right);
+      bar.addEventListener("keydown", (key) => {
+        const delta = key.key === "ArrowRight" ? snapHours() : key.key === "ArrowLeft" ? -snapHours() : 0;
+        if (!delta) return;
+        key.preventDefault();
+        if (key.shiftKey) placeEvent(event, { hours: event.hours + delta }, "resize"); else placeEvent(event, { atHours: event.atHours + delta }, "move");
+        eventsChanged();
+        const again = $(`.tl-bar[data-index="${index}"]`); if (again) again.focus();
+      });
+      row.append(bar); rows.append(row); positionBar(bar, event);
+    });
+    movePlayhead();
+  }
+  function positionBar(bar, event) {
+    const total = horizonHours();
+    bar.style.left = `${(100 * event.atHours) / total}%`; bar.style.width = `${Math.max(0.8, (100 * event.hours) / total)}%`;
+    bar.title = `${stamp(eventStartMs(event))} → ${stamp(eventStartMs(event) + event.hours * HOUR)} UTC`;
+  }
+  function placeEvent(event, next, mode) {
+    const total = horizonHours();
+    if (mode === "resize") event.hours = clamp(next.hours, 1, total - event.atHours);
+    else event.atHours = clamp(next.atHours, MIN_AT_HOURS, Math.max(MIN_AT_HOURS, total - event.hours));
+  }
+  function onTimelinePointer(pointer) {
+    const bar = pointer.target.closest(".tl-bar");
+    if (!bar || pointer.button !== 0) return;
+    const event = bench.events[Number(bar.dataset.index)], edge = pointer.target.dataset.edge || "";
+    const track = $("#tl-rows").getBoundingClientRect(), total = horizonHours(), snap = snapHours();
+    const origin = { x: pointer.clientX, atHours: event.atHours, hours: event.hours };
+    bar.setPointerCapture(pointer.pointerId);
+    pointer.preventDefault();
+    const move = (now) => {
+      const dh = Math.round(((now.clientX - origin.x) / track.width) * total / snap) * snap;
+      if (edge === "right") placeEvent(event, { hours: origin.hours + dh }, "resize");
+      else if (edge === "left") {
+        const at = clamp(origin.atHours + dh, MIN_AT_HOURS, origin.atHours + origin.hours - 1);
+        event.atHours = at; event.hours = origin.atHours + origin.hours - at;
+      } else placeEvent(event, { atHours: origin.atHours + dh }, "move");
+      positionBar(bar, event);
+    };
+    const done = () => {
+      bar.removeEventListener("pointermove", move); bar.removeEventListener("pointerup", done); bar.removeEventListener("pointercancel", done);
+      eventsChanged();
+    };
+    bar.addEventListener("pointermove", move); bar.addEventListener("pointerup", done); bar.addEventListener("pointercancel", done);
+  }
+  function movePlayhead() {
+    const head = $("#tl-head");
+    if (!head) return;
+    if (!bench.run) { head.hidden = true; return; }
+    const hours = (Date.parse(bench.run.times[Math.floor(bench.position)]) - startMs()) / HOUR;
+    head.hidden = false; head.style.left = `${clamp((100 * hours) / horizonHours(), 0, 100)}%`;
   }
 
   // ---- running ----------------------------------------------------------------------------------------------------
@@ -437,7 +527,7 @@
       const ctx = bench.ctx[name];
       const visual = V.buildVisualState(ctx, position);
       const state = S.fromVisual(visual, ctx, position);
-      bench.scenes[name].update(state, bench.config.layers);
+      bench.scenes[name].update(state, bench.config.layers, bench.playing && bench.speed >= CALM_SPEED);
       if (force || bench.lastReadoutTick) renderReadout(name, state, visual);
     }
     bench.lastReadoutTick = false;
@@ -445,6 +535,7 @@
     $("#slider").value = String(index);
     $("#clock").textContent = `${run.times[index].slice(0, 16).replace("T", " ")} UTC${index === run.branchIndex && run.kind === "WHAT_IF" ? " · branch" : ""}`;
     moveCursors();
+    movePlayhead();
   }
 
   function renderReadout(name, state, visual) {
@@ -494,6 +585,8 @@
   }
 
   function buildCharts() {
+    for (const observer of bench.observers) observer.disconnect();
+    bench.observers = [];
     for (const chart of bench.charts) chart.plot.destroy();
     bench.charts = [];
     const host = $("#charts");
@@ -507,7 +600,7 @@
       const value = el("span"); head.append(value);
       const body = el("div", "chart-body"), cursor = el("div", "cursor-line");
       card.append(head, body); host.append(card);
-      const width = Math.max(260, body.getBoundingClientRect().width || 380);
+      const width = Math.floor(body.getBoundingClientRect().width) || 380;
       const data = [seconds, run.series.baseline[name]];
       const series = [{}, { label: compare ? "baseline" : "run", stroke: "#4d6a8a", width: 1.6 }];
       if (compare) { data.push(run.series.intervention[name]); series.push({ label: "intervention", stroke: "#c0561d", width: 1.6, dash: [6, 4] }); }
@@ -521,8 +614,14 @@
         const bounds = plot.over.getBoundingClientRect(), time = plot.posToVal(event.clientX - bounds.left, "x");
         stopPlayback(); seek(nearestIndex(seconds, time));
       });
-      bench.charts.push({ name, plot, cursor, value, seconds, card });
+      bench.charts.push({ name, plot, cursor, value, seconds, card, body });
+      // The card width is only final after layout (scrollbars, grid reflow, side panel): follow it instead of measuring once.
+      if (window.ResizeObserver) {
+        const observer = new ResizeObserver(() => fitChart(bench.charts.find((chart) => chart.plot === plot)));
+        observer.observe(body); bench.observers.push(observer);
+      }
     }
+    window.requestAnimationFrame(() => { bench.charts.forEach(fitChart); moveCursors(); });
     redrawCharts();
   }
   function nearestIndex(seconds, time) {
@@ -534,7 +633,7 @@
     if (!bench.run) return;
     const ctx = u.ctx, area = u.bbox;
     const bands = bench.run.events.map((event) => ({ from: Date.parse(event.start_simulation_time) / 1000, to: Date.parse(event.end_simulation_time) / 1000, draft: false }))
-      .concat(bench.run.kind === "WHAT_IF" ? [] : bench.events.map((event) => ({ from: (branchMs() + event.startHours * HOUR) / 1000, to: (branchMs() + (event.startHours + event.hours) * HOUR) / 1000, draft: true })));
+      .concat(bench.run.kind === "WHAT_IF" ? [] : bench.events.map((event) => ({ from: eventStartMs(event) / 1000, to: (eventStartMs(event) + event.hours * HOUR) / 1000, draft: true })));
     ctx.save();
     for (const band of bands) {
       const x0 = u.valToPos(band.from, "x", true), x1 = u.valToPos(band.to, "x", true);
@@ -561,7 +660,12 @@
       chart.value.textContent = bench.run.kind === "WHAT_IF" ? `${fmt(base)} | ${fmt(inter)}` : fmt(base);
     }
   }
-  window.addEventListener("resize", () => { for (const chart of bench.charts) chart.plot.setSize({ width: Math.max(260, chart.card.querySelector(".chart-body").getBoundingClientRect().width), height: 160 }); moveCursors(); });
+  function fitChart(chart) {
+    if (!chart) return;
+    const width = Math.floor(chart.body.getBoundingClientRect().width);
+    if (width > 0 && Math.abs(width - chart.plot.width) > 1) { chart.plot.setSize({ width, height: 160 }); moveCursors(); }
+  }
+  window.addEventListener("resize", () => { bench.charts.forEach(fitChart); renderTimeline(); });
 
   // ---- comparison table and info -----------------------------------------------------------------------------------------
   function summarize(values, from) {
