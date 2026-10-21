@@ -7,13 +7,13 @@
   <title>Agri-Twin · Experiment bench</title>
   <link rel="stylesheet" href="vendor/uPlot.min.css?v=1.6.32">
   <link rel="stylesheet" href="vendor/isokit.css?v=1">
-  <link rel="stylesheet" href="bench.css?v=2">
+  <link rel="stylesheet" href="bench.css?v=3">
   <script src="vendor/uPlot.iife.min.js?v=1.6.32" defer></script>
   <script src="vendor/isokit.iife.js?v=1" defer></script>
   <script src="visual_state.js?v=20261102-visual7" defer></script>
   <script src="scene_state.js?v=20261102-scene1" defer></script>
   <script src="iso_scene.js?v=20261102-scene2" defer></script>
-  <script src="bench.js?v=2" defer></script>
+  <script src="bench.js?v=3" defer></script>
 </head>
 <body class="iso" data-theme="light">
   <header class="bar">
@@ -92,14 +92,6 @@
     </aside>
 
     <section class="stage" aria-label="Results">
-      <section id="timeline" class="timeline" aria-label="Intervention timeline">
-        <header><strong>Intervention timeline</strong><span class="hint">Drag a bar to move it, drag its edges to resize it (arrow keys move it, Shift+arrows resize it).</span></header>
-        <div class="tl-track">
-          <div id="tl-axis" class="tl-axis" aria-hidden="true"></div>
-          <div id="tl-rows" class="tl-rows"></div>
-          <div id="tl-head" class="tl-head" hidden aria-hidden="true"></div>
-        </div>
-      </section>
       <div id="empty" class="empty">Pick a scenario and press <strong>Run</strong>. Without events you get a single run; add an event to compare it with the baseline side by side.</div>
       <div id="scenes" class="scenes" hidden>
         <figure class="scene-card" id="card-baseline">
@@ -114,20 +106,24 @@
         </figure>
       </div>
 
-      <div id="transport" class="transport" hidden>
-        <button id="restart" type="button" aria-label="Restart">⏮</button>
-        <button id="back" type="button" aria-label="Back one hour">−1 h</button>
-        <button id="play" type="button" aria-pressed="false">▶ Play</button>
-        <button id="forward" type="button" aria-label="Forward one hour">+1 h</button>
-        <label class="speed">Speed <select id="speed"></select></label>
-        <button id="to-branch" type="button">Jump to start day</button>
-        <button id="to-event" type="button">Next event</button>
-        <div class="slider-wrap">
-          <input id="slider" type="range" min="0" max="0" value="0" aria-label="Simulation time">
-          <div id="ticks" class="ticks" aria-hidden="true"></div>
+      <section id="timeline" class="timeline" aria-label="Time and interventions">
+        <div id="transport" class="transport" hidden>
+          <button id="restart" type="button" aria-label="Restart">⏮</button>
+          <button id="back" type="button" aria-label="Back one hour">−1 h</button>
+          <button id="play" type="button" aria-pressed="false">▶ Play</button>
+          <button id="forward" type="button" aria-label="Forward one hour">+1 h</button>
+          <label class="speed">Speed <select id="speed"></select></label>
+          <button id="to-branch" type="button">Jump to first event</button>
+          <button id="to-event" type="button">Next event</button>
+          <output id="clock" class="clock"></output>
         </div>
-        <output id="clock" class="clock"></output>
-      </div>
+        <div class="tl-track">
+          <div id="tl-axis" class="tl-axis" title="Click or drag to move through time"></div>
+          <div id="tl-rows" class="tl-rows"></div>
+          <div id="tl-head" class="tl-head" hidden aria-hidden="true"><i class="tl-knob"></i></div>
+        </div>
+        <p class="hint">Click or drag along the dates to move through time. Drag an event bar to move it, drag its edges to resize it (arrow keys move it, Shift+arrows resize it).</p>
+      </section>
 
       <div id="charts" class="charts" hidden></div>
       <div id="delta" class="delta" hidden></div>

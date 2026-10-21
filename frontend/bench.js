@@ -274,7 +274,7 @@
     bench.events.push({ id: `${preset.id}-${bench.events.length + 1}-${bench.serial}`, type: preset.type, atHours, hours: clamp(preset.hours, 1, Math.max(1, total - atHours)), intensity: preset.intensity ?? 0, ramp: preset.ramp || 0 });
     eventsChanged();
   }
-  function eventsChanged() { renderEvents(); renderTimeline(); drawTicks(); redrawCharts(); changed(); }
+  function eventsChanged() { renderEvents(); renderTimeline(); redrawCharts(); changed(); }
   const eventInvalid = (event, spec, hasIntensity) => event.atHours < MIN_AT_HOURS || event.atHours + event.hours > horizonHours()
     || (hasIntensity && (event.intensity < spec.minimum || event.intensity > spec.maximum || (spec.minimum_exclusive && event.intensity <= spec.minimum)));
   function renderEvents() {
@@ -385,6 +385,26 @@
     };
     bar.addEventListener("pointermove", move); bar.addEventListener("pointerup", done); bar.addEventListener("pointercancel", done);
   }
+  // scrubbing: pressing or dragging on the date axis (or the knob) moves the playhead
+  function bindScrub() {
+    const axis = $("#tl-axis"), knob = $("#tl-head .tl-knob");
+    const toIndex = (clientX) => {
+      const box = $("#tl-rows").getBoundingClientRect(), ms = startMs() + clamp((clientX - box.left) / box.width, 0, 1) * horizonHours() * HOUR;
+      const t0 = Date.parse(bench.run.times[0]), step = (Date.parse(bench.run.times[1]) - t0) || HOUR;
+      return clamp(Math.round((ms - t0) / step), 0, bench.run.times.length - 1);
+    };
+    const begin = (pointer) => {
+      if (!bench.run || pointer.button !== 0) return;
+      pointer.preventDefault(); stopPlayback();
+      const target = pointer.currentTarget; target.setPointerCapture(pointer.pointerId);
+      const move = (now) => seek(toIndex(now.clientX));
+      const end = () => { target.removeEventListener("pointermove", move); target.removeEventListener("pointerup", end); target.removeEventListener("pointercancel", end); };
+      target.addEventListener("pointermove", move); target.addEventListener("pointerup", end); target.addEventListener("pointercancel", end);
+      move(pointer);
+    };
+    axis.addEventListener("pointerdown", begin);
+    knob.addEventListener("pointerdown", begin);
+  }
   function movePlayhead() {
     const head = $("#tl-head");
     if (!head) return;
@@ -480,13 +500,9 @@
     const compare = data.kind === "WHAT_IF";
     $("#card-intervention").hidden = !compare;
     $("#title-baseline").textContent = compare ? "Baseline" : "Run";
-    const slider = $("#slider");
-    slider.max = String(data.times.length - 1);
-    slider.value = String(Math.floor(bench.position));
     configureScenes();
     buildChartPicks();
     buildCharts();
-    drawTicks();
     renderDelta();
     renderInfo();
     renderFrame(true);
@@ -532,7 +548,6 @@
     }
     bench.lastReadoutTick = false;
     const index = Math.floor(position);
-    $("#slider").value = String(index);
     $("#clock").textContent = `${run.times[index].slice(0, 16).replace("T", " ")} UTC${index === run.branchIndex && run.kind === "WHAT_IF" ? " · branch" : ""}`;
     moveCursors();
     movePlayhead();
@@ -712,18 +727,6 @@
   }
 
   // ---- time -------------------------------------------------------------------------------------------------------------
-  function drawTicks() {
-    const host = $("#ticks");
-    host.replaceChildren();
-    if (!bench.run) return;
-    const n = bench.run.times.length - 1 || 1;
-    const percent = (index) => `${(100 * clamp(index, 0, n)) / n}%`;
-    if (bench.run.kind === "WHAT_IF") { const tick = el("div", "tick"); tick.style.left = percent(bench.run.branchIndex); tick.title = "Branch point"; host.append(tick); }
-    for (const event of bench.run.events) {
-      const a = bench.run.times.findIndex((time) => time >= event.start_simulation_time), b = bench.run.times.findIndex((time) => time >= event.end_simulation_time);
-      const tick = el("div", "tick event"); tick.style.left = percent(a); tick.style.width = `${Math.max(0.6, (100 * (((b < 0 ? n : b) - a))) / n)}%`; tick.title = event.event_type; host.append(tick);
-    }
-  }
   function seek(position) {
     bench.position = clamp(position, 0, bench.run.times.length - 1);
     bench.lastReadoutTick = true;
@@ -754,7 +757,7 @@
     $("#restart").addEventListener("click", () => { stopPlayback(); seek(0); });
     $("#back").addEventListener("click", () => { stopPlayback(); seek(Math.floor(bench.position) - 1); });
     $("#forward").addEventListener("click", () => { stopPlayback(); seek(Math.floor(bench.position) + 1); });
-    $("#slider").addEventListener("input", (event) => { stopPlayback(); seek(Number(event.target.value)); });
+    bindScrub();
     $("#to-branch").addEventListener("click", () => { stopPlayback(); seek(bench.run.branchIndex); });
     $("#to-event").addEventListener("click", () => {
       if (!bench.run.events.length) return;
