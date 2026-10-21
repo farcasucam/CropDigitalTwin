@@ -32,6 +32,15 @@ from enum import StrEnum
 from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
 
+from agri_twin.application.greenhouse_backend import (
+    GreenhouseBackendError,
+    GreenhouseBackendRequest,
+    build_timeline,
+    describe as describe_greenhouse_backend,
+    engine_factory as energyplus_engine_factory,
+    parse_greenhouse_backend,
+    with_runtime_events,
+)
 from agri_twin.application.integrated_synthetic_validation import (
     SINGLETON_CLASSES,
     checkpoint_payload,
@@ -69,6 +78,7 @@ from agri_twin.domain.calibration import ParameterSet
 from agri_twin.domain.greenhouse import PROFILES as GREENHOUSE_PROFILES
 from agri_twin.domain.greenhouse import GreenhouseConfiguration
 from agri_twin.domain.parameter_audit import ParameterRegistry
+from agri_twin.infrastructure.energyplus_timeline import EnergyPlusTimelineError
 from agri_twin.domain.phenology import (
     APPROXIMATE_PROFILES,
     DEFAULT_DORMANCY_CONFIGURATION,
@@ -90,7 +100,7 @@ SCENARIOS = (*MANDATORY_SCENARIOS, *SUPPLEMENTARY_SCENARIOS)
 ENVIRONMENTS = {"outdoor": "outdoor", "greenhouse": "passive_greenhouse"}  # API name -> orchestrator greenhouse_mode
 WEATHER_SOURCES = ("SYNTHETIC_SEASONAL",)
 WEATHER_GENERATOR = "WeatherEngine(seasonal + daily variability, seeded) + ScenarioEvent overlays (Phase 5.32)"
-REQUEST_FIELDS = ("api_version", "crop", "variety", "environment", "plot", "scenario", "start_time", "end_time", "seed", "weather", "dormancy", "checkpoint", "options", "runtime_events")
+REQUEST_FIELDS = ("api_version", "crop", "variety", "environment", "plot", "scenario", "start_time", "end_time", "seed", "weather", "dormancy", "checkpoint", "options", "runtime_events", "greenhouse")
 WEATHER_FIELDS = ("source", "profile_overrides")
 OPTION_FIELDS = ("progress_interval_steps", "require_requested_chilling_model", "include_trajectory", "compute_trajectory_hash", "variables")
 CHECKPOINT_FIELDS = ("format", "simulation_time", "payload", "sha256", "resume_hash")
@@ -293,8 +303,13 @@ VARIABLE_INDEX = {spec.name: spec for spec in VARIABLES}
 FLUX_TOTALS = ("irrigation_mm", "precipitation_mm", "drainage_mm", "transpiration_mm", "evaporation_mm", "et0_mm")
 
 
-def variable_availability(spec: VariableSpec, crop: str, environment: str) -> Availability:
+BACKEND_UNSUPPORTED_VARIABLES = {"ENERGYPLUS": {"co2_ppm": "the EnergyPlus backend does not model CO2 (no value is fabricated)"}}
+
+
+def variable_availability(spec: VariableSpec, crop: str, environment: str, backend: str = "SIMPLIFIED") -> Availability:
     if spec.scope == "NONE":
+        return Availability.NOT_SUPPORTED
+    if spec.name in BACKEND_UNSUPPORTED_VARIABLES.get(backend, {}) and environment == "greenhouse":
         return Availability.NOT_SUPPORTED
     if spec.scope == "GREENHOUSE" and environment != "greenhouse":
         return Availability.NOT_APPLICABLE
@@ -360,6 +375,11 @@ class SimulationRequest:
     options: ExecutionOptions = ExecutionOptions()
     api_version: str = API_VERSION
     runtime_events: tuple[RuntimeEvent, ...] = ()  # Phase 5.39: user-defined future events (empty: unchanged 5.37 behaviour)
+    greenhouse: GreenhouseBackendRequest | None = None  # Phase 5.41: None = simplified backend (unchanged hashes); ENERGYPLUS otherwise
+
+    @property
+    def backend(self) -> str:
+        return self.greenhouse.backend if self.greenhouse is not None else "SIMPLIFIED"
 
     @property
     def total_steps(self) -> int:
@@ -377,6 +397,8 @@ class SimulationRequest:
         }
         if self.runtime_events:
             document["runtime_events"] = [event.request_dict() for event in self.runtime_events]
+        if self.greenhouse is not None:
+            document["greenhouse"] = self.greenhouse.to_dict()
         return document
 
     def canonical_json(self) -> str:
@@ -389,9 +411,12 @@ class SimulationRequest:
     def resume_identity(self) -> dict[str, Any]:
         """Everything that must match between a checkpoint's producer and its resume."""
         cycle_start = campaign_cycle(self.crop)[1]
-        return {"api_version": self.api_version, "crop": self.crop, "variety": self.variety, "environment": self.environment, "plot": self.plot,
-                "scenario": self.scenario, "seed": self.seed, "weather": self.weather_dict(), "dormancy_effective": self.dormancy.effective_dict(),
-                "campaign_start": cycle_start.isoformat(), "timestep_seconds": TIMESTEP_SECONDS}
+        identity = {"api_version": self.api_version, "crop": self.crop, "variety": self.variety, "environment": self.environment, "plot": self.plot,
+                    "scenario": self.scenario, "seed": self.seed, "weather": self.weather_dict(), "dormancy_effective": self.dormancy.effective_dict(),
+                    "campaign_start": cycle_start.isoformat(), "timestep_seconds": TIMESTEP_SECONDS}
+        if self.greenhouse is not None:  # a checkpoint never resumes under another backend or layout
+            identity["greenhouse"] = self.greenhouse.to_dict()
+        return identity
 
     @property
     def resume_hash(self) -> str:
@@ -601,7 +626,11 @@ def canonicalize_request(document: SimulationRequest | Mapping[str, Any]) -> Sim
         raise _fail(ErrorCode(exc.kind), exc.message, exc.path) from None
     except ScenarioError as exc:
         raise _fail(ErrorCode.INVALID_CONFIGURATION, str(exc)) from None
-    request = SimulationRequest(crop, variety, environment, plot.plot_id, scenario, start, end, seed, source, overrides, dormancy, checkpoint, options, runtime_events=runtime_events)
+    try:
+        greenhouse = parse_greenhouse_backend(document.get("greenhouse"), environment, tuple(event.event_type for event in runtime_events))
+    except GreenhouseBackendError as exc:
+        raise _fail(ErrorCode(exc.kind), exc.message, exc.path) from None
+    request = SimulationRequest(crop, variety, environment, plot.plot_id, scenario, start, end, seed, source, overrides, dormancy, checkpoint, options, runtime_events=runtime_events, greenhouse=greenhouse)
     if checkpoint is not None:
         if checkpoint.resume_hash != request.resume_hash:
             raise _fail(ErrorCode.INVALID_CHECKPOINT, "checkpoint was produced by a different configuration (crop, environment, scenario, seed, weather or dormancy differ)", "checkpoint.resume_hash")
@@ -774,6 +803,7 @@ class _Execution:
     started_at: float | None = None
     timings: dict[str, float] = field(default_factory=dict)
     response: SimulationResponse | None = None
+    greenhouse_provenance: dict[str, str] | None = None
 
 
 class InteractiveSimulationService:
@@ -937,7 +967,19 @@ class InteractiveSimulationService:
         execution.started_at = self._tick()
         phenology = None if request.dormancy == DEFAULT_DORMANCY_CONFIGURATION else PhenologyEngine(dormancy=DormancyChillingController(configuration=request.dormancy))
         runner = ScenarioRunner(_weather_factory(request))
-        result = runner.run(execution.scenario, phenology=phenology, observer=observer)
+        engine_arguments: dict[str, Any] = {}
+        if request.greenhouse is not None:
+            try:
+                timeline = build_timeline(request.greenhouse, request.plot, with_runtime_events(execution.spec.scenario, request.runtime_events), _weather_factory(request), request.end_time)
+            except (EnergyPlusTimelineError, GreenhouseBackendError) as exc:
+                execution.status, execution.termination = ExecutionStatus.FAILED, "GREENHOUSE_BACKEND_ERROR"
+                execution.errors = (SimulationError(ErrorCode.INTERNAL_EXECUTION_ERROR, f"the ENERGYPLUS greenhouse backend failed before the run: {exc}"),)
+                execution.response = self._response(execution)
+                return execution.response
+            execution.greenhouse_provenance = dict(timeline.provenance)
+            engine_arguments["greenhouse_engine_factory"] = energyplus_engine_factory(timeline)
+            self._record(execution, "greenhouse_backend_seconds", execution.started_at)
+        result = runner.run(execution.scenario, phenology=phenology, observer=observer, **engine_arguments)
         self._record(execution, "simulation_seconds", execution.started_at)
         execution.snapshots = result.snapshots
         if result.status == "FAILED":
@@ -996,7 +1038,9 @@ class InteractiveSimulationService:
             "kind": "EXECUTION_DIAGNOSTICS (software/operational, not biological)",
             "termination": execution.termination, "steps_executed": execution.completed_steps if execution.snapshots else 0, "total_steps": execution.plan.total_steps,
             "cancel_requested": execution.cancel_requested, "progress_events_emitted": execution.progress_events,
-            "execution_path": "build_campaign -> ScenarioRunner.run -> CropDigitalTwinOrchestrator.step (existing engines)",
+            "execution_path": "build_campaign -> ScenarioRunner.run -> CropDigitalTwinOrchestrator.step (existing engines)"
+                              + (" with the EnergyPlus timeline as greenhouse engine" if request.greenhouse is not None else ""),
+            "greenhouse_backend": execution.greenhouse_provenance if execution.greenhouse_provenance is not None else request.backend,
             "state_integrity": "orchestrator state is replaced atomically per step; a stop leaves the last completed step as the state",
         }
         return SimulationResponse(execution.simulation_id, request.to_dict(), execution.effective, execution.status, execution.plan.to_dict(), self._progress(execution),
@@ -1043,6 +1087,8 @@ def effective_configuration(request: SimulationRequest, spec: CampaignSpec, scen
                   "parameter_status": SCIENTIFIC_STATUS["parameter_status"]},
         "scenario_config_hash": scenario.config_hash(),
     }
+    if request.greenhouse is not None:
+        effective["greenhouse_backend"] = describe_greenhouse_backend(request.greenhouse)
     if request.runtime_events:
         effective["runtime_events"] = [event.to_dict() | {"provenance": "USER_DEFINED_EVENT", "classification": "USER_DEFINED_SYNTHETIC_FORCING"} for event in request.runtime_events]
         effective["event_sequence_hash"] = event_sequence_hash(request.runtime_events)
@@ -1075,10 +1121,10 @@ def project_result(execution: _Execution) -> SimulationResult:
     catalogue, series = [], {}
     for name in selected:
         spec = VARIABLE_INDEX[name]
-        availability = variable_availability(spec, request.crop, request.environment)
+        availability = variable_availability(spec, request.crop, request.environment, request.backend)
         unit = MODEL_SPECS[request.dormancy.effective_chilling_model].unit.value if name == "chilling_accumulated" else spec.unit
         catalogue.append({"name": name, "unit": unit, "availability": availability.value, "source": spec.source, "description": spec.description,
-                          "reason": None if availability is Availability.AVAILABLE else spec.reason})
+                          "reason": None if availability is Availability.AVAILABLE else BACKEND_UNSUPPORTED_VARIABLES.get(request.backend, {}).get(name, spec.reason)})
         if availability is Availability.AVAILABLE and request.options.include_trajectory:
             series[name] = [spec.getter(snapshot) for snapshot in snapshots]  # type: ignore[misc]
     trajectory = {"time": [snapshot.simulation_time.isoformat() for snapshot in snapshots], **series} if request.options.include_trajectory else None

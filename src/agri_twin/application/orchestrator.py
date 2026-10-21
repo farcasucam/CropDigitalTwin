@@ -60,7 +60,7 @@ class CropDigitalTwinOrchestrator:
     microclimate is persistent state carried from step to step.
     """
 
-    def __init__(self, clock: SimulationClock, weather_engine: WeatherEngine, crop: CropGrowthState, soil: SoilState, greenhouse_mode: str = "outdoor", microclimate: GreenhouseMicroclimateState | None = None, phenology: PhenologyEngine | None = None) -> None:
+    def __init__(self, clock: SimulationClock, weather_engine: WeatherEngine, crop: CropGrowthState, soil: SoilState, greenhouse_mode: str = "outdoor", microclimate: GreenhouseMicroclimateState | None = None, phenology: PhenologyEngine | None = None, greenhouse_engine: object | None = None) -> None:
         self.clock = clock
         self.weather_engine = weather_engine
         normalized = replace(crop, root_depth_m=1.0) if crop.root_depth_m <= 0 else crop
@@ -71,7 +71,8 @@ class CropDigitalTwinOrchestrator:
         self.soil = soil
         self.greenhouse_mode = greenhouse_mode
         self.phenology = phenology or PhenologyEngine()
-        self.greenhouse = GreenhouseMicroclimateEngine()
+        # an injected engine (e.g. the EnergyPlus timeline) replaces the simplified one; engines that need the step time say so
+        self.greenhouse = greenhouse_engine if greenhouse_engine is not None else GreenhouseMicroclimateEngine()
         self.radiation = RadiationGrowthEngine()
         self.water = WaterBalanceEngine()
         self.nutrients = NutrientBalanceEngine()
@@ -95,7 +96,8 @@ class CropDigitalTwinOrchestrator:
         if simulation_time.tzinfo is None or not math.isfinite(dt_seconds) or dt_seconds <= 0:
             raise CropSimulationError("simulation time and dt_seconds are invalid")
         weather = self.weather_engine.generate(simulation_time)
-        microclimate = self.greenhouse.advance(weather, self.crop, dt_seconds, self.greenhouse_mode, actuators, prior=self.microclimate)
+        extra = {"simulation_time": simulation_time} if getattr(self.greenhouse, "requires_simulation_time", False) else {}
+        microclimate = self.greenhouse.advance(weather, self.crop, dt_seconds, self.greenhouse_mode, actuators, prior=self.microclimate, **extra)
         crop_weather = self._crop_environment(weather, microclimate.indoor_state)
         phenological = self.phenology.advance(self.crop, crop_weather, simulation_time, dt_seconds)
         phenological = replace(phenological, soil_water_vwc=self.soil.vwc_m3_m3)

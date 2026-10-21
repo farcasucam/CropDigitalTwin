@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Agri-Twin · Experiment bench</title>
+  <link rel="stylesheet" href="vendor/uPlot.min.css?v=1.6.32">
+  <link rel="stylesheet" href="vendor/isokit.css?v=1">
+  <link rel="stylesheet" href="bench.css?v=1">
+  <script src="vendor/uPlot.iife.min.js?v=1.6.32" defer></script>
+  <script src="vendor/isokit.iife.js?v=1" defer></script>
+  <script src="visual_state.js?v=20261102-visual7" defer></script>
+  <script src="scene_state.js?v=20261102-scene1" defer></script>
+  <script src="iso_scene.js?v=20261102-scene1" defer></script>
+  <script src="bench.js?v=1" defer></script>
+</head>
+<body class="iso" data-theme="light">
+  <header class="bar">
+    <a class="brand" href="/bench"><span class="brand-mark" aria-hidden="true">AT</span><span><strong>Agri-Twin</strong><small>Experiment bench</small></span></a>
+    <div class="bar-actions">
+      <span id="status" class="status" role="status" aria-live="polite">Loading…</span>
+      <label class="check"><input id="autorun" type="checkbox"> Auto-run</label>
+      <button id="run" class="primary" type="button" disabled>Run <kbd>Ctrl</kbd>+<kbd>Enter</kbd></button>
+      <a class="link" href="/">Classic workspace</a>
+    </div>
+  </header>
+  <div id="error" class="alert" role="alert" hidden></div>
+
+  <main class="bench">
+    <aside class="side" aria-label="Experiment setup">
+      <details open class="group">
+        <summary>1 · Scenario</summary>
+        <div class="grid2">
+          <label>Crop <select id="crop"></select></label>
+          <label>Environment <select id="environment"></select></label>
+        </div>
+        <label>Weather scenario <select id="scenario"></select></label>
+        <div class="field"><span class="label">Horizon</span>
+          <span class="seg" role="group" aria-label="Horizon">
+            <button type="button" data-horizon="week" aria-pressed="false">1 week</button>
+            <button type="button" data-horizon="month" aria-pressed="false">1 month</button>
+            <button type="button" data-horizon="season" aria-pressed="false">Full season</button>
+          </span>
+        </div>
+        <p id="period" class="hint"></p>
+      </details>
+
+      <details open class="group">
+        <summary>2 · Intervention</summary>
+        <label>Starts after day <output id="branch-out"></output>
+          <input id="branch" type="range" min="1" max="6" value="3" aria-describedby="branch-date">
+        </label>
+        <p id="branch-date" class="hint"></p>
+        <div class="field"><span class="label">Add an event</span>
+          <div id="presets" class="chips" role="group" aria-label="Event presets"></div>
+        </div>
+        <ul id="events" class="events" aria-label="Events"></ul>
+        <p class="hint">Events are user-defined synthetic forcing applied from the start day onward; the baseline never includes them.</p>
+      </details>
+
+      <details class="group" id="greenhouse-group">
+        <summary>3 · Greenhouse model</summary>
+        <div class="field"><span class="label">Thermal backend</span>
+          <span class="seg" id="backend" role="group" aria-label="Thermal backend"></span>
+        </div>
+        <p id="backend-note" class="hint"></p>
+        <label>Typology <select id="layout-typology"></select></label>
+        <div class="grid2">
+          <label>Span (m) <select id="layout-span"></select></label>
+          <label>Ridge rise (m) <select id="layout-rise"></select></label>
+          <label>Gutter (m) <select id="layout-gutter"></select></label>
+          <label>Pillars (m) <select id="layout-pillar"></select></label>
+          <label>Spans <select id="layout-spans"></select></label>
+          <label>Bays <select id="layout-bays"></select></label>
+        </div>
+        <p id="layout-note" class="hint"></p>
+      </details>
+
+      <details class="group">
+        <summary>View</summary>
+        <div class="field"><span class="label">Camera</span>
+          <span class="seg" role="group" aria-label="Camera">
+            <button type="button" data-view="ISOMETRIC" aria-pressed="true">Isometric</button>
+            <button type="button" data-view="TOP" aria-pressed="false">Top</button>
+            <button type="button" data-view="DETAIL" aria-pressed="false">Detail</button>
+          </span>
+        </div>
+        <div class="field"><span class="label">Layers</span>
+          <div id="layers" class="chips"></div>
+        </div>
+        <div class="field"><span class="label">Charts</span>
+          <div id="chart-picks" class="chips"></div>
+        </div>
+      </details>
+    </aside>
+
+    <section class="stage" aria-label="Results">
+      <div id="empty" class="empty">Pick a scenario and press <strong>Run</strong>. Without events you get a single run; add an event to compare it with the baseline side by side.</div>
+      <div id="scenes" class="scenes" hidden>
+        <figure class="scene-card" id="card-baseline">
+          <figcaption><strong id="title-baseline">Baseline</strong><span id="chip-baseline" class="chip-line"></span></figcaption>
+          <div class="scene-box"><svg id="svg-baseline" class="iso-svg" role="img" aria-label="Baseline scene"></svg></div>
+          <dl id="read-baseline" class="readout"></dl>
+        </figure>
+        <figure class="scene-card" id="card-intervention">
+          <figcaption><strong>Intervention</strong><span id="chip-intervention" class="chip-line"></span></figcaption>
+          <div class="scene-box"><svg id="svg-intervention" class="iso-svg" role="img" aria-label="Intervention scene"></svg></div>
+          <dl id="read-intervention" class="readout"></dl>
+        </figure>
+      </div>
+
+      <div id="transport" class="transport" hidden>
+        <button id="restart" type="button" aria-label="Restart">⏮</button>
+        <button id="back" type="button" aria-label="Back one hour">−1 h</button>
+        <button id="play" type="button" aria-pressed="false">▶ Play</button>
+        <button id="forward" type="button" aria-label="Forward one hour">+1 h</button>
+        <label class="speed">Speed <select id="speed"></select></label>
+        <button id="to-branch" type="button">Jump to start day</button>
+        <button id="to-event" type="button">Next event</button>
+        <div class="slider-wrap">
+          <input id="slider" type="range" min="0" max="0" value="0" aria-label="Simulation time">
+          <div id="ticks" class="ticks" aria-hidden="true"></div>
+        </div>
+        <output id="clock" class="clock"></output>
+      </div>
+
+      <div id="charts" class="charts" hidden></div>
+      <div id="delta" class="delta" hidden></div>
+      <details id="info" class="info" hidden><summary>Run information and scientific status</summary><div id="info-body"></div></details>
+    </section>
+  </main>
+</body>
+</html>

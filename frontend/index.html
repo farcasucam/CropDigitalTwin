@@ -6,10 +6,14 @@
   <meta name="color-scheme" content="light">
   <title>Agri-Twin · Interactive simulation</title>
   <link rel="stylesheet" href="vendor/uPlot.min.css?v=1.6.32">
+  <link rel="stylesheet" href="vendor/isokit.css?v=1">
   <link rel="stylesheet" href="styles.css?v=20261102-visual7">
   <script src="app.js?v=20261102-visual7" defer></script>
   <script src="vendor/uPlot.iife.min.js?v=1.6.32" defer></script>
+  <script src="vendor/isokit.iife.js?v=1" defer></script>
   <script src="visual_state.js?v=20261102-visual7" defer></script>
+  <script src="scene_state.js?v=20261102-scene1" defer></script>
+  <script src="iso_scene.js?v=20261102-scene1" defer></script>
   <script src="visual.js?v=20261102-visual7" defer></script>
   <script src="runtime.js?v=20261102-visual7" defer></script>
 </head>
@@ -20,6 +24,7 @@
       <span class="brand-mark" aria-hidden="true">AT</span>
       <span><strong>Agri-Twin</strong><small>Interactive simulation · Phase 5.40</small></span>
     </a>
+    <a class="local-badge" href="/bench" style="text-decoration:none;color:inherit">Experiment bench →</a>
     <span class="local-badge"><span aria-hidden="true">●</span> Local session</span>
   </header>
 
@@ -258,6 +263,18 @@
           <button type="button" id="iso-zoom-in" aria-label="Zoom in">+</button>
           <button type="button" id="iso-reset">Reset view</button>
         </div>
+        <details id="layout-panel" class="layout-panel" hidden><summary>Greenhouse layout (visual schematic)</summary>
+          <div class="layout-grid">
+            <label>Typology <select id="layout-typology"></select></label>
+            <label>Span width (m) <select id="layout-span"></select></label>
+            <label>Ridge rise (m) <select id="layout-rise"></select></label>
+            <label>Gutter height (m) <select id="layout-gutter"></select></label>
+            <label>Pillar spacing (m) <select id="layout-pillar"></select></label>
+            <label>Spans (modules) <select id="layout-spans"></select></label>
+            <label>Bays along length <select id="layout-bays"></select></label>
+          </div>
+          <p id="layout-note" class="field-help" role="status"></p>
+        </details>
         <fieldset class="layer-toggles"><legend>Layers</legend>
           <label class="check"><input type="checkbox" data-layer="crop" checked> Crop</label>
           <label class="check"><input type="checkbox" data-layer="soil" checked> Soil</label>
@@ -268,7 +285,7 @@
           <label class="check"><input type="checkbox" data-layer="co2"> CO2</label>
           <label class="check"><input type="checkbox" data-layer="events" checked> Events</label>
         </fieldset>
-        <div id="iso-wrap" class="iso-wrap" tabindex="0" role="group" aria-label="Spatial view. Space or K plays, arrow keys step one hour, Home restarts"><div id="iso-tooltip" class="iso-tooltip" role="tooltip" hidden></div><svg id="iso-svg" role="img" aria-label="Isometric view of the plot state at the selected simulation time" viewBox="0 0 640 380"></svg></div>
+        <div id="iso-wrap" class="iso-wrap iso" data-theme="light" tabindex="0" role="group" aria-label="Spatial view. Space or K plays, arrow keys step one hour, Home restarts"><div id="iso-tooltip" class="iso-tooltip" role="tooltip" hidden></div><svg id="iso-svg" role="img" aria-label="Isometric view of the plot state at the selected simulation time" viewBox="0 0 640 380"></svg></div>
         <div class="iso-toolbar time-controller" role="toolbar" aria-label="Time controller (presentation only)">
           <button type="button" id="tc-restart">⏮ Restart</button>
           <button type="button" id="tc-back" aria-label="Step backward">⏮ −1 h</button>

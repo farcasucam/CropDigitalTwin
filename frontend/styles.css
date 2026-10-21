@@ -203,7 +203,7 @@ footer { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2
 .link-button { border: 0; background: none; color: var(--green-dark); text-decoration: underline; cursor: pointer; }
 .preview-box { padding: .7rem; border: 1px dashed var(--green); border-radius: 10px; font-size: .8rem; }
 .iso-wrap { border: 1px solid var(--line); border-radius: 14px; background: #f8fbf8; overflow: hidden; touch-action: pan-y; position: relative; }
-#iso-svg { width: 100%; height: auto; max-height: 440px; display: block; cursor: grab; }
+#iso-svg { width: 100%; height: auto; max-height: 640px; display: block; cursor: grab; }
 .iso-toolbar button { padding: .35rem .7rem; border: 1px solid var(--line); border-radius: 8px; background: #fff; cursor: pointer; }
 .iso-toolbar button.active { background: var(--mint); border-color: var(--green); }
 .iso-toolbar input[type="range"] { flex: 1 1 160px; }
@@ -244,3 +244,34 @@ footer { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2
 .uplot-chart { width: 100%; min-width: 0; overflow: hidden; }
 .uplot-chart .uplot { max-width: 100%; }
 
+/* Phase 5.41 isometric scene (kit classes come from vendor/isokit.css) */
+.layout-panel { border: 1px solid var(--line); border-radius: 10px; padding: .4rem .7rem; margin: .5rem 0; }
+.layout-panel summary { cursor: pointer; font-size: .8rem; font-weight: 650; }
+.layout-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .5rem .8rem; margin-top: .5rem; }
+.layout-grid label { display: grid; gap: .2rem; font-size: .75rem; }
+.layout-grid select { padding: .35rem; border: 1px solid var(--line); border-radius: 8px; }
+.iso-wrap.iso { --anatomy-card: #f8fbf8; }
+#iso-svg .scene-hud-text { font: 11px ui-monospace, Menlo, Consolas, monospace; fill: #17352d; paint-order: stroke; stroke: rgba(255,255,255,.75); stroke-width: 3px; stroke-linejoin: round; }
+#iso-svg .scene-hud-text.small { font-size: 9px; }
+#iso-svg .scene-banner rect { fill: #c0561d; }
+#iso-svg .scene-banner text { fill: #fff; font: 12px sans-serif; }
+#iso-svg .scene-sun { stroke: none; fill: hsl(45 95% 60%); }
+#iso-svg .scene-wet { fill: #2a78b5; stroke: none; pointer-events: none; }
+#iso-svg .scene-haze { stroke: none; }
+#iso-svg .scene-hits circle { fill: transparent; stroke: none; pointer-events: all; cursor: pointer; }
+.iso-selected { filter: drop-shadow(0 0 2px #123b2c); }
+#iso-svg .scene-cover path { stroke: none; }
+#iso-svg .scene-hole path { fill: var(--anatomy-faint); fill-opacity: .55; stroke: none; pointer-events: none; }
+#iso-svg .scene-flaps path { fill: var(--anatomy-blue); fill-opacity: .2; }
+#iso-svg .scene-flaps .iso-line { fill: none; }
+#iso-svg .scene-screen-sheet { fill: var(--anatomy-hi); fill-opacity: .28; stroke: none; pointer-events: none; }
+#iso-svg .scene-irrigation circle { fill: #4aa3d9; }
+#iso-svg .co2-dot { fill: #6b5aa8; opacity: .8; pointer-events: none; }
+#iso-svg .scene-plant .stem { stroke-width: 1.2; fill: none; }
+#iso-svg .scene-plant .leaves { stroke: none; fill-opacity: .85; }
+#iso-svg .scene-plot .iso-fill { fill: hsl(30 30% 72%); }
+#iso-svg .scene-rain path { stroke: hsl(205 90% 82%); stroke-width: 1.3; fill: none; stroke-linecap: round; transform: translateY(var(--y0, 0)); animation: scene-fall 1s linear infinite; }
+@keyframes scene-fall { from { transform: translate(0, -60px); } to { transform: translate(var(--dx, 0px), var(--fall, 500px)); } }
+@media (prefers-reduced-motion: reduce) { #iso-svg .scene-rain path { animation: none; } }
+.iso-part.selected, g.iso-part.selected > * { outline: none; }
+g.iso-part.selected { filter: drop-shadow(0 0 2px #123b2c); }

@@ -1,0 +1,260 @@
+{
+ "MULTITUNEL_CAPILLA": {
+  "span": 9.6,
+  "spans": 3,
+  "length": 30.0,
+  "gutter": 4.0,
+  "pillar_spacing": 5.0,
+  "profile": [
+   [
+    0.0,
+    4.0
+   ],
+   [
+    1.2,
+    4.961678075529941
+   ],
+   [
+    2.4,
+    5.559620241755037
+   ],
+   [
+    3.5999999999999996,
+    5.892638574280133
+   ],
+   [
+    4.8,
+    6.0
+   ],
+   [
+    6.0,
+    5.892638574280133
+   ],
+   [
+    7.199999999999999,
+    5.559620241755037
+   ],
+   [
+    8.4,
+    4.961678075529939
+   ],
+   [
+    9.6,
+    4.0
+   ]
+  ],
+  "evidence": {
+   "span_m": "DOCUMENTED_COMMERCIAL",
+   "length_m": "PROVISIONAL_DEFAULT",
+   "gutter_height_m": "DOCUMENTED_COMMERCIAL",
+   "ridge_rise_m": "DOCUMENTED_COMMERCIAL"
+  }
+ },
+ "MULTITUNEL_GOTICO": {
+  "span": 9.6,
+  "spans": 3,
+  "length": 30.0,
+  "gutter": 4.0,
+  "pillar_spacing": 3.0,
+  "profile": [
+   [
+    8.881784197001252e-16,
+    4.0
+   ],
+   [
+    1.0530134778258624,
+    4.877062688616245
+   ],
+   [
+    2.220181606879975,
+    5.595251314790453
+   ],
+   [
+    3.4777193301643523,
+    6.1399303200425415
+   ],
+   [
+    4.8,
+    6.5
+   ],
+   [
+    6.122280669835647,
+    6.1399303200425415
+   ],
+   [
+    7.379818393120025,
+    5.595251314790453
+   ],
+   [
+    8.546986522174137,
+    4.877062688616245
+   ],
+   [
+    9.599999999999998,
+    4.0
+   ]
+  ],
+  "evidence": {
+   "span_m": "DOCUMENTED_COMMERCIAL",
+   "length_m": "PROVISIONAL_DEFAULT",
+   "gutter_height_m": "DOCUMENTED_COMMERCIAL",
+   "ridge_rise_m": "DOCUMENTED_COMMERCIAL"
+  }
+ },
+ "MULTITUNEL_TROPICAL_ASIMETRICO": {
+  "span": 9.6,
+  "spans": 3,
+  "length": 30.0,
+  "gutter": 4.0,
+  "pillar_spacing": 2.5,
+  "profile": [
+   [
+    0.0,
+    4.0
+   ],
+   [
+    3.36,
+    6.0
+   ],
+   [
+    9.6,
+    4.0
+   ]
+  ],
+  "evidence": {
+   "span_m": "DOCUMENTED_COMMERCIAL",
+   "length_m": "PROVISIONAL_DEFAULT",
+   "gutter_height_m": "DOCUMENTED_COMMERCIAL",
+   "ridge_rise_m": "PROVISIONAL_DEFAULT"
+  }
+ },
+ "MULTITUNEL_GRANDE_LUX": {
+  "span": 12.8,
+  "spans": 3,
+  "length": 30.0,
+  "gutter": 4.0,
+  "pillar_spacing": 3.0,
+  "profile": [
+   [
+    8.881784197001252e-16,
+    4.0
+   ],
+   [
+    1.457153930048019,
+    4.946775683229104
+   ],
+   [
+    3.02911714073881,
+    5.687460119708648
+   ],
+   [
+    4.686917289233255,
+    6.208401995410837
+   ],
+   [
+    6.4,
+    6.5
+   ],
+   [
+    8.113082710766745,
+    6.208401995410837
+   ],
+   [
+    9.77088285926119,
+    5.687460119708648
+   ],
+   [
+    11.342846069951982,
+    4.946775683229104
+   ],
+   [
+    12.8,
+    4.0
+   ]
+  ],
+  "evidence": {
+   "span_m": "DOCUMENTED_COMMERCIAL",
+   "length_m": "PROVISIONAL_DEFAULT",
+   "gutter_height_m": "DOCUMENTED_COMMERCIAL",
+   "ridge_rise_m": "DOCUMENTED_COMMERCIAL"
+  }
+ },
+ "RASPA_Y_AMAGADO": {
+  "span": 10.0,
+  "spans": 3,
+  "length": 30.0,
+  "gutter": 3.5,
+  "pillar_spacing": 5.0,
+  "profile": [
+   [
+    0.0,
+    3.5
+   ],
+   [
+    5.0,
+    4.5
+   ],
+   [
+    10.0,
+    3.5
+   ]
+  ],
+  "evidence": {
+   "span_m": "DOCUMENTED_COMMERCIAL",
+   "length_m": "PROVISIONAL_DEFAULT",
+   "gutter_height_m": "PROVISIONAL_DEFAULT",
+   "ridge_rise_m": "PROVISIONAL_DEFAULT"
+  }
+ },
+ "TUNEL": {
+  "span": 8.0,
+  "spans": 1,
+  "length": 30.0,
+  "gutter": 0.0,
+  "pillar_spacing": 2.5,
+  "profile": [
+   [
+    0.0,
+    0.0
+   ],
+   [
+    1.0,
+    2.6457513110645907
+   ],
+   [
+    2.0,
+    3.4641016151377544
+   ],
+   [
+    3.0,
+    3.872983346207417
+   ],
+   [
+    4.0,
+    4.0
+   ],
+   [
+    5.0,
+    3.872983346207417
+   ],
+   [
+    6.0,
+    3.4641016151377544
+   ],
+   [
+    7.0,
+    2.6457513110645907
+   ],
+   [
+    8.0,
+    0.0
+   ]
+  ],
+  "evidence": {
+   "span_m": "DOCUMENTED_COMMERCIAL",
+   "length_m": "PROVISIONAL_DEFAULT",
+   "gutter_height_m": "DOCUMENTED_COMMERCIAL",
+   "ridge_rise_m": "DOCUMENTED_COMMERCIAL"
+  }
+ }
+}

@@ -1,0 +1,1262 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Greenhouse scene demo</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:13px/1.5 ui-sans-serif,system-ui,"Segoe UI",sans-serif}
+main{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:18px;max-width:1280px;margin:18px auto;padding:0 16px}
+@media(max-width:980px){main{grid-template-columns:1fr}}
+.card{background:var(--anatomy-card);border-radius:14px;box-shadow:var(--anatomy-lift);padding:12px}
+.banner{grid-column:1/-1;font:11px/1.4 var(--anatomy-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--anatomy-muted)}
+.banner b{color:var(--anatomy-red)}
+fieldset{border:0;border-top:1px solid var(--anatomy-faint);margin:10px 0 0;padding:8px 0 0}
+legend{font:10px var(--anatomy-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--anatomy-muted);padding-right:6px}
+label{display:grid;grid-template-columns:118px 1fr 52px;align-items:center;gap:6px;margin:3px 0;font-size:12px}
+label output{font:11px var(--anatomy-mono);text-align:right;color:var(--anatomy-strong)}
+select{grid-column:2/4;width:100%;background:var(--anatomy-card);color:var(--anatomy-strong);border:1px solid var(--anatomy-faint);border-radius:6px;padding:3px}
+input[type=range]{width:100%}
+.note{font-size:11px;color:var(--anatomy-muted);margin:6px 0 0}.flag{color:var(--anatomy-red)}
+.sky rect{stroke:none}.sun{stroke:none}.hud-text{font:11px var(--anatomy-mono);fill:var(--anatomy-strong)}
+.wind{stroke:var(--anatomy-strong);fill:none;stroke-linecap:round}.rain path{stroke:hsl(205 90% 82%);stroke-width:1.3;fill:none;stroke-linecap:round;transform:translateY(var(--y0,0));animation:fall 1s linear infinite}
+@keyframes fall{from{transform:translate(0,-60px)}to{transform:translate(var(--dx,0px),var(--fall,500px))}}
+@media (prefers-reduced-motion:reduce){.rain path{animation:none}}
+#inspector{display:block;width:100%;height:auto}#inspector .stem{fill:none;stroke-width:2}#inspector .leaves{stroke:none;fill-opacity:.9}
+.inspect-ground{fill:var(--anatomy-faint);stroke:var(--anatomy-lo);stroke-width:.6}.bar-track{fill:var(--anatomy-faint)}.bar-fill{fill:var(--anatomy-mid)}
+.hud-text.small{font-size:9px;letter-spacing:.06em}.hud-text.tiny{font-size:8px}
+.zoom{display:flex;gap:6px;margin:8px 0 0}.zoom button{background:var(--anatomy-card);color:var(--anatomy-strong);border:1px solid var(--anatomy-faint);border-radius:6px;padding:2px 10px;cursor:pointer}
+.cover path{stroke:none;fill-opacity:.16}.hole path{fill:var(--anatomy-faint);fill-opacity:.55;stroke:none}
+.flaps path:first-child,.flaps path{fill:var(--anatomy-blue);fill-opacity:.2}.flaps .iso-line{fill:none}
+.screen-sheet{fill:var(--anatomy-hi);fill-opacity:.28;stroke:none}
+.plant .stem{stroke-width:1.2;fill:none}.plant .leaves{stroke:none;fill-opacity:.85}
+.soil .iso-fill{fill:hsl(30 30% 72%)}
+</style></head><body class="iso" data-theme="light"><main>
+<div class="banner"><b>Demo state</b>: every value below comes from these controls, not from a simulation. The scene only draws the state it is given.</div>
+<div class="card"><svg id="scene" class="iso-svg" role="img" aria-label="Isometric greenhouse scene. Scroll or +/- to zoom, drag or arrows to pan, double-click or 0 to reset"></svg><div class="zoom"><button id="zin" aria-label="Zoom in">+</button><button id="zout" aria-label="Zoom out">-</button><button id="zreset">Reset view</button><span class="note">wheel/drag, +/-, arrows, double-click</span></div><p class="note" id="status"></p></div>
+<div class="card"><svg id="inspector" role="img" aria-label="Plant inspector: current plant against a healthy reference"></svg><div id="panel"></div></div></main>
+<script>
+const AZIMUTH = 45;
+const ELEVATION = 30;
+const SHADES = 4;
+const RADIANS = Math.PI / 180;
+const UNIT = Math.sqrt(1.6);
+function cameraOf({ scale, azimuth = AZIMUTH, elevation = ELEVATION }) {
+    const a = azimuth * RADIANS;
+    const e = elevation * RADIANS;
+    return { sinA: Math.sin(a), cosA: Math.cos(a), sinE: Math.sin(e), cosE: Math.cos(e), k: scale * UNIT };
+}
+function iso([x, y, z], projection) {
+    const { origin } = projection;
+    const { sinA, cosA, sinE, cosE, k } = cameraOf(projection);
+    return [origin[0] + (x * sinA - y * cosA) * k, origin[1] + ((x * cosA + y * sinA) * sinE - z * cosE) * k];
+}
+function towardViewer(projection) {
+    const { sinA, cosA } = cameraOf(projection);
+    return [cosA, sinA];
+}
+function depthOf([x, y, z], projection) {
+    const { sinA, cosA, sinE, cosE } = cameraOf(projection);
+    return (x * cosA + y * sinA) * cosE + z * sinE;
+}
+const tenth = (value) => {
+    const text = (Math.round(value * 10) / 10).toFixed(1).replace(/\.0$/, "");
+    return text === "-0" ? "0" : text;
+};
+function pathOf(points, closed = false) {
+    if (!points.length)
+        return "";
+    return points.map(([x, y], at) => `${at ? "L" : "M"}${tenth(x)} ${tenth(y)}`).join("") + (closed ? "Z" : "");
+}
+const joinPaths = (paths) => paths.filter(Boolean).join("");
+function roundedPlan({ x, y, w, d, r }, steps = 8) {
+    const radius = Math.max(0, Math.min(r, w / 2, d / 2));
+    const corners = [
+        [x + w - radius, y + radius, -90],
+        [x + w - radius, y + d - radius, 0],
+        [x + radius, y + d - radius, 90],
+        [x + radius, y + radius, 180],
+    ];
+    const out = [];
+    for (const [cx, cy, start] of corners) {
+        const count = radius > 0 ? steps : 0;
+        for (let step = 0; step <= count; step++) {
+            const angle = (start + (count ? (90 * step) / count : 45)) * RADIANS;
+            out.push([cx + radius * Math.cos(angle), cy + radius * Math.sin(angle)]);
+        }
+    }
+    return out;
+}
+function signedArea(points) {
+    let area = 0;
+    for (let index = 0; index < points.length; index++) {
+        const [ax, ay] = points[index];
+        const [bx, by] = points[(index + 1) % points.length];
+        area += ax * by - bx * ay;
+    }
+    return area / 2;
+}
+const oriented = (points) => (signedArea(points) < 0 ? [...points].reverse() : points);
+function convexHull(points) {
+    const sorted = [...points].sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+    if (sorted.length < 3)
+        return sorted;
+    const cross = (o, a, b) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
+    const lower = [];
+    for (const point of sorted) {
+        while (lower.length >= 2 && cross(lower[lower.length - 2], lower[lower.length - 1], point) <= 0)
+            lower.pop();
+        lower.push(point);
+    }
+    const upper = [];
+    for (let index = sorted.length - 1; index >= 0; index--) {
+        const point = sorted[index];
+        while (upper.length >= 2 && cross(upper[upper.length - 2], upper[upper.length - 1], point) <= 0)
+            upper.pop();
+        upper.push(point);
+    }
+    return [...lower.slice(0, -1), ...upper.slice(0, -1)];
+}
+function runsOf(flags, want) {
+    const count = flags.length;
+    const runs = [];
+    const start = flags.findIndex((flag, index) => flag !== flags[(index + count - 1) % count]);
+    if (start < 0)
+        return flags[0] === want ? [Array.from({ length: count + 1 }, (_, index) => index % count)] : [];
+    let run = null;
+    for (let step = 0; step < count; step++) {
+        const index = (start + step) % count;
+        if (flags[index] === want) {
+            if (!run)
+                run = [index];
+            run.push((index + 1) % count);
+        }
+        else if (run) {
+            runs.push(run);
+            run = null;
+        }
+    }
+    if (run)
+        runs.push(run);
+    return runs;
+}
+function extrude(ring, z, height, projection, options = {}) {
+    const convex = options.convex ?? true;
+    const count = ring.length;
+    const counter = signedArea(ring) > 0;
+    const [vx, vy] = towardViewer(projection);
+    const { sinA, cosA } = cameraOf(projection);
+    const normals = ring.map(([ax, ay], index) => {
+        const [bx, by] = ring[(index + 1) % count];
+        const dx = bx - ax;
+        const dy = by - ay;
+        const length = Math.hypot(dx, dy) || 1;
+        return (counter ? [dy / length, -dx / length] : [-dy / length, dx / length]);
+    });
+    const facing = normals.map(([nx, ny]) => nx * vx + ny * vy > 1e-9);
+    const top = ring.map(([x, y]) => iso([x, y, z + height], projection));
+    const bottom = ring.map(([x, y]) => iso([x, y, z], projection));
+    const outline = [];
+    const crease = [];
+    for (const run of runsOf(facing, false))
+        outline.push(pathOf(run.map((index) => top[index])));
+    for (const run of runsOf(facing, true)) {
+        crease.push(pathOf(run.map((index) => top[index])));
+        if (height > 0)
+            outline.push(pathOf(run.map((index) => bottom[index])));
+    }
+    if (height > 0) {
+        for (let index = 0; index < count; index++) {
+            if (facing[(index + count - 1) % count] !== facing[index])
+                outline.push(pathOf([top[index], bottom[index]]));
+        }
+    }
+    let fill;
+    if (convex) {
+        fill = pathOf(convexHull([...top, ...bottom]), true);
+    }
+    else {
+        const parts = [pathOf(oriented(top), true), pathOf(oriented(bottom), true)];
+        for (let index = 0; index < count; index++) {
+            if (!facing[index])
+                continue;
+            const next = (index + 1) % count;
+            parts.push(pathOf(oriented([top[index], top[next], bottom[next], bottom[index]]), true));
+        }
+        fill = parts.join("");
+    }
+    const buckets = Array.from({ length: SHADES }, () => []);
+    if (height > 0) {
+        const [lx, ly] = [-sinA, cosA];
+        for (let index = 0; index < count; index++) {
+            if (!facing[index])
+                continue;
+            const [nx, ny] = normals[index];
+            const lit = (nx * lx + ny * ly + 1) / 2;
+            const shade = Math.min(SHADES - 1, Math.max(0, Math.floor(lit * SHADES)));
+            const next = (index + 1) % count;
+            buckets[shade].push(pathOf(oriented([top[index], top[next], bottom[next], bottom[index]]), true));
+        }
+    }
+    let bevel;
+    if (options.bevel && options.bevel > 0) {
+        const by = options.bevel;
+        const inset = ring.map(([x, y], index) => {
+            const [ax, ay] = normals[(index + count - 1) % count];
+            const [bx, by2] = normals[index];
+            const mx = ax + bx;
+            const my = ay + by2;
+            const length = Math.hypot(mx, my) || 1;
+            return [x - (mx / length) * by, y - (my / length) * by];
+        });
+        const insetTop = inset.map(([x, y]) => iso([x, y, z + height], projection));
+        bevel = runsOf(facing, true)
+            .map((run) => pathOf([top[run[0]], ...run.slice(1, -1).map((index) => insetTop[index]), top[run[run.length - 1]]]))
+            .join("");
+    }
+    return {
+        fill,
+        outline: outline.join(""),
+        crease: crease.join(""),
+        top: pathOf(oriented(top), true),
+        shades: buckets.map((paths) => paths.join("")),
+        bevel,
+    };
+}
+const ringOf = (plan, steps = 8) => roundedPlan(plan, steps);
+function slabOf(plan, z, height, projection, steps = 8, bevel = 0) {
+    return extrude(ringOf(plan, steps), z, height, projection, { convex: true, bevel });
+}
+function circleRing(cx, cy, radius, steps = 40) {
+    return Array.from({ length: steps }, (_, step) => {
+        const angle = (step / steps) * Math.PI * 2;
+        return [cx + radius * Math.cos(angle), cy + radius * Math.sin(angle)];
+    });
+}
+function cylinder(cx, cy, radius, z, height, projection, steps = 32, bevel = 0) {
+    return extrude(circleRing(cx, cy, radius, steps), z, height, projection, { convex: true, bevel });
+}
+const insetPlan = ({ x, y, w, d, r }, by) => ({ x: x + by, y: y + by, w: w - by * 2, d: d - by * 2, r: Math.max(0, r - by) });
+function onTop(points, z, projection, closed = false) {
+    return pathOf(points.map(([x, y]) => iso([x, y, z], projection)), closed);
+}
+const planOutline = (plan, z, projection, steps = 8) => onTop(ringOf(plan, steps), z, projection, true);
+const lineOnTop = (from, to, z, projection) => onTop([from, to], z, projection);
+const segment = (from, to, projection) => pathOf([iso(from, projection), iso(to, projection)]);
+const rise = (at, from, to, projection) => segment([at[0], at[1], from], [at[0], at[1], to], projection);
+const ring = (cx, cy, radius, z, projection, steps = 40) => onTop(circleRing(cx, cy, radius, steps), z, projection, true);
+const pointsAt = (points, projection) => points.map((point) => iso(point, projection));
+function dotGrid(x, y, columns, rows, gap, z, projection) {
+    const dots = [];
+    for (let row = 0; row < rows; row++) {
+        for (let column = 0; column < columns; column++)
+            dots.push(iso([x + column * gap, y + row * gap, z], projection));
+    }
+    return dots;
+}
+function corners({ x, y, w, d }, inset = 0) {
+    return [
+        [x + inset, y + inset],
+        [x + w - inset, y + inset],
+        [x + inset, y + d - inset],
+        [x + w - inset, y + d - inset],
+    ];
+}
+function boxCorners({ x, y, w, d }, z0, z1) {
+    const out = [];
+    for (const px of [x, x + w])
+        for (const py of [y, y + d])
+            for (const z of [z0, z1])
+                out.push([px, py, z]);
+    return out;
+}
+function knurl(cx, cy, radius, z0, z1, count, projection, inset = 0.4) {
+    const [vx, vy] = towardViewer(projection);
+    const lines = [];
+    for (let index = 0; index < count; index++) {
+        const angle = (index / count) * Math.PI * 2;
+        const nx = Math.cos(angle);
+        const ny = Math.sin(angle);
+        if (nx * vx + ny * vy < 0.15)
+            continue;
+        lines.push(segment([cx + radius * nx, cy + radius * ny, z0 + inset], [cx + radius * nx, cy + radius * ny, z1 - inset], projection));
+    }
+    return lines.join("");
+}
+function sideArc(cx, cy, radius, z, projection, steps = 24) {
+    const [vx, vy] = towardViewer(projection);
+    const facing = Math.atan2(vy, vx);
+    const points = [];
+    for (let step = 0; step <= steps; step++) {
+        const angle = facing - Math.PI / 2 + (step / steps) * Math.PI;
+        points.push(iso([cx + radius * Math.cos(angle), cy + radius * Math.sin(angle), z], projection));
+    }
+    return pathOf(points);
+}
+function ringSeam(ring, z, projection) {
+    const count = ring.length;
+    const counter = signedArea(ring) > 0;
+    const [vx, vy] = towardViewer(projection);
+    const facing = ring.map(([ax, ay], index) => {
+        const [bx, by] = ring[(index + 1) % count];
+        const dx = bx - ax;
+        const dy = by - ay;
+        const [nx, ny] = counter ? [dy, -dx] : [-dy, dx];
+        return nx * vx + ny * vy > 1e-9;
+    });
+    return runsOf(facing, true).map((run) => pathOf(run.map((index) => iso([ring[index][0], ring[index][1], z], projection)))).join("");
+}
+const sideSeam = (plan, z, projection, steps = 8) => ringSeam(ringOf(plan, steps), z, projection);
+function sideRing(center, radius, axis, projection, steps = 20) {
+    const [px, py, pz] = center;
+    const points = [];
+    for (let step = 0; step < steps; step++) {
+        const angle = (step / steps) * Math.PI * 2;
+        const u = radius * Math.cos(angle);
+        const v = radius * Math.sin(angle);
+        points.push(iso(axis === "x" ? [px, py + u, pz + v] : [px + u, py, pz + v], projection));
+    }
+    return pathOf(points, true);
+}
+function coil(from, to, center, radius, turns, axis, projection, perTurn = 16) {
+    const count = Math.max(1, Math.round(turns * perTurn));
+    const back = [];
+    const front = [];
+    let run = [];
+    let near = null;
+    for (let index = 0; index <= count; index++) {
+        const share = index / count;
+        const angle = share * turns * Math.PI * 2;
+        const u = radius * Math.cos(angle);
+        const v = radius * Math.sin(angle);
+        const along = from + (to - from) * share;
+        const point = axis === "x" ? [along, center[0] + u, center[1] + v] : [center[0] + u, along, center[1] + v];
+        const normal = axis === "x" ? [0, Math.cos(angle), Math.sin(angle)] : [Math.cos(angle), 0, Math.sin(angle)];
+        const facing = depthOf(normal, projection) > 0;
+        const flat = iso(point, projection);
+        if (near === null)
+            near = facing;
+        if (facing !== near) {
+            run.push(flat);
+            (near ? front : back).push(pathOf(run));
+            run = [flat];
+            near = facing;
+            continue;
+        }
+        run.push(flat);
+    }
+    if (run.length > 1)
+        (near ? front : back).push(pathOf(run));
+    return { back: back.join(""), front: front.join("") };
+}
+function topTicks(from, to, step, every, edge, z, lengths, projection, axis = "x") {
+    const minor = [];
+    const major = [];
+    const first = Math.ceil(from / step) * step;
+    for (let at = first, index = Math.round(first / step); at <= to + 1e-9; at += step, index++) {
+        const big = index % every === 0;
+        const length = big ? lengths[1] : lengths[0];
+        const a = axis === "x" ? [at, edge] : [edge, at];
+        const b = axis === "x" ? [at, edge + length] : [edge + length, at];
+        (big ? major : minor).push(lineOnTop(a, b, z, projection));
+    }
+    return { minor: minor.join(""), major: major.join("") };
+}
+function sideTicks(from, to, step, every, face, top, lengths, projection, axis = "x") {
+    const minor = [];
+    const major = [];
+    const first = Math.ceil(from / step) * step;
+    for (let at = first, index = Math.round(first / step); at <= to + 1e-9; at += step, index++) {
+        const big = index % every === 0;
+        const length = big ? lengths[1] : lengths[0];
+        const a = axis === "x" ? [at, face, top] : [face, at, top];
+        const b = axis === "x" ? [at, face, top - length] : [face, at, top - length];
+        (big ? major : minor).push(segment(a, b, projection));
+    }
+    return { minor: minor.join(""), major: major.join("") };
+}
+function radialTicks(cx, cy, radius, count, every, z, lengths, projection, from = 0, span = Math.PI * 2) {
+    const minor = [];
+    const major = [];
+    const closed = Math.abs(span - Math.PI * 2) < 1e-9;
+    const steps = closed ? count : count + 1;
+    for (let index = 0; index < steps; index++) {
+        const angle = from + (index / count) * span;
+        const big = index % every === 0;
+        const inner = radius - (big ? lengths[1] : lengths[0]);
+        const sx = Math.sin(angle);
+        const sy = -Math.cos(angle);
+        (big ? major : minor).push(lineOnTop([cx + sx * inner, cy + sy * inner], [cx + sx * radius, cy + sy * radius], z, projection));
+    }
+    return { minor: minor.join(""), major: major.join("") };
+}
+const haloOf = (plan, z, height, projection) => slabOf(plan, z, height, projection).fill;
+function axisVector(projection, [dx, dy, dz]) {
+    const origin = iso([0, 0, 0], projection);
+    const moved = iso([dx, dy, dz], projection);
+    return [moved[0] - origin[0], moved[1] - origin[1]];
+}
+const fine = (value) => Math.round(value * 100) / 100;
+function translateAlong(projection, by) {
+    const [x, y] = axisVector(projection, by);
+    return `translate(${fine(x)} ${fine(y)})`;
+}
+const thousandth = (value) => Math.round(value * 1000) / 1000;
+function axesAt(at, z, projection) {
+    const origin = iso([at[0], at[1], z], projection);
+    const along = (point) => {
+        const [px, py] = iso(point, projection);
+        return [px - origin[0], py - origin[1]];
+    };
+    return { origin, x: along([at[0] + 1, at[1], z]), y: along([at[0], at[1] + 1, z]), z: along([at[0], at[1], z + 1]) };
+}
+const matrixOf = (u, v, origin) => `matrix(${thousandth(u[0])} ${thousandth(u[1])} ${thousandth(v[0])} ${thousandth(v[1])} ${thousandth(origin[0])} ${thousandth(origin[1])})`;
+function holdStill(element, [dx, dy]) {
+    const text = dx || dy ? `translate(${-dx} ${-dy})` : "";
+    element.querySelectorAll("[data-hold]").forEach((node) => (text ? node.setAttribute("transform", text) : node.removeAttribute("transform")));
+}
+function topMatrix(at, z, projection, along = "x") {
+    const { origin, x, y } = axesAt(at, z, projection);
+    return along === "x" ? matrixOf(x, y, origin) : matrixOf([-y[0], -y[1]], x, origin);
+}
+function sideMatrix(at, z, projection, face) {
+    const { origin, x, y, z: up } = axesAt(at, z, projection);
+    const down = [-up[0], -up[1]];
+    return face === "left" ? matrixOf(x, down, origin) : matrixOf([-y[0], -y[1]], down, origin);
+}
+function screenRise(height, projection) {
+    const { cosE, k } = cameraOf(projection);
+    return height * cosE * k;
+}
+function fitProjection(points, width, height, { pad = 24, headroom = 0, azimuth = AZIMUTH, elevation = ELEVATION } = {}) {
+    const unit = { origin: [0, 0], scale: 1, azimuth, elevation };
+    const flat = points.map((point) => iso(point, unit));
+    const xs = flat.map(([x]) => x);
+    const ys = flat.map(([, y]) => y);
+    const left = Math.min(...xs);
+    const right = Math.max(...xs);
+    const up = Math.min(...ys);
+    const down = Math.max(...ys);
+    const scale = Math.min((width - pad * 2) / (right - left), (height - pad * 2 - headroom) / (down - up));
+    return {
+        origin: [width / 2 - ((left + right) / 2) * scale, headroom + (height - headroom) / 2 - ((up + down) / 2) * scale],
+        scale,
+        azimuth,
+        elevation,
+    };
+}
+const escape = (text) => text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const attrs = (pairs) => Object.entries(pairs)
+    .filter(([, value]) => value !== undefined && value !== false)
+    .map(([key, value]) => ` ${key}="${escape(String(value))}"`)
+    .join("");
+function solidSvg(paths, { tone = "hi", crease = "faint", halo = false, lit = false, flat = false, className, inner = "" } = {}) {
+    const parts = [];
+    if (halo)
+        parts.push(`<path class="iso-halo" d="${paths.fill}"/>`);
+    parts.push(`<path class="iso-fill" d="${paths.fill}"/>`);
+    if (!flat) {
+        paths.shades.forEach((d, shade) => {
+            if (d)
+                parts.push(`<path class="iso-shade" data-shade="${shade}" d="${d}"/>`);
+        });
+        parts.push(`<path class="iso-top" d="${paths.top}"/>`);
+    }
+    if (crease !== "none" && paths.crease)
+        parts.push(`<path class="iso-line iso-crease" data-tone="${crease}" d="${paths.crease}"/>`);
+    if (crease !== "none" && paths.bevel)
+        parts.push(`<path class="iso-line iso-bevel" data-tone="${crease}" d="${paths.bevel}"/>`);
+    if (inner)
+        parts.push(inner);
+    parts.push(`<path class="iso-line iso-edge" data-tone="${tone}" d="${paths.outline}"/>`);
+    return `<g${attrs({ class: className ? `iso-solid ${className}` : "iso-solid", "data-lit": lit ? "" : undefined, "data-seamless": paths.seamless ? "" : undefined })}>${parts.join("")}</g>`;
+}
+function lineSvg(d, { tone = "lo", dotted = false, dashed = false, flow = false, className, free } = {}) {
+    if (!d)
+        return "";
+    return `<path${attrs({
+        class: className ? `iso-line ${className}` : "iso-line",
+        "data-tone": tone,
+        "data-free": free === true ? "" : free || undefined,
+        "data-dotted": dotted ? "" : undefined,
+        "data-dashed": dashed ? "" : undefined,
+        "data-flow": flow ? "" : undefined,
+        d,
+    })}/>`;
+}
+function dotsSvg(points, { size = 0.5, tone = "mid", pulse = false } = {}) {
+    const dots = points
+        .map(([x, y, alpha], index) => `<circle cx="${tenth(x)}" cy="${tenth(y)}" r="${size}"${alpha !== undefined && alpha < 1 ? ` fill-opacity="${Math.max(0, alpha).toFixed(2)}"` : ""}${pulse ? ` data-pulse="" style="--pulse-at:${(index * 137) % 1600}ms"` : ""}/>`)
+        .join("");
+    return `<g class="iso-dots" data-tone="${tone}">${dots}</g>`;
+}
+function fadedSvg(list, style = {}) {
+    const groups = new Map();
+    for (const entry of list) {
+        const [d, alpha] = Array.isArray(entry) ? entry : [entry.d, entry.alpha];
+        if (!d || !(alpha > 0.02))
+            continue;
+        const level = Math.min(1, Math.round(alpha * 20) / 20);
+        groups.set(level, (groups.get(level) ?? "") + d);
+    }
+    return [...groups].map(([alpha, d]) => (alpha >= 1 ? lineSvg(d, style) : `<g opacity="${alpha.toFixed(2)}">${lineSvg(d, style)}</g>`)).join("");
+}
+function fadeLineSvg(points, { fade = [0, 0], tone = "lo", className, stops = 6 } = {}) {
+    if (points.length < 2)
+        return "";
+    const ease = (t) => t * t * (3 - 2 * t);
+    const hashOf = (text) => {
+        let hash = 2166136261;
+        for (let index = 0; index < text.length; index++)
+            hash = Math.imul(hash ^ text.charCodeAt(index), 16777619);
+        return (hash >>> 0).toString(36);
+    };
+    const lengths = [0];
+    for (let index = 1; index < points.length; index++)
+        lengths.push(lengths[index - 1] + Math.hypot(points[index][0] - points[index - 1][0], points[index][1] - points[index - 1][1]));
+    const at = (length) => {
+        let index = 1;
+        while (index < points.length - 1 && lengths[index] < length)
+            index++;
+        const span = lengths[index] - lengths[index - 1] || 1;
+        const t = Math.max(0, Math.min(1, (length - lengths[index - 1]) / span));
+        return [points[index - 1][0] + (points[index][0] - points[index - 1][0]) * t, points[index - 1][1] + (points[index][1] - points[index - 1][1]) * t];
+    };
+    const pieceOf = (from, to) => [at(from), ...points.filter((_, index) => lengths[index] > from + 1e-6 && lengths[index] < to - 1e-6), at(to)];
+    const total = lengths[lengths.length - 1];
+    if (total < 1e-6)
+        return "";
+    let [start, end] = Array.isArray(fade) ? fade : [fade, fade];
+    if (start + end > total) {
+        const share = total / (start + end);
+        start *= share;
+        end *= share;
+    }
+    const paint = `var(--anatomy-${tone})`;
+    const ramp = (piece, rising) => {
+        const d = pathOf(piece);
+        const [x1, y1] = piece[0];
+        const [x2, y2] = piece[piece.length - 1];
+        const id = `iso-fade-${hashOf(`${d}|${tone}|${rising}`)}`;
+        const marks = Array.from({ length: stops + 1 }, (_, index) => {
+            const t = index / stops;
+            const alpha = ease(rising ? t : 1 - t);
+            return `<stop offset="${t.toFixed(3)}" stop-opacity="${alpha.toFixed(3)}" style="stop-color:${paint}"/>`;
+        }).join("");
+        const gradient = `<linearGradient id="${id}" gradientUnits="userSpaceOnUse" x1="${tenth(x1)}" y1="${tenth(y1)}" x2="${tenth(x2)}" y2="${tenth(y2)}">${marks}</linearGradient>`;
+        return `<defs>${gradient}</defs><path${attrs({ class: className ? `iso-line ${className}` : "iso-line", "data-tone": tone, "data-free": rising ? "start" : "end", d, style: `stroke:url(#${id})` })}/>`;
+    };
+    const parts = [];
+    if (start > 0.05)
+        parts.push(ramp(pieceOf(0, start), true));
+    if (total - end - start > 0.05)
+        parts.push(lineSvg(pathOf(pieceOf(start, total - end)), { tone, className }));
+    if (end > 0.05)
+        parts.push(ramp(pieceOf(total - end, total), false));
+    return `<g class="iso-fade">${parts.join("")}</g>`;
+}
+function wireSvg(from, to, { via = [], tone = "lo", dotted = false, dashed = false, flow = false, ends = "both", size = 1.2 } = {}) {
+    const d = pathOf([from, ...via, to]);
+    const end = ([x, y]) => `<circle class="iso-wire-end" cx="${tenth(x)}" cy="${tenth(y)}" r="${size}"/>`;
+    return `<g class="iso-wire" data-tone="${tone}">${lineSvg(d, { tone, dotted, dashed, flow })}${ends === "both" || ends === "from" ? end(from) : ""}${ends === "both" || ends === "to" ? end(to) : ""}</g>`;
+}
+function faceTextSvg(transform, text, { size = 3, tone = "mid", anchor = "start" } = {}) {
+    return `<text class="iso-face-text" data-tone="${tone}" transform="${transform}" font-size="${size}" text-anchor="${anchor}">${escape(text)}</text>`;
+}
+function groupSvg(children, extra = {}) {
+    return `<g${attrs(extra)}>${Array.isArray(children) ? children.join("") : children}</g>`;
+}
+function figureSvg({ width, height, label, body, standalone = false, className }) {
+    const style = standalone ? `<style>${ISO_CSS}</style>` : "";
+    return `<svg${attrs({
+        xmlns: "http://www.w3.org/2000/svg",
+        class: `iso-svg${standalone ? " iso" : ""}${className ? ` ${className}` : ""}`,
+        "data-theme": standalone || undefined,
+        viewBox: `0 0 ${width} ${height}`,
+        role: "img",
+        "aria-label": label,
+    })}>${style}${Array.isArray(body) ? body.join("") : body}</svg>`;
+}
+function swatchSvg(mark) {
+    if (mark === "raised" || mark === "flat" || mark === "lit") {
+        const body = mark === "flat" ? "M2 6.5 8 3.5 14 6.5 8 9.5Z" : "M2 4.5 8 1.5 14 4.5 14 6 8 9 2 6Z";
+        const crease = mark === "flat" ? "" : `<path class="iso-swatch-crease" d="M2 4.5 8 7.5 14 4.5"/>`;
+        return `<svg class="iso-swatch" data-mark="${mark}" viewBox="0 0 16 10" aria-hidden="true"><path d="${body}"/>${crease}</svg>`;
+    }
+    return `<svg class="iso-swatch" data-mark="${mark}" viewBox="0 0 16 10" aria-hidden="true"><path d="M1.5 5h13"/></svg>`;
+}
+function plateHtml({ fig, title, hint, readout = "", keys = [], caption, body }) {
+    const corner = (name, text, extra = "") => `<span class="iso-plate-corner" data-corner="${name}"${extra}>${escape(text)}</span>`;
+    const legend = keys.length || caption
+        ? `<figcaption class="iso-legend">${keys.length ? `<span class="iso-keys">${keys.map((key) => `<span class="iso-key">${swatchSvg(key.mark)}${escape(key.label)}</span>`).join("")}</span>` : ""}${caption ? `<span class="iso-caption">${escape(caption)}</span>` : ""}</figcaption>`
+        : "";
+    return `<figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true">${corner("fig", fig)}${title ? corner("title", title) : ""}${hint ? corner("hint", hint) : ""}${corner("readout", readout, " data-readout")}</div>${body}</div>${legend}</figure>`;
+}
+function pageHtml({ title, theme = "dark", body, script = "", width = 650 }) {
+    return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${escape(title)}</title><style>${ISO_CSS}${PAGE_CSS.replace("__WIDTH__", String(width))}</style></head><body class="iso" data-theme="${theme}"><main class="iso-page">${body}</main>${script ? `<script type="module">${script.replace(/<\/(script)/gi, "<\\/$1")}<\/script>` : ""}</body></html>`;
+}
+const PAGE_CSS = `
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(__WIDTH__px,100% - 32px);margin:64px auto 96px}
+`;
+const ISO_CSS = `
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+`;
+
+const K = { cameraOf, iso, depthOf, pathOf, fitProjection, slabOf, cylinder, solidSvg, lineSvg };
+/* Scene runtime (prototype). Presentation only: it draws a state, it never computes climate or growth.
+ * Needs the inlined kit as `K` (iso, depthOf, pathOf, fitProjection, slabOf, cylinder, solidSvg, lineSvg).
+ * Static structure is built once in mount(); update(state) only rewrites attributes of persistent nodes. */
+const SVGNS = "http://www.w3.org/2000/svg";
+const clamp = (v, lo = 0, hi = 1) => Math.min(hi, Math.max(lo, v));
+const lerp = (a, b, t) => a + (b - a) * t;
+
+function el(tag, attrs, parent) {
+  const node = document.createElementNS(SVGNS, tag);
+  for (const k in attrs || {}) node.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(node);
+  return node;
+}
+
+// Deterministic low-discrepancy order (van der Corput): decides which plants are lost first, no randomness.
+function lossRank(index) {
+  let n = index + 1, f = 0.5, r = 0;
+  while (n > 0) { r += f * (n & 1); n >>= 1; f /= 2; }
+  return r;
+}
+
+// Distinct visual cue per stress variable so they can be told apart:
+//   cumulative stress -> leaf hue green -> yellow -> brown;  water stress -> droop, narrower and paler leaves;
+//   temperature stress -> orange-red leaf edge;  VPD stress -> dashed brown leaf edge.
+function plantStyle(c, lost) {
+  if (lost) return { fill: "hsl(32 18% 38%)", stroke: "none", strokeWidth: 0, dash: "none", droop: 0, narrow: 1 };
+  const cum = clamp(c.cumulative_stress), water = clamp(c.water_stress), temp = clamp(c.temperature_stress || 0), vpd = clamp(c.vpd_stress || 0);
+  const hue = lerp(138, 38, Math.pow(cum, 0.7)), sat = lerp(52, 42, cum), light = lerp(42, 33, cum) + 16 * water;
+  const edge = Math.max(temp, vpd);
+  return {
+    fill: `hsl(${hue.toFixed(0)} ${sat.toFixed(0)}% ${light.toFixed(0)}%)`,
+    stroke: edge < 0.08 ? "none" : temp >= vpd ? "hsl(14 88% 46%)" : "hsl(28 55% 26%)",
+    strokeWidth: 0.4 + 1.8 * edge, dash: vpd > temp && edge >= 0.08 ? "2.4 1.6" : "none",
+    droop: water * 0.32, narrow: 1 - 0.5 * water,
+  };
+}
+
+function tempColour(t) {
+  // blue below 10 C, neutral 18-28 C, red above 36 C; always paired with a numeric readout
+  if (t == null) return "none";
+  if (t < 18) return `hsl(215 70% ${lerp(55, 80, clamp((t - 0) / 18)).toFixed(0)}%)`;
+  if (t <= 28) return "hsl(150 25% 80%)";
+  return `hsl(${lerp(35, 0, clamp((t - 28) / 10)).toFixed(0)} 80% ${lerp(78, 58, clamp((t - 28) / 10)).toFixed(0)}%)`;
+}
+
+function plantShape(P, x, y, h, r, kind, droop) {
+  // world-space diamonds keep the isometric look; kind only changes silhouette parameters
+  const leaf = (z, rad) => K.pathOf([K.iso([x - rad, y, z], P), K.iso([x, y - rad, z], P), K.iso([x + rad, y, z], P), K.iso([x, y + rad, z], P)], true);
+  const stem = K.pathOf([K.iso([x, y, 0], P), K.iso([x, y, h * (kind === "rosette" ? 0.35 : 0.9)], P)]);
+  let leaves;
+  if (kind === "rosette") {
+    leaves = leaf(h * 0.22, r * 1.1) + leaf(h * 0.38, r * 0.7);
+  } else if (kind === "bush") {
+    leaves = leaf(h * 0.35 - droop, r * 1.1) + leaf(h * 0.62 - droop, r * 1.0) + leaf(h * 0.88 - droop * 0.5, r * 0.7);
+  } else {
+    leaves = leaf(h * 0.4 - droop, r * 0.85) + leaf(h * 0.68 - droop, r * 0.95) + leaf(h * 0.95 - droop * 0.5, r * 0.65);
+  }
+  return { stem, leaves };
+}
+
+const CROP_KINDS = {
+  vine: { hmax: 2.4, rmax: 0.55, fruit: true },
+  bush: { hmax: 1.0, rmax: 0.5, fruit: false },
+  rosette: { hmax: 0.3, rmax: 0.32, fruit: false },
+};
+
+function mount(svg, cfg) {
+  svg.innerHTML = "";
+  const W = 760, H = 460;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  svg.style.overflow = "hidden";  // rain and sky stay inside the figure
+  const open = cfg.system === "OPEN_FIELD";
+  const kind = CROP_KINDS[cfg.cropKind] || CROP_KINDS.vine;
+
+  // ---- geometry ----
+  let L, Wd, rows = [], pillars = [], facets = [], ventFacets = [], zTop, gutter = 0;
+  const spans = cfg.spans || 1;
+  if (open) {
+    L = cfg.field.length; Wd = cfg.field.width; zTop = 1;
+    const rowCount = Math.floor(Wd / cfg.field.rowSpacing), perRow = Math.floor(L / cfg.field.plantSpacing);
+    const stride = Math.max(1, Math.ceil(perRow / 22));
+    for (let r = 0; r < rowCount; r++) {
+      for (let p = 0; p < perRow; p += stride) rows.push({ x: (p + 0.5) * cfg.field.plantSpacing + (L - perRow * cfg.field.plantSpacing) / 2, y: (r + 0.5) * cfg.field.rowSpacing });
+    }
+  } else {
+    gutter = cfg.gutter;
+    const span = cfg.span, prof = cfg.profile.map(([y, z]) => [y, z + gutter]);
+    L = cfg.bays * cfg.pillar; Wd = span * spans; zTop = Math.max(...prof.map((p) => p[1]));
+    let apex = 0; prof.forEach((p, i) => { if (p[1] > prof[apex][1]) apex = i; });
+    const ventIndex = apex > 0 ? apex - 1 : 0;
+    for (let s = 0; s < spans; s++) {
+      const y0 = s * span;
+      for (let i = 0; i < prof.length - 1; i++) {
+        const f = { kind: "roof", span: s, index: i, pts: [[0, y0 + prof[i][0], prof[i][1]], [L, y0 + prof[i][0], prof[i][1]], [L, y0 + prof[i + 1][0], prof[i + 1][1]], [0, y0 + prof[i + 1][0], prof[i + 1][1]]] };
+        facets.push(f);
+        if (i === ventIndex) {
+          const hinge = prof[apex], lower = prof[i === apex ? i + 1 : i];
+          ventFacets.push({ facet: f, hinge: [y0 + hinge[0], hinge[1]], lower: [y0 + lower[0], lower[1]] });
+        }
+      }
+      for (const x of [0, L]) facets.push({ kind: "end", pts: [[x, y0, 0], [x, y0 + span, 0], ...prof.slice().reverse().map(([y, z]) => [x, y0 + y, z])] });
+    }
+    if (gutter > 0) for (const y of [0, Wd]) facets.push({ kind: "side", pts: [[0, y, 0], [L, y, 0], [L, y, gutter], [0, y, gutter]] });
+    // rows: 4 per span, plants every 1.5 m (rendered subset of the real planting density)
+    for (let s = 0; s < spans; s++) for (let k = 0; k < 4; k++) {
+      const y = s * span + span * (0.14 + 0.72 * (k / 3));
+      for (let x = 1.5; x < L - 1; x += 1.5) rows.push({ x, y });
+    }
+    if (gutter > 0) for (let i = 0; i <= cfg.bays; i++) for (let s = 0; s <= spans; s++) pillars.push({ x: i * cfg.pillar, y: s * span });
+  }
+  const az = cfg.azimuth == null ? 45 : cfg.azimuth;
+  const pad = open ? 5 : 3;
+  const P = K.fitProjection([[-pad, -pad, -0.3], [L + pad, -pad, -0.3], [L + pad, Wd + pad, -0.3], [-pad, Wd + pad, -0.3], [0, 0, zTop + 1], [L, Wd, zTop + 1], [0, Wd, zTop + 1], [L, 0, zTop + 1]], W, H - 70, { pad: 26, azimuth: az });
+  P.origin[1] += 36;
+
+  // ---- static layers ----
+  const defs = el("defs", {}, svg), clipId = "scene-clip-" + (mount.count = (mount.count || 0) + 1);
+  el("rect", { x: 0, y: 0, width: W, height: H, rx: 12 }, el("clipPath", { id: clipId }, defs));
+  const sky = el("g", { class: "sky" }, svg);
+  const skyRect = el("rect", { x: 0, y: 0, width: W, height: H, rx: 12 }, sky);
+  const body = el("g", {}, el("g", { "clip-path": `url(#${clipId})` }, svg));
+  const ground = el("g", {}, body);
+  ground.innerHTML = K.solidSvg(K.slabOf({ x: -pad, y: -pad, w: L + pad * 2, d: Wd + pad * 2, r: 2 }, -0.3, 0.3, P, 8, 0.4), { tone: "lo", crease: "faint", halo: true })
+    + K.solidSvg(K.slabOf({ x: 0, y: 0, w: L, d: Wd, r: 0 }, 0, 0.02, P, 2), { tone: open ? "lo" : "faint", flat: true, crease: "none" });
+  if (open) {
+    ground.lastChild.classList.add("soil");
+    const furrows = [];
+    for (let r = 0; r < Math.floor(Wd / cfg.field.rowSpacing); r++) { const y = (r + 0.5) * cfg.field.rowSpacing; furrows.push(K.pathOf([K.iso([0, y, 0.02], P), K.iso([L, y, 0.02], P)])); }
+    el("path", { class: "iso-line", "data-tone": "faint", d: furrows.join("") }, ground);
+  }
+
+  const interior = el("g", {}, body);
+  const items = [];
+  rows.forEach((pos, i) => items.push({ type: "plant", pos, i, depth: K.depthOf([pos.x, pos.y, 0], P) }));
+  pillars.forEach((pos) => items.push({ type: "pillar", pos, depth: K.depthOf([pos.x, pos.y, gutter / 2], P) }));
+  items.sort((a, b) => a.depth - b.depth);
+  const plants = [];
+  for (const it of items) {
+    if (it.type === "pillar") {
+      const holder = el("g", {}, interior);
+      holder.innerHTML = K.solidSvg(K.cylinder(it.pos.x, it.pos.y, 0.12, 0, gutter, P, 12), { tone: "mid", crease: "none" });
+    } else {
+      const g = el("g", { class: "plant" }, interior);
+      const stem = el("path", { class: "stem" }, g), leaves = el("path", { class: "leaves" }, g);
+      const fruit = [0, 1, 2].map(() => el("circle", { class: "fruit", r: 1.7 }, g));
+      plants.push({ g, stem, leaves, fruit, pos: it.pos, rank: lossRank(it.i) });
+    }
+  }
+
+  const ribs = el("g", { class: "ribs" }, body), screen = el("g", { class: "screen" }, body);
+  const hole = el("g", { class: "hole" }, body), cover = el("g", { class: "cover" }, body), flaps = el("g", { class: "flaps" }, body);
+  const edge = el("g", { class: "edges" }, body), rain = el("g", { class: "rain", "clip-path": `url(#${clipId})` }, svg), hud = el("g", { class: "hud" }, svg);
+  const coverPaths = [];
+  if (!open) {
+    const prof = cfg.profile.map(([y, z]) => [y, z + gutter]);
+    const ribD = [], seamD = [];
+    const stations = cfg.bays;
+    for (let i = 0; i <= stations; i++) for (let s = 0; s < spans; s++) ribD.push(K.pathOf(prof.map(([y, z]) => K.iso([i * cfg.pillar, s * cfg.span + y, z], P))));
+    el("path", { class: "iso-line", "data-tone": "mid", d: ribD.join("") }, ribs);
+    prof.forEach(([y, z]) => { for (let s = 0; s < spans; s++) seamD.push(K.pathOf([K.iso([0, s * cfg.span + y, z], P), K.iso([L, s * cfg.span + y, z], P)])); });
+    el("path", { class: "iso-line", "data-tone": "lo", d: seamD.join("") }, ribs);
+    const sorted = facets.slice().sort((a, b) => depthOfFacet(a) - depthOfFacet(b));
+    function depthOfFacet(f) { const c = f.pts.reduce((a, p) => [a[0] + p[0] / f.pts.length, a[1] + p[1] / f.pts.length, a[2] + p[2] / f.pts.length], [0, 0, 0]); return K.depthOf(c, P); }
+    for (const f of sorted) {
+      const path = el("path", { d: K.pathOf(f.pts.map((p) => K.iso(p, P)), true) }, cover);
+      f.node = path;
+      if (f.kind !== "roof") el("path", { class: "iso-line", "data-tone": "lo", d: path.getAttribute("d") }, edge);
+    }
+    const gut = [];
+    for (let s = 0; s <= spans; s++) gut.push(K.pathOf([K.iso([0, s * cfg.span, prof[0][1]], P), K.iso([L, s * cfg.span, prof[0][1]], P)]));
+    el("path", { class: "iso-line", "data-tone": "hi", d: gut.join("") }, edge);
+    ventFacets.forEach((v) => { v.hole = el("path", { d: v.facet.node.getAttribute("d") }, hole); v.flap = el("path", {}, flaps); v.flapEdge = el("path", { class: "iso-line", "data-tone": "mid" }, flaps); });
+    var screenPoly = el("path", { class: "screen-sheet" }, screen), screenEdge = el("path", { class: "iso-line", "data-tone": "hi" }, screen);
+    var screenZ = gutter > 0 ? gutter - 0.35 : zTop * 0.6;
+  }
+  // Rain: screen-space streaks. Positions follow a golden-ratio sequence (deterministic, no random); negative animation
+  // delays spread them over the whole height at any instant. Count, speed, length and slant follow the state.
+  const RAIN_MAX = 560, GOLDEN = 0.61803398875;
+  const streaks = Array.from({ length: RAIN_MAX }, (_, i) => {
+    const x = ((i * GOLDEN) % 1) * (W + 120) - 60, y0 = ((i * GOLDEN * 7.31) % 1) * H;
+    const path = el("path", { d: "M0 0" }, rain);
+    path.dataset.x = x.toFixed(1); path.style.setProperty("--y0", y0.toFixed(0) + "px");
+    return path;
+  });
+
+  const hudOut = el("text", { x: 18, y: 26, class: "hud-text" }, hud), hudIn = el("text", { x: W - 18, y: 26, class: "hud-text", "text-anchor": "end" }, hud);
+  const hudLine = (parent, n) => Array.from({ length: n }, (_, i) => el("tspan", { x: parent.getAttribute("x"), dy: i ? 15 : 0 }, parent));
+  const outLines = hudLine(hudOut, 5), inLines = hudLine(hudIn, 5);
+  const sun = el("circle", { r: 11, class: "sun" }, sky);
+  const windArrow = el("path", { class: "wind" }, hud);
+
+  function update(s) {
+    const o = s.outdoor, ind = s.indoor, a = s.actuators || {}, c = s.crop;
+    // sky and sun
+    const solar = clamp((o.solar_w_m2 || 0) / 900);
+    const wet = clamp((o.rain_mm_h || 0) / 3);
+    skyRect.setAttribute("fill", `hsl(${lerp(228, 205, solar).toFixed(0)} ${(lerp(38, 70, solar) * (1 - 0.6 * wet)).toFixed(0)}% ${(lerp(14, 90, solar) * (1 - 0.4 * wet)).toFixed(0)}%)`);
+    const day = clamp((s.hour - 6) / 12);
+    sun.setAttribute("cx", (80 + (W - 160) * day).toFixed(0)); sun.setAttribute("cy", (150 - 110 * Math.sin(Math.PI * day)).toFixed(0));
+    sun.setAttribute("opacity", (0.2 + 0.8 * solar).toFixed(2)); sun.setAttribute("fill", solar > 0.02 ? "hsl(45 95% 60%)" : "hsl(220 15% 75%)");
+    // rain: intensity 0..1 from mm/h (10 mm/h = heavy); slant follows the wind blowing towards screen-right/left
+    const intensity = clamp((o.rain_mm_h || 0) / 10), shown = Math.round(RAIN_MAX * Math.pow(intensity, 0.7));
+    const windTo = ((o.wind_dir_deg || 0) + 180) * Math.PI / 180, slant = Math.sin(windTo) * clamp((o.wind_m_s || 0) / 12) * 18;
+    const dropLen = 10 + 14 * intensity, dur = 1.1 - 0.5 * intensity;
+    rain.style.setProperty("--dx", (slant * ((H + 40) / dropLen)).toFixed(0) + "px"); rain.style.setProperty("--fall", (H + 40) + "px");
+    streaks.forEach((p, i) => {
+      if (i >= shown) { p.style.display = "none"; return; }
+      p.style.display = "";
+      p.setAttribute("d", `M${p.dataset.x} 0l${slant.toFixed(1)} ${dropLen.toFixed(1)}`);
+      p.setAttribute("opacity", (0.55 + 0.35 * intensity).toFixed(2));
+      p.style.animationDuration = (dur * (0.85 + 0.3 * ((i * 0.37) % 1))).toFixed(2) + "s";
+      p.style.animationDelay = (-(i / RAIN_MAX) * dur * 2).toFixed(2) + "s";
+    });
+    skyRect.setAttribute("opacity", (0.55 + 0.25 * intensity).toFixed(2));
+    // wind arrow: points where the wind blows to (direction given as meteorological "from")
+    const to = ((o.wind_dir_deg || 0) + 180) * Math.PI / 180, len = 6 + 5 * (o.wind_m_s || 0);
+    const cx = 64, cy = H - 44, dx = Math.sin(to) * len, dy = -Math.cos(to) * len * 0.6;
+    const tx = cx + dx / 2, ty = cy + dy / 2, back = Math.atan2(dy, dx) + Math.PI, head = (da) => `M${tx.toFixed(1)} ${ty.toFixed(1)}l${(7 * Math.cos(back + da)).toFixed(1)} ${(7 * Math.sin(back + da)).toFixed(1)}`;
+    windArrow.setAttribute("d", `M${(cx - dx / 2).toFixed(1)} ${(cy - dy / 2).toFixed(1)}L${tx.toFixed(1)} ${ty.toFixed(1)}${head(0.45)}${head(-0.45)}`);
+    windArrow.setAttribute("stroke-width", "2"); windArrow.setAttribute("opacity", (o.wind_m_s > 0.2 ? 1 : 0.25).toFixed(2));
+
+    // plants: growth, health, loss
+    const laiFrac = clamp(c.lai / (c.lai_max || 4));
+    const grow = Math.pow(laiFrac, 0.6);
+    const lossFraction = clamp((c.cumulative_stress - 0.8) / 0.2);
+    const style = plantStyle(c, false), lostStyle = plantStyle(c, true);
+    plants.forEach((pl) => {
+      const lost = pl.rank < lossFraction, st = lost ? lostStyle : style;
+      const h = lost ? Math.max(0.06, kind.hmax * 0.05) : Math.max(0.05, kind.hmax * grow);
+      const r = lost ? 0.05 : kind.rmax * (0.25 + 0.75 * grow) * st.narrow;
+      const shape = plantShape(P, pl.pos.x, pl.pos.y, h, r, cfg.cropKind, h * st.droop);
+      pl.stem.setAttribute("d", shape.stem); pl.stem.setAttribute("stroke", st.fill);
+      pl.leaves.setAttribute("d", lost ? "" : shape.leaves); pl.leaves.setAttribute("fill", st.fill);
+      pl.leaves.setAttribute("stroke", st.stroke); pl.leaves.setAttribute("stroke-width", (st.strokeWidth * 1.5).toFixed(2)); pl.leaves.setAttribute("stroke-dasharray", st.dash);
+      const nFruit = kind.fruit && !lost && c.fruit_fraction != null ? Math.round(3 * clamp(c.fruit_fraction)) : 0;
+      pl.fruit.forEach((f, k) => {
+        if (k < nFruit) {
+          const p = K.iso([pl.pos.x + (k - 1) * r * 0.5, pl.pos.y + 0.1, h * (0.45 + 0.1 * k)], P);
+          f.setAttribute("cx", p[0].toFixed(1)); f.setAttribute("cy", p[1].toFixed(1));
+          f.setAttribute("fill", `hsl(${lerp(95, 6, clamp(c.fruit_ripeness || 0)).toFixed(0)} 70% 48%)`); f.setAttribute("opacity", "1");
+        } else f.setAttribute("opacity", "0");
+      });
+    });
+
+    if (!open) {
+      const tint = tempColour(ind.temp_c);
+      cover.setAttribute("fill", tint); cover.style.fill = tint;
+      // roof vents: flap rotates about the hinge by opening x 40 degrees, outward
+      const opening = clamp(a.vent_opening || 0), ang = opening * 40 * Math.PI / 180;
+      ventFacets.forEach((v) => {
+        const f = v.facet, vy = v.lower[0] - v.hinge[0], vz = v.lower[1] - v.hinge[1], mag = Math.hypot(vy, vz);
+        let ny = -vz / mag, nz = vy / mag; if (nz < 0) { ny = -ny; nz = -nz; }
+        const ly = v.hinge[0] + vy * Math.cos(ang) + ny * mag * Math.sin(ang), lz = v.hinge[1] + vz * Math.cos(ang) + nz * mag * Math.sin(ang);
+        const pts = [[0, ly, lz], [L, ly, lz], [L, v.hinge[0], v.hinge[1]], [0, v.hinge[0], v.hinge[1]]];
+        const d = K.pathOf(pts.map((p) => K.iso(p, P)), true);
+        f.node.style.display = opening > 0.02 ? "none" : "";
+        v.hole.style.display = opening > 0.02 ? "" : "none";
+        v.flap.setAttribute("d", d); v.flapEdge.setAttribute("d", d);
+        v.flap.style.display = v.flapEdge.style.display = opening > 0.02 ? "" : "none";
+      });
+      // thermal/shade screen: sheet deploying from x = 0 along the length
+      const dep = clamp(a.screen_deployed || 0), xs = L * dep;
+      screen.style.display = dep > 0.01 ? "" : "none";
+      if (dep > 0.01) {
+        const pts = [[0, 0, screenZ], [xs, 0, screenZ], [xs, Wd, screenZ], [0, Wd, screenZ]].map((p) => K.iso(p, P));
+        screenPoly.setAttribute("d", K.pathOf(pts, true));
+        screenEdge.setAttribute("d", K.pathOf([K.iso([xs, 0, screenZ], P), K.iso([xs, Wd, screenZ], P)]));
+      }
+    }
+
+    // HUD: every number with units; unavailable stays "n/a" (never zero)
+    const f1 = (v, u, d = 1) => (v == null ? "n/a" : `${v.toFixed(d)} ${u}`);
+    outLines[0].textContent = `OUTDOOR  ${s.forcing_label || ""}`;
+    outLines[1].textContent = `T ${f1(o.temp_c, "C")}   RH ${f1(o.rh_pct, "%", 0)}`;
+    outLines[2].textContent = `Rad ${f1(o.solar_w_m2, "W/m2", 0)}   t ${String(Math.floor(s.hour)).padStart(2, "0")}:${String(Math.round((s.hour % 1) * 60)).padStart(2, "0")}`;
+    outLines[3].textContent = `Wind ${f1(o.wind_m_s, "m/s")} from ${o.wind_dir_deg == null ? "n/a" : o.wind_dir_deg + " deg"}`;
+    outLines[4].textContent = `Rain ${f1(o.rain_mm_h, "mm/h")}`;
+    if (open) {
+      inLines[0].textContent = "OPEN FIELD"; inLines[1].textContent = "crop sees outdoor weather";
+      inLines[2].textContent = "no thermal backend"; inLines[3].textContent = ""; inLines[4].textContent = "";
+    } else {
+      inLines[0].textContent = `INDOOR  ${s.backend_label || ""}`;
+      inLines[1].textContent = `T ${f1(ind.temp_c, "C")}   RH ${f1(ind.rh_pct, "%", 0)}`;
+      inLines[2].textContent = `CO2 ${f1(ind.co2_ppm, "ppm", 0)}`;
+      inLines[3].textContent = `Vents ${(100 * (a.vent_opening || 0)).toFixed(0)}%  Screen ${(100 * (a.screen_deployed || 0)).toFixed(0)}%`;
+      inLines[4].textContent = `Heater ${a.heater_kw == null ? "n/a" : a.heater_kw.toFixed(1) + " kW"}`;
+    }
+  }
+  const view = { k: 1, x: 0, y: 0 };
+  function applyView() {
+    view.k = clamp(view.k, 1, 6);
+    const maxX = (view.k - 1) * W / 2 + 40, maxY = (view.k - 1) * H / 2 + 40;
+    view.x = clamp(view.x, -maxX, maxX); view.y = clamp(view.y, -maxY, maxY);
+    body.setAttribute("transform", `translate(${(W / 2 + view.x).toFixed(1)} ${(H / 2 + view.y).toFixed(1)}) scale(${view.k.toFixed(3)}) translate(${-W / 2} ${-H / 2})`);
+  }
+  function zoomAt(factor, px, py) {  // px, py in viewBox units; that point stays still
+    const next = clamp(view.k * factor, 1, 6), r = next / view.k;
+    view.x = (px - W / 2) - ((px - W / 2) - view.x) * r; view.y = (py - H / 2) - ((py - H / 2) - view.y) * r; view.k = next; applyView();
+  }
+  const toBox = (e) => { const b = svg.getBoundingClientRect(); return [(e.clientX - b.left) * W / b.width, (e.clientY - b.top) * H / b.height]; };
+  const reset = () => { view.k = 1; view.x = view.y = 0; applyView(); };
+  let drag = null;
+  svg.style.touchAction = "none"; svg.style.cursor = "grab"; svg.tabIndex = 0;
+  svg.onwheel = (e) => { e.preventDefault(); const [px, py] = toBox(e); zoomAt(e.deltaY < 0 ? 1.15 : 1 / 1.15, px, py); };
+  svg.onpointerdown = (e) => { drag = { x: e.clientX, y: e.clientY, vx: view.x, vy: view.y }; svg.setPointerCapture(e.pointerId); svg.style.cursor = "grabbing"; };
+  svg.onpointermove = (e) => { if (!drag) return; const b = svg.getBoundingClientRect(); view.x = drag.vx + (e.clientX - drag.x) * W / b.width; view.y = drag.vy + (e.clientY - drag.y) * H / b.height; applyView(); };
+  svg.onpointerup = svg.onpointercancel = () => { drag = null; svg.style.cursor = "grab"; };
+  svg.ondblclick = reset;
+  svg.onkeydown = (e) => {
+    const step = 30; let used = true;
+    if (e.key === "+" || e.key === "=") zoomAt(1.25, W / 2, H / 2); else if (e.key === "-") zoomAt(0.8, W / 2, H / 2);
+    else if (e.key === "0") reset();
+    else if (e.key === "ArrowLeft") { view.x += step; applyView(); } else if (e.key === "ArrowRight") { view.x -= step; applyView(); }
+    else if (e.key === "ArrowUp") { view.y += step; applyView(); } else if (e.key === "ArrowDown") { view.y -= step; applyView(); } else used = false;
+    if (used) e.preventDefault();
+  };
+  applyView();
+  return { update, plantCount: plants.length, geometry: { length: L, width: Wd, top: zTop }, zoom: (f) => zoomAt(f, W / 2, H / 2), resetView: reset };
+}
+
+// Plant inspector: one large plant in the current state next to a healthy reference with the same LAI.
+function inspector(svg, cropKind) {
+  const kind = CROP_KINDS[cropKind] || CROP_KINDS.vine, W = 330, H = 312;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.innerHTML = "";
+  const slots = [{ label: "HEALTHY REFERENCE", x0: 85 }, { label: "CURRENT STATE", x0: 245 }].map((slot) => {
+    const g = el("g", {}, svg);
+    el("path", { d: `M${slot.x0 - 62} 218l62 -31l62 31l-62 31z`, class: "inspect-ground" }, g);
+    const stem = el("path", { class: "stem" }, g), leaves = el("path", { class: "leaves" }, g), fruit = [0, 1, 2].map(() => el("circle", { class: "fruit", r: 5 }, g));
+    el("text", { x: slot.x0, y: 262, "text-anchor": "middle", class: "hud-text small" }, g).textContent = slot.label;
+    return { ...slot, stem, leaves, fruit };
+  });
+  const bars = ["water", "temperature", "vpd", "cumulative"].map((name, i) => {
+    const y = 272 + i * 10;
+    el("text", { x: 8, y: y + 6, class: "hud-text tiny" }, svg).textContent = name.toUpperCase();
+    el("rect", { x: 92, y: y, width: 190, height: 6, class: "bar-track" }, svg);
+    return { fill: el("rect", { x: 92, y: y, width: 0, height: 6, class: "bar-fill" }, svg), val: el("text", { x: 290, y: y + 6, class: "hud-text tiny" }, svg) };
+  });
+  function draw(slot, c, lost) {
+    const P = { origin: [slot.x0, 218], scale: 66, azimuth: 45, elevation: 30 };
+    const st = plantStyle(c, lost), grow = Math.pow(clamp(c.lai / (c.lai_max || 4)), 0.6);
+    const h = lost ? 0.12 : Math.max(0.05, kind.hmax * grow), r = lost ? 0.1 : kind.rmax * (0.25 + 0.75 * grow) * st.narrow;
+    const shape = plantShape(P, 0, 0, h, r * 1.3, cropKind, h * st.droop);
+    slot.stem.setAttribute("d", shape.stem); slot.stem.setAttribute("stroke", st.fill); slot.stem.setAttribute("stroke-width", 2);
+    slot.leaves.setAttribute("d", lost ? "" : shape.leaves); slot.leaves.setAttribute("fill", st.fill); slot.leaves.setAttribute("stroke", st.stroke);
+    slot.leaves.setAttribute("stroke-width", (st.strokeWidth * 1.6).toFixed(2)); slot.leaves.setAttribute("stroke-dasharray", st.dash);
+    const n = kind.fruit && !lost && c.fruit_fraction != null ? Math.round(3 * clamp(c.fruit_fraction)) : 0;
+    slot.fruit.forEach((f, k) => {
+      if (k < n) { const p = K.iso([(k - 1) * r * 0.9, 0.12, h * (0.45 + 0.1 * k)], P); f.setAttribute("cx", p[0].toFixed(1)); f.setAttribute("cy", p[1].toFixed(1)); f.setAttribute("fill", `hsl(${lerp(95, 6, clamp(c.fruit_ripeness || 0)).toFixed(0)} 70% 48%)`); f.setAttribute("opacity", 1); }
+      else f.setAttribute("opacity", 0);
+    });
+  }
+  return {
+    update(c) {
+      draw(slots[0], { lai: c.lai, lai_max: c.lai_max, fruit_fraction: c.fruit_fraction, fruit_ripeness: c.fruit_ripeness, cumulative_stress: 0, water_stress: 0 }, false);
+      draw(slots[1], c, clamp((c.cumulative_stress - 0.8) / 0.2) >= 0.999);
+      [c.water_stress, c.temperature_stress || 0, c.vpd_stress || 0, c.cumulative_stress].forEach((v, i) => { bars[i].fill.setAttribute("width", (190 * clamp(v)).toFixed(0)); bars[i].val.textContent = v.toFixed(2); });
+    },
+  };
+}
+window.GreenhouseScene = { mount, inspector };
+
+const CATALOGUE = {"MULTITUNEL_CAPILLA":{"default":{"span":9.6,"rise":2.0,"gutter":4.0,"pillar":5.0,"spans":3,"bays":6},"options":{"span":[8.0,9.6],"rise":[1.8,2.0,2.2],"gutter":[4.0,4.5,5.0,5.5],"pillar":[2.5,5.0]},"sources":{"span":"https://novagric.com/invernaderos/tipos-de-invernaderos/invernadero-capilla/","rise":"https://novagric.com/invernaderos/tipos-de-invernaderos/invernadero-capilla/","gutter":"https://novagric.com/invernaderos/tipos-de-invernaderos/invernadero-capilla/"},"listed":{"rise":true,"gutter":true},"profiles":{"8|1.8":{"profile":[[0.0,0.0],[1.0,0.8786],[2.0,1.4117],[3.0,1.7056],[4.0,1.8],[5.0,1.7056],[6.0,1.4117],[7.0,0.8786],[8.0,0.0]],"kind":"SEGMENTAL_ARCH","off_catalogue":[]},"8|2":{"profile":[[0.0,0.0],[1.0,1.0],[2.0,1.5826],[3.0,1.899],[4.0,2.0],[5.0,1.899],[6.0,1.5826],[7.0,1.0],[8.0,0.0]],"kind":"SEGMENTAL_ARCH","off_catalogue":[]},"8|2.2":{"profile":[[0.0,0.0],[1.0,1.1288],[2.0,1.757],[3.0,2.0932],[4.0,2.2],[5.0,2.0932],[6.0,1.757],[7.0,1.1288],[8.0,0.0]],"kind":"SEGMENTAL_ARCH","off_catalogue":[]},"9.6|1.8":{"profile":[[0.0,0.0],[1.2,0.8506],[2.4,1.3942],[3.6,1.7007],[4.8,1.8],[6.0,1.7007],[7.2,1.3942],[8.4,0.8506],[9.6,0.0]],"kind":"SEGMENTAL_ARCH","off_catalogue":[]},"9.6|2":{"profile":[[0.0,0.0],[1.2,0.9617],[2.4,1.5596],[3.6,1.8926],[4.8,2.0],[6.0,1.8926],[7.2,1.5596],[8.4,0.9617],[9.6,0.0]],"kind":"SEGMENTAL_ARCH","off_catalogue":[]},"9.6|2.2":{"profile":[[0.0,0.0],[1.2,1.078],[2.4,1.7279],[3.6,2.0853],[4.8,2.2],[6.0,2.0853],[7.2,1.7279],[8.4,1.078],[9.6,0.0]],"kind":"SEGMENTAL_ARCH","off_catalogue":[]}}},"MULTITUNEL_GOTICO":{"default":{"span":9.6,"rise":2.5,"gutter":4.0,"pillar":3.0,"spans":3,"bays":10},"options":{"span":[8.0,9.6,12.8,14.4,16.0],"rise":[2.5,3.0],"gutter":[4.0,4.5,5.0,5.5,6.0,6.5],"pillar":[2.5,3.0]},"sources":{"span":"https://novagric.com/invernaderos/tipos-de-invernaderos/invernadero-gotico/","rise":"https://novagric.com/invernaderos/tipos-de-invernaderos/invernadero-gotico/","gutter":"https://novagric.com/invernaderos/tipos-de-invernaderos/invernadero-gotico/"},"listed":{"rise":true,"gutter":true},"profiles":{"8|2.5":{"profile":[[0.0,0.0],[0.8476,0.8436],[1.8116,1.5515],[2.8702,2.1078],[4.0,2.5],[5.1298,2.1078],[6.1884,1.5515],[7.1524,0.8436],[8.0,0.0]],"kind":"POINTED_ARCH","off_catalogue":[]},"8|3":{"profile":[[-0.0,-0.0],[0.8073,0.9803],[1.7596,1.8205],[2.8328,2.4995],[4.0,3.0],[5.1672,2.4995],[6.2404,1.8205],[7.1927,0.9803],[8.0,-0.0]],"kind":"POINTED_ARCH","off_catalogue":[]},"9.6|2.5":{"profile":[[0.0,0.0],[1.053,0.8771],[2.2202,1.5953],[3.4777,2.1399],[4.8,2.5],[6.1223,2.1399],[7.3798,1.5953],[8.547,0.8771],[9.6,0.0]],"kind":"POINTED_ARCH","off_catalogue":[]},"9.6|3":{"profile":[[0.0,-0.0],[1.0172,1.0124],[2.1739,1.8618],[3.4443,2.5293],[4.8,3.0],[6.1557,2.5293],[7.4261,1.8618],[8.5828,1.0124],[9.6,-0.0]],"kind":"POINTED_ARCH","off_catalogue":[]},"12.8|2.5":{"profile":[[0.0,0.0],[1.4572,0.9468],[3.0291,1.6875],[4.6869,2.2084],[6.4,2.5],[8.1131,2.2084],[9.7709,1.6875],[11.3428,0.9468],[12.8,0.0]],"kind":"POINTED_ARCH","off_catalogue":[]},"12.8|3":{"profile":[[0.0,-0.0],[1.4261,1.0799],[2.9888,1.9505],[4.6577,2.5947],[6.4,3.0],[8.1423,2.5947],[9.8112,1.9505],[11.3739,1.0799],[12.8,-0.0]],"kind":"POINTED_ARCH","off_catalogue":[]},"14.4|2.5":{"profile":[[0.0,0.0],[1.6576,0.9826],[3.4316,1.735],[5.2901,2.2439],[7.2,2.5],[9.1099,2.2439],[10.9684,1.735],[12.7424,0.9826],[14.4,0.0]],"kind":"POINTED_ARCH","off_catalogue":[]},"14.4|3":{"profile":[[0.0,0.0],[1.6279,1.1149],[3.393,1.9968],[5.2621,2.6291],[7.2,3.0],[9.1379,2.6291],[11.007,1.9968],[12.7721,1.1149],[14.4,0.0]],"kind":"POINTED_ARCH","off_catalogue":[]},"16|2.5":{"profile":[[0.0,0.0],[1.8575,1.0187],[3.8334,1.7832],[5.8929,2.2798],[8.0,2.5],[10.1071,2.2798],[12.1666,1.7832],[14.1425,1.0187],[16.0,0.0]],"kind":"POINTED_ARCH","off_catalogue":[]},"16|3":{"profile":[[0.0,0.0],[1.8289,1.1504],[3.796,2.0439],[5.8657,2.6642],[8.0,3.0],[10.1343,2.6642],[12.204,2.0439],[14.1711,1.1504],[16.0,0.0]],"kind":"POINTED_ARCH","off_catalogue":[]}}},"MULTITUNEL_TROPICAL_ASIMETRICO":{"default":{"span":9.6,"rise":2.0,"gutter":4.0,"pillar":2.5,"spans":3,"bays":12},"options":{"span":[9.6],"rise":[1.0,2.0,3.0],"gutter":[4.0,4.5,5.0,5.5,6.0,6.5],"pillar":[2.0,2.5]},"sources":{"span":"https://novagric.com/invernaderos/tipos-de-invernaderos/invernadero-asimetrico-o-tropical/","rise":"https://novagric.com/invernaderos/tipos-de-invernaderos/invernadero-asimetrico-o-tropical/ (ridge height not published)","gutter":"https://novagric.com/invernaderos/tipos-de-invernaderos/invernadero-asimetrico-o-tropical/"},"listed":{"rise":false,"gutter":true},"profiles":{"9.6|1":{"profile":[[0.0,0.0],[3.36,1.0],[9.6,0.0]],"kind":"GABLE","off_catalogue":["ridge_rise_m"]},"9.6|2":{"profile":[[0.0,0.0],[3.36,2.0],[9.6,0.0]],"kind":"GABLE","off_catalogue":["ridge_rise_m"]},"9.6|3":{"profile":[[0.0,0.0],[3.36,3.0],[9.6,0.0]],"kind":"GABLE","off_catalogue":["ridge_rise_m"]}}},"MULTITUNEL_GRANDE_LUX":{"default":{"span":12.8,"rise":2.5,"gutter":4.0,"pillar":3.0,"spans":3,"bays":10},"options":{"span":[12.8,14.4,16.0],"rise":[2.5,3.0],"gutter":[4.0,4.5,5.0,5.5,6.0,6.5],"pillar":[3.0]},"sources":{"span":"https://novagric.com/invernaderos/tipos-de-invernaderos/invernadero-lux/","rise":"https://novagric.com/invernaderos/tipos-de-invernaderos/invernadero-lux/","gutter":"https://novagric.com/invernaderos/tipos-de-invernaderos/invernadero-lux/"},"listed":{"rise":true,"gutter":true},"profiles":{"12.8|2.5":{"profile":[[0.0,0.0],[1.4572,0.9468],[3.0291,1.6875],[4.6869,2.2084],[6.4,2.5],[8.1131,2.2084],[9.7709,1.6875],[11.3428,0.9468],[12.8,0.0]],"kind":"POINTED_ARCH","off_catalogue":[]},"12.8|3":{"profile":[[0.0,-0.0],[1.4261,1.0799],[2.9888,1.9505],[4.6577,2.5947],[6.4,3.0],[8.1423,2.5947],[9.8112,1.9505],[11.3739,1.0799],[12.8,-0.0]],"kind":"POINTED_ARCH","off_catalogue":[]},"14.4|2.5":{"profile":[[0.0,0.0],[1.6576,0.9826],[3.4316,1.735],[5.2901,2.2439],[7.2,2.5],[9.1099,2.2439],[10.9684,1.735],[12.7424,0.9826],[14.4,0.0]],"kind":"POINTED_ARCH","off_catalogue":[]},"14.4|3":{"profile":[[0.0,0.0],[1.6279,1.1149],[3.393,1.9968],[5.2621,2.6291],[7.2,3.0],[9.1379,2.6291],[11.007,1.9968],[12.7721,1.1149],[14.4,0.0]],"kind":"POINTED_ARCH","off_catalogue":[]},"16|2.5":{"profile":[[0.0,0.0],[1.8575,1.0187],[3.8334,1.7832],[5.8929,2.2798],[8.0,2.5],[10.1071,2.2798],[12.1666,1.7832],[14.1425,1.0187],[16.0,0.0]],"kind":"POINTED_ARCH","off_catalogue":[]},"16|3":{"profile":[[0.0,0.0],[1.8289,1.1504],[3.796,2.0439],[5.8657,2.6642],[8.0,3.0],[10.1343,2.6642],[12.204,2.0439],[14.1711,1.1504],[16.0,0.0]],"kind":"POINTED_ARCH","off_catalogue":[]}}},"RASPA_Y_AMAGADO":{"default":{"span":10.0,"rise":1.0,"gutter":3.5,"pillar":5.0,"spans":3,"bays":6},"options":{"span":[8.0,9.6,10.0],"rise":[0.5,1.0,1.5],"gutter":[3.5],"pillar":[5.0,9.6,10.0]},"sources":{"span":"https://novagric.com/invernaderos/tipos-de-invernaderos/invernadero-raspa-y-amagado/","rise":"https://novagric.com/invernaderos/tipos-de-invernaderos/invernadero-raspa-y-amagado/ (raspa/amagado heights not published)","gutter":"https://novagric.com/invernaderos/tipos-de-invernaderos/invernadero-raspa-y-amagado/ (eave height not published)"},"listed":{"rise":false,"gutter":false},"profiles":{"8|0.5":{"profile":[[0.0,0.0],[4.0,0.5],[8.0,0.0]],"kind":"GABLE","off_catalogue":["ridge_rise_m"]},"8|1":{"profile":[[0.0,0.0],[4.0,1.0],[8.0,0.0]],"kind":"GABLE","off_catalogue":["ridge_rise_m"]},"8|1.5":{"profile":[[0.0,0.0],[4.0,1.5],[8.0,0.0]],"kind":"GABLE","off_catalogue":["ridge_rise_m"]},"9.6|0.5":{"profile":[[0.0,0.0],[4.8,0.5],[9.6,0.0]],"kind":"GABLE","off_catalogue":["ridge_rise_m"]},"9.6|1":{"profile":[[0.0,0.0],[4.8,1.0],[9.6,0.0]],"kind":"GABLE","off_catalogue":["ridge_rise_m"]},"9.6|1.5":{"profile":[[0.0,0.0],[4.8,1.5],[9.6,0.0]],"kind":"GABLE","off_catalogue":["ridge_rise_m"]},"10|0.5":{"profile":[[0.0,0.0],[5.0,0.5],[10.0,0.0]],"kind":"GABLE","off_catalogue":["ridge_rise_m"]},"10|1":{"profile":[[0.0,0.0],[5.0,1.0],[10.0,0.0]],"kind":"GABLE","off_catalogue":["ridge_rise_m"]},"10|1.5":{"profile":[[0.0,0.0],[5.0,1.5],[10.0,0.0]],"kind":"GABLE","off_catalogue":["ridge_rise_m"]}}},"TUNEL":{"default":{"span":8.0,"rise":4.0,"gutter":0.0,"pillar":2.5,"spans":1,"bays":12},"options":{"span":[8.0,9.6],"rise":[4.0,5.0],"gutter":[0.0],"pillar":[2.5]},"sources":{"span":"https://novagric.com/invernaderos/tipos-de-invernaderos/invernadero-tipo-tunel/","rise":"https://novagric.com/invernaderos/tipos-de-invernaderos/invernadero-tipo-tunel/ (height 4 or 5 m)","gutter":"https://novagric.com/invernaderos/tipos-de-invernaderos/invernadero-tipo-tunel/ (arches spring from the ground)"},"listed":{"rise":true,"gutter":true},"profiles":{"8|4":{"profile":[[0.0,0.0],[1.0,2.6458],[2.0,3.4641],[3.0,3.873],[4.0,4.0],[5.0,3.873],[6.0,3.4641],[7.0,2.6458],[8.0,0.0]],"kind":"SEGMENTAL_ARCH","off_catalogue":[]},"8|5":{"profile":[[0.0,0.0],[0.5883,1.5352],[1.4779,2.9176],[2.6314,4.0891],[4.0,5.0],[5.3686,4.0891],[6.5221,2.9176],[7.4117,1.5352],[8.0,0.0]],"kind":"POINTED_ARCH","off_catalogue":[]},"9.6|4":{"profile":[[0.0,0.0],[1.2,2.4146],[2.4,3.369],[3.6,3.8502],[4.8,4.0],[6.0,3.8502],[7.2,3.369],[8.4,2.4146],[9.6,0.0]],"kind":"SEGMENTAL_ARCH","off_catalogue":[]},"9.6|5":{"profile":[[0.0,0.0],[0.83,1.5636],[1.933,2.9483],[3.2715,4.1069],[4.8,5.0],[6.3285,4.1069],[7.667,2.9483],[8.77,1.5636],[9.6,0.0]],"kind":"POINTED_ARCH","off_catalogue":[]}}}};
+const params = new URLSearchParams(location.hash.slice(1));
+const state = { system: "GREENHOUSE", typology: "MULTITUNEL_CAPILLA", spans: 3, bays: 6, span: null, rise: null, gutter: null, pillar: null, cropKind: "vine", azimuth: 45,
+  hour: 13, o_temp: 24, o_rh: 55, o_solar: 700, o_wind: 3, o_dir: 270, o_rain: 0, i_temp: 30, i_rh: 62, vent: 0, screen: 0, heater: 0, lai: 2.4, water: 0.1, temp: 0, vpd: 0, cum: 0.1, fruit: 0.5, ripe: 0.4 };
+for (const [k, v] of params) state[k] = isNaN(Number(v)) ? v : Number(v);
+const panel = document.getElementById("panel");
+let scene = null, plantCard = null;
+document.getElementById("zin").onclick = () => scene && scene.zoom(1.3);
+document.getElementById("zout").onclick = () => scene && scene.zoom(1 / 1.3);
+document.getElementById("zreset").onclick = () => scene && scene.resetView();
+const ranges = [["Time (h)", "hour", 0, 23.9, 0.1], ["Outdoor T (C)", "o_temp", -5, 45, 0.5], ["Outdoor RH (%)", "o_rh", 10, 100, 1], ["Solar (W/m2)", "o_solar", 0, 1000, 10], ["Wind (m/s)", "o_wind", 0, 20, 0.5], ["Wind from (deg)", "o_dir", 0, 359, 5], ["Rain (mm/h)", "o_rain", 0, 15, 0.5],
+  ["Indoor T (C)", "i_temp", 0, 45, 0.5], ["Indoor RH (%)", "i_rh", 10, 100, 1], ["Roof vents", "vent", 0, 1, 0.05], ["Screen deployed", "screen", 0, 1, 0.05], ["Heater (kW)", "heater", 0, 40, 1],
+  ["LAI", "lai", 0, 4, 0.1], ["Water stress", "water", 0, 1, 0.05], ["Temperature stress", "temp", 0, 1, 0.05], ["VPD stress", "vpd", 0, 1, 0.05], ["Cumulative stress", "cum", 0, 1, 0.02], ["Fruit fraction", "fruit", 0, 1, 0.05], ["Fruit ripeness", "ripe", 0, 1, 0.05]];
+function select(name, key, options, onchange) {
+  const l = document.createElement("label"); l.innerHTML = "<span>" + name + "</span>";
+  const s = document.createElement("select");
+  options.forEach(([v, t]) => { const o = document.createElement("option"); o.value = v; o.textContent = t; if (String(state[key]) === String(v)) o.selected = true; s.appendChild(o); });
+  s.onchange = () => { state[key] = isNaN(Number(s.value)) ? s.value : Number(s.value); onchange(); }; l.appendChild(s); return l;
+}
+function buildPanel() {
+  panel.innerHTML = "";
+  const f0 = document.createElement("fieldset"); f0.innerHTML = "<legend>Cultivation</legend>";
+  f0.appendChild(select("System", "system", [["GREENHOUSE", "Greenhouse (thermal backend)"], ["OPEN_FIELD", "Open field (no EnergyPlus)"]], () => { remount(); buildPanel(); }));
+  f0.appendChild(select("Crop silhouette", "cropKind", [["vine", "Vine (tomato-like)"], ["bush", "Bush"], ["rosette", "Rosette (lettuce-like)"]], remount));
+  f0.appendChild(select("View", "azimuth", [[45, "SE corner"], [135, "SW corner"], [225, "NW corner"], [315, "NE corner"]], remount));
+  panel.appendChild(f0);
+  if (state.system === "GREENHOUSE") {
+    const cat = CATALOGUE[state.typology], d = cat.default;
+    if (state.span == null) { state.span = d.span; state.rise = d.rise; state.gutter = d.gutter; state.pillar = d.pillar; }
+    const f1 = document.createElement("fieldset"); f1.innerHTML = "<legend>Structure (manufacturer modularity)</legend>";
+    f1.appendChild(select("Typology", "typology", Object.keys(CATALOGUE).map((k) => [k, k.replace(/_/g, " ").toLowerCase()]), () => { const c = CATALOGUE[state.typology].default; Object.assign(state, { span: c.span, rise: c.rise, gutter: c.gutter, pillar: c.pillar, spans: c.spans, bays: c.bays }); remount(); buildPanel(); }));
+    f1.appendChild(select("Span width (m)", "span", cat.options.span.map((v) => [v, v]), remount));
+    f1.appendChild(select("Ridge rise (m)", "rise", cat.options.rise.map((v) => [v, v + (cat.listed.rise ? "" : " (provisional)")]), remount));
+    f1.appendChild(select("Gutter height (m)", "gutter", cat.options.gutter.map((v) => [v, v + (cat.listed.gutter ? "" : " (provisional)")]), remount));
+    f1.appendChild(select("Pillar spacing (m)", "pillar", cat.options.pillar.map((v) => [v, v]), remount));
+    f1.appendChild(select("Spans (modules)", "spans", Array.from({ length: 12 }, (_, i) => [i + 1, i + 1]), remount));
+    f1.appendChild(select("Bays along length", "bays", Array.from({ length: 16 }, (_, i) => [i + 2, i + 2]), remount));
+    panel.appendChild(f1);
+  }
+  const f2 = document.createElement("fieldset"); f2.innerHTML = "<legend>State (demo)</legend>";
+  ranges.forEach(([name, key, lo, hi, step]) => {
+    if (state.system === "OPEN_FIELD" && ["i_temp", "i_rh", "vent", "screen", "heater"].includes(key)) return;
+    const l = document.createElement("label"), out = document.createElement("output");
+    l.innerHTML = "<span>" + name + "</span>"; const r = document.createElement("input");
+    Object.assign(r, { type: "range", min: lo, max: hi, step, value: state[key] }); out.textContent = state[key];
+    r.oninput = () => { state[key] = Number(r.value); out.textContent = r.value; refresh(); }; l.appendChild(r); l.appendChild(out); f2.appendChild(l);
+  });
+  panel.appendChild(f2);
+  const n = document.createElement("p"); n.className = "note"; n.id = "notes"; panel.appendChild(n);
+}
+function remount() {
+  let cfg;
+  if (state.system === "OPEN_FIELD") cfg = { system: "OPEN_FIELD", cropKind: state.cropKind, azimuth: state.azimuth, field: { width: 12, length: 12, rowSpacing: 0.75, plantSpacing: 0.3 } };
+  else {
+    const cat = CATALOGUE[state.typology], key = state.span + "|" + state.rise, prof = cat.profiles[key] || cat.profiles[Object.keys(cat.profiles)[0]];
+    const missing = !cat.profiles[key];
+    cfg = { system: "GREENHOUSE", typology: state.typology, cropKind: state.cropKind, azimuth: state.azimuth, spans: state.spans, bays: state.bays, span: state.span, gutter: state.gutter, pillar: state.pillar, profile: prof.profile, profileKind: prof.kind };
+    const flags = [];
+    if (!cat.listed.rise) flags.push("ridge rise is provisional (not published)");
+    if (!cat.listed.gutter) flags.push("gutter/eave height is provisional (not published)");
+    if (prof.off_catalogue.length) flags.push("off-catalogue: " + prof.off_catalogue.join(", "));
+    if (missing) flags.push("ERROR: no pre-baked profile for " + key + "; showing another");
+    cfg.flags = flags;
+  }
+  scene = GreenhouseScene.mount(document.getElementById("scene"), cfg);
+  plantCard = GreenhouseScene.inspector(document.getElementById("inspector"), state.cropKind);
+  const g = scene.geometry, st = document.getElementById("status");
+  st.innerHTML = state.system === "OPEN_FIELD" ? "Open field 12 x 12 m, schematic. " + scene.plantCount + " plants drawn (subset of the planting grid)."
+    : cfg.typology.replace(/_/g, " ").toLowerCase() + ": " + g.width.toFixed(1) + " x " + g.length.toFixed(1) + " m, " + cfg.profileKind.toLowerCase().replace("_", " ") + ". <span class='flag'>" + (cfg.flags.length ? cfg.flags.join("; ") + "." : "") + "</span> Parametric schematic, not a manufacturer drawing.";
+  if (state.zoom > 1) scene.zoom(state.zoom);
+  refresh();
+}
+function refresh() {
+  if (!scene) return;
+  scene.update({ hour: state.hour, forcing_label: "(demo)", backend_label: "(demo)",
+    outdoor: { temp_c: state.o_temp, rh_pct: state.o_rh, solar_w_m2: state.o_solar, wind_m_s: state.o_wind, wind_dir_deg: state.o_dir, rain_mm_h: state.o_rain },
+    indoor: { temp_c: state.i_temp, rh_pct: state.i_rh, co2_ppm: null },
+    actuators: { vent_opening: state.vent, screen_deployed: state.screen, heater_kw: state.heater },
+    crop: { lai: state.lai, lai_max: 4, water_stress: state.water, temperature_stress: state.temp, vpd_stress: state.vpd, cumulative_stress: state.cum, fruit_fraction: state.fruit, fruit_ripeness: state.ripe } });
+  plantCard.update({ lai: state.lai, lai_max: 4, water_stress: state.water, temperature_stress: state.temp, vpd_stress: state.vpd, cumulative_stress: state.cum, fruit_fraction: state.fruit, fruit_ripeness: state.ripe });
+  const notes = document.getElementById("notes");
+  if (notes) notes.innerHTML = "Plant loss is a <b>derived indicator</b> (cumulative stress above 0.8 removes plants in a fixed order). The crop model has no mortality variable. CO2 shows n/a because the backend does not model it.";
+}
+buildPanel(); remount();
+</script></body></html>

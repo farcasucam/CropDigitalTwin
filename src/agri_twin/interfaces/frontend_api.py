@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any, Callable
 from urllib.parse import urlparse
 
+from agri_twin.application.greenhouse_catalogue import build_greenhouse_catalogue
 from agri_twin.application.interactive_runtime import InteractiveRuntimeService
 from agri_twin.application.runtime_replay import RuntimeReplayService
 from agri_twin.application.interactive_simulation import (
@@ -24,6 +25,7 @@ from agri_twin.application.interactive_simulation import (
 )
 from agri_twin.application.scientific_benchmark import PERENNIAL_CROPS
 from agri_twin.domain.farm import FarmConfigRepository
+from agri_twin.infrastructure.energyplus_timeline import REQUIRED_VERSION_PREFIX, find_energyplus
 
 LOGGER = logging.getLogger(__name__)
 FRONTEND_ROOT = Path(__file__).resolve().parents[3] / "frontend"
@@ -42,6 +44,7 @@ class InteractiveFrontendAdapter:
         self._lock = threading.RLock()
         self._workers: dict[str, threading.Thread] = {}
         self._worker_errors: dict[str, str] = {}
+        self._catalogue: dict[str, Any] | None = None
         self._farm_config = FarmConfigRepository(FRONTEND_ROOT.parent / "src" / "farm_config.json")
 
     def _tick(self) -> float | None:
@@ -114,6 +117,7 @@ class InteractiveFrontendAdapter:
         contract["perennial_crops"] = sorted(PERENNIAL_CROPS)
         contract["scientific_status"] = dict(SCIENTIFIC_STATUS)
         contract["runtime"] = self.runtime.contract()
+        contract["greenhouse_backends"] = self.greenhouse_backends()
         contract["poll_interval_ms"] = POLL_INTERVAL_MS
         contract["execution_adapter"] = "SYNCHRONOUS_IN_PROCESS_THREAD (local only; not durable or distributed)"
         return contract
@@ -189,6 +193,27 @@ class InteractiveFrontendAdapter:
     def runtime_contract(self) -> dict[str, Any]:
         return self.runtime.contract()
 
+    @staticmethod
+    def greenhouse_backends() -> list[dict[str, Any]]:
+        install = find_energyplus()
+        usable = install is not None and install.version.startswith(REQUIRED_VERSION_PREFIX)
+        reason = None
+        if install is None:
+            reason = "EnergyPlus was not found; set ENERGYPLUS_EXECUTABLE or install EnergyPlus 26.1"
+        elif not usable:
+            reason = f"EnergyPlus {install.version} found; the generated model needs {REQUIRED_VERSION_PREFIX}.x"
+        return [
+            {"id": "SIMPLIFIED", "label": "Simplified model", "available": True, "version": None, "reason": None,
+             "note": "fast lumped model; layout is visual only"},
+            {"id": "ENERGYPLUS", "label": "EnergyPlus", "available": usable, "version": install.version if install else None, "reason": reason,
+             "note": "single-zone model of the chosen layout; no crop feedback, no CO2"},
+        ]
+
+    def greenhouse_catalogue(self) -> dict[str, Any]:
+        if self._catalogue is None:
+            self._catalogue = build_greenhouse_catalogue()
+        return self._catalogue
+
     def runtime_preview(self, document: Any) -> dict[str, Any]:
         return self.runtime.preview_events(document)
 
@@ -223,6 +248,9 @@ class FrontendRequestHandler(BaseHTTPRequestHandler):
             return
         if path == "/api/runtime/contract":
             self._json(200, self.adapter.runtime_contract())
+            return
+        if path == "/api/greenhouse/catalogue":
+            self._json(200, self.adapter.greenhouse_catalogue())
             return
         if path.startswith("/api/simulations/"):
             try:
@@ -306,12 +334,19 @@ class FrontendRequestHandler(BaseHTTPRequestHandler):
         if path == "/":
             path = "/index.html"
         files = {
+            "/bench": ("bench.html", "text/html; charset=utf-8"),
+            "/bench.js": ("bench.js", "text/javascript; charset=utf-8"),
+            "/bench.css": ("bench.css", "text/css; charset=utf-8"),
             "/index.html": ("index.html", "text/html; charset=utf-8"),
             "/styles.css": ("styles.css", "text/css; charset=utf-8"),
             "/app.js": ("app.js", "text/javascript; charset=utf-8"),
             "/runtime.js": ("runtime.js", "text/javascript; charset=utf-8"),
             "/visual_state.js": ("visual_state.js", "text/javascript; charset=utf-8"),
             "/visual.js": ("visual.js", "text/javascript; charset=utf-8"),
+            "/scene_state.js": ("scene_state.js", "text/javascript; charset=utf-8"),
+            "/iso_scene.js": ("iso_scene.js", "text/javascript; charset=utf-8"),
+            "/vendor/isokit.iife.js": ("vendor/isokit.iife.js", "text/javascript; charset=utf-8"),
+            "/vendor/isokit.css": ("vendor/isokit.css", "text/css; charset=utf-8"),
             "/vendor/uPlot.iife.min.js": ("vendor/uPlot.iife.min.js", "text/javascript; charset=utf-8"),
             "/vendor/uPlot.min.css": ("vendor/uPlot.min.css", "text/css; charset=utf-8"),
         }

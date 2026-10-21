@@ -553,6 +553,18 @@ class SimplifiedGreenhouseModel(GreenhousePhysicalModel):
         return GreenhouseMicroclimateResult(environment, indoor, consumption, irrigation)
 
 
+def derived_environment(state: MicroclimateState) -> DerivedEnvironmentState:
+    """Derived environment (VPD, stress indices) of a microclimate state; shared by every greenhouse backend."""
+    return DerivedEnvironmentState(
+        state.vpd_kpa,
+        max(0.0, state.air_temperature_c - 20.0) + state.solar_radiation_w_m2 / 1000.0,
+        saturation_vapour_pressure_kpa(state.air_temperature_c),
+        saturation_vapour_pressure_kpa(state.air_temperature_c) * state.relative_humidity_pct / 100.0,
+        max(0.0, state.vpd_kpa * 0.15 + state.solar_radiation_w_m2 * 0.00005),
+        max(0.0, state.vpd_kpa * 0.15 + state.solar_radiation_w_m2 * 0.00005),
+    )
+
+
 class GreenhouseMicroclimateEngine(SimplifiedGreenhouseModel):
     """Backward-compatible alias of the simplified greenhouse engine."""
 
@@ -576,14 +588,7 @@ class GreenhouseMicroclimateEngine(SimplifiedGreenhouseModel):
             for value in actuators.values():
                 if isinstance(value, ActuatorControl):
                     consumption += value.consumption_kwh if getattr(value, "enabled", True) and not getattr(value, "failed", False) else 0.0
-        environment = DerivedEnvironmentState(
-            state.vpd_kpa,
-            max(0.0, state.air_temperature_c - 20.0) + state.solar_radiation_w_m2 / 1000.0,
-            saturation_vapour_pressure_kpa(state.air_temperature_c),
-            saturation_vapour_pressure_kpa(state.air_temperature_c) * state.relative_humidity_pct / 100.0,
-            max(0.0, state.vpd_kpa * 0.15 + state.solar_radiation_w_m2 * 0.00005),
-            max(0.0, state.vpd_kpa * 0.15 + state.solar_radiation_w_m2 * 0.00005),
-        )
+        environment = derived_environment(state)
         return GreenhouseMicroclimateResult(
             environment=environment,
             indoor_state=GreenhouseMicroclimateState(**state.to_dict()),

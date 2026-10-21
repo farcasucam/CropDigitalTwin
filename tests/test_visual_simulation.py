@@ -294,7 +294,8 @@ def server():
     httpd.shutdown()
 
 
-@pytest.mark.parametrize("path", ["/", "/visual_state.js", "/visual.js", "/runtime.js", "/vendor/uPlot.iife.min.js", "/vendor/uPlot.min.css"])
+@pytest.mark.parametrize("path", ["/", "/visual_state.js", "/visual.js", "/runtime.js", "/scene_state.js", "/iso_scene.js", "/vendor/uPlot.iife.min.js", "/vendor/uPlot.min.css",
+                                  "/vendor/isokit.iife.js", "/vendor/isokit.css"])
 def test_assets_are_served_locally_with_a_strict_csp(server, path):
     with urllib.request.urlopen(server + path, timeout=10) as response:
         assert response.status == 200
@@ -302,7 +303,7 @@ def test_assets_are_served_locally_with_a_strict_csp(server, path):
 
 
 def test_unlisted_assets_are_not_served(server):
-    for path in ("/vendor/uPlot.LICENSE", "/../pyproject.toml", "/vendor/"):
+    for path in ("/vendor/uPlot.LICENSE", "/vendor/isokit.LICENSE", "/../pyproject.toml", "/vendor/"):
         with pytest.raises(urllib.error.HTTPError):
             urllib.request.urlopen(server + path, timeout=10)
 
@@ -343,10 +344,11 @@ def test_all_assets_are_local():
     assert not re.search(r"(<script[^>]+src|<link[^>]+href)\s*=\s*[\"']?(https?:)?//", HTML)
     assert not re.search(r"https?://", CSS)
     assert (FRONTEND / "vendor" / "uPlot.LICENSE").is_file()
+    assert (FRONTEND / "vendor" / "isokit.LICENSE").is_file()
 
 
 def test_assets_are_loaded_in_dependency_order():
-    order = [HTML.index(name) for name in ("uPlot.iife.min.js", "visual_state.js", "visual.js", "runtime.js")]
+    order = [HTML.index(name) for name in ("uPlot.iife.min.js", "isokit.iife.js", "visual_state.js", "scene_state.js", "iso_scene.js", "visual.js", "runtime.js")]
     assert order == sorted(order)
 
 
@@ -419,12 +421,12 @@ def _audit_tree(tmp_path, runtime_js, html="<html></html>", css="", vendored=Tru
     (tmp_path / "frontend/vendor").mkdir(parents=True)
     for name in ("runtime_events.py", "interactive_runtime.py", "runtime_replay.py"):
         (tmp_path / "src/agri_twin/application" / name).write_text("x = 1\n", encoding="utf-8")
-    for name in ("runtime.js", "visual_state.js", "visual.js"):
+    for name in ("runtime.js", "visual_state.js", "visual.js", "scene_state.js", "iso_scene.js", "bench.js"):
         (tmp_path / "frontend" / name).write_text(runtime_js if name == "runtime.js" else "const a = 1;\n", encoding="utf-8")
     (tmp_path / "frontend/index.html").write_text(html, encoding="utf-8")
     (tmp_path / "frontend/styles.css").write_text(css, encoding="utf-8")
     if vendored:
-        for name in ("uPlot.iife.min.js", "uPlot.min.css", "uPlot.LICENSE"):
+        for name in ("uPlot.iife.min.js", "uPlot.min.css", "uPlot.LICENSE", "isokit.iife.js", "isokit.css", "isokit.LICENSE"):
             (tmp_path / "frontend/vendor" / name).write_text("x", encoding="utf-8")
     return {item["rule"] for item in static_audit_runtime(tmp_path)["violations"]}
 

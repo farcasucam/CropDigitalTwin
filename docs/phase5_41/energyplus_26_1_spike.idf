@@ -1,0 +1,81 @@
+Version, 26.1;
+
+Building, Spike Greenhouse, 0, Country, 0.04, 0.4, FullExterior, 25;
+
+SimulationControl, No, No, No, No, Yes;
+
+Timestep, 4;
+
+RunPeriod, Week, 7, 1, , 7, 7, , Tuesday, Yes, Yes, No, Yes, Yes;
+
+GlobalGeometryRules, UpperLeftCorner, CounterClockWise, World;
+
+Zone, Greenhouse Zone, 0, 0, 0, 0, 1, 1, autocalculate, autocalculate;
+
+Material, Floor Soil, MediumSmooth, 0.20, 1.40, 1800, 800, 0.90, 0.70, 0.70;
+Material, Frame, Smooth, 0.05, 50.0, 7800, 500, 0.90, 0.60, 0.60;
+
+WindowMaterial:SimpleGlazingSystem, Cover Film, 5.8, 0.80, 0.85;
+
+Construction, Floor Construction, Floor Soil;
+Construction, Frame Construction, Frame;
+Construction, Cover Construction, Cover Film;
+
+BuildingSurface:Detailed, Floor, Floor, Floor Construction, Greenhouse Zone, , Ground, , NoSun, NoWind, 0.0, 4,
+  0, 8, 0,  10, 8, 0,  10, 0, 0,  0, 0, 0;
+
+BuildingSurface:Detailed, South Wall, Wall, Frame Construction, Greenhouse Zone, , Outdoors, , SunExposed, WindExposed, 0.5, 4,
+  0, 0, 4,  0, 0, 0,  10, 0, 0,  10, 0, 4;
+BuildingSurface:Detailed, East Wall, Wall, Frame Construction, Greenhouse Zone, , Outdoors, , SunExposed, WindExposed, 0.5, 4,
+  10, 0, 4,  10, 0, 0,  10, 8, 0,  10, 8, 4;
+BuildingSurface:Detailed, North Wall, Wall, Frame Construction, Greenhouse Zone, , Outdoors, , SunExposed, WindExposed, 0.5, 4,
+  10, 8, 4,  10, 8, 0,  0, 8, 0,  0, 8, 4;
+BuildingSurface:Detailed, West Wall, Wall, Frame Construction, Greenhouse Zone, , Outdoors, , SunExposed, WindExposed, 0.5, 4,
+  0, 8, 4,  0, 8, 0,  0, 0, 0,  0, 0, 4;
+BuildingSurface:Detailed, Roof, Roof, Frame Construction, Greenhouse Zone, , Outdoors, , SunExposed, WindExposed, 0.0, 4,
+  0, 8, 4,  0, 0, 4,  10, 0, 4,  10, 8, 4;
+
+FenestrationSurface:Detailed, South Cover, Window, Cover Construction, South Wall, , 0.5, , 1, 4,
+  0.2, 0, 3.8,  0.2, 0, 0.2,  9.8, 0, 0.2,  9.8, 0, 3.8;
+FenestrationSurface:Detailed, East Cover, Window, Cover Construction, East Wall, , 0.5, , 1, 4,
+  10, 0.2, 3.8,  10, 0.2, 0.2,  10, 7.8, 0.2,  10, 7.8, 3.8;
+FenestrationSurface:Detailed, North Cover, Window, Cover Construction, North Wall, , 0.5, , 1, 4,
+  9.8, 8, 3.8,  9.8, 8, 0.2,  0.2, 8, 0.2,  0.2, 8, 3.8;
+FenestrationSurface:Detailed, West Cover, Window, Cover Construction, West Wall, , 0.5, , 1, 4,
+  0, 7.8, 3.8,  0, 7.8, 0.2,  0, 0.2, 0.2,  0, 0.2, 3.8;
+FenestrationSurface:Detailed, Roof Cover, Window, Cover Construction, Roof, , 0.5, , 1, 4,
+  0.2, 7.8, 4,  0.2, 0.2, 4,  9.8, 0.2, 4,  9.8, 7.8, 4;
+
+ScheduleTypeLimits, Fraction, 0.0, 1.0, Continuous;
+ScheduleTypeLimits, Temperature, -60, 200, Continuous;
+
+Schedule:Constant, Always On, Fraction, 1.0;
+Schedule:Constant, Vent Opening, Fraction, 0.0;
+Schedule:Constant, Heating Setpoint, Temperature, 12.0;
+Schedule:Constant, Cooling Setpoint, Temperature, 60.0;
+Schedule:Constant, Thermostat Type, , 4;
+
+ZoneInfiltration:DesignFlowRate, Cover Infiltration, Greenhouse Zone, Always On, AirChanges/Hour, , , , 0.5, 1, 0, 0, 0;
+
+ZoneVentilation:DesignFlowRate, Window Ventilation, Greenhouse Zone, Vent Opening, AirChanges/Hour, , , , 30.0, Natural, 0, 1, 1, 0, 0, 0, 0;
+
+ThermostatSetpoint:DualSetpoint, Dual SP, Heating Setpoint, Cooling Setpoint;
+ZoneControl:Thermostat, Zone Thermostat, Greenhouse Zone, Thermostat Type, ThermostatSetpoint:DualSetpoint, Dual SP;
+
+ZoneHVAC:IdealLoadsAirSystem, Heater, , Heater Supply Node, , , 45.0, 12.0, 0.015, 0.009, LimitCapacity, , 30000, NoLimit, , , , , ConstantSensibleHeatRatio, 0.7, None;
+
+ZoneHVAC:EquipmentList, Zone Equipment, SequentialLoad, ZoneHVAC:IdealLoadsAirSystem, Heater, 1, 1, , ;
+
+ZoneHVAC:EquipmentConnections, Greenhouse Zone, Zone Equipment, Heater Supply Node, , Zone Air Node, Zone Return Node;
+
+Output:Variable, Environment, Site Outdoor Air Drybulb Temperature, Timestep;
+Output:Variable, Greenhouse Zone, Zone Mean Air Temperature, Timestep;
+Output:Variable, Greenhouse Zone, Zone Air Relative Humidity, Timestep;
+Output:Variable, Greenhouse Zone, Zone Ventilation Air Change Rate, Timestep;
+Output:Variable, Greenhouse Zone, Zone Infiltration Air Change Rate, Timestep;
+Output:Variable, Heater, Zone Ideal Loads Zone Total Heating Energy, Timestep;
+Output:Variable, Roof Cover, Surface Window Transmitted Solar Radiation Rate, Timestep;
+Output:Meter, Heating:EnergyTransfer, Timestep;
+Output:SQLite, SimpleAndTabular;
+
+

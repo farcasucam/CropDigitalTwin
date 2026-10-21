@@ -202,11 +202,13 @@ class ScenarioRunner:
     def __init__(self, base_weather_factory: Callable[[Scenario], WeatherProvider] | None = None) -> None:
         self.base_weather_factory = base_weather_factory
 
-    def run(self, scenario: Scenario, *, phenology: PhenologyEngine | None = None, observer: Callable[[CropSimulationSnapshot, int], bool] | None = None) -> ScenarioResult:
+    def run(self, scenario: Scenario, *, phenology: PhenologyEngine | None = None, observer: Callable[[CropSimulationSnapshot, int], bool] | None = None,
+            greenhouse_engine_factory: Callable[[Scenario, WeatherProvider], object] | None = None) -> ScenarioResult:
         """Run the scenario step by step.
 
         ``phenology`` optionally configures the orchestrator's PhenologyEngine (for
         example a canonical DormancyConfiguration); None keeps the default engine.
+        ``greenhouse_engine_factory`` optionally builds a replacement greenhouse engine from the scenario and its weather provider.
         ``observer`` is called after every completed step with the snapshot and the
         number of completed steps; returning False stops the run cooperatively at that
         step boundary (status ``STOPPED``, snapshots up to and including that step).
@@ -214,8 +216,10 @@ class ScenarioRunner:
         """
         clock = SimulationClock(scenario.start)
         base = self.base_weather_factory(scenario) if self.base_weather_factory is not None else None
-        weather = WeatherEngine(WeatherConfiguration(simulation=WeatherConfiguration().simulation), provider=_ScenarioWeatherProvider(scenario, base))
-        orchestrator = CropDigitalTwinOrchestrator(clock, weather, scenario.initial_crop, scenario.initial_soil, scenario.greenhouse_mode, scenario.initial_microclimate, phenology)
+        provider = _ScenarioWeatherProvider(scenario, base)
+        weather = WeatherEngine(WeatherConfiguration(simulation=WeatherConfiguration().simulation), provider=provider)
+        engine = greenhouse_engine_factory(scenario, provider) if greenhouse_engine_factory is not None else None
+        orchestrator = CropDigitalTwinOrchestrator(clock, weather, scenario.initial_crop, scenario.initial_soil, scenario.greenhouse_mode, scenario.initial_microclimate, phenology, engine)
         snapshots: list[CropSimulationSnapshot] = []
         current = scenario.start
         try:
@@ -249,11 +253,22 @@ class ScenarioRunner:
 
     @staticmethod
     def _actuators(events: Sequence[ScenarioEvent]) -> dict[str, ActuatorControl]:
-        controls = {}
-        for event in events:
-            if event.event_type in {"shade", "heating", "cooling", "ventilation", "co2", "misting"}:
-                controls[event.event_type] = ActuatorControl(event.parameters.get("value", event.intensity), maximum=max(1.0, event.parameters.get("maximum", 1.0)), capacity=event.parameters.get("capacity", max(1.0, event.parameters.get("maximum", 1.0))))
-        return controls
+        return actuator_controls(events)
+
+
+def scenario_weather_provider(scenario: Scenario, base_weather_factory: Callable[[Scenario], WeatherProvider] | None = None) -> "_ScenarioWeatherProvider":
+    """The weather a run of ``scenario`` sees (base weather plus scenario events), as a provider usable outside the runner."""
+    base = base_weather_factory(scenario) if base_weather_factory is not None else None
+    return _ScenarioWeatherProvider(scenario, base)
+
+
+def actuator_controls(events: Sequence[ScenarioEvent]) -> dict[str, ActuatorControl]:
+    """Actuator commands implied by the events active at one instant (shared by every greenhouse backend)."""
+    controls = {}
+    for event in events:
+        if event.event_type in {"shade", "heating", "cooling", "ventilation", "co2", "misting"}:
+            controls[event.event_type] = ActuatorControl(event.parameters.get("value", event.intensity), maximum=max(1.0, event.parameters.get("maximum", 1.0)), capacity=event.parameters.get("capacity", max(1.0, event.parameters.get("maximum", 1.0))))
+    return controls
 
 
 @dataclass(frozen=True, slots=True)

@@ -1,6 +1,7 @@
 "use strict";
 
-/* Phase 5.39/5.40 runtime panel: event editor, what-if branches, timeline and read-only spatial view.
+/* Phase 5.39-5.41 runtime panel: event editor, what-if branches, timeline and read-only spatial view
+ * (scene drawn by iso_scene.js from scene_state.js).
  * Presentation only. Every number shown comes from the API; this file contains no model equation.
  * Scaling to a drawing range uses the extent of the returned series and is purely visual. */
 
@@ -10,6 +11,7 @@ const rt = {
   view: "ISOMETRIC", pan: { x: 0, y: 0 }, zoom: 1, playing: false, selected: null, lastRenderMs: null, running: false,
   position: 0, environment: "outdoor", catalogue: {}, ctx: {}, layers: { crop: true, soil: true, water: true, temperature: false, radiation: false, vpd: false, co2: false, events: true },
   fps: null, fpsLog: [], lastDraw: 0, lastReadout: 0, lastCursor: 0, hover: null,
+  scene: null, sceneKey: "", greenhouse: null,
 };
 const SPEEDS = [0.25, 0.5, 1, 2, 5, 10, 50];
 const DRAW_INTERVAL_MS = 12;
@@ -19,19 +21,23 @@ const READOUT_VARIABLES = ["temperature_c", "relative_humidity_pct", "vpd_kpa", 
   "evaporation_mm", "irrigation_mm", "biomass_total_g_m2", "leaf_area_index", "water_stress", "heat_stress", "greenhouse_ventilation_fraction", "greenhouse_shading_fraction"];
 
 const MAPPING = [
-  ["crop_stage", "Canopy colour (semantic stage palette)"],
-  ["leaf_area_index", "Canopy height, scaled to the extent of the returned series"],
-  ["biomass_total_g_m2", "Canopy footprint fill, scaled to the extent of the returned series"],
-  ["soil_water_vwc_m3_m3", "Soil tile tone (darker = wetter), scaled to the returned series"],
-  ["water_stress / heat_stress", "Red/amber canopy overlay opacity = backend value (not a threshold)"],
-  ["precipitation_mm / irrigation_mm", "Rain streaks / irrigation droplets when the backend value is > 0"],
-  ["greenhouse_ventilation_fraction", "Width of the roof vent opening (greenhouse only)"],
-  ["greenhouse_shading_fraction", "Shade screen opacity (greenhouse only)"],
-  ["temperature_c", "Temperature layer: ground tint blue→red, scaled to the returned series"],
-  ["radiation_w_m2", "Radiation layer: sun size and ray opacity, scaled to the returned series"],
-  ["vpd_kpa", "VPD layer: haze opacity above the canopy, scaled to the returned series"],
-  ["co2_ppm", "CO2 layer (greenhouse only): marker count, scaled to the returned series"],
-  ["events", "Events layer: banner while an event is active at the displayed time"],
+  ["leaf_area_index", "Plant height and canopy size, against a fixed drawing reference of LAI 4 (young crops stay small)"],
+  ["accumulated_stress", "Leaf hue green to yellow to brown, relative to max(1, run maximum)"],
+  ["water_stress", "Drooping, narrower and paler leaves (backend value)"],
+  ["heat_stress / cold_stress", "Orange-red / blue leaf edge (backend value)"],
+  ["vpd_stress", "Dashed brown leaf edge (backend value)"],
+  ["frost_damage", "Share of plants drawn as lost (the model has no mortality count)"],
+  ["biomass_fruit_g_m2 / biomass_total_g_m2 / maturity_index", "Fruit dots and ripeness colour (vine silhouette only)"],
+  ["soil_water_vwc_m3_m3", "Soil wetness overlay, scaled to the returned series"],
+  ["precipitation_mm / irrigation_mm", "Rain streaks (mm per step converted to mm per hour) / irrigation droplets"],
+  ["greenhouse_ventilation_fraction", "Roof vent flaps, up to 40 degrees open (greenhouse only)"],
+  ["greenhouse_shading_fraction", "Screen sheet deployed along the length (greenhouse only)"],
+  ["temperature_c", "Cover tint blue to red (greenhouse); numeric readout in both modes"],
+  ["radiation_w_m2", "Sun disc and sky brightness, scaled to the returned series"],
+  ["vpd_kpa", "Haze above the canopy, scaled to the returned series"],
+  ["co2_ppm", "CO2 markers (greenhouse only)"],
+  ["events", "Banner while an event is active at the displayed time"],
+  ["not served by the API", "Wind, cloud cover, outdoor humidity and outdoor rain in greenhouse mode are shown as n/a"],
 ];
 
 function svgEl(tag, attrs = {}, text) {
@@ -344,21 +350,6 @@ function jumpToEvent() {
   seek(next === undefined ? starts[0] : next);
 }
 
-function projection() {
-  const view = rt.view;
-  const scale = (view === "DETAIL" ? 1.6 : 1.0) * rt.zoom;
-  const cx = 320 + rt.pan.x, cy = (view === "TOP" ? 190 : 272) + rt.pan.y;
-  return (x, y, z = 0) => {
-    if (view === "TOP") return [cx + x * 1.4 * scale, cy + y * 1.4 * scale - z * 0.2 * scale];
-    return [cx + (x - y) * 0.87 * scale, cy + (x + y) * 0.5 * scale - z * scale];
-  };
-}
-
-function poly(points, project, attrs) {
-  const d = points.map(([x, y, z], i) => `${i ? "L" : "M"}${project(x, y, z).map((v) => v.toFixed(1)).join(",")}`).join("") + "Z";
-  return svgEl("path", { d, ...attrs });
-}
-
 function currentVisual() {
   return VisualState.buildVisualState(rt.ctx[$("#iso-branch").value], rt.position);
 }
@@ -374,113 +365,120 @@ function describeLayer(visual, layer) {
   return `${layer}: ${formatValue(info.value)} ${info.unit || ""}`.trim();
 }
 
+/* Layout (visual schematic): geometry comes from /api/greenhouse/catalogue; the simplified greenhouse model has no geometry input. */
+function sceneDescription() {
+  if (rt.environment !== "greenhouse") return { layout: null, key: "open-field" };
+  const gh = rt.greenhouse;
+  if (!gh || !gh.catalogue || !gh.choice) return null;
+  const choice = gh.choice;
+  const entry = gh.catalogue.typologies[choice.typology].profiles[`${choice.span}|${choice.rise}`];
+  if (!entry) return null;
+  return { layout: { span: choice.span, spans: choice.spans, bays: choice.bays, pillar: choice.pillar, gutter: choice.gutter, profile: entry.profile }, key: JSON.stringify(choice), kind: entry.kind };
+}
+
+function ensureScene() {
+  const description = sceneDescription();
+  const compact = window.innerWidth < 520;
+  const cropKind = SceneState.silhouetteFor($("#crop").value);
+  const key = [rt.environment, rt.view, compact, cropKind, description ? description.key : "pending"].join("#");
+  if (rt.scene && rt.sceneKey === key) return true;
+  if (!description) return false;
+  if (!rt.scene) rt.scene = IsoScene.create($("#iso-svg"));
+  const field = rt.greenhouse && rt.greenhouse.catalogue ? rt.greenhouse.catalogue.open_field : null;
+  rt.scene.configure(description.layout, { view: rt.view, cropKind, compact, field: field ? { width: field.width, length: field.length, rowSpacing: field.row_spacing, plantSpacing: field.plant_spacing } : null });
+  rt.sceneKey = key;
+  return true;
+}
+
+function decorateParts(visual, layers) {
+  const parts = rt.scene.parts();
+  const labelled = [["crop", parts.crop], [layers.soil ? "soil" : "plot", parts.ground], ["greenhouse", parts.greenhouse]];
+  for (const [id, elements] of labelled) {
+    for (const shape of elements || []) {
+      shape.setAttribute("data-part", id);
+      shape.setAttribute("tabindex", "0");
+      shape.setAttribute("role", "button");
+      shape.setAttribute("aria-label", `${PART_LABELS[id]} at ${visual.time}: press Enter for details`);
+      shape.setAttribute("class", `${shape.getAttribute("class") || ""}`.replace(/\s*\b(iso-part|selected)\b/g, "") + ` iso-part${rt.selected === id ? " selected" : ""}`);
+    }
+    for (const shape of (parts.mirror && parts.mirror[id]) || []) shape.classList.toggle("iso-selected", rt.selected === id);
+  }
+}
+
 function renderIso() {
   const started = performance.now();
-  const svg = $("#iso-svg");
-  svg.replaceChildren();
   if (!rt.result) return;
+  syncLayoutVisibility();
   const visual = currentVisual();
-  const layers = rt.layers;
-  const project = projection();
-  const greenhouse = rt.environment === "greenhouse";
-  const half = 90;
-  const part = (id, shape) => {
-    shape.setAttribute("data-part", id);
-    shape.setAttribute("tabindex", "0");
-    shape.setAttribute("role", "button");
-    shape.setAttribute("aria-label", `${PART_LABELS[id]} at ${visual.time}: press Enter for details`);
-    shape.setAttribute("class", `iso-part${rt.selected === id ? " selected" : ""}`);
-    return shape;
-  };
-  const wetness = visual.layers.soil.wetness;
-  const ground = [[-half, -half, 0], [half, -half, 0], [half, half, 0], [-half, half, 0]];
-  const tone = layers.soil && wetness !== null ? Math.round(150 - 80 * wetness) : 140;
-  svg.append(poly([[half, -half, -10], [half, half, -10], [half, half, 0], [half, -half, 0]], project, { fill: "#8a6b45", stroke: "#6b4d2c" }));
-  svg.append(poly([[-half, half, -10], [half, half, -10], [half, half, 0], [-half, half, 0]], project, { fill: "#775a39", stroke: "#6b4d2c" }));
-  svg.append(part(layers.soil ? "soil" : "plot", poly(ground, project, { fill: `rgb(${tone + 30},${tone},${Math.max(40, tone - 60)})`, stroke: "#6b4d2c" })));
-  const temperature = visual.layers.temperature.level;
-  if (layers.temperature && temperature !== null) {
-    svg.append(poly(ground, project, { fill: `hsl(${Math.round(220 - 220 * temperature)},80%,55%)`, opacity: 0.35, "pointer-events": "none" }));
+  if (!ensureScene()) {
+    $("#layout-note").textContent = "Greenhouse catalogue not loaded yet; the spatial view is waiting for it.";
+    return;
   }
-  if (layers.water && wetness !== null) svg.append(poly(ground, project, { fill: "#2a78b5", opacity: 0.35 * wetness, "pointer-events": "none" }));
-  if (layers.crop) {
-    const color = stageColor(visual.stage);
-    const compact = window.innerWidth < 520;
-    const rows = compact ? 3 : 5, columns = compact ? 3 : 6;
-    const canopy = visual.layers.crop.canopy_height;
-    const plantHeight = 8 + 44 * (canopy === null ? 0.4 : canopy);
-    const plants = [];
-    for (let r = 0; r < rows; r += 1) for (let c = 0; c < columns; c += 1) plants.push([-70 + (140 * r) / (rows - 1), -70 + (140 * c) / (columns - 1)]);
-    plants.sort((a, b) => (a[0] + a[1]) - (b[0] + b[1]));
-    const size = compact ? 9 : 6;
-    const group = svgEl("g", {});
-    for (const [px, py] of plants) {
-      const top = [[px - size, py - size, plantHeight], [px + size, py - size, plantHeight], [px + size, py + size, plantHeight], [px - size, py + size, plantHeight]];
-      group.append(poly([[px + size, py - size, 0], [px + size, py + size, 0], [px + size, py + size, plantHeight], [px + size, py - size, plantHeight]], project, { fill: color.band, opacity: 0.75, stroke: color.border }));
-      group.append(poly([[px - size, py + size, 0], [px + size, py + size, 0], [px + size, py + size, plantHeight], [px - size, py + size, plantHeight]], project, { fill: color.card, stroke: color.border }));
-      group.append(poly(top, project, { fill: color.band, stroke: color.border }));
-      for (const [name, tint] of [["water_stress", "#a3342b"], ["heat_stress", "#d98a1f"], ["cold_stress", "#2a78b5"]]) {
-        const stress = visual.layers.crop[name];
-        if (typeof stress === "number" && stress > 0) group.append(poly(top, project, { fill: tint, opacity: Math.min(0.85, stress), "pointer-events": "none" }));
-      }
-    }
-    svg.append(part("crop", group));
-  }
-  if (layers.water) {
-    if (visual.layers.water.rain) for (let k = 0; k < 14; k += 1) { const [px, py] = project(-80 + k * 12, -60 + ((k * 37) % 120), 110); svg.append(svgEl("line", { x1: px, y1: py, x2: px - 3, y2: py + 12, stroke: "#2a78b5", "stroke-width": 1.4 })); }
-    if (visual.layers.water.irrigation) for (let k = 0; k < 8; k += 1) { const [px, py] = project(-60 + k * 17, 0, 6); svg.append(svgEl("circle", { cx: px, cy: py, r: 3, fill: "#4aa3d9" })); }
-  }
-  if (layers.vpd && visual.layers.vpd.level !== null) {
-    svg.append(poly([[-half, -half, 60], [half, -half, 60], [half, half, 60], [-half, half, 60]], project, { fill: "#b59b6a", opacity: 0.45 * visual.layers.vpd.level, "pointer-events": "none" }));
-  }
-  if (greenhouse) {
-    const roof = 110, ridge = 140;
-    const shade = visual.greenhouse.shading;
-    const vent = visual.greenhouse.ventilation;
-    const walls = [[-half, -half], [half, -half], [half, half], [-half, half]];
-    for (const [x, y] of walls) {
-      const [ax, ay] = project(x, y, 0), [bx, by] = project(x, y, roof);
-      svg.append(svgEl("line", { x1: ax, y1: ay, x2: bx, y2: by, stroke: "#6c7f8f", "stroke-width": 2 }));
-    }
-    svg.append(part("greenhouse", poly(walls.map(([x, y]) => [x, y, roof]), project, { fill: "rgba(160,190,210,.12)", stroke: "#6c7f8f", "stroke-width": 2 })));
-    svg.append(poly([[-half, -half, roof], [-half, half, roof], [-half, 0, ridge]], project, { fill: "rgba(160,190,210,.25)", stroke: "#6c7f8f", "pointer-events": "none" }));
-    svg.append(poly([[half, -half, roof], [half, half, roof], [half, 0, ridge]], project, { fill: "rgba(160,190,210,.25)", stroke: "#6c7f8f", "pointer-events": "none" }));
-    if (typeof shade === "number" && shade > 0) svg.append(poly(walls.map(([x, y]) => [x, y, roof]), project, { fill: "#33413a", opacity: Math.min(0.7, shade), "pointer-events": "none" }));
-    if (typeof vent === "number") {
-      const w = 2 * half * Math.max(0, Math.min(1, vent));
-      svg.append(poly([[-half, -half, roof], [-half + w, -half, roof], [-half + w, -half, ridge - 10], [-half, -half, ridge - 10]], project, { fill: "rgba(90,170,120,.45)", stroke: "#2f7a52", "pointer-events": "none" }));
-    }
-    if (layers.co2 && visual.layers.co2.level !== null) {
-      const count = 4 + Math.round(20 * visual.layers.co2.level);
-      for (let k = 0; k < count; k += 1) {
-        const [px, py] = project(-75 + ((k * 53) % 150), -75 + ((k * 29) % 150), 20 + ((k * 17) % 70));
-        svg.append(svgEl("circle", { cx: px, cy: py, r: 2.5, fill: "#6b5aa8", opacity: 0.8, "pointer-events": "none" }));
-      }
-    }
-  }
-  if (layers.radiation && visual.layers.radiation.level !== null) {
-    const level = visual.layers.radiation.level;
-    svg.append(svgEl("circle", { cx: 585, cy: 55, r: 10 + 12 * level, fill: "#f2c230", opacity: 0.35 + 0.6 * level, "pointer-events": "none" }));
-    for (let k = 0; k < 8; k += 1) {
-      const angle = (k * Math.PI) / 4;
-      svg.append(svgEl("line", { x1: 585 + (16 + 12 * level) * Math.cos(angle), y1: 55 + (16 + 12 * level) * Math.sin(angle), x2: 585 + (26 + 14 * level) * Math.cos(angle), y2: 55 + (26 + 14 * level) * Math.sin(angle), stroke: "#d9a400", "stroke-width": 2, opacity: 0.4 + 0.5 * level, "pointer-events": "none" }));
-    }
-  }
-  if (layers.events && visual.active_events.length) {
-    svg.append(svgEl("rect", { x: 8, y: 6, width: 300, height: 26, rx: 4, fill: "#c0561d", "pointer-events": "none" }));
-    svg.append(svgEl("text", { x: 16, y: 24, "font-size": 12, fill: "#fff", "pointer-events": "none" }, `EVENT ACTIVE: ${visual.active_events.map((event) => event.event_type).join(", ")}`));
-  } else {
-    svg.append(svgEl("text", { x: 10, y: 20, "font-size": 12, fill: "#17352d", "pointer-events": "none" }, `${visual.time} · stage ${visual.stage ?? "—"}${visual.interpolated ? " · visual interpolation" : ""}`));
-  }
+  rt.scene.update(SceneState.fromVisual(visual, rt.ctx[$("#iso-branch").value], rt.position), rt.layers);
+  rt.scene.setView(rt.zoom, rt.pan.x, rt.pan.y);
+  decorateParts(visual, rt.layers);
   rt.visual = visual;
   if (rt.focusPart) {
-    const target = svg.querySelector(`[data-part="${rt.focusPart}"]`);
+    const target = $("#iso-svg").querySelector(`[data-part="${rt.focusPart}"]`);
     rt.focusPart = null;
     if (target) target.focus();
   }
   rt.lastRenderMs = performance.now() - started;
   const perf = $("#perf-render");
   if (perf) perf.textContent = `${rt.lastRenderMs.toFixed(1)} ms`;
+}
+
+function syncLayoutVisibility() {
+  $("#layout-panel").hidden = !(rt.environment === "greenhouse" && rt.greenhouse && rt.greenhouse.catalogue);
+}
+
+async function loadGreenhouseCatalogue() {
+  try {
+    const catalogue = await api("/api/greenhouse/catalogue");
+    rt.greenhouse = { catalogue, choice: null };
+    const names = Object.keys(catalogue.typologies);
+    replaceOptions($("#layout-typology"), names, (value) => value.replace(/_/g, " ").toLowerCase());
+    resetLayout(names[0]);
+    for (const id of ["typology", "span", "rise", "gutter", "pillar", "spans", "bays"]) {
+      $(`#layout-${id}`).addEventListener("change", () => (id === "typology" ? resetLayout($("#layout-typology").value) : readLayout()));
+    }
+    if (rt.result) renderIso();
+  } catch (error) {
+    rt.greenhouse = { catalogue: null, error: error.message };
+    runtimeError(null, `Greenhouse catalogue unavailable: ${error.message}`);
+  }
+}
+
+function resetLayout(typology) {
+  const cat = rt.greenhouse.catalogue, entry = cat.typologies[typology], d = entry.default;
+  rt.greenhouse.choice = { typology, span: d.span, rise: d.rise, gutter: d.gutter, pillar: d.pillar, spans: d.spans, bays: d.bays };
+  $("#layout-typology").value = typology;
+  const provisional = (listed) => (listed ? "" : " (provisional)");
+  replaceOptions($("#layout-span"), entry.options.span.map(String), (v) => v);
+  replaceOptions($("#layout-rise"), entry.options.rise.map(String), (v) => `${v}${provisional(entry.listed.rise)}`);
+  replaceOptions($("#layout-gutter"), entry.options.gutter.map(String), (v) => `${v}${provisional(entry.listed.gutter)}`);
+  replaceOptions($("#layout-pillar"), entry.options.pillar.map(String), (v) => v);
+  replaceOptions($("#layout-spans"), Array.from({ length: cat.max_spans }, (_, i) => String(i + 1)), (v) => v);
+  replaceOptions($("#layout-bays"), Array.from({ length: 15 }, (_, i) => String(i + 2)), (v) => v);
+  for (const [id, value] of [["span", d.span], ["rise", d.rise], ["gutter", d.gutter], ["pillar", d.pillar], ["spans", d.spans], ["bays", d.bays]]) $(`#layout-${id}`).value = String(value);
+  describeLayout();
+  if (rt.result) renderIso();
+}
+
+function readLayout() {
+  const choice = rt.greenhouse.choice;
+  for (const id of ["span", "rise", "gutter", "pillar", "spans", "bays"]) choice[id] = Number($(`#layout-${id}`).value);
+  describeLayout();
+  renderIso();
+}
+
+function describeLayout() {
+  const cat = rt.greenhouse.catalogue, choice = rt.greenhouse.choice, entry = cat.typologies[choice.typology];
+  const flags = [];
+  if (!entry.listed.rise) flags.push("ridge rise is provisional (not published)");
+  if (!entry.listed.gutter) flags.push("gutter/eave height is provisional (not published)");
+  $("#layout-note").textContent = `${cat.statement}${flags.length ? ` Provisional here: ${flags.join("; ")}.` : ""} `
+    + `${(choice.span * choice.spans).toFixed(1)} m x ${(choice.bays * choice.pillar).toFixed(1)} m.`;
 }
 
 function renderReadout() {
@@ -616,6 +614,7 @@ function initRuntime() {
   window.Visual.init(rt);
   $("#pause-button").addEventListener("click", () => void pauseCurrent());
   bindIso();
+  void loadGreenhouseCatalogue();
   refreshBranchRange();
   updateEventForm();
 }

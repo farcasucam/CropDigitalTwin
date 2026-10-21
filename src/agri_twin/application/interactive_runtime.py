@@ -110,7 +110,7 @@ class InteractiveRuntimeService:
             spec = event.spec
             affected = []
             for name in spec.affected_variables:
-                availability = variable_availability(VARIABLE_INDEX[name], canonical.crop, canonical.environment)
+                availability = variable_availability(VARIABLE_INDEX[name], canonical.crop, canonical.environment, canonical.backend)
                 affected.append({"variable": name, "unit": VARIABLE_INDEX[name].unit, "availability": availability.value})
             rows.append({**event.to_dict(), "supported": True, "support": "SUPPORTED", "provenance": SOURCE_USER_EVENT, "classification": FORCING_CLASSIFICATION,
                          "scenario_event_type": spec.scenario_type, "intensity_parameter": spec.primary_parameter, "intensity_unit": spec.unit,
@@ -220,8 +220,9 @@ def compare_branches(baseline: SimulationResponse, intervention: SimulationRespo
 # ---------------------------------------------------------------------------
 
 RUNTIME_AUDITED_PYTHON = ("src/agri_twin/application/runtime_events.py", "src/agri_twin/application/interactive_runtime.py", "src/agri_twin/application/runtime_replay.py")
-RUNTIME_AUDITED_JS = ("frontend/runtime.js", "frontend/visual_state.js", "frontend/visual.js")
-VENDORED_LIBRARIES = ("frontend/vendor/uPlot.iife.min.js", "frontend/vendor/uPlot.min.css", "frontend/vendor/uPlot.LICENSE")
+RUNTIME_AUDITED_JS = ("frontend/runtime.js", "frontend/visual_state.js", "frontend/visual.js", "frontend/scene_state.js", "frontend/iso_scene.js", "frontend/bench.js")
+VENDORED_LIBRARIES = ("frontend/vendor/uPlot.iife.min.js", "frontend/vendor/uPlot.min.css", "frontend/vendor/uPlot.LICENSE",
+                      "frontend/vendor/isokit.iife.js", "frontend/vendor/isokit.css", "frontend/vendor/isokit.LICENSE")
 REMOTE_ASSET = r"(<script[^>]+src|<link[^>]+href|@import\s+url\()\s*=?\s*[\x22\x27]?\s*(https?:)?//"
 JS_FORBIDDEN = (
     (r"\bMath\.(exp|log|log10|log2|pow|sqrt|cbrt|tanh)\b|\*\*", "scientific_formula_in_javascript"),
@@ -280,5 +281,5 @@ def static_audit_runtime(root: str | Path) -> dict[str, Any]:
     passed = not violations and project["status"] in {"PASS", "NOT_RUN"}
     return {"status": "PASS" if passed else "FAIL", "python_files": list(RUNTIME_AUDITED_PYTHON), "javascript_files": list(RUNTIME_AUDITED_JS),
             "violations": violations, "project_static_audit_status": project["status"],
-            "renderer": "SVG isometric (no Three.js); charts: vendored uPlot 1.6.32 (MIT, local file, presentation only)", "vendored_libraries": list(VENDORED_LIBRARIES),
+            "renderer": "SVG isometric (no Three.js) drawn with the vendored isokit (MIT, local file); charts: vendored uPlot 1.6.32 (MIT, local file, presentation only)", "vendored_libraries": list(VENDORED_LIBRARIES),
             "rules": {"javascript": [rule for _, rule in JS_FORBIDDEN]}}
