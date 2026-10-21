@@ -724,10 +724,10 @@
     const series = bench.run.series[name], at = Math.floor(bench.position);
     if (series.control_layer) {
       const value = (key) => (series[key] ? series[key][at] : null);
-      row("Control layer", null, ""); host.lastChild.lastChild.textContent = value("control_layer") === "PASSIVE" ? "passive only" : value("control_layer") === "ACTIVE" ? "uses energy" : "idle";
+      row("Control layer", null, ""); host.lastChild.lastChild.textContent = value("control_layer") === "PASSIVE" ? "passive" : value("control_layer") === "ACTIVE" ? "energy" : "idle";
       row("Vent command", isNumber(value("control_vent_opening")) ? value("control_vent_opening") * 100 : null, "%");
       row("Extractors", isNumber(value("control_extractor_level")) ? value("control_extractor_level") * 100 : null, "%");
-      row("HVAC", isNumber(value("greenhouse_cooling_kw")) ? value("greenhouse_cooling_kw") - value("greenhouse_heating_kw") : null, "kW (− heating)");
+      row("HVAC cool+", isNumber(value("greenhouse_cooling_kw")) ? value("greenhouse_cooling_kw") - value("greenhouse_heating_kw") : null, "kW");  // negative: heating
       row("Energy (est.)", value("control_energy_kwh_cumulative"), "kWh");
     }
     row("LAI", state.crop.lai, ""); row("Water stress", state.crop.water_stress, ""); row("Heat stress", state.crop.heat_stress, "");

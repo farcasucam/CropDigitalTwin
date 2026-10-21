@@ -92,9 +92,9 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .scene-box { border-radius: 10px; overflow: hidden; background: #f8fbf8; }
 .scene-box svg { width: 100%; height: auto; display: block; max-height: 520px; cursor: grab; }
 .readout { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: .3rem .8rem; margin: .5rem 0 0; font-size: .78rem; }
-.readout div { display: flex; justify-content: space-between; gap: .4rem; border-bottom: 1px dotted var(--line); padding: .1rem 0; }
-.readout dt { color: var(--muted); }
-.readout dd { margin: 0; font-variant-numeric: tabular-nums; font-weight: 600; }
+.readout div { display: flex; justify-content: space-between; gap: .4rem; border-bottom: 1px dotted var(--line); padding: .1rem 0; height: 1.55rem; white-space: nowrap; overflow: hidden; }  /* a fixed row height: a longer value must never wrap and push the page */
+.readout dt { color: var(--muted); overflow: hidden; text-overflow: ellipsis; flex: 0 1 auto; }
+.readout dd { margin: 0; font-variant-numeric: tabular-nums; font-weight: 600; text-align: right; overflow: hidden; text-overflow: ellipsis; }
 .readout .na { color: #8a8f8c; font-weight: 400; }
 .readout .banner { grid-column: 1 / -1; background: var(--orange); border-radius: 6px; padding: .2rem .5rem; justify-content: flex-start; }
 .readout .banner dt { color: #fff; font-weight: 650; }
