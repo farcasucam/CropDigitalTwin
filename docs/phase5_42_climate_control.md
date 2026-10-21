@@ -63,6 +63,25 @@ undefined. New trajectory variables (`control_vent_opening`, `control_extractor_
 `control_energy_kwh_cumulative`) appear only when control is on (`NOT_APPLICABLE` otherwise). Under the event bars of the timeline, one strip per actuator
 shows what it really did over the run.
 
+
+## Scene and events (bench)
+
+* **Plants** are drawn as plants (stem, leaf blades, flowers, fruit) by silhouette: vine (tomato, pepper, grape), rosette (lettuce), tree (peach, plum, apple).
+  The **phenological stage** decides the life state (seedling, leafy and flowering, fruiting, senescent or dormant: a tree is bare in dormancy). **Suffering** shows
+  in the foliage: water stress droops, narrows and pales the leaves; heat scorches them orange-brown; cold turns them blue-violet; VPD stress adds a dashed brown
+  edge; accumulated stress and senescence yellow them; frost damage draws lost plants. A "Stress: water 35 %" chip names the worst current stress.
+* **Temperature colour**: the air around the greenhouse is tinted by the outdoor temperature and the greenhouse interior by the indoor one, against the current
+  stage's own range from `crop_config.json` (green inside `min_temp_c .. max_temp_c`, blue towards `critical_frost_c`, orange to red towards `critical_heat_c`). Chips show the
+  two temperatures, and pills show which actuators are acting (vents, screen, fans, cooling, heating).
+* **Related events**: bundles add several events at once from one click ("Storm: rain + overcast + cooling", "Hot, dry and sunny"); each stays editable.
+* **Plausibility hint**: a cold wave placed where the run's own baseline weather is in the warmest third of the cycle (or a heat wave in the coolest third) is
+  flagged on its card and bar. It is relative to the run's own weather because no real climatology is available here; it never blocks.
+
+## Known gaps
+
+* The interactive simulator runs on `SYNTHETIC_SEASONAL` weather only, with each crop's single synthetic cycle (fixed planting date). Real weather in `data/weather/` is
+  not connected to it, so the cycle period cannot be chosen and real-climate percentiles are not available for event plausibility.
+
 ## Tests
 
 `tests/test_climate_control.py` (rules, tiers, schedules, energy, validation, determinism, resume identity, manual override, closed-loop stability) and the

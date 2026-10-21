@@ -107,3 +107,22 @@ def test_the_bench_offers_climate_control_without_assuming_any_equipment():
     assert "Nothing is assumed" in HTML and "ILLUSTRATIVE_EQUIPMENT" in JS
     assert 'placeholder = "not defined"' in JS  # an empty equipment field stays undefined; the request only carries numbers the user typed
     assert 'bench.config.backend === "ENERGYPLUS"' in JS  # the controller cannot act on a precomputed EnergyPlus timeline
+
+
+SCENE_JS = (FRONTEND / "iso_scene.js").read_text(encoding="utf-8")
+
+
+def test_related_events_come_as_bundles_that_stay_individually_editable():
+    assert "const BUNDLES" in JS and "storm" in JS and "parts.forEach((part) => addEvent(part, false)" in JS
+    assert "bundle" in CSS
+
+
+def test_event_plausibility_is_relative_to_the_runs_own_weather_and_never_blocks():
+    assert "function plausibility" in JS and "run's OWN weather" in JS
+    assert "unusual for the season" in JS and "A hint, never a block" in JS
+
+
+def test_the_scene_draws_phenology_stress_and_temperature_from_the_crop_catalogue_range():
+    for token in ("lifeStage", "dormancy", "flowers", "senescence", "leafPath", "tempTint(t, comfort)", "critical_heat_c", "critical_frost_c", "scene-climate", "Stress:"):
+        assert token in SCENE_JS, token
+    assert "state.comfort" in JS and "stage_thresholds" in JS  # the colour range is the stage's own, never a number of the page's

@@ -122,7 +122,7 @@ def test_scene_state_is_a_pure_function_of_the_series():
 def test_greenhouse_scene_state_carries_actuators_indoor_and_outdoor_values():
     state = node(CTX + 'return scene("greenhouse", 2);')
     assert state["outdoor"]["temp_c"] == 14 and state["indoor"]["temp_c"] == 28
-    assert state["actuators"] == {"vent_opening": 0.9, "screen_deployed": 0.5, "heating_kw": 0, "cooling_kw": 2}
+    assert state["actuators"] == {"vent_opening": 0.9, "screen_deployed": 0.5, "heating_kw": 0, "cooling_kw": 2, "extractor_level": None}
     assert state["indoor"]["co2_ppm"] is None  # NOT_APPLICABLE stays unavailable, never zero
 
 

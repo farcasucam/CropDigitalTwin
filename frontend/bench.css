@@ -50,6 +50,9 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .event header button { border: 0; background: none; color: var(--red); font-size: .78rem; }
 .event .grid2 label { margin: .25rem 0; }
 .event .grid2 label.wide { grid-column: 1 / -1; }
+.event .warn { font-size: .74rem; color: #8a4b12; background: #fff1de; border-radius: 6px; padding: .15rem .4rem; margin-top: .25rem; }
+.chip.bundle { border-style: dashed; }
+.tl-bar.odd { outline: 2px dashed #f0b429; outline-offset: 1px; }
 .event .when { font-size: .74rem; color: var(--muted); }
 .event[data-invalid="true"] { border-color: var(--red); }
 
@@ -148,6 +151,11 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .scene-box svg .scene-screen-sheet { fill: var(--anatomy-hi); fill-opacity: .28; stroke: none; pointer-events: none; }
 .scene-box svg .scene-irrigation circle { fill: #4aa3d9; }
 .scene-box svg .co2-dot { fill: #6b5aa8; opacity: .8; pointer-events: none; }
+.scene-box svg .scene-climate-text { font: 600 13px system-ui, sans-serif; fill: #17352d; paint-order: stroke; stroke: rgba(255,255,255,.85); stroke-width: 3px; }
+.scene-box svg .scene-pill-text { font: 600 10px system-ui, sans-serif; }
+.scene-box svg .scene-outdoor-air { stroke: none; }
+.scene-box svg .scene-plant .flower { stroke: none; }
+.scene-box svg .scene-plant .fruit { stroke: rgba(0,0,0,.18); stroke-width: .5; }
 .scene-box svg .scene-plant .stem { stroke-width: 1.2; fill: none; }
 .scene-box svg .scene-plant .leaves { stroke: none; fill-opacity: .85; }
 .scene-box svg .scene-plot .iso-fill { fill: hsl(30 30% 72%); }

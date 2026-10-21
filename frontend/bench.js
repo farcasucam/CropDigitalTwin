@@ -36,6 +36,12 @@
     { id: "shade", label: "Shade screen 60 %", type: "SHADING", intensity: 0.6, hours: 72 },
     { id: "co2", label: "CO2 boost", type: "CO2", intensity: 0.8, hours: 48 },
   ];
+  // Events that belong together: one click adds all of them at the same start, each still editable on its own.
+  const BUNDLES = [
+    { id: "storm", label: "Storm: rain + overcast + cooling", parts: ["rain", "sundown", "cold_small"] },
+    { id: "hotdry", label: "Hot, dry and sunny", parts: ["heat", "dry", "sunup"] },
+  ];
+  const BUNDLE_PARTS = { cold_small: { id: "cold_small", label: "Cooling −3 °C", type: "COLD_WAVE", intensity: 3, hours: 48, ramp: 6 } };
 
   const INTENSITY_UNITS = { HEAT_WAVE: "°C added", COLD_WAVE: "°C removed", RAIN: "mm/h", HIGH_RADIATION: "× radiation", LOW_RADIATION: "× radiation", WIND: "× wind",
     IRRIGATION: "mm per step", VENTILATION: "fraction of max", SHADING: "fraction of max", CO2: "fraction of max" };
@@ -270,17 +276,40 @@
       button.addEventListener("click", () => addEvent(preset));
       host.append(button);
     }
+    for (const bundle of BUNDLES) {
+      const parts = bundle.parts.map((id) => BUNDLE_PARTS[id] || PRESETS.find((preset) => preset.id === id));
+      const button = el("button", "chip bundle", bundle.label);
+      button.type = "button"; button.disabled = !parts.every(presetAllowed);
+      button.title = button.disabled ? "Not available in this environment" : `Adds together: ${parts.map((part) => part.label).join(", ")}`;
+      button.addEventListener("click", () => { parts.forEach((part) => addEvent(part, false)); eventsChanged(); });
+      host.append(button);
+    }
   }
   function pruneEvents() { bench.events = bench.events.filter((event) => presetAllowed({ type: event.type })); renderTimeline(); }
-  function addEvent(preset) {
+  function addEvent(preset, commit = true) {
     const total = horizonHours();
     // a new event starts where the playhead is (when a run is open) or a few days in, snapped to a whole day
     const head = bench.run ? Math.round((Date.parse(bench.run.times[Math.floor(bench.position)]) - startMs()) / HOUR) : Math.round(total * 0.3);
     const atHours = clamp(Math.round(head / 24) * 24, MIN_AT_HOURS, Math.max(MIN_AT_HOURS, total - 1));
     bench.events.push({ id: `${preset.id}-${bench.events.length + 1}-${bench.serial}`, type: preset.type, atHours, hours: clamp(preset.hours, 1, Math.max(1, total - atHours)), intensity: preset.intensity ?? 0, ramp: preset.ramp || 0 });
-    eventsChanged();
+    if (commit) eventsChanged();
   }
   function eventsChanged() { renderEvents(); renderTimeline(); redrawCharts(); changed(); }
+  // Plausibility against the run's OWN weather (no real climatology exists here): a cold wave while the baseline is in the warmest third of the
+  // cycle, or a heat wave in its coolest third, is flagged. A hint, never a block; the cut-offs are a design convention.
+  function plausibility(event) {
+    const run = bench.run;
+    if (!run || !["COLD_WAVE", "HEAT_WAVE"].includes(event.type)) return null;
+    const series = run.series.baseline.outdoor_temperature_c || run.series.baseline.temperature_c;
+    if (!series) return null;
+    const daily = [];
+    for (let day = 0; day * 24 < series.length; day++) { const chunk = series.slice(day * 24, day * 24 + 24).filter(isNumber); if (chunk.length) daily.push(chunk.reduce((a, b) => a + b, 0) / chunk.length); }
+    const at = Math.floor((event.atHours + event.hours / 2) / 24), mean = daily[clamp(at, 0, daily.length - 1)];
+    const rank = daily.filter((value) => value <= mean).length / daily.length;
+    if (event.type === "COLD_WAVE" && rank > 2 / 3) return `A cold wave here falls in the warmest third of this cycle (baseline ${fmt(mean, 1)} °C): unusual for the season.`;
+    if (event.type === "HEAT_WAVE" && rank < 1 / 3) return `A heat wave here falls in the coolest third of this cycle (baseline ${fmt(mean, 1)} °C): unusual for the season.`;
+    return null;
+  }
   const eventInvalid = (event, spec, hasIntensity) => event.atHours < MIN_AT_HOURS || event.atHours + event.hours > horizonHours()
     || (hasIntensity && (event.intensity < spec.minimum || event.intensity > spec.maximum || (spec.minimum_exclusive && event.intensity <= spec.minimum)));
   function renderEvents() {
@@ -318,6 +347,8 @@
       if (spec && spec.ramp_supported) field("Ramp (h)", "ramp", 0, 168, 1);
       item.append(grid);
       item.append(el("div", "when", `${stamp(eventStartMs(event))} → ${stamp(eventStartMs(event) + event.hours * HOUR)} UTC${invalid ? " · outside the allowed range" : ""}`));
+      const odd = plausibility(event);
+      if (odd) item.append(el("div", "warn", `⚠ ${odd}`));
       host.append(item);
     });
   }
@@ -348,6 +379,8 @@
       const row = lanes[lane], bar = el("div", "tl-bar");
       bar.append(el("span", "tl-label", label(event.type.toLowerCase()).replace(/\b\w/g, (c) => c.toUpperCase())));
       bar.dataset.index = String(index); bar.style.setProperty("--hue", String(hueFor(event.type))); bar.tabIndex = 0;
+      const odd = plausibility(event);
+      bar.classList.toggle("odd", Boolean(odd)); if (odd) bar.dataset.note = odd;
       const left = el("i", "tl-grip"), right = el("i", "tl-grip right");
       left.dataset.edge = "left"; right.dataset.edge = "right";
       bar.append(left, right);
@@ -368,7 +401,7 @@
     const total = horizonHours();
     bar.style.left = `${(100 * event.atHours) / total}%`; bar.style.width = `${Math.max(0.8, (100 * event.hours) / total)}%`;
     bar.classList.toggle("narrow", (100 * event.hours) / total < 9);  // too short to hold its name: the name sits beside the bar
-    bar.title = `${stamp(eventStartMs(event))} → ${stamp(eventStartMs(event) + event.hours * HOUR)} UTC`;
+    bar.title = `${stamp(eventStartMs(event))} → ${stamp(eventStartMs(event) + event.hours * HOUR)} UTC${bar.dataset.note ? `\n⚠ ${bar.dataset.note}` : ""}`;
   }
   function placeEvent(event, next, mode) {
     const total = horizonHours();
@@ -661,6 +694,7 @@
     drawActuation();
     renderDelta();
     renderInfo();
+    renderEvents(); renderTimeline();  // plausibility hints depend on the run's own weather
     renderFrame(true);
   }
 
@@ -699,6 +733,7 @@
       const ctx = bench.ctx[name];
       const visual = V.buildVisualState(ctx, position);
       const state = S.fromVisual(visual, ctx, position);
+      state.comfort = (((bench.caps.climate_control || {}).stage_thresholds || {})[bench.config.crop] || {})[state.stage] || null;  // the stage's own range, from the crop catalogue
       bench.scenes[name].update(state, bench.config.layers, bench.playing && bench.speed >= CALM_SPEED);
       if (force || bench.lastReadoutTick) renderReadout(name, state, visual);
     }

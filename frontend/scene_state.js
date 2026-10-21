@@ -63,6 +63,7 @@
       actuators: greenhouse ? {
         vent_opening: visual.greenhouse.ventilation, screen_deployed: visual.greenhouse.shading,
         heating_kw: sample("greenhouse_heating_kw"), cooling_kw: sample("greenhouse_cooling_kw"),
+        extractor_level: sample("control_extractor_level"),  // null unless a climate controller drove the run
       } : null,
       crop: {
         growth: isNumber(sample("leaf_area_index")) ? Math.min(1, Math.max(0, sample("leaf_area_index") / LAI_DRAW_REFERENCE)) : null,

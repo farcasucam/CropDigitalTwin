@@ -33,35 +33,109 @@
     rosette: { hmax: 0.3, rmax: 0.32, fruit: false },
   };
 
-  // One visual cue per stress variable: accumulated -> leaf hue; water -> droop/narrow/pale;
-  // heat or cold -> coloured leaf edge; VPD -> dashed brown edge.
-  function plantStyle(crop, lost) {
-    if (lost) return { fill: "hsl(32 18% 38%)", stroke: "none", strokeWidth: 0, dash: "none", droop: 0, narrow: 1 };
-    const cum = ease(crop.accumulated === null ? (crop.stress_max || 0) : crop.accumulated);
+  // Phenology: the stage name decides the plant's life state (seedling, leafy and flowering, fruiting, senescent / dormant). Names come from the crop catalogue.
+  function lifeStage(stage) {
+    const name = String(stage || "");
+    if (name.includes("dormancy") || name.includes("senescence")) return { name: "dormant", leaves: 0.5, flowers: false, senescence: 0.85 };
+    if (name.includes("yield") || name.includes("maturation")) return { name: "fruiting", leaves: 1, flowers: false, senescence: 0.12 };
+    if (name.includes("vegetative")) return { name: "flowering", leaves: 1, flowers: true, senescence: 0 };
+    if (name.includes("establishment")) return { name: "seedling", leaves: 0.55, flowers: false, senescence: 0 };
+    return { name: "unknown", leaves: 0.85, flowers: false, senescence: 0 };
+  }
+
+  // One visual cue per stress variable: accumulated and senescence -> leaf hue towards yellow-brown; water -> droop, narrow, pale;
+  // heat -> orange-red leaf edge; cold -> blue-violet leaf and edge; VPD -> dashed brown edge.
+  function plantStyle(crop, lost, life) {
+    if (lost) return { fill: "hsl(32 18% 38%)", stroke: "none", strokeWidth: 0, dash: "none", droop: 0, narrow: 1, suffering: 0 };
+    const cum = ease(Math.max(crop.accumulated === null ? (crop.stress_max || 0) : crop.accumulated, life.senescence));
     const water = clamp(crop.water_stress || 0), heat = clamp(crop.heat_stress || 0), cold = clamp(crop.cold_stress || 0), vpd = clamp(crop.vpd_stress || 0);
     const thermal = Math.max(heat, cold), edge = Math.max(thermal, vpd);
-    const hue = lerp(138, 38, cum), light = lerp(42, 33, cum) + 16 * water;
+    let hue = lerp(138, 38, cum);
+    if (cold > heat && cold > 0.1) hue = lerp(hue, 205, Math.min(0.75, cold));
+    if (heat > 0.1 && heat >= cold) hue = lerp(hue, 28, Math.min(0.7, heat));  // scorched towards orange-brown
+    const light = lerp(40, 33, cum) + 24 * water;
     return {
-      fill: `hsl(${hue.toFixed(0)} ${lerp(52, 42, cum).toFixed(0)}% ${light.toFixed(0)}%)`,
-      stroke: edge < 0.08 ? "none" : thermal >= vpd ? (heat >= cold ? "hsl(14 88% 46%)" : "hsl(212 80% 52%)") : "hsl(28 55% 26%)",
-      strokeWidth: 0.4 + 1.8 * edge, dash: vpd > thermal && edge >= 0.08 ? "2.4 1.6" : "none",
-      droop: water * 0.32, narrow: 1 - 0.5 * water,
+      fill: `hsl(${hue.toFixed(0)} ${lerp(54, 26, Math.max(cum, water)).toFixed(0)}% ${light.toFixed(0)}%)`,
+      stroke: edge < 0.08 ? "none" : thermal >= vpd ? (heat >= cold ? "hsl(14 88% 46%)" : "hsl(232 70% 56%)") : "hsl(28 55% 26%)",
+      strokeWidth: 0.5 + 2.6 * edge, dash: vpd > thermal && edge >= 0.08 ? "2.4 1.6" : "none",
+      droop: water * 0.9, narrow: 1 - 0.45 * water - 0.2 * heat, suffering: Math.max(water, heat, cold, vpd),
     };
   }
 
-  function plantShape(P, x, y, h, r, kind, droop) {
-    const leaf = (z, rad) => K.pathOf([K.iso([x - rad, y, z], P), K.iso([x, y - rad, z], P), K.iso([x + rad, y, z], P), K.iso([x, y + rad, z], P)], true);
-    const stem = K.pathOf([K.iso([x, y, 0], P), K.iso([x, y, h * (kind === "rosette" ? 0.35 : 0.9)], P)]);
-    let leaves;
-    if (kind === "rosette") leaves = leaf(h * 0.22, r * 1.1) + leaf(h * 0.38, r * 0.7);
-    else if (kind === "bush") leaves = leaf(h * 0.35 - droop, r * 1.1) + leaf(h * 0.62 - droop, r * 1.0) + leaf(h * 0.88 - droop * 0.5, r * 0.7);
-    else leaves = leaf(h * 0.4 - droop, r * 0.85) + leaf(h * 0.68 - droop, r * 0.95) + leaf(h * 0.95 - droop * 0.5, r * 0.65);
-    return { stem, leaves };
+  // A leaf is a pointed blade from the stem outwards: two quadratic curves from the base to the tip. `lift` is the tip height above the base (negative: hanging).
+  function leafPath(P, x, y, z, angle, length, lift, slenderness) {
+    const b = K.iso([x, y, z], P), t = K.iso([x + Math.cos(angle) * length, y + Math.sin(angle) * length, z + lift], P);
+    const dx = t[0] - b[0], dy = t[1] - b[1], n = Math.hypot(dx, dy) || 1, w = n * slenderness;
+    const mx = (b[0] + t[0]) / 2 - (dy / n) * w, my = (b[1] + t[1]) / 2 + (dx / n) * w, nx = (b[0] + t[0]) / 2 + (dy / n) * w, ny = (b[1] + t[1]) / 2 - (dx / n) * w;
+    const f = (v) => v.toFixed(1);
+    return `M${f(b[0])} ${f(b[1])}Q${f(mx)} ${f(my)} ${f(t[0])} ${f(t[1])}Q${f(nx)} ${f(ny)} ${f(b[0])} ${f(b[1])}Z`;
   }
 
-  function tempTint(t) {
-    // blue below 18 C, neutral 18-28 C, red above; always paired with a numeric readout
+  /* look: { leaves (0..1 of the full foliage), droop (0..~0.9), narrow, flowers (bool), bare (bool), turn (rank-based rotation) }.
+   * Returns the stem path, the leaf path and the anchor points of fruit and flowers. */
+  function plantShape(P, x, y, h, r, kind, look) {
+    const turn = look.turn * Math.PI * 2, GOLD = 2.39996;
+    let leaves = "", stem = "";
+    const fruitAt = [], flowerAt = [];
+    const slender = 0.3 * look.narrow;
+    if (kind === "rosette") {
+      // a rosette: leaves spiral out of the heart; inner ones stand up, outer ones lie out and hang with water stress
+      const n = Math.max(4, Math.round(13 * look.leaves));
+      for (let i = 0; i < n; i++) {
+        const ring = i / n, len = r * (0.45 + 0.65 * ring) * (0.9 + 0.2 * look.narrow), lift = len * (0.95 - 0.7 * ring) - h * look.droop * ring;
+        leaves += leafPath(P, x, y, h * 0.06 + h * 0.1 * (1 - ring), turn + i * GOLD, len, lift, 0.34 * look.narrow);
+      }
+      stem = K.pathOf([K.iso([x, y, 0], P), K.iso([x, y, h * 0.12], P)]);
+    } else if (kind === "bush") {
+      // a tree: trunk with branches; a crown of leaf clusters; bare in dormancy
+      const top = h * 0.5;
+      stem = K.pathOf([K.iso([x, y, 0], P), K.iso([x, y, top], P)]);
+      for (let i = 0; i < 4; i++) {
+        const a = turn + i * (Math.PI / 2) + 0.4, ex = x + Math.cos(a) * r * 0.55, ey = y + Math.sin(a) * r * 0.55;
+        stem += K.pathOf([K.iso([x, y, top * 0.82], P), K.iso([ex, ey, h * 0.78], P)]);
+      }
+      if (!look.bare) {
+        const n = Math.max(3, Math.round(8 * look.leaves));
+        for (let i = 0; i < n; i++) {
+          const a = turn + i * GOLD, ring = 0.35 + 0.65 * ((i % 3) / 2), len = r * 0.8 * ring + r * 0.15;
+          leaves += leafPath(P, x + Math.cos(a) * r * 0.3, y + Math.sin(a) * r * 0.3, h * (0.62 + 0.3 * ((i * 0.37) % 1)), a, len, len * (0.25 - look.droop * 0.7), 0.5 * look.narrow);
+        }
+      }
+      for (let k = 0; k < 4; k++) {
+        const a = turn + k * 1.7;
+        fruitAt.push([x + Math.cos(a) * r * 0.6, y + Math.sin(a) * r * 0.6, h * (0.62 + 0.08 * k)]);
+        flowerAt.push([x + Math.cos(a + 0.8) * r * 0.55, y + Math.sin(a + 0.8) * r * 0.55, h * (0.7 + 0.06 * k)]);
+      }
+    } else {
+      // a vine: a straight stem with leaves up it, trusses of fruit hanging low, flowers at the top
+      stem = K.pathOf([K.iso([x, y, 0], P), K.iso([x, y, h * 0.96], P)]);
+      const n = Math.max(3, Math.round(10 * look.leaves));
+      for (let i = 0; i < n; i++) {
+        const t = (i + 0.5) / n, len = r * (1.05 - 0.4 * t), a = turn + i * GOLD;
+        leaves += leafPath(P, x, y, h * (0.16 + 0.8 * t), a, len, len * (0.5 - look.droop * 1.1), slender);
+      }
+      for (let k = 0; k < 4; k++) {
+        const a = turn + k * 1.9;
+        fruitAt.push([x + Math.cos(a) * r * 0.55, y + Math.sin(a) * r * 0.55, h * (0.28 + 0.1 * k)]);
+        flowerAt.push([x + Math.cos(a + 1) * r * 0.45, y + Math.sin(a + 1) * r * 0.45, h * (0.82 + 0.05 * k)]);
+      }
+    }
+    return { stem, leaves, fruitAt, flowerAt };
+  }
+
+  // Temperature colour. With `comfort` (the stage's own min/max and critical heat/frost from the crop catalogue): green inside the comfortable range,
+  // blue below it and orange to red above it, deepest at the critical value. Without it a generic scale is used. Always paired with a numeric readout.
+  function tempTint(t, comfort) {
     if (!isNumber(t)) return "none";
+    if (comfort && isNumber(comfort.min_temp_c) && isNumber(comfort.max_temp_c)) {
+      if (t < comfort.min_temp_c) {
+        const span = isNumber(comfort.critical_frost_c) && comfort.critical_frost_c < comfort.min_temp_c ? comfort.min_temp_c - comfort.critical_frost_c : 8;
+        return `hsl(${lerp(205, 228, clamp((comfort.min_temp_c - t) / span)).toFixed(0)} 75% ${lerp(72, 48, clamp((comfort.min_temp_c - t) / span)).toFixed(0)}%)`;
+      }
+      if (t <= comfort.max_temp_c) return "hsl(140 40% 70%)";
+      const span = isNumber(comfort.critical_heat_c) && comfort.critical_heat_c > comfort.max_temp_c ? comfort.critical_heat_c - comfort.max_temp_c : 6, k = clamp((t - comfort.max_temp_c) / span);
+      return `hsl(${lerp(42, 2, k).toFixed(0)} 85% ${lerp(68, 50, k).toFixed(0)}%)`;
+    }
     if (t < 18) return `hsl(215 70% ${lerp(55, 80, clamp(t / 18)).toFixed(0)}%)`;
     if (t <= 28) return "hsl(150 25% 80%)";
     return `hsl(${lerp(35, 0, clamp((t - 28) / 10)).toFixed(0)} 80% ${lerp(78, 58, clamp((t - 28) / 10)).toFixed(0)}%)`;
@@ -142,6 +216,9 @@
       + K.solidSvg(K.slabOf({ x: 0, y: 0, w: L, d: Wd, r: 0 }, 0, 0.02, P, 2), { tone: open ? "lo" : "faint", flat: true, crease: "none" });
     const plotTile = soil.lastChild;
     plotTile.classList.add("scene-plot");
+    // the air around the greenhouse, tinted by the outdoor temperature (a ring of ground under and around the plot)
+    const outdoorAir = el("path", { class: "scene-outdoor-air", "pointer-events": "none", d: K.pathOf([[-pad, -pad, 0.31], [L + pad, -pad, 0.31], [L + pad, Wd + pad, 0.31], [-pad, Wd + pad, 0.31]].map((p) => K.iso(p, P)), true) }, soil);
+    soil.insertBefore(outdoorAir, plotTile);
     const wet = el("path", { class: "scene-wet", d: K.pathOf([[0, 0, 0.03], [L, 0, 0.03], [L, Wd, 0.03], [0, Wd, 0.03]].map((p) => K.iso(p, P)), true) }, soil);
     if (open) {
       const furrows = [];
@@ -163,8 +240,9 @@
       } else {
         const g = el("g", { class: "scene-plant" }, cropGroup);
         const stem = el("path", { class: "stem" }, g), leaves = el("path", { class: "leaves" }, g);
-        const fruit = [0, 1, 2].map(() => el("circle", { class: "fruit", r: 1.7 }, g));
-        plants.push({ stem, leaves, fruit, pos: it.pos, rank: lossRank(it.i) });
+        const flower = [0, 1, 2, 3].map(() => el("circle", { class: "flower", r: 1.5 }, g));
+        const fruit = [0, 1, 2, 3].map(() => el("circle", { class: "fruit", r: 2 }, g));
+        plants.push({ stem, leaves, fruit, flower, pos: it.pos, rank: lossRank(it.i) });
       }
     }
 
@@ -217,6 +295,24 @@
       return Array.from({ length: 6 }, (_, i) => el("tspan", { x, dy: i ? 15 : 0 }, text));
     };
     const outLines = lines(hud, 18, "start"), inLines = lines(hud, W - 18, "end");
+    // climate strip (always visible): the two temperatures as colour chips and the actuators that are acting
+    const strip = el("g", { class: "scene-climate", "pointer-events": "none" }, svg);
+    const chips = ["out", "in"].map((name, i) => {
+      const g = el("g", { transform: `translate(14 ${12 + i * 24})` }, strip);
+      const swatch = el("rect", { width: 20, height: 20, rx: 5, stroke: "rgba(0,0,0,.25)" }, g);
+      const text = el("text", { x: 27, y: 14.5, class: "scene-climate-text" }, g);
+      return { g, swatch, text };
+    });
+    const stressChip = (() => {
+      const g = el("g", { transform: "translate(14 62)" }, strip), swatch = el("rect", { width: 20, height: 20, rx: 5, stroke: "rgba(0,0,0,.25)" }, g);
+      return { g, swatch, text: el("text", { x: 27, y: 14.5, class: "scene-climate-text" }, g) };
+    })();
+    const pills = ["Vents", "Screen", "Fans", "Cooling", "Heating"].map((label, i) => {
+      const g = el("g", { transform: `translate(14 ${88 + i * 20})` }, strip);
+      const back = el("rect", { width: 66, height: 17, rx: 8.5 }, g), text = el("text", { x: 33, y: 12.4, "text-anchor": "middle", class: "scene-pill-text" }, g);
+      text.textContent = label;
+      return { back, text, passive: i < 2 };
+    });
     const banner = el("g", { class: "scene-banner" }, hud);
     el("rect", { x: 18, y: H - 38, width: 360, height: 24, rx: 4 }, banner);
     const bannerText = el("text", { x: 28, y: H - 21 }, banner);
@@ -277,34 +373,58 @@
       haze.setAttribute("fill", "hsl(38 40% 62%)"); haze.setAttribute("opacity", on("vpd") && s.levels.vpd !== null ? (0.4 * s.levels.vpd).toFixed(2) : "0");
 
       // plants: growth, stress, loss
-      const growth = c.growth === null ? 0.4 : c.growth, loss = clamp(c.loss_fraction || 0);
-      const key = [growth.toFixed(3), c.water_stress, c.heat_stress, c.cold_stress, c.vpd_stress, c.accumulated, c.stress_max, loss.toFixed(3), c.fruit_fraction, c.ripeness].join("|");
+      const growth = c.growth === null ? 0.4 : c.growth, loss = clamp(c.loss_fraction || 0), life = lifeStage(s.stage);
+      const bearsFruit = options.cropKind !== "rosette";
+      const key = [growth.toFixed(3), c.water_stress, c.heat_stress, c.cold_stress, c.vpd_stress, c.accumulated, c.stress_max, loss.toFixed(3), c.fruit_fraction, c.ripeness, life.name].join("|");
       if (key !== lastPlantKey) {
         lastPlantKey = key;
-        const style = plantStyle(c, false), lostStyle = plantStyle(c, true), grow = ease(growth);
+        const style = plantStyle(c, false, life), lostStyle = plantStyle(c, true, life), grow = ease(growth);
+        const bare = options.cropKind === "bush" && life.name === "dormant";
         plants.forEach((pl) => {
           const lost = pl.rank < loss, st = lost ? lostStyle : style;
           const h = lost ? Math.max(0.06, kind.hmax * 0.05) : Math.max(0.05, kind.hmax * grow);
           const r = lost ? 0.05 : Math.min(radiusCap, kind.rmax * (0.25 + 0.75 * grow) * st.narrow);
-          const shape = plantShape(P, pl.pos.x, pl.pos.y, h, r, options.cropKind || "bush", h * st.droop);
-          pl.stem.setAttribute("d", shape.stem); pl.stem.setAttribute("stroke", st.fill);
+          const shape = plantShape(P, pl.pos.x, pl.pos.y, h, r, options.cropKind || "bush", { leaves: life.leaves * (0.35 + 0.65 * grow), droop: st.droop, narrow: st.narrow, bare, turn: pl.rank });
+          pl.stem.setAttribute("d", shape.stem); pl.stem.setAttribute("stroke", bare ? "hsl(28 30% 30%)" : "hsl(100 30% 28%)");
           pl.leaves.setAttribute("d", lost ? "" : shape.leaves); pl.leaves.setAttribute("fill", st.fill);
-          pl.leaves.setAttribute("stroke", st.stroke); pl.leaves.setAttribute("stroke-width", (st.strokeWidth * 1.5).toFixed(2)); pl.leaves.setAttribute("stroke-dasharray", st.dash);
-          const nFruit = kind.fruit && !lost && c.fruit_fraction !== null ? Math.round(3 * clamp(c.fruit_fraction * 4)) : 0;
-          pl.fruit.forEach((f, k) => {
-            if (k < nFruit) {
-              const p = K.iso([pl.pos.x + (k - 1) * r * 0.5, pl.pos.y + 0.1, h * (0.45 + 0.1 * k)], P);
-              f.setAttribute("cx", p[0].toFixed(1)); f.setAttribute("cy", p[1].toFixed(1));
-              f.setAttribute("fill", `hsl(${lerp(95, 6, clamp(c.ripeness || 0)).toFixed(0)} 70% 48%)`); f.setAttribute("opacity", "1");
-            } else f.setAttribute("opacity", "0");
+          pl.leaves.setAttribute("stroke", st.stroke); pl.leaves.setAttribute("stroke-width", (st.strokeWidth * 0.7).toFixed(2)); pl.leaves.setAttribute("stroke-dasharray", st.dash);
+          const nFruit = kind.fruit && bearsFruit && !lost && c.fruit_fraction !== null ? Math.round(4 * clamp(c.fruit_fraction * 4)) : 0;
+          const nFlower = bearsFruit && !lost && life.flowers && !bare ? 3 : 0;
+          const place = (nodes, count, points, fill) => nodes.forEach((node, k) => {
+            if (k < count) {
+              const p = K.iso(points[k], P);
+              node.setAttribute("cx", p[0].toFixed(1)); node.setAttribute("cy", p[1].toFixed(1)); node.setAttribute("fill", fill(k)); node.setAttribute("opacity", "1");
+            } else node.setAttribute("opacity", "0");
           });
+          place(pl.fruit, nFruit, shape.fruitAt, () => `hsl(${lerp(95, 6, clamp(c.ripeness || 0)).toFixed(0)} 70% 48%)`);
+          place(pl.flower, nFlower, shape.flowerAt, (k) => (options.cropKind === "bush" ? "hsl(335 70% 86%)" : k % 2 ? "hsl(48 95% 58%)" : "hsl(52 90% 68%)"));
         });
       }
 
+      const comfort = s.comfort || null;
+      const outTint = on("temperature") ? tempTint(o.temp_c, comfort) : "none";
+      outdoorAir.style.fill = outTint === "none" ? "transparent" : outTint; outdoorAir.style.fillOpacity = outTint === "none" ? "0" : "0.38";
+      const inTemp = open ? o.temp_c : (ind ? ind.temp_c : null);
+      chips[0].swatch.setAttribute("fill", tempTint(o.temp_c, comfort) === "none" ? "#ccc" : tempTint(o.temp_c, comfort));
+      chips[0].text.textContent = `Outdoor ${isNumber(o.temp_c) ? o.temp_c.toFixed(1) : "n/a"} °C`;
+      chips[1].swatch.setAttribute("fill", tempTint(inTemp, comfort) === "none" ? "#ccc" : tempTint(inTemp, comfort));
+      chips[1].text.textContent = `${open ? "Crop (open field)" : "Indoor"} ${isNumber(inTemp) ? inTemp.toFixed(1) : "n/a"} °C`;
+      const live = [act && isNumber(act.vent_opening) && act.vent_opening > 0.02, act && isNumber(act.screen_deployed) && act.screen_deployed > 0.01,
+        act && isNumber(act.extractor_level) && act.extractor_level > 0.02, act && isNumber(act.cooling_kw) && act.cooling_kw > 0.05, act && isNumber(act.heating_kw) && act.heating_kw > 0.05];
+      pills.forEach((pill, k) => {
+        pill.back.style.fill = !live[k] ? "rgba(255,255,255,.55)" : pill.passive ? "hsl(145 45% 38%)" : k === 4 ? "hsl(14 80% 48%)" : "hsl(205 75% 46%)";
+        pill.text.style.fill = live[k] ? "#fff" : "#6b7a74"; pill.back.style.opacity = open ? "0" : "1"; pill.text.style.opacity = open ? "0" : "1";
+      });
+      // how the crop is doing: the worst of the four stresses, in words and in colour (green: none, red: severe)
+      const stresses = [["water", c.water_stress], ["heat", c.heat_stress], ["cold", c.cold_stress], ["VPD", c.vpd_stress]].filter(([, v]) => isNumber(v));
+      const worst = stresses.reduce((a, b) => (b[1] > a[1] ? b : a), ["", 0]), sev = clamp(worst[1]);
+      stressChip.swatch.setAttribute("fill", `hsl(${lerp(120, 0, ease(sev)).toFixed(0)} 65% ${lerp(62, 48, sev).toFixed(0)}%)`);
+      stressChip.text.textContent = !stresses.length ? "Stress n/a" : sev < 0.05 ? "No stress" : `Stress: ${worst[0]} ${(100 * sev).toFixed(0)}%`;
+      strip.style.display = on("temperature") || on("events") ? "" : "none";
       if (!open) {
-        const tint = on("temperature") && ind ? tempTint(ind.temp_c) : "none";
+        const tint = on("temperature") && ind ? tempTint(ind.temp_c, comfort) : "none";
         cover.style.fill = tint === "none" ? "var(--anatomy-blue)" : tint;
-        cover.style.fillOpacity = tint === "none" ? "0.08" : "0.16";
+        cover.style.fillOpacity = tint === "none" ? "0.08" : "0.3";
         const opening = clamp(act && isNumber(act.vent_opening) ? act.vent_opening : 0), ang = opening * 40 * Math.PI / 180;
         ventFacets.forEach((v) => {
           const vy = v.lower[0] - v.hinge[0], vz = v.lower[1] - v.hinge[1], mag = Math.hypot(vy, vz);
