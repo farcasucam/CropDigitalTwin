@@ -430,12 +430,13 @@
     cooling: ["max_temp_c", "critical_heat_c"], heating: ["min_temp_c"], irrigation: ["vwc_optimal_min", "target_vwc_after_irrigation"],
   };
   const ILLUSTRATIVE_EQUIPMENT = { vent_max_ach: 30, extractor_max_ach: 20, extractor_power_kw: 1.5, cooling_capacity_kw: 15, cooling_cop: 3, heating_capacity_kw: 15, heating_efficiency: 0.9, irrigation_max_mm_step: 3 };
-  const controlInfo = () => bench.caps.climate_control;
+  const controlInfo = () => (bench.caps ? bench.caps.climate_control : undefined);  // absent when the page runs against a server started before climate control existed
   function controlAllowed(actuator) {
     if (bench.config.backend === "ENERGYPLUS") return false;
     return bench.config.environment === "greenhouse" || actuator === "irrigation";
   }
   function controlDocument() {
+    if (!controlInfo()) return null;
     const control = bench.config.control, actuators = {};
     for (const info of controlInfo().actuators) if (controlAllowed(info.id) && control.actuators[info.id] !== "OFF") actuators[info.id] = control.actuators[info.id];
     if (!Object.keys(actuators).length) return null;
@@ -448,6 +449,12 @@
   function renderControl() {
     const host = $("#control-actuators");
     if (!host || !bench.caps) return;
+    if (!controlInfo()) {
+      host.replaceChildren(el("p", "hint ctl-warn", "This server does not offer climate control: restart it (python -m agri_twin.interfaces.frontend_api) so it loads the current code."));
+      for (const id of ["control-equipment", "control-schedules"]) $(`#${id}`).replaceChildren();
+      $("#control-summary").textContent = "unavailable";
+      return;
+    }
     const control = bench.config.control, info = controlInfo(), blocked = bench.config.backend === "ENERGYPLUS";
     host.replaceChildren();
     for (const actuator of info.actuators) {
@@ -519,6 +526,7 @@
     });
   }
   function bindControl() {
+    if (!controlInfo()) { renderControl(); return; }
     $("#add-schedule").addEventListener("click", () => {
       const scheduled = controlInfo().actuators.find((a) => bench.config.control.actuators[a.id] === "SCHEDULE") || controlInfo().actuators[0];
       bench.config.control.actuators[scheduled.id] = "SCHEDULE";
