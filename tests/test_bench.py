@@ -134,7 +134,7 @@ def test_bars_have_a_tooltip_and_the_chart_bands_follow_them_in_the_same_colour(
 
 
 def test_the_scene_background_no_longer_follows_the_hour_of_the_day():
-    assert 'skyRect.setAttribute("fill", "hsl(208 38% 86%)")' in SCENE_JS and "lerp(228, 205" not in SCENE_JS
+    assert "lerp(228, 205" not in SCENE_JS and 'skyRect.setAttribute("fill"' not in SCENE_JS  # constant warm paper; day and night is the sun marker only
 
 
 def test_the_bench_offers_real_weather_with_a_planting_date_and_states_what_it_is():
@@ -157,3 +157,11 @@ def test_event_plausibility_uses_the_climate_of_the_date_when_real_weather_is_se
     for token in ("/api/weather/climatology", "function loadClimate", "climate.p05", "climate.p95", "unusual for the season", "const runKey"):
         assert token in JS, token
     assert "tertile" in JS.lower() or "warmest third" in JS  # the run-relative hint stays as the fallback without real weather
+
+
+def test_the_scene_has_a_hand_inked_look_built_once_and_never_redrawn_per_frame():
+    for token in ('INK = "#231e16"', "PAPER", "scene-cast-shadow", "scene-tone", "scene-ink", "feDisplacementMap", "toneBand", "hull2", "halo: false"):
+        assert token in SCENE_JS, token
+    update = SCENE_JS.split("function update(s, layers, calm)")[1].split("return {\n      update,")[0]
+    for static_only in ("feDisplacementMap", "feTurbulence", "hull2(", "toneBand(", "K.solidSvg("):
+        assert static_only not in update, f"{static_only} must be built in configure, not in update"

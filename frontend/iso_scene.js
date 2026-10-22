@@ -27,6 +27,35 @@
     return r;
   }
 
+  // Hand-inked look (own implementation): warm paper, ink-brown lines, three flat tones per face (light / mid / dark by the way a face meets the light),
+  // a heavy silhouette, a flat blue cast shadow and a slight hand wobble on the static line work only. All of it is built once in configure(); update() never touches it.
+  const INK = "#231e16", PAPER = "#f6f1e6", SHADOW = "#41538f";
+  const PALETTE = {
+    "--anatomy-paper": "#f6f1e6", "--anatomy-face": "#fffaf0", "--anatomy-top": "#fffdf7", "--anatomy-lit-top": "#fffdf7", "--anatomy-lit-shade": "#efe9da",
+    "--anatomy-shade-0": "#d6cdb8", "--anatomy-shade-1": "#e0d8c5", "--anatomy-shade-2": "#e9e2d2", "--anatomy-shade-3": "#f1ebdd",
+    "--anatomy-hi": INK, "--anatomy-mid": "#4a4132", "--anatomy-lo": "#6d614c", "--anatomy-faint": "#cbc1aa", "--anatomy-weight": "1.1px",
+  };
+  const LIGHT = (() => { const v = [0.35, -0.55, 0.76], n = Math.hypot(...v); return v.map((x) => x / n); })();  // from the upper left of the drawing
+  function hull2(points) {  // convex hull (monotone chain) of [x, y] points
+    const p = points.slice().sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+    if (p.length < 3) return p;
+    const cross = (o, a, b) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
+    const lower = [], upper = [];
+    for (const q of p) { while (lower.length >= 2 && cross(lower[lower.length - 2], lower[lower.length - 1], q) <= 0) lower.pop(); lower.push(q); }
+    for (const q of p.slice().reverse()) { while (upper.length >= 2 && cross(upper[upper.length - 2], upper[upper.length - 1], q) <= 0) upper.pop(); upper.push(q); }
+    return lower.slice(0, -1).concat(upper.slice(0, -1));
+  }
+  const sub3 = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+  const cross3 = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+  function toneBand(points, centre) {  // 2 = lit, 1 = mid, 0 = dark: by the angle between the (outward) face normal and the light
+    let n = cross3(sub3(points[1], points[0]), sub3(points[2], points[1]));
+    const len = Math.hypot(...n) || 1; n = n.map((x) => x / len);
+    const mid = points.reduce((a, q) => [a[0] + q[0] / points.length, a[1] + q[1] / points.length, a[2] + q[2] / points.length], [0, 0, 0]);
+    if (n[0] * (mid[0] - centre[0]) + n[1] * (mid[1] - centre[1]) + n[2] * (mid[2] - centre[2]) < 0) n = n.map((x) => -x);
+    const d = n[0] * LIGHT[0] + n[1] * LIGHT[1] + n[2] * LIGHT[2];
+    return d > 0.55 ? 2 : d > 0.15 ? 1 : 0;
+  }
+
   const CROP_KINDS = {
     vine: { hmax: 2.4, rmax: 0.55, fruit: true },
     bush: { hmax: 1.0, rmax: 0.5, fruit: false },
@@ -56,8 +85,8 @@
     const light = lerp(40, 33, cum) + 24 * water;
     return {
       fill: `hsl(${hue.toFixed(0)} ${lerp(54, 26, Math.max(cum, water)).toFixed(0)}% ${light.toFixed(0)}%)`,
-      stroke: edge < 0.08 ? "none" : thermal >= vpd ? (heat >= cold ? "hsl(14 88% 46%)" : "hsl(232 70% 56%)") : "hsl(28 55% 26%)",
-      strokeWidth: 0.5 + 2.6 * edge, dash: vpd > thermal && edge >= 0.08 ? "2.4 1.6" : "none",
+      stroke: edge < 0.08 ? "hsl(105 35% 16%)" : thermal >= vpd ? (heat >= cold ? "hsl(14 88% 46%)" : "hsl(232 70% 56%)") : "hsl(28 55% 26%)",
+      strokeWidth: edge < 0.08 ? 0.45 : 0.5 + 2.6 * edge, dash: vpd > thermal && edge >= 0.08 ? "2.4 1.6" : "none",
       droop: water * 0.9, narrow: 1 - 0.45 * water - 0.2 * heat, suffering: Math.max(water, heat, cold, vpd),
     };
   }
@@ -152,6 +181,7 @@
       svg.replaceChildren();
       svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
       svg.style.overflow = "hidden";
+      for (const name in PALETTE) svg.style.setProperty(name, PALETTE[name]);
       scene = build(svg, layout, options, serial);
       return scene;
     }
@@ -202,23 +232,46 @@
       W, H - 70, { pad: 26, azimuth: view.azimuth, elevation: view.elevation });
     P.origin[1] += 36;
 
-    const clipId = `scene-clip-${serial}`;
+    const clipId = `scene-clip-${serial}`, wobbleId = `scene-wobble-${serial}`;
     const defs = el("defs", {}, svg);
+    // a slight hand wobble, applied to static line work only (never to anything update() redraws)
+    const wobble = el("filter", { id: wobbleId, filterUnits: "userSpaceOnUse", x: -30, y: -30, width: W + 60, height: H + 60 }, defs);
+    el("feTurbulence", { type: "fractalNoise", baseFrequency: "0.035", numOctaves: "2", seed: "7", result: "n" }, wobble);
+    el("feDisplacementMap", { in: "SourceGraphic", in2: "n", scale: "1.7", xChannelSelector: "R", yChannelSelector: "G" }, wobble);
     el("rect", { x: 0, y: 0, width: W, height: H, rx: 12 }, el("clipPath", { id: clipId }, defs));
     const sky = el("g", { class: "scene-sky" }, svg);
-    const skyRect = el("rect", { x: 0, y: 0, width: W, height: H, rx: 12 }, sky);
+    const skyRect = el("rect", { x: 0, y: 0, width: W, height: H, rx: 12, fill: PAPER }, sky);
+    const overcast = el("rect", { x: 0, y: 0, width: W, height: H, rx: 12, fill: "hsl(215 28% 38%)", opacity: 0 }, sky);
     const sun = el("circle", { r: 11, class: "scene-sun" }, sky);
     const world = el("g", { "clip-path": `url(#${clipId})` }, svg);
     const body = el("g", { class: "scene-body" }, world);
 
     const soil = el("g", { class: "scene-soil" }, body);
-    soil.innerHTML = K.solidSvg(K.slabOf({ x: -pad, y: -pad, w: L + pad * 2, d: Wd + pad * 2, r: 2 }, -0.3, 0.3, K.fitProjection ? P : P, 8, 0.4), { tone: "lo", crease: "faint", halo: true })
+    soil.innerHTML = K.solidSvg(K.slabOf({ x: -pad, y: -pad, w: L + pad * 2, d: Wd + pad * 2, r: 2 }, -0.3, 0.3, K.fitProjection ? P : P, 8, 0.4), { tone: "lo", crease: "faint", halo: false })
       + K.solidSvg(K.slabOf({ x: 0, y: 0, w: L, d: Wd, r: 0 }, 0, 0.02, P, 2), { tone: open ? "lo" : "faint", flat: true, crease: "none" });
     const plotTile = soil.lastChild;
     plotTile.classList.add("scene-plot");
     // the air around the greenhouse, tinted by the outdoor temperature (a ring of ground under and around the plot)
     const outdoorAir = el("path", { class: "scene-outdoor-air", "pointer-events": "none", d: K.pathOf([[-pad, -pad, 0.31], [L + pad, -pad, 0.31], [L + pad, Wd + pad, 0.31], [-pad, Wd + pad, 0.31]].map((p) => K.iso(p, P)), true) }, soil);
     soil.insertBefore(outdoorAir, plotTile);
+    // the flat blue cast shadow of the greenhouse on the ground (fixed direction: a moving shadow would flash at fast playback)
+    if (!open) {
+      const s0 = K.iso([0, 0, 0], P);
+      let best = [1, 0], score = -Infinity;
+      for (let a = 0; a < 360; a += 45) {
+        const v = [Math.cos((a * Math.PI) / 180), Math.sin((a * Math.PI) / 180)], s1 = K.iso([v[0], v[1], 0], P), value = (s1[0] - s0[0]) + 0.35 * (s1[1] - s0[1]);
+        if (value > score) { score = value; best = v; }
+      }
+      const prof = layout.profile.map(([y, z]) => [y, z + gutter]), cast = [[0, 0], [L, 0], [L, Wd], [0, Wd]], k = 0.8;
+      for (let s = 0; s < layout.spans; s++) for (const [y, z] of prof) for (const x of [0, L]) cast.push([x + best[0] * z * k, s * layout.span + y + best[1] * z * k]);
+      el("path", { class: "scene-cast-shadow", "pointer-events": "none", fill: SHADOW, "fill-opacity": "0.34", stroke: "none", d: K.pathOf(hull2(cast).map(([x, y]) => K.iso([x, y, 0.31], P)), true) }, soil);
+      soil.insertBefore(soil.lastChild, plotTile);
+    }
+    // ink: a heavy silhouette round the ground slab and a finer outline of the plot
+    const slabCorners = [[-pad, -pad], [L + pad, -pad], [L + pad, Wd + pad], [-pad, Wd + pad]];
+    const soilInk = el("g", { class: "scene-soil-ink", "pointer-events": "none", filter: `url(#${wobbleId})` }, soil);
+    el("path", { fill: "none", stroke: INK, "stroke-width": "2.6", "stroke-linejoin": "round", d: K.pathOf(hull2(slabCorners.flatMap(([x, y]) => [K.iso([x, y, 0.3], P), K.iso([x, y, -0.3], P)])), true) }, soilInk);
+    el("path", { fill: "none", stroke: INK, "stroke-width": "1.3", "stroke-linejoin": "round", d: K.pathOf([[0, 0], [L, 0], [L, Wd], [0, Wd]].map(([x, y]) => K.iso([x, y, 0.03], P)), true) }, soilInk);
     const wet = el("path", { class: "scene-wet", d: K.pathOf([[0, 0, 0.03], [L, 0, 0.03], [L, Wd, 0.03], [0, Wd, 0.03]].map((p) => K.iso(p, P)), true) }, soil);
     if (open) {
       const furrows = [];
@@ -248,6 +301,8 @@
 
     const ribs = el("g", { class: "scene-ribs" }, body), screen = el("g", { class: "scene-screen" }, body);
     const hole = el("g", { class: "scene-hole" }, body), cover = el("g", { class: "scene-cover" }, body), flaps = el("g", { class: "scene-flaps" }, body);
+    const toneG = el("g", { class: "scene-tone", "pointer-events": "none" }, body);
+    body.insertBefore(toneG, flaps);
     const edges = el("g", { class: "scene-edges" }, body), co2 = el("g", { class: "scene-co2" }, body);
     // invisible click targets above the cover: a plant stays selectable beneath a clickable cover
     const hits = el("g", { class: "scene-hits" }, body);
@@ -263,12 +318,22 @@
       const centre = (f) => f.pts.reduce((a, p) => [a[0] + p[0] / f.pts.length, a[1] + p[1] / f.pts.length, a[2] + p[2] / f.pts.length], [0, 0, 0]);
       for (const f of facets.slice().sort((a, b) => K.depthOf(centre(a), P) - K.depthOf(centre(b), P))) {
         f.node = el("path", { d: K.pathOf(f.pts.map((p) => K.iso(p, P)), true) }, cover);
+        const band = toneBand(f.pts, [L / 2, Wd / 2, zTop / 2]);
+        if (band !== 1) f.tone = el("path", { d: f.node.getAttribute("d"), fill: band === 2 ? "#ffffff" : INK, "fill-opacity": band === 2 ? "0.3" : "0.17", stroke: "none" }, toneG);
         if (f.kind !== "roof") el("path", { class: "iso-line", "data-tone": "lo", d: f.node.getAttribute("d") }, edges);
       }
       const gut = [];
       for (let s = 0; s <= spans; s++) gut.push(K.pathOf([K.iso([0, s * span, prof[0][1]], P), K.iso([L, s * span, prof[0][1]], P)]));
       el("path", { class: "iso-line", "data-tone": "hi", d: gut.join("") }, edges);
       ventFacets.forEach((v) => { v.hole = el("path", { d: v.facet.node.getAttribute("d") }, hole); v.flap = el("path", {}, flaps); v.flapEdge = el("path", { class: "iso-line", "data-tone": "mid" }, flaps); });
+      // heavy silhouette of the whole structure, drawn over everything it holds
+      const ink = el("g", { class: "scene-ink", "pointer-events": "none", filter: `url(#${wobbleId})` }, body);
+      for (let s = 0; s < spans; s++) {  // one silhouette per span: the gutters between spans stay drawn, nothing floats across the arches
+        const outline = [];
+        for (const [y, z] of prof) for (const x of [0, L]) outline.push(K.iso([x, s * span + y, z], P));
+        for (const x of [0, L]) for (const y of [s * span, (s + 1) * span]) outline.push(K.iso([x, y, 0], P));
+        el("path", { fill: "none", stroke: INK, "stroke-width": "2.6", "stroke-linejoin": "round", d: K.pathOf(hull2(outline), true) }, ink);
+      }
       screenPoly = el("path", { class: "scene-screen-sheet" }, screen); screenEdge = el("path", { class: "iso-line", "data-tone": "hi" }, screen);
       screenZ = gutter > 0 ? gutter - 0.35 : zTop * 0.6;
       for (let k = 0; k < 24; k++) el("circle", { class: "co2-dot", r: 2.2, cx: 0, cy: 0 }, co2);
@@ -340,8 +405,7 @@
       smoothSun = calm && smoothSun !== null ? smoothSun + (rawSun - smoothSun) * 0.04 : rawSun;
       const sunLevel = smoothSun;
       // The background stays one calm colour: day and night is shown by the small sun marker, never by flashing the whole scene.
-      skyRect.setAttribute("fill", "hsl(208 38% 86%)");
-      skyRect.setAttribute("opacity", "0.55");
+      skyRect.setAttribute("opacity", "1");
       const day = calm ? 0.5 : clamp((s.hour - 6) / 12);
       sun.setAttribute("cx", (80 + (W - 160) * day).toFixed(0)); sun.setAttribute("cy", (150 - 110 * Math.sin(Math.PI * day)).toFixed(0));
       sun.style.display = on("radiation") && s.levels.radiation !== null ? "" : "none";
@@ -362,7 +426,7 @@
         p.style.animationDelay = `${(-(i / RAIN_MAX) * dur * 2).toFixed(2)}s`;
       });
       }
-      skyRect.setAttribute("opacity", (0.55 + 0.2 * intensity).toFixed(2));
+      overcast.setAttribute("opacity", (0.2 * intensity).toFixed(2));  // rain greys the paper a little
       drops.style.display = on("water") && s.irrigation ? "" : "none";
       if (on("water") && s.irrigation) Array.from(drops.children).forEach((d, k) => { const p = K.iso([(k + 0.5) * L / 10, Wd / 2, 0.4], P); d.setAttribute("cx", p[0].toFixed(1)); d.setAttribute("cy", p[1].toFixed(1)); });
 
@@ -437,7 +501,7 @@
           const ly = v.hinge[0] + vy * Math.cos(ang) + ny * mag * Math.sin(ang), lz = v.hinge[1] + vz * Math.cos(ang) + nz * mag * Math.sin(ang);
           const d = K.pathOf([[0, ly, lz], [L, ly, lz], [L, v.hinge[0], v.hinge[1]], [0, v.hinge[0], v.hinge[1]]].map((p) => K.iso(p, P)), true);
           const opened = opening > 0.02;
-          v.facet.node.style.display = opened ? "none" : ""; v.hole.style.display = opened ? "" : "none";
+          v.facet.node.style.display = opened ? "none" : ""; v.hole.style.display = opened ? "" : "none"; if (v.facet.tone) v.facet.tone.style.display = opened ? "none" : "";
           v.flap.setAttribute("d", d); v.flapEdge.setAttribute("d", d); v.flap.style.display = v.flapEdge.style.display = opened ? "" : "none";
         });
         const dep = clamp(act && isNumber(act.screen_deployed) ? act.screen_deployed : 0), xs = L * dep;

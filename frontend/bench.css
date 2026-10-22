@@ -94,7 +94,7 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .scene-card { margin: 0; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: .6rem; min-width: 0; }
 .scene-card figcaption { display: flex; justify-content: space-between; gap: .6rem; align-items: baseline; margin-bottom: .35rem; }
 .chip-line { font-size: .74rem; color: var(--muted); }
-.scene-box { border-radius: 10px; overflow: hidden; background: #f8fbf8; }
+.scene-box { border-radius: 10px; overflow: hidden; background: #f6f1e6; }
 .scene-box svg { width: 100%; height: auto; display: block; max-height: 520px; cursor: grab; }
 .readout { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: .3rem .8rem; margin: .5rem 0 0; font-size: .78rem; }
 .readout div { display: flex; justify-content: space-between; gap: .4rem; border-bottom: 1px dotted var(--line); padding: .1rem 0; height: 1.55rem; white-space: nowrap; overflow: hidden; }  /* a fixed row height: a longer value must never wrap and push the page */

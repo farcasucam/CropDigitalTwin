@@ -77,6 +77,14 @@ shows what it really did over the run.
 * **Plausibility hint**: a cold wave placed where the run's own baseline weather is in the warmest third of the cycle (or a heat wave in the coolest third) is
   flagged on its card and bar. It is relative to the run's own weather because no real climatology is available here; it never blocks.
 
+## Visual style of the scene
+
+A hand-inked look implemented in `frontend/iso_scene.js` (own code; no third-party skill or engine): warm paper background and ink-brown lines (palette set on the `<svg>`), a heavy ink silhouette
+per greenhouse span and round the ground slab, three flat tones per roof and wall facet (light, mid, dark by the angle between the facet and a fixed light), a flat blue cast shadow of the
+structure on the ground (fixed direction, so it never flashes at fast playback), a fine ink outline on healthy leaves, and a slight hand wobble (SVG displacement) on the static line work only.
+Everything is built once in `configure()`; `update()` still only rewrites attributes, and a test checks that none of the style machinery runs per frame. Measured with headless Edge on a tomato
+greenhouse season: about 10 ms of JavaScript per scene update and 17-33 ms per frame while playing at 72 h/s, unchanged by the style.
+
 ## Known gaps
 
 * The interactive simulator runs on `SYNTHETIC_SEASONAL` weather only, with each crop's single synthetic cycle (fixed planting date). Real weather in `data/weather/` is
