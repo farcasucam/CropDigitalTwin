@@ -1122,8 +1122,10 @@
       const series = [{}, { label: compare ? "baseline" : "run", stroke: "#4d6a8a", width: 1.6 }];
       if (compare) { data.push(run.series.intervention[name]); series.push({ label: "intervention", stroke: "#c0561d", width: 1.6, dash: [6, 4] }); }
       if (!live) body.append(el("div", "chart-empty", "No data yet"));
+      const flat = live && [data[1], ...(compare ? [data[2]] : [])].every((values) => values.every((item) => item === null || item === data[1].find(isNumber)));
+      if (flat) body.append(el("div", "chart-empty", `Constant ${fmt(data[1].find(isNumber) ?? 0)} in this run`));
       const plot = new window.uPlot({
-        width, height: 160, legend: { show: false }, series, scales: live ? { x: { time: true } } : { x: { time: true, range: () => [seconds[0], seconds[1]] }, y: { range: () => [0, 1] } }, cursor: { drag: { x: false, y: false } },
+        width, height: 160, legend: { show: false }, series, scales: live ? { x: { time: true }, y: { range: (_u, low, high) => (high - low < 1e-9 ? [low - 1, high + 1] : window.uPlot.rangeNum(low, high, 0.1, true)) } } : { x: { time: true, range: () => [seconds[0], seconds[1]] }, y: { range: () => [0, 1] } }, cursor: { drag: { x: false, y: false } },
         axes: [{ stroke: "#5d6f68", grid: { stroke: "#e8eeea" } }, { stroke: "#5d6f68", size: 54, grid: { stroke: "#e8eeea" }, ...(live ? {} : { values: (_u, ticks) => ticks.map(() => "") }) }],
         hooks: { drawClear: [(u) => drawBands(u)] },
       }, data, body);
