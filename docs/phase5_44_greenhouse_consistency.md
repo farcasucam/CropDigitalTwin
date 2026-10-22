@@ -75,3 +75,16 @@ By default the EnergyPlus greenhouse only ventilates (its ideal-loads unit never
 written into the IDF as the cooling set-point schedule and the ideal-loads cooling capacity limit (`EvidenceStatus.USER_SUPPLIED`). The block is part of the request, the effective configuration and the hashes only when present.
 It is a fixed rule over the whole run (EnergyPlus runs as a precomputed timeline), not the stage-aware climate controller, and it is rejected for the simplified model (cooled by the controller's equipment).
 Example (El Ejido, June 2022, default layout): maximum air temperature 35.9 -> 29.1 degC with 28 degC / 150 W/m2, 11.1 MWh of cooling, peak 130 kW. No energy-cost series is produced for it (the cost needs the controller's energy estimate, which needs a COP).
+
+## Optional crop feedback in the simplified greenhouse
+
+`"greenhouse": {"backend": "SIMPLIFIED", "crop_exchange": true}` (checkbox "Crop feedback on the air" in the bench; default off, absent from requests that do not use it, so earlier hashes are unchanged; rejected for EnergyPlus and open field)
+couples the crop to the lumped greenhouse the way `CropGreenhouseFeedbackLoop` does, inside the orchestrator step:
+
+* **What the crop gives the air:** transpiration (the water balance evaluated in the indoor air, limited by what the air's vapour deficit can take), its latent heat (cools), leaf-air sensible heat (warms) and CO2 uptake from the growth carbon proxy.
+  Fluxes are per m2 of floor and shared with the air column of the layout (volume / floor area), so a taller greenhouse dilutes them.
+* **How:** a fixed three passes from the crop-free air (`GeometryGreenhouseEngine.EXCHANGE_ITERATIONS`); humidity feeds back negatively, so it settles. The exchange is a pure function of carried state (crop, soil, previous air) and the step's forcing, so
+  runs are deterministic and a what-if branch from a checkpoint equals the continuous run exactly (tested). The engine receives the step time and the soil from the orchestrator only when the option is on.
+* **What it does (tomato, El Ejido 2022, 15 Mar-30 Jun):** mean relative humidity 54.4 -> 60.9 %, peak air temperature 36.6 -> 35.2 degC, CO2 falls to about 90 ppm at its minimum (no enrichment, no respiration), cumulative biomass 275 -> 319 g/m2 (less heat and VPD stress). Runs take about twice as long.
+* **Limits:** engineering defaults of `CropGreenhouseFeedbackConfiguration`, not calibrated; **no crop respiration or CO2 emission** (it would need a user-supplied rate; none is assumed); the crop's CO2 response in the growth model is `min(1, C/420)` (audit finding 6), so low CO2
+  only penalises growth; the climate controller's one-step forecast ignores the crop's transpiration cooling (conservative); EnergyPlus cannot model it (precomputed timeline).

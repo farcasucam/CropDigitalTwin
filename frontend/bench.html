@@ -13,7 +13,7 @@
   <script src="visual_state.js?v=20261102-visual7" defer></script>
   <script src="scene_state.js?v=20261102-scene2" defer></script>
   <script src="iso_scene.js?v=20261102-scene7" defer></script>
-  <script src="bench.js?v=18" defer></script>
+  <script src="bench.js?v=19" defer></script>
 </head>
 <body class="iso" data-theme="light">
   <header class="bar">
@@ -100,6 +100,10 @@
           <span class="seg" id="backend" role="group" aria-label="Thermal backend"></span>
         </div>
         <p id="backend-note" class="hint"></p>
+        <div id="exchange-box" class="field" hidden>
+          <label class="check"><input id="crop-exchange" type="checkbox"> Crop feedback on the air (simplified model)</label>
+          <p class="hint">The crop transpires into the greenhouse air (humidity, latent cooling), exchanges sensible heat and takes up CO2 as it grows, shared with the air column of this layout. Engineering defaults, not calibrated; no respiration or CO2 emission is assumed. Off by default so the simplified model stays comparable with EnergyPlus, which cannot model it. Runs take about twice as long.</p>
+        </div>
         <div id="hvac-box" class="field" hidden>
           <span class="label">EnergyPlus HVAC cooling (optional, yours)</span>
           <p class="hint">Without both values EnergyPlus only ventilates: nothing is assumed. With them an ideal-loads cooler holds the set-point up to the capacity for the whole run (a fixed rule, not the climate controller).</p>

@@ -98,6 +98,8 @@ class CropDigitalTwinOrchestrator:
             raise CropSimulationError("simulation time and dt_seconds are invalid")
         weather = self.weather_engine.generate(simulation_time)
         extra = {"simulation_time": simulation_time} if getattr(self.greenhouse, "requires_simulation_time", False) else {}
+        if getattr(self.greenhouse, "requires_soil", False):
+            extra["soil"] = self.soil
         microclimate = self.greenhouse.advance(weather, self.crop, dt_seconds, self.greenhouse_mode, actuators, prior=self.microclimate, **extra)
         crop_weather = self._crop_environment(weather, microclimate.indoor_state)
         phenological = self.phenology.advance(self.crop, crop_weather, simulation_time, dt_seconds)

@@ -146,6 +146,7 @@
       const c = bench.config.layout;
       request.greenhouse = { backend: bench.config.backend, layout: { typology: c.typology, span_m: c.span, ridge_rise_m: c.rise, gutter_height_m: c.gutter, pillar_spacing_m: c.pillar, n_spans: c.spans, n_bays: c.bays } };
       const hvac = bench.config.hvac || {};
+      if (bench.config.backend === "SIMPLIFIED" && bench.config.cropExchange) request.greenhouse.crop_exchange = true;
       if (bench.config.backend === "ENERGYPLUS" && isNumber(hvac.setpoint) && isNumber(hvac.capacity)) request.greenhouse.hvac = { cooling_setpoint_c: hvac.setpoint, cooling_capacity_w_m2: hvac.capacity };
     }
     const control = controlDocument();
@@ -285,10 +286,13 @@
     const info = backendInfo(bench.config.backend), hvac = bench.config.hvac || (bench.config.hvac = {});
     $("#backend-note").textContent = info.available ? info.note : info.reason;
     $("#hvac-box").hidden = bench.config.backend !== "ENERGYPLUS";
+    $("#exchange-box").hidden = bench.config.backend !== "SIMPLIFIED";
+    $("#crop-exchange").checked = Boolean(bench.config.cropExchange);
     $("#hvac-setpoint").value = isNumber(hvac.setpoint) ? String(hvac.setpoint) : "";
     $("#hvac-capacity").value = isNumber(hvac.capacity) ? String(hvac.capacity) : "";
   }
   function bindHvac() {
+    $("#crop-exchange").addEventListener("change", (event) => { bench.config.cropExchange = event.target.checked; changed(); });
     for (const [id, key] of [["hvac-setpoint", "setpoint"], ["hvac-capacity", "capacity"]]) {
       $(`#${id}`).addEventListener("change", (event) => { (bench.config.hvac || (bench.config.hvac = {}))[key] = event.target.value === "" ? null : Number(event.target.value); changed(); });
     }
@@ -773,7 +777,7 @@
     $("#tariff-flat").addEventListener("change", (event) => { t.flat = event.target.value === "" ? null : Number(event.target.value); tariffChanged(); });
     $("#tariff-currency").addEventListener("change", (event) => { t.currency = event.target.value; renderTariff(); tariffChanged(); });
     $("#tariff-offset").addEventListener("change", (event) => { t.offset = Number(event.target.value) || 0; tariffChanged(); });
-    $("#add-year").addEventListener("click", () => { t.yearly.push({ year: new Date().getUTCFullYear() + 1, price: null }); renderTariff(); });
+    $("#add-year").addEventListener("click", () => { t.yearly.push({ year: Number(iso(startMs()).slice(0, 4)) + 1, price: null }); renderTariff(); });
     $("#add-band").addEventListener("click", () => { t.bands.push({ from: 0, to: 8, mode: "price", value: null }); renderTariff(); });
     renderTariff();
   }

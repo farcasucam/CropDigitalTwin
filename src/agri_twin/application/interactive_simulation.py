@@ -1054,7 +1054,7 @@ class InteractiveSimulationService:
         if request.control is not None:
             engine_arguments["control"] = ControlSession(request.control, request.crop)
         if request.greenhouse is not None and request.greenhouse.backend == "SIMPLIFIED":
-            engine_arguments["greenhouse_engine_factory"] = lumped_engine_factory(simplified_configuration(request.greenhouse)[0])
+            engine_arguments["greenhouse_engine_factory"] = lumped_engine_factory(simplified_configuration(request.greenhouse)[0], request.greenhouse.crop_exchange)
         if request.greenhouse is not None and request.greenhouse.backend == "ENERGYPLUS":
             try:
                 timeline = build_timeline(request.greenhouse, request.plot, with_runtime_events(execution.spec.scenario, request.runtime_events), _weather_factory(request), request.end_time)
@@ -1474,7 +1474,7 @@ class InteractiveSimulationApiSuite:
             request = canonicalize_request(materialize(document))
             spec = build_campaign(request.crop, request.environment, request.scenario, seed=request.seed)
             phenology = None if request.dormancy == DEFAULT_DORMANCY_CONFIGURATION else PhenologyEngine(dormancy=DormancyChillingController(configuration=request.dormancy))
-            engine = ({"greenhouse_engine_factory": lumped_engine_factory(simplified_configuration(request.greenhouse)[0])}
+            engine = ({"greenhouse_engine_factory": lumped_engine_factory(simplified_configuration(request.greenhouse)[0], request.greenhouse.crop_exchange)}
                       if request.greenhouse is not None and request.greenhouse.backend == "SIMPLIFIED" else {})  # a greenhouse run uses the lumped engine of its layout, through either path
             direct = ScenarioRunner(seasonal_weather_factory).run(spec.scenario, phenology=phenology, **engine)
             api = self._service().run_simulation(request)

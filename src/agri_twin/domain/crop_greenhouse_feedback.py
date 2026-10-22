@@ -228,6 +228,10 @@ class CropGreenhouseFeedbackLoop:
         self.greenhouse.commit(current)
         return CropGreenhouseStepResult(current, last_growth.state, last_growth, last_exchange, feedback, FeedbackConvergence(converged, iteration, error, reason))
 
+    def grow(self, crop: CropGrowthState, weather: WeatherState, microclimate: MicroclimateState, dt_seconds: float, simulation_time: datetime) -> CropGrowthResult:
+        """The crop's growth over one step in the given microclimate (what the exchange model needs to convert growth into CO2 uptake)."""
+        return self._grow(crop, weather, microclimate, dt_seconds, simulation_time)
+
     def _grow(self, crop: CropGrowthState, weather: WeatherState, microclimate: MicroclimateState, dt_seconds: float, simulation_time: datetime) -> CropGrowthResult:
         # No rain falls inside the greenhouse; the crop sees only the microclimate.
         crop_weather = WeatherState(microclimate.temperature_c, microclimate.relative_humidity_pct, microclimate.solar_radiation_w_m2, weather.wind_speed_m_s, weather.wind_direction_deg, 0.0, microclimate.pressure_hpa)

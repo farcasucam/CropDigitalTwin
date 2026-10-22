@@ -29,7 +29,7 @@ from agri_twin.infrastructure.epw_weather import EpwLocation
 from agri_twin.infrastructure.greenhouse_idf import ThermalSpec
 
 BACKENDS = ("SIMPLIFIED", "ENERGYPLUS")
-BACKEND_FIELDS = ("backend", "layout", "hvac")
+BACKEND_FIELDS = ("backend", "layout", "hvac", "crop_exchange")
 HVAC_FIELDS = ("cooling_setpoint_c", "cooling_capacity_w_m2")
 LAYOUT_FIELDS = ("typology", "span_m", "n_spans", "n_bays", "gutter_height_m", "ridge_rise_m", "pillar_spacing_m")
 DEFAULT_TYPOLOGY = GreenhouseTypology.MULTITUNEL_CAPILLA.value
@@ -49,26 +49,26 @@ class GreenhouseBackendError(ValueError):
 class GreenhouseBackendRequest:
     """Canonical backend selection. Only non-default (ENERGYPLUS) selections exist as objects; SIMPLIFIED is represented by None."""
 
-    __slots__ = ("backend", "layout", "hvac")
+    __slots__ = ("backend", "layout", "hvac", "crop_exchange")
 
-    def __init__(self, backend: str, layout: tuple[tuple[str, Any], ...], hvac: tuple[tuple[str, float], ...] = ()) -> None:
-        self.backend, self.layout, self.hvac = backend, layout, hvac
+    def __init__(self, backend: str, layout: tuple[tuple[str, Any], ...], hvac: tuple[tuple[str, float], ...] = (), crop_exchange: bool = False) -> None:
+        self.backend, self.layout, self.hvac, self.crop_exchange = backend, layout, hvac, crop_exchange
 
     def to_dict(self) -> dict[str, Any]:
-        return {"backend": self.backend, "layout": dict(self.layout), **({"hvac": dict(self.hvac)} if self.hvac else {})}  # no block when absent: earlier requests keep their hashes
+        return {"backend": self.backend, "layout": dict(self.layout), **({"hvac": dict(self.hvac)} if self.hvac else {}), **({"crop_exchange": True} if self.crop_exchange else {})}  # no entry when absent: earlier requests keep their hashes
 
     def __eq__(self, other: object) -> bool:
-        return isinstance(other, GreenhouseBackendRequest) and (self.backend, self.layout, self.hvac) == (other.backend, other.layout, other.hvac)
+        return isinstance(other, GreenhouseBackendRequest) and (self.backend, self.layout, self.hvac, self.crop_exchange) == (other.backend, other.layout, other.hvac, other.crop_exchange)
 
     def __hash__(self) -> int:
-        return hash((self.backend, self.layout, self.hvac))
+        return hash((self.backend, self.layout, self.hvac, self.crop_exchange))
 
 
-def _simplified_request(layout: Any) -> GreenhouseBackendRequest:
+def _simplified_request(layout: Any, crop_exchange: bool = False) -> GreenhouseBackendRequest:
     """The simplified backend is a lumped model of the SAME greenhouse the EnergyPlus backend simulates, so it carries a layout too (default typology when omitted)."""
     fields = _layout_fields(layout)
     _spec(fields)
-    return GreenhouseBackendRequest("SIMPLIFIED", tuple(sorted(fields.items())))
+    return GreenhouseBackendRequest("SIMPLIFIED", tuple(sorted(fields.items())), crop_exchange=crop_exchange)
 
 
 def parse_greenhouse_backend(document: Any, environment: str, runtime_event_types: tuple[str, ...] = ()) -> GreenhouseBackendRequest | None:
@@ -84,6 +84,12 @@ def parse_greenhouse_backend(document: Any, environment: str, runtime_event_type
         raise GreenhouseBackendError(f"greenhouse backend {backend!r} is not available; choose one of {', '.join(BACKENDS)}", "greenhouse.backend", "INVALID_REQUEST")
     layout = document.get("layout")
     hvac = _hvac_fields(document.get("hvac"))
+    crop_exchange = document.get("crop_exchange", False)
+    if not isinstance(crop_exchange, bool):
+        raise GreenhouseBackendError("greenhouse.crop_exchange must be true or false", "greenhouse.crop_exchange", "INVALID_REQUEST")
+    if crop_exchange and (backend != "SIMPLIFIED" or environment != "greenhouse"):
+        raise GreenhouseBackendError("crop_exchange (transpiration, latent and sensible heat, CO2 uptake) is modelled by the simplified greenhouse only; EnergyPlus runs as a precomputed timeline without the crop",
+                                     "greenhouse.crop_exchange", "UNSUPPORTED_ENVIRONMENT")
     if hvac and backend != "ENERGYPLUS":
         raise GreenhouseBackendError("greenhouse.hvac configures the EnergyPlus ideal-loads cooling; the simplified model is cooled by the climate controller's equipment", "greenhouse.hvac", "UNSUPPORTED_ENVIRONMENT")
     if backend == "SIMPLIFIED":
@@ -91,7 +97,7 @@ def parse_greenhouse_backend(document: Any, environment: str, runtime_event_type
             if layout is not None:
                 raise GreenhouseBackendError("a layout needs the greenhouse environment (open-field runs have no greenhouse)", "greenhouse.layout", "UNSUPPORTED_ENVIRONMENT")
             return None
-        return _simplified_request(layout)
+        return _simplified_request(layout, crop_exchange)
     if environment != "greenhouse":
         raise GreenhouseBackendError("the ENERGYPLUS backend needs the greenhouse environment (open-field runs never use EnergyPlus)", "greenhouse.backend", "UNSUPPORTED_ENVIRONMENT")
     spec_fields = _layout_fields(layout)
@@ -182,7 +188,12 @@ def describe(request: GreenhouseBackendRequest) -> dict[str, Any]:
     """Effective configuration block (hashed with the rest of the effective configuration)."""
     spec = layout_spec(request)
     if request.backend == "SIMPLIFIED":
-        return {"backend": "SIMPLIFIED", "layout": dict(request.layout), "geometry_provenance": spec.provenance.value, **simplified_configuration(request)[1]}
+        configuration, description = simplified_configuration(request)
+        if request.crop_exchange:
+            description = {**description, "crop_exchange": True, "limits": ["crop exchange: transpiration (water balance of the indoor air, limited by its vapour deficit), latent and sensible heat and CO2 uptake from a growth carbon proxy, iterated "
+                                                                           f"{3} times per step against the air it produces; engineering defaults, not calibrated", "no crop respiration or CO2 emission (needs a user-supplied rate: none is assumed)",
+                                                                           "the climate controller's one-step forecast ignores the crop's transpiration cooling", *description["limits"][1:]]}
+        return {"backend": "SIMPLIFIED", "layout": dict(request.layout), "geometry_provenance": spec.provenance.value, **description}
     install = find_energyplus()
     return {
         "backend": "ENERGYPLUS", "layout": dict(request.layout), "geometry_provenance": spec.provenance.value,

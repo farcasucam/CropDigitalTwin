@@ -211,3 +211,8 @@ def test_the_bench_prices_the_estimated_energy_with_the_users_own_tariff_after_t
 def test_the_bench_offers_optional_energyplus_hvac_cooling_without_assuming_values():
     assert "hvac-setpoint" in HTML and "hvac-capacity" in HTML and "nothing is assumed" in HTML.lower()
     assert "cooling_setpoint_c" in JS and "cooling_capacity_w_m2" in JS and 'bench.config.backend === "ENERGYPLUS" && isNumber(hvac.setpoint)' in JS
+
+
+def test_the_bench_offers_the_optional_crop_feedback_of_the_simplified_model():
+    assert "crop-exchange" in HTML and "Off by default" in HTML
+    assert "request.greenhouse.crop_exchange = true" in JS and 'bench.config.backend === "SIMPLIFIED" && bench.config.cropExchange' in JS

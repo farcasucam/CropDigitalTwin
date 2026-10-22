@@ -5,7 +5,7 @@ number of the lumped model from what the EnergyPlus greenhouse is built from (``
 model needs and EnergyPlus resolves with detailed geometry (``src/greenhouse_reduced_model.json``). The two backends therefore describe one greenhouse and can be compared.
 
 It has the same default operation as the EnergyPlus model (vents open by themselves above a temperature when it is cooler outside, an ideal heater holds a minimum), no crop
-feedback and no CO2 balance beyond the commanded supply. All values are provisional; this is consistency between models, not validation against a real greenhouse.
+feedback unless asked for (``crop_exchange``, see ``GeometryGreenhouseEngine``) and no CO2 balance beyond the commanded supply and the crop's uptake. All values are provisional; this is consistency between models, not validation against a real greenhouse.
 """
 
 from __future__ import annotations
@@ -16,6 +16,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any, Callable, Mapping
 
+from agri_twin.domain.crop_greenhouse_feedback import CropGreenhouseFeedbackConfiguration, CropGreenhouseFeedbackLoop, CropPhysicalExchangeModel
 from agri_twin.domain.greenhouse import (
     AIR_DENSITY_KG_M3,
     AIR_SPECIFIC_HEAT_J_KG_K,
@@ -73,21 +74,46 @@ def reduced_configuration(spec: GreenhouseGeometrySpec, envelope: EnvelopeSpec |
 class GeometryGreenhouseEngine(GreenhouseMicroclimateEngine):
     """Orchestrator-facing engine of the reduced model: uses its OWN configuration (the historical engine rebuilt a default one every step)."""
 
-    def __init__(self, configuration: GreenhouseConfiguration) -> None:
+    EXCHANGE_ITERATIONS = 3  # fixed-point passes of vapour/heat/CO2 exchange against the microclimate it produces (humidity feeds back negatively, so it settles)
+
+    def __init__(self, configuration: GreenhouseConfiguration, crop_exchange: bool = False) -> None:
         super().__init__(configuration=configuration)
+        self.crop_exchange = crop_exchange
+        # with the exchange on, the orchestrator also hands over the step time and the soil (everything the exchange is computed from is carried state, so what-if branches stay exact)
+        self.requires_simulation_time = crop_exchange
+        self.requires_soil = crop_exchange
+        if crop_exchange:
+            volume_per_floor_m2 = configuration.volume_m3 / configuration.thermal_exchange_area_m2  # the air column the crop's vapour and CO2 are shared with
+            self._exchange_configuration = CropGreenhouseFeedbackConfiguration(air_volume_m3=volume_per_floor_m2)
+            self._exchange = CropPhysicalExchangeModel(self._exchange_configuration)
+            self._growth = CropGreenhouseFeedbackLoop(self, exchange=self._exchange, configuration=self._exchange_configuration)
 
     @property
     def configuration(self) -> GreenhouseConfiguration:
         return self._configuration
 
     def advance(self, weather: WeatherState, crop, dt_seconds: float, mode: str = "outdoor", actuators: Mapping[str, Any] | None = None,
-                prior: GreenhouseMicroclimateState | None = None) -> GreenhouseMicroclimateResult:
+                prior: GreenhouseMicroclimateState | None = None, simulation_time=None, soil=None) -> GreenhouseMicroclimateResult:
         if prior is None:
             self._state = None
         controls = self._normalize_actuators(self._scaled(actuators))
-        state = self.step(weather, replace(self._configuration, mode=mode), controls, CropMicroclimateFeedback(leaf_area_index=crop.leaf_area_index), dt_seconds, prior=prior)
+        configuration = replace(self._configuration, mode=mode)
+        feedback = CropMicroclimateFeedback(leaf_area_index=crop.leaf_area_index)
+        if self.crop_exchange and simulation_time is not None:
+            feedback = self._crop_feedback(weather, crop, configuration, controls, dt_seconds, prior, simulation_time, soil)
+        state = self.step(weather, configuration, controls, feedback, dt_seconds, prior=prior)
         consumption = sum(value.consumption_kwh for value in (actuators or {}).values() if isinstance(value, ActuatorControl) and value.enabled and not value.failed)
         return GreenhouseMicroclimateResult(derived_environment(state), GreenhouseMicroclimateState(**state.to_dict()), consumption, 0.0)
+
+    def _crop_feedback(self, weather: WeatherState, crop, configuration: GreenhouseConfiguration, controls, dt_seconds: float, prior, simulation_time, soil) -> CropMicroclimateFeedback:
+        """Transpiration, latent and sensible heat and CO2 uptake of the crop in the air it produces: a pure function of the carried state (crop, soil, prior air) and the step's
+        forcing, iterated a fixed number of times from the crop-free air. Transpiration cannot exceed what the air's vapour deficit can take (mass conservation in the exchange model)."""
+        feedback = CropMicroclimateFeedback(leaf_area_index=crop.leaf_area_index)
+        for _ in range(self.EXCHANGE_ITERATIONS):
+            state = self._compute_state(weather, configuration, controls, feedback, dt_seconds, prior)
+            growth = self._growth.grow(crop, weather, state, dt_seconds, simulation_time)
+            feedback = self._exchange.calculate(crop, growth, state, weather, dt_seconds, soil).to_feedback()
+        return feedback
 
     def predict_air_temperature(self, weather: WeatherState, prior: GreenhouseMicroclimateState | None, dt_seconds: float, mode: str = "passive_greenhouse",
                                 extra_air_changes: float = 0.0, net_hvac_kw: float = 0.0, shade: float = 0.0) -> float:
@@ -110,5 +136,5 @@ class GeometryGreenhouseEngine(GreenhouseMicroclimateEngine):
         return scaled
 
 
-def engine_factory(configuration: GreenhouseConfiguration) -> Callable[[Any, Any], GeometryGreenhouseEngine]:
-    return lambda _scenario, _provider: GeometryGreenhouseEngine(configuration)
+def engine_factory(configuration: GreenhouseConfiguration, crop_exchange: bool = False) -> Callable[[Any, Any], GeometryGreenhouseEngine]:
+    return lambda _scenario, _provider: GeometryGreenhouseEngine(configuration, crop_exchange)
