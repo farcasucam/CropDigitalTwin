@@ -19,7 +19,7 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from typing import Any, Mapping, Sequence
 
-from agri_twin.application.scenarios import ScenarioEvent
+from agri_twin.application.scenarios import HALF_OPEN_INTERVAL, HOLD_DEW_POINT, ScenarioEvent
 
 UTC = timezone.utc
 SOURCE_USER_EVENT = "USER_DEFINED_EVENT"
@@ -74,7 +74,7 @@ SPECS: tuple[EventSpec, ...] = (
     EventSpec("LOW_RADIATION", "low_radiation", "radiation_multiplier", "multiplier of the forcing solar radiation (< 1)", "ALL", 0.0, 1.0, False, True, True,
               ("radiation_w_m2", "radiation_stress", "temperature_c"), "scales the solar radiation of the weather forcing"),
     EventSpec("WIND", "wind", "speed_multiplier", "multiplier of the forcing wind speed", "ALL", 0.0, 10.0, False, False, True,
-              ("temperature_c", "et0_mm"), "scales the wind speed of the weather forcing"),
+              ("temperature_c",), "scales the wind speed of the weather forcing; only the EnergyPlus backend uses wind (its convection and infiltration): no process of the outdoor or simplified models depends on it, so those outputs do not change (audit finding 5)"),
     EventSpec("IRRIGATION", "irrigation", "amount_mm", "mm of irrigation applied in every step of the interval", "ALL", 0.0, 100.0, True, False, False,
               ("irrigation_mm", "soil_water_vwc_m3_m3", "water_stress"), "requests drip irrigation in each step of the interval"),
     EventSpec("VENTILATION", "ventilation", "value", "greenhouse ventilation actuator command (fraction of its maximum)", "GREENHOUSE", 0.0, 1.0, False, False, False,
@@ -82,7 +82,7 @@ SPECS: tuple[EventSpec, ...] = (
     EventSpec("SHADING", "shade", "value", "greenhouse shading actuator command (fraction of its maximum)", "GREENHOUSE", 0.0, 1.0, False, False, False,
               ("greenhouse_shading_fraction", "radiation_w_m2", "temperature_c"), "commands the existing greenhouse shading actuator"),
     EventSpec("CO2", "co2", "value", "greenhouse CO2 actuator command (fraction of its maximum)", "GREENHOUSE", 0.0, 1.0, False, False, False,
-              ("co2_ppm",), "commands the existing greenhouse CO2 actuator"),
+              ("co2_ppm",), "commands the existing greenhouse CO2 actuator; the crop's growth response is min(1, CO2/420), so enrichment above 420 ppm does not raise growth (audit finding 6)"),
 )
 SPEC_INDEX = {spec.api_type: spec for spec in SPECS}
 NOT_SUPPORTED: Mapping[str, str] = {
@@ -123,6 +123,9 @@ class RuntimeEvent:
     def to_scenario_event(self) -> ScenarioEvent:
         spec = self.spec
         parameters: dict[str, float] = {spec.primary_parameter: self.intensity} if spec.primary_parameter else {}
+        parameters[HALF_OPEN_INTERVAL] = 1.0  # N hours act on N steps (audit finding 10)
+        if spec.api_type in {"HEAT_WAVE", "COLD_WAVE"}:
+            parameters[HOLD_DEW_POINT] = 1.0  # the air keeps its vapour pressure when its temperature changes (audit finding 4)
         if self.ramp_hours > 0.0:
             parameters["ramp_hours"] = self.ramp_hours
         return ScenarioEvent(self.event_id, spec.scenario_type, self.start, self.end, self.intensity, parameters)

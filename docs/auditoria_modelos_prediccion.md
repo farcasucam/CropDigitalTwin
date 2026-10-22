@@ -53,13 +53,15 @@ está en los parámetros: área, volumen, conductancia y renovaciones no son coh
 **3. Una orden de ventilación significaba cosas distintas según el modelo (CORREGIDO).** `ActuatorControl(requested, maximum=1)` hace que "ventilación 1,0" sean +1 renovación/h en el simplificado, frente a 30 en
 EnergyPlus (30 × más). "Ventanas totalmente abiertas" no hacía nada en el simplificado. *Corregido:* la orden es una fracción de la capacidad de ventanas (30 renovaciones/h) en los dos modelos; ventanas abiertas bajan ahora la temperatura interior 4,0 K en el simplificado y 4,1 K en EnergyPlus, y `greenhouse_ventilation_fraction` es la apertura en ambos.
 
-**4. Las olas de calor y de frío conservan la humedad relativa, no la humedad absoluta.** Una ola de calor de +8 K a HR constante multiplica por 1,68 la presión de vapor del aire. Evidencia (campo abierto,
+**4. Las olas de calor y de frío conservaban la humedad relativa, no la humedad absoluta (CORREGIDO para eventos de ejecución).** Una ola de calor de +8 K a HR constante multiplica por 1,68 la presión de vapor del aire. Evidencia (campo abierto,
 72 h): VPD del modelo 0,56 kPa frente a **1,20 kPa** si se mantuviera la presión de vapor, es decir, el estrés por VPD de una ola de calor se **subestima 2,1 veces**. En EnergyPlus el aire exterior más cálido y húmedo
-**humedece** el invernadero (+18,6 puntos de HR) y baja el estrés por VPD durante una ola de calor: el signo es el contrario al esperado. *Corrección propuesta:* mantener el punto de rocío (o la presión de vapor) por defecto
-y dar la opción de fijar la HR.
+**humedece** el invernadero (+18,6 puntos de HR) y baja el estrés por VPD durante una ola de calor: el signo es el contrario al esperado. *Corregido:* los eventos de ola de calor y de frío creados desde la API de ejecución mantienen la presión de vapor del aire (`hold_dew_point`): +8 K en campo abierto baja la HR media 28 puntos en la ventana
+y una ola de frío la sube; los escenarios históricos (fases anteriores) conservan su comportamiento y sus hashes. La opción de fijar la HR sigue siendo el evento de humedad.
 
-**5. El viento no hace nada, salvo en EnergyPlus.** El evento promete afectar a `temperature_c` y `et0_mm` pero ninguna salida cambia en campo abierto ni en el simplificado: ET0 es una fórmula tipo Hargreaves con
+**5. El viento no hace nada, salvo en EnergyPlus (DOCUMENTADO, no corregido).** El evento promete afectar a `temperature_c` y `et0_mm` pero ninguna salida cambia en campo abierto ni en el simplificado: ET0 es una fórmula tipo Hargreaves con
 rango térmico fijo de 10 °C, sin viento, humedad ni VPD, y la ventilación simplificada no depende del viento. En EnergyPlus sí cambia (por la convección exterior de la cubierta). Mismo evento, física distinta según el modelo.
+*Decisión:* no se sustituye ET0. Penman-Monteith (FAO-56) horario necesita la geometría solar (latitud, día, hora) para la radiación neta de onda larga y un cociente de nubosidad que el modelo no tiene; elegir esos valores sería inventarlos, y el cambio alteraría la
+hidrología de todas las fases y sus hashes. El evento de viento declara ahora que solo actúa mediante EnergyPlus (`affected_variables = temperature_c`, texto en el contrato) y una prueba lo fija. Queda como mejora aparte.
 
 **6. El CO₂ no puede aumentar el crecimiento.** `co2_response = min(1, CO₂/420)`: por encima de 420 ppm no hay efecto, así que el enriquecimiento (práctica habitual en invernadero) es invisible para el cultivo.
 EnergyPlus no modela CO₂. La magnitud del evento en el simplificado (+26,7 ppm en equilibrio) es una convención de unidades.
@@ -79,18 +81,19 @@ los cultivos: solo cambian el LAI máximo y los umbrales del catálogo. La trans
 
 ### Baja gravedad
 
-**10. Ventana de los eventos.** (Pendiente.) `ScenarioEvent.active` es cerrado en ambos extremos y el paso se etiqueta con el final del intervalo: un evento de 72 h afecta a **73 pasos** (27-feb 00:00 a 2-mar 00:00), con un
+**10. Ventana de los eventos (CORREGIDO para eventos de ejecución).** `ScenarioEvent.active` es cerrado en ambos extremos y el paso se etiqueta con el final del intervalo: un evento de 72 h afecta a **73 pasos** (27-feb 00:00 a 2-mar 00:00), con un
 desfase de una hora respecto a la semántica de intervalo (error del 1,4 % en la duración). Además hay una diferencia de **una hora entre tipos de evento**: los de forcing meteorológico (temperatura, radiación, lluvia) actúan en las muestras etiquetadas desde el inicio del evento, y los de actuador (riego, ventilación, sombreado, CO₂) en el paso que *empieza* dentro del evento, es decir, una muestra más tarde.
+*Corregido:* los eventos de ejecución son semiabiertos: un evento de N horas actúa sobre exactamente N pasos. Los de forzamiento (muestra etiquetada `t`, la hora que termina en `t`) actúan en `(inicio, fin]` y los de actuador (evaluados al empezar el paso) en `[inicio, fin)`: son los mismos N pasos, sin desfase entre tipos. Los hashes de las ejecuciones con eventos cambian; los escenarios históricos no.
 
 ## Plan de corrección sugerido (por impacto)
 
 1. ~~Riego: el último evento activo gana~~ (hecho, con prueba).
 2. ~~Invernadero simplificado coherente con EnergyPlus~~ (hecho en la fase 5.44, con prueba de acuerdo entre modelos).
-3. Olas de calor/frío: conservar el punto de rocío por defecto.
+3. ~~Olas de calor/frío: conservar el punto de rocío por defecto~~ (hecho para eventos de ejecución).
 4. ~~Semántica común de ventilación y definición única de `greenhouse_ventilation_fraction`~~ (hecho en la fase 5.44).
-5. ET0 con viento y VPD (Penman-Monteith con el coeficiente de cultivo del catálogo) o marcar el evento de viento como "solo EnergyPlus".
+5. ~~ET0 con viento y VPD o marcar el evento de viento como "solo EnergyPlus"~~ (marcado; Penman-Monteith queda como mejora aparte, ver el hallazgo).
 6. Respuesta al CO₂ con efecto de enriquecimiento (con fuente trazable) o avisar de que el evento no afecta al cultivo.
-7. ~~Convertir esta matriz en pruebas de regresión~~ (hecho en `tests/test_intervention_effects.py`: las invariantes que ya se cumplen son pruebas normales, y los hallazgos 2 a 6 y 10 son pruebas `xfail` estrictas que fallarán al corregirse el defecto, obligando a actualizar esta nota).
+7. ~~Convertir esta matriz en pruebas de regresión~~ (hecho en `tests/test_intervention_effects.py`: las invariantes que ya se cumplen son pruebas normales, y los hallazgos 5 y 6 abiertos son pruebas `xfail` estrictas que fallarán al corregirse el defecto, obligando a actualizar esta nota).
 
 ## Límites de esta auditoría
 

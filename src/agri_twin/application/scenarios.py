@@ -24,7 +24,7 @@ from agri_twin.domain import (
     WeatherConfiguration,
     WeatherState,
 )
-from agri_twin.domain.greenhouse import GreenhouseMicroclimateState
+from agri_twin.domain.greenhouse import GreenhouseMicroclimateState, saturation_vapour_pressure_kpa
 from agri_twin.domain.calibration import DatasetRole, Observation, ObservationDataset, ObservationResolution, SimulationPoint
 
 
@@ -46,6 +46,14 @@ class ScenarioKind(StrEnum):
     BENCHMARK = "benchmark"
 
 
+HALF_OPEN_INTERVAL = "half_open_interval"  # parameter set by runtime events (see ScenarioEvent.active)
+HOLD_DEW_POINT = "hold_dew_point"          # parameter set by runtime temperature waves: the vapour pressure of the air is kept, so the relative humidity follows the temperature
+
+
+def _humidity_holding_vapour_pressure(old_temperature_c: float, relative_humidity_pct: float, new_temperature_c: float) -> float:
+    return min(100.0, max(0.0, relative_humidity_pct * saturation_vapour_pressure_kpa(old_temperature_c) / saturation_vapour_pressure_kpa(new_temperature_c)))
+
+
 @dataclass(frozen=True, slots=True)
 class ScenarioEvent:
     event_id: str
@@ -62,7 +70,18 @@ class ScenarioEvent:
             raise ScenarioError("event intensity must be finite")
 
     def active(self, timestamp: datetime) -> bool:
+        """Whether an actuator command applies to the step that STARTS at ``timestamp``. Historical events: closed interval. Runtime events (``half_open_interval``): [start, end),
+        so an event of N hours acts on exactly N steps."""
+        if self.parameters.get(HALF_OPEN_INTERVAL):
+            return self.start <= timestamp < self.end
         return self.start <= timestamp <= self.end
+
+    def forcing_active(self, label: datetime) -> bool:
+        """Whether a weather-forcing change applies to the step LABELLED ``label`` (the hour ending at ``label``). For runtime events that is (start, end]: the same N steps as the
+        actuator commands, which are evaluated at the start of their step."""
+        if self.parameters.get(HALF_OPEN_INTERVAL):
+            return self.start < label <= self.end
+        return self.active(label)
 
 
 @dataclass(frozen=True, slots=True)
@@ -162,13 +181,15 @@ class _ScenarioWeatherProvider:
     def get(self, timestamp: datetime) -> WeatherState:
         values = asdict(self.base_provider.get(timestamp) if self.base_provider is not None else self.scenario.base_weather)
         for event in self.scenario.events:
-            if not event.active(timestamp):
+            if not event.forcing_active(timestamp):
                 continue
             weight = self._ramp(event, timestamp)
-            if event.event_type in {"warm", "heat_wave", "heat"}:
-                values["temperature_c"] += weight * event.parameters.get("temperature_offset_c", event.intensity)
-            elif event.event_type == "cold_wave":
-                values["temperature_c"] -= weight * event.parameters.get("temperature_offset_c", event.intensity)
+            if event.event_type in {"warm", "heat_wave", "heat", "cold_wave"}:
+                before = values["temperature_c"]
+                offset = weight * event.parameters.get("temperature_offset_c", event.intensity)
+                values["temperature_c"] += -offset if event.event_type == "cold_wave" else offset
+                if event.parameters.get(HOLD_DEW_POINT):
+                    values["relative_humidity_pct"] = _humidity_holding_vapour_pressure(before, values["relative_humidity_pct"], values["temperature_c"])
             elif event.event_type in {"cold", "frost"}:
                 values["temperature_c"] = self._toward(values["temperature_c"], event.parameters.get("temperature_c", event.intensity), weight)
             elif event.event_type in {"dry", "drought"}:

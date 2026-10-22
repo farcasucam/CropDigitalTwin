@@ -51,7 +51,7 @@ def delta(mode: str, kind: str, intensity: float | None, name: str) -> list[floa
 
 
 def window(values: list[float]) -> list[float]:
-    base = start_index(baseline("outdoor"))
+    base = start_index(baseline("outdoor")) + 1  # the step labelled START is the hour BEFORE the event; the event acts on the HOURS steps after it
     return values[base:base + HOURS]
 
 
@@ -69,9 +69,9 @@ def test_an_event_never_changes_anything_before_it_starts(mode, kind, intensity)
 
 def test_a_heat_wave_adds_exactly_its_offset_to_the_outdoor_temperature_and_only_inside_its_window():
     changes = delta("outdoor", "HEAT_WAVE", 8, "temperature_c")
-    first = start_index(baseline("outdoor"))
+    first = start_index(baseline("outdoor")) + 1
     assert all(abs(value - 8.0) < 1e-9 for value in changes[first:first + HOURS])
-    assert all(value == 0.0 for value in changes[:first]) and all(value == 0.0 for value in changes[first + HOURS + 1:])
+    assert all(value == 0.0 for value in changes[:first]) and all(value == 0.0 for value in changes[first + HOURS:])
 
 
 def test_a_cold_wave_lowers_the_temperature_and_raises_cold_stress_and_frost_damage():
@@ -119,10 +119,10 @@ def test_actuator_events_are_refused_outdoors_and_co2_is_refused_by_energyplus()
 @pytest.mark.parametrize("mode", ["outdoor", "gh"])
 def test_a_user_irrigation_replaces_the_scheduled_one_for_its_window_only(mode):
     base, changed = baseline(mode)["irrigation_mm"], with_event(mode, "IRRIGATION", 2)["irrigation_mm"]
-    first = start_index(baseline(mode)) + 1  # an actuator acts on the step that STARTS inside the event (forcing events use the step's end time: one hour earlier)
+    first = start_index(baseline(mode)) + 1  # the step that STARTS at the event start is labelled one hour later, like the first forced step
     applied = 2.0 * IRRIGATION_EFFICIENCY["drip"]
-    assert all(abs(value - applied) < 1e-9 for value in changed[first:first + HOURS + 1])
-    assert changed[:first] == base[:first] and changed[first + HOURS + 1:] == base[first + HOURS + 1:]
+    assert all(abs(value - applied) < 1e-9 for value in changed[first:first + HOURS])
+    assert changed[:first] == base[:first] and changed[first + HOURS:] == base[first + HOURS:]
     assert sum(changed) > sum(base)
 
 
@@ -189,14 +189,23 @@ def test_the_two_greenhouse_models_agree_on_the_standard_window_within_stated_to
 
 
 # ---- audited defects still open, stated as what a correct model would do (strict xfail) -------------------------------------------------------------
-@pytest.mark.xfail(strict=True, reason="audit finding 4: heat and cold waves keep the relative humidity, multiplying the vapour pressure by 1.68 for +8 K")
 def test_a_heat_wave_does_not_raise_the_vapour_pressure_of_the_outdoor_air():
-    assert statistics.mean(window(delta("outdoor", "HEAT_WAVE", 8, "relative_humidity_pct"))) < -10.0  # keeping the dew point makes the air drier
+    assert statistics.mean(window(delta("outdoor", "HEAT_WAVE", 8, "relative_humidity_pct"))) < -10.0  # keeping the dew point makes the air drier (audit finding 4, fixed)
 
 
-@pytest.mark.xfail(strict=True, reason="audit finding 5: wind changes no output outdoors or in the simplified greenhouse (ET0 has no wind or VPD term)")
+def test_a_cold_wave_keeps_the_dew_point_so_the_air_gets_more_humid_in_relative_terms():
+    assert statistics.mean(window(delta("outdoor", "COLD_WAVE", 8, "relative_humidity_pct"))) > 5.0
+
+
+@pytest.mark.xfail(strict=True, reason="audit finding 5, documented not fixed: ET0 is Hargreaves-Samani with a fixed temperature range, so it has no wind or VPD term; the WIND event declares that only EnergyPlus uses wind")
 def test_wind_changes_the_reference_evapotranspiration():
     assert any(abs(value) > 1e-9 for value in delta("outdoor", "WIND", 3, "et0_mm"))
+
+
+def test_the_wind_event_says_it_only_acts_through_energyplus():
+    from agri_twin.application.runtime_events import SPEC_INDEX
+    spec = SPEC_INDEX["WIND"]
+    assert spec.affected_variables == ("temperature_c",) and "only the EnergyPlus backend uses wind" in spec.summary
 
 
 @pytest.mark.xfail(strict=True, reason="audit finding 6: the CO2 response is min(1, CO2/420), so enrichment cannot increase growth")
@@ -204,7 +213,41 @@ def test_co2_enrichment_can_raise_the_growth_response():
     assert CropGrowthEngine.co2_response(800.0) > CropGrowthEngine.co2_response(420.0)
 
 
-@pytest.mark.xfail(strict=True, reason="audit finding 10: an event of 72 h acts on 73 hourly steps (the interval is closed at both ends)")
 def test_an_event_acts_for_exactly_its_duration():
     affected = [d for d in delta("outdoor", "HEAT_WAVE", 8, "temperature_c") if abs(d) > 1e-9]
-    assert len(affected) == HOURS
+    assert len(affected) == HOURS  # audit finding 10, fixed
+
+
+def test_forcing_and_actuator_events_cover_the_same_steps():
+    def steps(mode, kind, value, variable):
+        return [i for i, d in enumerate(delta(mode, kind, value, variable)) if abs(d) > 1e-9]
+    forcing, actuator = steps("gh", "HEAT_WAVE", 8, "outdoor_temperature_c"), steps("gh", "SHADING", 0.6, "greenhouse_shading_fraction")
+    assert len(forcing) == len(actuator) == HOURS and forcing[0] == actuator[0]
+
+
+def test_the_co2_event_declares_that_enrichment_does_not_raise_growth():
+    from agri_twin.application.runtime_events import SPEC_INDEX
+    assert "does not raise growth" in SPEC_INDEX["CO2"].summary
+
+
+def test_temperature_waves_keep_the_vapour_pressure_only_for_runtime_events():
+    from datetime import datetime, timezone
+    from agri_twin.application.scenarios import HALF_OPEN_INTERVAL, HOLD_DEW_POINT, ScenarioEvent, _ScenarioWeatherProvider
+    from agri_twin.domain.greenhouse import saturation_vapour_pressure_kpa
+    from agri_twin.domain.models import WeatherState
+
+    t0, t1, now = datetime(2026, 1, 1, tzinfo=timezone.utc), datetime(2026, 1, 3, tzinfo=timezone.utc), datetime(2026, 1, 2, tzinfo=timezone.utc)
+    base = WeatherState(10.0, 70.0, 200.0, 2.0, 0.0, 0.0, 1013.0)
+
+    class Fixed:
+        def get(self, timestamp):
+            return base
+
+    def humidity(parameters):
+        scenario = type("S", (), {"events": (ScenarioEvent("w", "heat_wave", t0, t1, 8.0, parameters),), "base_weather": base})()
+        return _ScenarioWeatherProvider(scenario, Fixed()).get(now)
+
+    historical, runtime = humidity({"temperature_offset_c": 8.0}), humidity({"temperature_offset_c": 8.0, HALF_OPEN_INTERVAL: 1.0, HOLD_DEW_POINT: 1.0})
+    assert historical.relative_humidity_pct == 70.0 and historical.temperature_c == runtime.temperature_c == 18.0
+    kept = runtime.relative_humidity_pct / 100.0 * saturation_vapour_pressure_kpa(18.0)
+    assert kept == pytest.approx(0.7 * saturation_vapour_pressure_kpa(10.0)) and runtime.relative_humidity_pct < 70.0
