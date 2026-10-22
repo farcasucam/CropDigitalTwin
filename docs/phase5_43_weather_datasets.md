@@ -1,7 +1,6 @@
 # Phase 5.43: local historical weather datasets
 
-Status: **IN PROGRESS (step A done: acquisition and offline queries)**. Steps B-E (use in the interactive simulator, choice of cycle period and planting date, interface,
-real-climate plausibility of events) are not done. Nothing here claims calibration or validation.
+Status: **IN PROGRESS (steps A, B, C and the interface of D done)**. Step E (event plausibility from real-climate percentiles) is not done. Nothing here claims calibration or validation.
 
 ## Why
 
@@ -38,14 +37,31 @@ is a new file: `update` fetches only what is missing, and an interrupted downloa
 
 ```powershell
 $env:PYTHONPATH = "src"
-python -m agri_twin.application.weather_datasets plan   --start-year 2015 --end-year 2025   # what would be downloaded; no network
-python -m agri_twin.application.weather_datasets status                                    # what is on disk; no network
-python -m agri_twin.application.weather_datasets download --start-year 2015 --end-year 2025 --confirm-network
-python -m agri_twin.application.weather_datasets update --confirm-network                  # next year(s) once they are complete
+python -m agri_twin.infrastructure.weather_archive plan   --start-year 2015 --end-year 2025   # what would be downloaded; no network
+python -m agri_twin.infrastructure.weather_archive status                                    # what is on disk; no network
+python -m agri_twin.infrastructure.weather_archive download --start-year 2015 --end-year 2025 --confirm-network
+python -m agri_twin.infrastructure.weather_archive update --confirm-network                  # next year(s) once they are complete
 ```
 
 `download` and `update` refuse to run without `--confirm-network`. They make one request per location and year, pause between requests, wait and retry on a rate
 limit and stop cleanly at the first failure. The CSV files are not versioned (tens of MB, reproducible with the command above); the `.metadata.json` files are.
+
+## Use in simulations (steps B and C)
+
+A request may carry `weather: {source: "LOCAL_ARCHIVE", campaign_start: "<planting day, midnight UTC>"}` (`SYNTHETIC_SEASONAL` stays the default and is unchanged, hashes included).
+
+* **Planting date.** Annual crops (tomato, pepper, lettuce) start on any day inside the downloaded years, so a short crop such as lettuce (42-day cycle) can run several cycles in one
+  year, one request each. Perennial crops (grape, peach, plum, apple) start on their own season day (`MM-DD` of their dormancy cycle) of any covered year, because their initial
+  state is a dormant tree: another day is rejected with that explanation.
+* **Length.** The crop's synthetic cycle length, or until the downloaded data end if they end first (stated in the configuration as `cycle_truncated_by_data`). `end_time` can only shorten it.
+* **Weather.** The hourly files of the crop's location, read exactly; an hour that was not downloaded is an error, never an estimate. Scenario events (heat wave, rain...) are still applied on top.
+  `profile_overrides` shape the synthetic generator only and are rejected here.
+* **Checkpoints.** The planting date and the provenance of the files (retrieval time, coordinates) are part of the resume identity: a checkpoint never resumes under other weather. Prefix plus
+  resumed baseline equals the continuous run (tested on local weather).
+* **Where it lives.** `application/weather_datasets.py` (offline and clock-free: locations, coverage, fingerprint, provider) and `infrastructure/weather_archive.py` (acquisition: network, clock, pauses).
+  The project's static audit forbids clock and sleeps in `application/`, which is why they are split.
+* **Interface (`/bench`).** "Weather source" in the scenario group: synthetic cycle or real weather, a planting date (or a season year for perennial crops), the location and coverage, and the notes that it
+  is reanalysis forcing for an approximate area. The capabilities endpoint lists, per crop, what is available.
 
 ## Notes
 
@@ -55,5 +71,6 @@ limit and stop cleanly at the first failure. The CSV files are not versioned (te
 
 ## Tests
 
-`tests/test_weather_datasets.py` (offline, fake transport): plan without a socket, one file per location and year with provenance, incremental update, resume after a
+`tests/test_weather_datasets.py` (acquisition, offline, fake transport) and `tests/test_local_weather_simulation.py` (simulations on a small temporary archive: exact use of the hours, planting dates,
+validation, truncation, resume identity, what-if equivalence, no network or clock in the simulation-side module): plan without a socket, one file per location and year with provenance, incremental update, resume after a
 cut, rate-limit retry, incomplete file detection, coverage status, explicit network confirmation, TLS verification on.

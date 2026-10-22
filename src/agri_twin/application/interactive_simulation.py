@@ -38,6 +38,14 @@ from agri_twin.application.climate_control import (
     describe as describe_climate_control,
     parse_control,
 )
+from agri_twin.application.weather_datasets import (
+    LOCAL_SOURCE,
+    DatasetInfo,
+    WeatherDatasetsError,
+    archive_weather_factory,
+    dataset_fingerprint,
+    dataset_info,
+)
 from agri_twin.application.greenhouse_backend import (
     GreenhouseBackendError,
     GreenhouseBackendRequest,
@@ -105,10 +113,10 @@ CHECKPOINT_FORMAT = "agri_twin.checkpoint_payload/5.29"
 DEFAULT_SCENARIO = "BASE_SEASON"
 SCENARIOS = (*MANDATORY_SCENARIOS, *SUPPLEMENTARY_SCENARIOS)
 ENVIRONMENTS = {"outdoor": "outdoor", "greenhouse": "passive_greenhouse"}  # API name -> orchestrator greenhouse_mode
-WEATHER_SOURCES = ("SYNTHETIC_SEASONAL",)
+WEATHER_SOURCES = ("SYNTHETIC_SEASONAL", LOCAL_SOURCE)
 WEATHER_GENERATOR = "WeatherEngine(seasonal + daily variability, seeded) + ScenarioEvent overlays (Phase 5.32)"
 REQUEST_FIELDS = ("api_version", "crop", "variety", "environment", "plot", "scenario", "start_time", "end_time", "seed", "weather", "dormancy", "checkpoint", "options", "runtime_events", "greenhouse", "control")
-WEATHER_FIELDS = ("source", "profile_overrides")
+WEATHER_FIELDS = ("source", "profile_overrides", "campaign_start")
 OPTION_FIELDS = ("progress_interval_steps", "require_requested_chilling_model", "include_trajectory", "compute_trajectory_hash", "variables")
 CHECKPOINT_FIELDS = ("format", "simulation_time", "payload", "sha256", "resume_hash")
 DEFAULT_PROGRESS_INTERVAL_STEPS = 24  # one simulated day of hourly steps
@@ -398,6 +406,9 @@ class SimulationRequest:
     runtime_events: tuple[RuntimeEvent, ...] = ()  # Phase 5.39: user-defined future events (empty: unchanged 5.37 behaviour)
     greenhouse: GreenhouseBackendRequest | None = None  # Phase 5.41: None = simplified backend (unchanged hashes); ENERGYPLUS otherwise
     control: ClimateControlConfig | None = None  # Phase 5.42: None = no climate controller (unchanged hashes)
+    campaign_start: datetime | None = None  # Phase 5.43: planting date of a LOCAL_ARCHIVE run (None: the crop's synthetic cycle)
+    campaign_end: datetime | None = None
+    dataset: tuple[tuple[str, str], ...] = ()  # (location id, fingerprint of the files the campaign reads); derived, never part of the request document
 
     @property
     def backend(self) -> str:
@@ -408,7 +419,10 @@ class SimulationRequest:
         return int((self.end_time - self.start_time).total_seconds()) // TIMESTEP_SECONDS
 
     def weather_dict(self) -> dict[str, Any]:
-        return {"source": self.weather_source, "profile_overrides": dict(self.profile_overrides)}
+        document: dict[str, Any] = {"source": self.weather_source, "profile_overrides": dict(self.profile_overrides)}
+        if self.campaign_start is not None:
+            document["campaign_start"] = self.campaign_start.isoformat()
+        return document
 
     def to_dict(self) -> dict[str, Any]:
         document = {
@@ -434,7 +448,7 @@ class SimulationRequest:
 
     def resume_identity(self) -> dict[str, Any]:
         """Everything that must match between a checkpoint's producer and its resume."""
-        cycle_start = campaign_cycle(self.crop)[1]
+        cycle_start = self.campaign_start or campaign_cycle(self.crop)[1]
         identity = {"api_version": self.api_version, "crop": self.crop, "variety": self.variety, "environment": self.environment, "plot": self.plot,
                     "scenario": self.scenario, "seed": self.seed, "weather": self.weather_dict(), "dormancy_effective": self.dormancy.effective_dict(),
                     "campaign_start": cycle_start.isoformat(), "timestep_seconds": TIMESTEP_SECONDS}
@@ -442,6 +456,8 @@ class SimulationRequest:
             identity["greenhouse"] = self.greenhouse.to_dict()
         if self.control is not None:  # a checkpoint never resumes under another control strategy
             identity["control"] = self.control.to_dict()
+        if self.dataset:  # nor under other weather files than the ones it was produced with
+            identity["dataset"] = dict(self.dataset)
         return identity
 
     @property
@@ -517,6 +533,12 @@ def _weather(raw: Any, scenario: str, seed: int) -> tuple[str, tuple[tuple[str, 
     overrides = raw.get("profile_overrides") or {}
     if not isinstance(overrides, Mapping):
         raise _fail(ErrorCode.INVALID_REQUEST, "profile_overrides must be a mapping", "weather.profile_overrides")
+    if raw.get("campaign_start") is not None and source != LOCAL_SOURCE:
+        raise _fail(ErrorCode.INVALID_REQUEST, f"campaign_start applies to the {LOCAL_SOURCE} weather source only (the synthetic cycle has a fixed start)", "weather.campaign_start")
+    if source == LOCAL_SOURCE:
+        if overrides:
+            raise _fail(ErrorCode.INVALID_CONFIGURATION, "profile_overrides shape the synthetic generator; the local archive weather is used exactly as downloaded", "weather.profile_overrides")
+        return source, ()
     canonical = []
     for key in sorted(overrides):
         value = overrides[key]
@@ -566,6 +588,34 @@ def _checkpoint(raw: Any) -> SimulationCheckpoint | None:
     if restored_time != instant:
         raise _fail(ErrorCode.INVALID_CHECKPOINT, "checkpoint simulation_time differs from the payload time", "checkpoint.simulation_time")
     return SimulationCheckpoint(CHECKPOINT_FORMAT, instant, payload, raw["sha256"], raw["resume_hash"])
+
+
+def _campaign(crop: str, raw_weather: Any) -> tuple[datetime, datetime, tuple[tuple[str, str], ...], bool]:
+    """(campaign start, campaign end, dataset identity, local?). Synthetic: the crop's fixed cycle. LOCAL_ARCHIVE: the planting date the caller chose, for as long as the
+    crop's cycle lasts or the downloaded years allow."""
+    _, cycle_start, cycle_end = campaign_cycle(crop)
+    if not (isinstance(raw_weather, Mapping) and raw_weather.get("source") == LOCAL_SOURCE):
+        return cycle_start, cycle_end, (), False
+    try:
+        info = dataset_info(crop)
+    except WeatherDatasetsError as exc:
+        raise _fail(ErrorCode.MODEL_NOT_READY, str(exc), "weather.source") from None
+    if info is None:
+        raise _fail(ErrorCode.MODEL_NOT_READY, f"no local weather has been downloaded for {crop}; run: python -m agri_twin.application.weather_datasets download --confirm-network", "weather.source")
+    raw = raw_weather.get("campaign_start")
+    window = f"{info.first.date().isoformat()} .. {info.last.date().isoformat()}"
+    if raw is None:
+        raise _fail(ErrorCode.INVALID_REQUEST, f"weather.campaign_start is required with {LOCAL_SOURCE}: the planting date, inside {window}", "weather.campaign_start")
+    start = _instant(raw, "weather.campaign_start")
+    if (start.hour, start.minute, start.second, start.microsecond) != (0, 0, 0, 0):
+        raise _fail(ErrorCode.INVALID_TIME_RANGE, "weather.campaign_start must be midnight UTC (a planting day)", "weather.campaign_start")
+    if start < info.first or start + timedelta(days=1) > info.last:
+        raise _fail(ErrorCode.INVALID_TIME_RANGE, f"weather.campaign_start {start.isoformat()} lies outside the downloaded weather ({window})", "weather.campaign_start")
+    if crop in PERENNIAL_CROPS and (start.month, start.day) != (cycle_start.month, cycle_start.day):
+        raise _fail(ErrorCode.INVALID_TIME_RANGE, f"the season of a perennial crop starts on {cycle_start.strftime('%m-%d')} (its dormancy cycle): choose that day of any covered year", "weather.campaign_start")
+    end = min(start + (cycle_end - cycle_start), info.last)
+    years = range(start.year, end.year + 1)
+    return start, end, ((info.location.id, dataset_fingerprint(info.location.id, years)),), True
 
 
 def canonicalize_request(document: SimulationRequest | Mapping[str, Any]) -> SimulationRequest:
@@ -622,7 +672,7 @@ def canonicalize_request(document: SimulationRequest | Mapping[str, Any]) -> Sim
         errors.append(SimulationError(ErrorCode.INVALID_REQUEST, "seed must be a non-negative integer", "seed"))
     if errors:
         raise SimulationApiError(errors)
-    _, campaign_start, campaign_end = campaign_cycle(crop)
+    campaign_start, campaign_end, dataset, local = _campaign(crop, document.get("weather"))
     checkpoint = _checkpoint(document.get("checkpoint"))
     start = campaign_start if document.get("start_time") is None else _instant(document["start_time"], "start_time")
     end = campaign_end if document.get("end_time") is None else _instant(document["end_time"], "end_time")
@@ -631,11 +681,11 @@ def canonicalize_request(document: SimulationRequest | Mapping[str, Any]) -> Sim
             raise _fail(ErrorCode.INVALID_TIME_RANGE, "start_time must be omitted or equal to the checkpoint time when resuming", "start_time")
         start = checkpoint.simulation_time
     elif start != campaign_start:
-        raise _fail(ErrorCode.INVALID_TIME_RANGE, f"start_time is fixed by the crop's synthetic cycle ({campaign_start.isoformat()}); set the horizon with end_time or resume from a checkpoint", "start_time")
+        raise _fail(ErrorCode.INVALID_TIME_RANGE, f"start_time is fixed by the campaign start ({campaign_start.isoformat()}); set the horizon with end_time or resume from a checkpoint", "start_time")
     if end <= start:
         raise _fail(ErrorCode.INVALID_TIME_RANGE, f"end_time {end.isoformat()} must be after start {start.isoformat()}", "end_time")
     if end > campaign_end:
-        raise _fail(ErrorCode.INVALID_TIME_RANGE, f"end_time {end.isoformat()} exceeds the synthetic campaign end {campaign_end.isoformat()}", "end_time")
+        raise _fail(ErrorCode.INVALID_TIME_RANGE, f"end_time {end.isoformat()} exceeds the campaign end {campaign_end.isoformat()}" + (" (the crop's cycle or the downloaded weather ends there)" if local else ""), "end_time")
     if (end - start).total_seconds() % TIMESTEP_SECONDS:
         raise _fail(ErrorCode.INVALID_TIME_RANGE, f"the horizon must be a whole number of {TIMESTEP_SECONDS} s steps", "end_time")
     source, overrides = _weather(document.get("weather"), scenario, seed)
@@ -660,7 +710,8 @@ def canonicalize_request(document: SimulationRequest | Mapping[str, Any]) -> Sim
         control = parse_control(document.get("control"), environment, greenhouse.backend if greenhouse is not None else "SIMPLIFIED")
     except ClimateControlRequestError as exc:
         raise _fail(ErrorCode(exc.kind), exc.message, exc.path) from None
-    request = SimulationRequest(crop, variety, environment, plot.plot_id, scenario, start, end, seed, source, overrides, dormancy, checkpoint, options, runtime_events=runtime_events, greenhouse=greenhouse, control=control)
+    request = SimulationRequest(crop, variety, environment, plot.plot_id, scenario, start, end, seed, source, overrides, dormancy, checkpoint, options, runtime_events=runtime_events, greenhouse=greenhouse, control=control,
+                                campaign_start=campaign_start if local else None, campaign_end=campaign_end if local else None, dataset=dataset)
     if checkpoint is not None:
         if checkpoint.resume_hash != request.resume_hash:
             raise _fail(ErrorCode.INVALID_CHECKPOINT, "checkpoint was produced by a different configuration (crop, environment, scenario, seed, weather or dormancy differ)", "checkpoint.resume_hash")
@@ -889,7 +940,7 @@ class InteractiveSimulationService:
     @staticmethod
     def _prepare(request: SimulationRequest) -> tuple[CampaignSpec, Scenario]:
         try:
-            spec = build_campaign(request.crop, request.environment, request.scenario, seed=request.seed)
+            spec = build_campaign(request.crop, request.environment, request.scenario, seed=request.seed, start=request.campaign_start, end=request.campaign_end)
         except ScenarioError as exc:
             raise _fail(ErrorCode.INVALID_CONFIGURATION, str(exc)) from None
         scenario = spec.scenario
@@ -1087,7 +1138,9 @@ def _cancellation_error(execution: _Execution) -> SimulationError:
                                                              "Operational stop, not a model or scientific failure.")
 
 
-def _weather_factory(request: SimulationRequest) -> Callable[[Scenario], SyntheticWeatherProvider]:
+def _weather_factory(request: SimulationRequest) -> Callable[[Scenario], Any]:
+    if request.dataset:
+        return archive_weather_factory(request.dataset[0][0])  # local files only; never the network
     if not request.profile_overrides:
         return seasonal_weather_factory  # exactly the Phase 5.32 base weather
     configuration = weather_configuration(effective_profile(request.scenario, request.profile_overrides), request.seed)
@@ -1097,6 +1150,8 @@ def _weather_factory(request: SimulationRequest) -> Callable[[Scenario], Synthet
 def effective_configuration(request: SimulationRequest, spec: CampaignSpec, scenario: Scenario) -> dict[str, Any]:
     """Resolved configuration actually executed (deterministic, hashed as configuration_hash)."""
     _, campaign_start, campaign_end = campaign_cycle(request.crop)
+    if request.campaign_start is not None:
+        campaign_start, campaign_end = request.campaign_start, request.campaign_end
     runtime_ids = {event.event_id for event in request.runtime_events}
     effective_dormancy = request.dormancy.describe()
     effective = {
@@ -1104,7 +1159,7 @@ def effective_configuration(request: SimulationRequest, spec: CampaignSpec, scen
         "greenhouse_mode": ENVIRONMENTS[request.environment], "scenario": request.scenario, "seed": request.seed,
         "period": {"campaign_start": campaign_start.isoformat(), "campaign_end": campaign_end.isoformat(), "start": request.start_time.isoformat(),
                    "end": request.end_time.isoformat(), "timestep_seconds": TIMESTEP_SECONDS, "total_steps": request.total_steps,
-                   "source": "existing synthetic crop cycle (SyntheticReferenceDatasetGenerator via campaign_cycle)"},
+                   "source": "the planting date chosen for the local weather archive; length of the crop's synthetic cycle" if request.dataset else "existing synthetic crop cycle (SyntheticReferenceDatasetGenerator via campaign_cycle)"},
         "initial_state": {"source": "CHECKPOINT" if request.checkpoint else "SYNTHETIC_INITIAL_STATE (Phase 5.29 _initial_state)",
                           "checkpoint_sha256": request.checkpoint.sha256 if request.checkpoint else None},
         "weather": {"source": request.weather_source, "generator": WEATHER_GENERATOR, "seed": request.seed,
@@ -1119,6 +1174,12 @@ def effective_configuration(request: SimulationRequest, spec: CampaignSpec, scen
                   "parameter_status": SCIENTIFIC_STATUS["parameter_status"]},
         "scenario_config_hash": scenario.config_hash(),
     }
+    if request.dataset:
+        info = dataset_info(request.crop)
+        effective["weather"] = {"source": request.weather_source, "classification": "FORCING", "represents_real_climatology": True,
+                                "kind": "modelled reanalysis (Open-Meteo archive), simulation forcing; not station measurements and never REAL_VERIFIED",
+                                "dataset": {"location_id": request.dataset[0][0], "fingerprint": request.dataset[0][1], "coordinates": (info.to_dict() if info else None),
+                                            "cycle_truncated_by_data": request.campaign_end < request.campaign_start + (campaign_cycle(request.crop)[2] - campaign_cycle(request.crop)[1])}}
     if request.greenhouse is not None:
         effective["greenhouse_backend"] = describe_greenhouse_backend(request.greenhouse)
     if request.control is not None:

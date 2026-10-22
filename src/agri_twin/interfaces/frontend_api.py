@@ -14,6 +14,8 @@ from agri_twin.application.greenhouse_catalogue import build_greenhouse_catalogu
 from agri_twin.application.interactive_runtime import InteractiveRuntimeService
 from agri_twin.application.runtime_replay import RuntimeReplayService
 from agri_twin.application.climate_control import capabilities as climate_control_capabilities
+from agri_twin.application.seasonal_synthetic_campaign import campaign_cycle
+from agri_twin.application.weather_datasets import LOCAL_SOURCE, WeatherDatasetsError, dataset_info
 from agri_twin.application.interactive_simulation import (
     ErrorCode,
     SCIENTIFIC_STATUS,
@@ -24,7 +26,7 @@ from agri_twin.application.interactive_simulation import (
     contract_description,
     plan_execution,
 )
-from agri_twin.application.scientific_benchmark import PERENNIAL_CROPS
+from agri_twin.application.scientific_benchmark import KNOWN_CROPS, PERENNIAL_CROPS
 from agri_twin.domain.farm import FarmConfigRepository
 from agri_twin.infrastructure.energyplus_timeline import REQUIRED_VERSION_PREFIX, find_energyplus
 
@@ -53,6 +55,25 @@ class InteractiveFrontendAdapter:
 
     def _elapsed(self, started: float | None) -> float | None:
         return self._timer() - started if started is not None and self._timer is not None else None
+
+    @staticmethod
+    def weather_datasets() -> dict[str, Any]:
+        """The local historical weather each crop can run on (offline: reads the downloaded files' metadata only)."""
+        crops: dict[str, Any] = {}
+        for crop in KNOWN_CROPS:
+            _, cycle_start, cycle_end = campaign_cycle(crop)
+            entry: dict[str, Any] = {"available": False, "cycle_days": (cycle_end - cycle_start).days, "perennial": crop in PERENNIAL_CROPS,
+                                     "cycle_start_month_day": cycle_start.strftime("%m-%d")}
+            try:
+                info = dataset_info(crop)
+            except WeatherDatasetsError:
+                info = None
+            if info is not None:
+                entry.update(info.to_dict(), available=True)
+            crops[crop] = entry
+        return {"source": LOCAL_SOURCE, "classification": "FORCING", "crops": crops,
+                "note": "Modelled reanalysis (Open-Meteo archive) used as simulation forcing: not station measurements and never REAL_VERIFIED. Points are approximate growing areas pending confirmation.",
+                "download": "python -m agri_twin.application.weather_datasets plan | download --confirm-network | update --confirm-network"}
 
     def capabilities(self) -> dict[str, Any]:
         contract = contract_description()
@@ -120,6 +141,7 @@ class InteractiveFrontendAdapter:
         contract["runtime"] = self.runtime.contract()
         contract["greenhouse_backends"] = self.greenhouse_backends()
         contract["climate_control"] = climate_control_capabilities()
+        contract["weather_datasets"] = self.weather_datasets()
         contract["poll_interval_ms"] = POLL_INTERVAL_MS
         contract["execution_adapter"] = "SYNCHRONOUS_IN_PROCESS_THREAD (local only; not durable or distributed)"
         return contract

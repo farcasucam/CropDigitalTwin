@@ -7,13 +7,13 @@
   <title>Agri-Twin · Experiment bench</title>
   <link rel="stylesheet" href="vendor/uPlot.min.css?v=1.6.32">
   <link rel="stylesheet" href="vendor/isokit.css?v=1">
-  <link rel="stylesheet" href="bench.css?v=9">
+  <link rel="stylesheet" href="bench.css?v=10">
   <script src="vendor/uPlot.iife.min.js?v=1.6.32" defer></script>
   <script src="vendor/isokit.iife.js?v=1" defer></script>
   <script src="visual_state.js?v=20261102-visual7" defer></script>
   <script src="scene_state.js?v=20261102-scene2" defer></script>
   <script src="iso_scene.js?v=20261102-scene5" defer></script>
-  <script src="bench.js?v=9" defer></script>
+  <script src="bench.js?v=10" defer></script>
 </head>
 <body class="iso" data-theme="light">
   <header class="bar">
@@ -36,6 +36,14 @@
           <label>Environment <select id="environment"></select></label>
         </div>
         <label>Weather scenario <select id="scenario"></select></label>
+        <div class="field"><span class="label">Weather source</span>
+          <span class="seg" id="weather-source" role="group" aria-label="Weather source"></span>
+        </div>
+        <div id="planting" class="field" hidden>
+          <label id="planting-date-field">Planting date (UTC) <input id="planting-date" type="date"></label>
+          <label id="planting-year-field">Season year <select id="planting-year"></select></label>
+        </div>
+        <p id="weather-note" class="hint"></p>
         <div class="field"><span class="label">Horizon</span>
           <span class="seg" role="group" aria-label="Horizon">
             <button type="button" data-horizon="week" aria-pressed="false">1 week</button>

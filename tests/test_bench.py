@@ -135,3 +135,19 @@ def test_bars_have_a_tooltip_and_the_chart_bands_follow_them_in_the_same_colour(
 
 def test_the_scene_background_no_longer_follows_the_hour_of_the_day():
     assert 'skyRect.setAttribute("fill", "hsl(208 38% 86%)")' in SCENE_JS and "lerp(228, 205" not in SCENE_JS
+
+
+def test_the_bench_offers_real_weather_with_a_planting_date_and_states_what_it_is():
+    for token in ("weather-source", "planting-date", "planting-year", "weather-note"):
+        assert f'id="{token}"' in HTML, token
+    for token in ('"LOCAL_ARCHIVE"', "campaign_start", "const localMode", "function ensurePlanting", "not station data", "approximate growing area"):
+        assert token in JS, token
+
+
+def test_capabilities_list_the_local_weather_each_crop_can_use(server):
+    import json
+
+    with urllib.request.urlopen(server + "/api/capabilities", timeout=60) as response:
+        datasets = json.loads(response.read())["weather_datasets"]
+    assert datasets["source"] == "LOCAL_ARCHIVE" and datasets["classification"] == "FORCING" and "never REAL_VERIFIED" in datasets["note"]
+    assert set(datasets["crops"]) >= {"tomato", "lettuce", "peach"} and datasets["crops"]["lettuce"]["cycle_days"] == 42

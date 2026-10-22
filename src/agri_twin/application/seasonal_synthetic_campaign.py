@@ -256,14 +256,16 @@ def _event(event_id: str, event_type: str, start: datetime, end: datetime, inten
     return ScenarioEvent(event_id, event_type, start, end, intensity, {**parameters, "ramp_hours": EVENT_RAMP_HOURS})
 
 
-def build_campaign(crop: str, environment: str, scenario_id: str, *, seed: int = DEFAULT_SEED) -> CampaignSpec:
+def build_campaign(crop: str, environment: str, scenario_id: str, *, seed: int = DEFAULT_SEED, start: datetime | None = None, end: datetime | None = None) -> CampaignSpec:
+    """The campaign of a crop and scenario. ``start``/``end`` shift it in time (local-archive runs choose their own planting date); omitted: the synthetic cycle."""
     if crop not in KNOWN_CROPS:
         raise ScenarioError(f"unknown crop: {crop}")
     if environment == "greenhouse" and crop not in ANNUAL_GREENHOUSE_CROPS:
         raise ScenarioError(f"greenhouse is not configured for {crop}")
     if scenario_id not in (*MANDATORY_SCENARIOS, *SUPPLEMENTARY_SCENARIOS):
         raise ScenarioError(f"unknown scenario: {scenario_id}")
-    cycle, start, end = campaign_cycle(crop)
+    cycle, cycle_start, cycle_end = campaign_cycle(crop)
+    start, end = start or cycle_start, end or cycle_end
     days = (end - start).days
     window_start = start + timedelta(days=days // 2)
     window = (window_start, window_start + timedelta(days=EVENT_DAYS))

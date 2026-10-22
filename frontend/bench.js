@@ -48,7 +48,7 @@
 
   const bench = {
     caps: null, catalogue: null,
-    config: { crop: "tomato", environment: "greenhouse", scenario: "BASE_SEASON", horizon: "month", backend: "SIMPLIFIED", layout: null, view: "ISOMETRIC",
+    config: { crop: "tomato", environment: "greenhouse", scenario: "BASE_SEASON", horizon: "month", backend: "SIMPLIFIED", layout: null, view: "ISOMETRIC", weatherSource: "SYNTHETIC_SEASONAL", plantingDate: null,
       control: { actuators: { shade: "OFF", vents: "OFF", extractors: "OFF", cooling: "OFF", heating: "OFF", irrigation: "OFF" }, equipment: {}, schedules: [] }, controlCharts: false,
       layers: { crop: true, soil: true, water: true, temperature: true, radiation: true, vpd: false, co2: false, events: true }, charts: CHART_DEFAULT.slice() },
     events: [], run: null, serial: 0, running: false, position: 0, playing: false, speed: 24, lastFrame: 0, lastReadout: 0,
@@ -117,9 +117,14 @@
 
   // ---- derived configuration ---------------------------------------------------------------------------------
   const defaults = () => bench.caps.crop_defaults[bench.config.crop];
-  const startMs = () => Date.parse(defaults().start_time);
+  // Real weather (local archive): the planting date is the user's; the synthetic cycle has a fixed one.
+  const archive = () => ((bench.caps.weather_datasets || { crops: {} }).crops || {})[bench.config.crop];
+  const localMode = () => bench.config.weatherSource === "LOCAL_ARCHIVE" && Boolean(archive() && archive().available && bench.config.plantingDate);
+  const startMs = () => (localMode() ? Date.parse(`${bench.config.plantingDate}T00:00:00Z`) : Date.parse(defaults().start_time));
   function endMs() {
-    const cropEnd = Date.parse(defaults().end_time), start = startMs();
+    const start = startMs();
+    let cropEnd = Date.parse(defaults().end_time);
+    if (localMode()) cropEnd = Math.min(start + archive().cycle_days * DAY, Date.parse(archive().last));  // the crop's cycle, or the downloaded years if they end first
     const days = { week: 7, month: 30, season: Infinity }[bench.config.horizon];
     return Math.min(cropEnd, start + days * DAY);
   }
@@ -136,6 +141,7 @@
   function buildRequest() {
     const request = { crop: bench.config.crop, environment: bench.config.environment, scenario: bench.config.scenario, end_time: iso(endMs()),
       options: { include_trajectory: true, compute_trajectory_hash: false } };
+    if (localMode()) request.weather = { source: "LOCAL_ARCHIVE", campaign_start: iso(startMs()) };
     if (bench.config.environment === "greenhouse" && bench.config.backend === "ENERGYPLUS") {
       const c = bench.config.layout;
       request.greenhouse = { backend: "ENERGYPLUS", layout: { typology: c.typology, span_m: c.span, ridge_rise_m: c.rise, gutter_height_m: c.gutter, pillar_spacing_m: c.pillar, n_spans: c.spans, n_bays: c.bays } };
@@ -160,7 +166,10 @@
     setOptions($("#crop"), caps.crops.map((crop) => [crop, crop]), bench.config.crop);
     setOptions($("#scenario"), caps.scenarios.map((name) => [name, name.replace(/_/g, " ").toLowerCase()]), bench.config.scenario);
     refreshEnvironment();
-    $("#crop").addEventListener("change", () => { bench.config.crop = $("#crop").value; refreshEnvironment(); fitBranch(); renderControl(); changed(); });
+    $("#crop").addEventListener("change", () => { bench.config.crop = $("#crop").value; refreshEnvironment(); ensurePlanting(); fitBranch(); renderWeather(); renderControl(); changed(); });
+    $("#planting-date").addEventListener("change", () => { bench.config.plantingDate = $("#planting-date").value; ensurePlanting(); fitBranch(); renderWeather(); changed(); });
+    $("#planting-year").addEventListener("change", () => { bench.config.plantingDate = `${$("#planting-year").value}-${archive().cycle_start_month_day}`; fitBranch(); renderWeather(); changed(); });
+    renderWeather();
     $("#environment").addEventListener("change", () => { bench.config.environment = $("#environment").value; syncGreenhouseGroup(); pruneEvents(); renderEvents(); renderPresets(); renderControl(); changed(); });
     $("#scenario").addEventListener("change", () => { bench.config.scenario = $("#scenario").value; changed(); });
     $$("[data-horizon]").forEach((button) => button.addEventListener("click", () => { bench.config.horizon = button.dataset.horizon; fitBranch(); changed(); }));
@@ -177,6 +186,53 @@
       else if (!pointer.buttons) hideTip();
     });
     $("#timeline").addEventListener("pointerleave", () => { if (!dragging) hideTip(); });
+  }
+
+  // ---- weather source and planting date ---------------------------------------------------------------------------
+  function defaultPlanting() {
+    const data = archive();
+    if (!data || !data.available) return null;
+    const monthDay = defaults().start_time.slice(5, 10), lastYear = Number(data.last.slice(0, 4)), firstYear = Number(data.first.slice(0, 4));
+    for (let year = lastYear; year >= firstYear; year--) {
+      const start = Date.parse(`${year}-${monthDay}T00:00:00Z`);
+      if (start + data.cycle_days * DAY <= Date.parse(data.last) && start >= Date.parse(data.first)) return `${year}-${monthDay}`;
+    }
+    return `${firstYear}-${monthDay}`;
+  }
+  function ensurePlanting() {
+    const data = archive();
+    if (!data || !data.available) { if (bench.config.weatherSource === "LOCAL_ARCHIVE") bench.config.weatherSource = "SYNTHETIC_SEASONAL"; return; }
+    const first = Date.parse(data.first), last = Date.parse(data.last), at = Date.parse(`${bench.config.plantingDate}T00:00:00Z`);
+    const wrongDay = data.perennial && String(bench.config.plantingDate || "").slice(5, 10) !== data.cycle_start_month_day;
+    if (!bench.config.plantingDate || !Number.isFinite(at) || at < first || at + DAY > last || wrongDay) bench.config.plantingDate = defaultPlanting();
+  }
+  function renderWeather() {
+    const host = $("#weather-source"), data = archive();
+    if (!host) return;
+    host.replaceChildren();
+    const options = [["SYNTHETIC_SEASONAL", "Synthetic cycle", true, "The crop's fixed synthetic season"], ["LOCAL_ARCHIVE", "Real weather", Boolean(data && data.available), data && data.available ? "Downloaded historical weather of the crop's growing area" : "No weather downloaded for this crop yet (see the note below)"]];
+    for (const [id, text, enabled, title] of options) {
+      const button = el("button", "", text);
+      button.type = "button"; button.disabled = !enabled; button.title = title; button.setAttribute("aria-pressed", String(bench.config.weatherSource === id));
+      button.addEventListener("click", () => { bench.config.weatherSource = id; ensurePlanting(); fitBranch(); renderWeather(); changed(); });
+      host.append(button);
+    }
+    const local = localMode();
+    $("#planting").hidden = !local;
+    if (local) {
+      $("#planting-date-field").hidden = data.perennial; $("#planting-year-field").hidden = !data.perennial;
+      $("#planting-date").min = data.first.slice(0, 10); $("#planting-date").max = iso(Date.parse(data.last) - DAY).slice(0, 10); $("#planting-date").value = bench.config.plantingDate;
+      const years = data.years.map((year) => [year, year]);
+      setOptions($("#planting-year"), years, Number(bench.config.plantingDate.slice(0, 4)));
+    }
+    const note = $("#weather-note");
+    if (!data) note.textContent = "";
+    else if (!data.available) note.textContent = "No real weather is downloaded for this crop: python -m agri_twin.application.weather_datasets download --confirm-network";
+    else if (local) {
+      const truncated = Date.parse(`${bench.config.plantingDate}T00:00:00Z`) + data.cycle_days * DAY > Date.parse(data.last);
+      note.textContent = `${data.label} (${data.latitude.toFixed(2)}, ${data.longitude.toFixed(2)}; approximate growing area). ${data.first.slice(0, 4)}–${data.last.slice(0, 4)}. `
+        + `Modelled reanalysis used as forcing, not station data. A ${data.perennial ? "season" : "cycle"} lasts ${data.cycle_days} days${data.perennial ? ` and starts on ${data.cycle_start_month_day}` : ""}.${truncated ? " The data end before the cycle does: the run stops there." : ""}`;
+    } else note.textContent = `Real weather is available for this crop: ${data.label}, ${data.first.slice(0, 4)}–${data.last.slice(0, 4)}.`;
   }
 
   function refreshEnvironment() {
@@ -196,6 +252,7 @@
   }
   function fitBranch() {
     const days = horizonDays(), total = horizonHours();
+
     for (const event of bench.events) {
       event.atHours = clamp(event.atHours, MIN_AT_HOURS, Math.max(MIN_AT_HOURS, total - 1));
       event.hours = clamp(event.hours, 1, Math.max(1, total - event.atHours));
@@ -203,7 +260,9 @@
     syncPressed("[data-horizon]", "horizon");
     renderEvents(); renderTimeline();
     const start = startMs();
-    $("#period").textContent = `Synthetic cycle ${iso(start).slice(0, 10)} → ${iso(endMs()).slice(0, 10)} · ${days} simulated days · weather is synthetic forcing`;
+    $("#period").textContent = localMode()
+      ? `Real weather ${iso(start).slice(0, 10)} → ${iso(endMs()).slice(0, 10)} · ${days} simulated days · reanalysis forcing, not station data`
+      : `Synthetic cycle ${iso(start).slice(0, 10)} → ${iso(endMs()).slice(0, 10)} · ${days} simulated days · weather is synthetic forcing`;
   }
 
   // greenhouse model + layout
@@ -1022,6 +1081,7 @@
       bench.caps = caps; bench.catalogue = catalogue;
       restore();
       if (!caps.crops.includes(bench.config.crop)) bench.config.crop = caps.crops[0];
+      ensurePlanting();
       buildSetup(); initLayout(); renderBackend(); renderPresets(); renderEvents(); bindTransport(); bindControl();
       $("#autorun").checked = false;
       $("#run").disabled = false;
