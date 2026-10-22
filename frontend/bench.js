@@ -218,6 +218,7 @@
       host.append(button);
     }
     const local = localMode();
+    if (local) loadClimate();
     $("#planting").hidden = !local;
     if (local) {
       $("#planting-date-field").hidden = data.perennial; $("#planting-year-field").hidden = !data.perennial;
@@ -360,17 +361,38 @@
     if (commit) eventsChanged();
   }
   function eventsChanged() { renderEvents(); renderTimeline(); redrawCharts(); changed(); }
-  // Plausibility against the run's OWN weather (no real climatology exists here): a cold wave while the baseline is in the warmest third of the
-  // cycle, or a heat wave in its coolest third, is flagged. A hint, never a block; the cut-offs are a design convention.
-  function plausibility(event) {
-    const run = bench.run;
-    if (!run || !["COLD_WAVE", "HEAT_WAVE"].includes(event.type)) return null;
-    const series = run.series.baseline.outdoor_temperature_c || run.series.baseline.temperature_c;
-    if (!series) return null;
+  // Plausibility of a cold or heat wave. With real weather it is judged against the climate of that date in the downloaded years: the daily mean the wave would
+  // produce must stay inside the 5-95 % range seen on those dates. Without real weather it is relative to the run's OWN weather (no climatology exists):
+  // a cold wave in the warmest third of the cycle, or a heat wave in its coolest third. Either way it is a hint, never a block; the cut-offs are conventions.
+  bench.climate = {};
+  function loadClimate() {
+    const crop = bench.config.crop;
+    if (!localMode() || crop in bench.climate) return;
+    bench.climate[crop] = "pending";
+    api(`/api/weather/climatology?crop=${encodeURIComponent(crop)}`).then((data) => { bench.climate[crop] = data; renderEvents(); renderTimeline(); }).catch(() => { bench.climate[crop] = null; });
+  }
+  const leapDay = (ms) => { const d = new Date(ms); return Math.round((Date.UTC(2000, d.getUTCMonth(), d.getUTCDate()) - Date.UTC(2000, 0, 1)) / DAY); };
+  const runKey = () => `${bench.config.crop}|${localMode() ? "L" : "S"}|${startMs()}`;  // a run only describes the settings it was made with
+  function baselineDailyMeans() {
+    const series = bench.run && bench.run.configKey === runKey() && (bench.run.series.baseline.outdoor_temperature_c || bench.run.series.baseline.temperature_c);
+    if (!series) return [];
     const daily = [];
     for (let day = 0; day * 24 < series.length; day++) { const chunk = series.slice(day * 24, day * 24 + 24).filter(isNumber); if (chunk.length) daily.push(chunk.reduce((a, b) => a + b, 0) / chunk.length); }
-    const at = Math.floor((event.atHours + event.hours / 2) / 24), mean = daily[clamp(at, 0, daily.length - 1)];
-    const rank = daily.filter((value) => value <= mean).length / daily.length;
+    return daily;
+  }
+  function plausibility(event) {
+    if (!["COLD_WAVE", "HEAT_WAVE"].includes(event.type)) return null;
+    const daily = baselineDailyMeans(), at = Math.floor((event.atHours + event.hours / 2) / 24);
+    const climate = localMode() ? bench.climate[bench.config.crop] : null;
+    if (climate && typeof climate === "object" && isNumber(event.intensity)) {
+      const day = leapDay(eventStartMs(event) + (event.hours * HOUR) / 2), typical = daily.length ? daily[clamp(at, 0, daily.length - 1)] : climate.p50[day];
+      const years = `${climate.years[0]}–${climate.years[climate.years.length - 1]}`;
+      if (event.type === "COLD_WAVE" && typical - event.intensity < climate.p05[day]) return `Daily mean ${fmt(typical - event.intensity, 1)} °C would be below the 5 % lowest seen on this date in ${years} (${fmt(climate.p05[day], 1)} °C): unusual for the season.`;
+      if (event.type === "HEAT_WAVE" && typical + event.intensity > climate.p95[day]) return `Daily mean ${fmt(typical + event.intensity, 1)} °C would be above the 5 % highest seen on this date in ${years} (${fmt(climate.p95[day], 1)} °C): unusual for the season.`;
+      return null;
+    }
+    if (!daily.length) return null;
+    const mean = daily[clamp(at, 0, daily.length - 1)], rank = daily.filter((value) => value <= mean).length / daily.length;
     if (event.type === "COLD_WAVE" && rank > 2 / 3) return `A cold wave here falls in the warmest third of this cycle (baseline ${fmt(mean, 1)} °C): unusual for the season.`;
     if (event.type === "HEAT_WAVE" && rank < 1 / 3) return `A heat wave here falls in the coolest third of this cycle (baseline ${fmt(mean, 1)} °C): unusual for the season.`;
     return null;
@@ -766,6 +788,7 @@
   }
 
   function adopt(data) {
+    data.configKey = runKey();
     bench.run = data;
     const catalogue = V.catalogue(data.variables);
     bench.ctx = {};

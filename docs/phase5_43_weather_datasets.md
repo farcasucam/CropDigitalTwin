@@ -1,6 +1,6 @@
 # Phase 5.43: local historical weather datasets
 
-Status: **IN PROGRESS (steps A, B, C and the interface of D done)**. Step E (event plausibility from real-climate percentiles) is not done. Nothing here claims calibration or validation.
+Status: **DONE for steps A-E (software qualification only)**. Nothing here claims calibration or validation.
 
 ## Why
 
@@ -62,6 +62,14 @@ A request may carry `weather: {source: "LOCAL_ARCHIVE", campaign_start: "<planti
   The project's static audit forbids clock and sleeps in `application/`, which is why they are split.
 * **Interface (`/bench`).** "Weather source" in the scenario group: synthetic cycle or real weather, a planting date (or a season year for perennial crops), the location and coverage, and the notes that it
   is reanalysis forcing for an approximate area. The capabilities endpoint lists, per crop, what is available.
+
+## Event plausibility from the real climate (step E)
+
+`GET /api/weather/climatology?crop=<crop>` returns, for the crop's location, the 5, 50 and 95 % percentiles of the **daily mean temperature** by calendar day, pooled over +-7 days of
+each date and over every downloaded year (offline, cached until the files change; `weather_datasets.climatology`). With real weather selected, a cold or heat wave is flagged on its card, its
+bar and its tooltip when the daily mean it would produce (the run's baseline daily mean, or the median of that date before any run, minus or plus the event's intensity) falls outside the
+5-95 % range seen on that date: a -8 degC cold wave in August on the Mazarron coast would give about 19 degC against a 5 % lowest of 24 degC. It is a hint, never a block, and the 5-95 % cut-offs are a
+convention. Magnitude matters: a large heat wave in summer is flagged too if it exceeds what was seen. With the synthetic cycle (no climatology) the earlier hint relative to the run's own weather remains.
 
 ## Notes
 

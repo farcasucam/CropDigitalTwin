@@ -150,3 +150,44 @@ def test_simulation_modules_never_import_the_network_or_the_clock_for_weather():
     imports = {alias.name for node in ast.walk(ast.parse(root.read_text(encoding="utf-8"))) if isinstance(node, (ast.Import, ast.ImportFrom)) for alias in (node.names if isinstance(node, ast.Import) else [ast.alias(node.module or "")])}
     assert not {name for name in imports if name.split(".")[0] in {"urllib", "socket", "http", "requests", "time"} or "open_meteo" in name}
     assert "datetime.now" not in root.read_text(encoding="utf-8") and "sleep(" not in root.read_text(encoding="utf-8")
+
+
+def test_climatology_gives_ordered_percentiles_by_calendar_day_from_the_downloaded_years(archive):
+    clim = wd.climatology("lettuce")
+    assert clim["years"] == list(YEARS) and clim["classification"] == "FORCING" and clim["window_days"] == 7 and len(clim["p05"]) == len(clim["p50"]) == len(clim["p95"]) == 366
+    assert all(low <= mid <= high for low, mid, high in zip(clim["p05"], clim["p50"], clim["p95"]))
+    summer, winter = date(2000, 8, 15).timetuple().tm_yday - 1, date(2000, 1, 15).timetuple().tm_yday - 1
+    assert clim["p50"][summer] > clim["p50"][winter] + 10  # the archive's own seasonal cycle comes out
+    assert wd.climatology("tomato") is None  # no data for El Ejido in this archive
+
+
+def test_the_climatology_is_cached_until_the_files_change(archive):
+    first = wd.climatology("lettuce")
+    assert wd.climatology("lettuce") == first
+    write_year(archive, "mazarron_coast_fields", 2019, retrieved="2027-02-02T00:00:00Z")
+    assert wd.climatology("lettuce")["fingerprint"] != first["fingerprint"]
+
+
+def test_the_climatology_endpoint_serves_it_and_refuses_crops_without_data(archive):
+    import threading
+    import urllib.error
+    import urllib.request
+    from http.server import ThreadingHTTPServer
+
+    from agri_twin.interfaces.frontend_api import FrontendRequestHandler, InteractiveFrontendAdapter
+
+    class Handler(FrontendRequestHandler):
+        adapter = InteractiveFrontendAdapter()
+
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+    base = f"http://127.0.0.1:{server.server_address[1]}"
+    try:
+        with urllib.request.urlopen(base + "/api/weather/climatology?crop=lettuce", timeout=30) as response:
+            payload = json.loads(response.read())
+        assert payload["location_id"] == "mazarron_coast_fields" and len(payload["p95"]) == 366
+        with pytest.raises(urllib.error.HTTPError) as caught:
+            urllib.request.urlopen(base + "/api/weather/climatology?crop=tomato", timeout=30)
+        assert caught.value.code == 404
+    finally:
+        server.shutdown()

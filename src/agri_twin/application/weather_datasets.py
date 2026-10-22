@@ -14,7 +14,7 @@ import hashlib
 import json
 import math
 from dataclasses import dataclass
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from functools import lru_cache
 from pathlib import Path
 from typing import Any, Callable, Iterable, Mapping, Sequence
@@ -193,6 +193,50 @@ class ArchiveWeatherProvider:
             return self._year(instant.year)[instant]
         except KeyError:
             raise WeatherTimestampNotAvailable(instant.isoformat()) from None
+
+
+CLIMATOLOGY_WINDOW_DAYS = 7  # each calendar day pools the days within +-7 of it, in every downloaded year
+
+
+def _percentile(sorted_values: Sequence[float], fraction: float) -> float:
+    position = (len(sorted_values) - 1) * fraction
+    low = int(math.floor(position))
+    high = min(low + 1, len(sorted_values) - 1)
+    return sorted_values[low] + (sorted_values[high] - sorted_values[low]) * (position - low)
+
+
+@lru_cache(maxsize=8)
+def _climatology(location_id: str, years: tuple[int, ...], archive: str, fingerprint: str) -> dict[str, Any]:
+    del fingerprint  # cache key only
+    by_day: list[list[float]] = [[] for _ in range(366)]
+    for year in years:
+        with (Path(archive) / location_id / f"{year}.csv").open(encoding="utf-8") as handle:
+            next(handle)
+            temperatures = [float(line.split(",")[1]) for line in handle]
+        for day in range(len(temperatures) // 24):
+            when = date(year, 1, 1) + timedelta(days=day)
+            by_day[date(2000, when.month, when.day).timetuple().tm_yday - 1].append(sum(temperatures[day * 24:(day + 1) * 24]) / 24.0)  # leap-year reference: no drift after 28 Feb
+    p05, p50, p95 = [], [], []
+    for index in range(366):
+        pooled = sorted(value for offset in range(-CLIMATOLOGY_WINDOW_DAYS, CLIMATOLOGY_WINDOW_DAYS + 1) for value in by_day[(index + offset) % 366])
+        p05.append(round(_percentile(pooled, 0.05), 2))
+        p50.append(round(_percentile(pooled, 0.50), 2))
+        p95.append(round(_percentile(pooled, 0.95), 2))
+    return {"p05": p05, "p50": p50, "p95": p95}
+
+
+def climatology(crop: str, archive: Path | None = None) -> dict[str, Any] | None:
+    """Daily-mean temperature percentiles (5, 50, 95 %) by calendar day over the downloaded years of the crop's location. Offline. ``None`` without data.
+
+    Day ``i`` of each list is the day-of-year ``i + 1`` of a leap year (1 January .. 31 December). It describes the reanalysis forcing, not station records."""
+    archive = archive or ARCHIVE_DIR
+    info = dataset_info(crop, archive)
+    if info is None:
+        return None
+    fingerprint = dataset_fingerprint(info.location.id, info.years, archive)
+    return {"crop": crop, "location_id": info.location.id, "years": list(info.years), "fingerprint": fingerprint, "variable": "daily mean air temperature", "unit": "degC",
+            "window_days": CLIMATOLOGY_WINDOW_DAYS, "classification": CLASSIFICATION, **_climatology(info.location.id, info.years, str(archive), fingerprint),
+            "note": "Percentiles of the downloaded reanalysis (forcing), pooled over +-7 days of each date and every downloaded year; not station records."}
 
 
 def archive_weather_factory(location_id: str, archive: Path | None = None) -> Callable[[Any], ArchiveWeatherProvider]:

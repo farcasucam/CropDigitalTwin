@@ -8,7 +8,7 @@ import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any, Callable
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlparse
 
 from agri_twin.application.greenhouse_catalogue import build_greenhouse_catalogue
 from agri_twin.application.interactive_runtime import InteractiveRuntimeService
@@ -16,6 +16,7 @@ from agri_twin.application.runtime_replay import RuntimeReplayService
 from agri_twin.application.climate_control import capabilities as climate_control_capabilities
 from agri_twin.application.seasonal_synthetic_campaign import campaign_cycle
 from agri_twin.application.weather_datasets import LOCAL_SOURCE, WeatherDatasetsError, dataset_info
+from agri_twin.application.weather_datasets import climatology as weather_climatology
 from agri_twin.application.interactive_simulation import (
     ErrorCode,
     SCIENTIFIC_STATUS,
@@ -233,6 +234,13 @@ class InteractiveFrontendAdapter:
              "note": "single-zone model of the chosen layout; no crop feedback, no CO2"},
         ]
 
+    @staticmethod
+    def climatology(crop: str) -> dict[str, Any] | None:
+        try:
+            return weather_climatology(crop)
+        except WeatherDatasetsError:
+            return None
+
     def greenhouse_catalogue(self) -> dict[str, Any]:
         if self._catalogue is None:
             self._catalogue = build_greenhouse_catalogue()
@@ -275,6 +283,14 @@ class FrontendRequestHandler(BaseHTTPRequestHandler):
             return
         if path == "/api/greenhouse/catalogue":
             self._json(200, self.adapter.greenhouse_catalogue())
+            return
+        if path == "/api/weather/climatology":
+            crop = (parse_qs(urlparse(self.path).query).get("crop") or [""])[0].lower()
+            payload = self.adapter.climatology(crop)
+            if payload is None:
+                self._json(404, {"errors": [{"code": "NO_LOCAL_WEATHER", "message": f"no downloaded weather for crop {crop!r}", "path": "crop"}]})
+            else:
+                self._json(200, payload)
             return
         if path.startswith("/api/simulations/"):
             try:

@@ -119,7 +119,7 @@ def test_related_events_come_as_bundles_that_stay_individually_editable():
 
 def test_event_plausibility_is_relative_to_the_runs_own_weather_and_never_blocks():
     assert "function plausibility" in JS and "run's OWN weather" in JS
-    assert "unusual for the season" in JS and "A hint, never a block" in JS
+    assert "unusual for the season" in JS and "hint, never a block" in JS
 
 
 def test_the_scene_draws_phenology_stress_and_temperature_from_the_crop_catalogue_range():
@@ -151,3 +151,9 @@ def test_capabilities_list_the_local_weather_each_crop_can_use(server):
         datasets = json.loads(response.read())["weather_datasets"]
     assert datasets["source"] == "LOCAL_ARCHIVE" and datasets["classification"] == "FORCING" and "never REAL_VERIFIED" in datasets["note"]
     assert set(datasets["crops"]) >= {"tomato", "lettuce", "peach"} and datasets["crops"]["lettuce"]["cycle_days"] == 42
+
+
+def test_event_plausibility_uses_the_climate_of_the_date_when_real_weather_is_selected():
+    for token in ("/api/weather/climatology", "function loadClimate", "climate.p05", "climate.p95", "unusual for the season", "const runKey"):
+        assert token in JS, token
+    assert "tertile" in JS.lower() or "warmest third" in JS  # the run-relative hint stays as the fallback without real weather
