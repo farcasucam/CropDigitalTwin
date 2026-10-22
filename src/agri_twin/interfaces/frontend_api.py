@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any, Callable
 from urllib.parse import parse_qs, urlparse
 
+from agri_twin.application.energy_cost import energy_cost
 from agri_twin.application.greenhouse_catalogue import build_greenhouse_catalogue
 from agri_twin.application.interactive_runtime import InteractiveRuntimeService
 from agri_twin.application.runtime_replay import RuntimeReplayService
@@ -252,6 +253,11 @@ class InteractiveFrontendAdapter:
     def runtime_what_if(self, document: Any) -> dict[str, Any]:
         return self.runtime.what_if(document)
 
+    def energy_cost(self, document: Any) -> dict[str, Any]:
+        if not isinstance(document, dict) or set(document) != {"tariff", "time", "energy_kwh"}:
+            raise ValueError("the body must hold exactly tariff, time and energy_kwh")
+        return energy_cost(document["time"], document["energy_kwh"], document["tariff"])
+
     def runtime_record(self, document: Any) -> dict[str, Any]:
         return self.replay_service.record(document)
 
@@ -329,6 +335,8 @@ class FrontendRequestHandler(BaseHTTPRequestHandler):
                 payload = self.adapter.runtime_preview(body)
             elif path == "/api/runtime/what-if":
                 payload = self.adapter.runtime_what_if(body)
+            elif path == "/api/energy/cost":
+                payload = self.adapter.energy_cost(body)
             elif path == "/api/runtime/record":
                 payload = self.adapter.runtime_record(body)
             elif path == "/api/runtime/replay":

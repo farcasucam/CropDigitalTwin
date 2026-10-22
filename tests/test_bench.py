@@ -199,3 +199,10 @@ def test_the_first_visit_shows_the_3d_scene_and_the_charts_without_data():
         assert token in JS, token
     assert "preview without data" in HTML and ".chart-empty" in CSS
     assert "growth: 0.3" in JS.split("function previewState")[1].split("function renderPreview")[0]  # a drawing placeholder; every number stays n/a
+
+
+def test_the_bench_prices_the_estimated_energy_with_the_users_own_tariff_after_the_run():
+    for element in ("tariff-flat", "tariff-yearly", "tariff-bands", "tariff-currency"):
+        assert element in HTML
+    assert "/api/energy/cost" in JS and "attachCost" in JS and "Nothing is assumed: with no price the cost stays empty" in HTML
+    assert "tariff" not in JS[JS.index("function buildRequest"):JS.index("function buildRequest") + 700]  # the tariff is not part of the simulation request

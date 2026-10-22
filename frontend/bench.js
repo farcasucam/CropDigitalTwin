@@ -20,7 +20,7 @@
     water_stress: "Water stress", heat_stress: "Heat stress", cold_stress: "Cold stress", vpd_stress: "VPD stress", accumulated_stress: "Accumulated stress",
     soil_water_vwc_m3_m3: "Soil water content", greenhouse_ventilation_fraction: "Vent opening", greenhouse_shading_fraction: "Shade screen",
     greenhouse_heating_kw: "Heating power", greenhouse_cooling_kw: "Cooling power", control_vent_opening: "Vent opening (command)", control_extractor_level: "Extractor speed (command)",
-    control_electric_kw: "Electric power (estimate)", control_energy_kwh: "Energy per step (estimate)", control_energy_kwh_cumulative: "Energy, cumulative (estimate)", transpiration_mm: "Transpiration", irrigation_mm: "Irrigation", precipitation_mm: "Precipitation",
+    control_electric_kw: "Electric power (estimate)", control_energy_kwh: "Energy per step (estimate)", control_energy_kwh_cumulative: "Energy, cumulative (estimate)", control_cost: "Energy cost per step (estimate)", control_cost_cumulative: "Energy cost, cumulative (estimate)", transpiration_mm: "Transpiration", irrigation_mm: "Irrigation", precipitation_mm: "Precipitation",
   };
   // quick events: defaults chosen inside the API limits; the contract still decides what is allowed
   const PRESETS = [
@@ -679,7 +679,96 @@
       card.append(grid); host.append(card);
     });
   }
+  // ---- energy price: a post-processing of the returned energy series (the tariff is not part of the simulation request) ----------------
+  const tariff = () => { const t = bench.config.tariff || (bench.config.tariff = { currency: "EUR", flat: null, yearly: [], bands: [], offset: 0 }); t.yearly = t.yearly || []; t.bands = t.bands || []; return t; };
+  const tariffCurrency = () => (tariff().currency || "EUR").trim() || "EUR";
+  function tariffDocument() {
+    const t = tariff(), doc = { currency: tariffCurrency() }, yearly = {};
+    if (isNumber(t.flat)) doc.flat_per_kwh = t.flat;
+    for (const item of t.yearly) if (Number.isInteger(item.year) && isNumber(item.price)) yearly[String(item.year)] = item.price;
+    if (Object.keys(yearly).length) doc.yearly = yearly;
+    const bands = t.bands.filter((b) => Number.isInteger(b.from) && Number.isInteger(b.to) && isNumber(b.value)).map((b) => ({ from_hour: b.from, to_hour: b.to, [b.mode === "factor" ? "factor" : "price_per_kwh"]: b.value }));
+    if (bands.length) doc.time_of_day = bands;
+    if (isNumber(t.offset) && t.offset) doc.utc_offset_hours = t.offset;
+    return doc;
+  }
+  const tariffDefined = () => { const d = tariffDocument(); return d.flat_per_kwh !== undefined || Boolean(d.yearly) || (d.time_of_day || []).some((b) => b.price_per_kwh !== undefined); };
+  const COST_NAMES = ["control_cost", "control_cost_cumulative"];
+  let costSerial = 0;
+  // Adds (or removes) the cost series of a run from its energy series; false when the tariff was rejected or superseded by a newer change.
+  async function attachCost(run) {
+    const serial = ++costSerial;
+    run.variables = run.variables.filter((item) => !COST_NAMES.includes(item.name));
+    for (const branch of ["baseline", "intervention"]) for (const name of COST_NAMES) delete run.series[branch][name];
+    run.cost = null;
+    if (!tariffDefined() || !run.series.baseline.control_energy_kwh) return true;
+    const body = { tariff: tariffDocument(), time: run.times }, done = new Map();
+    try {
+      for (const branch of ["baseline", "intervention"]) {
+        const series = run.series[branch];
+        if (!done.has(series)) done.set(series, await api("/api/energy/cost", { method: "POST", body: JSON.stringify({ ...body, energy_kwh: series.control_energy_kwh }) }));
+        if (serial !== costSerial) return false;
+        series.control_cost = done.get(series).cost; series.control_cost_cumulative = done.get(series).cost_cumulative;
+        (run.cost = run.cost || {})[branch] = done.get(series);
+      }
+    } catch (error) { showError(error); return false; }
+    const unit = tariffCurrency();
+    run.variables.push({ name: "control_cost", unit: `${unit}_per_step`, availability: "AVAILABLE" }, { name: "control_cost_cumulative", unit, availability: "AVAILABLE" });
+    return true;
+  }
+  async function tariffChanged() {
+    save();
+    const note = $("#tariff-note"), run = bench.run;
+    if (!run) { note.hidden = true; return; }
+    if (!(await attachCost(run))) return;
+    note.hidden = false;
+    if (!run.series.baseline.control_energy_kwh) note.textContent = "This run has no estimated energy (climate control off or no efficiency defined): there is nothing to price.";
+    else {
+      const total = run.cost && run.cost.intervention ? run.cost.intervention.total_cost : null;
+      note.textContent = isNumber(total) ? `Total estimated energy cost of this run: ${fmt(total)} ${tariffCurrency()}.` : tariffDefined() ? "Some steps have no price (a year or hour not covered by your tariff) or no estimable energy: the cost is not complete." : "Define a price to see the cost.";
+    }
+    const present = new Set(run.variables.map((item) => item.name));
+    bench.config.charts = bench.config.charts.filter((name) => !COST_NAMES.includes(name) || present.has(name));
+    buildChartPicks(); buildCharts(); renderDelta(); renderFrame(true);
+  }
+  function renderTariff() {
+    const t = tariff();
+    $("#tariff-flat").value = isNumber(t.flat) ? String(t.flat) : "";
+    $("#tariff-currency").value = t.currency || "EUR";
+    $("#tariff-offset").value = String(isNumber(t.offset) ? t.offset : 0);
+    const rows = (host, items, build) => {
+      host.replaceChildren();
+      items.forEach((item, index) => {
+        const card = el("li", "event"), head = el("header"), remove = el("button", "", "Remove"); remove.type = "button";
+        remove.addEventListener("click", () => { items.splice(index, 1); renderTariff(); tariffChanged(); });
+        head.append(el("span", "", ""), remove); card.append(head);
+        const grid = el("div", "grid2"); build(item, grid); card.append(grid); host.append(card);
+      });
+    };
+    const field = (grid, text, item, key, props, integer) => {
+      const wrap = el("label", "", text), input = el("input"); input.type = "number"; Object.assign(input, props); input.value = isNumber(item[key]) ? String(item[key]) : "";
+      input.addEventListener("change", () => { item[key] = input.value === "" ? null : integer ? Math.round(Number(input.value)) : Number(input.value); tariffChanged(); });
+      wrap.append(input); grid.append(wrap);
+    };
+    rows($("#tariff-yearly"), t.yearly, (item, grid) => { field(grid, "Year", item, "year", { min: 2000, max: 2100, step: 1 }, true); field(grid, `Price (${tariffCurrency()}/kWh)`, item, "price", { min: 0, step: "any" }); });
+    rows($("#tariff-bands"), t.bands, (item, grid) => {
+      field(grid, "From (h)", item, "from", { min: 0, max: 23, step: 1 }, true); field(grid, "Until (h, exclusive)", item, "to", { min: 1, max: 24, step: 1 }, true);
+      const kind = el("label", "", "Value is"), choice = el("select"); setOptions(choice, [["price", "an absolute price per kWh"], ["factor", "a factor on the price"]], item.mode || "price");
+      choice.addEventListener("change", () => { item.mode = choice.value; renderTariff(); tariffChanged(); }); kind.append(choice); grid.append(kind);
+      field(grid, item.mode === "factor" ? "Factor (x)" : `Price (${tariffCurrency()}/kWh)`, item, "value", { min: 0, step: "any" });
+    });
+  }
+  function bindTariff() {
+    const t = tariff();
+    $("#tariff-flat").addEventListener("change", (event) => { t.flat = event.target.value === "" ? null : Number(event.target.value); tariffChanged(); });
+    $("#tariff-currency").addEventListener("change", (event) => { t.currency = event.target.value; renderTariff(); tariffChanged(); });
+    $("#tariff-offset").addEventListener("change", (event) => { t.offset = Number(event.target.value) || 0; tariffChanged(); });
+    $("#add-year").addEventListener("click", () => { t.yearly.push({ year: new Date().getUTCFullYear() + 1, price: null }); renderTariff(); });
+    $("#add-band").addEventListener("click", () => { t.bands.push({ from: 0, to: 8, mode: "price", value: null }); renderTariff(); });
+    renderTariff();
+  }
   function bindControl() {
+    bindTariff();
     if (!controlInfo()) { renderControl(); return; }
     $("#add-schedule").addEventListener("click", () => {
       const scheduled = controlInfo().actuators.find((a) => bench.config.control.actuators[a.id] === "SCHEDULE") || controlInfo().actuators[0];
@@ -780,6 +869,7 @@
       if (serial !== bench.serial) return;
       data.seconds = (performance.now() - started) / 1000;
       data.signature = signature;
+      await attachCost(data);
       adopt(data);
       updateStale();
       setStatus(`Done in ${data.seconds.toFixed(1)} s · ${data.times.length} hourly steps`, "done");
@@ -945,6 +1035,7 @@
       row("Extractors", isNumber(value("control_extractor_level")) ? value("control_extractor_level") * 100 : null, "%");
       row("HVAC cool+", isNumber(value("greenhouse_cooling_kw")) ? value("greenhouse_cooling_kw") - value("greenhouse_heating_kw") : null, "kW");  // negative: heating
       row("Energy (est.)", value("control_energy_kwh_cumulative"), "kWh");
+      if (series.control_cost_cumulative) row("Cost (est.)", value("control_cost_cumulative"), tariffCurrency());
     }
     row("LAI", state.crop.lai, ""); row("Water stress", state.crop.water_stress, ""); row("Heat stress", state.crop.heat_stress, "");
     row("Stage", null, ""); host.lastChild.lastChild.textContent = state.stage || "n/a";

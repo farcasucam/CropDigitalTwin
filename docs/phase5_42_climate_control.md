@@ -112,3 +112,11 @@ greenhouse season: about 10 ms of JavaScript per scene update and 17-33 ms per f
 
 `tests/test_climate_control.py` (rules, tiers, schedules, energy, validation, determinism, resume identity, manual override, closed-loop stability) and the
 climate-control cases of `tests/test_bench.py`.
+
+## Energy price (tariff)
+
+The estimated control energy can be priced with a user-supplied tariff (`application/energy_cost.py`, route `POST /api/energy/cost`, panel "Energy price" in the bench). Nothing is assumed: with no price the cost is empty.
+A tariff combines a single price per kWh, a table of prices per calendar year (a future-price scenario; a year not in the table falls back to the single price) and time-of-day bands
+(absolute price, or a factor on the price of those hours; hours follow the simulation clock plus `utc_offset_hours`; bands may wrap midnight and must not overlap).
+The cost is post-processing of the returned energy series: the tariff is not part of the simulation request, so changing it never re-runs the simulation or changes a hash.
+A step with no energy or no price has no cost, and the running sum from there is empty. The estimate does not distinguish electricity from heating fuel: one price applies to the whole input energy.

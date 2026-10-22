@@ -13,7 +13,7 @@
   <script src="visual_state.js?v=20261102-visual7" defer></script>
   <script src="scene_state.js?v=20261102-scene2" defer></script>
   <script src="iso_scene.js?v=20261102-scene7" defer></script>
-  <script src="bench.js?v=15" defer></script>
+  <script src="bench.js?v=16" defer></script>
 </head>
 <body class="iso" data-theme="light">
   <header class="bar">
@@ -71,6 +71,21 @@
           <p class="hint">Nothing is assumed: an empty field leaves that actuator unavailable (or its energy not estimable). Energy is an estimate from these values, not a measurement.</p>
           <div id="control-equipment" class="grid2 ctl-equipment"></div>
           <div class="chips"><button id="load-illustrative" class="chip" type="button" title="Values to try the simulator; they do not describe any real installation">Fill with illustrative values (not sourced)</button><button id="clear-equipment" class="chip" type="button">Clear</button></div>
+        </details>
+        <details class="sub"><summary>Energy price (your tariff)</summary>
+          <p class="hint">Nothing is assumed: with no price the cost stays empty. The cost is computed from the estimated energy after the run, so changing the tariff never re-runs the simulation. A year in the table overrides the single price; a time band sets an absolute price or multiplies the price of its hours; hours follow the simulation clock (UTC) plus the offset.</p>
+          <div class="grid2">
+            <label>Single price (per kWh)<input id="tariff-flat" type="number" min="0" step="any" placeholder="not defined"></label>
+            <label>Currency<input id="tariff-currency" type="text" maxlength="8" value="EUR"></label>
+            <label>Clock offset (h from UTC)<input id="tariff-offset" type="number" min="-14" max="14" step="0.5" value="0"></label>
+          </div>
+          <div class="field"><span class="label">Price per year (a future-price scenario)</span></div>
+          <ul id="tariff-yearly" class="events" aria-label="Yearly prices"></ul>
+          <button id="add-year" class="chip" type="button">Add a year</button>
+          <div class="field"><span class="label">Time-of-day bands</span></div>
+          <ul id="tariff-bands" class="events" aria-label="Time bands"></ul>
+          <button id="add-band" class="chip" type="button">Add a band</button>
+          <p id="tariff-note" class="hint" hidden></p>
         </details>
         <details class="sub"><summary>Daily schedules</summary>
           <ul id="control-schedules" class="events" aria-label="Schedules"></ul>
