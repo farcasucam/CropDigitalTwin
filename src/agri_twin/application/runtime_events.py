@@ -74,7 +74,7 @@ SPECS: tuple[EventSpec, ...] = (
     EventSpec("LOW_RADIATION", "low_radiation", "radiation_multiplier", "multiplier of the forcing solar radiation (< 1)", "ALL", 0.0, 1.0, False, True, True,
               ("radiation_w_m2", "radiation_stress", "temperature_c"), "scales the solar radiation of the weather forcing"),
     EventSpec("WIND", "wind", "speed_multiplier", "multiplier of the forcing wind speed", "ALL", 0.0, 10.0, False, False, True,
-              ("temperature_c",), "scales the wind speed of the weather forcing; only the EnergyPlus backend uses wind (its convection and infiltration): no process of the outdoor or simplified models depends on it, so those outputs do not change (audit finding 5)"),
+              ("temperature_c",), "scales the wind speed of the weather forcing; only the EnergyPlus backend uses wind (its convection and infiltration): the outdoor and simplified models change only when model_options.et0_method is PENMAN_MONTEITH_FAO56, where wind enters the evapotranspiration (audit finding 5)"),
     EventSpec("IRRIGATION", "irrigation", "amount_mm", "mm of irrigation applied in every step of the interval", "ALL", 0.0, 100.0, True, False, False,
               ("irrigation_mm", "soil_water_vwc_m3_m3", "water_stress"), "requests drip irrigation in each step of the interval"),
     EventSpec("VENTILATION", "ventilation", "value", "greenhouse ventilation actuator command (fraction of its maximum)", "GREENHOUSE", 0.0, 1.0, False, False, False,

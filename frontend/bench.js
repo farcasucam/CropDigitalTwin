@@ -151,6 +151,10 @@
     }
     const control = controlDocument();
     if (control) request.control = control;
+    if (bench.config.et0Method === "PENMAN_MONTEITH_FAO56") {
+      request.model_options = { et0_method: bench.config.et0Method };
+      if (bench.config.environment === "greenhouse" && isNumber(bench.config.indoorWind) && bench.config.indoorWind > 0) request.model_options.indoor_wind_m_s = bench.config.indoorWind;
+    }
     return request;
   }
   function eventDocuments() {
@@ -250,6 +254,7 @@
     $("#greenhouse-group").hidden = !greenhouse;
     if (!greenhouse) bench.config.backend = "SIMPLIFIED";
     renderBackend();
+    renderModelOptions();
   }
   function syncPressed(selector, key) {
     $$(selector).forEach((button) => button.setAttribute("aria-pressed", String(button.dataset[key] === bench.config[key])));
@@ -290,6 +295,24 @@
     $("#crop-exchange").checked = Boolean(bench.config.cropExchange);
     $("#hvac-setpoint").value = isNumber(hvac.setpoint) ? String(hvac.setpoint) : "";
     $("#hvac-capacity").value = isNumber(hvac.capacity) ? String(hvac.capacity) : "";
+  }
+  const ET0_LABELS = { HARGREAVES_HISTORICAL: "Historical (temperature and radiation)", PENMAN_MONTEITH_FAO56: "FAO-56 Penman-Monteith (wind, humidity, pressure)" };
+  function renderModelOptions() {
+    const options = (bench.caps || {}).model_options, select = $("#et0-method");
+    if (!options || !select) { if ($("#options-group")) $("#options-group").hidden = true; return; }
+    setOptions(select, options.et0_methods.map((id) => [id, ET0_LABELS[id] || id]), bench.config.et0Method || options.default_et0_method);
+    $("#indoor-wind-box").hidden = !(bench.config.et0Method === "PENMAN_MONTEITH_FAO56" && bench.config.environment === "greenhouse");
+    $("#indoor-wind").value = isNumber(bench.config.indoorWind) ? String(bench.config.indoorWind) : "";
+    $("#et0-note").textContent = bench.config.et0Method === "PENMAN_MONTEITH_FAO56"
+      ? "FAO-56 hourly equation with the site of the weather location or plot (the local archive, or a plot with coordinates). Grass reference ET0, not calibrated; with it a WIND event changes evapotranspiration."
+      : "The historical estimate has no wind, humidity or pressure term: a WIND event does not change it.";
+  }
+  function bindModelOptions() {
+    const select = $("#et0-method");
+    if (!select) return;
+    select.addEventListener("change", () => { bench.config.et0Method = select.value; renderModelOptions(); changed(); });
+    $("#indoor-wind").addEventListener("change", (event) => { bench.config.indoorWind = event.target.value === "" ? null : Number(event.target.value); changed(); });
+    renderModelOptions();
   }
   function bindHvac() {
     $("#crop-exchange").addEventListener("change", (event) => { bench.config.cropExchange = event.target.checked; changed(); });
@@ -784,6 +807,7 @@
   function bindControl() {
     bindTariff();
     bindHvac();
+    bindModelOptions();
     if (!controlInfo()) { renderControl(); return; }
     $("#add-schedule").addEventListener("click", () => {
       const scheduled = controlInfo().actuators.find((a) => bench.config.control.actuators[a.id] === "SCHEDULE") || controlInfo().actuators[0];
@@ -833,7 +857,7 @@
   function runSignature() {
     try { return { request: buildRequest(), events: bench.events.length ? eventDocuments() : [], branch: bench.events.length ? iso(branchMs()) : null }; } catch { return null; }
   }
-  const SETTING_NAMES = { crop: "crop", environment: "environment", scenario: "weather scenario", end_time: "period", weather: "weather source or planting date", greenhouse: "greenhouse model", control: "climate control" };
+  const SETTING_NAMES = { crop: "crop", environment: "environment", scenario: "weather scenario", end_time: "period", weather: "weather source or planting date", greenhouse: "greenhouse model", control: "climate control", model_options: "evapotranspiration method" };
   function staleReasons(before, now) {
     const reasons = [];
     for (const key of Object.keys(SETTING_NAMES)) if (stable((before.request || {})[key]) !== stable((now.request || {})[key])) reasons.push(SETTING_NAMES[key]);

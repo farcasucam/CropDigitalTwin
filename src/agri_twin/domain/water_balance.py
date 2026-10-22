@@ -4,8 +4,13 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
+from datetime import datetime
+from typing import TYPE_CHECKING
 
 from agri_twin.domain.models import CropGrowthState, SoilState, WeatherState
+
+if TYPE_CHECKING:
+    from agri_twin.domain.evapotranspiration import PenmanMonteithEt0
 
 
 class WaterBalanceError(ValueError):
@@ -61,8 +66,9 @@ class WaterBalanceResult:
 class WaterBalanceEngine:
     """Advance a root-zone bucket using one explicit simulation interval."""
 
-    def __init__(self, irrigation_efficiency: dict[str, float] | None = None) -> None:
+    def __init__(self, irrigation_efficiency: dict[str, float] | None = None, et0: "PenmanMonteithEt0 | None" = None) -> None:
         self._efficiency = dict(IRRIGATION_EFFICIENCY if irrigation_efficiency is None else irrigation_efficiency)
+        self.et0 = et0  # None: the historical Hargreaves-like estimate (default); otherwise FAO-56 Penman-Monteith, which needs the step time
 
     def advance(
         self,
@@ -72,6 +78,8 @@ class WaterBalanceEngine:
         crop: CropGrowthState | None = None,
         irrigation: IrrigationRequest | None = None,
         root_depth_m: float | None = None,
+        when: datetime | None = None,
+        indoors: bool = False,
     ) -> WaterBalanceResult:
         if not math.isfinite(dt_seconds) or dt_seconds <= 0:
             raise WaterBalanceError("dt_seconds must be positive and finite")
@@ -84,7 +92,7 @@ class WaterBalanceEngine:
         hours = dt_seconds / 3600.0
         precipitation = weather.rain_rate_mm_h * hours
         irrigation_applied = self._irrigation_mm(request, soil, crop, depth)
-        et0 = self._et0_mm(weather, dt_seconds)
+        et0 = self.et0.mm(weather, when, dt_seconds, indoors) if self.et0 is not None and when is not None else self._et0_mm(weather, dt_seconds)
         lai = crop.leaf_area_index if crop else 0.0
         canopy_factor = min(1.0, max(0.0, lai / 3.0))
         evaporation = et0 * (1.0 - canopy_factor) * 0.3

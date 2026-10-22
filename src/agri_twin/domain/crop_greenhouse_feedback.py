@@ -127,7 +127,8 @@ class CropPhysicalExchangeModel:
         self.configuration = configuration or CropGreenhouseFeedbackConfiguration()
         self.water = water or WaterBalanceEngine()
 
-    def calculate(self, crop: CropGrowthState, growth: CropGrowthResult, microclimate: MicroclimateState, weather: WeatherState, dt_seconds: float, soil: SoilState | None = None) -> CropPhysicalExchange:
+    def calculate(self, crop: CropGrowthState, growth: CropGrowthResult, microclimate: MicroclimateState, weather: WeatherState, dt_seconds: float, soil: SoilState | None = None,
+                  simulation_time: datetime | None = None) -> CropPhysicalExchange:
         if not math.isfinite(dt_seconds) or dt_seconds <= 0:
             raise CropGreenhouseFeedbackError("dt_seconds must be positive and finite")
         profile = CropGrowthEngine().radiation.profile_for(crop.crop_key)
@@ -137,7 +138,7 @@ class CropPhysicalExchangeModel:
         # The crop transpires into the indoor air: demand uses the microclimate, not outdoor weather.
         indoor = WeatherState(microclimate.temperature_c, microclimate.relative_humidity_pct, microclimate.solar_radiation_w_m2, weather.wind_speed_m_s, weather.wind_direction_deg, 0.0, microclimate.pressure_hpa)
         if soil is not None and crop.root_depth_m > 0:
-            water_result = self.water.advance(soil, indoor, dt_seconds, crop)
+            water_result = self.water.advance(soil, indoor, dt_seconds, crop, when=simulation_time, indoors=True)
             demand = water_result.transpiration_mm / max(hours, 1e-12)
             origin = "WaterBalanceEngine (indoor microclimate); no second VPD correction"
         else:

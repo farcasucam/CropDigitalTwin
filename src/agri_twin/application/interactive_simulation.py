@@ -92,6 +92,14 @@ from agri_twin.application.twin_state import TwinState
 from agri_twin.application.weather import WeatherEngine
 from agri_twin.domain.calibration import ParameterSet
 from agri_twin.domain.climate_control import ClimateControlConfig
+from agri_twin.application.model_options import (
+    ModelOptions,
+    ModelOptionsError,
+    describe as describe_model_options,
+    et0_site,
+    parse_model_options,
+    water_engine_factory,
+)
 from agri_twin.domain.greenhouse import PROFILES as GREENHOUSE_PROFILES
 from agri_twin.domain.greenhouse import GreenhouseConfiguration
 from agri_twin.domain.parameter_audit import ParameterRegistry
@@ -117,7 +125,7 @@ SCENARIOS = (*MANDATORY_SCENARIOS, *SUPPLEMENTARY_SCENARIOS)
 ENVIRONMENTS = {"outdoor": "outdoor", "greenhouse": "passive_greenhouse"}  # API name -> orchestrator greenhouse_mode
 WEATHER_SOURCES = ("SYNTHETIC_SEASONAL", LOCAL_SOURCE)
 WEATHER_GENERATOR = "WeatherEngine(seasonal + daily variability, seeded) + ScenarioEvent overlays (Phase 5.32)"
-REQUEST_FIELDS = ("api_version", "crop", "variety", "environment", "plot", "scenario", "start_time", "end_time", "seed", "weather", "dormancy", "checkpoint", "options", "runtime_events", "greenhouse", "control")
+REQUEST_FIELDS = ("api_version", "crop", "variety", "environment", "plot", "scenario", "start_time", "end_time", "seed", "weather", "dormancy", "checkpoint", "options", "runtime_events", "greenhouse", "control", "model_options")
 WEATHER_FIELDS = ("source", "profile_overrides", "campaign_start")
 OPTION_FIELDS = ("progress_interval_steps", "require_requested_chilling_model", "include_trajectory", "compute_trajectory_hash", "variables")
 CHECKPOINT_FIELDS = ("format", "simulation_time", "payload", "sha256", "resume_hash")
@@ -408,6 +416,7 @@ class SimulationRequest:
     runtime_events: tuple[RuntimeEvent, ...] = ()  # Phase 5.39: user-defined future events (empty: unchanged 5.37 behaviour)
     greenhouse: GreenhouseBackendRequest | None = None  # Phase 5.41: None = simplified backend (unchanged hashes); ENERGYPLUS otherwise
     control: ClimateControlConfig | None = None  # Phase 5.42: None = no climate controller (unchanged hashes)
+    model_options: ModelOptions | None = None  # Phase 5.45: None = historical ET0 (unchanged hashes)
     campaign_start: datetime | None = None  # Phase 5.43: planting date of a LOCAL_ARCHIVE run (None: the crop's synthetic cycle)
     campaign_end: datetime | None = None
     dataset: tuple[tuple[str, str], ...] = ()  # (location id, fingerprint of the files the campaign reads); derived, never part of the request document
@@ -439,6 +448,8 @@ class SimulationRequest:
             document["greenhouse"] = self.greenhouse.to_dict()
         if self.control is not None:
             document["control"] = self.control.to_dict()
+        if self.model_options is not None:
+            document["model_options"] = self.model_options.to_dict()
         return document
 
     def canonical_json(self) -> str:
@@ -458,6 +469,8 @@ class SimulationRequest:
             identity["greenhouse"] = self.greenhouse.to_dict()
         if self.control is not None:  # a checkpoint never resumes under another control strategy
             identity["control"] = self.control.to_dict()
+        if self.model_options is not None:  # nor under another evapotranspiration method
+            identity["model_options"] = self.model_options.to_dict()
         if self.dataset:  # nor under other weather files than the ones it was produced with
             identity["dataset"] = dict(self.dataset)
         return identity
@@ -712,8 +725,17 @@ def canonicalize_request(document: SimulationRequest | Mapping[str, Any]) -> Sim
         control = parse_control(document.get("control"), environment, greenhouse.backend if greenhouse is not None else "SIMPLIFIED")
     except ClimateControlRequestError as exc:
         raise _fail(ErrorCode(exc.kind), exc.message, exc.path) from None
+    try:
+        model_options = parse_model_options(document.get("model_options"), environment)
+    except ModelOptionsError as exc:
+        raise _fail(ErrorCode(exc.kind), exc.message, exc.path) from None
     request = SimulationRequest(crop, variety, environment, plot.plot_id, scenario, start, end, seed, source, overrides, dormancy, checkpoint, options, runtime_events=runtime_events, greenhouse=greenhouse, control=control,
-                                campaign_start=campaign_start if local else None, campaign_end=campaign_end if local else None, dataset=dataset)
+                                model_options=model_options, campaign_start=campaign_start if local else None, campaign_end=campaign_end if local else None, dataset=dataset)
+    if model_options is not None:
+        try:
+            et0_site(request)  # the site must exist before anything runs
+        except ModelOptionsError as exc:
+            raise _fail(ErrorCode(exc.kind), exc.message, exc.path) from None
     if checkpoint is not None:
         if checkpoint.resume_hash != request.resume_hash:
             raise _fail(ErrorCode.INVALID_CHECKPOINT, "checkpoint was produced by a different configuration (crop, environment, scenario, seed, weather or dormancy differ)", "checkpoint.resume_hash")
@@ -1053,6 +1075,9 @@ class InteractiveSimulationService:
         engine_arguments: dict[str, Any] = {}
         if request.control is not None:
             engine_arguments["control"] = ControlSession(request.control, request.crop)
+        water_factory = water_engine_factory(request)
+        if water_factory is not None:
+            engine_arguments["water_engine_factory"] = water_factory
         if request.greenhouse is not None and request.greenhouse.backend == "SIMPLIFIED":
             engine_arguments["greenhouse_engine_factory"] = lumped_engine_factory(simplified_configuration(request.greenhouse)[0], request.greenhouse.crop_exchange)
         if request.greenhouse is not None and request.greenhouse.backend == "ENERGYPLUS":
@@ -1188,6 +1213,8 @@ def effective_configuration(request: SimulationRequest, spec: CampaignSpec, scen
         effective["greenhouse_backend"] = describe_greenhouse_backend(request.greenhouse)
     if request.control is not None:
         effective["climate_control"] = describe_climate_control(request.control)
+    if request.model_options is not None:
+        effective["evapotranspiration"] = describe_model_options(request)
     if request.runtime_events:
         effective["runtime_events"] = [event.to_dict() | {"provenance": "USER_DEFINED_EVENT", "classification": "USER_DEFINED_SYNTHETIC_FORCING"} for event in request.runtime_events]
         effective["event_sequence_hash"] = event_sequence_hash(request.runtime_events)

@@ -88,6 +88,11 @@ class GeometryGreenhouseEngine(GreenhouseMicroclimateEngine):
             self._exchange = CropPhysicalExchangeModel(self._exchange_configuration)
             self._growth = CropGreenhouseFeedbackLoop(self, exchange=self._exchange, configuration=self._exchange_configuration)
 
+    def use_water_engine(self, water) -> None:
+        """The crop's transpiration is the orchestrator's own water balance (same ET0 method), so the air and the soil see one evapotranspiration."""
+        if self.crop_exchange:
+            self._exchange.water = water
+
     @property
     def configuration(self) -> GreenhouseConfiguration:
         return self._configuration
@@ -112,7 +117,7 @@ class GeometryGreenhouseEngine(GreenhouseMicroclimateEngine):
         for _ in range(self.EXCHANGE_ITERATIONS):
             state = self._compute_state(weather, configuration, controls, feedback, dt_seconds, prior)
             growth = self._growth.grow(crop, weather, state, dt_seconds, simulation_time)
-            feedback = self._exchange.calculate(crop, growth, state, weather, dt_seconds, soil).to_feedback()
+            feedback = self._exchange.calculate(crop, growth, state, weather, dt_seconds, soil, simulation_time).to_feedback()
         return feedback
 
     def predict_air_temperature(self, weather: WeatherState, prior: GreenhouseMicroclimateState | None, dt_seconds: float, mode: str = "passive_greenhouse",

@@ -15,6 +15,7 @@ from agri_twin.application.greenhouse_catalogue import build_greenhouse_catalogu
 from agri_twin.application.interactive_runtime import InteractiveRuntimeService
 from agri_twin.application.runtime_replay import RuntimeReplayService
 from agri_twin.application.climate_control import capabilities as climate_control_capabilities
+from agri_twin.application.model_options import DEFAULT_ET0, ET0_METHODS
 from agri_twin.application.seasonal_synthetic_campaign import campaign_cycle
 from agri_twin.application.weather_datasets import LOCAL_SOURCE, WeatherDatasetsError, dataset_info
 from agri_twin.application.weather_datasets import climatology as weather_climatology
@@ -143,6 +144,7 @@ class InteractiveFrontendAdapter:
         contract["runtime"] = self.runtime.contract()
         contract["greenhouse_backends"] = self.greenhouse_backends()
         contract["climate_control"] = climate_control_capabilities()
+        contract["model_options"] = {"et0_methods": list(ET0_METHODS), "default_et0_method": DEFAULT_ET0}
         contract["weather_datasets"] = self.weather_datasets()
         contract["poll_interval_ms"] = POLL_INTERVAL_MS
         contract["execution_adapter"] = "SYNCHRONOUS_IN_PROCESS_THREAD (local only; not durable or distributed)"

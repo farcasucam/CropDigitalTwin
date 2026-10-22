@@ -61,7 +61,7 @@ class CropDigitalTwinOrchestrator:
     microclimate is persistent state carried from step to step.
     """
 
-    def __init__(self, clock: SimulationClock, weather_engine: WeatherEngine, crop: CropGrowthState, soil: SoilState, greenhouse_mode: str = "outdoor", microclimate: GreenhouseMicroclimateState | None = None, phenology: PhenologyEngine | None = None, greenhouse_engine: object | None = None) -> None:
+    def __init__(self, clock: SimulationClock, weather_engine: WeatherEngine, crop: CropGrowthState, soil: SoilState, greenhouse_mode: str = "outdoor", microclimate: GreenhouseMicroclimateState | None = None, phenology: PhenologyEngine | None = None, greenhouse_engine: object | None = None, water_engine: WaterBalanceEngine | None = None) -> None:
         self.clock = clock
         self.weather_engine = weather_engine
         normalized = replace(crop, root_depth_m=1.0) if crop.root_depth_m <= 0 else crop
@@ -75,7 +75,9 @@ class CropDigitalTwinOrchestrator:
         # an injected engine (e.g. the EnergyPlus timeline) replaces the simplified one; engines that need the step time say so
         self.greenhouse = greenhouse_engine if greenhouse_engine is not None else GreenhouseMicroclimateEngine()
         self.radiation = RadiationGrowthEngine()
-        self.water = WaterBalanceEngine()
+        self.water = water_engine if water_engine is not None else WaterBalanceEngine()
+        if hasattr(self.greenhouse, "use_water_engine"):
+            self.greenhouse.use_water_engine(self.water)
         self.nutrients = NutrientBalanceEngine()
         self.climate = ClimateStressEngine()
         self.microclimate = microclimate
@@ -106,7 +108,7 @@ class CropDigitalTwinOrchestrator:
         phenological = replace(phenological, soil_water_vwc=self.soil.vwc_m3_m3)
         potential_state = self.radiation.advance(phenological, crop_weather, dt_seconds)
         potential_growth = potential_state.biomass_total - phenological.biomass_total
-        water_result = self.water.advance(self.soil, crop_weather, dt_seconds, phenological, irrigation)
+        water_result = self.water.advance(self.soil, crop_weather, dt_seconds, phenological, irrigation, when=simulation_time, indoors=self.greenhouse_mode != "outdoor")
         nutrient_result = self.nutrients.advance(phenological, potential_growth, dt_seconds, fertilization)
         climate_result = self.climate.advance(nutrient_result.state, crop_weather, dt_seconds, microclimate.environment, water_result.water_stress, nutrient_result.nutrient_factor)
         co2_factor = CropGrowthEngine.co2_response(microclimate.indoor_state.co2_ppm)

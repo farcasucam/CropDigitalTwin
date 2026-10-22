@@ -216,3 +216,8 @@ def test_the_bench_offers_optional_energyplus_hvac_cooling_without_assuming_valu
 def test_the_bench_offers_the_optional_crop_feedback_of_the_simplified_model():
     assert "crop-exchange" in HTML and "Off by default" in HTML
     assert "request.greenhouse.crop_exchange = true" in JS and 'bench.config.backend === "SIMPLIFIED" && bench.config.cropExchange' in JS
+
+
+def test_the_bench_offers_the_penman_monteith_option_and_sends_it_only_when_chosen():
+    assert "et0-method" in HTML and "indoor-wind" in HTML
+    assert 'bench.config.et0Method === "PENMAN_MONTEITH_FAO56"' in JS and "request.model_options" in JS
