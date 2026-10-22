@@ -245,7 +245,9 @@ class ScenarioRunner:
 
     @staticmethod
     def _irrigation(events: Sequence[ScenarioEvent]) -> IrrigationRequest | None:
-        for event in events:
+        # The LAST active irrigation event wins: events are ordered base scenario first, then user events, so a user irrigation replaces the scheduled one
+        # (taking the first used to make every user irrigation a no-op while the season's base irrigation was active).
+        for event in reversed(events):
             if event.event_type == "irrigation":
                 return IrrigationRequest("scheduled", event.parameters.get("amount_mm", event.intensity), irrigation_type="drip")
         return None

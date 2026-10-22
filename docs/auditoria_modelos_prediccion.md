@@ -41,9 +41,9 @@ calor, y cómo se comparan los climas interiores de los dos modelos. Lectura del
 
 ### Alta gravedad: la intervención no actúa o actúa mal
 
-**1. El riego manual nunca actúa.** `ScenarioRunner._irrigation` devuelve el primer evento de riego activo, y el riego base de la temporada va antes que cualquier evento del usuario.
+**1. El riego manual nunca actuaba (CORREGIDO).** `ScenarioRunner._irrigation` devuelve el primer evento de riego activo, y el riego base de la temporada va antes que cualquier evento del usuario.
 Evidencia: con el evento "Riego 2 mm", `irrigation_mm`, humedad del suelo y estrés hídrico no cambian en ningún modo. *Corrección propuesta:* gana el último evento activo (el del usuario), coherente
-con la regla de que un evento manual anula al controlador.
+con la regla de que un evento manual anula al controlador. *Corregido:* `ScenarioRunner._irrigation` recorre los eventos en orden inverso; con el evento de 2 mm, `irrigation_mm` pasa de 0,38 a 1,90 mm por paso (2 mm × eficiencia 0,95) solo dentro de su ventana, en campo abierto y en invernadero. La matriz de arriba refleja el estado antes de la corrección.
 
 **2. El invernadero simplificado no tiene efecto invernadero.** El área de intercambio térmico es 1 m² (`thermal_exchange_area_m2 = 1.0`) para un volumen de 1000 m³: la ganancia solar es proporcional a esa
 área. Evidencia: al mediodía el interior está **−0,02 K** respecto al exterior (EnergyPlus: **+6,6 K**); radiación ×1,5 sube la T interior +0,04 K; sombrear al 60 % la baja 0,05 K. Consecuencia: en el modelo
@@ -80,18 +80,18 @@ los cultivos: solo cambian el LAI máximo y los umbrales del catálogo. La trans
 
 ### Baja gravedad
 
-**10. Ventana de los eventos.** `ScenarioEvent.active` es cerrado en ambos extremos y el paso se etiqueta con el final del intervalo: un evento de 72 h afecta a **73 pasos** (27-feb 00:00 a 2-mar 00:00), con un
-desfase de una hora respecto a la semántica de intervalo (error del 1,4 % en la duración).
+**10. Ventana de los eventos.** (Pendiente.) `ScenarioEvent.active` es cerrado en ambos extremos y el paso se etiqueta con el final del intervalo: un evento de 72 h afecta a **73 pasos** (27-feb 00:00 a 2-mar 00:00), con un
+desfase de una hora respecto a la semántica de intervalo (error del 1,4 % en la duración). Además hay una diferencia de **una hora entre tipos de evento**: los de forcing meteorológico (temperatura, radiación, lluvia) actúan en las muestras etiquetadas desde el inicio del evento, y los de actuador (riego, ventilación, sombreado, CO₂) en el paso que *empieza* dentro del evento, es decir, una muestra más tarde.
 
 ## Plan de corrección sugerido (por impacto)
 
-1. Riego: el último evento activo gana (cambio pequeño; test que exija que `irrigation_mm` cambie).
+1. ~~Riego: el último evento activo gana~~ (hecho, con prueba).
 2. Invernadero simplificado: parámetros coherentes (área, volumen, UA, renovaciones) o retirarlo del estudio del clima interior; contrastarlo con EnergyPlus.
 3. Olas de calor/frío: conservar el punto de rocío por defecto.
 4. Semántica común de ventilación (fracción → renovaciones por hora con la capacidad de la tipología o del equipamiento) y definición única de `greenhouse_ventilation_fraction`.
 5. ET0 con viento y VPD (Penman-Monteith con el coeficiente de cultivo del catálogo) o marcar el evento de viento como "solo EnergyPlus".
 6. Respuesta al CO₂ con efecto de enriquecimiento (con fuente trazable) o avisar de que el evento no afecta al cultivo.
-7. Convertir esta matriz en pruebas de regresión de dirección y orden de magnitud (cada intervención debe cambiar lo que dice que cambia).
+7. ~~Convertir esta matriz en pruebas de regresión~~ (hecho en `tests/test_intervention_effects.py`: las invariantes que ya se cumplen son pruebas normales, y los hallazgos 2 a 6 y 10 son pruebas `xfail` estrictas que fallarán al corregirse el defecto, obligando a actualizar esta nota).
 
 ## Límites de esta auditoría
 
