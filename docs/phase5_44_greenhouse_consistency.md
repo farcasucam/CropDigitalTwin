@@ -67,3 +67,11 @@ Tolerances asserted: hourly RMSE < 3 K, midday gap < 2.5 K, radiation within 8 %
 `tests/test_greenhouse_consistency.py` (solver against RK4 and the analytic equilibrium, thermostat, vents, controller stand-down, ventilation semantics, floor state, one geometry for both models, layout changes results, exact what-if),
 `tests/test_intervention_effects.py` (directions and magnitudes in both greenhouse models, agreement with EnergyPlus when installed), `tests/test_climate_control.py` (controller with sized equipment, no vent flipping), and
 the updated backend tests (`tests/test_energyplus_backend.py`). The API qualification suite compares its greenhouse case against a direct run with the same engine.
+
+## Optional HVAC cooling in EnergyPlus
+
+By default the EnergyPlus greenhouse only ventilates (its ideal-loads unit never cools: cooling set-point 60 degC), so its cooling-power series is zero. A request may add
+`"greenhouse": {"backend": "ENERGYPLUS", "hvac": {"cooling_setpoint_c": 28, "cooling_capacity_w_m2": 150}}`: both values are the user's (no default; one without the other is rejected; set-point 5-50 degC, capacity up to 1000 W/m2),
+written into the IDF as the cooling set-point schedule and the ideal-loads cooling capacity limit (`EvidenceStatus.USER_SUPPLIED`). The block is part of the request, the effective configuration and the hashes only when present.
+It is a fixed rule over the whole run (EnergyPlus runs as a precomputed timeline), not the stage-aware climate controller, and it is rejected for the simplified model (cooled by the controller's equipment).
+Example (El Ejido, June 2022, default layout): maximum air temperature 35.9 -> 29.1 degC with 28 degC / 150 W/m2, 11.1 MWh of cooling, peak 130 kW. No energy-cost series is produced for it (the cost needs the controller's energy estimate, which needs a COP).

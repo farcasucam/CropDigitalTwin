@@ -14,7 +14,7 @@ from typing import Any, Callable, Mapping
 from agri_twin.application.scenarios import Scenario, actuator_controls, scenario_weather_provider
 from agri_twin.domain.farm import FarmConfigRepository
 from agri_twin.domain.greenhouse_modularity import configure_greenhouse
-from agri_twin.domain.greenhouse_typology import GreenhouseGeometrySpec, GreenhouseTypology, GreenhouseTypologyError
+from agri_twin.domain.greenhouse_typology import EvidenceStatus, GreenhouseGeometrySpec, GreenhouseTypology, GreenhouseTypologyError, Sourced
 from agri_twin.domain.models import WeatherState
 from agri_twin.infrastructure.energyplus_timeline import (
     EnergyPlusMicroclimateEngine,
@@ -26,9 +26,11 @@ from agri_twin.infrastructure.energyplus_timeline import (
     run_timeline,
 )
 from agri_twin.infrastructure.epw_weather import EpwLocation
+from agri_twin.infrastructure.greenhouse_idf import ThermalSpec
 
 BACKENDS = ("SIMPLIFIED", "ENERGYPLUS")
-BACKEND_FIELDS = ("backend", "layout")
+BACKEND_FIELDS = ("backend", "layout", "hvac")
+HVAC_FIELDS = ("cooling_setpoint_c", "cooling_capacity_w_m2")
 LAYOUT_FIELDS = ("typology", "span_m", "n_spans", "n_bays", "gutter_height_m", "ridge_rise_m", "pillar_spacing_m")
 DEFAULT_TYPOLOGY = GreenhouseTypology.MULTITUNEL_CAPILLA.value
 FARM_CONFIG = Path(__file__).resolve().parents[3] / "src" / "farm_config.json"
@@ -47,19 +49,19 @@ class GreenhouseBackendError(ValueError):
 class GreenhouseBackendRequest:
     """Canonical backend selection. Only non-default (ENERGYPLUS) selections exist as objects; SIMPLIFIED is represented by None."""
 
-    __slots__ = ("backend", "layout")
+    __slots__ = ("backend", "layout", "hvac")
 
-    def __init__(self, backend: str, layout: tuple[tuple[str, Any], ...]) -> None:
-        self.backend, self.layout = backend, layout
+    def __init__(self, backend: str, layout: tuple[tuple[str, Any], ...], hvac: tuple[tuple[str, float], ...] = ()) -> None:
+        self.backend, self.layout, self.hvac = backend, layout, hvac
 
     def to_dict(self) -> dict[str, Any]:
-        return {"backend": self.backend, "layout": dict(self.layout)}
+        return {"backend": self.backend, "layout": dict(self.layout), **({"hvac": dict(self.hvac)} if self.hvac else {})}  # no block when absent: earlier requests keep their hashes
 
     def __eq__(self, other: object) -> bool:
-        return isinstance(other, GreenhouseBackendRequest) and (self.backend, self.layout) == (other.backend, other.layout)
+        return isinstance(other, GreenhouseBackendRequest) and (self.backend, self.layout, self.hvac) == (other.backend, other.layout, other.hvac)
 
     def __hash__(self) -> int:
-        return hash((self.backend, self.layout))
+        return hash((self.backend, self.layout, self.hvac))
 
 
 def _simplified_request(layout: Any) -> GreenhouseBackendRequest:
@@ -81,6 +83,9 @@ def parse_greenhouse_backend(document: Any, environment: str, runtime_event_type
     if backend not in BACKENDS:
         raise GreenhouseBackendError(f"greenhouse backend {backend!r} is not available; choose one of {', '.join(BACKENDS)}", "greenhouse.backend", "INVALID_REQUEST")
     layout = document.get("layout")
+    hvac = _hvac_fields(document.get("hvac"))
+    if hvac and backend != "ENERGYPLUS":
+        raise GreenhouseBackendError("greenhouse.hvac configures the EnergyPlus ideal-loads cooling; the simplified model is cooled by the climate controller's equipment", "greenhouse.hvac", "UNSUPPORTED_ENVIRONMENT")
     if backend == "SIMPLIFIED":
         if environment != "greenhouse":
             if layout is not None:
@@ -98,7 +103,39 @@ def parse_greenhouse_backend(document: Any, environment: str, runtime_event_type
         require_energyplus()
     except EnergyPlusTimelineError as exc:
         raise GreenhouseBackendError(str(exc), "greenhouse.backend", "MODEL_NOT_READY") from None
-    return GreenhouseBackendRequest("ENERGYPLUS", tuple(sorted(spec_fields.items())))
+    return GreenhouseBackendRequest("ENERGYPLUS", tuple(sorted(spec_fields.items())), hvac)
+
+
+def _hvac_fields(hvac: Any) -> tuple[tuple[str, float], ...]:
+    """Optional mechanical cooling of the EnergyPlus zone. Both values are the user's (no default exists): a set-point to hold and the installed capacity per m2 of floor."""
+    if hvac is None:
+        return ()
+    if not isinstance(hvac, Mapping):
+        raise GreenhouseBackendError("greenhouse.hvac must be a mapping", "greenhouse.hvac", "INVALID_REQUEST")
+    unknown = sorted(set(hvac) - set(HVAC_FIELDS))
+    if unknown:
+        raise GreenhouseBackendError(f"unknown hvac fields: {', '.join(unknown)}; allowed: {', '.join(HVAC_FIELDS)}", f"greenhouse.hvac.{unknown[0]}", "INVALID_REQUEST")
+    if set(hvac) != set(HVAC_FIELDS):
+        raise GreenhouseBackendError("hvac needs both cooling_setpoint_c and cooling_capacity_w_m2: nothing is assumed", "greenhouse.hvac", "INVALID_REQUEST")
+    values: dict[str, float] = {}
+    for name in HVAC_FIELDS:
+        value = hvac[name]
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or value != value or abs(value) == float("inf"):
+            raise GreenhouseBackendError(f"{name} must be a finite number", f"greenhouse.hvac.{name}", "INVALID_REQUEST")
+        values[name] = float(value)
+    if not 5.0 <= values["cooling_setpoint_c"] <= 50.0:
+        raise GreenhouseBackendError("cooling_setpoint_c must be between 5 and 50 degC", "greenhouse.hvac.cooling_setpoint_c", "INVALID_REQUEST")
+    if not 0.0 < values["cooling_capacity_w_m2"] <= 1000.0:
+        raise GreenhouseBackendError("cooling_capacity_w_m2 must be positive and at most 1000", "greenhouse.hvac.cooling_capacity_w_m2", "INVALID_REQUEST")
+    return tuple(sorted(values.items()))
+
+
+def thermal_spec(request: GreenhouseBackendRequest) -> ThermalSpec:
+    hvac = dict(request.hvac)
+    if not hvac:
+        return ThermalSpec()
+    return ThermalSpec(cooling_setpoint_c=Sourced(hvac["cooling_setpoint_c"], EvidenceStatus.USER_SUPPLIED, "user-supplied cooling set-point"),
+                       cooling_capacity_w_m2=Sourced(hvac["cooling_capacity_w_m2"], EvidenceStatus.USER_SUPPLIED, "user-supplied installed cooling capacity"))
 
 
 def _layout_fields(layout: Any) -> dict[str, Any]:
@@ -150,7 +187,8 @@ def describe(request: GreenhouseBackendRequest) -> dict[str, Any]:
     return {
         "backend": "ENERGYPLUS", "layout": dict(request.layout), "geometry_provenance": spec.provenance.value,
         "energyplus_version": install.version if install else None,
-        "model": "single thermal zone, faceted cover, ideal-loads heater, temperature-controlled plus commanded natural ventilation",
+        "model": "single thermal zone, faceted cover, ideal-loads heater" + (" and ideal-loads cooling (user set-point and capacity)" if request.hvac else "") + ", temperature-controlled plus commanded natural ventilation",
+        **({"hvac": dict(request.hvac)} if request.hvac else {}),
         "limits": ["placeholder envelope/thermal values (PROVISIONAL_DEFAULT)", "no crop feedback (transpiration, CO2 uptake)", "CO2 not modelled",
                    "shading approximated as an external screen scaling the solar input", "software qualification only; not validated against a real greenhouse"],
     }
@@ -192,7 +230,7 @@ def build_timeline(request: GreenhouseBackendRequest, plot_id: str, full_scenari
         shading.append(controls["shade"].actual if "shade" in controls else 0.0)
         series.append((label, state))
         label += timedelta(hours=1)
-    inputs = TimelineInputs(_location(plot_id), tuple(series), tuple(forced), tuple(shading), layout_spec(request))
+    inputs = TimelineInputs(_location(plot_id), tuple(series), tuple(forced), tuple(shading), layout_spec(request), thermal=thermal_spec(request))
     return run_timeline(inputs)
 
 

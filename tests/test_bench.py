@@ -206,3 +206,8 @@ def test_the_bench_prices_the_estimated_energy_with_the_users_own_tariff_after_t
         assert element in HTML
     assert "/api/energy/cost" in JS and "attachCost" in JS and "Nothing is assumed: with no price the cost stays empty" in HTML
     assert "tariff" not in JS[JS.index("function buildRequest"):JS.index("function buildRequest") + 700]  # the tariff is not part of the simulation request
+
+
+def test_the_bench_offers_optional_energyplus_hvac_cooling_without_assuming_values():
+    assert "hvac-setpoint" in HTML and "hvac-capacity" in HTML and "nothing is assumed" in HTML.lower()
+    assert "cooling_setpoint_c" in JS and "cooling_capacity_w_m2" in JS and 'bench.config.backend === "ENERGYPLUS" && isNumber(hvac.setpoint)' in JS

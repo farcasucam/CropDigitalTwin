@@ -145,6 +145,8 @@
     if (bench.config.environment === "greenhouse") {
       const c = bench.config.layout;
       request.greenhouse = { backend: bench.config.backend, layout: { typology: c.typology, span_m: c.span, ridge_rise_m: c.rise, gutter_height_m: c.gutter, pillar_spacing_m: c.pillar, n_spans: c.spans, n_bays: c.bays } };
+      const hvac = bench.config.hvac || {};
+      if (bench.config.backend === "ENERGYPLUS" && isNumber(hvac.setpoint) && isNumber(hvac.capacity)) request.greenhouse.hvac = { cooling_setpoint_c: hvac.setpoint, cooling_capacity_w_m2: hvac.capacity };
     }
     const control = controlDocument();
     if (control) request.control = control;
@@ -280,8 +282,16 @@
       button.addEventListener("click", () => { bench.config.backend = info.id; pruneEvents(); renderBackend(); renderEvents(); renderPresets(); renderControl(); changed(); });
       group.append(button);
     }
-    const info = backendInfo(bench.config.backend);
+    const info = backendInfo(bench.config.backend), hvac = bench.config.hvac || (bench.config.hvac = {});
     $("#backend-note").textContent = info.available ? info.note : info.reason;
+    $("#hvac-box").hidden = bench.config.backend !== "ENERGYPLUS";
+    $("#hvac-setpoint").value = isNumber(hvac.setpoint) ? String(hvac.setpoint) : "";
+    $("#hvac-capacity").value = isNumber(hvac.capacity) ? String(hvac.capacity) : "";
+  }
+  function bindHvac() {
+    for (const [id, key] of [["hvac-setpoint", "setpoint"], ["hvac-capacity", "capacity"]]) {
+      $(`#${id}`).addEventListener("change", (event) => { (bench.config.hvac || (bench.config.hvac = {}))[key] = event.target.value === "" ? null : Number(event.target.value); changed(); });
+    }
   }
   function initLayout() {
     const cat = bench.catalogue;
@@ -769,6 +779,7 @@
   }
   function bindControl() {
     bindTariff();
+    bindHvac();
     if (!controlInfo()) { renderControl(); return; }
     $("#add-schedule").addEventListener("click", () => {
       const scheduled = controlInfo().actuators.find((a) => bench.config.control.actuators[a.id] === "SCHEDULE") || controlInfo().actuators[0];

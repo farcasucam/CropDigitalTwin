@@ -43,6 +43,9 @@ class ThermalSpec:
     heating_setpoint_c: Sourced = field(default_factory=lambda: provisional(12.0))
     heater_capacity_w_m2: Sourced = field(default_factory=lambda: provisional(100.0))
     ground_temperature_c: Sourced = field(default_factory=lambda: provisional(15.0, "constant ground temperature"))
+    # Mechanical cooling is optional and has no default: without both values the HVAC never cools the zone (cooling set-point 60 degC, as before).
+    cooling_setpoint_c: Sourced | None = None
+    cooling_capacity_w_m2: Sourced | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -229,7 +232,8 @@ def build_greenhouse_idf(
     else:
         add("Schedule:Constant, Forced Vent Opening, Fraction, 0.0;")
     add(_obj("Schedule:Constant", "Heating Setpoint", "Temperature", _num(thermal.heating_setpoint_c.value)))
-    add("Schedule:Constant, Cooling Setpoint, Temperature, 60.0;")
+    cooling = thermal.cooling_setpoint_c is not None and thermal.cooling_capacity_w_m2 is not None
+    add(_obj("Schedule:Constant", "Cooling Setpoint", "Temperature", _num(thermal.cooling_setpoint_c.value) if cooling else "60.0"))
     add("Schedule:Constant, Thermostat Type, Mode, 4;")
     add(_obj("ZoneInfiltration:DesignFlowRate", "Cover Infiltration", "Greenhouse Zone", "Always On", "AirChanges/Hour", None, None, None, _num(thermal.infiltration_ach.value), 1, 0, 0, 0))
     # Two vent objects: temperature-controlled passive venting (EnergyPlus native limits) and commanded venting from the schedule.
@@ -239,7 +243,7 @@ def build_greenhouse_idf(
     add("ThermostatSetpoint:DualSetpoint, Dual SP, Heating Setpoint, Cooling Setpoint;")
     add("ZoneControl:Thermostat, Zone Thermostat, Greenhouse Zone, Thermostat Type, ThermostatSetpoint:DualSetpoint, Dual SP;")
     capacity = thermal.heater_capacity_w_m2.value * area
-    add(_obj("ZoneHVAC:IdealLoadsAirSystem", "Heater", None, "Heater Supply Node", None, None, 45.0, 12.0, 0.015, 0.009, "LimitCapacity", None, _num(capacity), "NoLimit", None, None, None, None, "ConstantSensibleHeatRatio", 0.7, "None"))
+    add(_obj("ZoneHVAC:IdealLoadsAirSystem", "Heater", None, "Heater Supply Node", None, None, 45.0, 12.0, 0.015, 0.009, "LimitCapacity", None, _num(capacity), *(("LimitCapacity", None, _num(thermal.cooling_capacity_w_m2.value * area)) if cooling else ("NoLimit", None, None)), None, None, "ConstantSensibleHeatRatio", 0.7, "None"))
     add("ZoneHVAC:EquipmentList, Zone Equipment, SequentialLoad, ZoneHVAC:IdealLoadsAirSystem, Heater, 1, 1, , ;")
     add("ZoneHVAC:EquipmentConnections, Greenhouse Zone, Zone Equipment, Heater Supply Node, , Zone Air Node, Zone Return Node;")
     if run.python_plugin_module and run.python_plugin_class:
@@ -266,6 +270,8 @@ def build_greenhouse_idf(
     for group, spec in (("envelope", envelope), ("thermal", thermal)):
         for name in spec.__slots__:  # type: ignore[attr-defined]
             value = getattr(spec, name)
+            if value is None:  # optional, user-supplied (cooling): absent means not present
+                continue
             provenance[f"{group}.{name}"] = f"{value.evidence.value}: {value.source}"
     return BuiltGreenhouseIdf(
         text=text,

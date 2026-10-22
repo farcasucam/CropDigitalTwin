@@ -179,3 +179,48 @@ def test_commanded_ventilation_and_a_heat_wave_act_through_energyplus():
     assert max(intervention["greenhouse_ventilation_fraction"]) == pytest.approx(1.0)
     assert statistics.mean(intervention["greenhouse_ventilation_fraction"]) > statistics.mean(baseline["greenhouse_ventilation_fraction"])
     assert max(intervention["temperature_c"]) > max(baseline["temperature_c"])  # the heat wave reaches the interior
+
+
+# -- optional EnergyPlus HVAC cooling ----------------------------------------------------------------------
+HVAC = {"cooling_setpoint_c": 18.0, "cooling_capacity_w_m2": 150.0}
+
+
+@pytest.mark.parametrize("hvac, path", [({"cooling_setpoint_c": 18.0}, "greenhouse.hvac"), ({**HVAC, "x": 1}, "greenhouse.hvac.x"), ({**HVAC, "cooling_setpoint_c": 80.0}, "greenhouse.hvac.cooling_setpoint_c"),
+                                        ({**HVAC, "cooling_capacity_w_m2": 0}, "greenhouse.hvac.cooling_capacity_w_m2"), ({**HVAC, "cooling_capacity_w_m2": True}, "greenhouse.hvac.cooling_capacity_w_m2"), ("cool", "greenhouse.hvac")])
+def test_invalid_hvac_requests_are_rejected_with_a_path(energyplus_present, hvac, path):
+    with pytest.raises(GreenhouseBackendError) as caught:
+        parse_greenhouse_backend({**ENERGYPLUS, "hvac": hvac}, "greenhouse")
+    assert caught.value.path == path
+
+
+def test_hvac_is_energyplus_only_and_absent_from_requests_that_do_not_use_it(energyplus_present):
+    with pytest.raises(GreenhouseBackendError) as caught:
+        parse_greenhouse_backend({"backend": "SIMPLIFIED", "hvac": HVAC}, "greenhouse")
+    assert caught.value.path == "greenhouse.hvac"
+    assert "hvac" not in parse_greenhouse_backend(ENERGYPLUS, "greenhouse").to_dict()
+    assert parse_greenhouse_backend({**ENERGYPLUS, "hvac": HVAC}, "greenhouse").to_dict()["hvac"] == HVAC
+
+
+def test_without_hvac_the_idf_never_cools_and_with_it_the_user_values_are_written():
+    from agri_twin.domain.greenhouse_typology import EvidenceStatus, Sourced, GreenhouseTypology
+    from agri_twin.domain.greenhouse_modularity import configure_greenhouse
+    from agri_twin.infrastructure.greenhouse_idf import RunSpec, ThermalSpec, build_greenhouse_idf
+
+    spec = configure_greenhouse(GreenhouseTypology.MULTITUNEL_CAPILLA).spec
+    plain = build_greenhouse_idf(spec, thermal=ThermalSpec(), run=RunSpec())
+    assert "Cooling Setpoint, Temperature, 60" in plain.text and "NoLimit" in plain.text
+    cooled = build_greenhouse_idf(spec, thermal=ThermalSpec(cooling_setpoint_c=Sourced(18.0, EvidenceStatus.USER_SUPPLIED, "u"), cooling_capacity_w_m2=Sourced(150.0, EvidenceStatus.USER_SUPPLIED, "u")), run=RunSpec())
+    assert "Cooling Setpoint, Temperature, 18" in cooled.text and cooled.text.count("LimitCapacity") == plain.text.count("LimitCapacity") + 1
+    assert cooled.idf_hash != plain.idf_hash and not any(key.endswith("cooling_setpoint_c") for key in plain.provenance)
+
+
+@needs_energyplus
+def test_energyplus_cools_the_greenhouse_when_the_user_supplies_the_hvac():
+    service = InteractiveSimulationService()
+    window = {**BASE, "end_time": "2026-04-20T00:00:00+00:00"}
+    plain = service.run_simulation({**window, "greenhouse": ENERGYPLUS})
+    cooled = service.run_simulation({**window, "greenhouse": {**ENERGYPLUS, "hvac": HVAC}})
+    assert max(plain.result.trajectory["greenhouse_cooling_kw"]) == 0.0
+    assert max(cooled.result.trajectory["greenhouse_cooling_kw"]) > 1.0
+    assert max(cooled.result.trajectory["temperature_c"]) < max(plain.result.trajectory["temperature_c"])
+    assert plain.hashes["configuration_hash"] != cooled.hashes["configuration_hash"]
