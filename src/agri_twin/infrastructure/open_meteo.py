@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import math
 import os
+import ssl
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta, timezone
 from enum import Enum
@@ -82,14 +83,25 @@ class HttpTransport(Protocol):
     def get(self, url: str, params: Mapping[str, str]) -> bytes: ...
 
 
+def _ssl_context() -> ssl.SSLContext:
+    """TLS verification stays ON. When the ``certifi`` bundle is installed it is used instead of the operating system store: the Windows store can hold an
+    expired root in the chain and make Python reject a valid server ("certificate has expired") while other clients accept it."""
+    try:
+        import certifi
+    except ImportError:
+        return ssl.create_default_context()
+    return ssl.create_default_context(cafile=certifi.where())
+
+
 class UrllibTransport:
     def __init__(self, timeout_seconds: float = 30.0) -> None:
         self._timeout = timeout_seconds
+        self._context = _ssl_context()
 
     def get(self, url: str, params: Mapping[str, str]) -> bytes:
         request = Request(f"{url}?{urlencode(params)}", headers={"Accept": "application/json"})
         try:
-            with urlopen(request, timeout=self._timeout) as response:
+            with urlopen(request, timeout=self._timeout, context=self._context) as response:
                 return response.read()
         except HTTPError as exc:
             if exc.code in (401, 403):

@@ -1,0 +1,44 @@
+{
+  "contract": "weather_locations",
+  "version": "1.0",
+  "note": "Where the local historical weather of each crop is taken from. Points were chosen by the assistant inside traditional growing areas (not town centres) from general geographic knowledge and are NOT verified against parcels: confirm or refine each point before any result is interpreted. The reanalysis grid is coarse (about 10-25 km), so a few kilometres change little, but the area must be right. The elevation of the grid cell used is recorded in each downloaded file's metadata.",
+  "coordinate_status": "APPROXIMATE_ZONE_PENDING_USER_CONFIRMATION",
+  "locations": {
+    "jumilla_vineyards": {
+      "label": "Jumilla (Murcia), wine-growing plain",
+      "crops": ["grape"],
+      "latitude": 38.44,
+      "longitude": -1.25
+    },
+    "cieza_orchards": {
+      "label": "Cieza (Murcia), Segura valley orchards",
+      "crops": ["peach"],
+      "latitude": 38.27,
+      "longitude": -1.40
+    },
+    "el_ejido_greenhouses": {
+      "label": "El Ejido (Almeria), Campo de Dalias greenhouses",
+      "crops": ["tomato", "pepper"],
+      "latitude": 36.77,
+      "longitude": -2.77
+    },
+    "mazarron_coast_fields": {
+      "label": "Mazarron coast (Murcia), irrigated fields",
+      "crops": ["lettuce"],
+      "latitude": 37.58,
+      "longitude": -1.32
+    },
+    "zaragoza_fruit_valley": {
+      "label": "Zaragoza, Jalon valley fruit-growing area (Calatayud)",
+      "crops": ["plum"],
+      "latitude": 41.35,
+      "longitude": -1.63
+    },
+    "burgo_de_osma_orchards": {
+      "label": "El Burgo de Osma (Soria), river-valley orchards",
+      "crops": ["apple"],
+      "latitude": 41.57,
+      "longitude": -3.05
+    }
+  }
+}

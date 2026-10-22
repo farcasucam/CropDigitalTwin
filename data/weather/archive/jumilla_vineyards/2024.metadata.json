@@ -1,0 +1,51 @@
+{
+  "source": "open-meteo",
+  "provider": "open-meteo",
+  "api": "historical",
+  "dataset_type": "historical",
+  "authentication_mode": "public",
+  "endpoint": "https://archive-api.open-meteo.com/v1/archive",
+  "model_requested": "auto",
+  "model_returned": null,
+  "latitude": 38.44,
+  "longitude": -1.25,
+  "elevation_requested": null,
+  "elevation": 519.0,
+  "timezone": "UTC",
+  "start_date": "2024-01-01",
+  "end_date": "2024-12-31",
+  "resolution": "hourly",
+  "variables": [
+    "temperature_2m",
+    "relative_humidity_2m",
+    "shortwave_radiation",
+    "wind_speed_10m",
+    "wind_direction_10m",
+    "rain",
+    "surface_pressure"
+  ],
+  "units": {
+    "wind_speed": "ms",
+    "temperature": "celsius",
+    "precipitation": "mm"
+  },
+  "wind_speed_unit": "ms",
+  "temperature_unit": "celsius",
+  "precipitation_unit": "mm",
+  "retrieved_at": "2026-10-22T12:05:38.830332Z",
+  "forecast_reference_time": null,
+  "forecast_valid_from": null,
+  "forecast_valid_to": null,
+  "request_count": 1,
+  "client_version": "1.0",
+  "location_id": "jumilla_vineyards",
+  "location_label": "Jumilla (Murcia), wine-growing plain",
+  "crops": [
+    "grape"
+  ],
+  "year": 2024,
+  "complete": true,
+  "coordinate_status": "APPROXIMATE_ZONE_PENDING_USER_CONFIRMATION",
+  "classification": "FORCING",
+  "source_note": "Modelled reanalysis from the Open-Meteo historical (archive) API used as simulation forcing; not station measurements, never REAL_VERIFIED. Attribution: weather data by Open-Meteo.com; check its current licence terms before redistributing."
+}
