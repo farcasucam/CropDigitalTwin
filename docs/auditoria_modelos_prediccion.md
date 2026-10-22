@@ -63,8 +63,9 @@ rango térmico fijo de 10 °C, sin viento, humedad ni VPD, y la ventilación sim
 *Corregido en la fase 5.45 como opción* (`model_options.et0_method = PENMAN_MONTEITH_FAO56`; por defecto sigue el ET0 histórico para no mover resultados ni hashes): Penman-Monteith horario FAO-56 con el sitio de la parcela o de la ubicación meteorológica, viento convertido a 2 m y claridad del cielo calculada como indica el artículo; reproduce los ejemplos 19 y 8 de FAO-56; con la opción el evento de viento cambia ET0. Detalle en `docs/phase5_45_et0_penman_monteith.md`. Nota original de la decisión de no sustituirlo por defecto: Penman-Monteith (FAO-56) horario necesita la geometría solar (latitud, día, hora) para la radiación neta de onda larga y un cociente de nubosidad que el modelo no tiene; elegir esos valores sería inventarlos, y el cambio alteraría la
 hidrología de todas las fases y sus hashes. El evento de viento declara ahora que solo actúa mediante EnergyPlus (`affected_variables = temperature_c`, texto en el contrato) y una prueba lo fija. Queda como mejora aparte.
 
-**6. El CO₂ no puede aumentar el crecimiento.** `co2_response = min(1, CO₂/420)`: por encima de 420 ppm no hay efecto, así que el enriquecimiento (práctica habitual en invernadero) es invisible para el cultivo.
+**6. El CO₂ no puede aumentar el crecimiento (CORREGIDO como opción en la fase 5.45).** `co2_response = min(1, CO₂/420)`: por encima de 420 ppm no hay efecto, así que el enriquecimiento (práctica habitual en invernadero) es invisible para el cultivo.
 EnergyPlus no modela CO₂. La magnitud del evento en el simplificado (+26,7 ppm en equilibrio) es una convención de unidades.
+*Corregido como opción en la fase 5.45* (`model_options.co2_response = LOG_RELATIVE_GAIN`; por defecto sigue `min(1, CO₂/420)`): respuesta logarítmica con la ganancia de Kimball (1983), +33 % por duplicación del CO₂ (IC 99,9 %: 24-43 %), valor genérico de cultivos C3 con su cita en `src/co2_response.json`, o el valor propio del usuario. No es un valor de tomate ni está calibrado; las suposiciones que la fuente no cubre quedan escritas en el archivo.
 
 ### Media gravedad: coherencia y estructura
 
@@ -92,8 +93,8 @@ desfase de una hora respecto a la semántica de intervalo (error del 1,4 % en la
 3. ~~Olas de calor/frío: conservar el punto de rocío por defecto~~ (hecho para eventos de ejecución).
 4. ~~Semántica común de ventilación y definición única de `greenhouse_ventilation_fraction`~~ (hecho en la fase 5.44).
 5. ~~ET0 con viento y VPD o marcar el evento de viento como "solo EnergyPlus"~~ (marcado; Penman-Monteith queda como mejora aparte, ver el hallazgo).
-6. Respuesta al CO₂ con efecto de enriquecimiento (con fuente trazable) o avisar de que el evento no afecta al cultivo.
-7. ~~Convertir esta matriz en pruebas de regresión~~ (hecho en `tests/test_intervention_effects.py`: las invariantes que ya se cumplen son pruebas normales, y los hallazgos 5 y 6 abiertos son pruebas `xfail` estrictas que fallarán al corregirse el defecto, obligando a actualizar esta nota).
+6. ~~Respuesta al CO₂ con efecto de enriquecimiento (con fuente trazable)~~ (hecho como opción en la fase 5.45).
+7. ~~Convertir esta matriz en pruebas de regresión~~ (hecho en `tests/test_intervention_effects.py`: las invariantes que ya se cumplen son pruebas normales, y los comportamientos por defecto de los hallazgos 5 y 6 (que siguen siendo los históricos) son pruebas `xfail` estrictas que fallarán al corregirse el defecto, obligando a actualizar esta nota).
 
 ## Límites de esta auditoría
 

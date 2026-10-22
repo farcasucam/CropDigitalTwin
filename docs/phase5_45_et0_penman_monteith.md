@@ -1,4 +1,4 @@
-# Phase 5.45: optional FAO-56 Penman-Monteith reference evapotranspiration
+# Phase 5.45: optional FAO-56 Penman-Monteith evapotranspiration and optional CO2 growth response
 
 Status: **COMPLETE (software qualification)**. A published equation implemented and checked against its paper's worked examples; **not** calibrated or validated against lysimeter or station data.
 
@@ -38,3 +38,18 @@ default request unchanged; validation paths; missing coordinates; identity and d
 ## Limits
 
 Reference grass ET0 only; not calibrated. Coordinates of the weather locations are approximate and pending confirmation. The synthetic generator's wind height is an assumption. Inside greenhouses the equation is applied outside its domain with the user's air speed.
+
+## Optional growth response to CO2 (audit finding 6)
+
+The historical response is `min(1, CO2 / 420)`: depletion limits growth and enrichment gives nothing, so a CO2 event raised the greenhouse's CO2 but never the crop's growth. `model_options.co2_response = "LOG_RELATIVE_GAIN"`
+(selector "Growth response to CO2" in the bench) applies `factor(C) = 1 + gain / ln 2 * ln(C / 420)` (1 at 420 ppm, `1 + gain` at 840 ppm, never negative). Default `HISTORICAL_CAPPED`: unchanged hashes and results.
+
+* **The parameter has a source** (`src/co2_response.json`, status `LITERATURE_GENERIC_C3_NOT_CROP_SPECIFIC`): Kimball (1983), *Agronomy Journal* 75(5): 779-788, doi 10.2134/agronj1983.00021962007500050014x: pooled 430+ observations of 37 species, doubling
+  atmospheric CO2 raises yield by about **33 %** (99.9 % confidence interval 24-43 %). Verified against the paper's Crossref record (abstract) on 2026-10-23; the full text was not read.
+* **What is not in the source and is stated as an assumption in the file:** the logarithmic form; the doubling taken from the model's 420 ppm reference; a yield ratio applied to the growth rate (no water-saving effect, no acclimation); mostly greenhouse and chamber data
+  (free-air studies give smaller responses; Kimball 2016/2017 reports about +19 % for C3 grain crops in FACE). It is a generic C3 value, not a tomato, pepper or lettuce value, and not calibrated in this model.
+* **Your own value:** `co2_gain_per_doubling` (0-1) replaces the source value for the request and is part of its identity; the effective configuration reports which one was used.
+* **Mechanics:** a factor above 1 is an enhancement of the radiation use efficiency, not one of the (at most 1) limitations, so `RadiationGrowthEngine.advance` takes an `enhancement_factor` (default 1: unchanged). The orchestrator and, with the crop-feedback option of phase 5.44, its growth proxy use the same response.
+* **Effect (tomato, simplified greenhouse, CO2 event to about 620 ppm from 1 March):** cumulative biomass 149.6 -> 158.4 g/m2 with the logarithmic response; no change with the historical one. EnergyPlus does not model CO2 and is unaffected.
+
+Tests: `tests/test_co2_response.py` (function values, parameter file, validation, opt-in behaviour, user gain, crop-feedback proxy, exact what-if).

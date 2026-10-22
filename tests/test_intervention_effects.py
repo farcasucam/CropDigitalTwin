@@ -208,7 +208,7 @@ def test_the_wind_event_says_it_only_acts_through_energyplus():
     assert spec.affected_variables == ("temperature_c",) and "only the EnergyPlus backend uses wind" in spec.summary
 
 
-@pytest.mark.xfail(strict=True, reason="audit finding 6: the CO2 response is min(1, CO2/420), so enrichment cannot increase growth")
+@pytest.mark.xfail(strict=True, reason="audit finding 6, default behaviour: the CO2 response is min(1, CO2/420), so enrichment cannot increase growth (the logarithmic response is the opt-in model_options.co2_response of phase 5.45)")
 def test_co2_enrichment_can_raise_the_growth_response():
     assert CropGrowthEngine.co2_response(800.0) > CropGrowthEngine.co2_response(420.0)
 

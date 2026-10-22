@@ -221,3 +221,8 @@ def test_the_bench_offers_the_optional_crop_feedback_of_the_simplified_model():
 def test_the_bench_offers_the_penman_monteith_option_and_sends_it_only_when_chosen():
     assert "et0-method" in HTML and "indoor-wind" in HTML
     assert 'bench.config.et0Method === "PENMAN_MONTEITH_FAO56"' in JS and "request.model_options" in JS
+
+
+def test_the_bench_offers_the_cited_co2_growth_response_and_sends_it_only_when_chosen():
+    assert "co2-response" in HTML and "co2-gain" in HTML
+    assert 'bench.config.co2Response === "LOG_RELATIVE_GAIN"' in JS and "co2_gain_per_doubling" in JS

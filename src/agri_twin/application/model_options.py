@@ -4,20 +4,27 @@ Every option defaults to the historical behaviour, and a request that does not u
 
 * ``et0_method``: ``HARGREAVES_HISTORICAL`` (default: temperature and radiation only, fixed temperature range, no wind or humidity) or ``PENMAN_MONTEITH_FAO56``
   (FAO-56 hourly: radiation, temperature, humidity, wind and pressure; needs the site, which comes from the weather location or the plot, never from a default).
+* ``co2_response``: ``HISTORICAL_CAPPED`` (default: ``min(1, CO2/420)``, enrichment gives no benefit) or ``LOG_RELATIVE_GAIN`` (growth factor 1 at 420 ppm and 1 + gain at twice that, logarithmic; the gain per doubling
+  comes from ``src/co2_response.json``, a generic C3 literature value with its citation and status, or from the request's ``co2_gain_per_doubling``).
 * ``indoor_wind_m_s``: air speed inside a greenhouse for the Penman-Monteith aerodynamic term (default 0: still air; the outdoor wind does not reach the crop). The user's value, not a model value.
 """
 
 from __future__ import annotations
 
+import json
 import math
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Mapping
 
+from agri_twin.domain.co2_response import LogarithmicCo2Response
 from agri_twin.domain.evapotranspiration import Et0Site, EvapotranspirationError, PenmanMonteithEt0
 from agri_twin.domain.farm import FarmConfigRepository
 
-OPTION_FIELDS = ("et0_method", "indoor_wind_m_s")
+OPTION_FIELDS = ("et0_method", "indoor_wind_m_s", "co2_response", "co2_gain_per_doubling")
+CO2_RESPONSES = ("HISTORICAL_CAPPED", "LOG_RELATIVE_GAIN")
+DEFAULT_CO2 = CO2_RESPONSES[0]
+CO2_FILE = Path(__file__).resolve().parents[2] / "co2_response.json"
 ET0_METHODS = ("HARGREAVES_HISTORICAL", "PENMAN_MONTEITH_FAO56")
 DEFAULT_ET0 = ET0_METHODS[0]
 FARM_CONFIG = Path(__file__).resolve().parents[3] / "src" / "farm_config.json"
@@ -35,6 +42,8 @@ class ModelOptionsError(ValueError):
 class ModelOptions:
     et0_method: str = DEFAULT_ET0
     indoor_wind_m_s: float = 0.0
+    co2_response: str = DEFAULT_CO2
+    co2_gain_per_doubling: float | None = None  # None: the value of src/co2_response.json
 
     def to_dict(self) -> dict[str, Any]:
         document: dict[str, Any] = {}
@@ -42,6 +51,10 @@ class ModelOptions:
             document["et0_method"] = self.et0_method
         if self.indoor_wind_m_s:
             document["indoor_wind_m_s"] = self.indoor_wind_m_s
+        if self.co2_response != DEFAULT_CO2:
+            document["co2_response"] = self.co2_response
+        if self.co2_gain_per_doubling is not None:
+            document["co2_gain_per_doubling"] = self.co2_gain_per_doubling
         return document
 
 
@@ -62,7 +75,17 @@ def parse_model_options(document: Any, environment: str) -> ModelOptions | None:
         raise ModelOptionsError("indoor_wind_m_s must be a number between 0 and 20", "model_options.indoor_wind_m_s")
     if wind and (method != "PENMAN_MONTEITH_FAO56" or environment != "greenhouse"):
         raise ModelOptionsError("indoor_wind_m_s applies to the Penman-Monteith ET0 inside a greenhouse", "model_options.indoor_wind_m_s", "UNSUPPORTED_ENVIRONMENT")
-    options = ModelOptions(method, float(wind))
+    co2 = str(document.get("co2_response", DEFAULT_CO2)).upper()
+    if co2 not in CO2_RESPONSES:
+        raise ModelOptionsError(f"co2_response {co2!r} is not available; choose one of {', '.join(CO2_RESPONSES)}", "model_options.co2_response")
+    gain = document.get("co2_gain_per_doubling")
+    if gain is not None:
+        if co2 != "LOG_RELATIVE_GAIN":
+            raise ModelOptionsError("co2_gain_per_doubling applies to the LOG_RELATIVE_GAIN response", "model_options.co2_gain_per_doubling", "UNSUPPORTED_ENVIRONMENT")
+        if isinstance(gain, bool) or not isinstance(gain, (int, float)) or not math.isfinite(gain) or not 0.0 <= gain <= 1.0:
+            raise ModelOptionsError("co2_gain_per_doubling must be a number between 0 and 1 (relative gain of growth for a doubling of CO2)", "model_options.co2_gain_per_doubling")
+        gain = float(gain)
+    options = ModelOptions(method, float(wind), co2, gain)
     return options if options.to_dict() else None
 
 
@@ -94,6 +117,32 @@ def water_engine_factory(request: Any) -> Callable[[Any, Any], Any] | None:
     return lambda _scenario, weather: WaterBalanceEngine(et0=PenmanMonteithEt0(site, height, lambda label: weather.generate(label).solar_radiation_w_m2, options.indoor_wind_m_s))
 
 
+def co2_constants() -> Mapping[str, Any]:
+    return json.loads(CO2_FILE.read_text(encoding="utf-8"))
+
+
+def co2_response_function(request: Any) -> Callable[[float], float] | None:
+    """The growth response to CO2 of a run (None: the historical min(1, CO2/420))."""
+    options = request.model_options
+    if options is None or options.co2_response == DEFAULT_CO2:
+        return None
+    constants = co2_constants()
+    gain = options.co2_gain_per_doubling if options.co2_gain_per_doubling is not None else float(constants["relative_gain_per_doubling"])
+    return LogarithmicCo2Response(gain, float(constants["reference_co2_ppm"]))
+
+
+def describe_co2(request: Any) -> dict[str, Any]:
+    options = request.model_options
+    if options is None or options.co2_response == DEFAULT_CO2:
+        return {"co2_response": DEFAULT_CO2, "formula": "min(1, CO2 / 420): depletion limits growth, enrichment above 420 ppm gives no benefit"}
+    constants = co2_constants()
+    user = options.co2_gain_per_doubling is not None
+    return {"co2_response": options.co2_response, "formula": constants["functional_form"],
+            "relative_gain_per_doubling": options.co2_gain_per_doubling if user else constants["relative_gain_per_doubling"],
+            "gain_origin": "USER_SUPPLIED (request)" if user else f"{constants['status']}: {constants['source']['citation']} (doi {constants['source']['doi']})",
+            "confidence_interval_99_9_of_the_source": None if user else constants["confidence_interval_99_9"], "assumptions": constants["assumptions_not_in_the_source"]}
+
+
 def describe(request: Any) -> dict[str, Any]:
     options = request.model_options
     method = options.et0_method if options is not None else DEFAULT_ET0
@@ -109,4 +158,4 @@ def describe(request: Any) -> dict[str, Any]:
                        "inside a greenhouse the equation is applied with the crop's indoor microclimate and the user's air speed, outside its validated open-field domain"]}
 
 
-__all__ = ["ModelOptions", "ModelOptionsError", "parse_model_options", "water_engine_factory", "describe", "et0_site", "EvapotranspirationError"]
+__all__ = ["co2_response_function", "describe_co2", "ModelOptions", "ModelOptionsError", "parse_model_options", "water_engine_factory", "describe", "et0_site", "EvapotranspirationError"]

@@ -61,7 +61,7 @@ class CropDigitalTwinOrchestrator:
     microclimate is persistent state carried from step to step.
     """
 
-    def __init__(self, clock: SimulationClock, weather_engine: WeatherEngine, crop: CropGrowthState, soil: SoilState, greenhouse_mode: str = "outdoor", microclimate: GreenhouseMicroclimateState | None = None, phenology: PhenologyEngine | None = None, greenhouse_engine: object | None = None, water_engine: WaterBalanceEngine | None = None) -> None:
+    def __init__(self, clock: SimulationClock, weather_engine: WeatherEngine, crop: CropGrowthState, soil: SoilState, greenhouse_mode: str = "outdoor", microclimate: GreenhouseMicroclimateState | None = None, phenology: PhenologyEngine | None = None, greenhouse_engine: object | None = None, water_engine: WaterBalanceEngine | None = None, co2_response: "Callable[[float], float] | None" = None) -> None:
         self.clock = clock
         self.weather_engine = weather_engine
         normalized = replace(crop, root_depth_m=1.0) if crop.root_depth_m <= 0 else crop
@@ -75,6 +75,9 @@ class CropDigitalTwinOrchestrator:
         # an injected engine (e.g. the EnergyPlus timeline) replaces the simplified one; engines that need the step time say so
         self.greenhouse = greenhouse_engine if greenhouse_engine is not None else GreenhouseMicroclimateEngine()
         self.radiation = RadiationGrowthEngine()
+        self.co2_response = co2_response if co2_response is not None else CropGrowthEngine.co2_response  # one response for the orchestrator and, with the crop exchange, for its growth proxy
+        if hasattr(self.greenhouse, "use_co2_response") and co2_response is not None:
+            self.greenhouse.use_co2_response(co2_response)
         self.water = water_engine if water_engine is not None else WaterBalanceEngine()
         if hasattr(self.greenhouse, "use_water_engine"):
             self.greenhouse.use_water_engine(self.water)
@@ -111,9 +114,12 @@ class CropDigitalTwinOrchestrator:
         water_result = self.water.advance(self.soil, crop_weather, dt_seconds, phenological, irrigation, when=simulation_time, indoors=self.greenhouse_mode != "outdoor")
         nutrient_result = self.nutrients.advance(phenological, potential_growth, dt_seconds, fertilization)
         climate_result = self.climate.advance(nutrient_result.state, crop_weather, dt_seconds, microclimate.environment, water_result.water_stress, nutrient_result.nutrient_factor)
-        co2_factor = CropGrowthEngine.co2_response(microclimate.indoor_state.co2_ppm)
+        co2_factor = self.co2_response(microclimate.indoor_state.co2_ppm)
         combined = climate_result.temperature_factor * climate_result.radiation_factor * climate_result.water_factor * climate_result.vpd_factor * climate_result.nutrient_factor * co2_factor
-        actual = self.radiation.advance(climate_result.state, crop_weather, dt_seconds, combined)
+        if co2_factor > 1.0:  # enrichment raises the radiation use efficiency: it is an enhancement, not one of the (<= 1) limitations
+            actual = self.radiation.advance(climate_result.state, crop_weather, dt_seconds, combined / co2_factor, co2_factor)
+        else:
+            actual = self.radiation.advance(climate_result.state, crop_weather, dt_seconds, combined)
         actual_growth = actual.biomass_total - climate_result.state.biomass_total
         harvest_ready = actual.maturity_index >= 1.0 and actual.current_stage == "post_harvest_dormancy"
         self.crop = replace(actual, soil_water_vwc=water_result.soil.vwc_m3_m3, water_stress=water_result.water_stress, nutrient_status=nutrient_result.nutrient_status, harvest_ready=harvest_ready)

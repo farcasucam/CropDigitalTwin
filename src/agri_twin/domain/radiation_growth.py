@@ -79,6 +79,7 @@ class RadiationGrowthEngine:
         weather: WeatherState,
         dt_seconds: float,
         limitation_factor: float = 1.0,
+        enhancement_factor: float = 1.0,
     ) -> CropGrowthState:
         """Return growth for one explicit weather interval at state's time.
 
@@ -90,6 +91,8 @@ class RadiationGrowthEngine:
             raise RadiationGrowthError("state must be a CropGrowthState")
         if not math.isfinite(limitation_factor) or not 0 <= limitation_factor <= 1:
             raise RadiationGrowthError("limitation_factor must be between 0 and 1")
+        if not math.isfinite(enhancement_factor) or enhancement_factor < 0:
+            raise RadiationGrowthError("enhancement_factor must be non-negative")  # a response that raises radiation use efficiency (CO2 enrichment): > 1 is allowed
         profile = self.profile_for(state.crop_key)
         if PhenologyEngine.endodormant(state):
             return state
@@ -98,7 +101,7 @@ class RadiationGrowthEngine:
         par = self.par_mj_m2(weather.solar_radiation_w_m2, dt_seconds)
         intercepted_par = par * (1.0 - math.exp(-profile.extinction_coefficient * state.leaf_area_index))
         potential_biomass = intercepted_par * profile.rue_g_dm_mj_par
-        actual_biomass = potential_biomass * limitation_factor
+        actual_biomass = potential_biomass * limitation_factor * enhancement_factor
         leaf, stem, root, fruit = self._partition(actual_biomass, state, profile)
         leaf_area_index = min(profile.maximum_lai, leaf * profile.specific_leaf_area_m2_g_dm)
         return replace(

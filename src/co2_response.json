@@ -1,0 +1,22 @@
+{
+  "contract": "co2_response",
+  "version": "1.0",
+  "status": "LITERATURE_GENERIC_C3_NOT_CROP_SPECIFIC",
+  "note": "Parameter of the optional growth response to CO2 (model_options.co2_response = LOG_RELATIVE_GAIN). Off by default: the historical response min(1, CO2/420) gives no benefit above 420 ppm. This value is a generic C3 literature figure, not a tomato, pepper or lettuce value, and not calibrated in this model; override it per request with co2_gain_per_doubling when a crop-specific, sourced value exists.",
+  "relative_gain_per_doubling": 0.33,
+  "confidence_interval_99_9": [0.24, 0.43],
+  "reference_co2_ppm": 420.0,
+  "functional_form": "factor(C) = max(0, 1 + relative_gain_per_doubling / ln(2) * ln(C / reference_co2_ppm)), equal to 1 at the reference and to 1 + gain at twice the reference",
+  "source": {
+    "citation": "Kimball, B. A. (1983). Carbon dioxide and agricultural yield: an assemblage and analysis of 430 prior observations. Agronomy Journal 75(5): 779-788.",
+    "doi": "10.2134/agronj1983.00021962007500050014x",
+    "reported": "pooled more than 430 observations of 37 species, mostly greenhouse or growth-chamber studies: doubling atmospheric CO2 raises yield by about 33 % (99.9 % confidence interval 24-43 %); applicable broadly to C3 crops",
+    "verified_against": "the Crossref record of the paper (abstract) on 2026-10-23; the full text was not read"
+  },
+  "assumptions_not_in_the_source": [
+    "the response is applied as a logarithmic function of the concentration (a first-order engineering form; the source reports one number per doubling)",
+    "the doubling is taken from the model's 420 ppm reference (the source's own baseline concentration was not checked)",
+    "a yield ratio is applied to the growth rate (radiation use efficiency), which ignores the water-saving effect of CO2 and acclimation",
+    "mostly greenhouse and chamber data: field responses (FACE) are smaller; Kimball 2016/2017 reports about +19 % for C3 grain crops in FACE"
+  ]
+}

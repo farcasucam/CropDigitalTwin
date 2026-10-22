@@ -82,7 +82,7 @@ SPECS: tuple[EventSpec, ...] = (
     EventSpec("SHADING", "shade", "value", "greenhouse shading actuator command (fraction of its maximum)", "GREENHOUSE", 0.0, 1.0, False, False, False,
               ("greenhouse_shading_fraction", "radiation_w_m2", "temperature_c"), "commands the existing greenhouse shading actuator"),
     EventSpec("CO2", "co2", "value", "greenhouse CO2 actuator command (fraction of its maximum)", "GREENHOUSE", 0.0, 1.0, False, False, False,
-              ("co2_ppm",), "commands the existing greenhouse CO2 actuator; the crop's growth response is min(1, CO2/420), so enrichment above 420 ppm does not raise growth (audit finding 6)"),
+              ("co2_ppm",), "commands the existing greenhouse CO2 actuator; the crop's growth response is min(1, CO2/420), so enrichment above 420 ppm does not raise growth by default; model_options.co2_response LOG_RELATIVE_GAIN lets it (audit finding 6)"),
 )
 SPEC_INDEX = {spec.api_type: spec for spec in SPECS}
 NOT_SUPPORTED: Mapping[str, str] = {

@@ -66,9 +66,10 @@ class CropGrowthEngine:
     # growth is limited below the ambient reference and not enhanced above it.
     CO2_REFERENCE_PPM = 420.0
 
-    def __init__(self, radiation: RadiationGrowthEngine | None = None, climate: ClimateStressEngine | None = None) -> None:
+    def __init__(self, radiation: RadiationGrowthEngine | None = None, climate: ClimateStressEngine | None = None, co2_response: "Callable[[float], float] | None" = None) -> None:
         self.radiation = radiation or RadiationGrowthEngine()
         self.climate = climate or ClimateStressEngine()
+        self._co2_factor = co2_response if co2_response is not None else self.co2_response  # None: the historical min(1, CO2/420)
 
     @classmethod
     def co2_response(cls, co2_ppm: float) -> float:
@@ -89,7 +90,7 @@ class CropGrowthEngine:
         nutrient_factor = climate.nutrient_factor if inputs.nutrient_factor is None else inputs.nutrient_factor
         vpd_factor = climate.vpd_factor
         radiation_factor = climate.radiation_factor
-        co2_factor = self.co2_response(inputs.co2_ppm) if inputs.co2_ppm is not None else inputs.co2_factor
+        co2_factor = self._co2_factor(inputs.co2_ppm) if inputs.co2_ppm is not None else inputs.co2_factor
         par = self.radiation.par_mj_m2(inputs.weather.solar_radiation_w_m2, inputs.dt_seconds)
         apar = par * (1.0 - math.exp(-profile.extinction_coefficient * max(0.0, state.leaf_area_index)))
         potential = apar * profile.rue_g_dm_mj_par
@@ -107,7 +108,8 @@ class CropGrowthEngine:
             maturity = state.maturity_index
         next_lai = max(0.0, min(profile.maximum_lai, state.leaf_area_index + lai_growth - senescence - damage))
         next_state = replace(climate.state, leaf_area_index=next_lai, maturity_index=maturity)
-        grown = self.radiation.advance(next_state, inputs.weather, inputs.dt_seconds, temperature_factor * water_factor * vpd_factor * radiation_factor * nutrient_factor * co2_factor)
+        limitations = temperature_factor * water_factor * vpd_factor * radiation_factor * nutrient_factor
+        grown = self.radiation.advance(next_state, inputs.weather, inputs.dt_seconds, limitations, co2_factor) if co2_factor > 1.0 else self.radiation.advance(next_state, inputs.weather, inputs.dt_seconds, limitations * co2_factor)
         # RadiationGrowthEngine owns biomass partitioning; this facade reports the
         # same explicit APAR/RUE calculation and restores the LAI balance above.
         next_state = replace(grown, leaf_area_index=next_lai, maturity_index=next_state.maturity_index)

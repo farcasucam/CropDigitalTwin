@@ -13,7 +13,7 @@
   <script src="visual_state.js?v=20261102-visual7" defer></script>
   <script src="scene_state.js?v=20261102-scene2" defer></script>
   <script src="iso_scene.js?v=20261102-scene7" defer></script>
-  <script src="bench.js?v=20" defer></script>
+  <script src="bench.js?v=21" defer></script>
 </head>
 <body class="iso" data-theme="light">
   <header class="bar">
@@ -128,6 +128,12 @@
         <summary>5 · Model options</summary>
         <div class="field"><label>Reference evapotranspiration <select id="et0-method"></select></label>
           <p id="et0-note" class="hint"></p></div>
+        <div class="field"><label>Growth response to CO2 <select id="co2-response"></select></label>
+          <p id="co2-note" class="hint"></p></div>
+        <div class="field" id="co2-gain-box" hidden>
+          <label>Relative growth gain for a doubling of CO2<input id="co2-gain" type="number" min="0" max="1" step="0.01" placeholder="source value"></label>
+          <p class="hint">Empty: the value of the cited source (generic C3, not crop-specific). Your own sourced value overrides it.</p>
+        </div>
         <div class="field" id="indoor-wind-box" hidden>
           <label>Air speed inside the greenhouse (m/s)<input id="indoor-wind" type="number" min="0" max="20" step="0.05" placeholder="0 (still air)"></label>
           <p class="hint">Your value: the outdoor wind does not reach the crop. Used only by the Penman-Monteith aerodynamic term.</p>

@@ -18,6 +18,7 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from typing import Callable
 
+from agri_twin.domain.greenhouse import saturation_vapour_pressure_kpa  # the single psychrometric definition of the project (same Tetens form as FAO-56 eq. 11)
 from agri_twin.domain.models import WeatherState
 
 SOLAR_CONSTANT_MJ_M2_MIN = 0.0820
@@ -40,10 +41,6 @@ class Et0Site:
     def __post_init__(self) -> None:
         if not (-90.0 <= self.latitude_deg <= 90.0 and -180.0 <= self.longitude_deg <= 180.0):
             raise EvapotranspirationError("site coordinates are out of range")
-
-
-def saturation_vapour_pressure_kpa(temperature_c: float) -> float:
-    return 0.6108 * math.exp(17.27 * temperature_c / (temperature_c + 237.3))
 
 
 def saturation_slope_kpa_c(temperature_c: float) -> float:

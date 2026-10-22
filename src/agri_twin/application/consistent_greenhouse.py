@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Any, Callable, Mapping
 
 from agri_twin.domain.crop_greenhouse_feedback import CropGreenhouseFeedbackConfiguration, CropGreenhouseFeedbackLoop, CropPhysicalExchangeModel
+from agri_twin.domain.crop_growth import CropGrowthEngine
 from agri_twin.domain.greenhouse import (
     AIR_DENSITY_KG_M3,
     AIR_SPECIFIC_HEAT_J_KG_K,
@@ -87,6 +88,11 @@ class GeometryGreenhouseEngine(GreenhouseMicroclimateEngine):
             self._exchange_configuration = CropGreenhouseFeedbackConfiguration(air_volume_m3=volume_per_floor_m2)
             self._exchange = CropPhysicalExchangeModel(self._exchange_configuration)
             self._growth = CropGreenhouseFeedbackLoop(self, exchange=self._exchange, configuration=self._exchange_configuration)
+
+    def use_co2_response(self, response) -> None:
+        """The growth proxy behind the crop's CO2 uptake responds to CO2 like the orchestrator's growth does."""
+        if self.crop_exchange:
+            self._growth.crop_engine = CropGrowthEngine(co2_response=response)
 
     def use_water_engine(self, water) -> None:
         """The crop's transpiration is the orchestrator's own water balance (same ET0 method), so the air and the soil see one evapotranspiration."""

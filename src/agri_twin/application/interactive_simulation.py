@@ -95,7 +95,9 @@ from agri_twin.domain.climate_control import ClimateControlConfig
 from agri_twin.application.model_options import (
     ModelOptions,
     ModelOptionsError,
+    co2_response_function,
     describe as describe_model_options,
+    describe_co2,
     et0_site,
     parse_model_options,
     water_engine_factory,
@@ -1078,6 +1080,9 @@ class InteractiveSimulationService:
         water_factory = water_engine_factory(request)
         if water_factory is not None:
             engine_arguments["water_engine_factory"] = water_factory
+        co2_function = co2_response_function(request)
+        if co2_function is not None:
+            engine_arguments["co2_response"] = co2_function
         if request.greenhouse is not None and request.greenhouse.backend == "SIMPLIFIED":
             engine_arguments["greenhouse_engine_factory"] = lumped_engine_factory(simplified_configuration(request.greenhouse)[0], request.greenhouse.crop_exchange)
         if request.greenhouse is not None and request.greenhouse.backend == "ENERGYPLUS":
@@ -1215,6 +1220,7 @@ def effective_configuration(request: SimulationRequest, spec: CampaignSpec, scen
         effective["climate_control"] = describe_climate_control(request.control)
     if request.model_options is not None:
         effective["evapotranspiration"] = describe_model_options(request)
+        effective["co2_growth_response"] = describe_co2(request)
     if request.runtime_events:
         effective["runtime_events"] = [event.to_dict() | {"provenance": "USER_DEFINED_EVENT", "classification": "USER_DEFINED_SYNTHETIC_FORCING"} for event in request.runtime_events]
         effective["event_sequence_hash"] = event_sequence_hash(request.runtime_events)

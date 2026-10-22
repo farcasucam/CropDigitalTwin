@@ -155,6 +155,10 @@
       request.model_options = { et0_method: bench.config.et0Method };
       if (bench.config.environment === "greenhouse" && isNumber(bench.config.indoorWind) && bench.config.indoorWind > 0) request.model_options.indoor_wind_m_s = bench.config.indoorWind;
     }
+    if (bench.config.co2Response === "LOG_RELATIVE_GAIN") {
+      request.model_options = { ...(request.model_options || {}), co2_response: bench.config.co2Response };
+      if (isNumber(bench.config.co2Gain)) request.model_options.co2_gain_per_doubling = bench.config.co2Gain;
+    }
     return request;
   }
   function eventDocuments() {
@@ -307,9 +311,24 @@
       ? "FAO-56 hourly equation with the site of the weather location or plot (the local archive, or a plot with coordinates). Grass reference ET0, not calibrated; with it a WIND event changes evapotranspiration."
       : "The historical estimate has no wind, humidity or pressure term: a WIND event does not change it.";
   }
+  const CO2_LABELS = { HISTORICAL_CAPPED: "Historical (no benefit above 420 ppm)", LOG_RELATIVE_GAIN: "Logarithmic gain from a cited source" };
+  function renderCo2Options() {
+    const options = (bench.caps || {}).model_options, select = $("#co2-response");
+    if (!options || !select) return;
+    setOptions(select, options.co2_responses.map((id) => [id, CO2_LABELS[id] || id]), bench.config.co2Response || options.default_co2_response);
+    const log = bench.config.co2Response === "LOG_RELATIVE_GAIN";
+    $("#co2-gain-box").hidden = !log;
+    $("#co2-gain").value = isNumber(bench.config.co2Gain) ? String(bench.config.co2Gain) : "";
+    $("#co2-note").textContent = log
+      ? `Growth factor 1 at 420 ppm and +${Math.round(100 * options.co2_gain_per_doubling.default)} % at twice that, logarithmic (${options.co2_gain_per_doubling.source}). A generic C3 value, not specific to this crop and not calibrated.`
+      : "Enrichment events raise the CO2 of the greenhouse but not the growth of the crop: the historical response is min(1, CO2/420).";
+  }
   function bindModelOptions() {
     const select = $("#et0-method");
     if (!select) return;
+    $("#co2-response").addEventListener("change", (event) => { bench.config.co2Response = event.target.value; renderCo2Options(); changed(); });
+    $("#co2-gain").addEventListener("change", (event) => { bench.config.co2Gain = event.target.value === "" ? null : Number(event.target.value); changed(); });
+    renderCo2Options();
     select.addEventListener("change", () => { bench.config.et0Method = select.value; renderModelOptions(); changed(); });
     $("#indoor-wind").addEventListener("change", (event) => { bench.config.indoorWind = event.target.value === "" ? null : Number(event.target.value); changed(); });
     renderModelOptions();
