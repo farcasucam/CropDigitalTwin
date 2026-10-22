@@ -20,6 +20,9 @@ kbd { font: 11px ui-monospace, Menlo, Consolas, monospace; background: rgba(255,
 .link { color: #bfe7d2; font-size: .82rem; }
 button.primary { background: #3aa070; border: 0; border-radius: 9px; color: #fff; padding: .5rem 1rem; font-weight: 650; }
 button.primary:disabled { opacity: .5; cursor: progress; }
+button.primary[data-stale="true"] { background: #c0392b; box-shadow: 0 0 0 3px rgba(192,57,43,.35); }  /* the data on screen no longer match the settings */
+.stale-note { background: #fbeceb; border: 1px solid #e3b2ae; color: #7a2019; border-radius: 10px; padding: .45rem .8rem; font-size: .84rem; font-weight: 600; }
+.status[data-state="stale"] { color: #ffd2cd; font-weight: 650; }
 .alert { margin: .6rem 1rem 0; padding: .6rem .9rem; border-radius: 10px; background: #fbeceb; border: 1px solid #e3b2ae; color: #7a2019; }
 
 .bench { display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 1rem; padding: 1rem; align-items: start; }
@@ -111,8 +114,14 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .transport .speed { display: inline-flex; gap: .3rem; align-items: center; font-size: .78rem; color: var(--muted); }
 .clock { font-variant-numeric: tabular-nums; font-size: .82rem; min-width: 22ch; text-align: right; }
 
-.charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: .8rem; }
+.charts { display: grid; grid-template-columns: var(--cols, repeat(auto-fit, minmax(380px, 1fr))); gap: .8rem; }
 .chart-card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: .5rem .6rem .3rem; min-width: 0; }
+.chart-card.dragging { opacity: .45; outline: 2px dashed var(--green); }
+.chart-tools { display: inline-flex; gap: .15rem; align-items: center; margin-right: .35rem; }
+.chart-tools button { border: 1px solid var(--line); background: #fff; border-radius: 6px; width: 1.5rem; height: 1.4rem; line-height: 1; padding: 0; color: var(--muted); }
+.chart-tools .chart-handle { cursor: grab; }
+.chart-tools button:hover { border-color: var(--green); color: var(--ink); }
+.chart-card header strong { flex: 1; }
 .chart-card header { display: flex; justify-content: space-between; gap: .5rem; font-size: .8rem; margin-bottom: .2rem; }
 .chart-card header span { color: var(--muted); font-variant-numeric: tabular-nums; }
 .chart-body { position: relative; min-width: 0; overflow: hidden; }

@@ -165,3 +165,20 @@ def test_the_scene_has_a_hand_inked_look_built_once_and_never_redrawn_per_frame(
     update = SCENE_JS.split("function update(s, layers, calm)")[1].split("return {\n      update,")[0]
     for static_only in ("feDisplacementMap", "feTurbulence", "hull2(", "toneBand(", "K.solidSvg("):
         assert static_only not in update, f"{static_only} must be built in configure, not in update"
+
+
+def test_the_run_button_turns_red_when_the_data_no_longer_match_the_settings():
+    for token in ('id="stale-note"', 'id="run-label"', 'data-stale="false"'):
+        assert token in HTML, token
+    for token in ("function runSignature", "function staleReasons", "function updateStale", "function stable(", "data.signature = signature", "Run again", "changed: "):
+        assert token in JS, token
+    assert 'button.primary[data-stale="true"]' in CSS and "#c0392b" in CSS
+    # only what changes the request counts: the view, the layers and the chart choice or order are not part of the signature
+    signature = JS.split("function runSignature()")[1].split("const SETTING_NAMES")[0]
+    assert "buildRequest()" in signature and "eventDocuments()" in signature and "layers" not in signature and "view" not in signature and "charts" not in signature
+
+
+def test_charts_can_be_reordered_by_drag_or_buttons_and_laid_out_in_columns():
+    for token in ("function chartTools", "function moveChart", "function syncChartOrder", "function applyChartColumns", "dragstart", "dragover", "Move earlier", "Move later", "Drag to reorder"):
+        assert token in JS, token
+    assert 'id="chart-cols"' in HTML and "var(--cols" in CSS and ".chart-card.dragging" in CSS

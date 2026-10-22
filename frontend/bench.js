@@ -714,9 +714,39 @@
 
 
   // ---- running ----------------------------------------------------------------------------------------------------
+  // Coherence between the settings and the data: the run remembers the exact request it was made with; whenever the settings now produce another one, the Run
+  // button turns red and says what changed. Settings that only change the drawing (view, layers, chart choice and order) never count.
+  function stable(value) {
+    if (Array.isArray(value)) return `[${value.map(stable).join(",")}]`;
+    if (value && typeof value === "object") return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${stable(value[key])}`).join(",")}}`;
+    return JSON.stringify(value);
+  }
+  function runSignature() {
+    try { return { request: buildRequest(), events: bench.events.length ? eventDocuments() : [], branch: bench.events.length ? iso(branchMs()) : null }; } catch { return null; }
+  }
+  const SETTING_NAMES = { crop: "crop", environment: "environment", scenario: "weather scenario", end_time: "period", weather: "weather source or planting date", greenhouse: "greenhouse model", control: "climate control" };
+  function staleReasons(before, now) {
+    const reasons = [];
+    for (const key of Object.keys(SETTING_NAMES)) if (stable((before.request || {})[key]) !== stable((now.request || {})[key])) reasons.push(SETTING_NAMES[key]);
+    if (stable(before.events) !== stable(now.events) || before.branch !== now.branch) reasons.push("interventions");
+    return reasons;
+  }
+  function updateStale() {
+    const run = bench.run, now = runSignature();
+    const reasons = run && run.signature && now ? staleReasons(run.signature, now) : [];
+    const stale = reasons.length > 0;
+    const button = $("#run"), note = $("#stale-note");
+    button.dataset.stale = String(stale);
+    $("#run-label").textContent = stale ? "Run again" : "Run";
+    note.hidden = !stale;
+    if (stale) {
+      note.textContent = `The data on screen come from the previous settings (changed: ${reasons.join(", ")}). Press Run to update them.`;
+      setStatus("Settings changed: the data shown are out of date", "stale");
+    } else if ($("#status").dataset.state === "stale") setStatus(run ? `Up to date · ${run.times.length} hourly steps` : "Ready", run ? "done" : "ready");
+  }
   function changed() {
     save();
-    if (bench.run) setStatus("Settings changed since the last run", "stale");
+    updateStale();
     if ($("#autorun").checked) { window.clearTimeout(bench.autoTimer); bench.autoTimer = window.setTimeout(() => void runExperiment(), 700); }
   }
 
@@ -730,6 +760,7 @@
     $("#run").disabled = true;
     stopPlayback();
     const started = performance.now();
+    const signature = runSignature();
     try {
       const request = buildRequest();
       let data;
@@ -742,11 +773,14 @@
       }
       if (serial !== bench.serial) return;
       data.seconds = (performance.now() - started) / 1000;
+      data.signature = signature;
       adopt(data);
+      updateStale();
       setStatus(`Done in ${data.seconds.toFixed(1)} s · ${data.times.length} hourly steps`, "done");
     } catch (error) {
       showError(error);
       setStatus("Run failed", "error");
+      updateStale();
     } finally {
       bench.running = false;
       $("#run").disabled = false;
@@ -929,7 +963,8 @@
     for (const name of bench.config.charts) {
       const info = run.variables.find((item) => item.name === name);
       const card = el("div", "chart-card"), head = el("header");
-      head.append(el("strong", "", `${label(name)}${info && info.unit ? ` (${info.unit})` : ""}`));
+      card.dataset.name = name;
+      head.append(chartTools(card), el("strong", "", `${label(name)}${info && info.unit ? ` (${info.unit})` : ""}`));
       const value = el("span"); head.append(value);
       const body = el("div", "chart-body"), cursor = el("div", "cursor-line");
       card.append(head, body); host.append(card);
@@ -956,6 +991,51 @@
     }
     window.requestAnimationFrame(() => { bench.charts.forEach(fitChart); moveCursors(); });
     redrawCharts();
+  }
+  // Reordering: drag a chart by its handle onto another, or move it with the ‹ › buttons (keyboard and touch friendly). Only the DOM order changes; the plots are kept.
+  function chartTools(card) {
+    const tools = el("span", "chart-tools"), handle = el("button", "chart-handle", "⠿"), left = el("button", "", "‹"), right = el("button", "", "›");
+    for (const [button, text] of [[handle, "Drag to reorder"], [left, "Move earlier"], [right, "Move later"]]) { button.type = "button"; button.title = text; button.setAttribute("aria-label", text); }
+    left.addEventListener("click", () => moveChart(card, -1)); right.addEventListener("click", () => moveChart(card, 1));
+    handle.addEventListener("pointerdown", () => { card.draggable = true; });  // the card is draggable only from its handle: the plot keeps its own mouse use
+    handle.addEventListener("keydown", (key) => { if (key.key === "ArrowLeft" || key.key === "ArrowUp") { key.preventDefault(); moveChart(card, -1); } else if (key.key === "ArrowRight" || key.key === "ArrowDown") { key.preventDefault(); moveChart(card, 1); } });
+    card.addEventListener("dragstart", (event) => { event.dataTransfer.effectAllowed = "move"; event.dataTransfer.setData("text/plain", card.dataset.name); card.classList.add("dragging"); bench.dragCard = card; });
+    card.addEventListener("dragend", () => { card.classList.remove("dragging"); card.draggable = false; bench.dragCard = null; syncChartOrder(); });
+    card.addEventListener("dragover", (event) => {
+      const dragged = bench.dragCard;
+      if (!dragged || dragged === card) return;
+      event.preventDefault();
+      const host = card.parentNode, cards = Array.from(host.children);
+      host.insertBefore(dragged, cards.indexOf(dragged) < cards.indexOf(card) ? card.nextSibling : card);
+    });
+    card.addEventListener("drop", (event) => event.preventDefault());
+    tools.append(handle, left, right);
+    return tools;
+  }
+  function moveChart(card, delta) {
+    const host = card.parentNode, cards = Array.from(host.children), at = cards.indexOf(card), target = cards[at + delta];
+    if (!target) return;
+    host.insertBefore(card, delta < 0 ? target : target.nextSibling);
+    syncChartOrder();
+    const again = card.querySelector(delta < 0 ? ".chart-tools button:nth-child(2)" : ".chart-tools button:nth-child(3)"); if (again) again.focus();
+  }
+  function syncChartOrder() {
+    const order = Array.from($("#charts").children).map((card) => card.dataset.name).filter(Boolean);
+    bench.config.charts = order;
+    bench.charts.sort((a, b) => order.indexOf(a.name) - order.indexOf(b.name));
+    save(); moveCursors();
+  }
+  function applyChartColumns() {
+    const cols = bench.config.chartCols || "auto", host = $("#charts");
+    if (host) host.style.setProperty("--cols", cols === "auto" ? "repeat(auto-fit, minmax(380px, 1fr))" : `repeat(${cols}, minmax(0, 1fr))`);
+    const group = $("#chart-cols");
+    group.replaceChildren();
+    for (const value of ["auto", "1", "2", "3"]) {
+      const button = el("button", "", value === "auto" ? "Auto" : value);
+      button.type = "button"; button.setAttribute("aria-pressed", String(cols === value));
+      button.addEventListener("click", () => { bench.config.chartCols = value; applyChartColumns(); save(); window.requestAnimationFrame(() => bench.charts.forEach(fitChart)); });
+      group.append(button);
+    }
   }
   function nearestIndex(seconds, time) {
     let low = 0, high = seconds.length - 1;
@@ -1107,6 +1187,7 @@
       ensurePlanting();
       buildSetup(); initLayout(); renderBackend(); renderPresets(); renderEvents(); bindTransport(); bindControl();
       $("#autorun").checked = false;
+      applyChartColumns();
       $("#run").disabled = false;
       window.__bench = bench;  // handle for scripted checks
       if (bench.config.horizon === "season" || bench.events.length > 1) setStatus("Ready: press Run (a full season or several events takes a few seconds)", "ready");

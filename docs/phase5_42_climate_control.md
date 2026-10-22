@@ -85,6 +85,15 @@ structure on the ground (fixed direction, so it never flashes at fast playback),
 Everything is built once in `configure()`; `update()` still only rewrites attributes, and a test checks that none of the style machinery runs per frame. Measured with headless Edge on a tomato
 greenhouse season: about 10 ms of JavaScript per scene update and 17-33 ms per frame while playing at 72 h/s, unchanged by the style.
 
+## Coherence between the settings and the data, and chart layout (bench)
+
+* **Out-of-date indicator.** A run remembers the exact request it was made with (request plus interventions, in a canonical form so that key order never matters). While the settings
+  produce another request, the **Run button turns red and reads "Run again"**, the status says the data are out of date, and a red strip above the results lists what changed (crop, period,
+  weather source or planting date, weather scenario, greenhouse model, climate control, interventions). Going back to the same values clears it. Settings that only change the drawing
+  (view, layers, chart choice and order, chart columns) never count.
+* **Charts** can be reordered by dragging their handle or with the "<" and ">" buttons (keyboard and touch friendly), so values of interest sit side by side; the order is remembered. "Chart columns"
+  (Auto, 1, 2, 3) fixes the layout.
+
 ## Known gaps
 
 * The interactive simulator runs on `SYNTHETIC_SEASONAL` weather only, with each crop's single synthetic cycle (fixed planting date). Real weather in `data/weather/` is
