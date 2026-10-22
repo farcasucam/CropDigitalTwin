@@ -642,7 +642,7 @@
   };
   const controlInfo = () => (bench.caps ? bench.caps.climate_control : undefined);  // absent when the page runs against a server started before climate control existed
   function controlAllowed(actuator) {
-    if (bench.config.backend === "ENERGYPLUS") return false;
+    if (bench.config.backend === "ENERGYPLUS" && actuator === "shade") return false;  // EnergyPlus gets shading as a scaling of the weather file fixed before the run
     return bench.config.environment === "greenhouse" || actuator === "irrigation";
   }
   function controlDocument() {
@@ -688,8 +688,8 @@
     }
     renderSchedules();
     const notes = [];
-    if (blocked) notes.push("The EnergyPlus backend runs as a precomputed timeline and cannot react to a controller: switch to the simplified model to use climate control.");
-    else {
+    if (blocked) notes.push("EnergyPlus runs in lock-step with the controller (one hour at a time), so the controller looks ahead with a lumped model of the same greenhouse. The shade screen cannot be driven in EnergyPlus (use manual shading events or the simplified model); a run with events replays from its start.");
+    {
       if (bench.config.environment !== "greenhouse") notes.push("Open field: only irrigation can be controlled.");
       for (const item of info.equipment) {
         const needed = controlAllowed(item.actuator) && control.actuators[item.actuator] !== "OFF" && !isNumber(control.equipment[item.id]);

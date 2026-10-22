@@ -72,8 +72,9 @@ def parse_control(document: Any, environment: str, backend: str = "SIMPLIFIED") 
         raise ClimateControlRequestError(str(exc)) from None
     if not config.any_active:
         return None
-    if backend != "SIMPLIFIED":
-        raise ClimateControlRequestError("climate control needs the simplified greenhouse backend: EnergyPlus runs as a precomputed timeline and cannot react to the controller", "control", "INVALID_CONFIGURATION")
+    if backend == "ENERGYPLUS" and config.mode("shade") is not ActuatorMode.OFF:
+        raise ClimateControlRequestError("the shade screen cannot be driven in EnergyPlus lock-step (EnergyPlus gets shading as a scaling of the weather file fixed before the run): set it to OFF "
+                                         "or use the simplified greenhouse", "control.actuators.shade", "INVALID_CONFIGURATION")
     if environment != "greenhouse":
         climate = [name for name in ACTUATORS if name != "irrigation" and config.mode(name) is not ActuatorMode.OFF]
         if climate:

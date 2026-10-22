@@ -25,6 +25,7 @@ from agri_twin.infrastructure.energyplus_timeline import (
     require_energyplus,
     run_timeline,
 )
+from agri_twin.infrastructure.energyplus_lockstep import LockstepMicroclimateEngine, LockstepSession
 from agri_twin.infrastructure.epw_weather import EpwLocation
 from agri_twin.infrastructure.greenhouse_idf import ThermalSpec
 
@@ -184,7 +185,7 @@ def simplified_configuration(request: GreenhouseBackendRequest):
     return reduced_configuration(layout_spec(request))
 
 
-def describe(request: GreenhouseBackendRequest) -> dict[str, Any]:
+def describe(request: GreenhouseBackendRequest, lockstep: bool = False) -> dict[str, Any]:
     """Effective configuration block (hashed with the rest of the effective configuration)."""
     spec = layout_spec(request)
     if request.backend == "SIMPLIFIED":
@@ -200,6 +201,9 @@ def describe(request: GreenhouseBackendRequest) -> dict[str, Any]:
         "energyplus_version": install.version if install else None,
         "model": "single thermal zone, faceted cover, ideal-loads heater" + (" and ideal-loads cooling (user set-point and capacity)" if request.hvac else "") + ", temperature-controlled plus commanded natural ventilation",
         **({"hvac": dict(request.hvac)} if request.hvac else {}),
+        **({"mode": "LOCK_STEP", "lock_step": "a climate controller drives EnergyPlus hour by hour through a Python Plugin bridge (vents, extra air changes, a signed power into the air, thermostat stand-down); "
+                                              "the controller forecasts with the lumped model of the same greenhouse, corrected by its last error; the shade screen cannot be driven; a resume replays the run from its start"}
+           if lockstep else {"mode": "TIMELINE"}),
         "limits": ["placeholder envelope/thermal values (PROVISIONAL_DEFAULT)", "no crop feedback (transpiration, CO2 uptake)", "CO2 not modelled",
                    "shading approximated as an external screen scaling the solar input", "software qualification only; not validated against a real greenhouse"],
     }
@@ -213,8 +217,8 @@ def _location(plot_id: str) -> EpwLocation:
         return DEFAULT_LOCATION
 
 
-def build_timeline(request: GreenhouseBackendRequest, plot_id: str, full_scenario: Scenario, base_factory: Callable[[Scenario], Any] | None, end: datetime) -> EnergyPlusTimeline:
-    """Run EnergyPlus from the campaign start to ``end`` with the weather and commanded actuators the orchestrator would see."""
+def _hourly_forcing(full_scenario: Scenario, base_factory: Callable[[Scenario], Any] | None, end: datetime) -> tuple[list[tuple[datetime, WeatherState]], list[float], list[float]]:
+    """The hourly weather (events included), the commanded vent opening and the commanded shading the orchestrator would see from the campaign start to ``end`` (padded to whole days)."""
     provider = scenario_weather_provider(full_scenario, base_factory)
     start = full_scenario.start.astimezone(timezone.utc)
     midnight = start.replace(hour=0, minute=0, second=0, microsecond=0)
@@ -241,8 +245,36 @@ def build_timeline(request: GreenhouseBackendRequest, plot_id: str, full_scenari
         shading.append(controls["shade"].actual if "shade" in controls else 0.0)
         series.append((label, state))
         label += timedelta(hours=1)
+    return series, forced, shading
+
+
+def build_timeline(request: GreenhouseBackendRequest, plot_id: str, full_scenario: Scenario, base_factory: Callable[[Scenario], Any] | None, end: datetime) -> EnergyPlusTimeline:
+    """Run EnergyPlus from the campaign start to ``end`` with the weather and commanded actuators the orchestrator would see."""
+    series, forced, shading = _hourly_forcing(full_scenario, base_factory, end)
     inputs = TimelineInputs(_location(plot_id), tuple(series), tuple(forced), tuple(shading), layout_spec(request), thermal=thermal_spec(request))
     return run_timeline(inputs)
+
+
+def open_lockstep(request: GreenhouseBackendRequest, plot_id: str, full_scenario: Scenario, base_factory: Callable[[Scenario], Any] | None, end: datetime) -> tuple[LockstepSession, dict[str, Any]]:
+    """Start EnergyPlus in lock-step from the campaign start with the weather the orchestrator would see; the caller owns (and must close) the session.
+
+    Manual ventilation events are not written into the run: they reach EnergyPlus hour by hour through the actuators the runner passes, together with a controller's. Manual shading events are
+    scaled into the weather file, as in the open-loop timeline (the screen cannot be driven in lock-step)."""
+    series, _forced, shading = _hourly_forcing(full_scenario, base_factory, end)
+    session = LockstepSession(layout_spec(request), series, shading, _location(plot_id), thermal=thermal_spec(request))
+    provenance = {"backend": "ENERGYPLUS", "mode": "LOCK_STEP", "energyplus_version": session.install.version, "executable_source": session.install.source, "idf_hash": session.idf_hash,
+                  "classification": "SOFTWARE_QUALIFICATION_ONLY (placeholder envelope properties; not validated against a real greenhouse)",
+                  "feedback": "no crop feedback into EnergyPlus (no transpiration, no CO2 uptake)", "co2": "not modelled",
+                  "control": "hour by hour through a Python Plugin bridge; shade screen not drivable; resuming from a checkpoint replays the run from its start"}
+    return session, provenance
+
+
+def lockstep_engine_factory(session: LockstepSession, request: GreenhouseBackendRequest) -> Callable[[Scenario, Any], LockstepMicroclimateEngine]:
+    from agri_twin.application.consistent_greenhouse import GeometryGreenhouseEngine
+
+    # one engine for every segment of a run (a resume replays the prefix and continues on the same session); the controller forecasts with the lumped model of the same greenhouse
+    engine = LockstepMicroclimateEngine(session, GeometryGreenhouseEngine(simplified_configuration(request)[0]))
+    return lambda _scenario, _provider: engine
 
 
 def engine_factory(timeline: EnergyPlusTimeline) -> Callable[[Scenario, Any], EnergyPlusMicroclimateEngine]:

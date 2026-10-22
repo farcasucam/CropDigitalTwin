@@ -221,9 +221,11 @@ def test_climate_actuators_need_a_greenhouse_but_irrigation_does_not():
     assert parse_control({"actuators": {"irrigation": "AUTO"}}, "outdoor") is not None
 
 
-def test_energyplus_cannot_be_combined_with_a_controller():
-    with pytest.raises(ClimateControlRequestError):
-        parse_control({"actuators": {"vents": "AUTO"}, "equipment": EQUIPMENT}, "greenhouse", backend="ENERGYPLUS")
+def test_energyplus_takes_a_controller_in_lock_step_except_for_the_shade_screen():
+    assert parse_control({"actuators": {"vents": "AUTO", "cooling": "AUTO"}, "equipment": EQUIPMENT}, "greenhouse", backend="ENERGYPLUS") is not None
+    with pytest.raises(ClimateControlRequestError) as caught:
+        parse_control({"actuators": {"shade": "AUTO"}, "equipment": EQUIPMENT}, "greenhouse", backend="ENERGYPLUS")
+    assert caught.value.path == "control.actuators.shade"
 
 
 def test_an_invalid_control_block_is_a_structured_api_error():

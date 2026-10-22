@@ -51,7 +51,7 @@ identical to before.
 
 ## Limits
 
-* Simplified greenhouse backend only. EnergyPlus runs as a precomputed timeline and cannot react to a controller: the request is rejected with a reason.
+* The controller acts on the simplified greenhouse and, since phase 5.46, on EnergyPlus in lock-step (hour by hour; see `docs/phase5_46_energyplus_lockstep.md`), except for the shade screen, which EnergyPlus cannot be driven on.
 * The proportional HVAC leaves an offset from its target (it closes `hvac_gain` of the distance); a predictive controller can do better.
 * Humidity control (venting for VPD) and CO2 are not controlled; wind affects only the forcing weather.
 * The greenhouse the controller acts on is the lumped model of phase 5.44 (same layout as EnergyPlus, provisional values): results describe the software, not a real greenhouse.

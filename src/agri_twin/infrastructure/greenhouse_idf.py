@@ -58,6 +58,7 @@ class RunSpec:
     forced_ventilation_file: str | None = None  # CSV (8760 hourly rows, fraction 0..1) with the commanded vent opening; None: always 0
     python_plugin_module: str | None = None  # set to enable the interactive bridge (see docs/phase5_41)
     python_plugin_class: str | None = None
+    lockstep: bool = False  # actuator objects an external controller drives hour by hour through the plugin (see energyplus_lockstep); False: the IDF is byte-identical to the open-loop one
 
 
 @dataclass(frozen=True, slots=True)
@@ -237,9 +238,17 @@ def build_greenhouse_idf(
     add("Schedule:Constant, Thermostat Type, Mode, 4;")
     add(_obj("ZoneInfiltration:DesignFlowRate", "Cover Infiltration", "Greenhouse Zone", "Always On", "AirChanges/Hour", None, None, None, _num(thermal.infiltration_ach.value), 1, 0, 0, 0))
     # Two vent objects: temperature-controlled passive venting (EnergyPlus native limits) and commanded venting from the schedule.
-    add(_obj("ZoneVentilation:DesignFlowRate", "Auto Ventilation", "Greenhouse Zone", "Always On", "AirChanges/Hour", None, None, None, _num(thermal.max_ventilation_ach.value), "Natural", 0, 1, 1, 0, 0, 0,
+    if run.lockstep:
+        add("ScheduleTypeLimits, Any Number;")
+        add("Schedule:Constant, Auto Vent Enabled, Fraction, 1.0;")          # 1: the default temperature-controlled venting; 0: a controller drives the vents
+        add("Schedule:Constant, Controller Air Changes, Any Number, 0.0;")   # air changes per hour a controller adds (vents beyond the design opening, extractors)
+        add("Schedule:Constant, Controller Heat Level, Any Number, 0.0;")    # kW a controller puts into (+) or takes out of (-) the air
+    add(_obj("ZoneVentilation:DesignFlowRate", "Auto Ventilation", "Greenhouse Zone", "Auto Vent Enabled" if run.lockstep else "Always On", "AirChanges/Hour", None, None, None, _num(thermal.max_ventilation_ach.value), "Natural", 0, 1, 1, 0, 0, 0,
              _num(thermal.vent_open_above_c.value), None, 100, None, 0))
     add(_obj("ZoneVentilation:DesignFlowRate", "Forced Ventilation", "Greenhouse Zone", "Forced Vent Opening", "AirChanges/Hour", None, None, None, _num(thermal.max_ventilation_ach.value), "Natural", 0, 1, 1, 0, 0, 0))
+    if run.lockstep:
+        add(_obj("ZoneVentilation:DesignFlowRate", "Controller Ventilation", "Greenhouse Zone", "Controller Air Changes", "AirChanges/Hour", None, None, None, 1, "Natural", 0, 1, 1, 0, 0, 0))
+        add("OtherEquipment, Controller Heat, None, Greenhouse Zone, Controller Heat Level, EquipmentLevel, 1000, , , 0, 0, 0, 0, Controller;")  # 1000 W x level (kW), all convective, no CO2
     add("ThermostatSetpoint:DualSetpoint, Dual SP, Heating Setpoint, Cooling Setpoint;")
     add("ZoneControl:Thermostat, Zone Thermostat, Greenhouse Zone, Thermostat Type, ThermostatSetpoint:DualSetpoint, Dual SP;")
     capacity = thermal.heater_capacity_w_m2.value * area

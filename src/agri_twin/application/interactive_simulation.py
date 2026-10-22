@@ -53,6 +53,8 @@ from agri_twin.application.greenhouse_backend import (
     build_timeline,
     describe as describe_greenhouse_backend,
     engine_factory as energyplus_engine_factory,
+    lockstep_engine_factory,
+    open_lockstep,
     simplified_configuration,
     parse_greenhouse_backend,
     with_runtime_events,
@@ -1072,9 +1074,12 @@ class InteractiveSimulationService:
 
         execution.status = ExecutionStatus.RUNNING
         execution.started_at = self._tick()
-        phenology = None if request.dormancy == DEFAULT_DORMANCY_CONFIGURATION else PhenologyEngine(dormancy=DormancyChillingController(configuration=request.dormancy))
+        def new_phenology():  # one engine per segment: a lock-step resume replays the prefix first and must not hand its dormancy state to the continuation
+            return None if request.dormancy == DEFAULT_DORMANCY_CONFIGURATION else PhenologyEngine(dormancy=DormancyChillingController(configuration=request.dormancy))
+
         runner = ScenarioRunner(_weather_factory(request))
         engine_arguments: dict[str, Any] = {}
+        lockstep_session = None
         if request.control is not None:
             engine_arguments["control"] = ControlSession(request.control, request.crop)
         water_factory = water_engine_factory(request)
@@ -1087,16 +1092,32 @@ class InteractiveSimulationService:
             engine_arguments["greenhouse_engine_factory"] = lumped_engine_factory(simplified_configuration(request.greenhouse)[0], request.greenhouse.crop_exchange)
         if request.greenhouse is not None and request.greenhouse.backend == "ENERGYPLUS":
             try:
-                timeline = build_timeline(request.greenhouse, request.plot, with_runtime_events(execution.spec.scenario, request.runtime_events), _weather_factory(request), request.end_time)
+                if request.control is not None:  # a controller needs the state hour by hour: EnergyPlus in lock-step instead of a timeline computed before the run
+                    lockstep_session, provenance = open_lockstep(request.greenhouse, request.plot, with_runtime_events(execution.spec.scenario, request.runtime_events), _weather_factory(request), request.end_time)
+                    execution.greenhouse_provenance = provenance
+                    engine_arguments["greenhouse_engine_factory"] = lockstep_engine_factory(lockstep_session, request.greenhouse)
+                else:
+                    timeline = build_timeline(request.greenhouse, request.plot, with_runtime_events(execution.spec.scenario, request.runtime_events), _weather_factory(request), request.end_time)
+                    execution.greenhouse_provenance = dict(timeline.provenance)
+                    engine_arguments["greenhouse_engine_factory"] = energyplus_engine_factory(timeline)
             except (EnergyPlusTimelineError, GreenhouseBackendError) as exc:
                 execution.status, execution.termination = ExecutionStatus.FAILED, "GREENHOUSE_BACKEND_ERROR"
                 execution.errors = (SimulationError(ErrorCode.INTERNAL_EXECUTION_ERROR, f"the ENERGYPLUS greenhouse backend failed before the run: {exc}"),)
                 execution.response = self._response(execution)
                 return execution.response
-            execution.greenhouse_provenance = dict(timeline.provenance)
-            engine_arguments["greenhouse_engine_factory"] = energyplus_engine_factory(timeline)
             self._record(execution, "greenhouse_backend_seconds", execution.started_at)
-        result = runner.run(execution.scenario, phenology=phenology, observer=observer, **engine_arguments)
+        try:
+            if lockstep_session is not None and request.checkpoint is not None:
+                divergence = self._replay_lockstep_prefix(request, execution, runner, new_phenology, engine_arguments)
+                if divergence is not None:
+                    execution.status, execution.termination = ExecutionStatus.FAILED, "GREENHOUSE_BACKEND_ERROR"
+                    execution.errors = (SimulationError(ErrorCode.INTERNAL_EXECUTION_ERROR, divergence),)
+                    execution.response = self._response(execution)
+                    return execution.response
+            result = runner.run(execution.scenario, phenology=new_phenology(), observer=observer, **engine_arguments)
+        finally:
+            if lockstep_session is not None:
+                lockstep_session.close()
         self._record(execution, "simulation_seconds", execution.started_at)
         execution.snapshots = result.snapshots
         if result.status == "FAILED":
@@ -1118,6 +1139,28 @@ class InteractiveSimulationService:
             self._emit(execution, listener)
         execution.response = self._response(execution)
         return execution.response
+
+    @staticmethod
+    def _replay_lockstep_prefix(request: SimulationRequest, execution: _Execution, runner: ScenarioRunner, new_phenology: Callable[[], Any], engine_arguments: dict[str, Any]) -> str | None:
+        """EnergyPlus only runs forward, so a lock-step run resumed from a checkpoint first replays the run from the campaign start up to the checkpoint (with the same controller, so the
+        same commands) on the same EnergyPlus session. The replay must end in exactly the checkpoint's state; otherwise the continuation would not be the run that produced it."""
+        checkpoint = request.checkpoint
+        assert checkpoint is not None
+        steps = int((checkpoint.simulation_time - execution.spec.scenario.start).total_seconds()) // TIMESTEP_SECONDS
+        replayed: list[CropSimulationSnapshot] = []
+
+        def observe(snapshot: CropSimulationSnapshot, completed: int) -> bool:
+            replayed[:] = [snapshot]
+            return completed < steps
+
+        arguments = dict(engine_arguments)
+        if request.control is not None:
+            arguments["control"] = ControlSession(request.control, request.crop)  # a fresh session: nothing is carried between segments
+        result = runner.run(with_runtime_events(execution.spec.scenario, request.runtime_events), phenology=new_phenology(), observer=observe, **arguments)
+        if result.status == "FAILED" or not replayed or checkpoint_payload(replayed[0]) != checkpoint.payload:
+            return ("the EnergyPlus lock-step replay up to the checkpoint did not reproduce the checkpoint's state "
+                    f"({'; '.join(result.warnings) or 'the state differs'}): the checkpoint was not produced by this configuration")
+        return None
 
     def _emit(self, execution: _Execution, listener: ProgressListener) -> None:
         try:
@@ -1215,7 +1258,7 @@ def effective_configuration(request: SimulationRequest, spec: CampaignSpec, scen
                                 "dataset": {"location_id": request.dataset[0][0], "fingerprint": request.dataset[0][1], "coordinates": (info.to_dict() if info else None),
                                             "cycle_truncated_by_data": request.campaign_end < request.campaign_start + (campaign_cycle(request.crop)[2] - campaign_cycle(request.crop)[1])}}
     if request.greenhouse is not None:
-        effective["greenhouse_backend"] = describe_greenhouse_backend(request.greenhouse)
+        effective["greenhouse_backend"] = describe_greenhouse_backend(request.greenhouse, lockstep=request.control is not None)
     if request.control is not None:
         effective["climate_control"] = describe_climate_control(request.control)
     if request.model_options is not None:

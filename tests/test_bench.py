@@ -226,3 +226,8 @@ def test_the_bench_offers_the_penman_monteith_option_and_sends_it_only_when_chos
 def test_the_bench_offers_the_cited_co2_growth_response_and_sends_it_only_when_chosen():
     assert "co2-response" in HTML and "co2-gain" in HTML
     assert 'bench.config.co2Response === "LOG_RELATIVE_GAIN"' in JS and "co2_gain_per_doubling" in JS
+
+
+def test_the_bench_lets_the_controller_drive_energyplus_except_the_shade_screen():
+    assert 'bench.config.backend === "ENERGYPLUS" && actuator === "shade"' in JS and "lock-step" in JS
+    assert "cannot react to a controller" not in JS
