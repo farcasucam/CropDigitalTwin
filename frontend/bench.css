@@ -52,6 +52,8 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .event .grid2 label.wide { grid-column: 1 / -1; }
 .event .warn { font-size: .74rem; color: #8a4b12; background: #fff1de; border-radius: 6px; padding: .15rem .4rem; margin-top: .25rem; }
 .chip.bundle { border-style: dashed; }
+.tl-tip { position: fixed; z-index: 60; pointer-events: none; background: #17352d; color: #fff; border-radius: 8px; padding: .4rem .6rem; font-size: .76rem; line-height: 1.35; box-shadow: 0 6px 18px rgba(0,0,0,.3); white-space: pre; max-width: 34rem; }
+.tl-tip .tip-warn { white-space: normal; color: #ffd98a; margin-top: .2rem; max-width: 22rem; }
 .tl-bar.odd { outline: 2px dashed #f0b429; outline-offset: 1px; }
 .event .when { font-size: .74rem; color: var(--muted); }
 .event[data-invalid="true"] { border-color: var(--red); }

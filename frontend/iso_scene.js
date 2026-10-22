@@ -328,7 +328,7 @@
     }
     applyView();
 
-    let lastPlantKey = "", lastRainKey = "", smoothSun = null;
+    let lastPlantKey = "", lastRainKey = "", smoothSun = null, smoothOut = null, smoothIn = null;
     // `calm` (fast playback): day and night alternate faster than the eye can follow, so the sky shows the running mean of the light and a noon sun
     // instead of strobing. Presentation only; the state itself is untouched.
     function update(s, layers, calm) {
@@ -339,7 +339,8 @@
       const rawSun = s.levels.radiation === null ? 0.5 : s.levels.radiation;
       smoothSun = calm && smoothSun !== null ? smoothSun + (rawSun - smoothSun) * 0.04 : rawSun;
       const sunLevel = smoothSun;
-      skyRect.setAttribute("fill", `hsl(${lerp(228, 205, sunLevel).toFixed(0)} ${lerp(38, 70, sunLevel).toFixed(0)}% ${lerp(14, 90, sunLevel).toFixed(0)}%)`);
+      // The background stays one calm colour: day and night is shown by the small sun marker, never by flashing the whole scene.
+      skyRect.setAttribute("fill", "hsl(208 38% 86%)");
       skyRect.setAttribute("opacity", "0.55");
       const day = calm ? 0.5 : clamp((s.hour - 6) / 12);
       sun.setAttribute("cx", (80 + (W - 160) * day).toFixed(0)); sun.setAttribute("cy", (150 - 110 * Math.sin(Math.PI * day)).toFixed(0));
@@ -361,7 +362,7 @@
         p.style.animationDelay = `${(-(i / RAIN_MAX) * dur * 2).toFixed(2)}s`;
       });
       }
-      skyRect.setAttribute("opacity", (0.55 + 0.25 * intensity).toFixed(2));
+      skyRect.setAttribute("opacity", (0.55 + 0.2 * intensity).toFixed(2));
       drops.style.display = on("water") && s.irrigation ? "" : "none";
       if (on("water") && s.irrigation) Array.from(drops.children).forEach((d, k) => { const p = K.iso([(k + 0.5) * L / 10, Wd / 2, 0.4], P); d.setAttribute("cx", p[0].toFixed(1)); d.setAttribute("cy", p[1].toFixed(1)); });
 
@@ -402,12 +403,16 @@
       }
 
       const comfort = s.comfort || null;
-      const outTint = on("temperature") ? tempTint(o.temp_c, comfort) : "none";
+      // at fast playback the daily temperature swing would flash the tints: they follow a running mean there (the numbers stay exact)
+      smoothOut = calm && smoothOut !== null && isNumber(o.temp_c) ? smoothOut + (o.temp_c - smoothOut) * 0.04 : o.temp_c;
+      smoothIn = calm && smoothIn !== null && ind && isNumber(ind.temp_c) ? smoothIn + (ind.temp_c - smoothIn) * 0.04 : (ind ? ind.temp_c : null);
+      const outTint = on("temperature") ? tempTint(smoothOut, comfort) : "none";
       outdoorAir.style.fill = outTint === "none" ? "transparent" : outTint; outdoorAir.style.fillOpacity = outTint === "none" ? "0" : "0.38";
       const inTemp = open ? o.temp_c : (ind ? ind.temp_c : null);
-      chips[0].swatch.setAttribute("fill", tempTint(o.temp_c, comfort) === "none" ? "#ccc" : tempTint(o.temp_c, comfort));
+      chips[0].swatch.setAttribute("fill", tempTint(smoothOut, comfort) === "none" ? "#ccc" : tempTint(smoothOut, comfort));
       chips[0].text.textContent = `Outdoor ${isNumber(o.temp_c) ? o.temp_c.toFixed(1) : "n/a"} °C`;
-      chips[1].swatch.setAttribute("fill", tempTint(inTemp, comfort) === "none" ? "#ccc" : tempTint(inTemp, comfort));
+      const shownIn = open ? smoothOut : smoothIn;
+      chips[1].swatch.setAttribute("fill", tempTint(shownIn, comfort) === "none" ? "#ccc" : tempTint(shownIn, comfort));
       chips[1].text.textContent = `${open ? "Crop (open field)" : "Indoor"} ${isNumber(inTemp) ? inTemp.toFixed(1) : "n/a"} °C`;
       const live = [act && isNumber(act.vent_opening) && act.vent_opening > 0.02, act && isNumber(act.screen_deployed) && act.screen_deployed > 0.01,
         act && isNumber(act.extractor_level) && act.extractor_level > 0.02, act && isNumber(act.cooling_kw) && act.cooling_kw > 0.05, act && isNumber(act.heating_kw) && act.heating_kw > 0.05];
@@ -422,7 +427,7 @@
       stressChip.text.textContent = !stresses.length ? "Stress n/a" : sev < 0.05 ? "No stress" : `Stress: ${worst[0]} ${(100 * sev).toFixed(0)}%`;
       strip.style.display = on("temperature") || on("events") ? "" : "none";
       if (!open) {
-        const tint = on("temperature") && ind ? tempTint(ind.temp_c, comfort) : "none";
+        const tint = on("temperature") && ind ? tempTint(smoothIn, comfort) : "none";
         cover.style.fill = tint === "none" ? "var(--anatomy-blue)" : tint;
         cover.style.fillOpacity = tint === "none" ? "0.08" : "0.3";
         const opening = clamp(act && isNumber(act.vent_opening) ? act.vent_opening : 0), ang = opening * 40 * Math.PI / 180;

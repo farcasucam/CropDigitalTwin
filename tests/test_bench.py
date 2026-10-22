@@ -126,3 +126,12 @@ def test_the_scene_draws_phenology_stress_and_temperature_from_the_crop_catalogu
     for token in ("lifeStage", "dormancy", "flowers", "senescence", "leafPath", "tempTint(t, comfort)", "critical_heat_c", "critical_frost_c", "scene-climate", "Stress:"):
         assert token in SCENE_JS, token
     assert "state.comfort" in JS and "stage_thresholds" in JS  # the colour range is the stage's own, never a number of the page's
+
+
+def test_bars_have_a_tooltip_and_the_chart_bands_follow_them_in_the_same_colour():
+    assert 'id="tl-tip"' in HTML and "function showTip" in JS and "Duration" in JS and "scheduleBandRedraw()" in JS
+    assert "bench.events.map((event) => ({ from: eventStartMs(event)" in JS and "hueFor(event.type)" in JS.split("function drawBands")[1].split("function redrawCharts")[0] or "band.hue" in JS
+
+
+def test_the_scene_background_no_longer_follows_the_hour_of_the_day():
+    assert 'skyRect.setAttribute("fill", "hsl(208 38% 86%)")' in SCENE_JS and "lerp(228, 205" not in SCENE_JS

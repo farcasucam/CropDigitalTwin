@@ -171,6 +171,12 @@
     syncPressed("[data-horizon]", "horizon");
     syncPressed("[data-view]", "view");
     $("#timeline").addEventListener("pointerdown", onTimelinePointer);
+    $("#timeline").addEventListener("pointermove", (pointer) => {
+      const bar = pointer.target.closest && pointer.target.closest(".tl-bar");
+      if (bar && !pointer.buttons) showTip(bench.events[Number(bar.dataset.index)], pointer.clientX, pointer.clientY);
+      else if (!pointer.buttons) hideTip();
+    });
+    $("#timeline").addEventListener("pointerleave", () => { if (!dragging) hideTip(); });
   }
 
   function refreshEnvironment() {
@@ -416,6 +422,7 @@
     const origin = { x: pointer.clientX, atHours: event.atHours, hours: event.hours };
     bar.setPointerCapture(pointer.pointerId);
     pointer.preventDefault();
+    dragging = true;
     const move = (now) => {
       const dh = Math.round(((now.clientX - origin.x) / track.width) * total / snap) * snap;
       if (edge === "right") placeEvent(event, { hours: origin.hours + dh }, "resize");
@@ -424,12 +431,36 @@
         event.atHours = at; event.hours = origin.atHours + origin.hours - at;
       } else placeEvent(event, { atHours: origin.atHours + dh }, "move");
       positionBar(bar, event);
+      showTip(event, now.clientX, now.clientY);
+      scheduleBandRedraw();
     };
     const done = () => {
       bar.removeEventListener("pointermove", move); bar.removeEventListener("pointerup", done); bar.removeEventListener("pointercancel", done);
-      eventsChanged();
+      dragging = false; hideTip(); eventsChanged();
     };
     bar.addEventListener("pointermove", move); bar.addEventListener("pointerup", done); bar.addEventListener("pointercancel", done);
+    showTip(event, pointer.clientX, pointer.clientY);
+  }
+  // A tooltip that states what the bar represents: type, start, end and duration (shown on hover and while moving or resizing).
+  let dragging = false, bandFrame = 0;
+  function showTip(event, x, y) {
+    const tip = $("#tl-tip");
+    if (!tip) return;
+    const start = eventStartMs(event), end = start + event.hours * HOUR, days = event.hours / 24;
+    tip.replaceChildren(el("strong", "", label(event.type.toLowerCase()).replace(/\b\w/g, (c) => c.toUpperCase())),
+      el("div", "", `Start  ${stamp(start)} UTC`), el("div", "", `End    ${stamp(end)} UTC`),
+      el("div", "", `Duration  ${event.hours} h${event.hours >= 24 ? ` (${fmt(days, 1)} d)` : ""}`));
+    const odd = plausibility(event);
+    if (odd) tip.append(el("div", "tip-warn", `⚠ ${odd}`));
+    tip.hidden = false;
+    const box = tip.getBoundingClientRect();
+    tip.style.left = `${clamp(x + 14, 4, window.innerWidth - box.width - 4)}px`;
+    tip.style.top = `${clamp(y - box.height - 14, 4, window.innerHeight - box.height - 4)}px`;
+  }
+  function hideTip() { const tip = $("#tl-tip"); if (tip) tip.hidden = true; }
+  function scheduleBandRedraw() {
+    if (bandFrame) return;
+    bandFrame = window.requestAnimationFrame(() => { bandFrame = 0; redrawCharts(); });
   }
   // scrubbing: pressing or dragging on the date axis (or the knob) moves the playhead
   function bindScrub() {
@@ -852,13 +883,15 @@
   function drawBands(u) {
     if (!bench.run) return;
     const ctx = u.ctx, area = u.bbox;
-    const bands = bench.run.events.map((event) => ({ from: Date.parse(event.start_simulation_time) / 1000, to: Date.parse(event.end_simulation_time) / 1000, draft: false }))
-      .concat(bench.run.kind === "WHAT_IF" ? [] : bench.events.map((event) => ({ from: eventStartMs(event) / 1000, to: (eventStartMs(event) + event.hours * HOUR) / 1000, draft: true })));
+    // the bands ARE the bars of the timeline (same colour, same dates, moving with them), drawn behind the series so they never cover a line
+    const bands = bench.events.map((event) => ({ from: eventStartMs(event) / 1000, to: (eventStartMs(event) + event.hours * HOUR) / 1000, hue: hueFor(event.type) }));
     ctx.save();
     for (const band of bands) {
-      const x0 = u.valToPos(band.from, "x", true), x1 = u.valToPos(band.to, "x", true);
-      ctx.fillStyle = band.draft ? "rgba(120,120,120,.18)" : "rgba(192,86,29,.16)";
-      ctx.fillRect(x0, area.top, Math.max(2, x1 - x0), area.height);
+      const x0 = u.valToPos(band.from, "x", true), x1 = u.valToPos(band.to, "x", true), width = Math.max(2, x1 - x0);
+      ctx.fillStyle = `hsl(${band.hue} 55% 42% / .15)`;
+      ctx.fillRect(x0, area.top, width, area.height);
+      ctx.fillStyle = `hsl(${band.hue} 55% 42% / .75)`;
+      ctx.fillRect(x0, area.top, width, 3);
     }
     if (bench.run.kind === "WHAT_IF") {
       const x = u.valToPos(Date.parse(bench.run.times[bench.run.branchIndex]) / 1000, "x", true);
