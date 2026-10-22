@@ -1,0 +1,1658 @@
+{
+ "window": {
+  "start": "2026-02-27T00:00:00+00:00",
+  "hours": 72
+ },
+ "effects": {
+  "outdoor": {
+   "HEAT_WAVE +8": {
+    "maturity_index": {
+     "window_mean": 0.0075,
+     "window_max_abs": 0.0155,
+     "after_max_abs": 0.0157,
+     "baseline_window_mean": 0.0278
+    },
+    "biomass_total_g_m2": {
+     "window_mean": 0.1121,
+     "window_max_abs": 0.2241,
+     "after_max_abs": 0.4215,
+     "baseline_window_mean": 23.2196
+    },
+    "leaf_area_index": {
+     "window_mean": 0.0013,
+     "window_max_abs": 0.0027,
+     "after_max_abs": 0.0051,
+     "baseline_window_mean": 0.2586
+    },
+    "drainage_mm": {
+     "window_mean": -0.0087,
+     "window_max_abs": 0.0376,
+     "after_max_abs": 0.0004,
+     "baseline_window_mean": 0.3461
+    },
+    "transpiration_mm": {
+     "window_mean": 0.0016,
+     "window_max_abs": 0.0074,
+     "after_max_abs": 0.0006,
+     "baseline_window_mean": 0.0061
+    },
+    "evaporation_mm": {
+     "window_mean": 0.0071,
+     "window_max_abs": 0.0302,
+     "after_max_abs": 0.0003,
+     "baseline_window_mean": 0.0278
+    },
+    "et0_mm": {
+     "window_mean": 0.0261,
+     "window_max_abs": 0.1113,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.1015
+    },
+    "temperature_c": {
+     "window_mean": 8.0,
+     "window_max_abs": 8.0,
+     "after_max_abs": 8.0,
+     "baseline_window_mean": 10.3236
+    },
+    "vpd_kpa": {
+     "window_mean": 0.2267,
+     "window_max_abs": 0.3333,
+     "after_max_abs": 0.3048,
+     "baseline_window_mean": 0.3304
+    },
+    "cold_stress": {
+     "window_mean": -0.1919,
+     "window_max_abs": 0.5333,
+     "after_max_abs": 0.2603,
+     "baseline_window_mean": 0.1927
+    },
+    "accumulated_stress": {
+     "window_mean": -0.0126,
+     "window_max_abs": 0.0275,
+     "after_max_abs": 0.0279,
+     "baseline_window_mean": 0.9989
+    },
+    "growth_factor": {
+     "window_mean": 0.1901,
+     "window_max_abs": 0.5285,
+     "after_max_abs": 0.2574,
+     "baseline_window_mean": 0.7995
+    }
+   },
+   "COLD_WAVE -8": {
+    "maturity_index": {
+     "window_mean": -0.0023,
+     "window_max_abs": 0.0054,
+     "after_max_abs": 0.0054,
+     "baseline_window_mean": 0.0278
+    },
+    "biomass_total_g_m2": {
+     "window_mean": -0.8833,
+     "window_max_abs": 1.8384,
+     "after_max_abs": 9.5251,
+     "baseline_window_mean": 23.2196
+    },
+    "leaf_area_index": {
+     "window_mean": -0.0106,
+     "window_max_abs": 0.0221,
+     "after_max_abs": 0.1143,
+     "baseline_window_mean": 0.2586
+    },
+    "drainage_mm": {
+     "window_mean": 0.0088,
+     "window_max_abs": 0.0382,
+     "after_max_abs": 0.0078,
+     "baseline_window_mean": 0.3461
+    },
+    "transpiration_mm": {
+     "window_mean": -0.0018,
+     "window_max_abs": 0.0085,
+     "after_max_abs": 0.0136,
+     "baseline_window_mean": 0.0061
+    },
+    "evaporation_mm": {
+     "window_mean": -0.0071,
+     "window_max_abs": 0.0298,
+     "after_max_abs": 0.0058,
+     "baseline_window_mean": 0.0278
+    },
+    "et0_mm": {
+     "window_mean": -0.0261,
+     "window_max_abs": 0.1113,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.1015
+    },
+    "temperature_c": {
+     "window_mean": -8.0,
+     "window_max_abs": 8.0,
+     "after_max_abs": 8.0,
+     "baseline_window_mean": 10.3236
+    },
+    "vpd_kpa": {
+     "window_mean": -0.1411,
+     "window_max_abs": 0.2066,
+     "after_max_abs": 0.189,
+     "baseline_window_mean": 0.3304
+    },
+    "cold_stress": {
+     "window_mean": 0.3885,
+     "window_max_abs": 0.5333,
+     "after_max_abs": 0.5333,
+     "baseline_window_mean": 0.1927
+    },
+    "frost_damage": {
+     "window_mean": 0.1584,
+     "window_max_abs": 0.2754,
+     "after_max_abs": 0.2687,
+     "baseline_window_mean": 0.0
+    },
+    "accumulated_stress": {
+     "window_mean": 0.0011,
+     "window_max_abs": 0.0046,
+     "after_max_abs": 0.0058,
+     "baseline_window_mean": 0.9989
+    },
+    "growth_factor": {
+     "window_mean": -0.3872,
+     "window_max_abs": 0.529,
+     "after_max_abs": 0.5273,
+     "baseline_window_mean": 0.7995
+    }
+   },
+   "DRYNESS": {},
+   "RAIN 5 mm/h": {
+    "precipitation_mm": {
+     "window_mean": 5.0,
+     "window_max_abs": 5.0,
+     "after_max_abs": 5.0,
+     "baseline_window_mean": 0.0
+    },
+    "drainage_mm": {
+     "window_mean": 5.0,
+     "window_max_abs": 5.0,
+     "after_max_abs": 5.0,
+     "baseline_window_mean": 0.3461
+    }
+   },
+   "HIGH_RADIATION x1.5": {
+    "biomass_total_g_m2": {
+     "window_mean": 1.0954,
+     "window_max_abs": 2.3677,
+     "after_max_abs": 4.3635,
+     "baseline_window_mean": 23.2196
+    },
+    "leaf_area_index": {
+     "window_mean": 0.0131,
+     "window_max_abs": 0.0284,
+     "after_max_abs": 0.0524,
+     "baseline_window_mean": 0.2586
+    },
+    "drainage_mm": {
+     "window_mean": -0.0172,
+     "window_max_abs": 0.0768,
+     "after_max_abs": 0.0037,
+     "baseline_window_mean": 0.3461
+    },
+    "transpiration_mm": {
+     "window_mean": 0.0035,
+     "window_max_abs": 0.0177,
+     "after_max_abs": 0.0064,
+     "baseline_window_mean": 0.0061
+    },
+    "evaporation_mm": {
+     "window_mean": 0.0137,
+     "window_max_abs": 0.0596,
+     "after_max_abs": 0.0027,
+     "baseline_window_mean": 0.0278
+    },
+    "et0_mm": {
+     "window_mean": 0.0507,
+     "window_max_abs": 0.2226,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.1015
+    },
+    "radiation_w_m2": {
+     "window_mean": 62.224,
+     "window_max_abs": 265.684,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 124.4479
+    },
+    "growth_factor": {
+     "window_mean": -0.0007,
+     "window_max_abs": 0.0018,
+     "after_max_abs": 0.0033,
+     "baseline_window_mean": 0.7995
+    }
+   },
+   "LOW_RADIATION x0.5": {
+    "biomass_total_g_m2": {
+     "window_mean": -1.0353,
+     "window_max_abs": 2.1814,
+     "after_max_abs": 4.0911,
+     "baseline_window_mean": 23.2196
+    },
+    "leaf_area_index": {
+     "window_mean": -0.0124,
+     "window_max_abs": 0.0262,
+     "after_max_abs": 0.0491,
+     "baseline_window_mean": 0.2586
+    },
+    "drainage_mm": {
+     "window_mean": 0.017,
+     "window_max_abs": 0.0755,
+     "after_max_abs": 0.0034,
+     "baseline_window_mean": 0.3461
+    },
+    "transpiration_mm": {
+     "window_mean": -0.0032,
+     "window_max_abs": 0.0153,
+     "after_max_abs": 0.006,
+     "baseline_window_mean": 0.0061
+    },
+    "evaporation_mm": {
+     "window_mean": -0.0139,
+     "window_max_abs": 0.0603,
+     "after_max_abs": 0.0026,
+     "baseline_window_mean": 0.0278
+    },
+    "et0_mm": {
+     "window_mean": -0.0507,
+     "window_max_abs": 0.2226,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.1015
+    },
+    "radiation_w_m2": {
+     "window_mean": -62.224,
+     "window_max_abs": 265.684,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 124.4479
+    },
+    "growth_factor": {
+     "window_mean": 0.0007,
+     "window_max_abs": 0.0016,
+     "after_max_abs": 0.0031,
+     "baseline_window_mean": 0.7995
+    }
+   },
+   "WIND x3": {},
+   "IRRIGATION 2 mm": {},
+   "VENTILATION 1.0": {
+    "rejected": "VENTILATION commands a greenhouse actuator and is NOT_APPLICABLE to outdoor runs"
+   },
+   "SHADING 0.6": {
+    "rejected": "SHADING commands a greenhouse actuator and is NOT_APPLICABLE to outdoor runs"
+   },
+   "CO2 0.8": {
+    "rejected": "CO2 commands a greenhouse actuator and is NOT_APPLICABLE to outdoor runs"
+   }
+  },
+  "gh_simplified": {
+   "HEAT_WAVE +8": {
+    "maturity_index": {
+     "window_mean": 0.0075,
+     "window_max_abs": 0.0155,
+     "after_max_abs": 0.0157,
+     "baseline_window_mean": 0.0285
+    },
+    "biomass_total_g_m2": {
+     "window_mean": 0.0792,
+     "window_max_abs": 0.1569,
+     "after_max_abs": 0.2668,
+     "baseline_window_mean": 19.1908
+    },
+    "leaf_area_index": {
+     "window_mean": 0.001,
+     "window_max_abs": 0.0019,
+     "after_max_abs": 0.0032,
+     "baseline_window_mean": 0.2103
+    },
+    "drainage_mm": {
+     "window_mean": -0.0067,
+     "window_max_abs": 0.0287,
+     "after_max_abs": 0.0002,
+     "baseline_window_mean": 0.3541
+    },
+    "transpiration_mm": {
+     "window_mean": 0.001,
+     "window_max_abs": 0.0046,
+     "after_max_abs": 0.0003,
+     "baseline_window_mean": 0.0039
+    },
+    "evaporation_mm": {
+     "window_mean": 0.0057,
+     "window_max_abs": 0.0241,
+     "after_max_abs": 0.0001,
+     "baseline_window_mean": 0.022
+    },
+    "et0_mm": {
+     "window_mean": 0.0203,
+     "window_max_abs": 0.0868,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.0789
+    },
+    "temperature_c": {
+     "window_mean": 7.971,
+     "window_max_abs": 8.0,
+     "after_max_abs": 8.0,
+     "baseline_window_mean": 10.4144
+    },
+    "relative_humidity_pct": {
+     "window_mean": 0.1224,
+     "window_max_abs": 5.514,
+     "after_max_abs": 3.5698,
+     "baseline_window_mean": 70.2463
+    },
+    "vpd_kpa": {
+     "window_mean": 0.2282,
+     "window_max_abs": 0.325,
+     "after_max_abs": 0.3148,
+     "baseline_window_mean": 0.338
+    },
+    "cold_stress": {
+     "window_mean": -0.1885,
+     "window_max_abs": 0.5333,
+     "after_max_abs": 0.2375,
+     "baseline_window_mean": 0.1893
+    },
+    "accumulated_stress": {
+     "window_mean": -0.0128,
+     "window_max_abs": 0.0278,
+     "after_max_abs": 0.0283,
+     "baseline_window_mean": 0.9989
+    },
+    "growth_factor": {
+     "window_mean": 0.1873,
+     "window_max_abs": 0.5299,
+     "after_max_abs": 0.2356,
+     "baseline_window_mean": 0.8052
+    },
+    "outdoor_temperature_c": {
+     "window_mean": 8.0,
+     "window_max_abs": 8.0,
+     "after_max_abs": 8.0,
+     "baseline_window_mean": 10.3236
+    }
+   },
+   "COLD_WAVE -8": {
+    "maturity_index": {
+     "window_mean": -0.0024,
+     "window_max_abs": 0.0055,
+     "after_max_abs": 0.0055,
+     "baseline_window_mean": 0.0285
+    },
+    "biomass_total_g_m2": {
+     "window_mean": -0.5701,
+     "window_max_abs": 1.1758,
+     "after_max_abs": 5.3344,
+     "baseline_window_mean": 19.1908
+    },
+    "leaf_area_index": {
+     "window_mean": -0.0068,
+     "window_max_abs": 0.0141,
+     "after_max_abs": 0.064,
+     "baseline_window_mean": 0.2103
+    },
+    "drainage_mm": {
+     "window_mean": 0.0067,
+     "window_max_abs": 0.029,
+     "after_max_abs": 0.0034,
+     "baseline_window_mean": 0.3541
+    },
+    "transpiration_mm": {
+     "window_mean": -0.0011,
+     "window_max_abs": 0.0052,
+     "after_max_abs": 0.006,
+     "baseline_window_mean": 0.0039
+    },
+    "evaporation_mm": {
+     "window_mean": -0.0056,
+     "window_max_abs": 0.0238,
+     "after_max_abs": 0.0026,
+     "baseline_window_mean": 0.022
+    },
+    "et0_mm": {
+     "window_mean": -0.0203,
+     "window_max_abs": 0.0868,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.0789
+    },
+    "temperature_c": {
+     "window_mean": -7.971,
+     "window_max_abs": 8.0,
+     "after_max_abs": 8.0,
+     "baseline_window_mean": 10.4144
+    },
+    "relative_humidity_pct": {
+     "window_mean": -0.117,
+     "window_max_abs": 4.8304,
+     "after_max_abs": 4.6514,
+     "baseline_window_mean": 70.2463
+    },
+    "vpd_kpa": {
+     "window_mean": -0.143,
+     "window_max_abs": 0.2013,
+     "after_max_abs": 0.1957,
+     "baseline_window_mean": 0.338
+    },
+    "cold_stress": {
+     "window_mean": 0.3861,
+     "window_max_abs": 0.5333,
+     "after_max_abs": 0.5333,
+     "baseline_window_mean": 0.1893
+    },
+    "frost_damage": {
+     "window_mean": 0.1511,
+     "window_max_abs": 0.2656,
+     "after_max_abs": 0.2589,
+     "baseline_window_mean": 0.0
+    },
+    "accumulated_stress": {
+     "window_mean": 0.0011,
+     "window_max_abs": 0.0046,
+     "after_max_abs": 0.0058,
+     "baseline_window_mean": 0.9989
+    },
+    "growth_factor": {
+     "window_mean": -0.3858,
+     "window_max_abs": 0.5302,
+     "after_max_abs": 0.5292,
+     "baseline_window_mean": 0.8052
+    },
+    "outdoor_temperature_c": {
+     "window_mean": -8.0,
+     "window_max_abs": 8.0,
+     "after_max_abs": 8.0,
+     "baseline_window_mean": 10.3236
+    }
+   },
+   "DRYNESS": {},
+   "RAIN 5 mm/h": {},
+   "HIGH_RADIATION x1.5": {
+    "maturity_index": {
+     "window_mean": 0.0,
+     "window_max_abs": 0.0001,
+     "after_max_abs": 0.0001,
+     "baseline_window_mean": 0.0285
+    },
+    "biomass_total_g_m2": {
+     "window_mean": 0.7011,
+     "window_max_abs": 1.4968,
+     "after_max_abs": 2.5156,
+     "baseline_window_mean": 19.1908
+    },
+    "leaf_area_index": {
+     "window_mean": 0.0084,
+     "window_max_abs": 0.018,
+     "after_max_abs": 0.0302,
+     "baseline_window_mean": 0.2103
+    },
+    "drainage_mm": {
+     "window_mean": -0.0132,
+     "window_max_abs": 0.0589,
+     "after_max_abs": 0.0017,
+     "baseline_window_mean": 0.3541
+    },
+    "transpiration_mm": {
+     "window_mean": 0.0022,
+     "window_max_abs": 0.0108,
+     "after_max_abs": 0.0029,
+     "baseline_window_mean": 0.0039
+    },
+    "evaporation_mm": {
+     "window_mean": 0.0111,
+     "window_max_abs": 0.0483,
+     "after_max_abs": 0.0012,
+     "baseline_window_mean": 0.022
+    },
+    "et0_mm": {
+     "window_mean": 0.04,
+     "window_max_abs": 0.1761,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.0789
+    },
+    "temperature_c": {
+     "window_mean": 0.0444,
+     "window_max_abs": 0.1851,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 10.4144
+    },
+    "relative_humidity_pct": {
+     "window_mean": -0.2101,
+     "window_max_abs": 0.9104,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 70.2463
+    },
+    "vpd_kpa": {
+     "window_mean": 0.0044,
+     "window_max_abs": 0.0197,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.338
+    },
+    "radiation_w_m2": {
+     "window_mean": 48.5347,
+     "window_max_abs": 207.2335,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 97.0694
+    },
+    "cold_stress": {
+     "window_mean": -0.0008,
+     "window_max_abs": 0.0107,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.1893
+    },
+    "accumulated_stress": {
+     "window_mean": -0.0,
+     "window_max_abs": 0.0,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.9989
+    },
+    "growth_factor": {
+     "window_mean": 0.0003,
+     "window_max_abs": 0.0101,
+     "after_max_abs": 0.0019,
+     "baseline_window_mean": 0.8052
+    }
+   },
+   "LOW_RADIATION x0.5": {
+    "maturity_index": {
+     "window_mean": -0.0,
+     "window_max_abs": 0.0001,
+     "after_max_abs": 0.0001,
+     "baseline_window_mean": 0.0285
+    },
+    "biomass_total_g_m2": {
+     "window_mean": -0.6665,
+     "window_max_abs": 1.3936,
+     "after_max_abs": 2.3627,
+     "baseline_window_mean": 19.1908
+    },
+    "leaf_area_index": {
+     "window_mean": -0.008,
+     "window_max_abs": 0.0167,
+     "after_max_abs": 0.0284,
+     "baseline_window_mean": 0.2103
+    },
+    "drainage_mm": {
+     "window_mean": 0.013,
+     "window_max_abs": 0.0576,
+     "after_max_abs": 0.0016,
+     "baseline_window_mean": 0.3541
+    },
+    "transpiration_mm": {
+     "window_mean": -0.002,
+     "window_max_abs": 0.0094,
+     "after_max_abs": 0.0027,
+     "baseline_window_mean": 0.0039
+    },
+    "evaporation_mm": {
+     "window_mean": -0.011,
+     "window_max_abs": 0.0482,
+     "after_max_abs": 0.0012,
+     "baseline_window_mean": 0.022
+    },
+    "et0_mm": {
+     "window_mean": -0.0396,
+     "window_max_abs": 0.1741,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.0789
+    },
+    "temperature_c": {
+     "window_mean": -0.0444,
+     "window_max_abs": 0.1851,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 10.4144
+    },
+    "relative_humidity_pct": {
+     "window_mean": 0.2122,
+     "window_max_abs": 0.9214,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 70.2463
+    },
+    "vpd_kpa": {
+     "window_mean": -0.0043,
+     "window_max_abs": 0.0195,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.338
+    },
+    "radiation_w_m2": {
+     "window_mean": -48.5347,
+     "window_max_abs": 207.2335,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 97.0694
+    },
+    "cold_stress": {
+     "window_mean": 0.0008,
+     "window_max_abs": 0.0107,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.1893
+    },
+    "accumulated_stress": {
+     "window_mean": 0.0,
+     "window_max_abs": 0.0,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.9989
+    },
+    "growth_factor": {
+     "window_mean": -0.0004,
+     "window_max_abs": 0.0102,
+     "after_max_abs": 0.0018,
+     "baseline_window_mean": 0.8052
+    }
+   },
+   "WIND x3": {},
+   "IRRIGATION 2 mm": {},
+   "VENTILATION 1.0": {
+    "maturity_index": {
+     "window_mean": -0.0,
+     "window_max_abs": 0.0,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.0285
+    },
+    "biomass_total_g_m2": {
+     "window_mean": 0.0047,
+     "window_max_abs": 0.0094,
+     "after_max_abs": 0.016,
+     "baseline_window_mean": 19.1908
+    },
+    "leaf_area_index": {
+     "window_mean": 0.0001,
+     "window_max_abs": 0.0001,
+     "after_max_abs": 0.0002,
+     "baseline_window_mean": 0.2103
+    },
+    "drainage_mm": {
+     "window_mean": -0.0001,
+     "window_max_abs": 0.0005,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.3541
+    },
+    "transpiration_mm": {
+     "window_mean": 0.0,
+     "window_max_abs": 0.0001,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.0039
+    },
+    "evaporation_mm": {
+     "window_mean": 0.0001,
+     "window_max_abs": 0.0004,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.022
+    },
+    "et0_mm": {
+     "window_mean": 0.0003,
+     "window_max_abs": 0.0015,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.0789
+    },
+    "temperature_c": {
+     "window_mean": -0.0193,
+     "window_max_abs": 0.1671,
+     "after_max_abs": 0.152,
+     "baseline_window_mean": 10.4144
+    },
+    "relative_humidity_pct": {
+     "window_mean": 0.079,
+     "window_max_abs": 0.5224,
+     "after_max_abs": 0.1677,
+     "baseline_window_mean": 70.2463
+    },
+    "vpd_kpa": {
+     "window_mean": -0.0014,
+     "window_max_abs": 0.0091,
+     "after_max_abs": 0.0065,
+     "baseline_window_mean": 0.338
+    },
+    "cold_stress": {
+     "window_mean": 0.0011,
+     "window_max_abs": 0.0111,
+     "after_max_abs": 0.0101,
+     "baseline_window_mean": 0.1893
+    },
+    "accumulated_stress": {
+     "window_mean": 0.0,
+     "window_max_abs": 0.0004,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.9989
+    },
+    "growth_factor": {
+     "window_mean": -0.0011,
+     "window_max_abs": 0.0111,
+     "after_max_abs": 0.0101,
+     "baseline_window_mean": 0.8052
+    },
+    "greenhouse_ventilation_fraction": {
+     "window_mean": 0.031,
+     "window_max_abs": 0.0315,
+     "after_max_abs": 0.0315,
+     "baseline_window_mean": 0.9502
+    }
+   },
+   "SHADING 0.6": {
+    "maturity_index": {
+     "window_mean": -0.0001,
+     "window_max_abs": 0.0001,
+     "after_max_abs": 0.0001,
+     "baseline_window_mean": 0.0285
+    },
+    "biomass_total_g_m2": {
+     "window_mean": -0.7958,
+     "window_max_abs": 1.6605,
+     "after_max_abs": 2.8175,
+     "baseline_window_mean": 19.1908
+    },
+    "leaf_area_index": {
+     "window_mean": -0.0095,
+     "window_max_abs": 0.0199,
+     "after_max_abs": 0.0338,
+     "baseline_window_mean": 0.2103
+    },
+    "drainage_mm": {
+     "window_mean": 0.0156,
+     "window_max_abs": 0.069,
+     "after_max_abs": 0.0019,
+     "baseline_window_mean": 0.3541
+    },
+    "transpiration_mm": {
+     "window_mean": -0.0024,
+     "window_max_abs": 0.0112,
+     "after_max_abs": 0.0032,
+     "baseline_window_mean": 0.0039
+    },
+    "evaporation_mm": {
+     "window_mean": -0.0132,
+     "window_max_abs": 0.0578,
+     "after_max_abs": 0.0014,
+     "baseline_window_mean": 0.022
+    },
+    "et0_mm": {
+     "window_mean": -0.0475,
+     "window_max_abs": 0.2087,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.0789
+    },
+    "temperature_c": {
+     "window_mean": -0.0533,
+     "window_max_abs": 0.2222,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 10.4144
+    },
+    "relative_humidity_pct": {
+     "window_mean": 0.2549,
+     "window_max_abs": 1.107,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 70.2463
+    },
+    "vpd_kpa": {
+     "window_mean": -0.0052,
+     "window_max_abs": 0.0233,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.338
+    },
+    "radiation_w_m2": {
+     "window_mean": -58.2416,
+     "window_max_abs": 248.6802,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 97.0694
+    },
+    "cold_stress": {
+     "window_mean": 0.001,
+     "window_max_abs": 0.0128,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.1893
+    },
+    "accumulated_stress": {
+     "window_mean": 0.0,
+     "window_max_abs": 0.0,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.9989
+    },
+    "growth_factor": {
+     "window_mean": -0.0004,
+     "window_max_abs": 0.0122,
+     "after_max_abs": 0.0021,
+     "baseline_window_mean": 0.8052
+    },
+    "greenhouse_shading_fraction": {
+     "window_mean": 0.5917,
+     "window_max_abs": 0.6,
+     "after_max_abs": 0.6,
+     "baseline_window_mean": 0.0
+    }
+   },
+   "CO2 0.8": {
+    "co2_ppm": {
+     "window_mean": 26.2769,
+     "window_max_abs": 26.6667,
+     "after_max_abs": 26.6667,
+     "baseline_window_mean": 420.0
+    }
+   }
+  },
+  "gh_energyplus": {
+   "HEAT_WAVE +8": {
+    "maturity_index": {
+     "window_mean": 0.0032,
+     "window_max_abs": 0.0072,
+     "after_max_abs": 0.0074,
+     "baseline_window_mean": 0.0658
+    },
+    "biomass_total_g_m2": {
+     "window_mean": 0.2953,
+     "window_max_abs": 0.6751,
+     "after_max_abs": 1.1497,
+     "baseline_window_mean": 16.4122
+    },
+    "leaf_area_index": {
+     "window_mean": 0.0035,
+     "window_max_abs": 0.0081,
+     "after_max_abs": 0.0138,
+     "baseline_window_mean": 0.1769
+    },
+    "drainage_mm": {
+     "window_mean": -0.0024,
+     "window_max_abs": 0.016,
+     "after_max_abs": 0.0035,
+     "baseline_window_mean": 0.3434
+    },
+    "transpiration_mm": {
+     "window_mean": 0.0004,
+     "window_max_abs": 0.0023,
+     "after_max_abs": 0.0018,
+     "baseline_window_mean": 0.0047
+    },
+    "evaporation_mm": {
+     "window_mean": 0.0021,
+     "window_max_abs": 0.0137,
+     "after_max_abs": 0.0038,
+     "baseline_window_mean": 0.0319
+    },
+    "et0_mm": {
+     "window_mean": 0.0074,
+     "window_max_abs": 0.049,
+     "after_max_abs": 0.0121,
+     "baseline_window_mean": 0.113
+    },
+    "temperature_c": {
+     "window_mean": 2.8859,
+     "window_max_abs": 6.0658,
+     "after_max_abs": 3.453,
+     "baseline_window_mean": 15.6189
+    },
+    "relative_humidity_pct": {
+     "window_mean": 18.5814,
+     "window_max_abs": 33.1798,
+     "after_max_abs": 36.9877,
+     "baseline_window_mean": 57.1992
+    },
+    "vpd_kpa": {
+     "window_mean": -0.2944,
+     "window_max_abs": 0.9004,
+     "after_max_abs": 0.5181,
+     "baseline_window_mean": 0.8033
+    },
+    "vpd_stress": {
+     "window_mean": -0.0596,
+     "window_max_abs": 0.7748,
+     "after_max_abs": 0.4541,
+     "baseline_window_mean": 0.1085
+    },
+    "accumulated_stress": {
+     "window_mean": -0.0006,
+     "window_max_abs": 0.0079,
+     "after_max_abs": 0.0014,
+     "baseline_window_mean": 0.9965
+    },
+    "growth_factor": {
+     "window_mean": 0.0591,
+     "window_max_abs": 0.7685,
+     "after_max_abs": 0.45,
+     "baseline_window_mean": 0.885
+    },
+    "outdoor_temperature_c": {
+     "window_mean": 8.0,
+     "window_max_abs": 8.0,
+     "after_max_abs": 8.0,
+     "baseline_window_mean": 10.3236
+    },
+    "greenhouse_ventilation_fraction": {
+     "window_mean": 0.1911,
+     "window_max_abs": 0.9597,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.0081
+    },
+    "greenhouse_heating_kw": {
+     "window_mean": -10.85,
+     "window_max_abs": 36.4837,
+     "after_max_abs": 15.9042,
+     "baseline_window_mean": 11.1576
+    }
+   },
+   "COLD_WAVE -8": {
+    "maturity_index": {
+     "window_mean": -0.0019,
+     "window_max_abs": 0.0042,
+     "after_max_abs": 0.0044,
+     "baseline_window_mean": 0.0658
+    },
+    "biomass_total_g_m2": {
+     "window_mean": -0.1684,
+     "window_max_abs": 0.3129,
+     "after_max_abs": 0.3176,
+     "baseline_window_mean": 16.4122
+    },
+    "leaf_area_index": {
+     "window_mean": -0.002,
+     "window_max_abs": 0.0038,
+     "after_max_abs": 0.0038,
+     "baseline_window_mean": 0.1769
+    },
+    "drainage_mm": {
+     "window_mean": 0.0024,
+     "window_max_abs": 0.019,
+     "after_max_abs": 0.0047,
+     "baseline_window_mean": 0.3434
+    },
+    "transpiration_mm": {
+     "window_mean": -0.0003,
+     "window_max_abs": 0.0027,
+     "after_max_abs": 0.001,
+     "baseline_window_mean": 0.0047
+    },
+    "evaporation_mm": {
+     "window_mean": -0.002,
+     "window_max_abs": 0.0163,
+     "after_max_abs": 0.0038,
+     "baseline_window_mean": 0.0319
+    },
+    "et0_mm": {
+     "window_mean": -0.0073,
+     "window_max_abs": 0.058,
+     "after_max_abs": 0.0137,
+     "baseline_window_mean": 0.113
+    },
+    "temperature_c": {
+     "window_mean": -1.6642,
+     "window_max_abs": 5.4974,
+     "after_max_abs": 1.774,
+     "baseline_window_mean": 15.6189
+    },
+    "relative_humidity_pct": {
+     "window_mean": -19.756,
+     "window_max_abs": 36.889,
+     "after_max_abs": 26.7778,
+     "baseline_window_mean": 57.1992
+    },
+    "vpd_kpa": {
+     "window_mean": 0.2369,
+     "window_max_abs": 0.6949,
+     "after_max_abs": 0.3756,
+     "baseline_window_mean": 0.8033
+    },
+    "vpd_stress": {
+     "window_mean": 0.0441,
+     "window_max_abs": 0.8,
+     "after_max_abs": 0.5433,
+     "baseline_window_mean": 0.1085
+    },
+    "accumulated_stress": {
+     "window_mean": 0.0003,
+     "window_max_abs": 0.0055,
+     "after_max_abs": 0.0008,
+     "baseline_window_mean": 0.9965
+    },
+    "growth_factor": {
+     "window_mean": -0.0438,
+     "window_max_abs": 0.7945,
+     "after_max_abs": 0.5384,
+     "baseline_window_mean": 0.885
+    },
+    "outdoor_temperature_c": {
+     "window_mean": -8.0,
+     "window_max_abs": 8.0,
+     "after_max_abs": 8.0,
+     "baseline_window_mean": 10.3236
+    },
+    "greenhouse_ventilation_fraction": {
+     "window_mean": -0.0081,
+     "window_max_abs": 0.1663,
+     "after_max_abs": 0.1668,
+     "baseline_window_mean": 0.0081
+    },
+    "greenhouse_heating_kw": {
+     "window_mean": 21.0602,
+     "window_max_abs": 40.4347,
+     "after_max_abs": 37.2981,
+     "baseline_window_mean": 11.1576
+    }
+   },
+   "DRYNESS": {},
+   "RAIN 5 mm/h": {
+    "maturity_index": {
+     "window_mean": -0.0016,
+     "window_max_abs": 0.0034,
+     "after_max_abs": 0.0036,
+     "baseline_window_mean": 0.0658
+    },
+    "biomass_total_g_m2": {
+     "window_mean": 0.5388,
+     "window_max_abs": 1.1768,
+     "after_max_abs": 2.0288,
+     "baseline_window_mean": 16.4122
+    },
+    "leaf_area_index": {
+     "window_mean": 0.0065,
+     "window_max_abs": 0.0141,
+     "after_max_abs": 0.0243,
+     "baseline_window_mean": 0.1769
+    },
+    "drainage_mm": {
+     "window_mean": 0.0034,
+     "window_max_abs": 0.0276,
+     "after_max_abs": 0.0038,
+     "baseline_window_mean": 0.3434
+    },
+    "transpiration_mm": {
+     "window_mean": -0.0003,
+     "window_max_abs": 0.003,
+     "after_max_abs": 0.0031,
+     "baseline_window_mean": 0.0047
+    },
+    "evaporation_mm": {
+     "window_mean": -0.0031,
+     "window_max_abs": 0.0249,
+     "after_max_abs": 0.0045,
+     "baseline_window_mean": 0.0319
+    },
+    "et0_mm": {
+     "window_mean": -0.0109,
+     "window_max_abs": 0.0869,
+     "after_max_abs": 0.0137,
+     "baseline_window_mean": 0.113
+    },
+    "temperature_c": {
+     "window_mean": -1.3664,
+     "window_max_abs": 7.1353,
+     "after_max_abs": 1.7725,
+     "baseline_window_mean": 15.6189
+    },
+    "relative_humidity_pct": {
+     "window_mean": 2.3259,
+     "window_max_abs": 14.4342,
+     "after_max_abs": 8.7025,
+     "baseline_window_mean": 57.1992
+    },
+    "vpd_kpa": {
+     "window_mean": -0.1385,
+     "window_max_abs": 1.0372,
+     "after_max_abs": 0.3742,
+     "baseline_window_mean": 0.8033
+    },
+    "vpd_stress": {
+     "window_mean": -0.1038,
+     "window_max_abs": 0.8,
+     "after_max_abs": 0.5433,
+     "baseline_window_mean": 0.1085
+    },
+    "accumulated_stress": {
+     "window_mean": -0.0124,
+     "window_max_abs": 0.0273,
+     "after_max_abs": 0.0168,
+     "baseline_window_mean": 0.9965
+    },
+    "growth_factor": {
+     "window_mean": 0.103,
+     "window_max_abs": 0.7947,
+     "after_max_abs": 0.5383,
+     "baseline_window_mean": 0.885
+    },
+    "greenhouse_ventilation_fraction": {
+     "window_mean": -0.0081,
+     "window_max_abs": 0.1663,
+     "after_max_abs": 0.1668,
+     "baseline_window_mean": 0.0081
+    },
+    "greenhouse_heating_kw": {
+     "window_mean": 9.3873,
+     "window_max_abs": 32.7438,
+     "after_max_abs": 15.7122,
+     "baseline_window_mean": 11.1576
+    }
+   },
+   "HIGH_RADIATION x1.5": {
+    "maturity_index": {
+     "window_mean": 0.0009,
+     "window_max_abs": 0.0019,
+     "after_max_abs": 0.0019,
+     "baseline_window_mean": 0.0658
+    },
+    "biomass_total_g_m2": {
+     "window_mean": 0.1155,
+     "window_max_abs": 0.3051,
+     "after_max_abs": 0.4469,
+     "baseline_window_mean": 16.4122
+    },
+    "leaf_area_index": {
+     "window_mean": 0.0014,
+     "window_max_abs": 0.0037,
+     "after_max_abs": 0.0054,
+     "baseline_window_mean": 0.1769
+    },
+    "drainage_mm": {
+     "window_mean": -0.0205,
+     "window_max_abs": 0.084,
+     "after_max_abs": 0.0004,
+     "baseline_window_mean": 0.3434
+    },
+    "transpiration_mm": {
+     "window_mean": 0.0026,
+     "window_max_abs": 0.0109,
+     "after_max_abs": 0.0007,
+     "baseline_window_mean": 0.0047
+    },
+    "evaporation_mm": {
+     "window_mean": 0.0179,
+     "window_max_abs": 0.0731,
+     "after_max_abs": 0.0003,
+     "baseline_window_mean": 0.0319
+    },
+    "et0_mm": {
+     "window_mean": 0.0633,
+     "window_max_abs": 0.2593,
+     "after_max_abs": 0.0002,
+     "baseline_window_mean": 0.113
+    },
+    "temperature_c": {
+     "window_mean": 0.774,
+     "window_max_abs": 4.2294,
+     "after_max_abs": 0.0214,
+     "baseline_window_mean": 15.6189
+    },
+    "relative_humidity_pct": {
+     "window_mean": -1.6921,
+     "window_max_abs": 11.2639,
+     "after_max_abs": 0.1087,
+     "baseline_window_mean": 57.1992
+    },
+    "vpd_kpa": {
+     "window_mean": 0.0754,
+     "window_max_abs": 0.5144,
+     "after_max_abs": 0.0028,
+     "baseline_window_mean": 0.8033
+    },
+    "radiation_w_m2": {
+     "window_mean": 58.845,
+     "window_max_abs": 230.9192,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 114.0697
+    },
+    "vpd_stress": {
+     "window_mean": 0.0457,
+     "window_max_abs": 0.8,
+     "after_max_abs": 0.0049,
+     "baseline_window_mean": 0.1085
+    },
+    "accumulated_stress": {
+     "window_mean": 0.0007,
+     "window_max_abs": 0.0083,
+     "after_max_abs": 0.0002,
+     "baseline_window_mean": 0.9965
+    },
+    "growth_factor": {
+     "window_mean": -0.0458,
+     "window_max_abs": 0.7949,
+     "after_max_abs": 0.0059,
+     "baseline_window_mean": 0.885
+    },
+    "greenhouse_ventilation_fraction": {
+     "window_mean": 0.0349,
+     "window_max_abs": 0.2129,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.0081
+    },
+    "greenhouse_heating_kw": {
+     "window_mean": -0.7329,
+     "window_max_abs": 10.428,
+     "after_max_abs": 1.5863,
+     "baseline_window_mean": 11.1576
+    }
+   },
+   "LOW_RADIATION x0.5": {
+    "maturity_index": {
+     "window_mean": -0.002,
+     "window_max_abs": 0.0042,
+     "after_max_abs": 0.0042,
+     "baseline_window_mean": 0.0658
+    },
+    "biomass_total_g_m2": {
+     "window_mean": -0.2162,
+     "window_max_abs": 0.4222,
+     "after_max_abs": 0.5183,
+     "baseline_window_mean": 16.4122
+    },
+    "leaf_area_index": {
+     "window_mean": -0.0026,
+     "window_max_abs": 0.0051,
+     "after_max_abs": 0.0062,
+     "baseline_window_mean": 0.1769
+    },
+    "drainage_mm": {
+     "window_mean": 0.0208,
+     "window_max_abs": 0.0979,
+     "after_max_abs": 0.0005,
+     "baseline_window_mean": 0.3434
+    },
+    "transpiration_mm": {
+     "window_mean": -0.0027,
+     "window_max_abs": 0.0131,
+     "after_max_abs": 0.0008,
+     "baseline_window_mean": 0.0047
+    },
+    "evaporation_mm": {
+     "window_mean": -0.0182,
+     "window_max_abs": 0.0848,
+     "after_max_abs": 0.0003,
+     "baseline_window_mean": 0.0319
+    },
+    "et0_mm": {
+     "window_mean": -0.0643,
+     "window_max_abs": 0.3013,
+     "after_max_abs": 0.0002,
+     "baseline_window_mean": 0.113
+    },
+    "temperature_c": {
+     "window_mean": -1.6645,
+     "window_max_abs": 7.4096,
+     "after_max_abs": 0.0228,
+     "baseline_window_mean": 15.6189
+    },
+    "relative_humidity_pct": {
+     "window_mean": 3.2464,
+     "window_max_abs": 15.3249,
+     "after_max_abs": 0.046,
+     "baseline_window_mean": 57.1992
+    },
+    "vpd_kpa": {
+     "window_mean": -0.1687,
+     "window_max_abs": 1.0559,
+     "after_max_abs": 0.003,
+     "baseline_window_mean": 0.8033
+    },
+    "radiation_w_m2": {
+     "window_mean": -59.239,
+     "window_max_abs": 238.809,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 114.0697
+    },
+    "vpd_stress": {
+     "window_mean": -0.1078,
+     "window_max_abs": 0.8,
+     "after_max_abs": 0.0051,
+     "baseline_window_mean": 0.1085
+    },
+    "accumulated_stress": {
+     "window_mean": -0.0156,
+     "window_max_abs": 0.0292,
+     "after_max_abs": 0.0287,
+     "baseline_window_mean": 0.9965
+    },
+    "growth_factor": {
+     "window_mean": 0.1076,
+     "window_max_abs": 0.7949,
+     "after_max_abs": 0.0061,
+     "baseline_window_mean": 0.885
+    },
+    "greenhouse_ventilation_fraction": {
+     "window_mean": -0.0081,
+     "window_max_abs": 0.1663,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.0081
+    },
+    "greenhouse_heating_kw": {
+     "window_mean": 1.0926,
+     "window_max_abs": 12.5959,
+     "after_max_abs": 1.5914,
+     "baseline_window_mean": 11.1576
+    }
+   },
+   "WIND x3": {
+    "maturity_index": {
+     "window_mean": -0.0001,
+     "window_max_abs": 0.0002,
+     "after_max_abs": 0.0002,
+     "baseline_window_mean": 0.0658
+    },
+    "biomass_total_g_m2": {
+     "window_mean": -0.0536,
+     "window_max_abs": 0.116,
+     "after_max_abs": 0.1719,
+     "baseline_window_mean": 16.4122
+    },
+    "leaf_area_index": {
+     "window_mean": -0.0006,
+     "window_max_abs": 0.0014,
+     "after_max_abs": 0.0021,
+     "baseline_window_mean": 0.1769
+    },
+    "drainage_mm": {
+     "window_mean": 0.0002,
+     "window_max_abs": 0.0132,
+     "after_max_abs": 0.0002,
+     "baseline_window_mean": 0.3434
+    },
+    "transpiration_mm": {
+     "window_mean": -0.0,
+     "window_max_abs": 0.0017,
+     "after_max_abs": 0.0003,
+     "baseline_window_mean": 0.0047
+    },
+    "evaporation_mm": {
+     "window_mean": -0.0002,
+     "window_max_abs": 0.0115,
+     "after_max_abs": 0.0001,
+     "baseline_window_mean": 0.0319
+    },
+    "et0_mm": {
+     "window_mean": -0.0007,
+     "window_max_abs": 0.0407,
+     "after_max_abs": 0.0001,
+     "baseline_window_mean": 0.113
+    },
+    "temperature_c": {
+     "window_mean": -0.0777,
+     "window_max_abs": 3.6015,
+     "after_max_abs": 0.0083,
+     "baseline_window_mean": 15.6189
+    },
+    "relative_humidity_pct": {
+     "window_mean": -0.679,
+     "window_max_abs": 19.0217,
+     "after_max_abs": 0.0483,
+     "baseline_window_mean": 57.1992
+    },
+    "vpd_kpa": {
+     "window_mean": 0.0104,
+     "window_max_abs": 0.8214,
+     "after_max_abs": 0.0011,
+     "baseline_window_mean": 0.8033
+    },
+    "vpd_stress": {
+     "window_mean": 0.0138,
+     "window_max_abs": 0.8,
+     "after_max_abs": 0.0018,
+     "baseline_window_mean": 0.1085
+    },
+    "accumulated_stress": {
+     "window_mean": 0.0002,
+     "window_max_abs": 0.0004,
+     "after_max_abs": 0.0004,
+     "baseline_window_mean": 0.9965
+    },
+    "growth_factor": {
+     "window_mean": -0.0137,
+     "window_max_abs": 0.7941,
+     "after_max_abs": 0.0018,
+     "baseline_window_mean": 0.885
+    },
+    "greenhouse_ventilation_fraction": {
+     "window_mean": -0.003,
+     "window_max_abs": 0.1436,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.0081
+    },
+    "greenhouse_heating_kw": {
+     "window_mean": 0.2239,
+     "window_max_abs": 3.6323,
+     "after_max_abs": 0.8327,
+     "baseline_window_mean": 11.1576
+    }
+   },
+   "IRRIGATION 2 mm": {},
+   "VENTILATION 1.0": {
+    "maturity_index": {
+     "window_mean": -0.0038,
+     "window_max_abs": 0.0075,
+     "after_max_abs": 0.0077,
+     "baseline_window_mean": 0.0658
+    },
+    "biomass_total_g_m2": {
+     "window_mean": 0.5014,
+     "window_max_abs": 1.1331,
+     "after_max_abs": 1.7033,
+     "baseline_window_mean": 16.4122
+    },
+    "leaf_area_index": {
+     "window_mean": 0.006,
+     "window_max_abs": 0.0136,
+     "after_max_abs": 0.0204,
+     "baseline_window_mean": 0.1769
+    },
+    "drainage_mm": {
+     "window_mean": 0.0059,
+     "window_max_abs": 0.0383,
+     "after_max_abs": 0.0015,
+     "baseline_window_mean": 0.3434
+    },
+    "transpiration_mm": {
+     "window_mean": -0.0006,
+     "window_max_abs": 0.0044,
+     "after_max_abs": 0.0026,
+     "baseline_window_mean": 0.0047
+    },
+    "evaporation_mm": {
+     "window_mean": -0.0053,
+     "window_max_abs": 0.034,
+     "after_max_abs": 0.0011,
+     "baseline_window_mean": 0.0319
+    },
+    "et0_mm": {
+     "window_mean": -0.0185,
+     "window_max_abs": 0.1195,
+     "after_max_abs": 0.0002,
+     "baseline_window_mean": 0.113
+    },
+    "temperature_c": {
+     "window_mean": -4.0523,
+     "window_max_abs": 9.8211,
+     "after_max_abs": 3.2898,
+     "baseline_window_mean": 15.6189
+    },
+    "relative_humidity_pct": {
+     "window_mean": 8.8091,
+     "window_max_abs": 42.3125,
+     "after_max_abs": 13.4279,
+     "baseline_window_mean": 57.1992
+    },
+    "vpd_kpa": {
+     "window_mean": -0.3786,
+     "window_max_abs": 1.6066,
+     "after_max_abs": 0.1619,
+     "baseline_window_mean": 0.8033
+    },
+    "cold_stress": {
+     "window_mean": 0.1255,
+     "window_max_abs": 0.4482,
+     "after_max_abs": 0.2193,
+     "baseline_window_mean": 0.0
+    },
+    "vpd_stress": {
+     "window_mean": -0.1085,
+     "window_max_abs": 0.8,
+     "after_max_abs": 0.0116,
+     "baseline_window_mean": 0.1085
+    },
+    "accumulated_stress": {
+     "window_mean": 0.0018,
+     "window_max_abs": 0.0083,
+     "after_max_abs": 0.0051,
+     "baseline_window_mean": 0.9965
+    },
+    "growth_factor": {
+     "window_mean": -0.0169,
+     "window_max_abs": 0.7947,
+     "after_max_abs": 0.2175,
+     "baseline_window_mean": 0.885
+    },
+    "greenhouse_ventilation_fraction": {
+     "window_mean": 0.9768,
+     "window_max_abs": 1.0,
+     "after_max_abs": 1.0,
+     "baseline_window_mean": 0.0081
+    },
+    "greenhouse_heating_kw": {
+     "window_mean": 32.9412,
+     "window_max_abs": 86.416,
+     "after_max_abs": 70.4958,
+     "baseline_window_mean": 11.1576
+    },
+    "greenhouse_cooling_kw": {
+     "window_mean": 0.0011,
+     "window_max_abs": 0.016,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.0
+    }
+   },
+   "SHADING 0.6": {
+    "maturity_index": {
+     "window_mean": -0.0024,
+     "window_max_abs": 0.005,
+     "after_max_abs": 0.005,
+     "baseline_window_mean": 0.0658
+    },
+    "biomass_total_g_m2": {
+     "window_mean": -0.3543,
+     "window_max_abs": 0.6296,
+     "after_max_abs": 0.9362,
+     "baseline_window_mean": 16.4122
+    },
+    "leaf_area_index": {
+     "window_mean": -0.0043,
+     "window_max_abs": 0.0076,
+     "after_max_abs": 0.0112,
+     "baseline_window_mean": 0.1769
+    },
+    "drainage_mm": {
+     "window_mean": 0.0244,
+     "window_max_abs": 0.1126,
+     "after_max_abs": 0.0008,
+     "baseline_window_mean": 0.3434
+    },
+    "transpiration_mm": {
+     "window_mean": -0.0031,
+     "window_max_abs": 0.0151,
+     "after_max_abs": 0.0015,
+     "baseline_window_mean": 0.0047
+    },
+    "evaporation_mm": {
+     "window_mean": -0.0212,
+     "window_max_abs": 0.0975,
+     "after_max_abs": 0.0006,
+     "baseline_window_mean": 0.0319
+    },
+    "et0_mm": {
+     "window_mean": -0.0752,
+     "window_max_abs": 0.3465,
+     "after_max_abs": 0.0003,
+     "baseline_window_mean": 0.113
+    },
+    "temperature_c": {
+     "window_mean": -2.0089,
+     "window_max_abs": 8.4549,
+     "after_max_abs": 0.0273,
+     "baseline_window_mean": 15.6189
+    },
+    "relative_humidity_pct": {
+     "window_mean": 4.6593,
+     "window_max_abs": 19.3041,
+     "after_max_abs": 0.0634,
+     "baseline_window_mean": 57.1992
+    },
+    "vpd_kpa": {
+     "window_mean": -0.2127,
+     "window_max_abs": 1.1905,
+     "after_max_abs": 0.0036,
+     "baseline_window_mean": 0.8033
+    },
+    "radiation_w_m2": {
+     "window_mean": -70.3623,
+     "window_max_abs": 284.3095,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 114.0697
+    },
+    "vpd_stress": {
+     "window_mean": -0.1085,
+     "window_max_abs": 0.8,
+     "after_max_abs": 0.0061,
+     "baseline_window_mean": 0.1085
+    },
+    "accumulated_stress": {
+     "window_mean": -0.0159,
+     "window_max_abs": 0.0304,
+     "after_max_abs": 0.0307,
+     "baseline_window_mean": 0.9965
+    },
+    "growth_factor": {
+     "window_mean": 0.1083,
+     "window_max_abs": 0.7949,
+     "after_max_abs": 0.0073,
+     "baseline_window_mean": 0.885
+    },
+    "greenhouse_ventilation_fraction": {
+     "window_mean": -0.0081,
+     "window_max_abs": 0.1663,
+     "after_max_abs": 0.0,
+     "baseline_window_mean": 0.0081
+    },
+    "greenhouse_shading_fraction": {
+     "window_mean": 0.5917,
+     "window_max_abs": 0.6,
+     "after_max_abs": 0.6,
+     "baseline_window_mean": 0.0
+    },
+    "greenhouse_heating_kw": {
+     "window_mean": 1.4901,
+     "window_max_abs": 14.6385,
+     "after_max_abs": 1.9025,
+     "baseline_window_mean": 11.1576
+    }
+   },
+   "CO2 0.8": {
+    "rejected": "event CO2 is not supported by the ENERGYPLUS backend: the EnergyPlus backend does not model CO2"
+   }
+  }
+ },
+ "event_timing": {
+  "event_hours": 72,
+  "samples_affected": 73,
+  "first": "2026-02-27T00:00:00+00:00",
+  "last": "2026-03-02T00:00:00+00:00"
+ },
+ "heat_wave_humidity": {
+  "vpd_baseline_kpa": 0.332,
+  "vpd_model_constant_relative_humidity_kpa": 0.56,
+  "vpd_if_vapour_pressure_were_kept_kpa": 1.204,
+  "vapour_pressure_growth_under_constant_rh": 1.68
+ },
+ "greenhouse_baselines": {
+  "simplified": {
+   "indoor_minus_outdoor_mean_k": 0.1,
+   "midday_k": -0.02,
+   "night_k": 0.22,
+   "indoor_min_c": 3.1,
+   "indoor_max_c": 20.1,
+   "indoor_rh_mean_pct": 69.3,
+   "heating_mean_kw": 0.0,
+   "ventilation_fraction_mean": 0.95
+  },
+  "energyplus": {
+   "indoor_minus_outdoor_mean_k": 4.7,
+   "midday_k": 6.63,
+   "night_k": 5.52,
+   "indoor_min_c": 12.0,
+   "indoor_max_c": 23.9,
+   "indoor_rh_mean_pct": 58.9,
+   "heating_mean_kw": 9.19,
+   "ventilation_fraction_mean": 0.023
+  }
+ },
+ "scientific_status": "synthetic forcing; differences between two simulated scenarios, not validated against real data"
+}
