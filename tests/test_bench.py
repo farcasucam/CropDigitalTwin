@@ -104,7 +104,7 @@ def test_capabilities_expose_climate_control_with_thresholds_from_the_crop_catal
 
 def test_the_bench_offers_climate_control_without_assuming_any_equipment():
     assert "Climate control" in HTML and "(not sourced)" in HTML and "Passive first" in HTML
-    assert "Nothing is assumed" in HTML and "ILLUSTRATIVE_EQUIPMENT" in JS
+    assert "Nothing is assumed" in HTML and "illustrativeEquipment" in JS
     assert 'placeholder = "not defined"' in JS  # an empty equipment field stays undefined; the request only carries numbers the user typed
     assert 'bench.config.backend === "ENERGYPLUS"' in JS  # the controller cannot act on a precomputed EnergyPlus timeline
 

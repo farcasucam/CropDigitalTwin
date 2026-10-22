@@ -12,7 +12,7 @@ from functools import lru_cache
 import pytest
 
 from agri_twin.application.interactive_simulation import InteractiveSimulationService, SimulationApiError
-from agri_twin.application.scenarios import ScenarioEvent, actuator_controls
+from agri_twin.application.scenarios import ScenarioEvent
 from agri_twin.domain.crop_growth import CropGrowthEngine
 from agri_twin.domain.water_balance import IRRIGATION_EFFICIENCY
 from agri_twin.infrastructure.energyplus_timeline import find_energyplus
@@ -79,9 +79,12 @@ def test_a_cold_wave_lowers_the_temperature_and_raises_cold_stress_and_frost_dam
     assert max(delta("outdoor", "COLD_WAVE", 8, "cold_stress")) > 0.3 and max(delta("outdoor", "COLD_WAVE", 8, "frost_damage")) > 0.1
 
 
-def test_the_simplified_greenhouse_follows_a_temperature_event_with_its_outdoor_coupling():
-    assert statistics.mean(window(delta("gh", "HEAT_WAVE", 8, "temperature_c"))) == pytest.approx(8.0, abs=0.1)
+def test_the_simplified_greenhouse_answers_a_temperature_wave_like_a_greenhouse_with_a_thermostat():
+    # it is the same greenhouse as the EnergyPlus one: the default heater holds its minimum, so the interior follows the outdoor change only in part and the heating energy moves
     assert statistics.mean(window(delta("gh", "HEAT_WAVE", 8, "outdoor_temperature_c"))) == pytest.approx(8.0, abs=1e-9)
+    assert 1.0 < statistics.mean(window(delta("gh", "HEAT_WAVE", 8, "temperature_c"))) < 8.0
+    assert statistics.mean(window(delta("gh", "HEAT_WAVE", 8, "greenhouse_heating_kw"))) < -3.0
+    assert statistics.mean(window(delta("gh", "COLD_WAVE", 8, "greenhouse_heating_kw"))) > 3.0
 
 
 @pytest.mark.parametrize("mode", ["outdoor", "gh"])
@@ -143,20 +146,49 @@ def test_energyplus_responds_physically_to_shading_and_to_open_vents_with_the_he
     assert statistics.mean(window([b - a for a, b in zip(base["greenhouse_heating_kw"], vents["greenhouse_heating_kw"])])) > 5.0
 
 
-# ---- audited defects, stated as what a correct model would do (strict xfail) -----------------------------------------------------------------
-@pytest.mark.xfail(strict=True, reason="audit finding 2: the simplified greenhouse has a 1 m2 exchange area, so it has no greenhouse effect at midday")
-def test_the_simplified_greenhouse_is_warmer_than_outside_at_midday():
+# ---- the simplified greenhouse is the same greenhouse as the EnergyPlus one (audit findings 2 and 3, fixed) -------------------------------------------------
+def test_the_simplified_greenhouse_is_warmer_than_outside_at_midday_like_a_greenhouse():
     tr = baseline("gh")
     hours = [int(stamp[11:13]) for stamp in tr["time"]]
-    assert statistics.mean(i - o for i, o, h in zip(tr["temperature_c"], tr["outdoor_temperature_c"], hours) if 10 <= h <= 16) > 1.0
+    midday = statistics.mean(i - o for i, o, h in zip(tr["temperature_c"], tr["outdoor_temperature_c"], hours) if 10 <= h <= 16)
+    assert 3.0 < midday < 10.0  # the historical 1 m2 model gave -0.02 K; EnergyPlus gives about +6.5 K in this window
+    assert min(tr["temperature_c"]) >= 11.9  # the default thermostat (12 degC) holds the minimum, as in EnergyPlus
 
 
-@pytest.mark.xfail(strict=True, reason="audit finding 3: a full ventilation command is +1 air change per hour in the simplified model (30 in EnergyPlus)")
-def test_a_full_ventilation_command_means_many_air_changes_per_hour():
-    controls = actuator_controls([ScenarioEvent("v", "ventilation", *_window(), 1.0, {"value": 1.0})])
-    assert controls["ventilation"].actual >= 10.0
+def test_in_the_simplified_greenhouse_radiation_shading_and_open_vents_move_the_interior_the_way_they_do_in_reality():
+    # (more radiation changes the winter MEAN very little here: the heater backs off and the vents open earlier; EnergyPlus +0.8 K, this model -0.1 K, see the audit)
+    assert statistics.mean(window(delta("gh", "LOW_RADIATION", 0.5, "temperature_c"))) < -0.3
+    assert statistics.mean(window(delta("gh", "HIGH_RADIATION", 1.5, "greenhouse_heating_kw"))) < 0.0
+    assert statistics.mean(window(delta("gh", "SHADING", 0.6, "temperature_c"))) < -0.5  # the historical model: -0.05 K
+    assert statistics.mean(window(delta("gh", "VENTILATION", 1.0, "temperature_c"))) < -1.0  # historical: -0.02 K
+    assert statistics.mean(window(delta("gh", "VENTILATION", 1.0, "greenhouse_heating_kw"))) > 5.0  # open vents in winter: the heater compensates
+    assert statistics.mean(window(with_event("gh", "VENTILATION", 1.0)["greenhouse_ventilation_fraction"])) > 0.9
 
 
+def test_a_full_ventilation_command_is_the_whole_vent_capacity_in_both_greenhouse_models():
+    from agri_twin.application.greenhouse_backend import parse_greenhouse_backend, simplified_configuration
+
+    configuration = simplified_configuration(parse_greenhouse_backend(None, "greenhouse"))[0]
+    assert configuration.vent_command_fraction and configuration.passive_vent_ach == 30.0  # the capacity EnergyPlus uses for the same command
+
+
+@needs_energyplus
+def test_the_two_greenhouse_models_agree_on_the_standard_window_within_stated_tolerances():
+    lumped, detailed = baseline("gh"), baseline("ep")
+    hours = [int(stamp[11:13]) for stamp in lumped["time"]]
+    rmse = statistics.mean((a - b) ** 2 for a, b in zip(lumped["temperature_c"], detailed["temperature_c"])) ** 0.5
+    midday = lambda tr: statistics.mean(i - o for i, o, h in zip(tr["temperature_c"], tr["outdoor_temperature_c"], hours) if 10 <= h <= 16)
+    assert rmse < 3.0 and abs(midday(lumped) - midday(detailed)) < 2.5
+    assert abs(statistics.mean(lumped["radiation_w_m2"]) / statistics.mean(detailed["radiation_w_m2"]) - 1.0) < 0.08
+    assert abs(sum(lumped["greenhouse_heating_kw"]) / sum(detailed["greenhouse_heating_kw"]) - 1.0) < 0.35
+    change = lambda mode, kind, intensity: statistics.mean(window(delta(mode, kind, intensity, "temperature_c")))
+    for event_kind, intensity in (("SHADING", 0.6), ("VENTILATION", 1.0), ("LOW_RADIATION", 0.5)):
+        assert change("gh", event_kind, intensity) * change("ep", event_kind, intensity) > 0, event_kind  # both models move the interior the same way
+        assert abs(change("gh", event_kind, intensity) - change("ep", event_kind, intensity)) < 1.5, event_kind  # and by a similar amount
+    assert abs(change("gh", "HIGH_RADIATION", 1.5) - change("ep", "HIGH_RADIATION", 1.5)) < 1.5
+
+
+# ---- audited defects still open, stated as what a correct model would do (strict xfail) -------------------------------------------------------------
 @pytest.mark.xfail(strict=True, reason="audit finding 4: heat and cold waves keep the relative humidity, multiplying the vapour pressure by 1.68 for +8 K")
 def test_a_heat_wave_does_not_raise_the_vapour_pressure_of_the_outdoor_air():
     assert statistics.mean(window(delta("outdoor", "HEAT_WAVE", 8, "relative_humidity_pct"))) < -10.0  # keeping the dew point makes the air drier
@@ -176,10 +208,3 @@ def test_co2_enrichment_can_raise_the_growth_response():
 def test_an_event_acts_for_exactly_its_duration():
     affected = [d for d in delta("outdoor", "HEAT_WAVE", 8, "temperature_c") if abs(d) > 1e-9]
     assert len(affected) == HOURS
-
-
-def _window():
-    from datetime import datetime, timedelta, timezone
-
-    start = datetime(2026, 2, 27, tzinfo=timezone.utc)
-    return start, start + timedelta(hours=HOURS)

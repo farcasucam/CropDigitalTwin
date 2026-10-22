@@ -8,6 +8,7 @@ commands. Nothing here writes a physical state.
 from __future__ import annotations
 
 import json
+from datetime import timedelta
 from functools import lru_cache
 from pathlib import Path
 from typing import Any, Mapping
@@ -98,7 +99,7 @@ class ControlSession:
         self.controller = controller or RuleBasedClimateController(config)
 
     def plan(self, orchestrator: Any, provider: Any, current: Any, dt_seconds: float, manual: Mapping[str, ActuatorControl]) -> tuple[dict[str, ActuatorControl], IrrigationRequest | None, ControlRecord]:
-        observation = self.observe(orchestrator, provider, current)
+        observation = self.observe(orchestrator, provider, current, dt_seconds)
         decision = self.controller.decide(observation)
         equipment = self.config.equipment
         overridden = tuple(sorted(name for name in manual if name in MANUAL_TO_ACTUATORS))
@@ -108,8 +109,9 @@ class ControlSession:
         for name, requested in (("shade", record.shade_fraction), ("heating", record.heating_kw), ("cooling", record.cooling_kw)):
             if name not in actuators and (requested > 0 or self.config.mode(name) is not ActuatorMode.OFF):
                 actuators[name] = _control(requested, 1.0)
-        if "ventilation" not in actuators:
-            actuators["ventilation"] = _control(record.vent_ach + record.extractor_ach, 1.0)
+        if "ventilation" not in actuators and any(self.config.mode(name) is not ActuatorMode.OFF for name in ("vents", "extractors")):
+            # physical air changes per hour; naming it apart from the "ventilation" fraction of manual events also tells the engine its default venting stands down
+            actuators["ventilation_ach"] = _control(record.vent_ach + record.extractor_ach, 1.0)
         irrigation = None
         if decision.irrigation_target_vwc is not None:
             irrigation = IrrigationRequest("vwc_target", target_vwc=decision.irrigation_target_vwc, maximum_mm=equipment.irrigation_max_mm_step)
@@ -117,14 +119,18 @@ class ControlSession:
             irrigation = IrrigationRequest("scheduled", amount_mm=decision.irrigation_mm, irrigation_type="drip")
         return actuators, irrigation, record
 
-    def observe(self, orchestrator: Any, provider: Any, current: Any) -> ControlObservation:
+    def observe(self, orchestrator: Any, provider: Any, current: Any, dt_seconds: float = 3600.0) -> ControlObservation:
         outdoor = provider.get(current)
         indoor = orchestrator.microclimate
         transmission, conductance, per_ach = 1.0, None, 0.0
-        try:  # an engine without a profile: the screen rule sees the outdoor radiation and the HVAC rules fall back to a ramp
-            profile = orchestrator.greenhouse.profile_for(orchestrator.greenhouse_mode)
-            per_ach = AIR_DENSITY_KG_M3 * AIR_SPECIFIC_HEAT_J_KG_K * profile.volume_m3 / 3600.0
-            transmission, conductance = profile.solar_transmission, profile.heat_loss_w_k + per_ach * profile.ventilation_ach
+        try:  # an engine without thermal numbers: the screen rule sees the outdoor radiation and the HVAC rules fall back to a ramp
+            engine = orchestrator.greenhouse
+            source = getattr(engine, "configuration", None)  # the lumped engine of a layout carries its own configuration; the historical engine, its mode profile
+            source = source if source is not None else engine.profile_for(orchestrator.greenhouse_mode)
+            per_ach = AIR_DENSITY_KG_M3 * AIR_SPECIFIC_HEAT_J_KG_K * source.volume_m3 / 3600.0
+            ground = getattr(source, "ground_conductance_w_k", 0.0)
+            base_ach = source.ventilation_ach
+            transmission, conductance = source.solar_transmission, source.heat_loss_w_k + ground + per_ach * base_ach
         except Exception:
             pass
         stage = orchestrator.crop.current_stage
@@ -135,7 +141,20 @@ class ControlSession:
             indoor.vpd_kpa if indoor is not None else 0.0,
             outdoor.temperature_c, outdoor.solar_radiation_w_m2, outdoor.solar_radiation_w_m2 * transmission,
             orchestrator.soil.vwc_m3_m3, conductance, per_ach,
-            (indoor.heating_kw - indoor.cooling_kw) if indoor is not None else 0.0)
+            (indoor.heating_kw - indoor.cooling_kw) if indoor is not None else 0.0, self._prediction(orchestrator, provider, current, dt_seconds, indoor))
+
+    @staticmethod
+    def _prediction(orchestrator: Any, provider: Any, current: Any, dt_seconds: float, indoor: Any):
+        """A function (extra air changes, net HVAC kW, shade) -> air temperature at the end of the step, from the greenhouse model with the forcing of the coming step
+        (events included, as a perfect one-step-ahead forecast); None when the engine cannot predict."""
+        predict = getattr(orchestrator.greenhouse, "predict_air_temperature", None)
+        if predict is None:
+            return None
+        try:
+            weather = provider.get(current + timedelta(seconds=dt_seconds))
+        except Exception:
+            return None
+        return lambda extra, kw, shade: float(predict(weather, indoor, dt_seconds, orchestrator.greenhouse_mode, extra, kw, shade))
 
 
 def _control(requested: float, floor: float) -> ActuatorControl:

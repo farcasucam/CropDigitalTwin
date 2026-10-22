@@ -142,9 +142,9 @@
     const request = { crop: bench.config.crop, environment: bench.config.environment, scenario: bench.config.scenario, end_time: iso(endMs()),
       options: { include_trajectory: true, compute_trajectory_hash: false } };
     if (localMode()) request.weather = { source: "LOCAL_ARCHIVE", campaign_start: iso(startMs()) };
-    if (bench.config.environment === "greenhouse" && bench.config.backend === "ENERGYPLUS") {
+    if (bench.config.environment === "greenhouse") {
       const c = bench.config.layout;
-      request.greenhouse = { backend: "ENERGYPLUS", layout: { typology: c.typology, span_m: c.span, ridge_rise_m: c.rise, gutter_height_m: c.gutter, pillar_spacing_m: c.pillar, n_spans: c.spans, n_bays: c.bays } };
+      request.greenhouse = { backend: bench.config.backend, layout: { typology: c.typology, span_m: c.span, ridge_rise_m: c.rise, gutter_height_m: c.gutter, pillar_spacing_m: c.pillar, n_spans: c.spans, n_bays: c.bays } };
     }
     const control = controlDocument();
     if (control) request.control = control;
@@ -319,7 +319,7 @@
     const flags = [];
     if (!entry.listed.rise) flags.push("ridge rise");
     if (!entry.listed.gutter) flags.push("gutter height");
-    const effect = bench.config.backend === "ENERGYPLUS" ? "The layout is simulated by EnergyPlus." : "With the simplified model the layout is only drawn; it does not change results.";
+    const effect = bench.config.backend === "ENERGYPLUS" ? "The layout is simulated by EnergyPlus." : "The simplified model takes its floor area, volume and cover from this layout, like EnergyPlus.";
     $("#layout-note").textContent = `${(layout.span * layout.spans).toFixed(1)} × ${(layout.bays * layout.pillar).toFixed(1)} m. ${effect}${flags.length ? ` Provisional (not published): ${flags.join(", ")}.` : ""} Schematic, not a manufacturer drawing.`;
   }
 
@@ -578,7 +578,12 @@
     shade: ["optimal_max_w_m2", "photoinhibition_w_m2", "shading_reduction_pct"], vents: ["max_temp_c", "critical_heat_c"], extractors: ["max_temp_c", "critical_heat_c"],
     cooling: ["max_temp_c", "critical_heat_c"], heating: ["min_temp_c"], irrigation: ["vwc_optimal_min", "target_vwc_after_irrigation"],
   };
-  const ILLUSTRATIVE_EQUIPMENT = { vent_max_ach: 30, extractor_max_ach: 20, extractor_power_kw: 1.5, cooling_capacity_kw: 15, cooling_cop: 3, heating_capacity_kw: 15, heating_efficiency: 0.9, irrigation_max_mm_step: 3 };
+  // Illustrative only (not sourced) and sized to the chosen greenhouse: air-change rates as in the greenhouse models, powers per square metre of floor.
+  const illustrativeEquipment = () => {
+    const c = bench.config.layout, area = c ? c.span * c.spans * c.bays * c.pillar : 800;
+    const round = (value) => Math.round(value * 10) / 10;
+    return { vent_max_ach: 30, extractor_max_ach: 20, extractor_power_kw: round(0.03 * area), cooling_capacity_kw: round(0.45 * area), cooling_cop: 3, heating_capacity_kw: round(0.15 * area), heating_efficiency: 0.9, irrigation_max_mm_step: 3 };
+  };
   const controlInfo = () => (bench.caps ? bench.caps.climate_control : undefined);  // absent when the page runs against a server started before climate control existed
   function controlAllowed(actuator) {
     if (bench.config.backend === "ENERGYPLUS") return false;
@@ -682,7 +687,7 @@
       bench.config.control.schedules.push({ actuator: scheduled.id, from_day: "06-15", to_day: "09-15", start_hour: 11, end_hour: 17, value: scheduled.id === "irrigation" ? 1 : 0.6 });
       renderControl(); changed();
     });
-    $("#load-illustrative").addEventListener("click", () => { bench.config.control.equipment = { ...ILLUSTRATIVE_EQUIPMENT }; renderControl(); changed(); });
+    $("#load-illustrative").addEventListener("click", () => { bench.config.control.equipment = illustrativeEquipment(); renderControl(); changed(); });
     $("#clear-equipment").addEventListener("click", () => { bench.config.control.equipment = {}; renderControl(); changed(); });
     renderControl();
   }
@@ -929,7 +934,7 @@
     row("Outdoor T", state.outdoor.temp_c, "°C");
     if (state.indoor) {
       row("Indoor T", state.indoor.temp_c, "°C"); row("Indoor RH", state.indoor.rh_pct, "%"); row("VPD", state.indoor.vpd_kpa, "kPa");
-      row("CO2", state.indoor.co2_ppm, "ppm"); row("Air exchanged", state.actuators.vent_opening === null ? null : state.actuators.vent_opening * 100, "%");
+      row("CO2", state.indoor.co2_ppm, "ppm"); row("Vent opening", state.actuators.vent_opening === null ? null : state.actuators.vent_opening * 100, "%");
       row("Shade", state.actuators.screen_deployed === null ? null : state.actuators.screen_deployed * 100, "%"); row("Heating", state.actuators.heating_kw, "kW");
     } else { row("Humidity", state.outdoor.rh_pct, "%"); row("Radiation", state.outdoor.radiation_w_m2, "W/m²"); row("Rain", state.outdoor.rain_mm_h, "mm/h"); }
     const series = bench.run ? bench.run.series[name] : {}, at = Math.floor(bench.position);

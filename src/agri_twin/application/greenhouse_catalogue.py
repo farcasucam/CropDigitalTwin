@@ -2,7 +2,7 @@
 
 Single source of truth for geometry: the browser receives manufacturer modularity options and ready-made roof
 cross-sections computed by `greenhouse_typology` and never re-implements the geometry equations. The layout is a
-presentation choice: the simplified greenhouse model has no geometry input, so it does not change simulation results.
+geometry the lumped and the EnergyPlus greenhouse models both read (phase 5.44).
 """
 
 from __future__ import annotations

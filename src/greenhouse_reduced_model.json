@@ -1,0 +1,10 @@
+{
+  "contract": "greenhouse_reduced_model",
+  "version": "1.0",
+  "evidence_status": "CONSISTENCY_WITH_ENERGYPLUS_NOT_VALIDATED",
+  "note": "Parameters of the lumped greenhouse model that EnergyPlus determines by detailed geometry and that a lumped model needs as numbers. Everything else (floor area, volume, cover area, cover U-value, glazing fraction and SHGC, infiltration, vent capacity and opening temperature, heater setpoint and capacity, ground temperature) is read from the SAME typology geometry and envelope/thermal specification the EnergyPlus model is built from, so the two models describe one greenhouse. These constants were identified against EnergyPlus 26.1 on the default MULTITUNEL_CAPILLA layout (docs/auditoria_modelos_prediccion.md, tests/test_greenhouse_consistency.py) and are provisional like the envelope values themselves: they make the models consistent with each other, not with a real greenhouse.",
+  "floor_film_coefficient_w_m2k": 4.0,
+  "incidence_factor": 0.71,
+  "solar_to_air_fraction": 0.1,
+  "floor_mass_participation": 1.0
+}

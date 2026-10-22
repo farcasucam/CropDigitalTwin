@@ -40,7 +40,7 @@ identical to before.
 
 * **Stateless**: a decision depends only on the observation at the start of the step (`ControlObservation`). A what-if branch resumed from a checkpoint
   behaves exactly like the continuous run, and the control configuration is part of the resume identity.
-* **Stable at one step per hour**: HVAC power compensates the disturbance (it estimates the temperature the greenhouse would settle at without HVAC from
+* **Predictive since phase 5.44** (the paragraph below describes the first, disturbance-compensating version, kept as the fallback): the controller asks the greenhouse model what each action would do over the coming step and takes only what is still needed, vents then extractors then HVAC, so it neither oscillates nor spends energy it does not need. **Stable at one step per hour (first version)**: HVAC power compensates the disturbance (it estimates the temperature the greenhouse would settle at without HVAC from
   the previous step's HVAC power and the conductance) instead of feeding the measured temperature back. A plain proportional loop alternated in sign and
   overshot (43.6 degC inside against 34.8 degC outside in a tomato season) with the oversized equipment of the first trials; `tests/test_climate_control.py`
   closes the loop on a lumped greenhouse and checks that it settles.
@@ -54,7 +54,7 @@ identical to before.
 * Simplified greenhouse backend only. EnergyPlus runs as a precomputed timeline and cannot react to a controller: the request is rejected with a reason.
 * The proportional HVAC leaves an offset from its target (it closes `hvac_gain` of the distance); a predictive controller can do better.
 * Humidity control (venting for VPD) and CO2 are not controlled; wind affects only the forcing weather.
-* The simplified greenhouse has a small thermal exchange area, so its solar gain is weak: results describe the software, not a real greenhouse.
+* The greenhouse the controller acts on is the lumped model of phase 5.44 (same layout as EnergyPlus, provisional values): results describe the software, not a real greenhouse.
 
 ## Interface (`/bench`)
 

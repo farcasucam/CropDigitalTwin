@@ -229,7 +229,7 @@ class InteractiveFrontendAdapter:
             reason = f"EnergyPlus {install.version} found; the generated model needs {REQUIRED_VERSION_PREFIX}.x"
         return [
             {"id": "SIMPLIFIED", "label": "Simplified model", "available": True, "version": None, "reason": None,
-             "note": "fast lumped model; layout is visual only"},
+             "note": "fast two-node lumped model of the chosen layout (same geometry and envelope as EnergyPlus); no crop feedback, no CO2 balance beyond the commanded supply"},
             {"id": "ENERGYPLUS", "label": "EnergyPlus", "available": usable, "version": install.version if install else None, "reason": reason,
              "note": "single-zone model of the chosen layout; no crop feedback, no CO2"},
         ]

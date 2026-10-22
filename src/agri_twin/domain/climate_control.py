@@ -20,7 +20,7 @@ from __future__ import annotations
 import math
 from dataclasses import dataclass, field
 from enum import StrEnum
-from typing import Any, Mapping, Protocol, Sequence
+from typing import Any, Callable, Mapping, Protocol, Sequence
 
 
 class ClimateControlError(ValueError):
@@ -144,24 +144,27 @@ class ControlDesign:
     vents_full_at: float = 0.3
     extractors_full_at: float = 0.6
     hvac_gain: float = 0.9
+    vents_start_margin_c: float = 0.0  # the hot band starts this many degrees BELOW the stage's max_temp_c: a real greenhouse opens before the crop's limit
 
     def __post_init__(self) -> None:
         if not 0.0 < self.vents_full_at <= self.extractors_full_at < 1.0:
             raise ClimateControlError("design fractions must satisfy 0 < vents_full_at <= extractors_full_at < 1")
         if not 0.0 < self.hvac_gain <= 1.0:
             raise ClimateControlError("hvac_gain must be in (0, 1]")
+        if not 0.0 <= self.vents_start_margin_c <= 15.0:
+            raise ClimateControlError("vents_start_margin_c must be within [0, 15] degC")
 
     @classmethod
     def from_mapping(cls, document: Mapping[str, Any] | None) -> "ControlDesign":
         document = dict(document or {})
-        known = {"vents_full_at", "extractors_full_at", "hvac_gain"}
+        known = {"vents_full_at", "extractors_full_at", "hvac_gain", "vents_start_margin_c"}
         unknown = sorted(set(document) - known - {"source", "note", "evidence_status", "meaning"})
         if unknown:
             raise ClimateControlError(f"unknown design fields: {', '.join(unknown)}")
         return cls(**{name: float(document[name]) for name in known if name in document})
 
     def to_dict(self) -> dict[str, Any]:
-        return {"vents_full_at": self.vents_full_at, "extractors_full_at": self.extractors_full_at, "hvac_gain": self.hvac_gain}
+        return {"vents_full_at": self.vents_full_at, "extractors_full_at": self.extractors_full_at, "hvac_gain": self.hvac_gain, "vents_start_margin_c": self.vents_start_margin_c}
 
 
 @dataclass(frozen=True, slots=True)
@@ -248,6 +251,7 @@ class ControlObservation:
     conductance_w_k: float | None = None            # cover heat loss plus the base air exchange (W K-1); None: HVAC falls back to a ramp over the crop's critical band
     air_conductance_per_ach_w_k: float = 0.0       # extra conductance per additional air change per hour (W K-1)
     previous_hvac_net_kw: float = 0.0              # heating minus cooling thermal power applied in the previous step (kW)
+    predict: Callable[[float, float, float], float] | None = field(default=None, compare=False, repr=False)  # (extra air changes/h, net HVAC kW (+heating), shade fraction) -> air temperature at the END of this step, from the greenhouse model itself
     forecast: tuple[tuple[float, float], ...] = ()  # (outdoor temperature degC, outdoor radiation W m-2) for the next hours; unused by the rules, there for predictive controllers
 
 
@@ -354,43 +358,7 @@ class RuleBasedClimateController:
                 source[name] = "SCHEDULE"
 
         usable = {name for name in auto if eq.available(name)}
-        # ---- cooling tiers: passive first, then extractors, then HVAC cooling
-        hot = self._demand(observation.indoor_temp_c, sp.max_temp_c, sp.critical_heat_c)
-        cooling_names = [name for name in ("vents", "extractors", "cooling") if name in auto]
-        if cooling_names and hot is None:
-            for name in cooling_names:
-                if name in usable:
-                    source[name] = "NO_THRESHOLD"
-            reasons.append("cooling rules need max_temp_c and critical_heat_c for the stage; the catalogue does not define them")
-        elif cooling_names:
-            outdoor_helps = observation.outdoor_temp_c < observation.indoor_temp_c  # vents and extractors only cool with cooler outside air
-            previous = 0.0
-            for name, end in (("vents", cfg.design.vents_full_at), ("extractors", cfg.design.extractors_full_at)):
-                if name in usable and outdoor_helps:
-                    levels[name] = _clamp((hot - previous) / (end - previous))
-                    previous = end
-            if "cooling" in usable:
-                air_changes = levels["vents"] * (eq.vent_max_ach or 0.0) + levels["extractors"] * (eq.extractor_max_ach or 0.0)
-                target = sp.max_temp_c + previous * (sp.critical_heat_c - sp.max_temp_c)
-                levels["cooling"] = self._hvac_level(observation, air_changes, target, False, eq.cooling_capacity_kw, cfg.design.hvac_gain, fallback=_clamp((hot - previous) / (1.0 - previous)))
-            for name in cooling_names:
-                source[name] = "RULES" if name in usable else source.get(name, "UNAVAILABLE")
-            if hot > 0 and not outdoor_helps and ("vents" in usable or "extractors" in usable):
-                reasons.append("outside air is not cooler than the greenhouse: ventilation held back")
-        # ---- heating
-        if "heating" in auto and "heating" in usable:
-            if sp.min_temp_c is None:
-                source["heating"] = "NO_THRESHOLD"
-                reasons.append("the heating rule needs min_temp_c for the stage; the catalogue does not define it")
-            else:
-                fallback = self._demand(observation.indoor_temp_c, sp.min_temp_c, sp.critical_frost_c, below=True)
-                if fallback is None and observation.conductance_w_k is None:
-                    source["heating"] = "NO_THRESHOLD"
-                    reasons.append("without the greenhouse conductance the heating rule needs critical_frost_c for the stage")
-                else:
-                    levels["heating"] = self._hvac_level(observation, 0.0, sp.min_temp_c, True, eq.heating_capacity_kw, cfg.design.hvac_gain, fallback=fallback or 0.0)
-                    source["heating"] = "RULES"
-        # ---- screen: radiation above the crop's optimum, up to the stage's shading reduction
+        # ---- screen: radiation above the crop's optimum, up to the stage's shading reduction (decided first: the cooling search below knows about it)
         if "shade" in auto:
             if sp.optimal_max_w_m2 is None or sp.photoinhibition_w_m2 is None or sp.shading_reduction_pct is None or sp.photoinhibition_w_m2 <= sp.optimal_max_w_m2:
                 source["shade"] = "NO_THRESHOLD"
@@ -399,6 +367,43 @@ class RuleBasedClimateController:
                 level = _clamp((observation.crop_radiation_unshaded_w_m2 - sp.optimal_max_w_m2) / (sp.photoinhibition_w_m2 - sp.optimal_max_w_m2))
                 levels["shade"] = level * _clamp(sp.shading_reduction_pct / 100.0)
                 source["shade"] = "RULES"
+        shade = levels["shade"] if cfg.mode("shade") is not ActuatorMode.SCHEDULE else scheduled.get("shade", 0.0)
+        # ---- cooling: passive first (vents), then extractors, then HVAC cooling
+        hot_start = None if sp.max_temp_c is None else sp.max_temp_c - cfg.design.vents_start_margin_c
+        cooling_names = [name for name in ("vents", "extractors", "cooling") if name in auto]
+        if cooling_names and (hot_start is None or sp.critical_heat_c is None):
+            for name in cooling_names:
+                if name in usable:
+                    source[name] = "NO_THRESHOLD"
+            reasons.append("cooling rules need max_temp_c and critical_heat_c for the stage; the catalogue does not define them")
+        elif cooling_names:
+            outdoor_helps = observation.outdoor_temp_c < observation.indoor_temp_c  # vents and extractors only cool with cooler outside air
+            if observation.predict is not None:
+                self._cool_by_prediction(observation, hot_start, shade, usable, outdoor_helps, levels, reasons)
+            else:
+                self._cool_by_ramp(observation, hot_start, usable, outdoor_helps, levels, reasons)
+            for name in cooling_names:
+                source[name] = "RULES" if name in usable else source.get(name, "UNAVAILABLE")
+        # ---- heating
+        if "heating" in auto and "heating" in usable:
+            if sp.min_temp_c is None:
+                source["heating"] = "NO_THRESHOLD"
+                reasons.append("the heating rule needs min_temp_c for the stage; the catalogue does not define it")
+            elif observation.predict is not None:
+                air = levels["vents"] * (eq.vent_max_ach or 0.0) + levels["extractors"] * (eq.extractor_max_ach or 0.0)
+                if observation.predict(air, 0.0, shade) < sp.min_temp_c:
+                    # the smallest heating power that brings the end of the step up to the minimum (the model is monotone in the power)
+                    kw = self._solve(lambda power: observation.predict(air, power, shade), 0.0, eq.heating_capacity_kw or 0.0, sp.min_temp_c, rising=True)
+                    levels["heating"] = _clamp(kw / eq.heating_capacity_kw)
+                source["heating"] = "RULES"
+            else:
+                fallback = self._demand(observation.indoor_temp_c, sp.min_temp_c, sp.critical_frost_c, below=True)
+                if fallback is None and observation.conductance_w_k is None:
+                    source["heating"] = "NO_THRESHOLD"
+                    reasons.append("without the greenhouse conductance the heating rule needs critical_frost_c for the stage")
+                else:
+                    levels["heating"] = self._hvac_level(observation, 0.0, sp.min_temp_c, True, eq.heating_capacity_kw, cfg.design.hvac_gain, fallback=fallback or 0.0)
+                    source["heating"] = "RULES"
         # ---- irrigation: below the optimal soil water, refill to the stage's target
         target = None
         if "irrigation" in auto:
@@ -412,6 +417,59 @@ class RuleBasedClimateController:
         scheduled_irrigation = levels["irrigation"] if cfg.mode("irrigation") is ActuatorMode.SCHEDULE else 0.0
         return ControlDecision(shade=levels["shade"], vents=levels["vents"], extractors=levels["extractors"], cooling=levels["cooling"], heating=levels["heating"],
                                irrigation_mm=scheduled_irrigation, irrigation_target_vwc=target, source=source, reasons=tuple(reasons))
+
+    @staticmethod
+    def _solve(function: Callable[[float], float], low: float, high: float, target: float, *, rising: bool = False) -> float:
+        """The smallest x in [low, high] whose value reaches ``target`` (``rising``: the function grows with x; else it falls). ``high`` if it never does. 14 halvings."""
+        reached = (lambda value: value >= target) if rising else (lambda value: value <= target)
+        if not reached(function(high)):
+            return high
+        for _ in range(14):
+            middle = (low + high) / 2.0
+            if reached(function(middle)):
+                high = middle
+            else:
+                low = middle
+        return high
+
+    def _cool_by_prediction(self, observation: ControlObservation, ceiling: float, shade: float, usable: set[str], outdoor_helps: bool, levels: dict[str, float], reasons: list[str]) -> None:
+        """Each tier takes only what the greenhouse model says is still needed to keep the END of the step at the ceiling: vents, then extractors, then HVAC cooling."""
+        eq, predict = self.config.equipment, observation.predict
+        assert predict is not None
+        if predict(0.0, 0.0, shade) <= ceiling:
+            return
+        air = 0.0
+        if not outdoor_helps and ("vents" in usable or "extractors" in usable):
+            reasons.append("outside air is not cooler than the greenhouse: ventilation held back")
+        for name, capacity in (("vents", eq.vent_max_ach), ("extractors", eq.extractor_max_ach)):
+            if name in usable and outdoor_helps and capacity:
+                start = air
+                added = self._solve(lambda extra: predict(start + extra, 0.0, shade), 0.0, capacity, ceiling)
+                levels[name] = _clamp(added / capacity)
+                air = start + added
+                if predict(air, 0.0, shade) <= ceiling:
+                    return
+        if "cooling" in usable and eq.cooling_capacity_kw:
+            kw = self._solve(lambda power: predict(air, -power, shade), 0.0, eq.cooling_capacity_kw, ceiling)
+            levels["cooling"] = _clamp(kw / eq.cooling_capacity_kw)
+
+    def _cool_by_ramp(self, observation: ControlObservation, hot_start: float, usable: set[str], outdoor_helps: bool, levels: dict[str, float], reasons: list[str]) -> None:
+        """Without a model of the greenhouse: ramps over the hot band, passive tiers first (the historical rule)."""
+        cfg, sp, eq = self.config, observation.setpoints, self.config.equipment
+        hot = self._demand(observation.indoor_temp_c, hot_start, sp.critical_heat_c)
+        if hot is None:
+            return
+        previous = 0.0
+        for name, end in (("vents", cfg.design.vents_full_at), ("extractors", cfg.design.extractors_full_at)):
+            if name in usable and outdoor_helps:
+                levels[name] = _clamp((hot - previous) / (end - previous))
+                previous = end
+        if "cooling" in usable:
+            air_changes = levels["vents"] * (eq.vent_max_ach or 0.0) + levels["extractors"] * (eq.extractor_max_ach or 0.0)
+            target = hot_start + previous * (sp.critical_heat_c - hot_start)
+            levels["cooling"] = self._hvac_level(observation, air_changes, target, False, eq.cooling_capacity_kw, cfg.design.hvac_gain, fallback=_clamp((hot - previous) / (1.0 - previous)))
+        if hot > 0 and not outdoor_helps and ("vents" in usable or "extractors" in usable):
+            reasons.append("outside air is not cooler than the greenhouse: ventilation held back")
 
     @staticmethod
     def _hvac_level(observation: ControlObservation, extra_air_changes: float, target_c: float, heating: bool, capacity_kw: float | None, gain: float, fallback: float) -> float:

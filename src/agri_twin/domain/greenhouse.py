@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import math
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Any, Mapping
 
 from agri_twin.domain.models import ActuatorState, CropGrowthState, DerivedEnvironmentState, WeatherState
@@ -55,6 +55,23 @@ def _first_order(initial: float, outdoor: float, source: float, rate: float, dt_
     return equilibrium + (initial - equilibrium) * math.exp(-rate * dt_seconds)
 
 
+def _two_node_step(t_air: float, t_floor: float, g_out: float, t_out: float, g_floor: float, g_ground: float, t_ground: float, c_air: float, c_floor: float,
+                   q_air: float, q_floor: float, dt_seconds: float) -> tuple[float, float]:
+    """Exact solution over dt of the air + floor network (heat capacities in J K-1, conductances in W K-1, heat inputs in W):
+    c_air dTa/dt = g_out (To - Ta) + g_floor (Tf - Ta) + q_air;  c_floor dTf/dt = g_floor (Ta - Tf) + g_ground (Tg - Tf) + q_floor."""
+    a, b = -(g_out + g_floor) / c_air, g_floor / c_air
+    c, d = g_floor / c_floor, -(g_floor + g_ground) / c_floor
+    b1, b2 = (g_out * t_out + q_air) / c_air, (g_ground * t_ground + q_floor) / c_floor
+    det = a * d - b * c
+    eq_air, eq_floor = -(d * b1 - b * b2) / det, -(-c * b1 + a * b2) / det
+    disc = math.sqrt(max((a - d) ** 2 + 4.0 * b * c, 0.0))  # > 0: the off-diagonal terms have the same sign
+    l1, l2 = (a + d + disc) / 2.0, (a + d - disc) / 2.0
+    e1, e2, denom = math.exp(l1 * dt_seconds), math.exp(l2 * dt_seconds), l1 - l2
+    dx, dy = t_air - eq_air, t_floor - eq_floor
+    return (eq_air + ((e1 * (a - l2) - e2 * (a - l1)) * dx + (e1 - e2) * b * dy) / denom,
+            eq_floor + ((e1 - e2) * c * dx + (e1 * (d - l2) - e2 * (d - l1)) * dy) / denom)
+
+
 @dataclass(frozen=True, slots=True)
 class GreenhouseConfiguration:
     """Explicit engineering configuration for a simplified greenhouse model."""
@@ -69,10 +86,34 @@ class GreenhouseConfiguration:
     co2_ppm_baseline: float = 420.0
     thermal_exchange_area_m2: float = 1.0
     mode: str = "passive_greenhouse"
+    # Optional extensions (all inert at their defaults, which leave the historical model bit-for-bit unchanged). They let one lumped model carry what a detailed
+    # one (EnergyPlus) has for the same greenhouse: heat exchange with the ground, passive venting and a thermostat.
+    ground_conductance_w_k: float = 0.0          # floor-to-ground conductance (W K-1)
+    ground_temperature_c: float = 15.0
+    passive_vent_ach: float = 0.0                # air changes per hour of the roof vents fully open (also the capacity the "ventilation" command is a fraction of)
+    passive_vent_open_above_c: float | None = None  # vents open on their own above this indoor temperature, while the outdoor air is cooler
+    thermostat_setpoint_c: float | None = None   # an ideal heater holds this minimum temperature, up to its capacity
+    heater_capacity_kw: float = 0.0
+    vent_command_fraction: bool = False          # True: the "ventilation" actuator is a fraction of passive_vent_ach (otherwise raw air changes per hour)
+    # Floor node (two-node model, active when floor_mass_kj_k > 0): thermal_mass_kj_k is then the AIR's capacity, the solar gain lands mostly on the floor, which exchanges
+    # heat with the air (floor_conductance_w_k) and with the ground (ground_conductance_w_k) and gives it back slowly.
+    floor_mass_kj_k: float = 0.0
+    floor_conductance_w_k: float = 0.0
+    solar_to_air_fraction: float = 1.0
 
     def __post_init__(self) -> None:
         if self.mode not in {"outdoor", "passive_greenhouse", "actuated_greenhouse"}:
             raise GreenhouseModelError("greenhouse mode is invalid")
+        if self.floor_mass_kj_k < 0 or self.floor_conductance_w_k < 0 or not 0.0 <= self.solar_to_air_fraction <= 1.0:
+            raise GreenhouseModelError("floor mass and conductance cannot be negative and the solar share to the air must be in [0, 1]")
+        if self.floor_mass_kj_k > 0 and self.floor_conductance_w_k <= 0:
+            raise GreenhouseModelError("a floor node needs a floor-to-air conductance")
+        if self.ground_conductance_w_k < 0 or self.passive_vent_ach < 0 or self.heater_capacity_kw < 0:
+            raise GreenhouseModelError("ground conductance, vent capacity and heater capacity cannot be negative")
+        if self.thermostat_setpoint_c is not None and self.heater_capacity_kw <= 0:
+            raise GreenhouseModelError("a thermostat needs a heater capacity")
+        if self.passive_vent_open_above_c is not None and self.passive_vent_ach <= 0:
+            raise GreenhouseModelError("passive venting needs a vent capacity")
         if not 0 < self.volume_m3 <= 100000 or self.thermal_mass_kj_k <= 0 or self.heat_loss_w_k < 0 or self.thermal_exchange_area_m2 <= 0:
             raise GreenhouseModelError("greenhouse configuration values are invalid")
         if not 0 < self.solar_transmission <= 1:
@@ -90,6 +131,8 @@ class GreenhouseActuatorState:
     shading_fraction: float = 0.0
     co2_supply_ppm: float = 0.0
     misting_mm_h: float = 0.0
+    default_vent_enabled: bool = True     # False when a controller drives the vents: the default passive venting then stands down
+    default_heating_enabled: bool = True  # False when a controller drives the heating: the default thermostat then stands down
 
     def __post_init__(self) -> None:
         for name in ("heating_kw", "cooling_kw", "ventilation_ach", "shading_fraction", "co2_supply_ppm", "misting_mm_h"):
@@ -178,6 +221,7 @@ class MicroclimateState:
     cooling_kw: float = 0.0
     shading_fraction: float = 0.0
     temperature_c: float = 0.0
+    floor_temperature_c: float | None = None
 
     def __init__(
         self,
@@ -197,6 +241,7 @@ class MicroclimateState:
         cooling_kw: float = 0.0,
         shading_fraction: float = 0.0,
         radiation_w_m2: float | None = None,
+        floor_temperature_c: float | None = None,
     ) -> None:
         air = temperature_c if air_temperature_c is None else air_temperature_c
         solar = vpd_or_radiation if solar_radiation_w_m2 is None else solar_radiation_w_m2
@@ -216,6 +261,9 @@ class MicroclimateState:
         object.__setattr__(self, "cooling_kw", cooling_kw)
         object.__setattr__(self, "shading_fraction", shading_fraction)
         object.__setattr__(self, "temperature_c", air)
+        object.__setattr__(self, "floor_temperature_c", floor_temperature_c)
+        if floor_temperature_c is not None and not math.isfinite(floor_temperature_c):
+            raise GreenhouseModelError("floor_temperature_c must be finite")
         self._validate()
 
     def _validate(self) -> None:
@@ -243,7 +291,7 @@ class MicroclimateState:
         object.__setattr__(self, "solar_radiation_w_m2", value)
 
     def to_dict(self) -> dict[str, float]:
-        return {
+        document = {
             "air_temperature_c": self.air_temperature_c,
             "relative_humidity_pct": self.relative_humidity_pct,
             "vpd_kpa": self.vpd_kpa,
@@ -258,6 +306,9 @@ class MicroclimateState:
             "shading_fraction": self.shading_fraction,
             "temperature_c": self.temperature_c,
         }
+        if self.floor_temperature_c is not None:
+            document["floor_temperature_c"] = self.floor_temperature_c
+        return document
 
 
 class GreenhouseMicroclimateState(MicroclimateState):
@@ -336,7 +387,12 @@ class SimplifiedGreenhouseModel(GreenhousePhysicalModel):
         cooling = 0.0
         co2 = 0.0
         misting = 0.0
+        vent_enabled = heat_enabled = True
         for name, value in actuators.items():
+            if name == "ventilation_ach":
+                vent_enabled = False
+            elif name in {"heating", "heat"}:
+                heat_enabled = False
             actual = value.actual if isinstance(value, ActuatorControl) else getattr(value, "actual_value", 0.0)
             if name in {"shade", "shading"}:
                 shading = float(actual)
@@ -357,6 +413,8 @@ class SimplifiedGreenhouseModel(GreenhousePhysicalModel):
             shading_fraction=shading,
             co2_supply_ppm=co2,
             misting_mm_h=misting,
+            default_vent_enabled=vent_enabled,
+            default_heating_enabled=heat_enabled,
         )
 
     def step(
@@ -410,18 +468,7 @@ class SimplifiedGreenhouseModel(GreenhousePhysicalModel):
 
         cfg = configuration or self._configuration
         if mode is not None:
-            cfg = GreenhouseConfiguration(
-                volume_m3=cfg.volume_m3,
-                solar_transmission=cfg.solar_transmission,
-                ventilation_ach=cfg.ventilation_ach,
-                heat_loss_w_k=cfg.heat_loss_w_k,
-                thermal_mass_kj_k=cfg.thermal_mass_kj_k,
-                orientation_deg=cfg.orientation_deg,
-                shading_fraction=cfg.shading_fraction,
-                co2_ppm_baseline=cfg.co2_ppm_baseline,
-                thermal_exchange_area_m2=cfg.thermal_exchange_area_m2,
-                mode=str(mode),
-            )
+            cfg = replace(cfg, mode=str(mode))
         if not isinstance(cfg, GreenhouseConfiguration):
             raise GreenhouseModelError("configuration must be GreenhouseConfiguration")
         controls = self._normalize_actuators(actuators if actuators is not None else legacy_actuators)
@@ -496,10 +543,49 @@ class SimplifiedGreenhouseModel(GreenhousePhysicalModel):
             + (crop_feedback.sensible_heat_w_m2 - crop_feedback.latent_heat_w_m2) * area
             - misting_evaporated_kg * LATENT_HEAT_VAPORIZATION_J_KG / dt_seconds
         )
-        # Conductance to outdoor air (W K-1): cover heat loss + ventilation enthalpy exchange.
-        conductance_w_k = config.heat_loss_w_k + AIR_DENSITY_KG_M3 * AIR_SPECIFIC_HEAT_J_KG_K * volume * exchange_rate_s
+        # Conductance to outdoor air (W K-1): cover heat loss + ventilation enthalpy exchange (+ the floor, when the configuration has one).
         heat_capacity_j_k = config.thermal_mass_kj_k * 1000.0
-        temperature = _first_order(previous_temperature, weather.temperature_c, heat_sources_w / heat_capacity_j_k, conductance_w_k / heat_capacity_j_k, dt_seconds)
+        ground_w_k = config.ground_conductance_w_k
+        two_node = config.floor_mass_kj_k > 0.0
+        solar_w = indoor_radiation * area
+        previous_floor = (getattr(prior, "floor_temperature_c", None) if prior is not None else None)
+        if previous_floor is None:
+            previous_floor = config.ground_temperature_c
+
+        def settle(ach: float, heater_w: float) -> tuple[float, float, float | None]:
+            """Exact end-of-step air temperature, the conductance of the air node and the floor temperature (None without a floor node)."""
+            air_w_k = AIR_DENSITY_KG_M3 * AIR_SPECIFIC_HEAT_J_KG_K * volume * (ach / 3600.0)
+            outdoor_w_k = config.heat_loss_w_k + air_w_k
+            if two_node:
+                other_w = heat_sources_w - solar_w  # actuators, crop and misting terms heat the air directly
+                air_end, floor_end = _two_node_step(previous_temperature, previous_floor, outdoor_w_k, weather.temperature_c, config.floor_conductance_w_k, ground_w_k,
+                                                    config.ground_temperature_c, heat_capacity_j_k, config.floor_mass_kj_k * 1000.0,
+                                                    other_w + heater_w + config.solar_to_air_fraction * solar_w, (1.0 - config.solar_to_air_fraction) * solar_w, dt_seconds)
+                return air_end, outdoor_w_k + config.floor_conductance_w_k, floor_end
+            total = outdoor_w_k + ground_w_k
+            sink = weather.temperature_c if ground_w_k == 0.0 else (outdoor_w_k * weather.temperature_c + ground_w_k * config.ground_temperature_c) / total
+            return _first_order(previous_temperature, sink, (heat_sources_w + heater_w) / heat_capacity_j_k, total / heat_capacity_j_k, dt_seconds), total, None
+
+        # Default operation of a greenhouse that has one (same rules as the EnergyPlus model): vents open by themselves when it is too warm inside and cooler outside,
+        # and an ideal heater holds the minimum temperature. Both stand down when a controller drives the same actuator.
+        heater_w = 0.0
+        base_ach = air_changes_h
+        if config.passive_vent_open_above_c is not None and actuators.default_vent_enabled:
+            free = settle(air_changes_h, 0.0)[0]
+            if free > config.passive_vent_open_above_c and weather.temperature_c < free:
+                air_changes_h += config.passive_vent_ach
+        if config.thermostat_setpoint_c is not None and actuators.default_heating_enabled:
+            free = settle(air_changes_h, 0.0)[0]
+            if free < config.thermostat_setpoint_c:
+                response_k_per_w = (settle(air_changes_h, 1000.0)[0] - free) / 1000.0  # air temperature gained per watt held for the whole step (the model is linear)
+                heater_w = min(config.heater_capacity_kw * 1000.0, (config.thermostat_setpoint_c - free) / response_k_per_w)
+        if air_changes_h != base_ach:
+            exchange_rate_s = air_changes_h / 3600.0
+            exchanged_fraction = 1.0 - math.exp(-exchange_rate_s * dt_seconds)
+        temperature, conductance_w_k, floor_temperature = settle(air_changes_h, heater_w)
+        # With a vent capacity the reported ventilation is the OPENING (0..1 of the vents), as in EnergyPlus; otherwise the historical exchanged fraction.
+        if config.passive_vent_ach > 0.0:
+            exchanged_fraction = min(1.0, max(0.0, (air_changes_h - max(0.0, config.ventilation_ach)) / config.passive_vent_ach))
 
         # Water vapour (kg m-3): transpiration + evaporated misting, exchanged with
         # outdoor air; vapour above saturation at the new temperature condenses.
@@ -524,10 +610,11 @@ class SimplifiedGreenhouseModel(GreenhousePhysicalModel):
             co2_ppm=max(0.0, co2),
             wind_speed_m_s=weather.wind_speed_m_s,
             ventilation_fraction=exchanged_fraction,
-            heating_kw=actuators.heating_kw,
+            heating_kw=actuators.heating_kw + heater_w / 1000.0,
             cooling_kw=actuators.cooling_kw,
             shading_fraction=shade,
             temperature_c=temperature,
+            floor_temperature_c=floor_temperature,
         )
 
     def reset(self) -> None:

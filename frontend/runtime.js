@@ -365,7 +365,7 @@ function describeLayer(visual, layer) {
   return `${layer}: ${formatValue(info.value)} ${info.unit || ""}`.trim();
 }
 
-/* Layout (visual schematic): geometry comes from /api/greenhouse/catalogue; the simplified greenhouse model has no geometry input. */
+/* Layout (visual schematic): geometry comes from /api/greenhouse/catalogue; the lumped greenhouse model derives its volume, floor and cover areas from the same layout. */
 function sceneDescription() {
   if (rt.environment !== "greenhouse") return { layout: null, key: "open-field" };
   const gh = rt.greenhouse;

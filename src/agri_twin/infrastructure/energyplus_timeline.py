@@ -45,6 +45,11 @@ CACHE_SIZE = 6
 OUTDOOR_CO2_PPM = 420.0
 
 
+def _without_round_off(watts: float) -> float:
+    """EnergyPlus' ideal-loads output carries floating-point residue (down to 1e-11 W) where nothing is running; below a microwatt it is zero."""
+    return watts if watts > 1e-6 else 0.0
+
+
 class EnergyPlusTimelineError(RuntimeError):
     """Raised when EnergyPlus is unavailable, incompatible or fails."""
 
@@ -230,7 +235,7 @@ def _read_results(database: Path, labels: Sequence[datetime], floor_area: float,
             raise EnergyPlusTimelineError(f"EnergyPlus produced no result for {label.isoformat()}") from None
         values[label] = TimelineValue(
             air_temperature_c=raw["air"], relative_humidity_pct=min(100.0, max(0.0, raw["rh"])), radiation_w_m2=max(0.0, raw["solar"]) / floor_area,
-            ventilation_fraction=min(1.0, max(0.0, raw["vent"] / max_ach)), heating_kw=max(0.0, raw["heat"]) / 1000.0, cooling_kw=max(0.0, raw["cool"]) / 1000.0)
+            ventilation_fraction=min(1.0, max(0.0, raw["vent"] / max_ach)), heating_kw=_without_round_off(raw["heat"]) / 1000.0, cooling_kw=_without_round_off(raw["cool"]) / 1000.0)
     return values
 
 

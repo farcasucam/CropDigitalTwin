@@ -43,16 +43,15 @@ calor, y cómo se comparan los climas interiores de los dos modelos. Lectura del
 
 **1. El riego manual nunca actuaba (CORREGIDO).** `ScenarioRunner._irrigation` devuelve el primer evento de riego activo, y el riego base de la temporada va antes que cualquier evento del usuario.
 Evidencia: con el evento "Riego 2 mm", `irrigation_mm`, humedad del suelo y estrés hídrico no cambian en ningún modo. *Corrección propuesta:* gana el último evento activo (el del usuario), coherente
-con la regla de que un evento manual anula al controlador. *Corregido:* `ScenarioRunner._irrigation` recorre los eventos en orden inverso; con el evento de 2 mm, `irrigation_mm` pasa de 0,38 a 1,90 mm por paso (2 mm × eficiencia 0,95) solo dentro de su ventana, en campo abierto y en invernadero. La matriz de arriba refleja el estado antes de la corrección.
+con la regla de que un evento manual anula al controlador. *Corregido:* `ScenarioRunner._irrigation` recorre los eventos en orden inverso; con el evento de 2 mm, `irrigation_mm` pasa de 0,38 a 1,90 mm por paso (2 mm × eficiencia 0,95) solo dentro de su ventana, en campo abierto y en invernadero. La matriz de arriba refleja el estado antes de las correcciones (riego, fase 5.44).
 
-**2. El invernadero simplificado no tiene efecto invernadero.** El área de intercambio térmico es 1 m² (`thermal_exchange_area_m2 = 1.0`) para un volumen de 1000 m³: la ganancia solar es proporcional a esa
+**2. El invernadero simplificado no tenía efecto invernadero (CORREGIDO en la fase 5.44).** El área de intercambio térmico es 1 m² (`thermal_exchange_area_m2 = 1.0`) para un volumen de 1000 m³: la ganancia solar es proporcional a esa
 área. Evidencia: al mediodía el interior está **−0,02 K** respecto al exterior (EnergyPlus: **+6,6 K**); radiación ×1,5 sube la T interior +0,04 K; sombrear al 60 % la baja 0,05 K. Consecuencia: en el modelo
 simplificado el cultivo ve prácticamente la temperatura exterior, y las intervenciones de radiación o sombreado no tienen efecto térmico. El solucionador es exacto (benchmarks de la fase 5.31), el defecto
-está en los parámetros: área, volumen, conductancia y renovaciones no son coherentes entre sí. *Corrección propuesta:* geometría coherente derivada de la tipología, o declarar el simplificado "acoplado al
-exterior" y no ofrecerlo para estudiar el clima interior.
+está en los parámetros: área, volumen, conductancia y renovaciones no son coherentes entre sí. *Corregido:* el modelo simplificado es ahora un modelo agrupado de dos nodos del MISMO invernadero que simula EnergyPlus (geometría, envolvente, ventilación pasiva y termostato por defecto); al mediodía el interior queda +4,6 K sobre el exterior (EnergyPlus +6,5 K) y el RMSE horario respecto a EnergyPlus es de 2,0 K. Detalle y diferencias residuales en `docs/phase5_44_greenhouse_consistency.md`.
 
-**3. Una orden de ventilación significa cosas distintas según el modelo.** `ActuatorControl(requested, maximum=1)` hace que "ventilación 1,0" sean +1 renovación/h en el simplificado, frente a 30 en
-EnergyPlus (30 × más). "Ventanas totalmente abiertas" no hace nada en el simplificado. El controlador climático no lo sufre porque usa el equipamiento que define el usuario.
+**3. Una orden de ventilación significaba cosas distintas según el modelo (CORREGIDO).** `ActuatorControl(requested, maximum=1)` hace que "ventilación 1,0" sean +1 renovación/h en el simplificado, frente a 30 en
+EnergyPlus (30 × más). "Ventanas totalmente abiertas" no hacía nada en el simplificado. *Corregido:* la orden es una fracción de la capacidad de ventanas (30 renovaciones/h) en los dos modelos; ventanas abiertas bajan ahora la temperatura interior 4,0 K en el simplificado y 4,1 K en EnergyPlus, y `greenhouse_ventilation_fraction` es la apertura en ambos.
 
 **4. Las olas de calor y de frío conservan la humedad relativa, no la humedad absoluta.** Una ola de calor de +8 K a HR constante multiplica por 1,68 la presión de vapor del aire. Evidencia (campo abierto,
 72 h): VPD del modelo 0,56 kPa frente a **1,20 kPa** si se mantuviera la presión de vapor, es decir, el estrés por VPD de una ola de calor se **subestima 2,1 veces**. En EnergyPlus el aire exterior más cálido y húmedo
@@ -86,9 +85,9 @@ desfase de una hora respecto a la semántica de intervalo (error del 1,4 % en la
 ## Plan de corrección sugerido (por impacto)
 
 1. ~~Riego: el último evento activo gana~~ (hecho, con prueba).
-2. Invernadero simplificado: parámetros coherentes (área, volumen, UA, renovaciones) o retirarlo del estudio del clima interior; contrastarlo con EnergyPlus.
+2. ~~Invernadero simplificado coherente con EnergyPlus~~ (hecho en la fase 5.44, con prueba de acuerdo entre modelos).
 3. Olas de calor/frío: conservar el punto de rocío por defecto.
-4. Semántica común de ventilación (fracción → renovaciones por hora con la capacidad de la tipología o del equipamiento) y definición única de `greenhouse_ventilation_fraction`.
+4. ~~Semántica común de ventilación y definición única de `greenhouse_ventilation_fraction`~~ (hecho en la fase 5.44).
 5. ET0 con viento y VPD (Penman-Monteith con el coeficiente de cultivo del catálogo) o marcar el evento de viento como "solo EnergyPlus".
 6. Respuesta al CO₂ con efecto de enriquecimiento (con fuente trazable) o avisar de que el evento no afecta al cultivo.
 7. ~~Convertir esta matriz en pruebas de regresión~~ (hecho en `tests/test_intervention_effects.py`: las invariantes que ya se cumplen son pruebas normales, y los hallazgos 2 a 6 y 10 son pruebas `xfail` estrictas que fallarán al corregirse el defecto, obligando a actualizar esta nota).

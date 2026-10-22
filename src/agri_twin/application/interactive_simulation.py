@@ -38,6 +38,7 @@ from agri_twin.application.climate_control import (
     describe as describe_climate_control,
     parse_control,
 )
+from agri_twin.application.consistent_greenhouse import engine_factory as lumped_engine_factory
 from agri_twin.application.weather_datasets import (
     LOCAL_SOURCE,
     DatasetInfo,
@@ -52,6 +53,7 @@ from agri_twin.application.greenhouse_backend import (
     build_timeline,
     describe as describe_greenhouse_backend,
     engine_factory as energyplus_engine_factory,
+    simplified_configuration,
     parse_greenhouse_backend,
     with_runtime_events,
 )
@@ -1051,7 +1053,9 @@ class InteractiveSimulationService:
         engine_arguments: dict[str, Any] = {}
         if request.control is not None:
             engine_arguments["control"] = ControlSession(request.control, request.crop)
-        if request.greenhouse is not None:
+        if request.greenhouse is not None and request.greenhouse.backend == "SIMPLIFIED":
+            engine_arguments["greenhouse_engine_factory"] = lumped_engine_factory(simplified_configuration(request.greenhouse)[0])
+        if request.greenhouse is not None and request.greenhouse.backend == "ENERGYPLUS":
             try:
                 timeline = build_timeline(request.greenhouse, request.plot, with_runtime_events(execution.spec.scenario, request.runtime_events), _weather_factory(request), request.end_time)
             except (EnergyPlusTimelineError, GreenhouseBackendError) as exc:
@@ -1122,7 +1126,7 @@ class InteractiveSimulationService:
             "termination": execution.termination, "steps_executed": execution.completed_steps if execution.snapshots else 0, "total_steps": execution.plan.total_steps,
             "cancel_requested": execution.cancel_requested, "progress_events_emitted": execution.progress_events,
             "execution_path": "build_campaign -> ScenarioRunner.run -> CropDigitalTwinOrchestrator.step (existing engines)"
-                              + (" with the EnergyPlus timeline as greenhouse engine" if request.greenhouse is not None else ""),
+                              + (" with the EnergyPlus timeline as greenhouse engine" if request.backend == "ENERGYPLUS" else (" with the lumped greenhouse of the layout" if request.greenhouse is not None else "")),
             "greenhouse_backend": execution.greenhouse_provenance if execution.greenhouse_provenance is not None else request.backend,
             "state_integrity": "orchestrator state is replaced atomically per step; a stop leaves the last completed step as the state",
         }
@@ -1210,6 +1214,13 @@ def _behaviour_warnings(execution: _Execution) -> tuple[SimulationWarning, ...]:
     return ()
 
 
+NOISE_FLOOR = 1e-9  # smaller than this in a returned series is floating-point residue (a thermostat holding the stage minimum leaves 1e-15 of "cold stress"), not a value
+
+
+def _without_round_off(value: Any) -> Any:
+    return 0.0 if isinstance(value, float) and 0.0 < abs(value) < NOISE_FLOOR else value
+
+
 def _cumulative_energy(snapshots: Sequence[CropSimulationSnapshot]) -> list[float | None]:
     total: float | None = 0.0
     cumulative: list[float | None] = []
@@ -1231,7 +1242,7 @@ def project_result(execution: _Execution) -> SimulationResult:
         catalogue.append({"name": name, "unit": unit, "availability": availability.value, "source": spec.source, "description": spec.description,
                           "reason": None if availability is Availability.AVAILABLE else BACKEND_UNSUPPORTED_VARIABLES.get(request.backend, {}).get(name, spec.reason)})
         if availability is Availability.AVAILABLE and request.options.include_trajectory:
-            series[name] = _cumulative_energy(snapshots) if name == "control_energy_kwh_cumulative" else [spec.getter(snapshot) for snapshot in snapshots]  # type: ignore[misc]
+            series[name] = _cumulative_energy(snapshots) if name == "control_energy_kwh_cumulative" else [_without_round_off(spec.getter(snapshot)) for snapshot in snapshots]  # type: ignore[misc]
     trajectory = {"time": [snapshot.simulation_time.isoformat() for snapshot in snapshots], **series} if request.options.include_trajectory else None
     totals = {name: math.fsum(VARIABLE_INDEX[name].getter(snapshot) for snapshot in snapshots) for name in FLUX_TOTALS}  # type: ignore[misc]
     final_state = twin_state_from_snapshot(snapshots[-1], execution.spec).to_dict()
@@ -1463,7 +1474,9 @@ class InteractiveSimulationApiSuite:
             request = canonicalize_request(materialize(document))
             spec = build_campaign(request.crop, request.environment, request.scenario, seed=request.seed)
             phenology = None if request.dormancy == DEFAULT_DORMANCY_CONFIGURATION else PhenologyEngine(dormancy=DormancyChillingController(configuration=request.dormancy))
-            direct = ScenarioRunner(seasonal_weather_factory).run(spec.scenario, phenology=phenology)
+            engine = ({"greenhouse_engine_factory": lumped_engine_factory(simplified_configuration(request.greenhouse)[0])}
+                      if request.greenhouse is not None and request.greenhouse.backend == "SIMPLIFIED" else {})  # a greenhouse run uses the lumped engine of its layout, through either path
+            direct = ScenarioRunner(seasonal_weather_factory).run(spec.scenario, phenology=phenology, **engine)
             api = self._service().run_simulation(request)
             short = self._service().run_simulation({**request.to_dict(), "end_time": (request.start_time + timedelta(days=7)).isoformat()})
             rows.append({"case": case_id, "direct_status": direct.status, "api_status": api.execution_status.value, "steps": len(direct.snapshots),
@@ -1471,7 +1484,7 @@ class InteractiveSimulationApiSuite:
                          "seven_day_horizon_is_exact_prefix": trajectory_hash(direct.snapshots[:7 * 24]) == short.hashes["trajectory_hash"]})
         passed = all(row["trajectory_hash_equal"] and row["seven_day_horizon_is_exact_prefix"] for row in rows)
         return {"status": "PASS" if passed else "FAIL", "rows": rows,
-                "definition": "direct = build_campaign + ScenarioRunner(seasonal_weather_factory).run; the API horizon stops the same run at a step boundary (no event clipping)"}
+                "definition": "direct = build_campaign + ScenarioRunner(seasonal_weather_factory).run (with the lumped greenhouse engine of the layout for greenhouse runs); the API horizon stops the same run at a step boundary (no event clipping)"}
 
     # -- checkpoint / resume ----------------------------------------------------------
 

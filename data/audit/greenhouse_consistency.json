@@ -1,0 +1,86 @@
+{
+ "tolerances": {
+  "hourly_indoor_rmse_k": 3.0,
+  "midday_gap_k": 2.5,
+  "radiation_ratio_error": 0.08,
+  "winter_heating_energy_error": 0.35,
+  "intervention_gap_k": 1.5
+ },
+ "windows": {
+  "winter_synthetic": {
+   "lumped": {
+    "radiation_w_m2": 122.8,
+    "indoor_minus_outdoor_midday_k": 4.58,
+    "indoor_minus_outdoor_night_k": 5.48,
+    "indoor_min_c": 12.0,
+    "indoor_max_c": 23.9,
+    "indoor_rh_pct": 56.2,
+    "heating_kwh": 7352,
+    "vent_opening_mean": 0.11
+   },
+   "energyplus": {
+    "radiation_w_m2": 126.8,
+    "indoor_minus_outdoor_midday_k": 6.5,
+    "indoor_minus_outdoor_night_k": 5.33,
+    "indoor_min_c": 12.0,
+    "indoor_max_c": 23.9,
+    "indoor_rh_pct": 59.2,
+    "heating_kwh": 6339,
+    "vent_opening_mean": 0.02
+   },
+   "hourly_indoor_rmse_k": 2.04
+  },
+  "summer_real_weather": {
+   "lumped": {
+    "radiation_w_m2": 286.2,
+    "indoor_minus_outdoor_midday_k": 2.51,
+    "indoor_minus_outdoor_night_k": 1.2,
+    "indoor_min_c": 17.6,
+    "indoor_max_c": 36.6,
+    "indoor_rh_pct": 53.8,
+    "heating_kwh": 0,
+    "vent_opening_mean": 0.86
+   },
+   "energyplus": {
+    "radiation_w_m2": 277.1,
+    "indoor_minus_outdoor_midday_k": 1.89,
+    "indoor_minus_outdoor_night_k": -1.96,
+    "indoor_min_c": 16.7,
+    "indoor_max_c": 35.9,
+    "indoor_rh_pct": 59.1,
+    "heating_kwh": 0,
+    "vent_opening_mean": 0.49
+   },
+   "hourly_indoor_rmse_k": 2.01
+  }
+ },
+ "interventions": {
+  "SHADING 0.6": {
+   "lumped": -1.68,
+   "lumped_heating_kw": 3.3,
+   "energyplus": -2.01,
+   "energyplus_heating_kw": 1.5
+  },
+  "VENTILATION 1.0": {
+   "lumped": -3.97,
+   "lumped_heating_kw": 28.0,
+   "energyplus": -4.05,
+   "energyplus_heating_kw": 32.9
+  },
+  "LOW_RADIATION 0.5": {
+   "lumped": -1.41,
+   "lumped_heating_kw": 2.6,
+   "energyplus": -1.66,
+   "energyplus_heating_kw": 1.1
+  },
+  "HIGH_RADIATION 1.5": {
+   "lumped": -0.11,
+   "lumped_heating_kw": -1.8,
+   "energyplus": 0.77,
+   "energyplus_heating_kw": -0.7
+  }
+ },
+ "scientific_status": "consistency between two models with provisional envelope values; not validation",
+ "status": "PASS",
+ "failures": []
+}

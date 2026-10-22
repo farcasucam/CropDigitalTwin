@@ -39,12 +39,15 @@ def energyplus_present(monkeypatch):
 
 
 # -- request validation (no EnergyPlus needed) ------------------------------------------------------------
-def test_default_backend_leaves_the_canonical_request_unchanged():
+def test_the_default_backend_is_the_lumped_greenhouse_of_the_default_layout():
     plain = canonicalize_request(BASE)
-    assert plain.greenhouse is None and plain.backend == "SIMPLIFIED"
-    assert "greenhouse" not in plain.to_dict()
+    assert plain.backend == "SIMPLIFIED" and plain.greenhouse is not None  # the simplified model has a geometry now: the same greenhouse EnergyPlus simulates
+    assert plain.to_dict()["greenhouse"] == {"backend": "SIMPLIFIED", "layout": {"typology": "MULTITUNEL_CAPILLA"}}
     explicit = canonicalize_request({**BASE, "greenhouse": {"backend": "SIMPLIFIED"}})
     assert explicit.request_hash == plain.request_hash and explicit.resume_hash == plain.resume_hash
+    other = canonicalize_request({**BASE, "greenhouse": {"backend": "SIMPLIFIED", "layout": {"typology": "TUNEL"}}})
+    assert other.resume_hash != plain.resume_hash  # a checkpoint never resumes under another layout
+    assert "greenhouse" not in canonicalize_request({**BASE, "environment": "outdoor"}).to_dict()  # open-field requests are unchanged
 
 
 def test_energyplus_selection_changes_hashes_and_is_part_of_the_resume_identity(energyplus_present):
@@ -61,7 +64,7 @@ def test_energyplus_selection_changes_hashes_and_is_part_of_the_resume_identity(
     ({"backend": "ENERGYPLUS", "layout": {"span_m": 9.0, "ridge_rise_m": 99.0}}, "greenhouse.layout"),
     ({"backend": "ENERGYPLUS", "layout": {"colour": "red"}}, "greenhouse.layout.colour"),
     ({"backend": "ENERGYPLUS", "layout": {"n_spans": "three"}}, "greenhouse.layout.n_spans"),
-    ({"backend": "SIMPLIFIED", "layout": {"typology": "TUNEL"}}, "greenhouse.layout"),
+    ({"backend": "SIMPLIFIED", "layout": {"typology": "PYRAMID"}}, "greenhouse.layout.typology"),
     ({"backend": "MAGIC"}, "greenhouse.backend"),
     ({"backend": "ENERGYPLUS", "extra": 1}, "greenhouse.extra"),
 ])
@@ -92,8 +95,11 @@ def test_events_the_backend_cannot_model_are_rejected(energyplus_present):
     assert "CO2" in caught.value.errors[0].message
 
 
-def test_parse_returns_none_when_unset():
-    assert parse_greenhouse_backend(None, "greenhouse") is None
+def test_parse_defaults_to_the_lumped_greenhouse_indoors_and_nothing_outdoors():
+    assert parse_greenhouse_backend(None, "greenhouse").backend == "SIMPLIFIED"
+    assert parse_greenhouse_backend(None, "outdoor") is None
+    with pytest.raises(GreenhouseBackendError):
+        parse_greenhouse_backend({"backend": "SIMPLIFIED", "layout": {"typology": "TUNEL"}}, "outdoor")
     with pytest.raises(GreenhouseBackendError):
         parse_greenhouse_backend("ENERGYPLUS", "greenhouse")
 

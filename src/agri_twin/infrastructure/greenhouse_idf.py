@@ -68,6 +68,10 @@ class BuiltGreenhouseIdf:
     provenance: dict[str, str]
 
 
+# The floor layer written into the IDF below (Material, Floor Soil): the reduced model reads the same numbers.
+FLOOR_MATERIAL = {"thickness_m": 0.20, "conductivity_w_mk": 1.40, "density_kg_m3": 1800.0, "specific_heat_j_kgk": 800.0}
+
+
 @dataclass(frozen=True, slots=True)
 class _Poly:
     name: str
@@ -147,6 +151,16 @@ def _surfaces(spec: GreenhouseGeometrySpec) -> list[_Poly]:
             for t, tri in enumerate(_triangles(ring)):
                 polys.append(_Poly(f"End {end} S{s + 1} T{t + 1}", "Wall", tri, inward))
     return polys
+
+
+def cover_area_m2(spec: GreenhouseGeometrySpec) -> float:
+    """Total area of the walls and roof facets (the cover, glazing plus frame) of the greenhouse."""
+    total = 0.0
+    for poly in _surfaces(spec):
+        if poly.kind != "Floor":
+            n = _normal(poly.points)
+            total += 0.5 * (n[0] ** 2 + n[1] ** 2 + n[2] ** 2) ** 0.5
+    return total
 
 
 def _num(value: float) -> str:

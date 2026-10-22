@@ -70,9 +70,9 @@ irrigation -> droplets; radiation -> sun and sky.
 
 ## Honest limits
 
-- The simplified greenhouse model has no geometry input: choosing a typology or dimensions **does not change any result** with that backend (the notes
-  say so). Geometry affects results only with the EnergyPlus backend.
-- Layout and open-field dimensions are a visual schematic; values the manufacturer does not publish are provisional. With the EnergyPlus backend the chosen layout is simulated; with the simplified model it only changes the drawing.
+- The simplified greenhouse model is a two-node lumped model of the SAME layout EnergyPlus simulates (floor area, volume and cover from the typology geometry; see
+  `docs/phase5_44_greenhouse_consistency.md`): the layout changes its results too. Until phase 5.44 it had a 1 m2 exchange area and no geometry input.
+- Layout and open-field dimensions are a visual schematic; values the manufacturer does not publish are provisional. The chosen layout is simulated by both greenhouse backends.
 - `frost_damage` is drawn as "lost plants" proportionally; it is not a plant count. Plants are a drawn subset of the planting grid.
 - Accumulated stress is shown relative to `max(1, run maximum)`, a drawing scale rather than a model threshold.
 - Rain in greenhouse mode is `precipitation_mm` "reaching the crop", which is 0 indoors, so outdoor rain is not shown there.

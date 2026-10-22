@@ -6,8 +6,9 @@
   "design": {
     "vents_full_at": 0.3,
     "extractors_full_at": 0.6,
-    "meaning": "fractions of the hot band [max_temp_c .. critical_heat_c] of the current stage at which the passive vents reach full opening and the extractors reach full speed; HVAC cooling covers the rest. Active equipment therefore only works once the passive tier is exhausted. hvac_gain (0..1] is the fraction of the distance between the HVAC-free equilibrium temperature (estimated from the greenhouse conductance and the HVAC power of the previous step) and the target that the HVAC power closes in one step.",
-    "hvac_gain": 0.9
+    "meaning": "fractions of the hot band [max_temp_c .. critical_heat_c] of the current stage at which the passive vents reach full opening and the extractors reach full speed; HVAC cooling covers the rest. Active equipment therefore only works once the passive tier is exhausted. hvac_gain (0..1] is the fraction of the distance between the HVAC-free equilibrium temperature (estimated from the greenhouse conductance and the HVAC power of the previous step) and the target that the HVAC power closes in one step. vents_start_margin_c: the hot band starts this many degrees below the stage's max_temp_c (a real greenhouse opens its vents before the crop's limit; the default operation of the greenhouse models opens them at 24 degC); a provisional design convention.",
+    "hvac_gain": 0.9,
+    "vents_start_margin_c": 4.0
   },
   "crop_thresholds_used": {
     "cooling": "stress_thresholds.max_temp_c, stress_thresholds.critical_heat_c",

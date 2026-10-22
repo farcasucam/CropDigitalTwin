@@ -62,9 +62,16 @@ class GreenhouseBackendRequest:
         return hash((self.backend, self.layout))
 
 
+def _simplified_request(layout: Any) -> GreenhouseBackendRequest:
+    """The simplified backend is a lumped model of the SAME greenhouse the EnergyPlus backend simulates, so it carries a layout too (default typology when omitted)."""
+    fields = _layout_fields(layout)
+    _spec(fields)
+    return GreenhouseBackendRequest("SIMPLIFIED", tuple(sorted(fields.items())))
+
+
 def parse_greenhouse_backend(document: Any, environment: str, runtime_event_types: tuple[str, ...] = ()) -> GreenhouseBackendRequest | None:
     if document is None:
-        return None
+        return _simplified_request(None) if environment == "greenhouse" else None
     if not isinstance(document, Mapping):
         raise GreenhouseBackendError("greenhouse must be a mapping", "greenhouse", "INVALID_REQUEST")
     unknown = sorted(set(document) - set(BACKEND_FIELDS))
@@ -75,9 +82,11 @@ def parse_greenhouse_backend(document: Any, environment: str, runtime_event_type
         raise GreenhouseBackendError(f"greenhouse backend {backend!r} is not available; choose one of {', '.join(BACKENDS)}", "greenhouse.backend", "INVALID_REQUEST")
     layout = document.get("layout")
     if backend == "SIMPLIFIED":
-        if layout is not None:
-            raise GreenhouseBackendError("a layout applies to the ENERGYPLUS backend only; the simplified model has no geometry input", "greenhouse.layout", "INVALID_REQUEST")
-        return None
+        if environment != "greenhouse":
+            if layout is not None:
+                raise GreenhouseBackendError("a layout needs the greenhouse environment (open-field runs have no greenhouse)", "greenhouse.layout", "UNSUPPORTED_ENVIRONMENT")
+            return None
+        return _simplified_request(layout)
     if environment != "greenhouse":
         raise GreenhouseBackendError("the ENERGYPLUS backend needs the greenhouse environment (open-field runs never use EnergyPlus)", "greenhouse.backend", "UNSUPPORTED_ENVIRONMENT")
     spec_fields = _layout_fields(layout)
@@ -125,9 +134,18 @@ def layout_spec(request: GreenhouseBackendRequest) -> GreenhouseGeometrySpec:
     return _spec(dict(request.layout))
 
 
+def simplified_configuration(request: GreenhouseBackendRequest):
+    """(lumped configuration, description) of the greenhouse of this request: derived from the same geometry and envelope as the EnergyPlus model."""
+    from agri_twin.application.consistent_greenhouse import reduced_configuration
+
+    return reduced_configuration(layout_spec(request))
+
+
 def describe(request: GreenhouseBackendRequest) -> dict[str, Any]:
     """Effective configuration block (hashed with the rest of the effective configuration)."""
     spec = layout_spec(request)
+    if request.backend == "SIMPLIFIED":
+        return {"backend": "SIMPLIFIED", "layout": dict(request.layout), "geometry_provenance": spec.provenance.value, **simplified_configuration(request)[1]}
     install = find_energyplus()
     return {
         "backend": "ENERGYPLUS", "layout": dict(request.layout), "geometry_provenance": spec.provenance.value,
