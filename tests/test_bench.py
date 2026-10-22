@@ -182,3 +182,20 @@ def test_charts_can_be_reordered_by_drag_or_buttons_and_laid_out_in_columns():
     for token in ("function chartTools", "function moveChart", "function syncChartOrder", "function applyChartColumns", "dragstart", "dragover", "Move earlier", "Move later", "Drag to reorder"):
         assert token in JS, token
     assert 'id="chart-cols"' in HTML and "var(--cols" in CSS and ".chart-card.dragging" in CSS
+
+
+def test_a_chart_has_a_close_button_and_the_oval_button_always_says_whether_it_is_shown():
+    for token in ("chart-close", "function setChart", "function refreshChartChips", "chip.dataset.name = name", "chartsInit"):
+        assert token in JS, token
+    # the chip, the x and a rebuild all go through setChart / buildCharts, which re-syncs every chip
+    assert "close.addEventListener(\"click\", () => setChart(name, false))" in JS
+    assert "chip.addEventListener(\"click\", () => setChart(name, !bench.config.charts.includes(name)))" in JS
+    assert "refreshChartChips();" in JS.split("function buildCharts")[1].split("// Reordering")[0]
+    assert ".chart-close" in CSS
+
+
+def test_the_first_visit_shows_the_3d_scene_and_the_charts_without_data():
+    for token in ("function previewState", "function renderPreview", "No data yet", "Preview · no data yet", "function chartCatalogue", "renderPreview();"):
+        assert token in JS, token
+    assert "preview without data" in HTML and ".chart-empty" in CSS
+    assert "growth: 0.3" in JS.split("function previewState")[1].split("function renderPreview")[0]  # a drawing placeholder; every number stays n/a

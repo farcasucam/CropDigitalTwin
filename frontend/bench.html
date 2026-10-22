@@ -7,13 +7,13 @@
   <title>Agri-Twin · Experiment bench</title>
   <link rel="stylesheet" href="vendor/uPlot.min.css?v=1.6.32">
   <link rel="stylesheet" href="vendor/isokit.css?v=1">
-  <link rel="stylesheet" href="bench.css?v=12">
+  <link rel="stylesheet" href="bench.css?v=13">
   <script src="vendor/uPlot.iife.min.js?v=1.6.32" defer></script>
   <script src="vendor/isokit.iife.js?v=1" defer></script>
   <script src="visual_state.js?v=20261102-visual7" defer></script>
   <script src="scene_state.js?v=20261102-scene2" defer></script>
   <script src="iso_scene.js?v=20261102-scene7" defer></script>
-  <script src="bench.js?v=13" defer></script>
+  <script src="bench.js?v=14" defer></script>
 </head>
 <body class="iso" data-theme="light">
   <header class="bar">
@@ -111,7 +111,7 @@
         </div>
         <div class="field"><span class="label">Charts</span>
           <div id="chart-picks" class="chips"></div>
-          <p class="hint">Drag a chart by its ⠿ handle (or use ‹ ›) to put the values you want to compare side by side.</p>
+          <p class="hint">Drag a chart by its ⠿ handle (or use ‹ ›) to put the values you want to compare side by side; close one with its ×. A button is lit exactly when its chart is shown.</p>
         </div>
         <div class="field"><span class="label">Chart columns</span>
           <span class="seg" id="chart-cols" role="group" aria-label="Chart columns"></span>
@@ -121,7 +121,7 @@
 
     <section class="stage" aria-label="Results">
       <div id="stale-note" class="stale-note" role="status" hidden></div>
-      <div id="empty" class="empty">Pick a scenario and press <strong>Run</strong>. Without events you get a single run; add an event to compare it with the baseline side by side.</div>
+      <div id="empty" class="empty">No simulation yet: what you see below is a preview without data. Pick a scenario and press <strong>Run</strong>. Without events you get a single run; add an event to compare it with the baseline side by side.</div>
       <div id="scenes" class="scenes" hidden>
         <figure class="scene-card" id="card-baseline">
           <figcaption><strong id="title-baseline">Baseline</strong><span id="chip-baseline" class="chip-line"></span></figcaption>

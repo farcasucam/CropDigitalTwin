@@ -94,6 +94,15 @@ greenhouse season: about 10 ms of JavaScript per scene update and 17-33 ms per f
 * **Charts** can be reordered by dragging their handle or with the "<" and ">" buttons (keyboard and touch friendly), so values of interest sit side by side; the order is remembered. "Chart columns"
   (Auto, 1, 2, 3) fixes the layout.
 
+## First visit and chart controls (bench)
+
+* **Preview before the first run.** The page opens with the same 3D scene (greenhouse or open field, chosen layout and view) and the chosen charts, without data: every number reads "n/a" or
+  "No data yet", plant size is a drawing placeholder, the chart axes span the planned period and planned interventions already shade the empty charts. It follows crop, environment,
+  layout and view changes until a run replaces it.
+* **Closing a chart.** Every chart has a "x"; the oval buttons of the View panel are lit exactly when their chart is shown (chip, "x" and rebuilds all go through one function that re-syncs them).
+  The selection is the user's own: closed charts stay closed after a run, even all of them. The oval buttons list the variables of the API contract for the crop and environment before a run, and
+  the ones the run returned afterwards.
+
 ## Known gaps
 
 * The interactive simulator runs on `SYNTHETIC_SEASONAL` weather only, with each crop's single synthetic cycle (fixed planting date). Real weather in `data/weather/` is

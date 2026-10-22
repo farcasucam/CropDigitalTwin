@@ -747,6 +747,7 @@
   function changed() {
     save();
     updateStale();
+    if (!bench.run) renderPreview();
     if ($("#autorun").checked) { window.clearTimeout(bench.autoTimer); bench.autoTimer = window.setTimeout(() => void runExperiment(), 700); }
   }
 
@@ -846,14 +847,14 @@
   }
 
   // ---- scenes -----------------------------------------------------------------------------------------------------
+  const sceneEnvironment = () => (bench.run ? bench.run.environment : bench.config.environment);
   function sceneLayout() {
-    if (bench.run.environment !== "greenhouse") return { layout: null };
+    if (sceneEnvironment() !== "greenhouse") return { layout: null };
     const c = bench.config.layout, entry = bench.catalogue.typologies[c.typology].profiles[`${c.span}|${c.rise}`];
     if (!entry) return null;
     return { layout: { span: c.span, spans: c.spans, bays: c.bays, pillar: c.pillar, gutter: c.gutter, profile: entry.profile } };
   }
   function configureScenes() {
-    if (!bench.run) return;
     const description = sceneLayout();
     if (!description) { showError(new Error("No pre-built profile for this layout combination")); return; }
     const field = bench.catalogue.open_field;
@@ -867,13 +868,41 @@
     $("#chip-intervention").textContent = chipText();
   }
   function chipText() {
-    if (bench.run.environment !== "greenhouse") return "open field · no thermal backend";
+    if (sceneEnvironment() !== "greenhouse") return "open field · no thermal backend";
     const c = bench.config.layout;
-    return `${c.typology.replace(/_/g, " ").toLowerCase()} · ${bench.run.backend === "ENERGYPLUS" ? "EnergyPlus" : "simplified model"}`;
+    return `${c.typology.replace(/_/g, " ").toLowerCase()} · ${(bench.run ? bench.run.backend : bench.config.backend) === "ENERGYPLUS" ? "EnergyPlus" : "simplified model"}`;
+  }
+
+  // ---- preview before the first run: the same 3D scene and the chosen charts, with no data -----------------------------------------------
+  // Plant size is a drawing placeholder (a young crop); every number stays "n/a" until a run provides it.
+  function previewState() {
+    const greenhouse = bench.config.environment === "greenhouse";
+    return { kind: "SCENE_STATE", time: null, hour: 12, interpolated: false, stage: null, environment: bench.config.environment,
+      outdoor: { temp_c: null, rh_pct: null, radiation_w_m2: null, wind_m_s: null, wind_dir_deg: null, rain_mm_h: null },
+      indoor: greenhouse ? { temp_c: null, rh_pct: null, vpd_kpa: null, co2_ppm: null, radiation_w_m2: null } : null,
+      actuators: greenhouse ? { vent_opening: null, screen_deployed: null, heating_kw: null, cooling_kw: null, extractor_level: null } : null,
+      crop: { growth: 0.3, lai: null, water_stress: null, heat_stress: null, cold_stress: null, vpd_stress: null, stress_max: null, accumulated: null, loss_fraction: null, fruit_fraction: null, ripeness: null },
+      levels: { temperature: null, radiation: null, vpd: null, co2: null, soil_wetness: null }, rain: false, irrigation: false, events: [], comfort: null };
+  }
+  function renderPreview() {
+    if (bench.run || !bench.caps) return;
+    $("#scenes").hidden = false; $("#charts").hidden = false; $("#card-intervention").hidden = true;
+    $("#title-baseline").textContent = "Preview · no data yet";
+    configureScenes();
+    renderFrame(true);
+    buildChartPicks();
+    buildCharts();
   }
 
   function renderFrame(force) {
-    if (!bench.run) return;
+    if (!bench.run) {
+      if (!bench.scenes.baseline || $("#scenes").hidden) return;
+      const state = previewState();
+      state.comfort = null;
+      bench.scenes.baseline.update(state, bench.config.layers, false);
+      renderReadout("baseline", state, null);
+      return;
+    }
     const run = bench.run, position = clamp(bench.position, 0, run.times.length - 1);
     const names = run.kind === "WHAT_IF" ? ["baseline", "intervention"] : ["baseline"];
     for (const name of names) {
@@ -903,7 +932,7 @@
       row("CO2", state.indoor.co2_ppm, "ppm"); row("Air exchanged", state.actuators.vent_opening === null ? null : state.actuators.vent_opening * 100, "%");
       row("Shade", state.actuators.screen_deployed === null ? null : state.actuators.screen_deployed * 100, "%"); row("Heating", state.actuators.heating_kw, "kW");
     } else { row("Humidity", state.outdoor.rh_pct, "%"); row("Radiation", state.outdoor.radiation_w_m2, "W/m²"); row("Rain", state.outdoor.rain_mm_h, "mm/h"); }
-    const series = bench.run.series[name], at = Math.floor(bench.position);
+    const series = bench.run ? bench.run.series[name] : {}, at = Math.floor(bench.position);
     if (series.control_layer) {
       const value = (key) => (series[key] ? series[key][at] : null);
       row("Control layer", null, ""); host.lastChild.lastChild.textContent = value("control_layer") === "PASSIVE" ? "passive" : value("control_layer") === "ACTIVE" ? "energy" : "idle";
@@ -920,24 +949,41 @@
   function availableNumeric() {
     return bench.run.variables.filter((item) => item.availability === "AVAILABLE" && bench.run.series.baseline[item.name] && typeof bench.run.series.baseline[item.name][0] === "number").map((item) => item.name);
   }
+  const NON_NUMERIC = new Set(["crop_stage", "control_layer", "dormancy_released"]);
+  // What can be charted: after a run, what that run returned; before it, what the API contract lists for this crop and environment.
+  function chartCatalogue() {
+    if (bench.run) return availableNumeric().map((name) => ({ name, unit: (bench.run.variables.find((item) => item.name === name) || {}).unit }));
+    const greenhouse = bench.config.environment === "greenhouse", perennial = (bench.caps.perennial_crops || []).includes(bench.config.crop);
+    return (bench.caps.variables || []).filter((item) => !NON_NUMERIC.has(item.name) && (item.scope === "ALL" || (item.scope === "GREENHOUSE" && greenhouse) || (item.scope === "PERENNIAL" && perennial) || (item.scope === "CONTROL" && controlActive())))
+      .map((item) => ({ name: item.name, unit: item.unit }));
+  }
+  // The single way to show or hide a chart (the chip, the × and a rebuild all go through it), so a chip always says whether its chart is on screen.
+  function setChart(name, on) {
+    const at = bench.config.charts.indexOf(name);
+    if (on && at < 0) bench.config.charts.push(name);
+    if (!on && at >= 0) bench.config.charts.splice(at, 1);
+    buildCharts(); save();
+  }
+  function refreshChartChips() {
+    for (const chip of $$("#chart-picks .chip")) chip.setAttribute("aria-pressed", String(bench.config.charts.includes(chip.dataset.name)));
+  }
   function buildChartPicks() {
-    const host = $("#chart-picks"), names = availableNumeric();
-    bench.config.charts = bench.config.charts.filter((name) => names.includes(name));
-    if (controlActive() && !bench.config.controlCharts) {  // first run with control: show what it does
+    const host = $("#chart-picks"), names = chartCatalogue().map((item) => item.name);
+    if (bench.run) bench.config.charts = bench.config.charts.filter((name) => names.includes(name));
+    if (bench.run && controlActive() && !bench.config.controlCharts) {  // first run with control: show what it does
       for (const name of ["control_vent_opening", "greenhouse_cooling_kw", "greenhouse_heating_kw", "control_energy_kwh_cumulative"]) if (names.includes(name) && !bench.config.charts.includes(name)) bench.config.charts.push(name);
       bench.config.controlCharts = true;
     }
-    if (!bench.config.charts.length) bench.config.charts = CHART_DEFAULT.filter((name) => names.includes(name)).slice(0, 4);
+    if (!bench.config.chartsInit) {  // the default selection is made once; afterwards an empty selection is the user's choice
+      if (!bench.config.charts.length) bench.config.charts = CHART_DEFAULT.filter((name) => names.includes(name)).slice(0, 4);
+      bench.config.chartsInit = true;
+    }
     host.replaceChildren();
     for (const name of names) {
       const chip = el("button", "chip", label(name));
-      chip.type = "button";
+      chip.type = "button"; chip.dataset.name = name;
       chip.setAttribute("aria-pressed", String(bench.config.charts.includes(name)));
-      chip.addEventListener("click", () => {
-        const at = bench.config.charts.indexOf(name);
-        if (at >= 0) bench.config.charts.splice(at, 1); else bench.config.charts.push(name);
-        chip.setAttribute("aria-pressed", String(at < 0)); buildCharts(); save();
-      });
+      chip.addEventListener("click", () => setChart(name, !bench.config.charts.includes(name)));
       host.append(chip);
     }
     const layers = $("#layers");
@@ -958,27 +1004,36 @@
     bench.charts = [];
     const host = $("#charts");
     host.replaceChildren();
-    if (!bench.run) return;
-    const run = bench.run, seconds = run.times.map((time) => Date.parse(time) / 1000), compare = run.kind === "WHAT_IF";
-    for (const name of bench.config.charts) {
-      const info = run.variables.find((item) => item.name === name);
+    const live = Boolean(bench.run), run = bench.run, compare = live && run.kind === "WHAT_IF";
+    // without a run the x axis spans the planned period and the plot is empty
+    const seconds = live ? run.times.map((time) => Date.parse(time) / 1000) : [startMs() / 1000, endMs() / 1000];
+    const catalogue = new Map(chartCatalogue().map((item) => [item.name, item]));
+    const shown = bench.config.charts.filter((name) => catalogue.has(name));
+    if (!shown.length) host.append(el("p", "charts-none", "No charts selected: pick values in the View panel."));
+    for (const name of shown) {
+      const info = catalogue.get(name);
       const card = el("div", "chart-card"), head = el("header");
       card.dataset.name = name;
       head.append(chartTools(card), el("strong", "", `${label(name)}${info && info.unit ? ` (${info.unit})` : ""}`));
-      const value = el("span"); head.append(value);
+      const value = el("span"); if (!live) value.textContent = "—";
+      const close = el("button", "chart-close", "×"); close.type = "button"; close.title = "Remove this chart"; close.setAttribute("aria-label", `Remove the ${label(name)} chart`);
+      close.addEventListener("click", () => setChart(name, false));
+      head.append(value, close);
       const body = el("div", "chart-body"), cursor = el("div", "cursor-line");
       card.append(head, body); host.append(card);
       const width = Math.floor(body.getBoundingClientRect().width) || 380;
-      const data = [seconds, run.series.baseline[name]];
+      const data = [seconds, live ? run.series.baseline[name] : [null, null]];
       const series = [{}, { label: compare ? "baseline" : "run", stroke: "#4d6a8a", width: 1.6 }];
       if (compare) { data.push(run.series.intervention[name]); series.push({ label: "intervention", stroke: "#c0561d", width: 1.6, dash: [6, 4] }); }
+      if (!live) body.append(el("div", "chart-empty", "No data yet"));
       const plot = new window.uPlot({
-        width, height: 160, legend: { show: false }, series, scales: { x: { time: true } }, cursor: { drag: { x: false, y: false } },
-        axes: [{ stroke: "#5d6f68", grid: { stroke: "#e8eeea" } }, { stroke: "#5d6f68", size: 54, grid: { stroke: "#e8eeea" } }],
+        width, height: 160, legend: { show: false }, series, scales: live ? { x: { time: true } } : { x: { time: true, range: () => [seconds[0], seconds[1]] }, y: { range: () => [0, 1] } }, cursor: { drag: { x: false, y: false } },
+        axes: [{ stroke: "#5d6f68", grid: { stroke: "#e8eeea" } }, { stroke: "#5d6f68", size: 54, grid: { stroke: "#e8eeea" }, ...(live ? {} : { values: (_u, ticks) => ticks.map(() => "") }) }],
         hooks: { drawClear: [(u) => drawBands(u)] },
       }, data, body);
       body.append(cursor);
       plot.over.addEventListener("click", (event) => {
+        if (!bench.run) return;
         const bounds = plot.over.getBoundingClientRect(), time = plot.posToVal(event.clientX - bounds.left, "x");
         stopPlayback(); seek(nearestIndex(seconds, time));
       });
@@ -990,6 +1045,7 @@
       }
     }
     window.requestAnimationFrame(() => { bench.charts.forEach(fitChart); moveCursors(); });
+    refreshChartChips();
     redrawCharts();
   }
   // Reordering: drag a chart by its handle onto another, or move it with the ‹ › buttons (keyboard and touch friendly). Only the DOM order changes; the plots are kept.
@@ -1043,7 +1099,6 @@
     return low;
   }
   function drawBands(u) {
-    if (!bench.run) return;
     const ctx = u.ctx, area = u.bbox;
     // the bands ARE the bars of the timeline (same colour, same dates, moving with them), drawn behind the series so they never cover a line
     const bands = bench.events.map((event) => ({ from: eventStartMs(event) / 1000, to: (eventStartMs(event) + event.hours * HOUR) / 1000, hue: hueFor(event.type) }));
@@ -1055,7 +1110,7 @@
       ctx.fillStyle = `hsl(${band.hue} 55% 42% / .75)`;
       ctx.fillRect(x0, area.top, width, 3);
     }
-    if (bench.run.kind === "WHAT_IF") {
+    if (bench.run && bench.run.kind === "WHAT_IF") {
       const x = u.valToPos(Date.parse(bench.run.times[bench.run.branchIndex]) / 1000, "x", true);
       ctx.strokeStyle = "rgba(23,53,45,.7)"; ctx.setLineDash([5, 4]); ctx.lineWidth = 1.5;
       ctx.beginPath(); ctx.moveTo(x, area.top); ctx.lineTo(x, area.top + area.height); ctx.stroke();
@@ -1188,6 +1243,7 @@
       buildSetup(); initLayout(); renderBackend(); renderPresets(); renderEvents(); bindTransport(); bindControl();
       $("#autorun").checked = false;
       applyChartColumns();
+      renderPreview();
       $("#run").disabled = false;
       window.__bench = bench;  // handle for scripted checks
       if (bench.config.horizon === "season" || bench.events.length > 1) setStatus("Ready: press Run (a full season or several events takes a few seconds)", "ready");

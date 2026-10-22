@@ -117,6 +117,10 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .charts { display: grid; grid-template-columns: var(--cols, repeat(auto-fit, minmax(380px, 1fr))); gap: .8rem; }
 .chart-card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: .5rem .6rem .3rem; min-width: 0; }
 .chart-card.dragging { opacity: .45; outline: 2px dashed var(--green); }
+.chart-close { border: 0; background: none; color: var(--muted); font-size: 1.15rem; line-height: 1; padding: 0 .25rem; margin-left: .3rem; border-radius: 6px; }
+.chart-close:hover { color: var(--red); background: #fbeceb; }
+.chart-empty { position: absolute; inset: 0 0 30px 54px; display: grid; place-items: center; color: var(--muted); font-size: .8rem; pointer-events: none; }
+.charts-none { grid-column: 1 / -1; color: var(--muted); font-size: .85rem; padding: .6rem; text-align: center; border: 1px dashed var(--line); border-radius: 12px; }
 .chart-tools { display: inline-flex; gap: .15rem; align-items: center; margin-right: .35rem; }
 .chart-tools button { border: 1px solid var(--line); background: #fff; border-radius: 6px; width: 1.5rem; height: 1.4rem; line-height: 1; padding: 0; color: var(--muted); }
 .chart-tools .chart-handle { cursor: grab; }
