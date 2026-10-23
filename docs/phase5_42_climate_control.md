@@ -120,3 +120,9 @@ A tariff combines a single price per kWh, a table of prices per calendar year (a
 (absolute price, or a factor on the price of those hours; hours follow the simulation clock plus `utc_offset_hours`; bands may wrap midnight and must not overlap).
 The cost is post-processing of the returned energy series: the tariff is not part of the simulation request, so changing it never re-runs the simulation or changes a hash.
 A step with no energy or no price has no cost, and the running sum from there is empty. The estimate does not distinguish electricity from heating fuel: one price applies to the whole input energy.
+
+## An actuator set to OFF does nothing
+
+With any climate actuator in use (shade, vents, extractors, cooling, heating), the greenhouse's built-in automatic functions stand down: the 12 degC heater thermostat and the temperature-controlled vents. Before, heating OFF left the thermostat
+running, so during a cold wave the timeline showed heating interleaved with the controller's cooling (the controller cooled below the set-point and the thermostat heated). Now heating OFF means no heater, and vents and extractors OFF mean no
+ventilation beyond infiltration (a manual ventilation event still acts). Without a controller block the greenhouse keeps its defaults. Applies to the simplified model and to EnergyPlus in lock-step.

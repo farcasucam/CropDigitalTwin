@@ -240,3 +240,18 @@ def test_a_manual_event_on_an_actuator_replaces_the_controller_for_it():
     request = {**BASE, "end_time": "2026-02-25T00:00:00+00:00", "control": {"actuators": {"shade": "AUTO"}}, "runtime_events": [event]}
     shade = service.run_simulation(request).result.trajectory["greenhouse_shading_fraction"]
     assert max(shade) > 0 and shade[0] == 0.0
+
+
+def test_an_actuator_set_to_off_does_nothing_because_taking_control_stands_the_built_in_functions_down():
+    cold = [{"event_type": "COLD_WAVE", "intensity": 8, "start_simulation_time": "2026-02-20T00:00:00+00:00", "duration_hours": 48}]
+    base = {"crop": "tomato", "environment": "greenhouse", "end_time": "2026-02-26T00:00:00+00:00", "runtime_events": cold, "options": {"include_trajectory": True, "compute_trajectory_hash": False}}
+    service = InteractiveSimulationService()
+    default = service.run_simulation(base).result.trajectory
+    assert max(default["greenhouse_heating_kw"]) > 1.0  # the greenhouse's own 12 degC thermostat heats during the cold wave
+    cooling_only = {"actuators": {"cooling": "AUTO"}, "equipment": EQUIPMENT}
+    controlled = service.run_simulation({**base, "control": cooling_only}).result.trajectory
+    assert max(controlled["greenhouse_heating_kw"]) == 0.0  # heating OFF: no heater at all, so nothing fights the cooling
+    assert min(controlled["temperature_c"]) < min(default["temperature_c"])  # and the air really gets as cold as the weather lets it
+    vents_off = service.run_simulation({**base, "control": {"actuators": {"heating": "AUTO"}, "equipment": EQUIPMENT}}).result.trajectory
+    assert max(vents_off["greenhouse_ventilation_fraction"]) == 0.0  # vents OFF: the built-in temperature-controlled vents stand down too
+    assert max(default["greenhouse_ventilation_fraction"]) > 0.0

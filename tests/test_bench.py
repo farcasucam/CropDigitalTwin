@@ -168,7 +168,7 @@ def test_the_scene_has_a_hand_inked_look_built_once_and_never_redrawn_per_frame(
 
 
 def test_the_run_button_turns_red_when_the_data_no_longer_match_the_settings():
-    for token in ('id="stale-note"', 'id="run-label"', 'data-stale="false"'):
+    for token in ('id="stale-note"', 'id="run-label"', 'data-stale="true"'):
         assert token in HTML, token
     for token in ("function runSignature", "function staleReasons", "function updateStale", "function stable(", "data.signature = signature", "Run again", "changed: "):
         assert token in JS, token
@@ -231,3 +231,8 @@ def test_the_bench_offers_the_cited_co2_growth_response_and_sends_it_only_when_c
 def test_the_bench_lets_the_controller_drive_energyplus_except_the_shade_screen():
     assert 'bench.config.backend === "ENERGYPLUS" && actuator === "shade"' in JS and "lock-step" in JS
     assert "cannot react to a controller" not in JS
+
+
+def test_the_run_button_is_red_before_the_first_run_because_nothing_on_screen_is_data():
+    assert 'id="run" class="primary" type="button" disabled data-stale="true"' in HTML  # red from the first paint
+    assert 'button.dataset.stale = String(stale || !run)' in JS and "No data yet: press Run" in JS

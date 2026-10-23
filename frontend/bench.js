@@ -888,7 +888,8 @@
     const reasons = run && run.signature && now ? staleReasons(run.signature, now) : [];
     const stale = reasons.length > 0;
     const button = $("#run"), note = $("#stale-note");
-    button.dataset.stale = String(stale);
+    button.dataset.stale = String(stale || !run);  // red also before the first run: nothing on screen is data yet (no note, so the layout does not move)
+    button.title = run ? "" : "No data yet: press Run";
     $("#run-label").textContent = stale ? "Run again" : "Run";
     note.hidden = !stale;
     if (stale) {
@@ -1045,6 +1046,7 @@
     renderFrame(true);
     buildChartPicks();
     buildCharts();
+    updateStale();
   }
 
   function renderFrame(force) {

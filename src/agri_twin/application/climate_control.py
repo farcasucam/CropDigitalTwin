@@ -92,6 +92,9 @@ def describe(config: ClimateControlConfig) -> dict[str, Any]:
                        "software qualification only; not validated against a real greenhouse"]}
 
 
+CLIMATE_ACTUATORS = ("shade", "vents", "extractors", "cooling", "heating")
+
+
 class ControlSession:
     """Binds a control configuration (and any ``ClimateController``) to one run."""
 
@@ -110,9 +113,13 @@ class ControlSession:
         for name, requested in (("shade", record.shade_fraction), ("heating", record.heating_kw), ("cooling", record.cooling_kw)):
             if name not in actuators and (requested > 0 or self.config.mode(name) is not ActuatorMode.OFF):
                 actuators[name] = _control(requested, 1.0)
-        if "ventilation" not in actuators and any(self.config.mode(name) is not ActuatorMode.OFF for name in ("vents", "extractors")):
-            # physical air changes per hour; naming it apart from the "ventilation" fraction of manual events also tells the engine its default venting stands down
-            actuators["ventilation_ach"] = _control(record.vent_ach + record.extractor_ach, 1.0)
+        # Taking control means taking all of it: with any climate actuator in use, the greenhouse's built-in automatic functions (the heater thermostat, the temperature-controlled vents) stand down,
+        # so an actuator set to OFF does nothing instead of being replaced silently by the default behaviour (a controller cooling the air below the thermostat set-point would otherwise fight it).
+        if any(self.config.mode(name) is not ActuatorMode.OFF for name in CLIMATE_ACTUATORS):
+            actuators.setdefault("heating", _control(0.0, 1.0))
+            if "ventilation" not in actuators:
+                # physical air changes per hour; naming it apart from the "ventilation" fraction of manual events also tells the engine its default venting stands down
+                actuators["ventilation_ach"] = _control(record.vent_ach + record.extractor_ach, 1.0)
         irrigation = None
         if decision.irrigation_target_vwc is not None:
             irrigation = IrrigationRequest("vwc_target", target_vwc=decision.irrigation_target_vwc, maximum_mm=equipment.irrigation_max_mm_step)

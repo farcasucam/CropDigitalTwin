@@ -13,7 +13,7 @@
   <script src="visual_state.js?v=20261102-visual7" defer></script>
   <script src="scene_state.js?v=20261102-scene2" defer></script>
   <script src="iso_scene.js?v=20261102-scene7" defer></script>
-  <script src="bench.js?v=22" defer></script>
+  <script src="bench.js?v=23" defer></script>
 </head>
 <body class="iso" data-theme="light">
   <header class="bar">
@@ -21,7 +21,7 @@
     <div class="bar-actions">
       <span id="status" class="status" role="status" aria-live="polite">Loading…</span>
       <label class="check"><input id="autorun" type="checkbox"> Auto-run</label>
-      <button id="run" class="primary" type="button" disabled data-stale="false"><span id="run-label">Run</span> <kbd>Ctrl</kbd>+<kbd>Enter</kbd></button>
+      <button id="run" class="primary" type="button" disabled data-stale="true"><span id="run-label">Run</span> <kbd>Ctrl</kbd>+<kbd>Enter</kbd></button>
       <a class="link" href="/">Classic workspace</a>
     </div>
   </header>
@@ -65,7 +65,7 @@
 
       <details class="group" id="control-group">
         <summary>3 · Climate control <span id="control-summary" class="pill">off</span></summary>
-        <p class="hint">Passive first: screens and vents act before extractors and HVAC, which spend energy. Automatic rules use the crop's own thresholds for its current stage (from the crop catalogue); a schedule repeats a daily window over a range of dates. A manual event on the timeline overrides the controller for that actuator.</p>
+        <p class="hint">Passive first: screens and vents act before extractors and HVAC, which spend energy. Automatic rules use the crop's own thresholds for its current stage (from the crop catalogue); a schedule repeats a daily window over a range of dates. A manual event on the timeline overrides the controller for that actuator. With any actuator on, the greenhouse's built-in heater thermostat and temperature-controlled vents stand down: an actuator set to Off does nothing.</p>
         <div id="control-actuators" class="ctl-list"></div>
         <details class="sub"><summary>Equipment (your installation)</summary>
           <p class="hint">Nothing is assumed: an empty field leaves that actuator unavailable (or its energy not estimable). Energy is an estimate from these values, not a measurement.</p>
