@@ -11,6 +11,9 @@ from typing import Any, Callable
 from urllib.parse import parse_qs, urlparse
 
 from agri_twin.application.energy_cost import energy_cost
+from agri_twin.application.greenhouse_backend import GreenhouseBackendError, layout_floor_area_m2
+from agri_twin.application.season_kpis import season_kpis
+from agri_twin.application.site_resources import SiteResources, SiteResourcesError, load_site_resources, save_site_resources
 from agri_twin.application.greenhouse_catalogue import build_greenhouse_catalogue
 from agri_twin.application.interactive_runtime import InteractiveRuntimeService
 from agri_twin.application.runtime_replay import RuntimeReplayService
@@ -257,6 +260,45 @@ class InteractiveFrontendAdapter:
     def runtime_what_if(self, document: Any) -> dict[str, Any]:
         return self.runtime.what_if(document)
 
+    def _plot_areas(self) -> dict[str, dict[str, Any]]:
+        return {plot.crop_key: {"plot_id": plot.plot_id, "area_ha": plot.area_ha, "area_m2": None if plot.area_ha is None else plot.area_ha * 10000.0, "source": "src/farm_config.json"}
+                for plot in self._farm_config.plots}
+
+    def site_resources(self) -> dict[str, Any]:
+        resources, document = load_site_resources()
+        return {"configuration": resources.to_dict(), "status": document.get("status"), "note": document.get("note"), "meanings": document.get("meanings"),
+                "content_hash": resources.content_hash, "plots": self._plot_areas()}
+
+    def save_site_resources(self, document: Any) -> dict[str, Any]:
+        try:
+            save_site_resources(document if isinstance(document, dict) else {})
+        except SiteResourcesError as exc:
+            raise ValueError(f"{exc.path}: {exc.message}" if exc.path else exc.message) from None
+        return self.site_resources()
+
+    def season_kpis(self, document: Any) -> dict[str, Any]:
+        allowed = {"crop", "environment", "times", "series", "greenhouse", "equipment", "area_m2", "resources"}
+        if not isinstance(document, dict) or set(document) - allowed or not {"crop", "environment", "times", "series"} <= set(document):
+            raise ValueError("the body must hold crop, environment, times and series (optionally greenhouse, equipment, area_m2)")
+        crop, environment = str(document["crop"]).lower(), str(document["environment"]).lower()
+        plots = self._plot_areas()
+        plot_area = (plots.get(crop) or {}).get("area_m2")
+        if document.get("area_m2") is not None:
+            area, source, plot_area = float(document["area_m2"]), "given by the caller", plot_area
+        elif environment == "greenhouse":
+            layout = (document.get("greenhouse") or {}).get("layout") if isinstance(document.get("greenhouse"), dict) else None
+            try:
+                area, source = layout_floor_area_m2(layout), "floor area of the simulated greenhouse layout"
+            except GreenhouseBackendError as exc:
+                raise ValueError(f"{exc.path}: {exc.message}") from None
+        else:
+            area, source, plot_area = plot_area, "area of the plot in the farm configuration" if plot_area else "unknown", None
+        try:
+            resources = SiteResources.from_mapping(document["resources"]) if document.get("resources") is not None else load_site_resources()[0]  # unsaved values of the bench, or the saved file
+            return season_kpis(resources, crop=crop, times=document["times"], series=document["series"], area_m2=area, area_source=source, plot_area_m2=plot_area, equipment=document.get("equipment"))
+        except SiteResourcesError as exc:
+            raise ValueError(f"{exc.path}: {exc.message}") from None
+
     def energy_cost(self, document: Any) -> dict[str, Any]:
         if not isinstance(document, dict) or set(document) != {"tariff", "time", "energy_kwh"}:
             raise ValueError("the body must hold exactly tariff, time and energy_kwh")
@@ -287,6 +329,9 @@ class FrontendRequestHandler(BaseHTTPRequestHandler):
         path = urlparse(self.path).path
         if path == "/api/capabilities":
             self._json(200, self.adapter.capabilities())
+            return
+        if path == "/api/site-resources":
+            self._json(200, self.adapter.site_resources())
             return
         if path == "/api/runtime/contract":
             self._json(200, self.adapter.runtime_contract())
@@ -339,6 +384,10 @@ class FrontendRequestHandler(BaseHTTPRequestHandler):
                 payload = self.adapter.runtime_preview(body)
             elif path == "/api/runtime/what-if":
                 payload = self.adapter.runtime_what_if(body)
+            elif path == "/api/site-resources":
+                payload = self.adapter.save_site_resources(body)
+            elif path == "/api/kpis/season":
+                payload = self.adapter.season_kpis(body)
             elif path == "/api/energy/cost":
                 payload = self.adapter.energy_cost(body)
             elif path == "/api/runtime/record":

@@ -259,6 +259,7 @@
     if (!greenhouse) bench.config.backend = "SIMPLIFIED";
     renderBackend();
     renderModelOptions();
+    if (typeof renderResources === "function" && bench.caps) renderResources();
   }
   function syncPressed(selector, key) {
     $$(selector).forEach((button) => button.setAttribute("aria-pressed", String(button.dataset[key] === bench.config[key])));
@@ -332,6 +333,124 @@
     select.addEventListener("change", () => { bench.config.et0Method = select.value; renderModelOptions(); changed(); });
     $("#indoor-wind").addEventListener("change", (event) => { bench.config.indoorWind = event.target.value === "" ? null : Number(event.target.value); changed(); });
     renderModelOptions();
+  }
+  // ---- resources: prices and conversions, and the season results computed with them (server side, from the series of the run) ----------------------------------------
+  const resources = () => { const r = bench.config.resources || (bench.config.resources = { waterFlat: null, waterYearly: [], heatingPrice: null, dryPct: {} }); r.waterYearly = r.waterYearly || []; r.dryPct = r.dryPct || {}; return r; };
+  function equipmentDocument() { const out = {}; for (const [key, value] of Object.entries((bench.config.control || {}).equipment || {})) if (isNumber(value)) out[key] = value; return out; }
+  function siteDocument() {
+    const r = resources(), currency = tariffCurrency(), yearly = {}, crops = {};
+    for (const item of r.waterYearly) if (Number.isInteger(item.year) && isNumber(item.price)) yearly[String(item.year)] = item.price;
+    for (const [crop, pct] of Object.entries(r.dryPct)) if (isNumber(pct) && pct > 0) crops[crop] = { fruit_dry_matter_fraction: pct / 100 };
+    const electricity = tariffDocument(); delete electricity.currency;
+    return { equipment: equipmentDocument(), prices: { currency, electricity, heating_energy: isNumber(r.heatingPrice) ? { flat_per_kwh: r.heatingPrice } : null, water: { flat_per_m3: isNumber(r.waterFlat) ? r.waterFlat : null, yearly } }, crops };
+  }
+  function applySiteDocument(config) {
+    const r = resources(), prices = config.prices || {}, water = prices.water || {};
+    r.waterFlat = isNumber(water.flat_per_m3) ? water.flat_per_m3 : null;
+    r.waterYearly = Object.entries(water.yearly || {}).map(([year, price]) => ({ year: Number(year), price }));
+    r.heatingPrice = prices.heating_energy && isNumber(prices.heating_energy.flat_per_kwh) ? prices.heating_energy.flat_per_kwh : null;
+    r.dryPct = {};
+    for (const [crop, entry] of Object.entries(config.crops || {})) if (isNumber(entry.fruit_dry_matter_fraction)) r.dryPct[crop] = Math.round(entry.fruit_dry_matter_fraction * 10000) / 100;
+    const t = tariff(), electricity = prices.electricity || {};
+    if (prices.currency) t.currency = prices.currency;
+    t.flat = isNumber(electricity.flat_per_kwh) ? electricity.flat_per_kwh : null;
+    t.yearly = Object.entries(electricity.yearly || {}).map(([year, price]) => ({ year: Number(year), price }));
+    t.bands = (electricity.time_of_day || []).map((b) => ({ from: b.from_hour, to: b.to_hour, mode: b.factor !== undefined ? "factor" : "price", value: b.factor !== undefined ? b.factor : b.price_per_kwh }));
+    t.offset = electricity.utc_offset_hours || 0;
+    const equipment = (config.equipment || {});
+    for (const [key, value] of Object.entries(equipment)) if (isNumber(value)) bench.config.control.equipment[key] = value;
+  }
+  async function loadSiteResources(replace) {
+    try {
+      bench.site = await api("/api/site-resources");
+      if (replace) { applySiteDocument(bench.site.configuration); renderTariff(); renderControl(); }
+    } catch (error) { bench.site = null; }
+    renderResources();
+  }
+  function renderResources() {
+    const r = resources(), crop = bench.config.crop, box = $("#res-water");
+    if (!box) return;
+    box.value = isNumber(r.waterFlat) ? String(r.waterFlat) : "";
+    $("#res-heating-price").value = isNumber(r.heatingPrice) ? String(r.heatingPrice) : "";
+    $("#res-crop-label").textContent = `Dry matter of the fresh ${crop} (%)`;
+    $("#res-dry").value = isNumber(r.dryPct[crop]) ? String(r.dryPct[crop]) : "";
+    const host = $("#res-water-yearly");
+    host.replaceChildren();
+    r.waterYearly.forEach((item, index) => {
+      const card = el("li", "event"), head = el("header"), remove = el("button", "", "Remove"); remove.type = "button";
+      remove.addEventListener("click", () => { r.waterYearly.splice(index, 1); renderResources(); resourcesChanged(); });
+      head.append(el("span", "", ""), remove); card.append(head);
+      const grid = el("div", "grid2");
+      for (const [text, key, props, integer] of [["Year", "year", { min: 2000, max: 2100, step: 1 }, true], [`Price (${tariffCurrency()}/m³)`, "price", { min: 0, step: "any" }, false]]) {
+        const wrap = el("label", "", text), input = el("input"); input.type = "number"; Object.assign(input, props); input.value = isNumber(item[key]) ? String(item[key]) : "";
+        input.addEventListener("change", () => { item[key] = input.value === "" ? null : integer ? Math.round(Number(input.value)) : Number(input.value); resourcesChanged(); });
+        wrap.append(input); grid.append(wrap);
+      }
+      card.append(grid); host.append(card);
+    });
+    const defined = [r.waterFlat, r.heatingPrice, ...Object.values(r.dryPct)].filter(isNumber).length + r.waterYearly.length;
+    $("#resources-summary").textContent = defined ? "defined" : "empty";
+  }
+  function resourcesChanged() { save(); renderResources(); if (bench.run) { bench.run.kpis = {}; renderSeason(); } }
+  function bindResources() {
+    const r = resources();
+    $("#res-water").addEventListener("change", (event) => { r.waterFlat = event.target.value === "" ? null : Number(event.target.value); resourcesChanged(); });
+    $("#res-heating-price").addEventListener("change", (event) => { r.heatingPrice = event.target.value === "" ? null : Number(event.target.value); resourcesChanged(); });
+    $("#res-dry").addEventListener("change", (event) => { r.dryPct[bench.config.crop] = event.target.value === "" ? null : Number(event.target.value); resourcesChanged(); });
+    $("#res-add-year").addEventListener("click", () => { r.waterYearly.push({ year: Number(iso(startMs()).slice(0, 4)) + 1, price: null }); renderResources(); });
+    $("#res-load").addEventListener("click", () => loadSiteResources(true).then(resourcesChanged));
+    $("#res-save").addEventListener("click", async () => {
+      const note = $("#res-note");
+      try { bench.site = await api("/api/site-resources", { method: "POST", body: JSON.stringify(siteDocument()) }); note.textContent = `Saved to src/site_resources.json (hash ${bench.site.content_hash.slice(0, 12)}).`; }
+      catch (error) { note.textContent = `Not saved: ${error.message || error}`; }
+      note.hidden = false;
+    });
+    loadSiteResources(!bench.config.resources);  // first visit: start from the saved site configuration
+  }
+  const SEASON_ROWS = [
+    ["Yield", [["Fresh product (kg/m²)", (k) => k.yield.fresh_product_kg_m2, 3], ["Fresh product, unit (kg)", (k) => k.yield.fresh_product_kg, 0], ["Fresh product (t/ha)", (k) => k.yield.fresh_product_t_ha, 2], ["Fruit dry matter (g/m²)", (k) => k.yield.fruit_dry_matter_g_m2, 1]]],
+    ["Water", [["Irrigation (mm)", (k) => k.water.irrigation_mm, 1], ["Irrigation, unit (m³)", (k) => k.water.irrigation_m3, 1], ["Drained share (%)", (k) => (k.water.drained_share === null ? null : k.water.drained_share * 100), 1], ["Product per m³ of irrigation (kg)", (k) => k.water.product_per_m3_irrigation_kg, 1]]],
+    ["Energy", [["Input energy (kWh)", (k) => k.energy.input_kwh, 0], ["Input energy (kWh/m²)", (k) => k.energy.input_kwh_per_m2, 2], ["Energy per kg of product (kWh)", (k) => k.energy.kwh_per_kg_product, 2], ["Heating, thermal (kWh)", (k) => k.energy.heating_thermal_kwh, 0], ["Cooling, thermal (kWh)", (k) => k.energy.cooling_thermal_kwh, 0]]],
+    ["Risk", [["Hours above the stage maximum", (k) => k.risk.hours_above_max_temp, 0], ["Hours below the stage minimum", (k) => k.risk.hours_below_min_temp, 0], ["Hours above critical heat", (k) => k.risk.hours_above_critical_heat, 0], ["Peak frost damage", (k) => k.risk.peak_frost_damage, 2]]],
+    ["Cost of resources", [["Energy + water", (k) => k.cost.resource_cost, 0], ["Per m²", (k) => k.cost.resource_cost_per_m2, 3], ["Per kg of product", (k) => k.cost.resource_cost_per_kg_product, 3], ["Energy share (%)", (k) => (k.cost.energy_share === null ? null : k.cost.energy_share * 100), 0]]],
+  ];
+  async function seasonKpi(run, branch) {
+    run.kpis = run.kpis || {};
+    if (!run.kpis[branch]) {
+      const series = run.series[branch];
+      run.kpis[branch] = api("/api/kpis/season", { method: "POST", body: JSON.stringify({ crop: bench.config.crop, environment: run.environment, times: run.times, series, greenhouse: run.greenhouse || undefined, resources: siteDocument() }) });
+    }
+    return run.kpis[branch];
+  }
+  async function renderSeason() {
+    const host = $("#season"), run = bench.run;
+    if (!host || !run) { if (host) host.hidden = true; return; }
+    const names = run.kind === "WHAT_IF" ? ["baseline", "intervention"] : ["baseline"], token = (renderSeason.token = (renderSeason.token || 0) + 1);
+    let kpis;
+    try { kpis = await Promise.all(names.map((name) => seasonKpi(run, name))); } catch (error) { run.kpis = {}; host.hidden = true; return; }
+    if (token !== renderSeason.token || run !== bench.run) return;
+    const body = $("#season-body"), compare = names.length === 2, table = el("table"), head = el("thead"), row = el("tr");
+    for (const text of compare ? ["", "Baseline", "Intervention", "Δ"] : ["", "Run"]) row.append(el("th", "", text));
+    head.append(row); table.append(head);
+    const tbody = el("tbody");
+    for (const [group, items] of SEASON_ROWS) {
+      const title = el("tr"), cell = el("th", "group", group); cell.colSpan = compare ? 4 : 2; title.append(cell); tbody.append(title);
+      for (const [label, getter, digits] of items) {
+        const values = kpis.map((k) => { const v = getter(k); return isNumber(v) ? v : null; });
+        if (values.every((v) => v === null) && group === "Energy" && label.startsWith("Heating") === false && kpis[0].energy.input_kwh === null && kpis[0].energy.heating_thermal_kwh === null) continue;
+        const tr = el("tr"); tr.append(el("td", "", label));
+        for (const v of values) tr.append(el("td", v === null ? "na" : "", v === null ? "n/a" : fmt(v, digits)));
+        if (compare) { const delta = values[0] !== null && values[1] !== null ? values[1] - values[0] : null; tr.append(el("td", delta === null ? "na" : delta > 1e-9 ? "up" : delta < -1e-9 ? "down" : "", delta === null ? "n/a" : `${delta > 0 ? "+" : ""}${fmt(delta, digits)}`)); }
+        tbody.append(tr);
+      }
+    }
+    table.append(tbody);
+    const missing = [...new Set(kpis.flatMap((k) => k.missing))], area = kpis[0].area;
+    const notes = [`Per ${fmt(area.m2 || 0, 0)} m² (${area.source}).`, kpis[0].statement];
+    if (kpis[0].plot_scaling) notes.push(`Scaled to the ${fmt(kpis[0].plot_scaling.plot_area_m2 / 10000, 2)} ha plot of the farm configuration: ×${fmt(kpis[0].plot_scaling.factor, 1)} (${kpis[0].plot_scaling.assumption}).`);
+    if (missing.length) notes.push(`n/a until you define: ${missing.join("; ")}.`);
+    body.replaceChildren(table, el("p", "season-note", notes.join(" ")));
+    host.hidden = false;
   }
   function bindHvac() {
     $("#crop-exchange").addEventListener("change", (event) => { bench.config.cropExchange = event.target.checked; changed(); });
@@ -826,6 +945,7 @@
   function bindControl() {
     bindTariff();
     bindHvac();
+    bindResources();
     bindModelOptions();
     if (!controlInfo()) { renderControl(); return; }
     $("#add-schedule").addEventListener("click", () => {
@@ -928,6 +1048,7 @@
       if (serial !== bench.serial) return;
       data.seconds = (performance.now() - started) / 1000;
       data.signature = signature;
+      data.greenhouse = request.greenhouse || null;
       await attachCost(data);
       adopt(data);
       updateStale();
@@ -995,6 +1116,7 @@
     buildCharts();
     drawActuation();
     renderDelta();
+    renderSeason();
     renderInfo();
     renderEvents(); renderTimeline();  // plausibility hints depend on the run's own weather
     renderFrame(true);

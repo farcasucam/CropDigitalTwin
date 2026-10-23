@@ -1,0 +1,38 @@
+{
+  "contract": "site_resources",
+  "version": "1.0",
+  "status": "USER_DEFINED_EMPTY_TEMPLATE",
+  "note": "One place for what the user knows about the site and the market: the efficiency and capacity of the equipment, the price of energy and water, and the conversions from simulated dry matter to marketable units. Nothing here is a model value and nothing is assumed: every field is empty until the user defines it, and a result that needs an empty field is reported as not computable. The equipment and the electricity tariff can also be given per request in the bench; the water and heating prices and the conversions live here. Save changes from the bench (Resources) or edit this file.",
+  "equipment": {
+    "vent_max_ach": null,
+    "extractor_max_ach": null,
+    "extractor_power_kw": null,
+    "cooling_capacity_kw": null,
+    "cooling_cop": null,
+    "heating_capacity_kw": null,
+    "heating_efficiency": null,
+    "irrigation_max_mm_step": null
+  },
+  "prices": {
+    "currency": "EUR",
+    "electricity": {"flat_per_kwh": null, "yearly": {}, "time_of_day": [], "utc_offset_hours": 0},
+    "heating_energy": null,
+    "water": {"flat_per_m3": null, "yearly": {}}
+  },
+  "crops": {
+    "tomato": {"fruit_dry_matter_fraction": null},
+    "pepper": {"fruit_dry_matter_fraction": null},
+    "lettuce": {"fruit_dry_matter_fraction": null},
+    "grape": {"fruit_dry_matter_fraction": null},
+    "peach": {"fruit_dry_matter_fraction": null},
+    "plum": {"fruit_dry_matter_fraction": null},
+    "apple": {"fruit_dry_matter_fraction": null}
+  },
+  "meanings": {
+    "heating_efficiency": "thermal kW delivered per kW of input energy (boiler efficiency or heat-pump COP)",
+    "cooling_cop": "thermal kW removed per electric kW",
+    "heating_energy": "price of the heating fuel; empty: heating is priced with the electricity tariff",
+    "water": "price per cubic metre of irrigation water (1 mm over 1 m2 is 1 litre); flat_per_m3 and/or a table per calendar year",
+    "fruit_dry_matter_fraction": "dry-matter share of the fresh marketable product (0-1), to turn simulated dry matter into kg of fresh product; calibre and quality are not modelled"
+  }
+}

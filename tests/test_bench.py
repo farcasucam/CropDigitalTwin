@@ -236,3 +236,9 @@ def test_the_bench_lets_the_controller_drive_energyplus_except_the_shade_screen(
 def test_the_run_button_is_red_before_the_first_run_because_nothing_on_screen_is_data():
     assert 'id="run" class="primary" type="button" disabled data-stale="true"' in HTML  # red from the first paint
     assert 'button.dataset.stale = String(stale || !run)' in JS and "No data yet: press Run" in JS
+
+
+def test_the_bench_has_resources_and_shows_the_season_results_computed_by_the_server():
+    for token in ("resources-group", "res-water", "res-dry", "res-save", "res-load", 'id="season"', "season-body"):
+        assert token in HTML, token
+    assert "/api/kpis/season" in JS and "/api/site-resources" in JS and "renderSeason" in JS and "siteDocument" in JS

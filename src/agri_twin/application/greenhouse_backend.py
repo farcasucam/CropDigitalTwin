@@ -178,6 +178,13 @@ def layout_spec(request: GreenhouseBackendRequest) -> GreenhouseGeometrySpec:
     return _spec(dict(request.layout))
 
 
+def layout_floor_area_m2(layout: Any) -> float:
+    """Floor area of a layout document (the ``greenhouse.layout`` block of a request; None: the default layout), without needing EnergyPlus."""
+    from agri_twin.domain.greenhouse_typology import floor_area_m2
+
+    return floor_area_m2(layout_spec(_simplified_request(layout)))
+
+
 def simplified_configuration(request: GreenhouseBackendRequest):
     """(lumped configuration, description) of the greenhouse of this request: derived from the same geometry and envelope as the EnergyPlus model."""
     from agri_twin.application.consistent_greenhouse import reduced_configuration

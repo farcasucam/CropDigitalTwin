@@ -137,6 +137,10 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .delta th, .delta td { text-align: right; padding: .25rem .5rem; border-bottom: 1px solid var(--line); }
 .delta th:first-child, .delta td:first-child { text-align: left; }
 .delta .up { color: var(--red); } .delta .down { color: var(--blue); }
+.season h3 { margin: 0 0 .4rem; font-size: .95rem; }
+.season th.group { text-align: left; background: var(--mint); font-size: .74rem; letter-spacing: .03em; text-transform: uppercase; }
+.season td.na { color: var(--muted); font-style: italic; }
+.season .season-note { margin: .5rem 0 0; font-size: .78rem; color: var(--muted); }
 .info { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: .5rem .8rem; font-size: .8rem; }
 .info code { overflow-wrap: anywhere; }
 

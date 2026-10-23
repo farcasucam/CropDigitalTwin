@@ -13,7 +13,7 @@
   <script src="visual_state.js?v=20261102-visual7" defer></script>
   <script src="scene_state.js?v=20261102-scene2" defer></script>
   <script src="iso_scene.js?v=20261102-scene7" defer></script>
-  <script src="bench.js?v=23" defer></script>
+  <script src="bench.js?v=24" defer></script>
 </head>
 <body class="iso" data-theme="light">
   <header class="bar">
@@ -140,6 +140,21 @@
         </div>
       </details>
 
+      <details class="group" id="resources-group">
+        <summary>6 · Resources and prices <span id="resources-summary" class="pill">empty</span></summary>
+        <p class="hint">What you know about the site and the market. Nothing is assumed: a result that needs an empty field is shown as n/a with the reason. Equipment efficiencies and the electricity tariff are the ones of the Climate control group; the product has no price here (calibre and quality are not modelled).</p>
+        <div class="grid2">
+          <label>Water price (per m³)<input id="res-water" type="number" min="0" step="any" placeholder="not defined"></label>
+          <label>Heating fuel price (per kWh)<input id="res-heating-price" type="number" min="0" step="any" placeholder="uses electricity"></label>
+          <label class="wide"><span id="res-crop-label">Dry matter of the fresh product (%)</span><input id="res-dry" type="number" min="0" max="100" step="any" placeholder="not defined"></label>
+        </div>
+        <div class="field"><span class="label">Water price per year (a future-price scenario)</span></div>
+        <ul id="res-water-yearly" class="events" aria-label="Yearly water prices"></ul>
+        <button id="res-add-year" class="chip" type="button">Add a year</button>
+        <div class="chips"><button id="res-load" class="chip" type="button" title="Replace these values with the saved site configuration">Load site configuration</button><button id="res-save" class="chip" type="button" title="Write equipment, tariff, prices and conversions to src/site_resources.json">Save to site configuration</button></div>
+        <p id="res-note" class="hint" hidden></p>
+      </details>
+
       <details class="group">
         <summary>View</summary>
         <div class="field"><span class="label">Camera</span>
@@ -200,6 +215,7 @@
 
       <div id="charts" class="charts" hidden></div>
       <div id="delta" class="delta" hidden></div>
+      <section id="season" class="delta season" hidden aria-label="Season results"><h3>Season results</h3><div id="season-body"></div></section>
       <details id="info" class="info" hidden><summary>Run information and scientific status</summary><div id="info-body"></div></details>
     </section>
   </main>
