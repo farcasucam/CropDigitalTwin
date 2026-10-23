@@ -71,6 +71,63 @@
       "irrigation_type": "drip",
       "soil_type": "sandy_loam",
       "station_id": "ST-PEP-01"
+    },
+    {
+      "id": "plot_20500",
+      "name": "parcela_tipo_lechuga_20500",
+      "farm_name": "PARCELA_TIPO",
+      "plot_code": "L01-TIPO",
+      "crop_key": "lettuce",
+      "crop_variety": "UNSPECIFIED",
+      "area_ha": 3.0,
+      "coordinates": {
+        "latitude": 37.58,
+        "longitude": -1.32,
+        "elevation_m": null
+      },
+      "current_stage": "vegetative_growth",
+      "irrigation_type": "drip",
+      "soil_type": "sandy_loam",
+      "station_id": "ST-LET-01",
+      "provenance": "TYPICAL_PLOT_NOT_REAL: a plot of typical size for the crop and area, not an existing one; coordinates are the approximate growing-area point of src/weather_locations.json"
+    },
+    {
+      "id": "plot_61200",
+      "name": "parcela_tipo_melocotonero_61200",
+      "farm_name": "PARCELA_TIPO",
+      "plot_code": "M01-TIPO",
+      "crop_key": "peach",
+      "crop_variety": "UNSPECIFIED",
+      "area_ha": 3.5,
+      "coordinates": {
+        "latitude": 38.27,
+        "longitude": -1.4,
+        "elevation_m": null
+      },
+      "current_stage": "vegetative_growth",
+      "irrigation_type": "drip",
+      "soil_type": "calcareous_loam",
+      "station_id": "ST-PCH-01",
+      "provenance": "TYPICAL_PLOT_NOT_REAL: a plot of typical size for the crop and area, not an existing one; coordinates are the approximate growing-area point of src/weather_locations.json"
+    },
+    {
+      "id": "plot_72300",
+      "name": "parcela_tipo_manzano_72300",
+      "farm_name": "PARCELA_TIPO",
+      "plot_code": "A01-TIPO",
+      "crop_key": "apple",
+      "crop_variety": "UNSPECIFIED",
+      "area_ha": 5.0,
+      "coordinates": {
+        "latitude": 41.57,
+        "longitude": -3.05,
+        "elevation_m": null
+      },
+      "current_stage": "vegetative_growth",
+      "irrigation_type": "drip",
+      "soil_type": "clay_loam",
+      "station_id": "ST-APL-01",
+      "provenance": "TYPICAL_PLOT_NOT_REAL: a plot of typical size for the crop and area, not an existing one; coordinates are the approximate growing-area point of src/weather_locations.json"
     }
   ]
 }

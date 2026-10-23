@@ -42,6 +42,7 @@ class Plot:
     soil_type: str
     irrigation_type: str
     station_id: str
+    provenance: str = ""  # empty: a configured plot; otherwise what the plot is (for example a typical plot that does not exist)
 
     @property
     def initial_stage(self) -> str:
@@ -99,6 +100,7 @@ class FarmConfigRepository:
                     soil_type=str(raw.get("soil_type", "")),
                     irrigation_type=str(raw.get("irrigation_type", "")),
                     station_id=str(raw.get("station_id", "")),
+                    provenance=str(raw.get("provenance", "")),
                 )
             except (KeyError, TypeError, ValueError, AttributeError) as exc:
                 raise FarmConfigurationError("plot configuration is invalid") from exc

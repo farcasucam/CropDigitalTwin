@@ -127,7 +127,7 @@ class InteractiveFrontendAdapter:
                         "longitude": configured_plot.longitude,
                         "elevation_m": configured_plot.elevation,
                     },
-                    "metadata_status": "CONFIGURED",
+                    "metadata_status": "TYPICAL_PLOT_NOT_REAL" if configured_plot.provenance else "CONFIGURED",
                     "metadata_source": "src/farm_config.json",
                 }
             supported = []
@@ -261,7 +261,7 @@ class InteractiveFrontendAdapter:
         return self.runtime.what_if(document)
 
     def _plot_areas(self) -> dict[str, dict[str, Any]]:
-        return {plot.crop_key: {"plot_id": plot.plot_id, "area_ha": plot.area_ha, "area_m2": None if plot.area_ha is None else plot.area_ha * 10000.0, "source": "src/farm_config.json"}
+        return {plot.crop_key: {"plot_id": plot.plot_id, "area_ha": plot.area_ha, "area_m2": None if plot.area_ha is None else plot.area_ha * 10000.0, "source": "src/farm_config.json", "typical": bool(plot.provenance)}
                 for plot in self._farm_config.plots}
 
     def site_resources(self) -> dict[str, Any]:
@@ -283,6 +283,7 @@ class InteractiveFrontendAdapter:
         crop, environment = str(document["crop"]).lower(), str(document["environment"]).lower()
         plots = self._plot_areas()
         plot_area = (plots.get(crop) or {}).get("area_m2")
+        plot_note = " (a typical plot, not a real one)" if (plots.get(crop) or {}).get("typical") else ""
         if document.get("area_m2") is not None:
             area, source, plot_area = float(document["area_m2"]), "given by the caller", plot_area
         elif environment == "greenhouse":
@@ -292,7 +293,7 @@ class InteractiveFrontendAdapter:
             except GreenhouseBackendError as exc:
                 raise ValueError(f"{exc.path}: {exc.message}") from None
         else:
-            area, source, plot_area = plot_area, "area of the plot in the farm configuration" if plot_area else "unknown", None
+            area, source, plot_area = plot_area, f"area of the plot in the farm configuration{plot_note}" if plot_area else "unknown", None
         try:
             resources = SiteResources.from_mapping(document["resources"]) if document.get("resources") is not None else load_site_resources()[0]  # unsaved values of the bench, or the saved file
             return season_kpis(resources, crop=crop, times=document["times"], series=document["series"], area_m2=area, area_source=source, plot_area_m2=plot_area, equipment=document.get("equipment"))

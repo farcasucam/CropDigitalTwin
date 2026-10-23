@@ -83,8 +83,24 @@ def test_capabilities_expose_configured_plot_details_and_coordinates() -> None:
     }
 
 
-def test_capabilities_mark_unconfigured_plot_details_without_coordinates() -> None:
-    details = InteractiveFrontendAdapter().capabilities()["plot_details"]["apple"]
+def test_capabilities_mark_typical_plots_as_not_real() -> None:
+    details = InteractiveFrontendAdapter().capabilities()["plot_details"]
+    for crop, hectares in (("lettuce", 3.0), ("peach", 3.5), ("apple", 5.0)):
+        assert details[crop]["metadata_status"] == "TYPICAL_PLOT_NOT_REAL" and details[crop]["area_ha"] == hectares and details[crop]["coordinates"]["latitude"] is not None
+    assert details["tomato"]["metadata_status"] == "CONFIGURED"
+
+
+def test_capabilities_mark_unconfigured_plot_details_without_coordinates(tmp_path) -> None:
+    import json
+    from agri_twin.domain.farm import FarmConfigRepository
+
+    document = json.loads((FRONTEND.parent / "src" / "farm_config.json").read_text(encoding="utf-8"))
+    document["plots"] = [plot for plot in document["plots"] if plot["crop_key"] != "apple"]
+    path = tmp_path / "farm.json"
+    path.write_text(json.dumps(document), encoding="utf-8")
+    adapter = InteractiveFrontendAdapter()
+    adapter._farm_config = FarmConfigRepository(path)  # noqa: SLF001
+    details = adapter.capabilities()["plot_details"]["apple"]
     assert details["metadata_status"] == "NO_FARM_METADATA_CONFIGURED"
     assert details["metadata_source"] is None
     assert details["coordinates"] is None

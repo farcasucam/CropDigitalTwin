@@ -146,7 +146,8 @@ def test_the_api_serves_the_configuration_with_the_plot_areas_of_the_farm_json_a
 
     adapter = InteractiveFrontendAdapter()
     configuration = adapter.site_resources()
-    assert configuration["plots"]["tomato"]["area_m2"] == pytest.approx(32500.0) and "lettuce" not in configuration["plots"] and configuration["content_hash"]
+    assert configuration["plots"]["tomato"]["area_m2"] == pytest.approx(32500.0) and configuration["content_hash"]
+    assert configuration["plots"]["lettuce"]["typical"] and configuration["plots"]["lettuce"]["area_m2"] == pytest.approx(30000.0) and not configuration["plots"]["tomato"]["typical"]
     equipment = {"vent_max_ach": 30, "extractor_max_ach": 20, "extractor_power_kw": 20, "cooling_capacity_kw": 400, "cooling_cop": 3, "heating_capacity_kw": 150, "heating_efficiency": 0.9}
     control = {"actuators": {"vents": "AUTO", "extractors": "AUTO", "cooling": "AUTO", "heating": "AUTO"}, "equipment": equipment}
     run = InteractiveSimulationService().run_simulation({"crop": "tomato", "environment": "greenhouse", "end_time": "2026-03-01T00:00:00+00:00", "control": control,

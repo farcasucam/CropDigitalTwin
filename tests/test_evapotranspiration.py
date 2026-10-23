@@ -85,10 +85,25 @@ def test_invalid_options_are_rejected_with_a_path(document, path):
     assert caught.value.path == path
 
 
-def test_a_crop_without_coordinates_cannot_use_penman_monteith_without_the_weather_archive():
+def test_a_plot_without_coordinates_cannot_use_penman_monteith_without_the_weather_archive(monkeypatch, tmp_path):
+    import json
+
+    import agri_twin.application.model_options as options_module
+
+    document = json.loads(options_module.FARM_CONFIG.read_text(encoding="utf-8"))
+    document["plots"] = [plot for plot in document["plots"] if plot["crop_key"] != "lettuce"]
+    farm = tmp_path / "farm.json"
+    farm.write_text(json.dumps(document), encoding="utf-8")
+    monkeypatch.setattr(options_module, "FARM_CONFIG", farm)
     with pytest.raises(SimulationApiError) as caught:
         canonicalize_request({"crop": "lettuce", "model_options": PM})
     assert "coordinates" in caught.value.errors[0].message and caught.value.errors[0].path == "model_options.et0_method"
+    assert canonicalize_request({"crop": "tomato", "model_options": PM}).model_options is not None
+
+
+def test_the_typical_plots_give_every_crop_a_site_for_penman_monteith():
+    for crop in ("lettuce", "peach", "apple", "tomato", "pepper", "grape", "plum"):
+        assert canonicalize_request({"crop": crop, "model_options": PM}).model_options is not None
 
 
 def test_penman_monteith_changes_the_evapotranspiration_and_is_part_of_the_identity():

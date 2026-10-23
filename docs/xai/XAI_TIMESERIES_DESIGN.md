@@ -5,6 +5,8 @@ Estado: **PROPUESTA** (nada implementado). Fecha de redacción: 2026-10-23. Los 
 
 ---
 
+> **Diseño científico:** las preguntas de investigación, hipótesis, banco de pruebas (GCTSB), métricas, análisis estadístico y amenazas a la validez están en `docs/xai/XAI_SCIENTIFIC_DESIGN.md`, que **prevalece** sobre este documento en todo lo que afecte a la evaluación. Este documento fija la arquitectura y las fases de ingeniería; el TFG (`docs/xai/TFG.pdf`) es el punto de partida de la fase numérica (STL, PELT, Holt-Winters, enriquecimiento semántico, verificador).
+
 ## 0. Cómo leer este documento (reglas para el agente)
 
 1. **Respeta `CLAUDE.md` y `docs/architecture/`**: arquitectura por capas (dominio puro → aplicación → infraestructura → interfaces), cadena causal `evento/dato → modelo físico → estado → cultivo → evaluación/control → comando → actuador → modelo físico`, informes deterministas con hash, nada de valores agronómicos inventados.
@@ -143,6 +145,12 @@ Numeración **6.x** (la familia 5.x es el marco científico del gemelo). Orden o
 **Pruebas:** determinismo del hash; anti-fuga (ninguna covariable futura contiene información posterior al instante de corte); el frame de una rama de `what-if` coincide con el de la ejecución continua en el prefijo.
 **Aceptación:** `manual_phase6_1_frames_test.py` genera frames de 4 escenarios (tomate/pimiento, outdoor/greenhouse/EnergyPlus-control) con hashes estables.
 
+### Fase 6.1b — Banco de pruebas GCTSB y preregistro *(3–4 jornadas; antes de 6.2)*
+**Objetivo:** el generador de escenarios con verdad de terreno que hace evaluables todas las fases siguientes (detalle y justificación en `XAI_SCIENTIFIC_DESIGN.md` §5).
+**Entregables:** `application/xai/benchmark.py` (hipercubo latino de eventos, perturbaciones **pareadas** del gemelo para la verdad interventiva, inyección de ruido y fallos de sensor **sobre la observación**, anotaciones de cambios, particiones por temporada y cultivo), `docs/xai/PREREGISTRATION.md` (hipótesis, métricas primarias, umbrales provisionales, plan estadístico) y `manual_phase6_1b_benchmark_test.py` con hashes estables.
+**Pruebas:** determinismo; la perturbación pareada afecta solo a lo posterior al instante del evento; el ruido no altera el estado verdadero; sin fuga entre particiones; cada anotación coincide con el evento del gemelo.
+**Aceptación:** ≥ 1000 escenarios reproducibles con las cuatro verdades (G1-G4) y una tabla de cobertura de factores.
+
 ### Fase 6.2 — `TimeSeriesAnalyzer` determinista (STL, PELT, Holt-Winters) *(2–3 jornadas)*
 **Objetivo:** el «análisis algorítmico determinista» previo al LLM.
 **Diseño**
@@ -168,6 +176,9 @@ Numeración **6.x** (la familia 5.x es el marco científico del gemelo). Orden o
 **Evaluación honesta (sin dato real):** *backtesting* sobre series del gemelo con orígenes rodantes: MASE/sMAPE y **cobertura empírica de cuantiles** frente a Holt-Winters y naive estacional; casos con y sin covariables; casos con evento (ola de frío) para ver si las covariables futuras (forzamiento conocido) mejoran. Resultado = informe, **no** afirmación de calidad general.
 **Pruebas:** contrato del cliente con el doble; errores (timeout, 5xx, respuesta malformada) → excepciones tipificadas; límites de entrada; hash estable.
 **Aceptación:** `manual_phase6_3_forecast_test.py` (con servicio real si está disponible; si no, con el doble y lo declara).
+
+### Fase 6.3a — Puerta de viabilidad de TimesFM 3 *(incluida en 6.3; 2 jornadas)*
+Antes de construir la atribución: ejecutar RQ2 y la parte contrafáctica de RQ4 sobre el banco GCTSB frente a naive estacional, Holt-Winters, regresión con retardos, boosting, un modelo entrenado en el dominio y Chronos-2, con orígenes rodantes, intervalos por bloques y cobertura de cuantiles. **Regla de decisión (preregistrada):** si el uso de covariables no concuerda con el gemelo en los factores principales, la explicación L2/L3 se construye sobre un modelo agnóstico y TimesFM queda como comparador; el resultado negativo se publica.
 
 ### Fase 6.4 — Capa semántica: `SemanticEnricher` y `SemanticFormatter` *(3 jornadas)*
 **Objetivo:** convertir números en hechos verificables y en Markdown que un LLM pueda razonar sin «ceguera matemática».

@@ -44,3 +44,9 @@ In the default tomato greenhouse season about 90 % of the irrigation drains (273
 ## Tests
 
 `tests/test_site_resources_kpis.py`: empty template, validation with paths, atomic save, conversions (dry matter to fresh product, area), water volume and cost per year, energy from efficiencies (COP only if cooling ran), request equipment override, own heating price, cost per m2 and per kg, risk hours from the catalogue, linear scaling, open field, and the API on a real run.
+
+## Typical plots
+
+Lettuce, peach and apple had no plot in `src/farm_config.json`, so their totals and the Penman-Monteith site were undefined. Three **typical plots that do not exist** were added (`provenance: TYPICAL_PLOT_NOT_REAL`; ids as the synthetic plots of the interactive service):
+lettuce 3.0 ha (`plot_20500`), peach 3.5 ha (`plot_61200`), apple 5.0 ha (`plot_72300`), with the approximate growing-area coordinates of `src/weather_locations.json` (pending the user's confirmation), drip irrigation and a soil type of the growth configuration.
+The sizes are chosen as typical for the crop and area (small and medium family farms), not measured. The capabilities report them as `TYPICAL_PLOT_NOT_REAL` and the season results say "a typical plot, not a real one" in the area source. Replace them with real parcels when they exist.
