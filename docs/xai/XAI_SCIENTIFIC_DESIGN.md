@@ -5,6 +5,8 @@ Punto de partida: el TFG `docs/xai/TFG.pdf` (Agro-IA Command Center), leído en 
 
 ---
 
+> **Publicación:** este diseño es la base metodológica de un artículo Q1 de IA explicativa aplicada; las contribuciones, el posicionamiento, la revisión sistemática, la ciencia abierta y los riesgos de rechazo están en `docs/xai/PUBLICATION_STRATEGY.md`, y la estructura del software en `docs/xai/XAI_MODULE_ARCHITECTURE.md`.
+
 ## 1. Qué hizo realmente el TFG en su fase numérica (y qué no)
 
 **Lo implementado** (TFG §6.3.2-6.3.5, 6.10, 6.11):

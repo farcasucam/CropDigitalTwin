@@ -1,0 +1,57 @@
+{
+  "contract": "xai_benchmark_design",
+  "version": "1.0",
+  "status": "PROVISIONAL_DESIGN_CONVENTION",
+  "note": "Design of the Greenhouse Causal Time-Series Benchmark (GCTSB): how scenarios, interventions and sensor errors are sampled. Every number here is a SAMPLING CONVENTION of the benchmark, not an agronomic or physical value and not a measurement. The intensity ranges lie inside the technical bounds of the runtime events (src/agri_twin/application/runtime_events.py); the noise and fault parameters are ASSUMPTIONS about sensors, swept from none to high so the dependence on them is reported. The values are frozen in docs/xai/PREREGISTRATION.md before the test partition is touched.",
+  "seasons": 40,
+  "window": {"days_min": 10, "days_max": 30, "warmup_days_min": 5},
+  "events": {
+    "per_scenario_min": 0,
+    "per_scenario_max": 3,
+    "duration_hours_min": 12,
+    "duration_hours_max": 72
+  },
+  "factors": {
+    "HEAT_WAVE": {"intensity_min": 3.0, "intensity_max": 12.0, "environments": ["outdoor", "greenhouse"], "unit": "degC added"},
+    "COLD_WAVE": {"intensity_min": 3.0, "intensity_max": 12.0, "environments": ["outdoor", "greenhouse"], "unit": "degC subtracted"},
+    "LOW_RADIATION": {"intensity_min": 0.3, "intensity_max": 0.8, "environments": ["outdoor", "greenhouse"], "unit": "multiplier"},
+    "HIGH_RADIATION": {"intensity_min": 1.1, "intensity_max": 1.5, "environments": ["outdoor", "greenhouse"], "unit": "multiplier"},
+    "RAIN": {"intensity_min": 1.0, "intensity_max": 8.0, "environments": ["outdoor", "greenhouse"], "unit": "mm per hour"},
+    "DRYNESS": {"intensity_min": null, "intensity_max": null, "environments": ["outdoor", "greenhouse"], "unit": "none"},
+    "WIND": {"intensity_min": 1.5, "intensity_max": 4.0, "environments": ["outdoor", "greenhouse"], "unit": "multiplier"},
+    "IRRIGATION": {"intensity_min": 0.5, "intensity_max": 3.0, "environments": ["outdoor", "greenhouse"], "unit": "mm per step"},
+    "VENTILATION": {"intensity_min": 0.3, "intensity_max": 1.0, "environments": ["greenhouse"], "unit": "fraction of the vent capacity"},
+    "SHADING": {"intensity_min": 0.3, "intensity_max": 0.9, "environments": ["greenhouse"], "unit": "fraction"},
+    "CO2": {"intensity_min": 0.3, "intensity_max": 1.0, "environments": ["greenhouse"], "unit": "fraction of the actuator"}
+  },
+  "probes": {
+    "note": "Fixed-level single-factor edits applied from a cut-off for the horizon: the interventional ground truth of the attribution and counterfactual questions (G2, G4).",
+    "horizon_hours": 72,
+    "cutoff_after_hours": 48,
+    "levels": {
+      "HEAT_WAVE": 6.0, "COLD_WAVE": 6.0, "LOW_RADIATION": 0.5, "HIGH_RADIATION": 1.3, "IRRIGATION": 2.0, "WIND": 3.0,
+      "VENTILATION": 1.0, "SHADING": 0.6, "CO2": 1.0
+    },
+    "outdoor": ["HEAT_WAVE", "COLD_WAVE", "LOW_RADIATION", "HIGH_RADIATION", "IRRIGATION", "WIND"],
+    "greenhouse": ["HEAT_WAVE", "COLD_WAVE", "LOW_RADIATION", "HIGH_RADIATION", "IRRIGATION", "WIND", "VENTILATION", "SHADING", "CO2"]
+  },
+  "control": {
+    "note": "Share of greenhouse scenarios run with the climate controller, with ILLUSTRATIVE equipment (not sourced, not a real installation): per square metre of floor, as the bench's illustrative values.",
+    "share": 0.25,
+    "equipment_per_m2": {"extractor_power_kw": 0.03, "cooling_capacity_kw": 0.45, "heating_capacity_kw": 0.15},
+    "equipment_fixed": {"vent_max_ach": 30, "extractor_max_ach": 20, "cooling_cop": 3, "heating_efficiency": 0.9, "irrigation_max_mm_step": 3},
+    "actuators": {"vents": "AUTO", "extractors": "AUTO", "cooling": "AUTO", "heating": "AUTO", "irrigation": "AUTO"}
+  },
+  "observation": {
+    "note": "Sensor errors are applied to the OBSERVATION of a true series, never to the twin's state. sigma is relative to the standard deviation of the series over the window (with a floor for constant series).",
+    "floor_sigma": 0.01,
+    "levels": {
+      "none": {"relative_sigma": 0.0, "ar1_phi": 0.0, "drift_sigmas": 0.0, "stuck_per_1000h": 0.0, "stuck_hours": 6, "dropout_per_1000h": 0.0, "dropout_hours": 3, "spike_per_1000h": 0.0, "spike_sigmas": 6.0, "delay_hours": 0},
+      "low": {"relative_sigma": 0.05, "ar1_phi": 0.3, "drift_sigmas": 0.0, "stuck_per_1000h": 0.5, "stuck_hours": 6, "dropout_per_1000h": 1.0, "dropout_hours": 3, "spike_per_1000h": 1.0, "spike_sigmas": 6.0, "delay_hours": 0},
+      "medium": {"relative_sigma": 0.1, "ar1_phi": 0.5, "drift_sigmas": 0.5, "stuck_per_1000h": 1.0, "stuck_hours": 12, "dropout_per_1000h": 2.0, "dropout_hours": 6, "spike_per_1000h": 2.0, "spike_sigmas": 8.0, "delay_hours": 1},
+      "high": {"relative_sigma": 0.2, "ar1_phi": 0.7, "drift_sigmas": 1.0, "stuck_per_1000h": 2.0, "stuck_hours": 24, "dropout_per_1000h": 4.0, "dropout_hours": 12, "spike_per_1000h": 4.0, "spike_sigmas": 10.0, "delay_hours": 2}
+    },
+    "level_order": ["none", "low", "medium", "high"]
+  },
+  "split": {"salt": "gctsb-1", "test_share": 0.3, "unit": "crop and season (never hour or window)"}
+}

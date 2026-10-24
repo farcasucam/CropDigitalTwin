@@ -5,6 +5,8 @@ Estado: **PROPUESTA** (nada implementado). Fecha de redacción: 2026-10-23. Los 
 
 ---
 
+> **Estructura del código y publicación (2026-10-24):** el módulo XAI es un **paquete independiente y reutilizable** (`docs/xai/XAI_MODULE_ARCHITECTURE.md`): donde este documento dice `agri_twin/domain|application|infrastructure/xai`, léase el paquete `tsxai` y un adaptador del gemelo. La parte XAI alimenta un artículo Q1 (`docs/xai/PUBLICATION_STRATEGY.md`), que añade la **fase 6.0b (revisión sistemática del estado del arte)** antes de seguir implementando, y hace que la 6.1b se construya sobre un `SimulatorPort` genérico.
+
 > **Diseño científico:** las preguntas de investigación, hipótesis, banco de pruebas (GCTSB), métricas, análisis estadístico y amenazas a la validez están en `docs/xai/XAI_SCIENTIFIC_DESIGN.md`, que **prevalece** sobre este documento en todo lo que afecte a la evaluación. Este documento fija la arquitectura y las fases de ingeniería; el TFG (`docs/xai/TFG.pdf`) es el punto de partida de la fase numérica (STL, PELT, Holt-Winters, enriquecimiento semántico, verificador).
 
 ## 0. Cómo leer este documento (reglas para el agente)
@@ -321,6 +323,10 @@ La arquitectura (puerto `ForecastBackend`) hace el cambio local a `infrastructur
 | D1 Uso y licencia | **Investigación, no comercial** | Se pueden usar los pesos TimesFM 3.0 en la Spark con `TIMESFM_LICENSE_ACK=non-commercial-research`. Quedan fuera el despliegue en explotaciones reales y el uso de producción; documentar la restricción en cada informe y **leer el texto de la licencia antes de compartir resultados o pesos** |
 | D3 Idioma | **Español e inglés** | Las explicaciones se generan en ambos idiomas con el mismo `Explanation` estructurado (los hechos y `fact_id` son idénticos; solo cambia el texto); el verificador se ejecuta sobre cada idioma; el vocabulario cerrado de tendencias (`xai_semantics.json`) lleva etiquetas ES/EN |
 | D4 Almacén vectorial | **Docker en la Spark** | Servicio `vector-store` en `docker-compose.xai.yml` (imagen **arm64**; candidatos Qdrant o Chroma *(verificar tag arm64)*), volumen persistente, solo red interna; `index_fingerprint` sigue siendo el hash del corpus |
+| D6 Corpus RAG | **Sin corpus específico** (2026-10-24) | El RAG indexa solo `docs/` y `src/crop_config.json` hasta que el usuario aporte documentos con licencia |
+| LLM (D2) | Disponibles en Docker en la Spark: **OLMo, Llama y Qwen** (2026-10-24) | La elección se hace con el banco de la fase 6.6 entre estos tres; inventariar versiones, cuantizaciones y licencias |
+| Estudio con expertos (RQ7) | **En el alcance; ética aprobada** (2026-10-24) | Alcance completo, sin fecha límite: prima el producto |
+| Código del TFG | **No existe**: se reimplementa desde la memoria (2026-10-24) | Se corrigen las brechas B1-B8 de `XAI_SCIENTIFIC_DESIGN.md` |
 | Alcance | **Invernadero y campo abierto** | `MultivariateFrame` y los roles de variable cubren ambos; en campo abierto no hay `greenhouse_*`, `co2_ppm` ni control climático, y el riego es la única palanca de control |
 | Horizonte | **Temporada completa** | Dos escalas, ver abajo |
 | Precios | **El usuario aporta rendimiento y precios de energía y agua** | Ver «Objetivos de temporada» |

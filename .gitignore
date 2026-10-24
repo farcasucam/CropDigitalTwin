@@ -2,3 +2,8 @@
 # python -m agri_twin.application.weather_datasets download (see docs/phase5_43_weather_datasets.md).
 # Their .metadata.json files stay versioned.
 data/weather/archive/**/*.csv
+
+# The thesis PDF stays local (not published)
+docs/xai/TFG.pdf
+# Local assistant settings
+.claude/

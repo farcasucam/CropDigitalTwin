@@ -1,0 +1,62 @@
+{
+ "leakage": {
+  "groups": {
+   "dev": 2,
+   "test": 2
+  },
+  "shared_groups": [],
+  "status": "PASS"
+ },
+ "manifest_hash": "5b261dbb4c16276258f7c94a2a56bbd819810fc751e16f6aff12bbea95158248",
+ "report_hash": "1b8d6a09b9649a15f4eb86bc2bf3c533f94c24d428ed2a9175b045047b6c623a",
+ "rows": [
+  {
+   "content_hash": "d6ccad9a3386c2ec78a973425066b296468de113ccf964473effab89524e2770",
+   "id": "s7a283c9ada9e",
+   "labels": {
+    "control": "off",
+    "crop": "tomato",
+    "environment": "outdoor"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "4c1a6db23f4b52a77ac6eba45e8c38af6fe081cc4213acf9c452f32f66b11a1e",
+   "id": "s7f130944e07d",
+   "labels": {
+    "control": "off",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "dad6d304adeb93697c40f159dd1c63c50d1f70b297b5d6a3538a641681ed61b2",
+   "id": "s370c0afc65af",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "test"
+  },
+  {
+   "content_hash": "d02a82303233a712afbb5fe920e24c6c54bfc944ec82af5ac6c99da1d59c18b1",
+   "id": "s554a80df75bd",
+   "labels": {
+    "control": "off",
+    "crop": "lettuce",
+    "environment": "outdoor"
+   },
+   "split": "test"
+  }
+ ],
+ "scenarios": 4,
+ "simulator": "agri-twin-interactive/1",
+ "splits": {
+  "dev": 2,
+  "test": 2
+ },
+ "statement": "pilot of a benchmark whose truth is the truth of the simulated twin (uncalibrated crop model)",
+ "status": "PASS"
+}
