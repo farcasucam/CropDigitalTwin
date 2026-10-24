@@ -1,0 +1,260 @@
+{
+ "baseline_label": "dev-pilot",
+ "catalogue_hash": "76e24d8d5d9a9105782ae897de2f8568d543f7cedaf79673085c7e4232dff825",
+ "count": 22,
+ "design_hash": "4d274864959cfefbeff5c114bcea64f2099a8bebea9ca25ad4a0313f508fdbe1",
+ "format": "tsxai.bench/1",
+ "manifest_hash": "c93949ac95c79a1085cd1bb2afe8a8f33e460575e4ecc5fbccd8e5528ca62ed8",
+ "scenarios": [
+  {
+   "content_hash": "bf26df49d09d2ab15a98887d2f2a681f51d45f0f726125a89ff860cf693cc16a",
+   "group": "crop=tomato|season=2",
+   "id": "sdda844b9eb25",
+   "labels": {
+    "control": "off",
+    "crop": "tomato",
+    "environment": "outdoor"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "e471940c87d4cf688543007eecf23a41598439afd38437c2f89ffb519cb0b9a9",
+   "group": "crop=tomato|season=18",
+   "id": "s0fc1be8493d8",
+   "labels": {
+    "control": "off",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "c45df0335b5ce935e32556761788ca902ca95e06e96d22af332d93b1ddb15dcd",
+   "group": "crop=tomato|season=14",
+   "id": "sb3df0dc29643",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "452725303be61ddcca07f3394dd033029d431783e04af0f8412baafccceb0d6b",
+   "group": "crop=lettuce|season=18",
+   "id": "s5cd5f9ed8276",
+   "labels": {
+    "control": "off",
+    "crop": "lettuce",
+    "environment": "outdoor"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "494b42c45634f16b10fbc326d5f87f794d4c4aafc48d8bfd860926b9eaf1d56b",
+   "group": "crop=lettuce|season=18",
+   "id": "s6db20f3e1eec",
+   "labels": {
+    "control": "off",
+    "crop": "lettuce",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "630a6ad9f481a080d624e17ea73d9a035601d0f0699b61d598477e4cbf851640",
+   "group": "crop=lettuce|season=16",
+   "id": "sa9d67c830bde",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "33c9bbf9eaa66f598e7a1dae0ad8c8f726860ab2edf8ee4bb1c504ab6a968515",
+   "group": "crop=pepper|season=1",
+   "id": "sf2abcd957f8c",
+   "labels": {
+    "control": "off",
+    "crop": "pepper",
+    "environment": "outdoor"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "458590e7876f1d5e5a79484fcf596716bbbfb8c6f980085380a227eb0f2965c9",
+   "group": "crop=pepper|season=30",
+   "id": "sbefc82a5dddd",
+   "labels": {
+    "control": "off",
+    "crop": "pepper",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "86d68b77e18028af605d39942f7844cdab3ffe839eab64d2ab06e0d3116a951a",
+   "group": "crop=pepper|season=37",
+   "id": "s530933bd1cdf",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "529e3dce7f6ada8d7a5d9bb2d04ba5462c5da6216b45d63446070ae710b1b4dc",
+   "group": "crop=grape|season=34",
+   "id": "sad6aa9a66315",
+   "labels": {
+    "control": "off",
+    "crop": "grape",
+    "environment": "outdoor"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "08acb8e2940c74db4a150ba95cfb3077c85351de4a4fe5e0e3959d5e13b4676d",
+   "group": "crop=peach|season=25",
+   "id": "sb32f0048ab20",
+   "labels": {
+    "control": "off",
+    "crop": "peach",
+    "environment": "outdoor"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "995774506a8c529249a3754c7b25b90f17d2793e32cefc9fc1352ff9d47d5d44",
+   "group": "crop=plum|season=24",
+   "id": "s54dabf5be509",
+   "labels": {
+    "control": "off",
+    "crop": "plum",
+    "environment": "outdoor"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "bc5995f371dd16c7ef9d06bca8561bf67caf778562179562052df128763e5245",
+   "group": "crop=apple|season=1",
+   "id": "s4746e0df4f72",
+   "labels": {
+    "control": "off",
+    "crop": "apple",
+    "environment": "outdoor"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "6b69fbda29c00f8b0a0cf08fa32fa9925aeee2c4d5ff286b3a92bb24a6992e6e",
+   "group": "crop=tomato|season=7",
+   "id": "s1130df5e7b93",
+   "labels": {
+    "control": "off",
+    "crop": "tomato",
+    "environment": "outdoor"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "318a767a1159158727e7abfca839819fcffefb527c68417118ca1f366d96cc08",
+   "group": "crop=tomato|season=14",
+   "id": "se9be9c1c2f96",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "8e89d844addd59dec744437fa4c60c30bc35a206d0bc10bb5cda8010b0fe5ab1",
+   "group": "crop=tomato|season=38",
+   "id": "s679f15f91928",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "af4e6281fb8c63c4368fb0f4d1d51c170edd0f7715546b2e73831eb6010859c1",
+   "group": "crop=lettuce|season=29",
+   "id": "scb9d1d0d23bd",
+   "labels": {
+    "control": "off",
+    "crop": "lettuce",
+    "environment": "outdoor"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "014daf990bf5015143d6ee0086a1608afe74abc3eadc8ff99b0507d4571ac53a",
+   "group": "crop=lettuce|season=32",
+   "id": "s5ee0d2b5797e",
+   "labels": {
+    "control": "off",
+    "crop": "lettuce",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "00a9687c9827e3f8aabb287a00598c374f8ad921abc29e77491bdd5c8b3d41d7",
+   "group": "crop=lettuce|season=10",
+   "id": "s10aac3aa1855",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "53863102e5766784dcc145313cfaeb46b56e8532abb0100ee574b892be16957a",
+   "group": "crop=pepper|season=38",
+   "id": "se2bf6a691e5b",
+   "labels": {
+    "control": "off",
+    "crop": "pepper",
+    "environment": "outdoor"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "1c528e2a07a5d5b36fdcd88e167f8c450a80560aadd1bb62eea37939d3db6718",
+   "group": "crop=grape|season=12",
+   "id": "s9da291249bfc",
+   "labels": {
+    "control": "off",
+    "crop": "grape",
+    "environment": "outdoor"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "d084e0c1f2f8cff27841545ef7beb90a9daa7f5b0401afbfe94825262f8c21b8",
+   "group": "crop=peach|season=23",
+   "id": "s5174967c21aa",
+   "labels": {
+    "control": "off",
+    "crop": "peach",
+    "environment": "outdoor"
+   },
+   "split": "dev"
+  }
+ ],
+ "simulator": "agri-twin-interactive/1",
+ "splits": {
+  "dev": 22,
+  "test": 0
+ }
+}
