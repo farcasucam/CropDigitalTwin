@@ -1,18 +1,18 @@
 {
  "leakage": {
   "groups": {
-   "dev": 2,
-   "test": 2
+   "dev": 4,
+   "test": 1
   },
   "shared_groups": [],
   "status": "PASS"
  },
- "manifest_hash": "5b261dbb4c16276258f7c94a2a56bbd819810fc751e16f6aff12bbea95158248",
- "report_hash": "1b8d6a09b9649a15f4eb86bc2bf3c533f94c24d428ed2a9175b045047b6c623a",
+ "manifest_hash": "648a62f0f38cec310f911c06403b736c43477574642a32054ca2e530fdb15ac2",
+ "report_hash": "55f4dc65480cd843e5a76cd0b895c6e03fb1f370fd780e1676faf437d4a9cfb0",
  "rows": [
   {
-   "content_hash": "d6ccad9a3386c2ec78a973425066b296468de113ccf964473effab89524e2770",
-   "id": "s7a283c9ada9e",
+   "content_hash": "db923b51aa70868ea00946de78ad88695818af20f29713264b941b1e3fe3dec3",
+   "id": "s5b515b0053be",
    "labels": {
     "control": "off",
     "crop": "tomato",
@@ -21,8 +21,8 @@
    "split": "dev"
   },
   {
-   "content_hash": "4c1a6db23f4b52a77ac6eba45e8c38af6fe081cc4213acf9c452f32f66b11a1e",
-   "id": "s7f130944e07d",
+   "content_hash": "a7331e14bcea9e40f3390d8880a7997d1e99bc61147b88e93d95cf34cfca99a5",
+   "id": "sefe0014e3bf4",
    "labels": {
     "control": "off",
     "crop": "tomato",
@@ -31,8 +31,8 @@
    "split": "dev"
   },
   {
-   "content_hash": "dad6d304adeb93697c40f159dd1c63c50d1f70b297b5d6a3538a641681ed61b2",
-   "id": "s370c0afc65af",
+   "content_hash": "de77a1ebab6797d6e40e4e3bd53b0346efb85018a03c17b0ae5711c6c1ed0fdf",
+   "id": "s4209699c2d97",
    "labels": {
     "control": "on",
     "crop": "tomato",
@@ -41,21 +41,42 @@
    "split": "test"
   },
   {
-   "content_hash": "d02a82303233a712afbb5fe920e24c6c54bfc944ec82af5ac6c99da1d59c18b1",
-   "id": "s554a80df75bd",
+   "content_hash": "89c1fed953d8a28d0691bfc2b497cacb9e84fddb6adb0846a23f56c54ea7b68a",
+   "id": "sdad98bbbfcea",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "7cd0b01b4e42ccb8af92af0553b1a2bd3e4d6970b3e35f61d5d3b3f542f0ca3a",
+   "id": "s1a715b608a70",
    "labels": {
     "control": "off",
     "crop": "lettuce",
     "environment": "outdoor"
    },
-   "split": "test"
+   "split": "dev"
+  },
+  {
+   "content_hash": "b0caf42a7d4341bbb7ade8c851961fd46e0df672365bb91e9af1368ea972ff4a",
+   "id": "sa7978c6a175e",
+   "labels": {
+    "control": "off",
+    "crop": "lettuce",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
   }
  ],
- "scenarios": 4,
+ "scenarios": 6,
  "simulator": "agri-twin-interactive/1",
  "splits": {
-  "dev": 2,
-  "test": 2
+  "dev": 5,
+  "test": 1
  },
  "statement": "pilot of a benchmark whose truth is the truth of the simulated twin (uncalibrated crop model)",
  "status": "PASS"

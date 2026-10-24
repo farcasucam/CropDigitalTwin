@@ -1,0 +1,477 @@
+{
+ "paired": {
+  "baseline": "3352f13814b4b026be110c205e91d1f3b3f449d0ce4bd534921422a9a30dd152",
+  "first_changed_sample": 49,
+  "intervened": "07a8b8212bc266cac77204fe96e44432a096cf25350ed8d7b3c2750c0c96ba85"
+ },
+ "report_hash": "fa48e5f3d11c0ad6c8d0cd21834f8c5db6e33411db565f0a2d59f4b8c0e6bf6d",
+ "rows": [
+  {
+   "crop": "tomato",
+   "data_quality": [
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "biomass_fruit_g_m2"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 'establishment'",
+     "kind": "CONSTANT",
+     "variable": "crop_stage"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "frost_damage"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "heat_stress"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.38",
+     "kind": "CONSTANT",
+     "variable": "irrigation_mm"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "precipitation_mm"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "radiation_stress"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 149.99999999999997",
+     "kind": "CONSTANT",
+     "variable": "root_zone_water_mm"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.35",
+     "kind": "CONSTANT",
+     "variable": "soil_water_vwc_m3_m3"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "vpd_stress"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "water_stress"
+    }
+   ],
+   "frame_hash": "d9584960e5eec297207926af525c67015cc705e769fa433d5060fde8b6d44d5b",
+   "future_covariates": [
+    "precipitation_mm"
+   ],
+   "labels": {
+    "control": "off",
+    "environment": "outdoor"
+   },
+   "samples": 168,
+   "targets": [
+    "growth_factor",
+    "relative_humidity_pct",
+    "soil_water_vwc_m3_m3",
+    "temperature_c",
+    "vpd_kpa"
+   ],
+   "variables": 25
+  },
+  {
+   "crop": "tomato",
+   "data_quality": [
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "biomass_fruit_g_m2"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 420.0",
+     "kind": "CONSTANT",
+     "variable": "co2_ppm"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "cold_stress"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 'establishment'",
+     "kind": "CONSTANT",
+     "variable": "crop_stage"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "frost_damage"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "greenhouse_cooling_kw"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "greenhouse_shading_fraction"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "heat_stress"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.38",
+     "kind": "CONSTANT",
+     "variable": "irrigation_mm"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "outdoor_rain_rate_mm_h"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "precipitation_mm"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "radiation_stress"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 149.99999999999997",
+     "kind": "CONSTANT",
+     "variable": "root_zone_water_mm"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.35",
+     "kind": "CONSTANT",
+     "variable": "soil_water_vwc_m3_m3"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "water_stress"
+    }
+   ],
+   "frame_hash": "3352f13814b4b026be110c205e91d1f3b3f449d0ce4bd534921422a9a30dd152",
+   "future_covariates": [
+    "outdoor_radiation_w_m2",
+    "outdoor_rain_rate_mm_h",
+    "outdoor_relative_humidity_pct",
+    "outdoor_temperature_c",
+    "outdoor_wind_speed_m_s",
+    "precipitation_mm"
+   ],
+   "labels": {
+    "control": "off",
+    "environment": "greenhouse"
+   },
+   "samples": 168,
+   "targets": [
+    "greenhouse_cooling_kw",
+    "greenhouse_heating_kw",
+    "growth_factor",
+    "relative_humidity_pct",
+    "soil_water_vwc_m3_m3",
+    "temperature_c",
+    "vpd_kpa"
+   ],
+   "variables": 35
+  },
+  {
+   "crop": "pepper",
+   "data_quality": [
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "biomass_fruit_g_m2"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 420.0",
+     "kind": "CONSTANT",
+     "variable": "co2_ppm"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "cold_stress"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "control_extractor_level"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 'establishment'",
+     "kind": "CONSTANT",
+     "variable": "crop_stage"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "frost_damage"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "greenhouse_cooling_kw"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "greenhouse_shading_fraction"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "heat_stress"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.38",
+     "kind": "CONSTANT",
+     "variable": "irrigation_mm"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "outdoor_rain_rate_mm_h"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "precipitation_mm"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "radiation_stress"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 149.99999999999997",
+     "kind": "CONSTANT",
+     "variable": "root_zone_water_mm"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.35",
+     "kind": "CONSTANT",
+     "variable": "soil_water_vwc_m3_m3"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "water_stress"
+    }
+   ],
+   "frame_hash": "7598121383962c564dba0e86b18801944c6312e3f27cbd4276a3dfc1ea42c76a",
+   "future_covariates": [
+    "outdoor_radiation_w_m2",
+    "outdoor_rain_rate_mm_h",
+    "outdoor_relative_humidity_pct",
+    "outdoor_temperature_c",
+    "outdoor_wind_speed_m_s",
+    "precipitation_mm"
+   ],
+   "labels": {
+    "control": "on",
+    "environment": "greenhouse"
+   },
+   "samples": 168,
+   "targets": [
+    "greenhouse_cooling_kw",
+    "greenhouse_heating_kw",
+    "growth_factor",
+    "relative_humidity_pct",
+    "soil_water_vwc_m3_m3",
+    "temperature_c",
+    "vpd_kpa"
+   ],
+   "variables": 41
+  },
+  {
+   "crop": "pepper",
+   "data_quality": [
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "accumulated_stress"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "biomass_fruit_g_m2"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "cold_stress"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "control_extractor_level"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 'establishment'",
+     "kind": "CONSTANT",
+     "variable": "crop_stage"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "frost_damage"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "greenhouse_cooling_kw"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "greenhouse_shading_fraction"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "heat_stress"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.38",
+     "kind": "CONSTANT",
+     "variable": "irrigation_mm"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "outdoor_rain_rate_mm_h"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "precipitation_mm"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "radiation_stress"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 149.99999999999997",
+     "kind": "CONSTANT",
+     "variable": "root_zone_water_mm"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.35",
+     "kind": "CONSTANT",
+     "variable": "soil_water_vwc_m3_m3"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "vpd_stress"
+    },
+    {
+     "count": 168,
+     "detail": "the series is constant at 0.0",
+     "kind": "CONSTANT",
+     "variable": "water_stress"
+    }
+   ],
+   "frame_hash": "0d21df6648d0f425ce58a8db9555d6af4fb3571fceecf66c313d5b979004b054",
+   "future_covariates": [
+    "outdoor_radiation_w_m2",
+    "outdoor_rain_rate_mm_h",
+    "outdoor_relative_humidity_pct",
+    "outdoor_temperature_c",
+    "outdoor_wind_speed_m_s",
+    "precipitation_mm"
+   ],
+   "labels": {
+    "control": "on",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "samples": 168,
+   "targets": [
+    "greenhouse_cooling_kw",
+    "greenhouse_heating_kw",
+    "growth_factor",
+    "relative_humidity_pct",
+    "soil_water_vwc_m3_m3",
+    "temperature_c",
+    "vpd_kpa"
+   ],
+   "variables": 41
+  }
+ ],
+ "simulator": "agri-twin-interactive/1",
+ "statement": "frames of the simulated twin: synthetic data, exogenous weather as forcing, no REAL_VERIFIED data",
+ "status": "PASS"
+}

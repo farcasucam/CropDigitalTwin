@@ -6,8 +6,10 @@ it turns the interactive simulation service into a deterministic simulator the f
 * **Variables and roles:** ``src/xai_variable_roles.json`` (provisional design convention) with the units of the twin's variable catalogue.
 * **Interventions:** the runtime events of the twin (heat and cold waves, radiation, rain, dryness, wind, irrigation, ventilation, shading, CO2), with their technical bounds, and the sampling ranges and probe
   levels of ``src/xai_benchmark_design.json`` (sampling conventions of the benchmark, not agronomic values).
-* **Contexts:** every crop outdoors and, for the annual crops, in the greenhouse with and without the climate controller (illustrative equipment, not a real installation). Variants of one crop in one season share a
-  split group, so they can never straddle the dev/test split.
+* **Contexts:** every crop outdoors and, for the annual crops, in the greenhouse with and without the climate controller (illustrative equipment, not a real installation) and with the controller plus the
+  crop's feedback on the greenhouse air (``feedback=on``). Variants of one crop in one season share a split group, so they can never straddle the dev/test split.
+* **Frames (phase 6.1):** ``twin_series_source()`` is a ``tsxai`` ``SeriesSource`` over this simulator; the exogenous weather and the rain are labelled ``FORCING`` and everything the twin computes ``SYNTHETIC``.
+  A scenario may also carry its own ``greenhouse`` request (for example EnergyPlus, where installed) in ``options``.
 * **Timing:** a window sample ``k`` is the hour ending ``campaign_start + window_start + k`` hours; an intervention that starts at window index ``s`` acts on samples ``s+1 .. s+n``, which is how the twin
   applies a runtime event of ``n`` hours.
 
@@ -22,7 +24,7 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from tsxai.bench import BenchmarkDesign
-from tsxai.core import ContextSpec, FactorSpec, Intervention, RunResult, ScenarioDescriptor, VariableCatalogue, VariableSpec, content_hash
+from tsxai.core import ContextSpec, FactorSpec, Intervention, RunResult, ScenarioDescriptor, SimulatorSeriesSource, VariableCatalogue, VariableSpec, content_hash
 
 from agri_twin.application.greenhouse_backend import layout_floor_area_m2
 from agri_twin.application.interactive_simulation import VARIABLES, InteractiveSimulationService
@@ -86,17 +88,20 @@ class TwinSimulator:
             hours = int((end - start).total_seconds() // 3600)
             variants = [{"environment": "outdoor", "control": "off"}]
             if crop in ANNUAL_GREENHOUSE_CROPS:
-                variants += [{"environment": "greenhouse", "control": "off"}, {"environment": "greenhouse", "control": "on"}]
+                variants += [{"environment": "greenhouse", "control": "off"}, {"environment": "greenhouse", "control": "on"}, {"environment": "greenhouse", "control": "on", "feedback": "on"}]
             cells += [ContextSpec({"crop": crop, **variant}, hours, warmup, ("crop",)) for variant in variants]
         return cells
 
     def scenario_options(self, labels: Mapping[str, str], season: int) -> Mapping[str, Any]:
-        if labels.get("control") != "on":
-            return {}
-        control = self._design["control"]
-        area = layout_floor_area_m2(None)
-        equipment = {**control["equipment_fixed"], **{key: round(value * area, 3) for key, value in control["equipment_per_m2"].items()}}
-        return {"control": {"actuators": dict(control["actuators"]), "equipment": equipment}}
+        options: dict[str, Any] = {}
+        if labels.get("feedback") == "on":
+            options["greenhouse"] = {"backend": "SIMPLIFIED", "crop_exchange": True}
+        if labels.get("control") == "on":
+            control = self._design["control"]
+            area = layout_floor_area_m2(None)
+            equipment = {**control["equipment_fixed"], **{key: round(value * area, 3) for key, value in control["equipment_per_m2"].items()}}
+            options["control"] = {"actuators": dict(control["actuators"]), "equipment": equipment}
+        return options
 
     def run(self, scenario: ScenarioDescriptor, interventions: Sequence[Intervention] = ()) -> RunResult:
         crop, environment = scenario.labels["crop"], scenario.labels["environment"]
@@ -107,6 +112,8 @@ class TwinSimulator:
         if interventions:
             request["runtime_events"] = [{"event_type": item.factor, "start_simulation_time": (origin + timedelta(hours=w0 + item.start)).isoformat(), "duration_hours": item.duration,
                                           **({"intensity": item.level} if item.level is not None else {})} for item in interventions]
+        if scenario.options.get("greenhouse"):
+            request["greenhouse"] = dict(scenario.options["greenhouse"])
         control = scenario.options.get("control")
         if control:
             request["control"] = {"actuators": dict(control["actuators"]), "equipment": dict(control["equipment"])}
@@ -118,3 +125,10 @@ class TwinSimulator:
         series = {name: list(values[a:b]) for name, values in trajectory.items() if name != "time" and None not in values[a:b]}
         run_hash = content_hash({"request": response.hashes["request_hash"], "trajectory": response.result.trajectory_hash, "window": [w0, w1]})
         return RunResult(series, list(trajectory["time"][a:b]), run_hash)
+
+
+def twin_series_source(simulator: TwinSimulator | None = None) -> SimulatorSeriesSource:
+    """Frames of the twin: the exogenous weather and the rain are forcing, everything the twin computes is synthetic (no ``REAL_VERIFIED`` data exists)."""
+    simulator = simulator or TwinSimulator()
+    forcing = {name: "FORCING" for name in simulator.catalogue().with_role("known_future_covariate")}
+    return SimulatorSeriesSource(simulator, "SYNTHETIC", forcing)

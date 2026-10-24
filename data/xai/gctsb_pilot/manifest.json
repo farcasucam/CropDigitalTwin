@@ -1,15 +1,15 @@
 {
  "baseline_label": "pilot",
- "catalogue_hash": "8b843dc9e092d0bdb72cc9755592f8e3e49936a5bf1cb55f61890c6c6de6b9da",
- "count": 4,
+ "catalogue_hash": "76e24d8d5d9a9105782ae897de2f8568d543f7cedaf79673085c7e4232dff825",
+ "count": 6,
  "design_hash": "4d274864959cfefbeff5c114bcea64f2099a8bebea9ca25ad4a0313f508fdbe1",
  "format": "tsxai.bench/1",
- "manifest_hash": "5b261dbb4c16276258f7c94a2a56bbd819810fc751e16f6aff12bbea95158248",
+ "manifest_hash": "648a62f0f38cec310f911c06403b736c43477574642a32054ca2e530fdb15ac2",
  "scenarios": [
   {
-   "content_hash": "d6ccad9a3386c2ec78a973425066b296468de113ccf964473effab89524e2770",
+   "content_hash": "db923b51aa70868ea00946de78ad88695818af20f29713264b941b1e3fe3dec3",
    "group": "crop=tomato|season=2",
-   "id": "s7a283c9ada9e",
+   "id": "s5b515b0053be",
    "labels": {
     "control": "off",
     "crop": "tomato",
@@ -18,9 +18,9 @@
    "split": "dev"
   },
   {
-   "content_hash": "4c1a6db23f4b52a77ac6eba45e8c38af6fe081cc4213acf9c452f32f66b11a1e",
+   "content_hash": "a7331e14bcea9e40f3390d8880a7997d1e99bc61147b88e93d95cf34cfca99a5",
    "group": "crop=tomato|season=18",
-   "id": "s7f130944e07d",
+   "id": "sefe0014e3bf4",
    "labels": {
     "control": "off",
     "crop": "tomato",
@@ -29,9 +29,9 @@
    "split": "dev"
   },
   {
-   "content_hash": "dad6d304adeb93697c40f159dd1c63c50d1f70b297b5d6a3538a641681ed61b2",
+   "content_hash": "de77a1ebab6797d6e40e4e3bd53b0346efb85018a03c17b0ae5711c6c1ed0fdf",
    "group": "crop=tomato|season=33",
-   "id": "s370c0afc65af",
+   "id": "s4209699c2d97",
    "labels": {
     "control": "on",
     "crop": "tomato",
@@ -40,20 +40,43 @@
    "split": "test"
   },
   {
-   "content_hash": "d02a82303233a712afbb5fe920e24c6c54bfc944ec82af5ac6c99da1d59c18b1",
-   "group": "crop=lettuce|season=14",
-   "id": "s554a80df75bd",
+   "content_hash": "89c1fed953d8a28d0691bfc2b497cacb9e84fddb6adb0846a23f56c54ea7b68a",
+   "group": "crop=tomato|season=14",
+   "id": "sdad98bbbfcea",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "7cd0b01b4e42ccb8af92af0553b1a2bd3e4d6970b3e35f61d5d3b3f542f0ca3a",
+   "group": "crop=lettuce|season=18",
+   "id": "s1a715b608a70",
    "labels": {
     "control": "off",
     "crop": "lettuce",
     "environment": "outdoor"
    },
-   "split": "test"
+   "split": "dev"
+  },
+  {
+   "content_hash": "b0caf42a7d4341bbb7ade8c851961fd46e0df672365bb91e9af1368ea972ff4a",
+   "group": "crop=lettuce|season=18",
+   "id": "sa7978c6a175e",
+   "labels": {
+    "control": "off",
+    "crop": "lettuce",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
   }
  ],
  "simulator": "agri-twin-interactive/1",
  "splits": {
-  "dev": 2,
-  "test": 2
+  "dev": 5,
+  "test": 1
  }
 }
