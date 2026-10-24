@@ -7,3 +7,5 @@ data/weather/archive/**/*.csv
 docs/xai/TFG.pdf
 # Local assistant settings
 .claude/
+
+graphify-out/

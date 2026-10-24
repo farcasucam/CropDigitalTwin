@@ -25,7 +25,7 @@ Los umbrales son **provisionales** (convenciones de diseño) y se fijan sobre la
 
 | ID | Hipótesis | Métrica primaria | Comparador | Criterio provisional |
 |---|---|---|---|---|
-| H1a | PELT sobre el residuo STL detecta mejor que sobre la serie cruda | F1 con margen (margen = ± 3 h, justificado por la constante de tiempo) y Covering | PELT crudo, z-score sobre residuo, CUSUM, BinSeg, BOCPD, MSTL | Mejora de F1 con IC > 0 |
+| H1a | PELT sobre la serie **desestacionalizada** (observada menos componente estacional de STL) detecta mejor que sobre la serie cruda. Variante de ablación: PELT sobre el residuo STL (el tendencia absorbe parte del salto: la 6.2 lo midió así en datos plantados) | F1 con margen (margen = ± 3 h, justificado por la constante de tiempo; el piloto de desarrollo barre ± 2, ± 3 y ± 6) y Covering | PELT crudo, z-score sobre residuo, residuo STL, CUSUM, BinSeg, BOCPD, MSTL | Mejora de F1 con IC > 0 |
 | H1b | La detección degrada con ruido y en regímenes de umbral | F1 por nivel de ruido y por régimen | — | Curva informada, sin umbral |
 | H1c | 72 h no basta para estimar la estacionalidad; 7-14 d sí | Fuerza de tendencia/estacionalidad y error de recuperación por longitud de ventana | 72 h, 7 d, 14 d | Informe |
 | H2 | TimesFM supera a naive estacional y Holt-Winters; no necesariamente a un modelo entrenado en el dominio | MASE y pérdida por cuantiles; cobertura empírica | Naive, HW, regresión con retardos, boosting, modelo entrenado, Chronos-2 | Informe por régimen; la decisión de la puerta 6.3a usa H4 |
@@ -67,3 +67,5 @@ Causalidad sobre el invernadero real; calibración o validación experimental de
 ## 8. Registro de desviaciones
 
 _Vacío hasta el congelado._
+
+Cambios previos al congelado (no son desviaciones): 2026-10-24, fase 6.2: la señal primaria de PELT pasa del residuo STL a la serie desestacionalizada, y el residuo queda como variante de ablación; el criterio de materialidad de un cambio verdadero (`|efecto| ≥ fracción × DE` de la serie) es una convención provisional que se barre (0,1; 0,25; 0,5).
