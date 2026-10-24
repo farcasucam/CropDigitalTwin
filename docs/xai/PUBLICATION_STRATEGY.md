@@ -95,20 +95,23 @@ El mayor reproche previsible a un trabajo de IA explicativa aplicada es «un sol
 * **El TFG es trabajo previo del mismo autor:** se cita y se declara qué se reutiliza (la idea de enriquecimiento semántico con STL, PELT y Holt-Winters) y qué es nuevo (verdad interventiva, evidencia calibrada, verificador con niveles, atribución validada, ablación, modularidad). Conviene confirmar la política de la universidad y de la revista sobre el uso de contenido de un TFG.
 * **Segundo artículo (el gemelo):** contenido distinto (modelo físico, acoplamiento, EnergyPlus síncrono, recursos y KPIs de temporada). El artículo XAI usa el gemelo como banco de pruebas y lo cita como trabajo en preparación o preprint; **no se duplican contribuciones** (evitar la fragmentación artificial). Se coordina el orden: idealmente un preprint del gemelo disponible cuando se envíe el artículo XAI.
 
-## 9. Revistas candidatas (verificar cuartil y alcance vigentes en JCR/SJR antes de decidir)
+## 9. Revistas: criterio y acuerdos de la universidad (la elección se hace con resultados)
 
-Criterios: alcance en IA aplicada/explicable, aceptación de trabajos con banco de pruebas y estudio con humanos, política de ciencia abierta, tiempos de revisión. Los cuartiles que he visto proceden de agregadores de terceros y se contradicen entre sí; **no son una fuente fiable**: hay que consultar Journal Citation Reports o SCImago.
+**Decisión (2026-10-24):** no se elige revista hasta tener resultados. Criterios del autor: **indexada en JCR**, **poca complejidad de publicación** y **acuerdos de la UCAM** con tres editoriales: **ScienceDirect (Elsevier)**, **American Chemical Society (ACS)** y **Cambridge University Press (CUP)**. El detalle de cada acuerdo (publicación abierta incluida o con descuento, cupos) lo confirma la biblioteca; no lo doy por sabido.
 
-| Grupo | Revista | Por qué encaja | Reserva |
+El segundo dominio (industria química con PLC) abre revistas de ingeniería química, además de las de IA aplicada. Candidatas a evaluar (pertenencia a JCR, cuartil y alcance **por verificar** en JCR/SCImago; los agregadores se contradicen):
+
+| Editorial | Revista | Encaje | Reserva |
 |---|---|---|---|
-| Encaje temático alto | *Information Fusion* | XAI, fusión de modelos y de evidencia; admite marcos y bancos | Muy selectiva; exige novedad metodológica clara |
-| Encaje temático alto | *Expert Systems with Applications* | IA aplicada, acepta sistemas completos con evaluación | Muy volumen; revisores desiguales |
-| Encaje temático alto | *Engineering Applications of Artificial Intelligence* | Aplicación de IA a ingeniería con validación | Pide aplicación clara |
-| Alternativa metodológica | *Knowledge-Based Systems*; *Artificial Intelligence Review* | Marcos de conocimiento y explicación; revisión si se amplía la sistemática | La segunda favorece revisiones |
-| Alternativa de sistemas | *ACM Transactions on Intelligent Systems and Technology* | Sistemas inteligentes con evaluación | Plazos largos |
-| Si se enfatiza el dominio | *Computers and Electronics in Agriculture* | Público agrícola, gemelo y banco | Menos peso de XAI general |
+| Elsevier | *Information Fusion* | XAI y fusión de evidencia; banco con verdad causal | Muy selectiva |
+| Elsevier | *Expert Systems with Applications* | IA aplicada con evaluación | Revisión desigual |
+| Elsevier | *Engineering Applications of AI* | IA en ingeniería, dos dominios | Pide aplicación clara |
+| Elsevier | *Computers & Chemical Engineering* | Series de procesos y PLC; valida el segundo dominio | Menos peso de XAI general |
+| Elsevier | *Computers and Electronics in Agriculture* | Público agrícola | Mejor para el segundo artículo (el gemelo) |
+| ACS | *Industrial & Engineering Chemistry Research* | Control y monitorización de procesos químicos | Espera un caso industrial más sólido que un reactor didáctico |
+| CUP | *Data-Centric Engineering* | Datos, ingeniería e IA, acceso abierto | Comprobar si está en JCR |
 
-Recomendación provisional: preparar el artículo para *Information Fusion* o *Expert Systems with Applications* como primera opción (la contribución de banco con verdad causal exacta y la evaluación de fidelidad son de interés general) y *Engineering Applications of AI* como segunda; el dominio agrícola va en *Computers and Electronics in Agriculture* con el segundo artículo (el gemelo). **No se fija destino hasta tener la revisión sistemática y los primeros resultados de RQ1–RQ3.**
+Lectura provisional: Elsevier concentra el mejor encaje (*Information Fusion*, *ESWA*, *EAAI*). ACS exigiría reforzar el dominio químico con un caso realista; CUP tiene pocas revistas de este alcance. Se decide con la revisión sistemática y los resultados de RQ1–RQ3.
 
 ## 10. Plan y hitos
 
@@ -128,6 +131,6 @@ Recomendación provisional: preparar el artículo para *Information Fusion* o *E
 
 1. **Autores y filiación:** por ahora Francisco Arcas-Túnez (farcas@ucam.edu, UCAM); el reparto de autoría se decide más adelante. El TFG lo dirigió el autor y la universidad es su centro de trabajo: no hace falta permiso para usarlo; el PDF sigue fuera de git por indicación expresa.
 2. **Preprint:** por ahora no.
-3. **Segundo dominio:** pendiente (ver `XAI_MODULE_ARCHITECTURE.md` §10).
-4. **Revista objetivo:** sin preferencia; sugerencias en §9.
+3. **Segundo dominio:** sí, industria química con PLC (`tsxai.examples.PlcReactor`).
+4. **Revista objetivo:** se decide con resultados; criterio y acuerdos en §9.
 5. **Revisión de la revisión sistemática por una segunda persona:** pendiente.

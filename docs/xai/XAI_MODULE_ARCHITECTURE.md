@@ -115,5 +115,5 @@ Dependencia: `tsxai` es opcional para el gemelo (`pip install -e ../tsxai`); el 
 | 1 | Nombre | **TSXAI** (`tsxai`) |
 | 2 | Licencia | **Apache-2.0** |
 | 3 | Ubicación | **Repositorio nuevo** `https://github.com/farcasucam/tsxai` (local en `../tsxai`; sin publicar todavía) |
-| 4 | Segundo dominio de ejemplo | **Pendiente**: la pregunta no se entendió; se explica en la respuesta del asistente (recomendación: sí, un sistema pequeño de causalidad conocida) |
+| 4 | Segundo dominio de ejemplo | **Sí**: uno sencillo de industria química controlada por PLC. Hecho en `tsxai.examples.PlcReactor` (reactor encamisado exotérmico, lazo PI de válvula con límite de velocidad y enclavamiento de alta temperatura enclavado con rearme; pasa el contrato y el banco; constantes ilustrativas, no es una planta real) |
 | 5 | Datos reales | El puerto `SeriesSource` queda preparado y sin uso hasta que haya datos reales |

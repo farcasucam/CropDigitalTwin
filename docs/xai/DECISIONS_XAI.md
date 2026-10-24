@@ -43,6 +43,8 @@ Registro de decisiones del proyecto XAI de series temporales. Cada decisión lle
 * **Artículos:** XAI de series temporales (Q1, aplicado) y, aparte, el gemelo. Sin preprint por ahora; revista objetivo sin fijar (sugerencias en `PUBLICATION_STRATEGY.md` §9).
 * **Autoría:** Francisco Arcas-Túnez (farcas@ucam.edu); detalles más adelante.
 * **TFG:** dirigido por el autor, en su universidad; no se requiere permiso. **El PDF no se sube a GitHub** (`.gitignore`).
+* **Segundo dominio:** industria química controlada por PLC, sencillo (`tsxai.examples.PlcReactor`).
+* **Revistas:** se eligen con resultados; JCR, poca complejidad de publicación y acuerdos UCAM (ScienceDirect/Elsevier, ACS, CUP).
 * **Medido:** generar el banco cuesta unos **11-15 s por escenario** (cada ejecución repite la temporada desde el inicio de la campaña); la estimación anterior de 2-4 s era errónea. Mejora prevista: reutilizar el prefijo con puntos de control.
 
 ## Inventario de la DGX Spark (2026-10-24, solo lectura)
