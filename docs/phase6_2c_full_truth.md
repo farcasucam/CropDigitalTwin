@@ -50,3 +50,26 @@ Same analysis, same default configuration, 38 dev scenarios, 114 series (a simul
 - `stl_pelt` (threshold 0.25, none): precision 0.77 against 0.30 for chance, but recall 0.16 (interventions 0.15, against 0.71 in the twin). The z-score baseline is as good (F1 0.31 against 0.27): the ranking of methods found on the twin does not transfer.
 - Raw PELT reaches recall 0.91 by detecting almost everything; its chance baseline has recall 0.78, so its F1 (0.58) is barely above chance (about 0.51).
 - Conclusion: the numbers are domain-dependent. What holds in both domains: detection beats chance, and the intervention-only truth understates detection. The analyzer's parameters are in samples, not in time units, so the two domains are not comparable until the configuration is expressed in time (open item).
+
+## Time scale declared by the host, chance-corrected skill (follow-up on the reactor)
+
+The analyzer measured everything in samples; a sample is an hour in the twin and a minute in the reactor. `tsxai.core.TimeScale` lets a host declare the sample length, the dominant cycle (or none) and the shortest event worth reporting; `AnalyzerConfig.for_time_scale` derives the period, the minimum segment and `TimeScale.tolerance` (half the shortest event) from it. With the hourly/daily scale the result is exactly the default configuration (same hash), so the twin's numbers do not change. The reactor declares 1 minute, no cycle, events of 20 minutes (its dilution time is 20 to 50 minutes); that value was chosen after seeing a diagnostic, not blind.
+
+Diagnostic before the change (stl_pelt, none, threshold 0.5): the matching tolerance matters (intervention recall 0.15 at 3 samples, 0.30 at 10) but the noise model matters more (long-run: 487 detections, recall 0.22, precision 0.63; white: 2792 detections, recall 0.64, precision 0.33). Neither noise model is right for both: it is an operating-point trade-off that the domain changes.
+
+Two measures were added to every cell: `skill` (precision and recall corrected for chance, 0 = random placement, 1 = perfect) and `saturated` (random placement already reaches precision above 0.5). The analysis now records `method_used` when a different detector ran than the configured one.
+
+| Reactor, level none | Truth threshold | Precision / chance | Recall / chance | Skill P / R |
+|---|---|---|---|---|
+| declared scale (raw PELT: no cycle, so every STL method and the z-score fall back to it) | 0.25 | 0.66 / 0.59 | 0.95 / 0.76 | 0.17 / 0.77 (saturated) |
+| declared scale | 1.0 | 0.33 / 0.31 | 0.91 / 0.76 | 0.03 / 0.61 |
+| hourly defaults in samples | 0.25 | 0.77 / 0.30 | 0.16 / 0.06 | 0.67 / 0.11 |
+| hourly defaults in samples | 1.0 | 0.39 / 0.13 | 0.30 / 0.10 | 0.30 / 0.23 |
+
+For comparison, the twin (stl_pelt, none, threshold 0.25): skill about 0.31 precision / 0.55 recall (derived from the table above).
+
+Reading:
+- Declaring the time scale makes the detector over-detect on the reactor (recall skill high, precision skill near zero); the hourly defaults in samples under-detect (the reverse). Neither is a good operating point, and no single configuration serves both domains.
+- Without a cycle, "STL + PELT", "BinSeg", "z-score" and "raw PELT" are not four methods: the method comparison is only meaningful for domains with a declared cycle.
+- The truth is not invariant to scale: with the declared scale the reactor has 212 natural changes against 1964 with the default window (threshold 0.25). Any cross-domain claim must fix the shift definition in physical time before the test partition is scored.
+- Consequence for the plan: report the power curve and precision-recall trade-off per domain, and choose the operating point with a rule fixed in advance (for example a target false-alarm rate on a reference period), not one tuned on the truth.
