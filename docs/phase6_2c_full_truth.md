@@ -40,3 +40,13 @@ The **chance baseline** places the same number of detections as the method at ra
 - The series come from a deterministic simulator forced by weather files; only the sensor error is random. The twin has no unmodelled disturbances, faults or operator actions, so these figures say nothing about real crops or plants.
 - The truth depends on the shift definition (window 6, STL seasonal). A different definition changes the numbers, not the ordering of methods; this has been checked only across thresholds.
 - Pilot size: 22 scenarios, one partition; intervals not computed here.
+
+## Second domain: the PLC-controlled reactor (`tsxai/examples/reactor_g1b_pilot.py`)
+
+Same analysis, same default configuration, 38 dev scenarios, 114 series (a simulated teaching reactor, one sample per minute, no daily cycle).
+
+- Precision against interventions alone is again low (0.08): interventions are 273 of 2281 true changes (12 %). The incomplete-truth effect is not specific to the twin.
+- Natural changes are NOT rare here (1964, about 20 per series at threshold 0.25), against the expectation that the PI loop would hold the state steady. Cause not verified; the shift definition uses windows of 6 samples, which are 6 minutes here and 6 hours in the twin, so it is probably scale-dependent.
+- `stl_pelt` (threshold 0.25, none): precision 0.77 against 0.30 for chance, but recall 0.16 (interventions 0.15, against 0.71 in the twin). The z-score baseline is as good (F1 0.31 against 0.27): the ranking of methods found on the twin does not transfer.
+- Raw PELT reaches recall 0.91 by detecting almost everything; its chance baseline has recall 0.78, so its F1 (0.58) is barely above chance (about 0.51).
+- Conclusion: the numbers are domain-dependent. What holds in both domains: detection beats chance, and the intervention-only truth understates detection. The analyzer's parameters are in samples, not in time units, so the two domains are not comparable until the configuration is expressed in time (open item).
