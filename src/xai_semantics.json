@@ -1,0 +1,23 @@
+{
+  "status": "PROVISIONAL design conventions of the semantic layer (phase 6.4); thresholds are NOT written here: they are read from crop_config.json per crop and stage, with their path as the source",
+  "conventions": {
+    "trend_noise_factor": 3.0,
+    "min_exceedance_samples": 1,
+    "twin_quorum": 0.8,
+    "twin_min_variants": 3,
+    "max_listed_exceedances": 3,
+    "max_listed_onsets": 5,
+    "interval_coverage_tolerance": 0.05
+  },
+  "threshold_fields": {
+    "temperature_c": {"unit": "degC", "max": ["stress_thresholds", "max_temp_c"], "min": ["stress_thresholds", "min_temp_c"]},
+    "vpd_kpa": {"unit": "kPa", "max": ["vpd_thresholds", "stress_max_kpa"]},
+    "soil_water_vwc_m3_m3": {"unit": "m3_m-3", "min": ["vwc_thresholds", "optimal_min"]}
+  },
+  "forbidden_claims": [
+    "the twin is calibrated",
+    "the twin is validated against the real system",
+    "the forecaster proves a cause",
+    "a decision is recommended on the strength of an unconfirmed model estimate"
+  ]
+}

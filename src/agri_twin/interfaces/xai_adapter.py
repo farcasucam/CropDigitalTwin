@@ -18,6 +18,7 @@ The truth of a benchmark built here is the truth of the SIMULATED twin, whose cr
 
 from __future__ import annotations
 
+import calendar
 import json
 from datetime import timedelta
 from pathlib import Path
@@ -25,6 +26,8 @@ from typing import Any, Mapping, Sequence
 
 from tsxai.bench import BenchmarkDesign
 from tsxai.core import ContextSpec, FactorSpec, Intervention, RunResult, ScenarioDescriptor, SimulatorSeriesSource, VariableCatalogue, VariableSpec, content_hash
+from tsxai.semantics import DomainPack, ThresholdSpec
+from tsxai.semantics.vocabulary import DEFAULT_VOCABULARY
 
 from agri_twin.application.greenhouse_backend import layout_floor_area_m2
 from agri_twin.application.interactive_simulation import VARIABLES, InteractiveSimulationService
@@ -34,6 +37,8 @@ from agri_twin.application.seasonal_synthetic_campaign import ANNUAL_GREENHOUSE_
 
 ROLES_FILE = Path(__file__).resolve().parents[2] / "xai_variable_roles.json"
 DESIGN_FILE = Path(__file__).resolve().parents[2] / "xai_benchmark_design.json"
+SEMANTICS_FILE = Path(__file__).resolve().parents[2] / "xai_semantics.json"
+CROP_CONFIG_FILE = Path(__file__).resolve().parents[2] / "crop_config.json"
 NAME = "agri-twin-interactive/1"
 
 
@@ -151,6 +156,31 @@ def controller_role_overrides(simulator: TwinSimulator):
 def intervention_plan_variables(intervention) -> tuple[str, ...]:
     """The variables an intervention directly sets, to be stated as a plan in a what-if (empty for a weather or process factor)."""
     return FACTOR_PLAN.get(intervention.factor, ())
+
+
+def crop_stage(crop: str, month: int, crop_config_path: Path | str | None = None) -> str | None:
+    """The crop-catalogue stage whose months include ``month`` (1-12), or ``None`` when the catalogue has none: the stage is the catalogue's own, not an inference."""
+    crops = _load(Path(crop_config_path or CROP_CONFIG_FILE)).get("crops", {})
+    for stage, spec in crops.get(crop, {}).get("stages", {}).items():
+        if calendar.month_name[month] in spec.get("months", ()):
+            return stage
+    return None
+
+
+def semantic_pack(crop: str, month: int, semantics_path: Path | str | None = None, crop_config_path: Path | str | None = None) -> DomainPack:
+    """The semantic-layer pack of the twin: the generic bilingual vocabulary, the provisional conventions of ``src/xai_semantics.json`` and the thresholds of the crop's stage of ``month``, each read from
+    ``crop_config.json`` with its path as the source. A variable or a stage without a catalogue value gets no threshold: nothing is invented."""
+    config = _load(Path(semantics_path or SEMANTICS_FILE))
+    stage = crop_stage(crop, month, crop_config_path)
+    spec = _load(Path(crop_config_path or CROP_CONFIG_FILE)).get("crops", {}).get(crop, {}).get("stages", {}).get(stage, {}) if stage else {}
+    thresholds: dict[str, dict[str, ThresholdSpec]] = {}
+    for variable, fields in config["threshold_fields"].items():
+        for side in ("max", "min"):
+            if side in fields:
+                group, key = fields[side]
+                if key in spec.get(group, {}):
+                    thresholds.setdefault(variable, {})[side] = ThresholdSpec(float(spec[group][key]), fields["unit"], f"crop_config.json {crop}/{stage}/{group}.{key}")
+    return DomainPack(f"agri-twin/{crop}", DEFAULT_VOCABULARY, thresholds, {k: float(v) for k, v in config["conventions"].items()}, "provisional", tuple(config["forbidden_claims"]))
 
 
 def twin_series_source(simulator: TwinSimulator | None = None) -> SimulatorSeriesSource:

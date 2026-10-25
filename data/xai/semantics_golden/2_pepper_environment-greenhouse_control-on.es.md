@@ -1,0 +1,75 @@
+# pepper greenhouse on
+
+## Contexto
+- El estado del sistema no se conoce en esta ventana; no se aplican umbrales por etapa [observado] [F:835d47d1e5]
+
+## Estado actual
+- temperature_c es estable en 10 tramos (en total 125 muestras) entre las muestras 0 y 198 [observado] [F:52b3b385eb]
+- temperature_c sube entre las muestras 24 y 29 un neto de 0,339 degC (0,0565 degC/h) [observado] [F:30efe4677e]
+- temperature_c baja entre las muestras 56 y 61 un neto de 0,92 degC (-0,153 degC/h) [observado] [F:46f5253775]
+- temperature_c sube entre las muestras 62 y 71 un neto de 0,387 degC (0,0387 degC/h) [observado] [F:4061d679ac]
+- temperature_c baja entre las muestras 91 y 96 un neto de 0,722 degC (-0,12 degC/h) [observado] [F:fc0b6b6b47]
+- temperature_c sube entre las muestras 97 y 102 un neto de 0,488 degC (0,0813 degC/h) [observado] [F:0186eddada]
+- temperature_c sube entre las muestras 103 y 108 un neto de 0,414 degC (0,0691 degC/h) [observado] [F:622d7d1f71]
+- temperature_c baja entre las muestras 109 y 114 un neto de 0,438 degC (-0,073 degC/h) [observado] [F:d7caa9ee8c]
+- temperature_c baja entre las muestras 115 y 120 un neto de 0,54 degC (-0,09 degC/h) [observado] [F:54a8622b58]
+- temperature_c baja entre las muestras 121 y 130 un neto de 0,284 degC (-0,0284 degC/h) [observado] [F:872855f3cc]
+- temperature_c sube entre las muestras 163 y 168 un neto de 0,12 degC (0,02 degC/h) [observado] [F:eb5f96b6ac]
+- temperature_c sube entre las muestras 187 y 192 un neto de 0,109 degC (0,0182 degC/h) [observado] [F:4abe4050ac]
+- temperature_c baja entre las muestras 199 y 204 un neto de 0,082 degC (-0,0137 degC/h) [observado] [F:21435595c1]
+- temperature_c sube entre las muestras 205 y 210 un neto de 0,125 degC (0,0208 degC/h) [observado] [F:01e0776493]
+- temperature_c sube entre las muestras 211 y 217 un neto de 0,152 degC (0,0218 degC/h) [observado] [F:8f7aa03fec]
+- temperature_c baja entre las muestras 218 y 223 un neto de 0,0779 degC (-0,013 degC/h) [observado] [F:6edeb71697]
+- temperature_c baja entre las muestras 224 y 232 un neto de 1,19 degC (-0,132 degC/h) [observado] [F:b50353c733]
+- temperature_c sube entre las muestras 233 y 239 un neto de 0,763 degC (0,109 degC/h) [observado] [F:50766e1a37]
+- vpd_kpa es estable en 8 tramos (en total 240 muestras) entre las muestras 0 y 239 [observado] [F:fa4e448e84]
+- soil_water_vwc_m3_m3: el paquete de dominio no define umbral, no se supone ninguno [observado] [F:590cb66f99]
+- temperature_c: el paquete de dominio no define umbral, no se supone ninguno [observado] [F:c8c8a7d98c]
+- vpd_kpa: el paquete de dominio no define umbral, no se supone ninguno [observado] [F:1de0a46bc6]
+
+## Cambios detectados
+- temperature_c baja en la muestra 24 0,0878 degC (jump, 3,41 sigmas de ruido) [observado] [F:857aaafdcc]
+- temperature_c sube en la muestra 30 0,0788 degC (jump, 3,06 sigmas de ruido) [observado] [F:d88f795a41]
+- temperature_c sube en la muestra 43 0,535 degC (jump, 20,8 sigmas de ruido) [observado] [F:d38136c96d]
+- temperature_c baja en la muestra 50 0,537 degC (jump, 20,9 sigmas de ruido) [observado] [F:855330ce23]
+- temperature_c sube en la muestra 56 0,292 degC (jump, 11,3 sigmas de ruido) [observado] [F:54202907d6]
+- temperature_c baja en la muestra 62 0,153 degC (jump, 5,94 sigmas de ruido) [observado] [F:6765e7a8a1]
+- temperature_c baja en la muestra 72 0,16 degC (jump, 6,21 sigmas de ruido) [observado] [F:952842eb82]
+- temperature_c baja en la muestra 91 0,826 degC (jump, 32,1 sigmas de ruido) [observado] [F:61ada98029]
+- temperature_c sube en la muestra 97 0,739 degC (jump, 28,7 sigmas de ruido) [observado] [F:92edd32667]
+- temperature_c baja en la muestra 103 0,324 degC (jump, 12,6 sigmas de ruido) [observado] [F:255e0707dc]
+- temperature_c sube en la muestra 109 0,332 degC (jump, 12,9 sigmas de ruido) [observado] [F:d1b6db488b]
+- temperature_c baja en la muestra 115 1,09 degC (jump, 42,4 sigmas de ruido) [observado] [F:a725ca26a6]
+- temperature_c sube en la muestra 121 0,988 degC (jump, 38,4 sigmas de ruido) [observado] [F:3df04fdc07]
+- temperature_c sube en la muestra 131 0,202 degC (jump, 7,84 sigmas de ruido) [observado] [F:e20588b88f]
+- temperature_c baja en la muestra 163 0,156 degC (jump, 6,07 sigmas de ruido) [observado] [F:cd97a2bd20]
+- temperature_c sube en la muestra 169 0,155 degC (jump, 6,03 sigmas de ruido) [observado] [F:9e4e01a74c]
+- temperature_c baja en la muestra 175 0,0821 degC (jump, 3,19 sigmas de ruido) [observado] [F:e2a4dd9b0c]
+- temperature_c sube en la muestra 181 0,128 degC (jump, 4,97 sigmas de ruido) [observado] [F:5f5356163f]
+- temperature_c baja en la muestra 187 0,222 degC (jump, 8,63 sigmas de ruido) [observado] [F:833078e63c]
+- temperature_c sube en la muestra 193 0,179 degC (jump, 6,97 sigmas de ruido) [observado] [F:f5b99a2c8d]
+- temperature_c sube en la muestra 199 0,195 degC (jump, 7,59 sigmas de ruido) [observado] [F:0afa8696c7]
+- temperature_c baja en la muestra 205 0,11 degC (jump, 4,27 sigmas de ruido) [observado] [F:03431c6dfa]
+- temperature_c sube en la muestra 211 0,666 degC (jump, 25,9 sigmas de ruido) [observado] [F:25319a0d13]
+- temperature_c baja en la muestra 218 0,702 degC (jump, 27,3 sigmas de ruido) [observado] [F:0a1693de29]
+- temperature_c sube en la muestra 224 0,34 degC (jump, 13,2 sigmas de ruido) [observado] [F:a8b2929da3]
+- temperature_c sube en la muestra 233 1,09 degC (jump, 42,5 sigmas de ruido) [observado] [F:a56684124c]
+- vpd_kpa tiene 6 cambios pequeños más entre las muestras 85 y 214, el mayor de 0,137 kPa; no se listan uno a uno [observado] [F:b8f2d5913f]
+- vpd_kpa sube en la muestra 107 0,168 kPa (jump, 3,63 sigmas de ruido) [observado] [F:48223a5647]
+- greenhouse_cooling_kw entre las muestras 0 y 239: 0 encendidos, 0 h encendido, integral 0 kWh (ON por encima de 19,4, device rating, provisional 5 percent convention of xai_variable_roles.json) [observado] [F:f985262ac0]
+- greenhouse_heating_kw entre las muestras 0 y 239: 10 encendidos, 57 h encendido, integral 1378 kWh (ON por encima de 6,48, device rating, provisional 5 percent convention of xai_variable_roles.json) [observado] [F:ab1f235f8c]
+- greenhouse_heating_kw se enciende en la muestra 3 (por encima de 6,48 kW, device rating, provisional 5 percent convention of xai_variable_roles.json) [observado] [F:6c8e45c304]
+- greenhouse_heating_kw se enciende en la muestra 26 (por encima de 6,48 kW, device rating, provisional 5 percent convention of xai_variable_roles.json) [observado] [F:cb31e2acf3]
+- greenhouse_heating_kw se enciende en la muestra 51 (por encima de 6,48 kW, device rating, provisional 5 percent convention of xai_variable_roles.json) [observado] [F:d9befca6f6]
+- greenhouse_heating_kw se enciende en la muestra 74 (por encima de 6,48 kW, device rating, provisional 5 percent convention of xai_variable_roles.json) [observado] [F:ffc356b8f5]
+- greenhouse_heating_kw se enciende en la muestra 97 (por encima de 6,48 kW, device rating, provisional 5 percent convention of xai_variable_roles.json) [observado] [F:87a141c8d4]
+
+## Previsión
+- lagged-ridge/l1-2-3-24 prevé temperature_c entre 13,7 y 25 degC desde la muestra 120 hasta la 167, terminando en 16,3 degC [estimado por el modelo] [F:a050abe838]
+- temperature_c: el intervalo nominal del 80 % del modelo va de 12,2 a 27 degC; no calibrado [estimado por el modelo] [F:b672a62ac1]
+
+## Qué pasaría si
+- nada que informar
+
+## Calidad del dato
+- 13 series son constantes en la ventana: co2_ppm, cold_stress, frost_damage, greenhouse_cooling_kw, greenhouse_shading_fraction, heat_stress, irrigation_mm, outdoor_rain_rate_mm_h, precipitation_mm, radiation_stress, root_zone_water_mm, soil_water_vwc_m3_m3, water_stress [observado] [F:3aa90b645d]

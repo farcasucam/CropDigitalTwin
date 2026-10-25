@@ -1,0 +1,75 @@
+# pepper greenhouse on
+
+## Context
+- The state of the system is not known for this window; stage thresholds are not applied [observed] [F:835d47d1e5]
+
+## Current state
+- temperature_c is stable in 10 stretches (together 125 samples) between samples 0 and 198 [observed] [F:52b3b385eb]
+- temperature_c rises from sample 24 to 29 by 0.339 degC net (0.0565 degC/h) [observed] [F:30efe4677e]
+- temperature_c falls from sample 56 to 61 by 0.92 degC net (-0.153 degC/h) [observed] [F:46f5253775]
+- temperature_c rises from sample 62 to 71 by 0.387 degC net (0.0387 degC/h) [observed] [F:4061d679ac]
+- temperature_c falls from sample 91 to 96 by 0.722 degC net (-0.12 degC/h) [observed] [F:fc0b6b6b47]
+- temperature_c rises from sample 97 to 102 by 0.488 degC net (0.0813 degC/h) [observed] [F:0186eddada]
+- temperature_c rises from sample 103 to 108 by 0.414 degC net (0.0691 degC/h) [observed] [F:622d7d1f71]
+- temperature_c falls from sample 109 to 114 by 0.438 degC net (-0.073 degC/h) [observed] [F:d7caa9ee8c]
+- temperature_c falls from sample 115 to 120 by 0.54 degC net (-0.09 degC/h) [observed] [F:54a8622b58]
+- temperature_c falls from sample 121 to 130 by 0.284 degC net (-0.0284 degC/h) [observed] [F:872855f3cc]
+- temperature_c rises from sample 163 to 168 by 0.12 degC net (0.02 degC/h) [observed] [F:eb5f96b6ac]
+- temperature_c rises from sample 187 to 192 by 0.109 degC net (0.0182 degC/h) [observed] [F:4abe4050ac]
+- temperature_c falls from sample 199 to 204 by 0.082 degC net (-0.0137 degC/h) [observed] [F:21435595c1]
+- temperature_c rises from sample 205 to 210 by 0.125 degC net (0.0208 degC/h) [observed] [F:01e0776493]
+- temperature_c rises from sample 211 to 217 by 0.152 degC net (0.0218 degC/h) [observed] [F:8f7aa03fec]
+- temperature_c falls from sample 218 to 223 by 0.0779 degC net (-0.013 degC/h) [observed] [F:6edeb71697]
+- temperature_c falls from sample 224 to 232 by 1.19 degC net (-0.132 degC/h) [observed] [F:b50353c733]
+- temperature_c rises from sample 233 to 239 by 0.763 degC net (0.109 degC/h) [observed] [F:50766e1a37]
+- vpd_kpa is stable in 8 stretches (together 240 samples) between samples 0 and 239 [observed] [F:fa4e448e84]
+- soil_water_vwc_m3_m3: the domain pack defines no threshold, none is assumed [observed] [F:590cb66f99]
+- temperature_c: the domain pack defines no threshold, none is assumed [observed] [F:c8c8a7d98c]
+- vpd_kpa: the domain pack defines no threshold, none is assumed [observed] [F:1de0a46bc6]
+
+## Changes detected
+- temperature_c shifts down at sample 24 by 0.0878 degC (jump, 3.41 noise sigmas) [observed] [F:857aaafdcc]
+- temperature_c shifts up at sample 30 by 0.0788 degC (jump, 3.06 noise sigmas) [observed] [F:d88f795a41]
+- temperature_c shifts up at sample 43 by 0.535 degC (jump, 20.8 noise sigmas) [observed] [F:d38136c96d]
+- temperature_c shifts down at sample 50 by 0.537 degC (jump, 20.9 noise sigmas) [observed] [F:855330ce23]
+- temperature_c shifts up at sample 56 by 0.292 degC (jump, 11.3 noise sigmas) [observed] [F:54202907d6]
+- temperature_c shifts down at sample 62 by 0.153 degC (jump, 5.94 noise sigmas) [observed] [F:6765e7a8a1]
+- temperature_c shifts down at sample 72 by 0.16 degC (jump, 6.21 noise sigmas) [observed] [F:952842eb82]
+- temperature_c shifts down at sample 91 by 0.826 degC (jump, 32.1 noise sigmas) [observed] [F:61ada98029]
+- temperature_c shifts up at sample 97 by 0.739 degC (jump, 28.7 noise sigmas) [observed] [F:92edd32667]
+- temperature_c shifts down at sample 103 by 0.324 degC (jump, 12.6 noise sigmas) [observed] [F:255e0707dc]
+- temperature_c shifts up at sample 109 by 0.332 degC (jump, 12.9 noise sigmas) [observed] [F:d1b6db488b]
+- temperature_c shifts down at sample 115 by 1.09 degC (jump, 42.4 noise sigmas) [observed] [F:a725ca26a6]
+- temperature_c shifts up at sample 121 by 0.988 degC (jump, 38.4 noise sigmas) [observed] [F:3df04fdc07]
+- temperature_c shifts up at sample 131 by 0.202 degC (jump, 7.84 noise sigmas) [observed] [F:e20588b88f]
+- temperature_c shifts down at sample 163 by 0.156 degC (jump, 6.07 noise sigmas) [observed] [F:cd97a2bd20]
+- temperature_c shifts up at sample 169 by 0.155 degC (jump, 6.03 noise sigmas) [observed] [F:9e4e01a74c]
+- temperature_c shifts down at sample 175 by 0.0821 degC (jump, 3.19 noise sigmas) [observed] [F:e2a4dd9b0c]
+- temperature_c shifts up at sample 181 by 0.128 degC (jump, 4.97 noise sigmas) [observed] [F:5f5356163f]
+- temperature_c shifts down at sample 187 by 0.222 degC (jump, 8.63 noise sigmas) [observed] [F:833078e63c]
+- temperature_c shifts up at sample 193 by 0.179 degC (jump, 6.97 noise sigmas) [observed] [F:f5b99a2c8d]
+- temperature_c shifts up at sample 199 by 0.195 degC (jump, 7.59 noise sigmas) [observed] [F:0afa8696c7]
+- temperature_c shifts down at sample 205 by 0.11 degC (jump, 4.27 noise sigmas) [observed] [F:03431c6dfa]
+- temperature_c shifts up at sample 211 by 0.666 degC (jump, 25.9 noise sigmas) [observed] [F:25319a0d13]
+- temperature_c shifts down at sample 218 by 0.702 degC (jump, 27.3 noise sigmas) [observed] [F:0a1693de29]
+- temperature_c shifts up at sample 224 by 0.34 degC (jump, 13.2 noise sigmas) [observed] [F:a8b2929da3]
+- temperature_c shifts up at sample 233 by 1.09 degC (jump, 42.5 noise sigmas) [observed] [F:a56684124c]
+- vpd_kpa has 6 further small shifts between samples 85 and 214, the largest 0.137 kPa; not listed one by one [observed] [F:b8f2d5913f]
+- vpd_kpa shifts up at sample 107 by 0.168 kPa (jump, 3.63 noise sigmas) [observed] [F:48223a5647]
+- greenhouse_cooling_kw over samples 0 to 239: 0 onsets, 0 h on, integral 0 kWh (ON above 19.4, device rating, provisional 5 percent convention of xai_variable_roles.json) [observed] [F:f985262ac0]
+- greenhouse_heating_kw over samples 0 to 239: 10 onsets, 57 h on, integral 1378 kWh (ON above 6.48, device rating, provisional 5 percent convention of xai_variable_roles.json) [observed] [F:ab1f235f8c]
+- greenhouse_heating_kw switches on at sample 3 (above 6.48 kW, device rating, provisional 5 percent convention of xai_variable_roles.json) [observed] [F:6c8e45c304]
+- greenhouse_heating_kw switches on at sample 26 (above 6.48 kW, device rating, provisional 5 percent convention of xai_variable_roles.json) [observed] [F:cb31e2acf3]
+- greenhouse_heating_kw switches on at sample 51 (above 6.48 kW, device rating, provisional 5 percent convention of xai_variable_roles.json) [observed] [F:d9befca6f6]
+- greenhouse_heating_kw switches on at sample 74 (above 6.48 kW, device rating, provisional 5 percent convention of xai_variable_roles.json) [observed] [F:ffc356b8f5]
+- greenhouse_heating_kw switches on at sample 97 (above 6.48 kW, device rating, provisional 5 percent convention of xai_variable_roles.json) [observed] [F:87a141c8d4]
+
+## Forecast
+- lagged-ridge/l1-2-3-24 forecasts temperature_c between 13.7 and 25 degC from sample 120 to 167, ending at 16.3 degC [model estimate] [F:a050abe838]
+- temperature_c: the model's nominal 80 % interval spans 12.2 to 27 degC; not calibrated [model estimate] [F:b672a62ac1]
+
+## What if
+- nothing to report
+
+## Data quality
+- 13 series are constant over the window: co2_ppm, cold_stress, frost_damage, greenhouse_cooling_kw, greenhouse_shading_fraction, heat_stress, irrigation_mm, outdoor_rain_rate_mm_h, precipitation_mm, radiation_stress, root_zone_water_mm, soil_water_vwc_m3_m3, water_stress [observed] [F:3aa90b645d]
