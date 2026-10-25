@@ -127,8 +127,28 @@ class TwinSimulator:
         return RunResult(series, list(trajectory["time"][a:b]), run_hash)
 
 
+CONTROLLER_DRIVEN = ("past_only_covariate", "set by the climate controller in this scenario (control on): an output of the controller reacting to the state, so not a plan; its future values are never given to a forecaster")
+FACTOR_PLAN = {"IRRIGATION": ("irrigation_mm",), "SHADING": ("greenhouse_shading_fraction",), "VENTILATION": ("control_vent_opening",)}  # the decision variable an intervention itself sets (a stated plan)
+
+
+def controller_role_overrides(simulator: TwinSimulator):
+    """With the controller on, the decision-role variables (vent opening, extractor, shading, irrigation) are the controller's own outputs: they react to the indoor state, so their future values would hand a
+    forecaster the controller's reaction to the very target it predicts. In those scenarios they become past-only covariates; with the controller off they stay decisions (a person's plan)."""
+    decisions = simulator.catalogue().with_role("decision_covariate")
+
+    def overrides(scenario):
+        return {name: CONTROLLER_DRIVEN for name in decisions} if scenario.labels.get("control") == "on" else {}
+
+    return overrides
+
+
+def intervention_plan_variables(intervention) -> tuple[str, ...]:
+    """The variables an intervention directly sets, to be stated as a plan in a what-if (empty for a weather or process factor)."""
+    return FACTOR_PLAN.get(intervention.factor, ())
+
+
 def twin_series_source(simulator: TwinSimulator | None = None) -> SimulatorSeriesSource:
-    """Frames of the twin: the exogenous weather and the rain are forcing, everything the twin computes is synthetic (no ``REAL_VERIFIED`` data exists)."""
+    """Frames of the twin: the exogenous weather and the rain are forcing, everything the twin computes is synthetic (no ``REAL_VERIFIED`` data exists). With the controller on, its outputs are past-only covariates."""
     simulator = simulator or TwinSimulator()
     forcing = {name: "FORCING" for name in simulator.catalogue().with_role("known_future_covariate")}
-    return SimulatorSeriesSource(simulator, "SYNTHETIC", forcing)
+    return SimulatorSeriesSource(simulator, "SYNTHETIC", forcing, role_overrides=controller_role_overrides(simulator))

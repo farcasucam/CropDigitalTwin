@@ -1,0 +1,1563 @@
+{
+ "baseline_label": "c-bank-dev-1",
+ "catalogue_hash": "76e24d8d5d9a9105782ae897de2f8568d543f7cedaf79673085c7e4232dff825",
+ "count": 134,
+ "design_hash": "b31de373b0f8141aa5ffecb68a4a2765312881e7077cd41f703c3caf4efaef47",
+ "format": "tsxai.bench/1",
+ "manifest_hash": "3554941e158285b49828879b0a6880b7c918c4524037452a88449832375f540f",
+ "scenarios": [
+  {
+   "content_hash": "f1009e5bf619dc2153061a4fa4c289c930b1c814d073d1d34839c5068448f4ba",
+   "group": "crop=pepper|season=30",
+   "id": "s0004e7cca9ca",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "804b95af4dc4f1caaad58dbd0f538e42e5a85f9e6d39cc5e906a28505b10f352",
+   "group": "crop=tomato|season=7",
+   "id": "s0923ab7b9a82",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "1648def0c84c741b0d665039d6308a5f5bbc102c6d953554bda6d62799b5d1a3",
+   "group": "crop=lettuce|season=5",
+   "id": "s0a1b1e76575e",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "7fb2c519f2c9c6c0a740f04d9c505ead4ab1a1ab7802130e654d2e47b2f31671",
+   "group": "crop=tomato|season=16",
+   "id": "s0a90ccf3fb4e",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "6a11c92cd9d9ad588caf616a0114a88e10cd661a2fa3c8e7e68c6bad3563c738",
+   "group": "crop=lettuce|season=21",
+   "id": "s0d0c1e704cf4",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "9c51040d81509ce1911840796cce8bb07a5ecabd752bb66c1f75c5fb05bad145",
+   "group": "crop=lettuce|season=31",
+   "id": "s0d7cd4c5397d",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "28f68216c5e76789b5943c73708e795eb7ae63a719129f9b7315af4e450f6098",
+   "group": "crop=tomato|season=8",
+   "id": "s0efdb243f578",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "d0bc4235a55ce8bd190591894a2b3ae8a257f0f82d57399152922c46f4b23109",
+   "group": "crop=lettuce|season=4",
+   "id": "s1068865ddd38",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "692baffb77c6b2f743cb95d901f92ab684b6b7469f16753e81b0ade14b8f2943",
+   "group": "crop=pepper|season=38",
+   "id": "s126d7763196a",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "d71f252cc5eb5689bb25fbddbe16b1752fc41d80043d788ed4660f2fcba04154",
+   "group": "crop=pepper|season=4",
+   "id": "s16b699321677",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "1fcc96dba96964567aa7a088722b8aaacf2b84759173cd0612f9bb4680f03a2f",
+   "group": "crop=pepper|season=10",
+   "id": "s19681d22e203",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "dd9dd2befd6a40bbe8d2f6f336ee7c4d5fdea956a06284d3f7b12180ac629551",
+   "group": "crop=lettuce|season=31",
+   "id": "s1d1c8bd9db65",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "5fae764cb6cf40015aa63309db6f5f7c52892c944182597cc71e8a7f4c6c2c5f",
+   "group": "crop=pepper|season=4",
+   "id": "s1ec280fe1aef",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "8d48f203efcd132be5891768b8b46c9e80c181b9ad76d46454255573492af61e",
+   "group": "crop=tomato|season=21",
+   "id": "s1fcdf6327845",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "8c8b6f7d7c081b2e00b416cb1d6697b2876fcfdf84783bb51e539a2107ceee09",
+   "group": "crop=lettuce|season=16",
+   "id": "s2024e1ab9b93",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "5bd8ffd15dde3cbcd9e5b6a6a1465034d375f7b7a76ef433b295ac966d83335e",
+   "group": "crop=tomato|season=4",
+   "id": "s203c7ec52dc0",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "f5061bedda5fdc551ee4bbb1db10746f77015ab90c5fbb392ef345aa8ea24e2c",
+   "group": "crop=pepper|season=9",
+   "id": "s21191672969c",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "62c6ea458258186fb4f821de8448174a68f3ff8889dc23f5376ac5272e9964fe",
+   "group": "crop=lettuce|season=27",
+   "id": "s21a52fa90494",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "ba7076bd231744c1752a5647a3558a97599d531868de3293f3e22e9700d8fa02",
+   "group": "crop=pepper|season=15",
+   "id": "s2679c4032a1b",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "cc8a16d34e13a11fd0e7351b625238b144e08681c027b3d2404cd77360b70f61",
+   "group": "crop=lettuce|season=27",
+   "id": "s2818b1eb2e1b",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "79271de2be513b7a751ee248da0a7801374de1b157e27a3b39973e890e3bc53d",
+   "group": "crop=tomato|season=35",
+   "id": "s282095bd3fb0",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "714688cae93e55892a2988c9df5b874c05b53aa1cb67be45105432521c468d5b",
+   "group": "crop=tomato|season=7",
+   "id": "s28ff3a73a2ee",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "599623ba98bd5726078163aaeecc792908662a1ba555e0863ed3f88018c610b0",
+   "group": "crop=tomato|season=38",
+   "id": "s29154ed74bb2",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "86bcec487c038735a8e9dd90fe94a701245a3d4df85e42fa678f72f75519e2cb",
+   "group": "crop=pepper|season=18",
+   "id": "s2afb872f2af8",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "844da451f5c331b001a02b0d5593bcb2e7b466f0666ca18e60e43a98d414d583",
+   "group": "crop=tomato|season=28",
+   "id": "s2b843dda8bf3",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "31ee7f8e5c901181ede9afd08b15bd1c50736709c0b92e9c8f24345e845a1086",
+   "group": "crop=tomato|season=34",
+   "id": "s2e1697c02ceb",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "57c6eb50174027f415d158ac4fc0ac7cb713321795858ef726934eb1dd6b5868",
+   "group": "crop=tomato|season=37",
+   "id": "s3c3ccadc9037",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "8ed20b0c89ae29cb0881d279330abcc56e1a22bd007dd8ef79d686ea13474899",
+   "group": "crop=tomato|season=21",
+   "id": "s3c6ff15dd7d7",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "3e8c72d54442055580791a48b57193d2672e22301cf7a4d3692c0fdea79e2932",
+   "group": "crop=lettuce|season=18",
+   "id": "s3ce4d97e84d6",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "142bbf5a6bbba72e0758b06283f1dab43b5f1123f0bd2547dd9924d27b8ba3ad",
+   "group": "crop=lettuce|season=6",
+   "id": "s3e0750456099",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "81191ae5c218e6249aac5bc6524d01fedb6f7e35cb99da775d8014eb546625a0",
+   "group": "crop=tomato|season=2",
+   "id": "s3e325e2cf17e",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "098c331299d6280f66b861b9235fc6f21e503d8a6b84af76386f03ccddb5c2fc",
+   "group": "crop=tomato|season=24",
+   "id": "s43b4e460569d",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "db38287f76d6c5a012d7c475bb456b098bba259cd33cdf4c39ae2b1b7ea27298",
+   "group": "crop=lettuce|season=31",
+   "id": "s4c04785531e9",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "71b6967c2349babb68287baff1fbdc0b6cd0e15a7579a4f7bc8b21e1faddc249",
+   "group": "crop=lettuce|season=17",
+   "id": "s50bf7ed0f57a",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "aca81c6e6799d74c3bf3369fcc6fea95a3feff19c917451c1f49c24aa207483d",
+   "group": "crop=pepper|season=6",
+   "id": "s526a3b4a7b1f",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "3aa42de28c9cef0fb742a08e3904c467881b73fe57ce35c19fff0245147bc64d",
+   "group": "crop=pepper|season=9",
+   "id": "s540b507357ce",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "0578680693a677c83e025c8d128263764371a5f90664fbf52a0567e234789bae",
+   "group": "crop=tomato|season=14",
+   "id": "s55ea34cdae8c",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "a65c45d03d4c034a42b7375f9d310fef76e3936e7e97166d350217ac5611a7dc",
+   "group": "crop=tomato|season=26",
+   "id": "s55ef26c0547b",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "068f3e43b1b1ab0b773a8adc91b198ac78bf05d8ef8ca95fb5ade251fba88949",
+   "group": "crop=tomato|season=24",
+   "id": "s573f3b8ace77",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "1bb662b7505f5a8b770bb586bc78e916f30f60c2b6d824361b1558ff2f1e483d",
+   "group": "crop=tomato|season=37",
+   "id": "s5bb3a456a46e",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "55da9cc1e14eb643190eb95115b9b173bb69a32ca583ecd8e4931dc6c07a2a55",
+   "group": "crop=tomato|season=27",
+   "id": "s5c68adfb7c31",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "40d6a19348eb148f59c03b1445bb07f880eecdf340d7b3a5745868a4db9bcb86",
+   "group": "crop=lettuce|season=18",
+   "id": "s5ce3b6829b4e",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "4644e3c768fc4655d17b532d6bdf4605960ab2cc64c4d9ad59e6ee69a61f7870",
+   "group": "crop=tomato|season=38",
+   "id": "s63531e1b4eac",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "f13264ab46662ceed4d9936e8fce737ed27195f9a76bb17beaa3e71d3bb9a32e",
+   "group": "crop=tomato|season=21",
+   "id": "s69ed65b93244",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "3530f0525117e470f636c38dae6ac5649124d1c638a518fe114ccef7faffe977",
+   "group": "crop=pepper|season=8",
+   "id": "s69f2f2d2e8aa",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "93a6e90bc36e460637ef685a84b59a0a3e13e3e80dda1d841487ca7d8d50d2b4",
+   "group": "crop=pepper|season=22",
+   "id": "s6a9e38fbe411",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "f7dd9fcda06e7c2cc9957fbd542154d4b80040ad524c7e9af30bddc1d98d251c",
+   "group": "crop=lettuce|season=16",
+   "id": "s6acafe6e16bf",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "d60f77c1c6aa8ccf732d567eb8519c58cd09d8b79bd001180fac764f6e36da5b",
+   "group": "crop=lettuce|season=7",
+   "id": "s6b678f8e21e3",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "cc4275a66f019d6027a699243988e5e33ede38feaf534f0431abbf0746746ec6",
+   "group": "crop=lettuce|season=18",
+   "id": "s6c376d64afd0",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "640d46f772a19dd811811f2b700c278a963c937d99bc0db31d3db87bb28d7c97",
+   "group": "crop=pepper|season=34",
+   "id": "s6c8c06be0547",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "6f2b8f12fe1df3535e233465a50e85561b28e3501ad7484c1298a37717bbdc57",
+   "group": "crop=pepper|season=14",
+   "id": "s6cb4316857d0",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "fdcbd6a409c10075044920f111b7d9980ca1a883360d291c32b127cdb5e8b163",
+   "group": "crop=pepper|season=20",
+   "id": "s6e74eeeb52a1",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "fb2f4525bcab91357c413282227619b0295371b855c5c6a702f0de6e150f587e",
+   "group": "crop=pepper|season=37",
+   "id": "s6f8d6a2c262a",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "86d1d5f782687cb82792156eb053b835fafc32f689646bc691f8ab62189a04df",
+   "group": "crop=tomato|season=13",
+   "id": "s720e382508d7",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "1297cb93b25f0dacb3fc55d11ba47f22b7bb4774b693b759fb39eb902007e1d6",
+   "group": "crop=pepper|season=1",
+   "id": "s72114311732c",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "2c591be92f88193aa968bc9fec7f6619f9460e425fdb15698963beb32980cf24",
+   "group": "crop=tomato|season=37",
+   "id": "s770ba072ef80",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "e6432af1d1f685b468bf107708c08db2242ce0ace7ae664e6fad5944a7195956",
+   "group": "crop=lettuce|season=40",
+   "id": "s7817ed02b01d",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "0aaaa9a2dc98486b08e31aa386b24b0f4b6ec2fd8dfade7142a115ccd6ec09fc",
+   "group": "crop=lettuce|season=40",
+   "id": "s7b150b2d5404",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "619488d033fbb8afb0c7deadf0eb97887cbeaf188eeeb76708d944129ccf6da7",
+   "group": "crop=pepper|season=9",
+   "id": "s7d553c014610",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "15fc7b53f28e4e9786f2e1db1b9b321972bf6f61096956eaa7571035ffd0dee2",
+   "group": "crop=tomato|season=12",
+   "id": "s8170fe0fa30f",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "06075a60ef8c27c566436c81de4919bb82800f56d4ab75b68a9215cd2f928de2",
+   "group": "crop=tomato|season=7",
+   "id": "s81927da3a4a3",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "129ca40421624f283080763edd491614205516d5ffbb977f1a742f58918506b6",
+   "group": "crop=tomato|season=7",
+   "id": "s8353647fea1a",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "2a61110fd32b3224cd897d3ecef86e3350628fdbd3f9619b6af9f67dcfea1e22",
+   "group": "crop=pepper|season=14",
+   "id": "s83a2ad986b3b",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "cb4160d7c75d2ff4467b2d0b088cdf9056a3f6c113082fd8e825486f4118c85a",
+   "group": "crop=lettuce|season=23",
+   "id": "s844a42fe7358",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "55a15a02e27396b3489457289ed36a481279f787ca6e8083e752db533af5cf27",
+   "group": "crop=tomato|season=18",
+   "id": "s8497e8fd8f98",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "27d4e1e610e4da8bb5e6de85f09f970fa99cd3c0ea8d82e6ff5a63e430b4c065",
+   "group": "crop=lettuce|season=16",
+   "id": "s84fffceb77fe",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "0c5873c68a019abdaed272bee910737dd4ce02d60004071545127f0db37b6b62",
+   "group": "crop=tomato|season=24",
+   "id": "s8bb5ac68e62a",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "699434ad00457e8c317de54cf8a8a1580f155d18cdb8adca8d21fe7fa9ab5cb0",
+   "group": "crop=lettuce|season=8",
+   "id": "s8cec488b42e1",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "19bad436e40aebf2c473390ea76435c2184460ea430da1082912978a6c665746",
+   "group": "crop=tomato|season=13",
+   "id": "s8f60da455730",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "12733245d66a3f8e757a178671d87430db2a07653fd78d1fc741f358479589f0",
+   "group": "crop=pepper|season=30",
+   "id": "s943aaf3fc8c3",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "0a3de6ce4a889685d6e59b15d14a158e5e1a85bd6d7afb1417d308d355b17a1b",
+   "group": "crop=tomato|season=23",
+   "id": "s94e1a164bca0",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "139d5fca1d3bce8fc5b06e43d844fb270004ff45c36de44d4511074f51318a02",
+   "group": "crop=tomato|season=39",
+   "id": "s950f8914d8b6",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "40f52de3800ac315ef039619054c231cf24bc1701778f2a4c12cd00c8fbdb7e9",
+   "group": "crop=lettuce|season=16",
+   "id": "s95d465f99dc5",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "c4939ec58b820988dab82bd6baecca95225585310f846eb9bb9a72f292c4e7fa",
+   "group": "crop=pepper|season=30",
+   "id": "s95e75221741e",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "bdd79ca6a00ca6fda2c0cbc2460be0afa0a7679a2a279b6da9ab40c88c299acc",
+   "group": "crop=pepper|season=29",
+   "id": "s9689d2905178",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "23683696c69baf170b5f86cd5f8091eae6e2c1c65b08bc5100bf2b286a5251ff",
+   "group": "crop=lettuce|season=37",
+   "id": "s993655b56f22",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "09f66ac1a09b8bbc51641785ce1720a861cac75c24bee55c01d2c7421c13a810",
+   "group": "crop=lettuce|season=33",
+   "id": "s995850f301e3",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "60203e61bed6e4f7bf860845f6ab26bf7cef4f456eb17fbb3332c797014b95f6",
+   "group": "crop=lettuce|season=17",
+   "id": "s9a3c9aa6e56f",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "4636b0c1540b3e7a047f86f28ac331adcba4b071d8981fca7e354f5e56f0cc2e",
+   "group": "crop=lettuce|season=40",
+   "id": "s9a9dd75a09f9",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "0fbd8f5035afc74dffef195e60ce9db4a228eee552c5b460d6b77ac4430a094f",
+   "group": "crop=lettuce|season=27",
+   "id": "s9c13c74e2ea6",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "9d52b8d1c8efb6ecad1ce49da7c39344c0467e8d919af2eec0c5e9ab4619239a",
+   "group": "crop=tomato|season=21",
+   "id": "s9cd121828ed4",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "ff9bf7697df7ae360d89c141adc91ab5a046cb3dbf8e8751787937b1f3178f77",
+   "group": "crop=lettuce|season=37",
+   "id": "s9cfdca780303",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "b23148d58f300ebb2b026a820845db4be8495fe15f1d3a096e50707781e11251",
+   "group": "crop=tomato|season=35",
+   "id": "s9eca53f852dd",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "68b79c80057b1944176fd6146824849c9429acbfee6a4efc3812722a9f94bb3c",
+   "group": "crop=tomato|season=39",
+   "id": "s9efa7fadb6da",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "cbd5281540a1eb9feea5b2beaecd7b43d3374b7a53dd6c5145e9f3646c815ae3",
+   "group": "crop=lettuce|season=34",
+   "id": "sa19618cfb9e2",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "64e1183cb78afa26fda1899027358b1b4b5880c802f55d2df2d60fb44b5cd669",
+   "group": "crop=tomato|season=24",
+   "id": "sa1c53cdcdd39",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "00381af97e8d4ff1c50943844f8cc373d5f87c8f2b822240ab3c7a334870a2ba",
+   "group": "crop=tomato|season=34",
+   "id": "sa501b4e6a3b3",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "bf662eac082d2bb75ccfd1559aef65c38dda437c8a526f7cf813b6178c5a6e13",
+   "group": "crop=tomato|season=2",
+   "id": "sa599ec845179",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "6fc7456ae8b6308dd55d0a357da89ac8df907674d993f531e8593f167aca9b56",
+   "group": "crop=lettuce|season=11",
+   "id": "sa59a92075766",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "3c30436861571baea8a800578dc753089415b858574f9d9969a087db6e973fd5",
+   "group": "crop=lettuce|season=11",
+   "id": "saa8181219354",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "5f831f670a92378c7041158fa2818cb513353e51a2e71452dee9b3d99670c8d7",
+   "group": "crop=pepper|season=27",
+   "id": "saf97f3a9fdea",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "8e1ccac4a82c06607367405692a70b4d20bee575426374efd06740708074978f",
+   "group": "crop=pepper|season=10",
+   "id": "safd51f7f2a85",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "7cd99f88be567fcd32b1a5a150f8446c7374f17fa80b96471bd2fd83a55c574d",
+   "group": "crop=lettuce|season=28",
+   "id": "sb2343bdb6d0c",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "565c01fe6c69bcaf7e4b498086cdc9225d8f3c9731e657a13ef9c6c8c61bc6fb",
+   "group": "crop=tomato|season=37",
+   "id": "sb470be110b61",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "4e7cee496a36fefa75c288f2f7f37f37539cd1ec51ea382068280807406863eb",
+   "group": "crop=lettuce|season=12",
+   "id": "sb516e81cd5c8",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "849c51fb10e759c63088d7baa66f68e03bc5c1a923b3c0732e4c69035f81c0bc",
+   "group": "crop=tomato|season=2",
+   "id": "sb5718e647855",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "b18d953e3d9cd096cae2535d16a492c9db808b4aa6fdb0b340519411d80e3b2f",
+   "group": "crop=pepper|season=40",
+   "id": "sb5b53fc61202",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "6655c9d064ef67cde173bbac6f2ca1886db723736e1a64150fb85e44dd4387ed",
+   "group": "crop=lettuce|season=4",
+   "id": "sb601633c6f4c",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "3d5bec8637aef556dfa59c32cd605b865d6f235eb1ff56934254171578d4677c",
+   "group": "crop=pepper|season=2",
+   "id": "sb68074ff1041",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "c6b52b769524383148b5d9ca48815f42079b58f862fd2f5ee5c8cf21878078d3",
+   "group": "crop=pepper|season=14",
+   "id": "sb69af61fb21b",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "2a8e9ba708bc57bf24bbbea6a88779fa682d28a9aac0c8fef7dad68c7febb0ba",
+   "group": "crop=lettuce|season=28",
+   "id": "sb71f61d32f8a",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "5804519b7160cde9511bc4da709099887b0c58e1a9ac15839297de2f12de8a88",
+   "group": "crop=tomato|season=38",
+   "id": "sbaa1a2e3689c",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "56728dddcd9ed7954932ee48e206947d78ae28d75305c71ef31ad9f9514b1ee8",
+   "group": "crop=tomato|season=4",
+   "id": "sbc5862d5911f",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "53a731ae91701d0b95156a0599141805dc3cd65552a7d7ebc6d7d56e4dfcb794",
+   "group": "crop=lettuce|season=18",
+   "id": "sbcb556b946b9",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "7798bc65c5a3ee848c55852612156c4f68ef8fd0579fbed335931ebc89c6d641",
+   "group": "crop=tomato|season=34",
+   "id": "sbd629476ccea",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "46ce2093f4a23cb7499b16039d7a93240a074518db9588fc0fdf0d81ae9f254d",
+   "group": "crop=pepper|season=37",
+   "id": "sc18686941aeb",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "492b28307dedf8743b9b07d3c6288fe73a2d5543a109a816b588bf5b84649e24",
+   "group": "crop=pepper|season=27",
+   "id": "sc190a486e46b",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "585e8ab4aad24281bd212aea489d45686d3aec684a92d065a593c486ee15277c",
+   "group": "crop=tomato|season=25",
+   "id": "sc323e0ea520c",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "24d093a00141edf098de778f15e7a273e9443df63c44f6c39756d8e046ac940d",
+   "group": "crop=lettuce|season=16",
+   "id": "sc99d1c931cd7",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "e3757e316808efeb47bcd0641bbf33b2eebd9649da405b32bdaf74fd2adf2bf5",
+   "group": "crop=lettuce|season=34",
+   "id": "scdc8d45e903e",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "9e2f3ab0904baf0dab7208960c6d863ff3e550d90aaf2724b8518bf37c80d742",
+   "group": "crop=tomato|season=16",
+   "id": "sd3fb0dce01ef",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "68c43b6822bd27eea7baa9b496216c2d103c03f9d9c62778fc2b3a80a34ac389",
+   "group": "crop=pepper|season=1",
+   "id": "sd45ff1f73cc5",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "ceb050e9d8c4a5c44cd2da708b2cb2521cf4ce5e042c680098a64da6e4e33c65",
+   "group": "crop=lettuce|season=8",
+   "id": "sd4da224a8cc1",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "c125bceca2d812bd6347df33638ddac9be2411ead269e14cb67e8ee4ade96889",
+   "group": "crop=tomato|season=39",
+   "id": "sd4f6f62608ff",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "218a9bc36f38773478c6b1b22782d0077a4c2d40eefac20504910f63414c1f40",
+   "group": "crop=tomato|season=18",
+   "id": "sd5e9ed64fd9f",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "3e4d425655a44bdff875104041dc64bd11af84059ac2d7aacc9e445f31a0fdcf",
+   "group": "crop=lettuce|season=33",
+   "id": "sd8c95139adcf",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "eb691e0865e4f4996a30c0fb6b242f02873ca965b63ac28cfed57d9e52dd0672",
+   "group": "crop=tomato|season=10",
+   "id": "sdac69f8535c8",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "cfb6e3330f2884c765097b43c47899d88274bb283e20979487d7b1fe8f8be586",
+   "group": "crop=tomato|season=39",
+   "id": "se0cc4f267b06",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "97bfdd1cf22ed545ad8f36902411d6435bd99e5238bb300808481ed7c680eea8",
+   "group": "crop=lettuce|season=29",
+   "id": "se100adcf4257",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "6d71b7e702ba8d40175b45756ccec3ff873a9010f1c9db6d7d890821a6d22803",
+   "group": "crop=pepper|season=26",
+   "id": "se15ab3145a83",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "0c7e227334a0a477ad0fd70a4c2ca9dd9a9eb85772c9d769b2054cd78bba9eeb",
+   "group": "crop=pepper|season=22",
+   "id": "se161ae09a785",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "c268b32ce1c9d5b9be26b56587adcfbbd71e9e43353799fb1bebd41cfcfd5891",
+   "group": "crop=pepper|season=6",
+   "id": "se5a75e07a51b",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "d61ebf7301fbe05e04f866275008ea67c2c8220b0f44b17bf1934bcf68ddc781",
+   "group": "crop=pepper|season=15",
+   "id": "se74216188ee3",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "a8c54e519b6f161a57ac74f3a94d0fe4dd1d251fcafab0ac4839a1eb2594758a",
+   "group": "crop=lettuce|season=33",
+   "id": "sea2b284fbce6",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "cf8fa8692796d1ca1d449308ca9a015f687d8a23e68c28ff0af7e2417e1014df",
+   "group": "crop=lettuce|season=33",
+   "id": "sed550c3e7e99",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "cae2a6958218c102be42d150e06d61b906acd628fbb72bde385007d4ace9e2c1",
+   "group": "crop=pepper|season=10",
+   "id": "sf0fbe9344912",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "b7e19bf4e2930d9868743448fdae2f47ae7b0a2b20d2a2555ff940c1183f082e",
+   "group": "crop=tomato|season=13",
+   "id": "sf16e90fe49cd",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "83f736814e64daeadf369ca3dda42a568ad20c08a592bbc0f347d95abe18b513",
+   "group": "crop=pepper|season=15",
+   "id": "sf26a0c5e4fb0",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "a77536d4b5f9faecd66ad12e7117c908fec93be9d1957668efab7692ffc8b7b8",
+   "group": "crop=lettuce|season=35",
+   "id": "sf3c1afc4bcab",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "89ed50ee63ac2ddbc3344420530f750ddfd3ea32af486a3f8d3b9d7ba793e825",
+   "group": "crop=lettuce|season=37",
+   "id": "sf7a860b4bf87",
+   "labels": {
+    "control": "on",
+    "crop": "lettuce",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "4f501cf25ab781a3f4bb6a3c1e0ed1c1a06bf004b125c919c41846a96fb9a98d",
+   "group": "crop=pepper|season=15",
+   "id": "sf82d0a27de82",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "d3cf9743db0f2afd3b417d3e063b40ee04799e09591862661ddef03902590772",
+   "group": "crop=tomato|season=28",
+   "id": "sf9a23e254711",
+   "labels": {
+    "control": "on",
+    "crop": "tomato",
+    "environment": "greenhouse",
+    "feedback": "on"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "4808eaeb2e598420264510c5ead9d02e258ee0afc8d4c68efe0f7df63c9ef2ec",
+   "group": "crop=pepper|season=12",
+   "id": "sfb613e169c0f",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  },
+  {
+   "content_hash": "7bc7a960e75f0628cf0bd52e4a2c807612933f85cfb096267d6b87986af7f309",
+   "group": "crop=pepper|season=37",
+   "id": "sff7fde05d4b0",
+   "labels": {
+    "control": "on",
+    "crop": "pepper",
+    "environment": "greenhouse"
+   },
+   "split": "dev"
+  }
+ ],
+ "simulator": "agri-twin-interactive/1+focus-c",
+ "splits": {
+  "dev": 134,
+  "test": 0
+ }
+}

@@ -1,0 +1,63 @@
+{
+ "composition": {
+  "contexts": {
+   "lettuce|feedback=off": 19,
+   "lettuce|feedback=on": 26,
+   "pepper|feedback=off": 15,
+   "pepper|feedback=on": 24,
+   "tomato|feedback=off": 26,
+   "tomato|feedback=on": 24
+  },
+  "factors": {
+   "COLD_WAVE": 69,
+   "HEAT_WAVE": 60,
+   "HIGH_RADIATION": 71,
+   "LOW_RADIATION": 67,
+   "RAIN": 72,
+   "WIND": 54
+  },
+  "interventions": 393
+ },
+ "design": {
+  "duration_hours": [
+   24,
+   72
+  ],
+  "interventions_per_scenario": [
+   2,
+   4
+  ],
+  "seasons": 40,
+  "window_days": [
+   21,
+   28
+  ]
+ },
+ "design_hash": "b31de373b0f8141aa5ffecb68a4a2765312881e7077cd41f703c3caf4efaef47",
+ "factors_offered": [
+  "HEAT_WAVE",
+  "COLD_WAVE",
+  "LOW_RADIATION",
+  "HIGH_RADIATION",
+  "RAIN",
+  "WIND"
+ ],
+ "kept_dev": 134,
+ "leakage": {
+  "groups": {
+   "dev": 64,
+   "test": 0
+  },
+  "shared_groups": [],
+  "status": "PASS"
+ },
+ "manifest_hash": "3554941e158285b49828879b0a6880b7c918c4524037452a88449832375f540f",
+ "report_hash": "b2e0f97e8a3e82bc4cd60454c5a66355c78ac4668e0d4215a05436f712573788",
+ "sampled": 200,
+ "seconds_per_scenario_mean": 55.4,
+ "seconds_total": 1277.8,
+ "simulator": "agri-twin-interactive/1+focus-c",
+ "statement": "development bank of the main context; truth is that of the SIMULATED twin (uncalibrated crop model); the test partition was not generated",
+ "status": "PASS",
+ "twin_git_head": "814a6bbb944001078d4ad2270bc7cce39d91847e"
+}

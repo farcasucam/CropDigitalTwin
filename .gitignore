@@ -9,3 +9,5 @@ docs/xai/TFG.pdf
 .claude/
 
 graphify-out/
+data/xai/_cache_c/
+data/xai/gctsb_c_dev/scenarios/

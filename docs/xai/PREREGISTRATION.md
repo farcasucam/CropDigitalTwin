@@ -56,6 +56,14 @@ Los umbrales son **provisionales** (convenciones de diseño) y se fijan sobre la
 3. Ejecutar sobre la partición de prueba **una vez**; archivar `manifest.json`, resultados y hashes.
 4. Informar todo, incluidas las hipótesis no confirmadas.
 
+## 5b. Contexto principal y escala (decisiones D8-D11, 2026-10-25; borrador)
+
+* **Análisis primario:** invernadero con control encendido (contexto C), escala horaria. Objetivos explicados: `greenhouse_heating_kw`, `greenhouse_cooling_kw` y la energía del controlador, ante el forzamiento exterior. El clima interior es una consecuencia observada, no una palanca.
+* **Circularidad:** en C las salidas del controlador (apertura de ventanas, extractor, sombreado, riego) no se dan nunca como covariables futuras ni como plan; solo una intervención que fija una de ellas puede declararla como plan. Medido en el piloto: darlas como plan inflaba la puerta contrafáctica (acuerdo en signo de 0,70 a 0,40 en TimesFM 3.0 al aislarlas).
+* **Contrastes de generalización (secundarios):** exterior sin control, invernadero sin control y el reactor con PLC. Los resultados de cada contexto se informan por separado, sin promediarlos con C.
+* **Tamaño:** el piloto de desarrollo tiene pocos casos en C; el análisis primario se hace sobre un banco ampliado en C, con intervalos por bloques (cultivo y temporada) y cálculo de potencia antes de congelar.
+* **Fuera del alcance primario:** la escala de temporada (discusión y trabajo futuro).
+
 ## 6. Estudio con expertos (RQ7)
 
 La aprobación ética **está concedida**. Se registran aquí, al congelar: número de expertos, criterios de inclusión, consentimiento, casos (plantados, con verdad conocida), orden aleatorizado de condiciones, cálculo de la potencia (modesta: se declara), variables medidas y análisis.

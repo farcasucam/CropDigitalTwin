@@ -17,6 +17,7 @@ from tsxai.testing import check_simulator  # noqa: E402
 from agri_twin.application.interactive_simulation import VARIABLES  # noqa: E402
 from agri_twin.application.runtime_events import SPEC_INDEX  # noqa: E402
 from agri_twin.interfaces.xai_adapter import DESIGN_FILE, ROLES_FILE, TwinSimulator, benchmark_design, twin_series_source  # noqa: E402
+from agri_twin.interfaces.xai_adapter import CONTROLLER_DRIVEN  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 SIM = TwinSimulator()
@@ -104,7 +105,8 @@ def test_frames_cover_open_field_greenhouse_controller_and_crop_feedback_with_st
     for environment, control, feedback in (("outdoor", "off", None), ("greenhouse", "off", None), ("greenhouse", "on", None), ("greenhouse", "on", "on")):
         frame = _frame(environment, control, feedback)
         assert len(frame) == 120 and frame.content_hash == _frame(environment, control, feedback).content_hash
-        assert frame.catalogue.content_hash == SIM.catalogue().content_hash and frame.meta["simulator"] == SIM.name
+        expected = SIM.catalogue() if control == "off" else SIM.catalogue().with_roles({n: CONTROLLER_DRIVEN for n in SIM.catalogue().with_role("decision_covariate")})  # a controller's outputs are not a plan
+        assert frame.catalogue.content_hash == expected.content_hash and frame.meta["simulator"] == SIM.name
     assert _frame("greenhouse", "on", "on").content_hash != _frame("greenhouse", "on").content_hash  # the crop's feedback changes the greenhouse air
 
 
@@ -121,7 +123,9 @@ def test_the_forecast_view_of_a_twin_frame_leaks_no_computed_variable():
     view = frame.forecast_view(72, 24)
     assert set(view.future_covariates) == {n for n in frame.series if roles[n].role == "known_future_covariate"}
     assert set(view.future_covariates).isdisjoint({"temperature_c", "radiation_w_m2", "greenhouse_ventilation_fraction", "et0_mm", "transpiration_mm", "growth_factor"})
-    assert "greenhouse_shading_fraction" in frame.forecast_view(72, 24, plan=True).future_covariates and "greenhouse_shading_fraction" not in view.future_covariates
+    assert "greenhouse_shading_fraction" not in frame.forecast_view(72, 24, plan=True).future_covariates  # with the controller on, shading is the controller's output: even "a plan" must not carry its future values
+    open_loop = _frame("greenhouse", "off")
+    assert "greenhouse_shading_fraction" in open_loop.forecast_view(72, 24, plan=True).future_covariates and "greenhouse_shading_fraction" not in open_loop.forecast_view(72, 24).future_covariates  # a person's plan stays a plan
 
 
 def test_the_frame_of_a_what_if_branch_equals_the_continuous_run_before_the_intervention():
@@ -145,3 +149,23 @@ def test_only_the_adapter_knows_tsxai_and_the_framework_knows_nothing_of_the_twi
                 importers.append(path.relative_to(ROOT).as_posix())
     assert set(importers) == {"src/agri_twin/interfaces/xai_adapter.py"}
     assert DESIGN_FILE.exists() and ROLES_FILE.exists()
+
+
+def test_controller_outputs_are_never_a_plan_when_the_controller_is_on():
+    from agri_twin.interfaces.xai_adapter import intervention_plan_variables
+    from tsxai.core import Intervention
+
+    source = twin_series_source()
+    off = {"crop": "tomato", "environment": "greenhouse", "control": "off"}
+    on = {"crop": "tomato", "environment": "greenhouse", "control": "on"}
+    sim = source._simulator
+    frame_on = source.frame(ScenarioDescriptor(on, 1, 480, 120, sim.scenario_options(on, 1)))
+    decisions = [n for n in ("control_vent_opening", "control_extractor_level", "greenhouse_shading_fraction", "irrigation_mm") if n in frame_on.series]
+    assert decisions and all(frame_on.catalogue.variables[n].role == "past_only_covariate" for n in decisions)
+    view = frame_on.forecast_view(60, 24, plan=True)
+    assert not any(n in view.future_covariates for n in decisions)  # a controller output is not stated in advance, even when "a plan" is given
+    stated = frame_on.forecast_view(60, 24, plan=["irrigation_mm"] if "irrigation_mm" in frame_on.series else [])
+    assert set(stated.future_covariates) - set(view.future_covariates) <= {"irrigation_mm"}
+    frame_off = source.frame(ScenarioDescriptor(off, 1, 480, 120, sim.scenario_options(off, 1)))
+    assert all(frame_off.catalogue.variables[n].role == "decision_covariate" for n in decisions if n in frame_off.series)
+    assert intervention_plan_variables(Intervention("IRRIGATION", 10, 5, 2.0)) == ("irrigation_mm",) and intervention_plan_variables(Intervention("COLD_WAVE", 10, 5, 5.0)) == ()

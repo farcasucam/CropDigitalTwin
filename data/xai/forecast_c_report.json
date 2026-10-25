@@ -1,0 +1,848 @@
+{
+ "backends": [
+  "holt_winters",
+  "lagged_ridge",
+  "seasonal_naive",
+  "timesfm25",
+  "timesfm3"
+ ],
+ "backtest": {
+  "holt_winters": {
+   "consequence": {
+    "coverage80": 0.7383084577114428,
+    "median_mase": 1.107904395681641,
+    "median_nrmse": 0.2493458018821137,
+    "median_pinball": 0.15906207281661272,
+    "median_rmsse": 0.9155472766494883,
+    "median_smape": 5.755228160090842,
+    "rows": 2010,
+    "undefined_mase_rows": 0
+   },
+   "controller": {
+    "coverage80": 0.8723569651741293,
+    "median_mase": 1.079250362918173,
+    "median_nrmse": 0.38644469261788794,
+    "median_pinball": 0.0,
+    "median_rmsse": 0.746783470545576,
+    "median_smape": 0.0,
+    "rows": 1340,
+    "undefined_mase_rows": 692
+   }
+  },
+  "lagged_ridge": {
+   "consequence": {
+    "coverage80": 0.91318407960199,
+    "median_mase": 1.0466127773851657,
+    "median_nrmse": 0.2190410711428702,
+    "median_pinball": 0.1442048824097133,
+    "median_rmsse": 0.8104738186120433,
+    "median_smape": 4.740864454798911,
+    "rows": 2010,
+    "undefined_mase_rows": 0
+   },
+   "controller": {
+    "coverage80": 0.9529539800995024,
+    "median_mase": 0.9752405678822091,
+    "median_nrmse": 0.24908034679544,
+    "median_pinball": 0.0,
+    "median_rmsse": 0.595268491857901,
+    "median_smape": 0.0,
+    "rows": 1340,
+    "undefined_mase_rows": 692
+   }
+  },
+  "seasonal_naive": {
+   "consequence": {
+    "coverage80": 0.7634535655058043,
+    "median_mase": 0.950712624217337,
+    "median_nrmse": 0.21300858799817796,
+    "median_pinball": 0.14323418884042616,
+    "median_rmsse": 0.893076171976436,
+    "median_smape": 5.149086563696298,
+    "rows": 2010,
+    "undefined_mase_rows": 0
+   },
+   "controller": {
+    "coverage80": 0.920926616915423,
+    "median_mase": 0.6508692843291033,
+    "median_nrmse": 0.18825876158018862,
+    "median_pinball": 0.0,
+    "median_rmsse": 0.6470728951202305,
+    "median_smape": 0.0,
+    "rows": 1340,
+    "undefined_mase_rows": 692
+   }
+  },
+  "timesfm25": {
+   "consequence": {
+    "coverage80": 0.8102197346600332,
+    "median_mase": 1.0276464498897253,
+    "median_nrmse": 0.2330791327662683,
+    "median_pinball": 0.13910938662856717,
+    "median_rmsse": 0.8777543655540352,
+    "median_smape": 5.054839941942316,
+    "rows": 2010,
+    "undefined_mase_rows": 0
+   },
+   "controller": {
+    "coverage80": 0.8212686567164179,
+    "median_mase": 0.6961552464664804,
+    "median_nrmse": 0.16811888475862735,
+    "median_pinball": 0.020405553846137115,
+    "median_rmsse": 0.5592338216134465,
+    "median_smape": 200.0,
+    "rows": 1340,
+    "undefined_mase_rows": 692
+   }
+  },
+  "timesfm3": {
+   "consequence": {
+    "coverage80": 0.8138266998341626,
+    "median_mase": 0.8322062933440295,
+    "median_nrmse": 0.18546350445636461,
+    "median_pinball": 0.09381902322752,
+    "median_rmsse": 0.7148906958086432,
+    "median_smape": 4.007976510551181,
+    "rows": 2010,
+    "undefined_mase_rows": 0
+   },
+   "controller": {
+    "coverage80": 0.942568407960199,
+    "median_mase": 0.4756881127318471,
+    "median_nrmse": 0.12452223369203086,
+    "median_pinball": 0.0,
+    "median_rmsse": 0.4411362064548182,
+    "median_smape": 0.0,
+    "rows": 1340,
+    "undefined_mase_rows": 692
+   }
+  }
+ },
+ "backtest_rows": 23450,
+ "bank_manifest": "3554941e158285b49828879b0a6880b7c918c4524037452a88449832375f540f",
+ "context": 168,
+ "gate": {
+  "consequence": {
+   "cases": 393,
+   "cases_used": 270,
+   "context": 168,
+   "expressibility_by_factor": {
+    "COLD_WAVE": {
+     "expressible": 138,
+     "pairs": 138
+    },
+    "HEAT_WAVE": {
+     "expressible": 117,
+     "pairs": 117
+    },
+    "HIGH_RADIATION": {
+     "expressible": 108,
+     "pairs": 108
+    },
+    "LOW_RADIATION": {
+     "expressible": 120,
+     "pairs": 120
+    }
+   },
+   "horizon": 96,
+   "sign_by_factor": {
+    "holt_winters": {
+     "COLD_WAVE": {
+      "pairs": 138,
+      "sign_agreement": 0.0
+     },
+     "HEAT_WAVE": {
+      "pairs": 117,
+      "sign_agreement": 0.0
+     },
+     "HIGH_RADIATION": {
+      "pairs": 108,
+      "sign_agreement": 0.0
+     },
+     "LOW_RADIATION": {
+      "pairs": 120,
+      "sign_agreement": 0.0
+     }
+    },
+    "lagged_ridge": {
+     "COLD_WAVE": {
+      "pairs": 138,
+      "sign_agreement": 0.6811594202898551
+     },
+     "HEAT_WAVE": {
+      "pairs": 117,
+      "sign_agreement": 0.811965811965812
+     },
+     "HIGH_RADIATION": {
+      "pairs": 108,
+      "sign_agreement": 0.5
+     },
+     "LOW_RADIATION": {
+      "pairs": 120,
+      "sign_agreement": 0.4083333333333333
+     }
+    },
+    "seasonal_naive": {
+     "COLD_WAVE": {
+      "pairs": 138,
+      "sign_agreement": 0.0
+     },
+     "HEAT_WAVE": {
+      "pairs": 117,
+      "sign_agreement": 0.0
+     },
+     "HIGH_RADIATION": {
+      "pairs": 108,
+      "sign_agreement": 0.0
+     },
+     "LOW_RADIATION": {
+      "pairs": 120,
+      "sign_agreement": 0.0
+     }
+    },
+    "timesfm25": {
+     "COLD_WAVE": {
+      "pairs": 138,
+      "sign_agreement": 0.6014492753623188
+     },
+     "HEAT_WAVE": {
+      "pairs": 117,
+      "sign_agreement": 0.6068376068376068
+     },
+     "HIGH_RADIATION": {
+      "pairs": 108,
+      "sign_agreement": 0.3333333333333333
+     },
+     "LOW_RADIATION": {
+      "pairs": 120,
+      "sign_agreement": 0.3
+     }
+    },
+    "timesfm3": {
+     "COLD_WAVE": {
+      "pairs": 138,
+      "sign_agreement": 0.6521739130434783
+     },
+     "HEAT_WAVE": {
+      "pairs": 117,
+      "sign_agreement": 0.7264957264957265
+     },
+     "HIGH_RADIATION": {
+      "pairs": 108,
+      "sign_agreement": 0.5185185185185185
+     },
+     "LOW_RADIATION": {
+      "pairs": 120,
+      "sign_agreement": 0.44166666666666665
+     }
+    }
+   },
+   "skipped": {
+    "no_effect": 0,
+    "short_context": 123,
+    "short_horizon": 0
+   },
+   "summary": {
+    "holt_winters": {
+     "by_factor": {
+      "COLD_WAVE": {
+       "pairs": 138,
+       "sign_agreement": 0.0
+      },
+      "HEAT_WAVE": {
+       "pairs": 117,
+       "sign_agreement": 0.0
+      },
+      "HIGH_RADIATION": {
+       "pairs": 108,
+       "sign_agreement": 0.0
+      },
+      "LOW_RADIATION": {
+       "pairs": 120,
+       "sign_agreement": 0.0
+      }
+     },
+     "effect_coverage": 0.8129217288125624,
+     "expressible_pairs": 483,
+     "inexpressible_pairs": 0,
+     "intervals_95": {
+      "groups": {
+       "count": 52.0
+      },
+      "median_relative_error": {
+       "high": 1.0,
+       "low": 1.0
+      },
+      "sign_agreement": {
+       "high": 0.0,
+       "low": 0.0
+      },
+      "spearman_peaks": {
+       "high": null,
+       "low": null
+      }
+     },
+     "median_relative_error": 1.0,
+     "pairs": 483,
+     "sign_agreement": 0.0,
+     "spearman_peaks": null
+    },
+    "lagged_ridge": {
+     "by_factor": {
+      "COLD_WAVE": {
+       "pairs": 138,
+       "sign_agreement": 0.6811594202898551
+      },
+      "HEAT_WAVE": {
+       "pairs": 117,
+       "sign_agreement": 0.811965811965812
+      },
+      "HIGH_RADIATION": {
+       "pairs": 108,
+       "sign_agreement": 0.5
+      },
+      "LOW_RADIATION": {
+       "pairs": 120,
+       "sign_agreement": 0.4083333333333333
+      }
+     },
+     "effect_coverage": 0.8647147054375296,
+     "expressible_pairs": 483,
+     "inexpressible_pairs": 0,
+     "intervals_95": {
+      "groups": {
+       "count": 52.0
+      },
+      "median_relative_error": {
+       "high": 1.0009057437247209,
+       "low": 0.7866025617770109
+      },
+      "sign_agreement": {
+       "high": 0.6563146997929606,
+       "low": 0.5504587155963303
+      },
+      "spearman_peaks": {
+       "high": 0.35095215365191484,
+       "low": 0.10787424938690333
+      }
+     },
+     "median_relative_error": 0.8887674503214426,
+     "pairs": 483,
+     "sign_agreement": 0.6045548654244306,
+     "spearman_peaks": 0.23662698477780564
+    },
+    "seasonal_naive": {
+     "by_factor": {
+      "COLD_WAVE": {
+       "pairs": 138,
+       "sign_agreement": 0.0
+      },
+      "HEAT_WAVE": {
+       "pairs": 117,
+       "sign_agreement": 0.0
+      },
+      "HIGH_RADIATION": {
+       "pairs": 108,
+       "sign_agreement": 0.0
+      },
+      "LOW_RADIATION": {
+       "pairs": 120,
+       "sign_agreement": 0.0
+      }
+     },
+     "effect_coverage": 0.7663298535747745,
+     "expressible_pairs": 483,
+     "inexpressible_pairs": 0,
+     "intervals_95": {
+      "groups": {
+       "count": 52.0
+      },
+      "median_relative_error": {
+       "high": 1.0,
+       "low": 1.0
+      },
+      "sign_agreement": {
+       "high": 0.0,
+       "low": 0.0
+      },
+      "spearman_peaks": {
+       "high": null,
+       "low": null
+      }
+     },
+     "median_relative_error": 1.0,
+     "pairs": 483,
+     "sign_agreement": 0.0,
+     "spearman_peaks": null
+    },
+    "timesfm25": {
+     "by_factor": {
+      "COLD_WAVE": {
+       "pairs": 138,
+       "sign_agreement": 0.6014492753623188
+      },
+      "HEAT_WAVE": {
+       "pairs": 117,
+       "sign_agreement": 0.6068376068376068
+      },
+      "HIGH_RADIATION": {
+       "pairs": 108,
+       "sign_agreement": 0.3333333333333333
+      },
+      "LOW_RADIATION": {
+       "pairs": 120,
+       "sign_agreement": 0.3
+      }
+     },
+     "effect_coverage": 0.7558986021348736,
+     "expressible_pairs": 483,
+     "inexpressible_pairs": 0,
+     "intervals_95": {
+      "groups": {
+       "count": 52.0
+      },
+      "median_relative_error": {
+       "high": 1.025733575951455,
+       "low": 0.9999374997132977
+      },
+      "sign_agreement": {
+       "high": 0.5040650406504065,
+       "low": 0.42998027613412226
+      },
+      "spearman_peaks": {
+       "high": 0.09443207811671214,
+       "low": -0.12211404929260963
+      }
+     },
+     "median_relative_error": 1.0059328945859694,
+     "pairs": 483,
+     "sign_agreement": 0.46790890269151136,
+     "spearman_peaks": -0.011808718400160513
+    },
+    "timesfm3": {
+     "by_factor": {
+      "COLD_WAVE": {
+       "pairs": 138,
+       "sign_agreement": 0.6521739130434783
+      },
+      "HEAT_WAVE": {
+       "pairs": 117,
+       "sign_agreement": 0.7264957264957265
+      },
+      "HIGH_RADIATION": {
+       "pairs": 108,
+       "sign_agreement": 0.5185185185185185
+      },
+      "LOW_RADIATION": {
+       "pairs": 120,
+       "sign_agreement": 0.44166666666666665
+      }
+     },
+     "effect_coverage": 0.8347312862962416,
+     "expressible_pairs": 483,
+     "inexpressible_pairs": 0,
+     "intervals_95": {
+      "groups": {
+       "count": 52.0
+      },
+      "median_relative_error": {
+       "high": 0.9681150835225092,
+       "low": 0.9110934394768303
+      },
+      "sign_agreement": {
+       "high": 0.6389413988657845,
+       "low": 0.5321637426900585
+      },
+      "spearman_peaks": {
+       "high": 0.22080439527688342,
+       "low": 0.0021410713223864743
+      }
+     },
+     "median_relative_error": 0.9285250644348776,
+     "pairs": 483,
+     "sign_agreement": 0.587991718426501,
+     "spearman_peaks": 0.11725468863054352
+    }
+   }
+  },
+  "controller": {
+   "cases": 393,
+   "cases_used": 270,
+   "context": 168,
+   "expressibility_by_factor": {
+    "COLD_WAVE": {
+     "expressible": 49,
+     "pairs": 49
+    },
+    "HEAT_WAVE": {
+     "expressible": 37,
+     "pairs": 37
+    },
+    "HIGH_RADIATION": {
+     "expressible": 23,
+     "pairs": 23
+    },
+    "LOW_RADIATION": {
+     "expressible": 39,
+     "pairs": 39
+    }
+   },
+   "horizon": 96,
+   "sign_by_factor": {
+    "holt_winters": {
+     "COLD_WAVE": {
+      "pairs": 49,
+      "sign_agreement": 0.0
+     },
+     "HEAT_WAVE": {
+      "pairs": 37,
+      "sign_agreement": 0.0
+     },
+     "HIGH_RADIATION": {
+      "pairs": 23,
+      "sign_agreement": 0.0
+     },
+     "LOW_RADIATION": {
+      "pairs": 39,
+      "sign_agreement": 0.0
+     }
+    },
+    "lagged_ridge": {
+     "COLD_WAVE": {
+      "pairs": 49,
+      "sign_agreement": 0.673469387755102
+     },
+     "HEAT_WAVE": {
+      "pairs": 37,
+      "sign_agreement": 0.7027027027027027
+     },
+     "HIGH_RADIATION": {
+      "pairs": 23,
+      "sign_agreement": 0.5652173913043478
+     },
+     "LOW_RADIATION": {
+      "pairs": 39,
+      "sign_agreement": 0.5897435897435898
+     }
+    },
+    "seasonal_naive": {
+     "COLD_WAVE": {
+      "pairs": 49,
+      "sign_agreement": 0.0
+     },
+     "HEAT_WAVE": {
+      "pairs": 37,
+      "sign_agreement": 0.0
+     },
+     "HIGH_RADIATION": {
+      "pairs": 23,
+      "sign_agreement": 0.0
+     },
+     "LOW_RADIATION": {
+      "pairs": 39,
+      "sign_agreement": 0.0
+     }
+    },
+    "timesfm25": {
+     "COLD_WAVE": {
+      "pairs": 49,
+      "sign_agreement": 0.42857142857142855
+     },
+     "HEAT_WAVE": {
+      "pairs": 37,
+      "sign_agreement": 0.5405405405405406
+     },
+     "HIGH_RADIATION": {
+      "pairs": 23,
+      "sign_agreement": 0.5217391304347826
+     },
+     "LOW_RADIATION": {
+      "pairs": 39,
+      "sign_agreement": 0.48717948717948717
+     }
+    },
+    "timesfm3": {
+     "COLD_WAVE": {
+      "pairs": 49,
+      "sign_agreement": 0.6530612244897959
+     },
+     "HEAT_WAVE": {
+      "pairs": 37,
+      "sign_agreement": 0.6216216216216216
+     },
+     "HIGH_RADIATION": {
+      "pairs": 23,
+      "sign_agreement": 0.6521739130434783
+     },
+     "LOW_RADIATION": {
+      "pairs": 39,
+      "sign_agreement": 0.6410256410256411
+     }
+    }
+   },
+   "skipped": {
+    "no_effect": 0,
+    "short_context": 123,
+    "short_horizon": 0
+   },
+   "summary": {
+    "holt_winters": {
+     "by_factor": {
+      "COLD_WAVE": {
+       "pairs": 49,
+       "sign_agreement": 0.0
+      },
+      "HEAT_WAVE": {
+       "pairs": 37,
+       "sign_agreement": 0.0
+      },
+      "HIGH_RADIATION": {
+       "pairs": 23,
+       "sign_agreement": 0.0
+      },
+      "LOW_RADIATION": {
+       "pairs": 39,
+       "sign_agreement": 0.0
+      }
+     },
+     "effect_coverage": 0.8236802539282204,
+     "expressible_pairs": 148,
+     "inexpressible_pairs": 0,
+     "intervals_95": {
+      "groups": {
+       "count": 51.0
+      },
+      "median_relative_error": {
+       "high": 1.0,
+       "low": 1.0
+      },
+      "sign_agreement": {
+       "high": 0.0,
+       "low": 0.0
+      },
+      "spearman_peaks": {
+       "high": null,
+       "low": null
+      }
+     },
+     "median_relative_error": 1.0,
+     "pairs": 148,
+     "sign_agreement": 0.0,
+     "spearman_peaks": null
+    },
+    "lagged_ridge": {
+     "by_factor": {
+      "COLD_WAVE": {
+       "pairs": 49,
+       "sign_agreement": 0.673469387755102
+      },
+      "HEAT_WAVE": {
+       "pairs": 37,
+       "sign_agreement": 0.7027027027027027
+      },
+      "HIGH_RADIATION": {
+       "pairs": 23,
+       "sign_agreement": 0.5652173913043478
+      },
+      "LOW_RADIATION": {
+       "pairs": 39,
+       "sign_agreement": 0.5897435897435898
+      }
+     },
+     "effect_coverage": 0.8338771693620568,
+     "expressible_pairs": 148,
+     "inexpressible_pairs": 0,
+     "intervals_95": {
+      "groups": {
+       "count": 51.0
+      },
+      "median_relative_error": {
+       "high": 0.9717013929374072,
+       "low": 0.5649763069630718
+      },
+      "sign_agreement": {
+       "high": 0.7309941520467836,
+       "low": 0.5488721804511278
+      },
+      "spearman_peaks": {
+       "high": 0.743467671061799,
+       "low": 0.4174892704283201
+      }
+     },
+     "median_relative_error": 0.8640475380951771,
+     "pairs": 148,
+     "sign_agreement": 0.6418918918918919,
+     "spearman_peaks": 0.59220046372815
+    },
+    "seasonal_naive": {
+     "by_factor": {
+      "COLD_WAVE": {
+       "pairs": 49,
+       "sign_agreement": 0.0
+      },
+      "HEAT_WAVE": {
+       "pairs": 37,
+       "sign_agreement": 0.0
+      },
+      "HIGH_RADIATION": {
+       "pairs": 23,
+       "sign_agreement": 0.0
+      },
+      "LOW_RADIATION": {
+       "pairs": 39,
+       "sign_agreement": 0.0
+      }
+     },
+     "effect_coverage": 0.7645628218210568,
+     "expressible_pairs": 148,
+     "inexpressible_pairs": 0,
+     "intervals_95": {
+      "groups": {
+       "count": 51.0
+      },
+      "median_relative_error": {
+       "high": 1.0,
+       "low": 1.0
+      },
+      "sign_agreement": {
+       "high": 0.0,
+       "low": 0.0
+      },
+      "spearman_peaks": {
+       "high": null,
+       "low": null
+      }
+     },
+     "median_relative_error": 1.0,
+     "pairs": 148,
+     "sign_agreement": 0.0,
+     "spearman_peaks": null
+    },
+    "timesfm25": {
+     "by_factor": {
+      "COLD_WAVE": {
+       "pairs": 49,
+       "sign_agreement": 0.42857142857142855
+      },
+      "HEAT_WAVE": {
+       "pairs": 37,
+       "sign_agreement": 0.5405405405405406
+      },
+      "HIGH_RADIATION": {
+       "pairs": 23,
+       "sign_agreement": 0.5217391304347826
+      },
+      "LOW_RADIATION": {
+       "pairs": 39,
+       "sign_agreement": 0.48717948717948717
+      }
+     },
+     "effect_coverage": 0.7165482370792221,
+     "expressible_pairs": 148,
+     "inexpressible_pairs": 0,
+     "intervals_95": {
+      "groups": {
+       "count": 51.0
+      },
+      "median_relative_error": {
+       "high": 1.0037936793358924,
+       "low": 0.997883388714708
+      },
+      "sign_agreement": {
+       "high": 0.5454545454545454,
+       "low": 0.42758620689655175
+      },
+      "spearman_peaks": {
+       "high": 0.10842432811260984,
+       "low": -0.2398591700975207
+      }
+     },
+     "median_relative_error": 1.0002079929461245,
+     "pairs": 148,
+     "sign_agreement": 0.4864864864864865,
+     "spearman_peaks": -0.060655026160393796
+    },
+    "timesfm3": {
+     "by_factor": {
+      "COLD_WAVE": {
+       "pairs": 49,
+       "sign_agreement": 0.6530612244897959
+      },
+      "HEAT_WAVE": {
+       "pairs": 37,
+       "sign_agreement": 0.6216216216216216
+      },
+      "HIGH_RADIATION": {
+       "pairs": 23,
+       "sign_agreement": 0.6521739130434783
+      },
+      "LOW_RADIATION": {
+       "pairs": 39,
+       "sign_agreement": 0.6410256410256411
+      }
+     },
+     "effect_coverage": 0.8225929421294448,
+     "expressible_pairs": 148,
+     "inexpressible_pairs": 0,
+     "intervals_95": {
+      "groups": {
+       "count": 51.0
+      },
+      "median_relative_error": {
+       "high": 0.9979943983148784,
+       "low": 0.8599992811105419
+      },
+      "sign_agreement": {
+       "high": 0.7225806451612903,
+       "low": 0.5531914893617021
+      },
+      "spearman_peaks": {
+       "high": 0.5968316444312075,
+       "low": 0.2826950104147148
+      }
+     },
+     "median_relative_error": 0.9212984769018358,
+     "pairs": 148,
+     "sign_agreement": 0.6418918918918919,
+     "spearman_peaks": 0.4528563772202484
+    }
+   }
+  }
+ },
+ "horizon": 96,
+ "partition": "dev",
+ "report_hash": "d2e34a81d09ec13002277b345a5faf4adbc82154c2bd0f13da536fd471124aa3",
+ "runs_cached": 527,
+ "scenarios": 134,
+ "service": {
+  "timesfm25": {
+   "health": {
+    "checkpoint": "google/timesfm-2.5-200m-pytorch",
+    "licence": "Apache-2.0",
+    "max_context": 2048,
+    "max_horizon": 256,
+    "model": "timesfm-2.5",
+    "past_only_covariates": "ignored",
+    "status": "ok",
+    "version": "unknown"
+   },
+   "url": "http://127.0.0.1:8088"
+  },
+  "timesfm3": {
+   "health": {
+    "checkpoint": "google/timesfm-3.0-pytorch",
+    "licence": "timesfm-non-commercial-license-v1.0 (research and benchmarking only)",
+    "max_context": 2048,
+    "max_horizon": 1024,
+    "model": "timesfm-3.0",
+    "past_only_covariates": "native",
+    "status": "ok",
+    "version": "unknown"
+   },
+   "url": "http://127.0.0.1:8089"
+  },
+  "used": false
+ },
+ "statement": "development pilot on the main context: not the preregistered evaluation; synthetic data; truth of the simulated twin; no quality claim",
+ "status": "PASS"
+}
