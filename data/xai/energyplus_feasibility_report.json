@@ -1,0 +1,184 @@
+{
+ "cases": [
+  {
+   "factor": "COLD_WAVE",
+   "level": 6.0,
+   "ratio_working_over_truth": 1.896768188410503,
+   "same_direction": true,
+   "season": 0,
+   "target": "greenhouse_heating_kw",
+   "truth_energyplus": {
+    "baseline_integral_kwh": 595.91953125,
+    "effect_integral_kwh": 365.42548828124995,
+    "first_changed_sample": 101,
+    "indoor_temperature_peak_effect": -5.380023287112502
+   },
+   "working_simplified": {
+    "baseline_integral_kwh": 665.90859375,
+    "effect_integral_kwh": 693.12744140625,
+    "first_changed_sample": 101,
+    "indoor_temperature_peak_effect": -4.670134765336282
+   }
+  },
+  {
+   "factor": "HEAT_WAVE",
+   "level": 6.0,
+   "ratio_working_over_truth": 1.2972731779871096,
+   "same_direction": true,
+   "season": 0,
+   "target": "greenhouse_cooling_kw",
+   "truth_energyplus": {
+    "baseline_integral_kwh": 0.0,
+    "effect_integral_kwh": 239.32177734375003,
+    "first_changed_sample": 101,
+    "indoor_temperature_peak_effect": -5.3114906207769685
+   },
+   "working_simplified": {
+    "baseline_integral_kwh": 0.0,
+    "effect_integral_kwh": 310.46572265625,
+    "first_changed_sample": 101,
+    "indoor_temperature_peak_effect": 4.63946881501176
+   }
+  },
+  {
+   "factor": "COLD_WAVE",
+   "level": 6.0,
+   "ratio_working_over_truth": 1.8912466843501328,
+   "same_direction": true,
+   "season": 1,
+   "target": "greenhouse_heating_kw",
+   "truth_energyplus": {
+    "baseline_integral_kwh": 632.8599609375,
+    "effect_integral_kwh": 366.80185546875,
+    "first_changed_sample": 101,
+    "indoor_temperature_peak_effect": -5.45426876602696
+   },
+   "working_simplified": {
+    "baseline_integral_kwh": 733.48505859375,
+    "effect_integral_kwh": 693.71279296875,
+    "first_changed_sample": 101,
+    "indoor_temperature_peak_effect": -4.698631060280528
+   }
+  },
+  {
+   "factor": "HEAT_WAVE",
+   "level": 6.0,
+   "ratio_working_over_truth": 1.9699055546662396,
+   "same_direction": true,
+   "season": 1,
+   "target": "greenhouse_cooling_kw",
+   "truth_energyplus": {
+    "baseline_integral_kwh": 0.0,
+    "effect_integral_kwh": 148.24423828125003,
+    "first_changed_sample": 101,
+    "indoor_temperature_peak_effect": -5.2919414341145945
+   },
+   "working_simplified": {
+    "baseline_integral_kwh": 0.0,
+    "effect_integral_kwh": 292.02714843750005,
+    "first_changed_sample": 101,
+    "indoor_temperature_peak_effect": 4.666995459893991
+   }
+  },
+  {
+   "factor": "COLD_WAVE",
+   "level": 6.0,
+   "ratio_working_over_truth": 1.826657073895284,
+   "same_direction": true,
+   "season": 2,
+   "target": "greenhouse_heating_kw",
+   "truth_energyplus": {
+    "baseline_integral_kwh": 528.4775390625,
+    "effect_integral_kwh": 340.8328125,
+    "first_changed_sample": 101,
+    "indoor_temperature_peak_effect": -5.449480278459152
+   },
+   "working_simplified": {
+    "baseline_integral_kwh": 541.37900390625,
+    "effect_integral_kwh": 622.58466796875,
+    "first_changed_sample": 101,
+    "indoor_temperature_peak_effect": -4.68201206827877
+   }
+  },
+  {
+   "factor": "HEAT_WAVE",
+   "level": 6.0,
+   "ratio_working_over_truth": 1.553919866675925,
+   "same_direction": true,
+   "season": 2,
+   "target": "greenhouse_cooling_kw",
+   "truth_energyplus": {
+    "baseline_integral_kwh": 0.0,
+    "effect_integral_kwh": 341.74248046875005,
+    "first_changed_sample": 101,
+    "indoor_temperature_peak_effect": -5.281575659069841
+   },
+   "working_simplified": {
+    "baseline_integral_kwh": 0.0,
+    "effect_integral_kwh": 531.0404296875,
+    "first_changed_sample": 101,
+    "indoor_temperature_peak_effect": 4.669261252644336
+   }
+  },
+  {
+   "factor": "COLD_WAVE",
+   "level": 6.0,
+   "ratio_working_over_truth": 1.819177569218527,
+   "same_direction": true,
+   "season": 3,
+   "target": "greenhouse_heating_kw",
+   "truth_energyplus": {
+    "baseline_integral_kwh": 468.1072265625,
+    "effect_integral_kwh": 337.97724609374995,
+    "first_changed_sample": 101,
+    "indoor_temperature_peak_effect": -5.467287893531264
+   },
+   "working_simplified": {
+    "baseline_integral_kwh": 460.2603515625,
+    "effect_integral_kwh": 614.8406249999999,
+    "first_changed_sample": 101,
+    "indoor_temperature_peak_effect": -4.687709327998018
+   }
+  },
+  {
+   "factor": "HEAT_WAVE",
+   "level": 6.0,
+   "ratio_working_over_truth": 1.938720829732066,
+   "same_direction": true,
+   "season": 3,
+   "target": "greenhouse_cooling_kw",
+   "truth_energyplus": {
+    "baseline_integral_kwh": 0.0,
+    "effect_integral_kwh": 274.5615234375,
+    "first_changed_sample": 101,
+    "indoor_temperature_peak_effect": -5.6092675423734875
+   },
+   "working_simplified": {
+    "baseline_integral_kwh": 0.0,
+    "effect_integral_kwh": 532.29814453125,
+    "first_changed_sample": 101,
+    "indoor_temperature_peak_effect": 4.667197746186929
+   }
+  }
+ ],
+ "deterministic_energyplus_baseline": true,
+ "energyplus_version": "26.1.0",
+ "paired_run_seconds_energyplus": {
+  "max": 15.55,
+  "mean": 11.97,
+  "min": 10.33
+ },
+ "report_hash": "8ced502187d3cebee48ff4ac6fd676cdf0828cfa9618dc1870d1bc3251da0b88",
+ "scenario": {
+  "control": "on",
+  "crop": "tomato",
+  "environment": "greenhouse"
+ },
+ "statement": "feasibility and structural-mismatch measurement of the synthetic twin; no validation of either twin; no quality claim",
+ "status": "PASS",
+ "timings_are_not_results": true,
+ "window": [
+  480,
+  240
+ ]
+}
