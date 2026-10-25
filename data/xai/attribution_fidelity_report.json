@@ -1,0 +1,711 @@
+{
+ "backends": {
+  "lagged_ridge": {
+   "by_factor": {
+    "COLD_WAVE": {
+     "expressible": 80,
+     "pairs": 80,
+     "sign_agreement": 0.775
+    },
+    "HEAT_WAVE": {
+     "expressible": 80,
+     "pairs": 80,
+     "sign_agreement": 0.7125
+    },
+    "HIGH_RADIATION": {
+     "expressible": 80,
+     "pairs": 80,
+     "sign_agreement": 0.425
+    },
+    "IRRIGATION": {
+     "expressible": 0,
+     "pairs": 0,
+     "sign_agreement": null
+    },
+    "LOW_RADIATION": {
+     "expressible": 80,
+     "pairs": 80,
+     "sign_agreement": 0.525
+    },
+    "SHADING": {
+     "expressible": 80,
+     "pairs": 80,
+     "sign_agreement": 0.0
+    },
+    "VENTILATION": {
+     "expressible": 34,
+     "pairs": 74,
+     "sign_agreement": 0.35294117647058826
+    },
+    "WIND": {
+     "expressible": 0,
+     "pairs": 0,
+     "sign_agreement": null
+    }
+   },
+   "gate_summary": {
+    "by_factor": {
+     "COLD_WAVE": {
+      "pairs": 80,
+      "sign_agreement": 0.65
+     },
+     "HEAT_WAVE": {
+      "pairs": 80,
+      "sign_agreement": 0.7
+     },
+     "HIGH_RADIATION": {
+      "pairs": 80,
+      "sign_agreement": 0.6875
+     },
+     "LOW_RADIATION": {
+      "pairs": 80,
+      "sign_agreement": 0.675
+     },
+     "SHADING": {
+      "pairs": 80,
+      "sign_agreement": 0.0
+     },
+     "VENTILATION": {
+      "pairs": 34,
+      "sign_agreement": 0.29411764705882354
+     }
+    },
+    "clipped_steps": 0,
+    "effect_coverage": 0.8644873271889401,
+    "expressible_pairs": 434,
+    "forecast_steps": 45504,
+    "inexpressible_pairs": 40,
+    "integral_median_relative_error": 1.0,
+    "integral_sign_agreement": 0.4769585253456221,
+    "integral_spearman": 0.24639590065072,
+    "median_relative_error": 0.9315480016446847,
+    "pairs": 474,
+    "sign_agreement": 0.5230414746543779,
+    "spearman_peaks": 0.3229868818355722
+   },
+   "ranking": {
+    "all": {
+     "by_target": {
+      "greenhouse_heating_kw": {
+       "cells": 16.0,
+       "intervals_95": {
+        "groups": {
+         "count": 16.0
+        },
+        "mean_rho": {
+         "high": 0.6455357142857142,
+         "low": 0.5758928571428571
+        },
+        "sign_agreement": {
+         "high": 0.5458333333333334,
+         "low": 0.39166666666666666
+        },
+        "top1_rate": {
+         "high": 0.625,
+         "low": 0.125
+        }
+       },
+       "mean_rho": 0.6133928571428571,
+       "sign_agreement": 0.4666666666666667,
+       "top1_chance": 0.19583333333333333,
+       "top1_rate": 0.375
+      },
+      "growth_factor": {
+       "cells": 16.0,
+       "intervals_95": {
+        "groups": {
+         "count": 16.0
+        },
+        "mean_rho": {
+         "high": 0.3723214285714286,
+         "low": 0.012500000000000004
+        },
+        "sign_agreement": {
+         "high": 0.6104166666666667,
+         "low": 0.43125
+        },
+        "top1_rate": {
+         "high": 0.625,
+         "low": 0.1875
+        }
+       },
+       "mean_rho": 0.18392857142857144,
+       "sign_agreement": 0.5229166666666667,
+       "top1_chance": 0.18333333333333335,
+       "top1_rate": 0.375
+      },
+      "relative_humidity_pct": {
+       "cells": 16.0,
+       "intervals_95": {
+        "groups": {
+         "count": 16.0
+        },
+        "mean_rho": {
+         "high": 0.6491071428571429,
+         "low": 0.22053571428571428
+        },
+        "sign_agreement": {
+         "high": 0.45625,
+         "low": 0.35833333333333334
+        },
+        "top1_rate": {
+         "high": 0.5625,
+         "low": 0.125
+        }
+       },
+       "mean_rho": 0.4446428571428571,
+       "sign_agreement": 0.4083333333333333,
+       "top1_chance": 0.18333333333333335,
+       "top1_rate": 0.3125
+      },
+      "temperature_c": {
+       "cells": 16.0,
+       "intervals_95": {
+        "groups": {
+         "count": 16.0
+        },
+        "mean_rho": {
+         "high": 0.6330357142857143,
+         "low": 0.5794642857142857
+        },
+        "sign_agreement": {
+         "high": 0.5708333333333333,
+         "low": 0.4583333333333333
+        },
+        "top1_rate": {
+         "high": 0.3125,
+         "low": 0.0
+        }
+       },
+       "mean_rho": 0.6071428571428571,
+       "sign_agreement": 0.5104166666666666,
+       "top1_chance": 0.18333333333333335,
+       "top1_rate": 0.125
+      },
+      "vpd_kpa": {
+       "cells": 16.0,
+       "intervals_95": {
+        "groups": {
+         "count": 16.0
+        },
+        "mean_rho": {
+         "high": 0.4875,
+         "low": 0.17589285714285713
+        },
+        "sign_agreement": {
+         "high": 0.56875,
+         "low": 0.37083333333333335
+        },
+        "top1_rate": {
+         "high": 0.8125,
+         "low": 0.3125
+        }
+       },
+       "mean_rho": 0.32857142857142857,
+       "sign_agreement": 0.4770833333333333,
+       "top1_chance": 0.18333333333333335,
+       "top1_rate": 0.5625
+      }
+     },
+     "cells_inexpressible": 0,
+     "cells_not_estimable": 0,
+     "cells_scored": 80,
+     "cells_total": 80,
+     "min_factors": 3,
+     "overall": {
+      "cells": 80.0,
+      "intervals_95": {
+       "groups": {
+        "count": 16.0
+       },
+       "mean_rho": {
+        "high": 0.51625,
+        "low": 0.3578571428571428
+       },
+       "sign_agreement": {
+        "high": 0.51,
+        "low": 0.44000000000000006
+       },
+       "top1_rate": {
+        "high": 0.45,
+        "low": 0.25
+       }
+      },
+      "mean_rho": 0.43553571428571425,
+      "sign_agreement": 0.4770833333333333,
+      "top1_chance": 0.18583333333333335,
+      "top1_rate": 0.35
+     }
+    },
+    "control_off": {
+     "by_target": {
+      "greenhouse_heating_kw": {
+       "cells": 8.0,
+       "intervals_95": {
+        "groups": {
+         "count": 8.0
+        },
+        "mean_rho": {
+         "high": 0.6749999999999999,
+         "low": 0.6124999999999999
+        },
+        "sign_agreement": {
+         "high": 0.7000000000000001,
+         "low": 0.4
+        },
+        "top1_rate": {
+         "high": 0.75,
+         "low": 0.125
+        }
+       },
+       "mean_rho": 0.6375,
+       "sign_agreement": 0.55,
+       "top1_chance": 0.2,
+       "top1_rate": 0.375
+      },
+      "growth_factor": {
+       "cells": 8.0,
+       "intervals_95": {
+        "groups": {
+         "count": 8.0
+        },
+        "mean_rho": {
+         "high": 0.6,
+         "low": -0.037500000000000006
+        },
+        "sign_agreement": {
+         "high": 0.65,
+         "low": 0.4
+        },
+        "top1_rate": {
+         "high": 0.75,
+         "low": 0.125
+        }
+       },
+       "mean_rho": 0.275,
+       "sign_agreement": 0.525,
+       "top1_chance": 0.2,
+       "top1_rate": 0.375
+      },
+      "relative_humidity_pct": {
+       "cells": 8.0,
+       "intervals_95": {
+        "groups": {
+         "count": 8.0
+        },
+        "mean_rho": {
+         "high": 0.9,
+         "low": 0.7375
+        },
+        "sign_agreement": {
+         "high": 0.4,
+         "low": 0.4
+        },
+        "top1_rate": {
+         "high": 0.875,
+         "low": 0.125
+        }
+       },
+       "mean_rho": 0.825,
+       "sign_agreement": 0.4,
+       "top1_chance": 0.2,
+       "top1_rate": 0.5
+      },
+      "temperature_c": {
+       "cells": 8.0,
+       "intervals_95": {
+        "groups": {
+         "count": 8.0
+        },
+        "mean_rho": {
+         "high": 0.6499999999999999,
+         "low": 0.55
+        },
+        "sign_agreement": {
+         "high": 0.575,
+         "low": 0.42500000000000004
+        },
+        "top1_rate": {
+         "high": 0.5,
+         "low": 0.0
+        }
+       },
+       "mean_rho": 0.6,
+       "sign_agreement": 0.5,
+       "top1_chance": 0.2,
+       "top1_rate": 0.25
+      },
+      "vpd_kpa": {
+       "cells": 8.0,
+       "intervals_95": {
+        "groups": {
+         "count": 8.0
+        },
+        "mean_rho": {
+         "high": 0.575,
+         "low": 0.04999999999999999
+        },
+        "sign_agreement": {
+         "high": 0.55,
+         "low": 0.42500000000000004
+        },
+        "top1_rate": {
+         "high": 0.875,
+         "low": 0.125
+        }
+       },
+       "mean_rho": 0.3,
+       "sign_agreement": 0.475,
+       "top1_chance": 0.2,
+       "top1_rate": 0.5
+      }
+     },
+     "cells_inexpressible": 0,
+     "cells_not_estimable": 0,
+     "cells_scored": 40,
+     "cells_total": 40,
+     "min_factors": 3,
+     "overall": {
+      "cells": 40.0,
+      "intervals_95": {
+       "groups": {
+        "count": 8.0
+       },
+       "mean_rho": {
+        "high": 0.625,
+        "low": 0.43
+       },
+       "sign_agreement": {
+        "high": 0.53,
+        "low": 0.45
+       },
+       "top1_rate": {
+        "high": 0.525,
+        "low": 0.275
+       }
+      },
+      "mean_rho": 0.5275,
+      "sign_agreement": 0.49000000000000005,
+      "top1_chance": 0.2,
+      "top1_rate": 0.4
+     }
+    },
+    "control_on": {
+     "by_target": {
+      "greenhouse_heating_kw": {
+       "cells": 8.0,
+       "intervals_95": {
+        "groups": {
+         "count": 8.0
+        },
+        "mean_rho": {
+         "high": 0.6410714285714285,
+         "low": 0.5285714285714286
+        },
+        "sign_agreement": {
+         "high": 0.4,
+         "low": 0.3666666666666667
+        },
+        "top1_rate": {
+         "high": 0.75,
+         "low": 0.125
+        }
+       },
+       "mean_rho": 0.5892857142857143,
+       "sign_agreement": 0.38333333333333336,
+       "top1_chance": 0.19166666666666668,
+       "top1_rate": 0.375
+      },
+      "growth_factor": {
+       "cells": 8.0,
+       "intervals_95": {
+        "groups": {
+         "count": 8.0
+        },
+        "mean_rho": {
+         "high": 0.25,
+         "low": -0.09999999999999999
+        },
+        "sign_agreement": {
+         "high": 0.625,
+         "low": 0.41666666666666663
+        },
+        "top1_rate": {
+         "high": 0.75,
+         "low": 0.125
+        }
+       },
+       "mean_rho": 0.09285714285714286,
+       "sign_agreement": 0.5208333333333333,
+       "top1_chance": 0.16666666666666666,
+       "top1_rate": 0.375
+      },
+      "relative_humidity_pct": {
+       "cells": 8.0,
+       "intervals_95": {
+        "groups": {
+         "count": 8.0
+        },
+        "mean_rho": {
+         "high": 0.19999999999999998,
+         "low": -0.12142857142857143
+        },
+        "sign_agreement": {
+         "high": 0.5208333333333334,
+         "low": 0.3125
+        },
+        "top1_rate": {
+         "high": 0.375,
+         "low": 0.0
+        }
+       },
+       "mean_rho": 0.06428571428571428,
+       "sign_agreement": 0.41666666666666663,
+       "top1_chance": 0.16666666666666666,
+       "top1_rate": 0.125
+      },
+      "temperature_c": {
+       "cells": 8.0,
+       "intervals_95": {
+        "groups": {
+         "count": 8.0
+        },
+        "mean_rho": {
+         "high": 0.6285714285714286,
+         "low": 0.6
+        },
+        "sign_agreement": {
+         "high": 0.625,
+         "low": 0.4375
+        },
+        "top1_rate": {
+         "high": 0.0,
+         "low": 0.0
+        }
+       },
+       "mean_rho": 0.6142857142857143,
+       "sign_agreement": 0.5208333333333334,
+       "top1_chance": 0.16666666666666666,
+       "top1_rate": 0.0
+      },
+      "vpd_kpa": {
+       "cells": 8.0,
+       "intervals_95": {
+        "groups": {
+         "count": 8.0
+        },
+        "mean_rho": {
+         "high": 0.5071428571428571,
+         "low": 0.15
+        },
+        "sign_agreement": {
+         "high": 0.6458333333333334,
+         "low": 0.29166666666666663
+        },
+        "top1_rate": {
+         "high": 0.875,
+         "low": 0.25
+        }
+       },
+       "mean_rho": 0.3571428571428571,
+       "sign_agreement": 0.47916666666666663,
+       "top1_chance": 0.16666666666666666,
+       "top1_rate": 0.625
+      }
+     },
+     "cells_inexpressible": 0,
+     "cells_not_estimable": 0,
+     "cells_scored": 40,
+     "cells_total": 40,
+     "min_factors": 3,
+     "overall": {
+      "cells": 40.0,
+      "intervals_95": {
+       "groups": {
+        "count": 8.0
+       },
+       "mean_rho": {
+        "high": 0.4125,
+        "low": 0.25535714285714284
+       },
+       "sign_agreement": {
+        "high": 0.5183333333333333,
+        "low": 0.4083333333333333
+       },
+       "top1_rate": {
+        "high": 0.425,
+        "low": 0.15
+       }
+      },
+      "mean_rho": 0.3435714285714285,
+      "sign_agreement": 0.46416666666666667,
+      "top1_chance": 0.17166666666666666,
+      "top1_rate": 0.3
+     }
+    }
+   }
+  },
+  "seasonal_naive": {
+   "by_factor": {
+    "COLD_WAVE": {
+     "expressible": 80,
+     "pairs": 80,
+     "sign_agreement": 0.0
+    },
+    "HEAT_WAVE": {
+     "expressible": 80,
+     "pairs": 80,
+     "sign_agreement": 0.0
+    },
+    "HIGH_RADIATION": {
+     "expressible": 80,
+     "pairs": 80,
+     "sign_agreement": 0.0
+    },
+    "IRRIGATION": {
+     "expressible": 0,
+     "pairs": 0,
+     "sign_agreement": null
+    },
+    "LOW_RADIATION": {
+     "expressible": 80,
+     "pairs": 80,
+     "sign_agreement": 0.0
+    },
+    "SHADING": {
+     "expressible": 80,
+     "pairs": 80,
+     "sign_agreement": 0.0
+    },
+    "VENTILATION": {
+     "expressible": 34,
+     "pairs": 74,
+     "sign_agreement": 0.0
+    },
+    "WIND": {
+     "expressible": 0,
+     "pairs": 0,
+     "sign_agreement": null
+    }
+   },
+   "gate_summary": {
+    "by_factor": {
+     "COLD_WAVE": {
+      "pairs": 80,
+      "sign_agreement": 0.0
+     },
+     "HEAT_WAVE": {
+      "pairs": 80,
+      "sign_agreement": 0.0
+     },
+     "HIGH_RADIATION": {
+      "pairs": 80,
+      "sign_agreement": 0.0
+     },
+     "LOW_RADIATION": {
+      "pairs": 80,
+      "sign_agreement": 0.0
+     },
+     "SHADING": {
+      "pairs": 80,
+      "sign_agreement": 0.0
+     },
+     "VENTILATION": {
+      "pairs": 34,
+      "sign_agreement": 0.0
+     }
+    },
+    "clipped_steps": 0,
+    "effect_coverage": 0.7386232718894009,
+    "expressible_pairs": 434,
+    "forecast_steps": 0,
+    "inexpressible_pairs": 40,
+    "integral_median_relative_error": 1.0,
+    "integral_sign_agreement": 0.0,
+    "integral_spearman": null,
+    "median_relative_error": 1.0,
+    "pairs": 474,
+    "sign_agreement": 0.0,
+    "spearman_peaks": null
+   },
+   "ranking": {
+    "all": {
+     "by_target": {},
+     "cells_inexpressible": 0,
+     "cells_not_estimable": 80,
+     "cells_scored": 0,
+     "cells_total": 80,
+     "min_factors": 3,
+     "overall": {
+      "cells": 0.0,
+      "intervals_95": {},
+      "mean_rho": null,
+      "sign_agreement": null,
+      "top1_chance": null,
+      "top1_rate": null
+     }
+    },
+    "control_off": {
+     "by_target": {},
+     "cells_inexpressible": 0,
+     "cells_not_estimable": 40,
+     "cells_scored": 0,
+     "cells_total": 40,
+     "min_factors": 3,
+     "overall": {
+      "cells": 0.0,
+      "intervals_95": {},
+      "mean_rho": null,
+      "sign_agreement": null,
+      "top1_chance": null,
+      "top1_rate": null
+     }
+    },
+    "control_on": {
+     "by_target": {},
+     "cells_inexpressible": 0,
+     "cells_not_estimable": 40,
+     "cells_scored": 0,
+     "cells_total": 40,
+     "min_factors": 3,
+     "overall": {
+      "cells": 0.0,
+      "intervals_95": {},
+      "mean_rho": null,
+      "sign_agreement": null,
+      "top1_chance": null,
+      "top1_rate": null
+     }
+    }
+   }
+  }
+ },
+ "cases": 128,
+ "cases_used": 128,
+ "context": 120,
+ "factors": [
+  "HEAT_WAVE",
+  "COLD_WAVE",
+  "LOW_RADIATION",
+  "HIGH_RADIATION",
+  "WIND",
+  "VENTILATION",
+  "SHADING",
+  "IRRIGATION"
+ ],
+ "horizon": 48,
+ "partition": "dev (synthetic)",
+ "report_hash": "2bb476dd5c10f060963d48dd3d3dde1511012bd1fc9b95c8bd561826a0c57a57",
+ "seasons": 8,
+ "skipped": {
+  "no_effect": 0,
+  "short_context": 0,
+  "short_horizon": 0
+ },
+ "statement": "exploratory; development partition; synthetic data; truth of the simulated twin; TimesFM not run; no quality claim",
+ "status": "PASS",
+ "variants": [
+  "control_off",
+  "control_on"
+ ]
+}

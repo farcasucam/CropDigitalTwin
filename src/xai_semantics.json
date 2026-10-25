@@ -14,6 +14,8 @@
     "vpd_kpa": {"unit": "kPa", "max": ["vpd_thresholds", "stress_max_kpa"]},
     "soil_water_vwc_m3_m3": {"unit": "m3_m-3", "min": ["vwc_thresholds", "optimal_min"]}
   },
+  "confirmable_variables": ["temperature_c", "greenhouse_heating_kw", "greenhouse_cooling_kw"],
+  "confirmable_variables_source": "DEVELOPMENT evidence only (phase 6.5r step 4, data/xai/rq4b_wide_report.json, synthetic): the twin variants gave the truth's direction in all material pairs for these variables and in about 85-90 percent for relative humidity and vapour deficit, with errors shared by every variant. To be frozen in the preregistration before the test partition; not a property of the real greenhouse",
   "forbidden_claims": [
     "the twin is calibrated",
     "the twin is validated against the real system",

@@ -180,7 +180,7 @@ def semantic_pack(crop: str, month: int, semantics_path: Path | str | None = Non
                 group, key = fields[side]
                 if key in spec.get(group, {}):
                     thresholds.setdefault(variable, {})[side] = ThresholdSpec(float(spec[group][key]), fields["unit"], f"crop_config.json {crop}/{stage}/{group}.{key}")
-    return DomainPack(f"agri-twin/{crop}", DEFAULT_VOCABULARY, thresholds, {k: float(v) for k, v in config["conventions"].items()}, "provisional", tuple(config["forbidden_claims"]))
+    return DomainPack(f"agri-twin/{crop}", DEFAULT_VOCABULARY, thresholds, {k: float(v) for k, v in config["conventions"].items()}, "provisional", tuple(config["forbidden_claims"]), tuple(config["confirmable_variables"]))
 
 
 def twin_series_source(simulator: TwinSimulator | None = None) -> SimulatorSeriesSource:

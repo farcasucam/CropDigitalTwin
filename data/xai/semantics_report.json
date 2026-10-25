@@ -16,7 +16,7 @@
    "case": "0_tomato_environment-outdoor_control-off",
    "facts": 30,
    "facts_hash": "33c3122ffb8a84da8caeec32d1fb82473ef4b67e31590ca20dcd91b29e4f2eee",
-   "pack_hash": "1157f827c22c8e7903bc6275b60266f1e8520659816f642379ad84ae04c49d6b",
+   "pack_hash": "998f3115d53970d418616a61da82a17c53b0275ba715d084eaa22ecbd20bea5e",
    "text_hash": {
     "en": "a1d8367f5dbbd874dbc6588f8d6760ce8aeb695ec621a7749cf9c49681be5279",
     "es": "8135b795a80b3ba0a376220735ce23f4ccf36e92301b876e7b606caee0dc333c"
@@ -65,7 +65,7 @@
    "case": "1_tomato_environment-greenhouse_control-off",
    "facts": 40,
    "facts_hash": "4916923f7693de0a24ea969d6c2c202682e904a630e91b61874359cf1aa0ebc4",
-   "pack_hash": "1157f827c22c8e7903bc6275b60266f1e8520659816f642379ad84ae04c49d6b",
+   "pack_hash": "998f3115d53970d418616a61da82a17c53b0275ba715d084eaa22ecbd20bea5e",
    "text_hash": {
     "en": "1d76387040b8f3cfff835fdfc02105c12db25298ddf62d738a1df071a7f79c79",
     "es": "496d2a2df6b415069faf0f479b2947098e567fe25d04a1adbc1ea7e8abe55c72"
@@ -113,7 +113,7 @@
    "case": "2_pepper_environment-greenhouse_control-on",
    "facts": 61,
    "facts_hash": "e571ec877bbd5df79bd622b818384f6f08545d6629beadcefd50b8b85984cc3a",
-   "pack_hash": "53475725a2f513d4a8df755aa754d0f2e0a5350c4c0a521dd745c9190416bd22",
+   "pack_hash": "d3530f11caf2bdddcc0b4ef5a7cbeb5acf5f6eea04775dfa906ecc05d2d3be04",
    "text_hash": {
     "en": "3a8701a33d842078f1fea19f927b19bf9c16d98bb00e6a281aed76e37d13386d",
     "es": "7d7391608d444be99d2f6ebdb9a3c21ef22e7f7a63b66defd56e74a5052331e9"
@@ -150,7 +150,7 @@
    "case": "3_pepper_environment-greenhouse_control-on_feedback-on",
    "facts": 32,
    "facts_hash": "cd9fb9c256b9622549a4fdc7ac9731a34253a15404f2dfe0670545f2e1a6bb1f",
-   "pack_hash": "53475725a2f513d4a8df755aa754d0f2e0a5350c4c0a521dd745c9190416bd22",
+   "pack_hash": "d3530f11caf2bdddcc0b4ef5a7cbeb5acf5f6eea04775dfa906ecc05d2d3be04",
    "text_hash": {
     "en": "c69e761738928be579fe58a10c679b677b4abfae82744e6e832cf113baef34e1",
     "es": "139f703d25fed92a351a4dccfe6dbec02befc22c423f89b0514ae90fe60b86a7"
@@ -172,7 +172,7 @@
   }
  ],
  "convention_status": "provisional",
- "report_hash": "8783b1efefb7226fd6ad8c59759934ae828353d28d5fc270e631051612d9378e",
+ "report_hash": "28dd01a66e091ef41d0b5c1500a74705a31dc0471fdc5157303ef86dc9f865ea",
  "statement": "synthetic data; forcing is the exogenous weather; thresholds from crop_config.json; nothing TWIN_CONFIRMED until the working twin exists (6.5r); no quality claim",
  "status": "PASS"
 }
