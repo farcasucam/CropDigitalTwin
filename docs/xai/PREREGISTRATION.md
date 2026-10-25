@@ -68,11 +68,11 @@ Los umbrales son **provisionales** (convenciones de diseño) y se fijan sobre la
 
 ## 6. Estudio con expertos (RQ7)
 
-La aprobación ética **está concedida**. Se registran aquí, al congelar: número de expertos, criterios de inclusión, consentimiento, casos (plantados, con verdad conocida), orden aleatorizado de condiciones, cálculo de la potencia (modesta: se declara), variables medidas y análisis.
+**No se requiere comité de ética** (D17, decisión del usuario, 2026-10-25; sustituye la mención anterior a una aprobación concedida). Se mantienen consentimiento informado y anonimato. Se registran aquí, al congelar: número de expertos, criterios de inclusión, consentimiento, casos (plantados, con verdad conocida), orden aleatorizado de condiciones, cálculo de la potencia (modesta: se declara), variables medidas y análisis.
 
 ## 7. Qué NO se afirmará
 
-Causalidad sobre el invernadero real; calibración o validación experimental del modelo de cultivo; generalización a cultivos o parcelas no simulados; calidad de previsión en general; que el razonamiento mostrado sea el razonamiento interno del modelo de lenguaje.
+Causalidad sobre el invernadero real; que el gemelo sea válido frente al sistema real (que un previsor falle frente al gemelo no lo valida); calibración o validación experimental del modelo de cultivo; generalización a cultivos o parcelas no simulados; calidad de previsión en general; que el razonamiento mostrado sea el razonamiento interno del modelo de lenguaje.
 
 ## 8. Registro de desviaciones
 
@@ -81,3 +81,5 @@ _Vacío hasta el congelado._
 Cambios previos al congelado (no son desviaciones): 2026-10-24, fase 6.2: la señal primaria de PELT pasa del residuo STL a la serie desestacionalizada, y el residuo queda como variante de ablación; el criterio de materialidad de un cambio verdadero (`|efecto| ≥ fracción × DE` de la serie) es una convención provisional que se barre (0,1; 0,25; 0,5).
 
 2026-10-25, fase 6.3c (decisión derivada de resultados de desarrollo, no de la partición de prueba): la integral del efecto sobre el horizonte (kWh con muestra horaria) pasa a ser el criterio principal de volumen del contrafáctico y el pico queda como criterio secundario; en el backtest se añaden, sin sustituir al MASE, la coincidencia de encendidos con tolerancia ±2 h, el MAE condicionado dual y la integral del horizonte. Motivo: la demanda del controlador es intermitente y las métricas escaladas quedan indefinidas en muchos casos. La estratificación por actividad previa (activo/plano, mínimo 10 pares por celda) es exploratoria y su regla de lectura se fijó antes de ver las cifras. Fase 6.3d (D12, D13; también derivado de resultados de desarrollo): la protección de estabilidad del ridge es una acotación de último recurso al rango del contexto ampliado por un factor 5 a cada lado, con los pasos acotados registrados (1,4 % de los pasos de la puerta en desarrollo) y la puerta evaluada con y sin acotación; el umbral de encendido es una propiedad del dispositivo declarada por el anfitrión (5 % de la potencia nominal, convención provisional sin fuente) y el barrido 0/1/5 kW se conserva como informe complementario de robustez.
+
+2026-10-25, cambio de alcance (D14-D16, decidido con resultados de desarrollo y antes de ver la partición de prueba): el L3 lo responde el gemelo y el previsor pasa a ser objeto de estudio (RQ4 se confirma en prueba como hipótesis negativa registrada: signo < 0,8); se añade RQ4b con doble gemelo (gemelo verdad con EnergyPlus para las series de energía; gemelo de trabajo con parámetros perturbados dentro de rangos declarados y backend simplificado; niveles de desajuste 0 / pequeño / grande, el 0 solo como techo); la ablación separa A3a (atribución del previsor con su fidelidad) y A3b (contrafácticos del gemelo de trabajo); el RAG queda fuera de los brazos evaluados. Métricas primarias y umbrales de RQ4b y RQ6 se fijan antes del congelado.

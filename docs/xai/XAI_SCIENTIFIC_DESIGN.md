@@ -40,7 +40,7 @@ Se distinguen **cuatro niveles de explicación**, cada uno con su propia verdad 
 |---|---|---|---|---|
 | **L1 Descriptivo** | ¿Qué ha pasado? | STL/MSTL, puntos de cambio, tendencias por tramo, variables derivadas | Anotaciones: eventos, cambios de actuador, cambios de etapa, fallos inyectados | Asociación |
 | **L2 Atributivo** | ¿Qué factores pesan en el estado o en la previsión? | Atribución sobre el pronosticador (oclusión, permutación, gradientes, SHAP agrupado) | Efecto **interventivo** de cada factor medido en pares de ejecuciones del gemelo | Asociación del *modelo* (verificada contra intervención) |
-| **L3 Contrafáctico** | ¿Qué pasaría si cambiara X? | Previsión con covariable futura editada | Ejecución pareada del gemelo con el mismo cambio | Intervención |
+| **L3 Contrafáctico** | ¿Qué pasaría si cambiara X? | **Ejecución pareada del gemelo de trabajo** (D14, D15); la previsión con covariable futura editada queda como objeto de estudio (RQ4) | Ejecución pareada del gemelo verdad con el mismo cambio (EnergyPlus para las series de energía) | Intervención |
 | **L4 Lingüístico** | ¿Cómo se lo cuento a una persona sin falsear nada? | LLM con salida estructurada + verificador | Hechos con identificador del L1-L3; reglas del catálogo | (fidelidad del texto) |
 
 **Dos nociones de fidelidad que no se deben mezclar** (Jacovi & Goldberg, 2020; Doshi-Velez & Kim, 2017):
@@ -49,6 +49,12 @@ Se distinguen **cuatro niveles de explicación**, cada uno con su propia verdad 
 El caso interesante es **alta fidelidad al modelo y baja al mundo**: el modelo usa una correlación espuria. Eso es un hallazgo, no un fallo del método.
 
 **Límite epistemológico que se declara siempre:** el gemelo es un modelo, no la naturaleza. «Verdad de terreno» significa *«verdad del sistema simulado»*. Ninguna conclusión se extiende al invernadero real sin datos intervenidos reales (ver §9).
+
+**Doble gemelo (D15, 2026-10-25).** Para que el L3 no sea circular (verdad y evidencia del mismo modelo), se separan dos papeles:
+* **Gemelo verdad:** parámetros del banco; las series de energía (`greenhouse_heating_kw`, `greenhouse_cooling_kw`) con el backend **EnergyPlus**. Genera los datos (con error de sensor) y los efectos verdaderos. El explicador no lo consulta.
+* **Gemelo de trabajo:** el que tiene el explicador; parámetros **perturbados** dentro de los rangos declarados (auditoría de parámetros, conjunto de incertidumbre de la fase 5.23; nada inventado) y backend simplificado. Su desajuste con el verdad es a la vez **paramétrico y estructural**.
+* **Niveles de desajuste:** 0 (mismo modelo: techo de referencia, nunca resultado principal), pequeño y grande. Un **conjunto** de gemelos de trabajo da evidencia calibrada: «confirmado en k de n variantes».
+* Que un previsor falle frente al gemelo **no valida el gemelo**: solo muestra que hace falta un modelo con la estructura del sistema. La validez frente al invernadero real sigue pendiente de datos reales.
 
 ---
 
@@ -84,6 +90,11 @@ Cada hipótesis tiene una **métrica primaria**, una **comparación** y un **cri
 ### RQ4 (L3): ¿reproduce TimesFM el efecto contrafáctico?
 * **H4:** el signo y el orden de magnitud de Δprevisión coinciden con Δgemelo en los factores principales, con dependencia del régimen; el **ancho de los cuantiles** cubre el Δgemelo con la frecuencia nominal solo si está calibrado (se mide, no se supone).
 * Métricas: concordancia de signo, error relativo, **cobertura del efecto verdadero por el intervalo contrafáctico**.
+* **Estado (D14, desarrollo, 2026-10-25):** negativa. Concordancia de signo 0,64 frente a 0,8 exigido; 0 de 19 pares en contextos sin actividad previa del controlador (mecanismo: el umbral nunca excitado no se puede aprender). Se confirma una sola vez en la partición de prueba; su generalidad se contrasta en el reactor con PLC (6.3e). El previsor deja de ser fuente de L3 en el producto.
+
+### RQ4b (L3 con modelo imperfecto): ¿cuánto se degrada el contrafáctico del gemelo de trabajo frente al verdad?
+* **H4b:** con desajuste pequeño, el contrafáctico del gemelo de trabajo supera al del mejor previsor en concordancia de signo y en Spearman de la integral; la ventaja disminuye con el desajuste y puede desaparecer en el grande. La concordancia del conjunto (k de n) está calibrada: cuando k/n es alto, el signo acierta con una frecuencia comparable.
+* Métricas: las de RQ4 por nivel de desajuste y por régimen (activo/plano, calefacción/refrigeración), calibración de k/n (diagrama de fiabilidad). Comparador: el mejor previsor de RQ4 sobre los mismos casos.
 
 ### RQ5 (L4): ¿es fiel el texto?
 * **H5a:** con hechos con identificador y verificador, la tasa de **afirmaciones sin respaldo** tras el verificador es ≤ 2 % (umbral provisional) y la de **cifras inventadas** es 0 % tras *fail-closed*.
@@ -99,9 +110,10 @@ Mismo LLM, `temperature=0`, N repeticiones, mismas preguntas:
 | A0 | La serie numérica cruda (dígito a dígito, Gruver et al., 2023) |
 | A1 | Estadísticos resumen (media, mín., máx., pendiente) |
 | A2 | **Enriquecimiento del TFG** (STL, PELT, Holt-Winters, umbrales) en Markdown |
-| A3 | A2 + evidencia L2/L3 (atribución y contrafácticos validados) |
-| A4 | A3 + verificador determinista (*fail-closed*) |
-* **H6:** A0 < A1 < A2 < A3 ≤ A4 en corrección y en alucinación, con efecto medible en cada escalón; **el escalón A2→A3 es la aportación de este trabajo** (el TFG llega a A2).
+| A3a | A2 + atribución del previsor **con su fidelidad medida** (lenguaje de asociación, nunca causal) |
+| A3b | A2 + contrafácticos del **gemelo de trabajo** con su nivel de evidencia (k de n variantes) |
+| A4 | A3a + A3b + verificador determinista (*fail-closed*) |
+* **H6:** A0 < A1 < A2 < A3b ≤ A4 en corrección y en alucinación, con efecto medible en cada escalón; **A3b > A3a** en las afirmaciones causales (la evidencia del simulador supera a la del previsor); **el escalón A2→A3b es la aportación de este trabajo** (el TFG llega a A2). El RAG no forma parte de ningún brazo (D16).
 * Métricas: exactitud de afirmaciones frente a verdad plantada, alucinación (cifras y causas), obediencia al esquema, latencia, coste en tokens.
 
 ### RQ7 (utilidad humana)

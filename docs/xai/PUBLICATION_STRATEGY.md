@@ -13,8 +13,8 @@ Las contribuciones se enuncian como **hipótesis contrastables**, no como hechos
 | ID | Contribución candidata | Evidencia que la sostiene | Riesgo |
 |---|---|---|---|
 | **C1** | Un **banco de pruebas con verdad interventiva** (efectos causales exactos medidos con pares de ejecuciones de un simulador) para XAI de series temporales multivariantes con errores de sensor realistas | El banco GCTSB y su datasheet, publicados | Que ya exista algo equivalente: exige la revisión sistemática de §3 |
-| **C2** | Un **estudio empírico de fidelidad** de las atribuciones sobre un modelo de fundación de series temporales (TimesFM 3), medidas contra la verdad interventiva y contra la fidelidad al modelo | RQ3 y RQ4 con intervalos y por régimen | Resultado negativo o muy dependiente del régimen (es publicable, pero hay que contarlo bien) |
-| **C3** | Un **pipeline neuro-simbólico con evidencia calibrada y verificación determinista**, con una **ablación controlada** (dato crudo → resumen → enriquecimiento clásico → + atribución y contrafácticos validados → + verificador) | RQ5 y RQ6 | Que la mejora sea pequeña o que dependa del LLM (se mitiga con ≥ 2 LLM y repeticiones) |
+| **C2** | Un **hallazgo de fidelidad con mecanismo**: los previsores basados en datos, incluido un modelo de fundación (TimesFM 3), no reproducen los contrafácticos de un sistema en lazo cerrado cuando la historia no excita el umbral del controlador; la atribución del previsor se mide frente a la verdad interventiva (D14) | RQ3, RQ4 (negativa en desarrollo: signo 0,64; 0 de 19 pares planos) confirmada en prueba; generalidad en el reactor con PLC (6.3e) | Que el mecanismo no se repita en el reactor o en prueba: se informa igual |
+| **C3** | Un **pipeline neuro-simbólico con evidencia por niveles y verificación determinista**, cuyo L3 lo aporta un **simulador imperfecto** (doble gemelo, D15), con ablación A0-A4 (A3a previsor frente a A3b gemelo) y robustez ante el desajuste del modelo | RQ4b, RQ5 y RQ6 | Que la ventaja del gemelo desaparezca con poco desajuste, o que la mejora dependa del LLM (≥ 2 LLM y repeticiones) |
 | **C4** | Un **módulo abierto, modular e integrable** con pruebas de contrato y, si se decide, un segundo dominio | El paquete `tsxai`, sus ejemplos y su suite de contrato | Se queda en «ingeniería» si no hay evaluación: por eso va ligado a C1-C3 |
 
 **Lo que NO es la contribución:** «un TFG con un LLM»; el gemelo (segundo artículo); previsión por sí misma; una interfaz.
@@ -25,14 +25,14 @@ Las contribuciones se enuncian como **hipótesis contrastables**, no como hechos
 |---|---|
 | **Evaluación cuantitativa de la explicación**, no solo ejemplos | Métricas definidas de antemano (`XAI_SCIENTIFIC_DESIGN.md` §4), verdad de terreno, intervalos |
 | **Fidelidad frente a plausibilidad** (Jacovi & Goldberg, 2020) | Fidelidad al modelo y al mundo, por separado (§2 del diseño científico) |
-| Evaluación humana **bien diseñada** | RQ7 con expertos, ética aprobada, aleatorización, α de Krippendorff, potencia declarada |
+| Evaluación humana **bien diseñada** | RQ7 con expertos (sin comité de ética, D17), consentimiento informado, aleatorización, α de Krippendorff, potencia declarada |
 | **Líneas base** serias, incluidas simples | Naive, Holt-Winters, regresión con retardos, boosting, modelo entrenado, Chronos-2; atribución aleatoria y modelo lineal transparente |
 | **Ablación** | Brazos A0-A4 con el mismo LLM |
 | **Generalización** más allá de un caso | 7 cultivos × 3 entornos × 40 temporadas × niveles de ruido; segundo dominio (decisión abierta) |
 | **Reproducibilidad** | Preregistro, semillas, hashes, imágenes por digest, código y datos abiertos, registro/reproducción del LLM |
 | **Limitaciones honestas** | «Verdad del sistema simulado», ruido supuesto, modelos de 7-8B, licencias; sección propia |
 | **Impacto práctico** | Caso de uso real (gestión de invernadero), expertos, vector rendimiento-agua-energía |
-| **Ética y datos** | Aprobación ética; sin datos personales; el TFG no se redistribuye |
+| **Ética y datos** | Sin comité de ética (D17; se declara según la norma de la universidad y de la revista); consentimiento y anonimato de los expertos; sin datos personales; el TFG no se redistribuye |
 
 ### Marco de evaluación reconocido
 Alinear las métricas con propiedades establecidas de la evaluación de XAI evita la acusación de «métricas propias a medida». Se propone mapearlas a las **12 propiedades Co-12** (Nauta et al., 2023: corrección, completitud, consistencia, continuidad, contrastividad, complejidad de covariables, compacidad, composición, confianza, contexto, coherencia, controlabilidad) y a los niveles de evaluación de Doshi-Velez & Kim (2017). Entregable: una tabla propiedad → métrica → hipótesis en el artículo.
@@ -41,7 +41,7 @@ Alinear las métricas con propiedades establecidas de la evaluación de XAI evit
 
 Sin una revisión rigurosa no se puede afirmar novedad. Se añade una fase **antes de implementar más** con un protocolo registrado:
 
-* **Preguntas:** ¿qué benchmarks de XAI de series temporales existen y qué verdad usan?; ¿qué se ha evaluado sobre atribución en modelos de fundación de series temporales?; ¿qué trabajos explican series temporales con LLM y cómo evalúan su fidelidad?; ¿qué se hace con evidencia calibrada y verificación determinista?
+* **Preguntas:** ¿qué benchmarks de XAI de series temporales existen y qué verdad usan?; ¿qué se ha evaluado sobre atribución en modelos de fundación de series temporales?; ¿qué trabajos explican series temporales con LLM y cómo evalúan su fidelidad?; ¿qué se hace con evidencia calibrada y verificación determinista? Pregunta añadida (D14): ¿se usa un simulador mecanicista como fuente de contrafácticos para explicaciones en lenguaje natural, y cómo se trata su desajuste con el sistema real? **Estado: no hecha (2026-10-25); prioritaria.**
 * **Fuentes:** Scopus, Web of Science, IEEE Xplore, ACM DL, arXiv/OpenReview (el estado del arte de TS-XAI y de LLM está en preprints), Google Scholar para la cadena de citas.
 * **Cadenas de búsqueda** registradas (por ejemplo: «time series» AND (explainab* OR interpretab*) AND (benchmark OR faithfulness OR ground truth); «foundation model» AND «time series» AND (attribution OR explanation); «LLM» AND «time series» AND (explanation OR narrative) AND (faithful* OR hallucinat*); «counterfactual» AND «time series» AND «simulator»), criterios de inclusión y exclusión, cribado por dos lecturas cuando sea posible, diagrama PRISMA.
 * **Obras de partida** (verificar cada una): Ismail et al. (2020, benchmark de interpretabilidad en series temporales); Schlegel et al. (2019, evaluación de XAI en series temporales); Turbé et al. (2023, evaluación de métodos post-hoc en series temporales); Nauta et al. (2023, Co-12); Jacovi & Goldberg (2020); Adebayo et al. (2018); trabajos de TimeSHAP, WinIT, Dynamask; Time-LLM (Jin et al., 2023) y LLMTime (Gruver et al., 2023); TimesFM y Chronos-2; Turpin et al. (2023) y Lanham et al. (2023) sobre fidelidad de la cadena de pensamiento; FActScore (Min et al., 2023), RAGAS y SelfCheckGPT para fidelidad de texto; literatura de agricultura inteligente y IA explicativa (Wolfert et al., 2017 y revisiones posteriores).
@@ -87,7 +87,9 @@ El mayor reproche previsible a un trabajo de IA explicativa aplicada es «un sol
 | «¿Por qué no usar otro LLM como juez?» | Se usa un verificador determinista con reglas explícitas, más evaluación humana; opcionalmente un LLM-juez como análisis secundario |
 | «El pipeline es ingeniería» | Las contribuciones C1-C3 son de evaluación y de hallazgo; el pipeline es el objeto de estudio |
 | «Poca novedad frente a Time-LLM, etc.» | La revisión sistemática establece el hueco: evidencia calibrada, verificación y verdad interventiva |
-| «Resultados negativos de TimesFM» | Se presentan como hallazgo (la fidelidad depende del régimen) con análisis causal del porqué |
+| «Resultados negativos de TimesFM» | Son la contribución C2: se presentan con su mecanismo (umbral no excitado), su estratificación y su contraste en un segundo dominio |
+| «Circularidad: el gemelo es la verdad y la evidencia» | Doble gemelo (D15): el explicador usa un gemelo de trabajo perturbado y estructuralmente distinto (simplificado frente a EnergyPlus); el desajuste 0 solo es techo de referencia |
+| «Si tenéis el gemelo, ¿para qué el previsor?» | Porque en instalaciones sin simulador solo hay datos: el banco mide cuándo un explicador basado en datos es fiable y cuándo hace falta un modelo |
 | «Reproducibilidad con pesos no libres» | Código, datos y manifiestos abiertos; pesos citados por origen y hash; alternativa con Chronos-2 (Apache-2.0) |
 
 ## 8. Relación con el TFG y con el segundo artículo
@@ -121,9 +123,9 @@ Lectura provisional: Elsevier concentra el mejor encaje (*Information Fusion*, *
 | M1 | Paquete independiente con puertos, simulador de juguete y pruebas de contrato | 6.0 (rehecha) |
 | M2 | Banco GCTSB sobre `SimulatorPort` (gemelo + juguete) con datasheet | 6.1b |
 | M3 | Analizador y evaluación RQ1 | 6.2 |
-| M4 | Puerta de viabilidad de TimesFM y comparadores (RQ2, RQ4) | 6.3a |
-| M5 | Atribución y fidelidad (RQ3) | 6.5 |
-| M6 | Capa semántica, LLM, verificador y evaluación lingüística (RQ5), ablación (RQ6) | 6.4, 6.6, 6.7, 6.9 |
+| M4 | Puerta de viabilidad de TimesFM y comparadores (RQ2, RQ4): **hecha en desarrollo, negativa** (6.3-6.3d); mecanismo en el reactor (6.3e) | 6.3a-6.3e |
+| M5 | Doble gemelo (RQ4b) y fidelidad de la atribución (RQ3) | 6.5r |
+| M6 | Capa semántica con niveles de evidencia, LLM, verificador y evaluación lingüística (RQ5), ablación A0-A4 con A3a/A3b (RQ6); RAG solo en el producto (D16) | 6.4, 6.6, 6.7, 6.8 |
 | M7 | Estudio con expertos (RQ7) | 6.9 |
 | M8 | Congelado, ejecución única sobre prueba, redacción, artefactos archivados | cierre |
 
@@ -133,4 +135,6 @@ Lectura provisional: Elsevier concentra el mejor encaje (*Information Fusion*, *
 2. **Preprint:** por ahora no.
 3. **Segundo dominio:** sí, industria química con PLC (`tsxai.examples.PlcReactor`).
 4. **Revista objetivo:** se decide con resultados; criterio y acuerdos en §9.
+5. **Alcance (D14-D16, 2026-10-25):** L3 por el gemelo, doble gemelo con EnergyPlus para la energía, RAG fuera del artículo y dentro del producto.
+6. **Ética (D17):** el estudio con expertos no necesita comité de ética.
 5. **Revisión de la revisión sistemática por una segunda persona:** pendiente.
