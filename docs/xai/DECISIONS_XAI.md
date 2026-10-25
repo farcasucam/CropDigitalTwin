@@ -40,7 +40,7 @@ Registro de decisiones del proyecto XAI de series temporales. Cada decisión lle
 | D5 | Umbrales de aprobación de la fase 6.9 | se congelan en el preregistro (6.1b) | 6.9 |
 | — | Pasar el acceso a la Spark de contraseña a **clave SSH** y rotar la contraseña (ya figura en la conversación) | usuario | Nada: el acceso funciona (ver el inventario) |
 | — | Número de expertos (sin comité de ética, D17) | usuario | RQ7 |
-| — | **Revisión sistemática (6.0b): no hecha**; prioritaria, en paralelo a 6.3e-6.4 | asistente + segunda lectura del usuario | Declarar novedad; elegir revista |
+| — | **Revisión sistemática (6.0b): primera pasada hecha (2026-10-25)**: una lectura, solo resúmenes, 25 búsquedas, sin PRISMA; falta la segunda lectura y verificar las citas a texto completo. Hallazgos: C2 ya tiene un antecedente cercano (Won, arXiv 2610.08118: modelos de fundación y contrafácticos exactos), C1 y C3 tienen vecinos parciales (DoTime, AXIS, MechSim); hay que **reposicionar C2 hacia el mecanismo** (umbral latente / lazo cerrado; 6.3e muestra que la explicación por excitación no generaliza) | asistente + segunda lectura del usuario | Declarar novedad; elegir revista |
 | — | Coordenadas de las zonas meteorológicas y de las parcelas tipo (aproximadas) | usuario | Resultados que dependan del sitio (Penman-Monteith) |
 
 ## Reglas operativas

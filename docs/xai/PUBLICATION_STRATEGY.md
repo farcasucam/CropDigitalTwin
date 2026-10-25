@@ -53,7 +53,7 @@ Sin una revisión rigurosa no se puede afirmar novedad. Se añade una fase **ant
 * **Artefactos:** código del módulo (licencia permisiva), banco GCTSB con **datasheet** (Gebru et al., «Datasheets for Datasets»), tarjetas de modelo/uso del pipeline, *prompts* y esquemas, scripts de evaluación, manifiestos con hashes, semillas. Archivado con DOI (por ejemplo en Zenodo; verificar política de la revista).
 * **Lo que no se puede publicar:** los pesos de TimesFM 3 (licencia no comercial, no redistribuible: se cita el origen) y el TFG (se queda local). Los LLM abiertos se citan por versión y licencia.
 * **Lista de verificación de reproducibilidad** (al estilo de las de NeurIPS/ICML): presupuesto de cómputo (la DGX Spark), variación entre semillas e intervalos, versiones de software, partición, hiperparámetros fijados en desarrollo, código y datos disponibles.
-* **Ética:** aprobación del comité para el estudio con expertos (registrar el código de aprobación en el artículo), consentimiento, anonimización, sin datos personales.
+* **Ética (D17):** no se requiere comité para el estudio con expertos; se mantienen consentimiento informado, anonimización y ausencia de datos personales, y se declara en el artículo que no hubo evaluación por comité (verificar la política de la revista elegida).
 
 ## 5. Validez externa: más allá del invernadero
 
