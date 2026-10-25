@@ -155,11 +155,13 @@
     },
     "greenhouse_heating_kw": {
       "role": "target",
-      "why": "energy objective: heating demand"
+      "why": "energy objective: heating demand",
+      "activation": {"fraction": 0.05, "nominal_from": "heating_capacity_kw", "basis": "PROVISIONAL design convention (not a sourced value): the device counts as ON above 5 % of its rated thermal power, an engineering property of the installation and not a tuning knob"}
     },
     "greenhouse_cooling_kw": {
       "role": "target",
-      "why": "energy objective: cooling demand"
+      "why": "energy objective: cooling demand",
+      "activation": {"fraction": 0.05, "nominal_from": "cooling_capacity_kw", "basis": "PROVISIONAL design convention (not a sourced value): the device counts as ON above 5 % of its rated thermal power, an engineering property of the installation and not a tuning knob"}
     },
     "control_vent_opening": {
       "role": "decision_covariate",

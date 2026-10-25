@@ -1,0 +1,684 @@
+{
+ "backends": [
+  "holt_winters",
+  "lagged_ridge",
+  "lagged_ridge_unclipped",
+  "seasonal_naive"
+ ],
+ "backtest": {
+  "device_catalogue": {
+   "holt_winters": {
+    "clipped_share": null,
+    "clipped_steps": 0,
+    "forecast_integral_kwh": {
+     "max": 4900.601462638374,
+     "median": 0.0,
+     "p99": 4623.116141214156
+    },
+    "forecast_steps": 0,
+    "integral_mean_error_kwh": -7.43446732497483,
+    "integral_median_relative_error": 0.11658240889713957,
+    "mean_mae_active": 17.826405972728285,
+    "mean_mae_inactive": 4.122028494638952,
+    "onsets": {
+     "detected_within_tolerance": 273,
+     "f1": 0.7489711934156379,
+     "false_alarms": 104,
+     "true": 352
+    },
+    "rows": 1340
+   },
+   "lagged_ridge": {
+    "clipped_share": 0.0014614427860696517,
+    "clipped_steps": 47,
+    "forecast_integral_kwh": {
+     "max": 4945.099345530198,
+     "median": 0.0,
+     "p99": 4415.277140119007
+    },
+    "forecast_steps": 32160,
+    "integral_mean_error_kwh": -3.971577763359655,
+    "integral_median_relative_error": 0.05576966641143558,
+    "mean_mae_active": 14.933071280069912,
+    "mean_mae_inactive": 3.3849300473730595,
+    "onsets": {
+     "detected_within_tolerance": 311,
+     "f1": 0.8077922077922078,
+     "false_alarms": 107,
+     "true": 352
+    },
+    "rows": 1340
+   },
+   "lagged_ridge_unclipped": {
+    "clipped_share": 0.0,
+    "clipped_steps": 0,
+    "forecast_integral_kwh": {
+     "max": 540159220993.3927,
+     "median": 0.0,
+     "p99": 4475.203884278223
+    },
+    "forecast_steps": 32160,
+    "integral_mean_error_kwh": 403103915.474198,
+    "integral_median_relative_error": 0.05576966641143558,
+    "mean_mae_active": 17.533281863032258,
+    "mean_mae_inactive": 17233299.38284599,
+    "onsets": {
+     "detected_within_tolerance": 311,
+     "f1": 0.8077922077922078,
+     "false_alarms": 107,
+     "true": 352
+    },
+    "rows": 1340
+   },
+   "seasonal_naive": {
+    "clipped_share": null,
+    "clipped_steps": 0,
+    "forecast_integral_kwh": {
+     "max": 4758.457324218751,
+     "median": 0.0,
+     "p99": 4440.730078125001
+    },
+    "forecast_steps": 0,
+    "integral_mean_error_kwh": -7.004419746968282,
+    "integral_median_relative_error": 0.11082990879021752,
+    "mean_mae_active": 18.291676568361144,
+    "mean_mae_inactive": 2.0285274382984704,
+    "onsets": {
+     "detected_within_tolerance": 298,
+     "f1": 0.826629680998613,
+     "false_alarms": 71,
+     "true": 352
+    },
+    "rows": 1340
+   }
+  },
+  "fixed_0kw": {
+   "holt_winters": {
+    "clipped_share": null,
+    "clipped_steps": 0,
+    "forecast_integral_kwh": {
+     "max": 4900.601462638374,
+     "median": 0.0,
+     "p99": 4623.116141214156
+    },
+    "forecast_steps": 0,
+    "integral_mean_error_kwh": -7.43446732497483,
+    "integral_median_relative_error": 0.11658240889713957,
+    "mean_mae_active": 16.24005413018365,
+    "mean_mae_inactive": 3.9225570821692295,
+    "onsets": {
+     "detected_within_tolerance": 177,
+     "f1": 0.34071222329162654,
+     "false_alarms": 468,
+     "true": 394
+    },
+    "rows": 1340
+   },
+   "lagged_ridge": {
+    "clipped_share": 0.0014614427860696517,
+    "clipped_steps": 47,
+    "forecast_integral_kwh": {
+     "max": 4945.099345530198,
+     "median": 0.0,
+     "p99": 4415.277140119007
+    },
+    "forecast_steps": 32160,
+    "integral_mean_error_kwh": -3.971577763359655,
+    "integral_median_relative_error": 0.05576966641143558,
+    "mean_mae_active": 13.574973144701067,
+    "mean_mae_inactive": 3.154113198780114,
+    "onsets": {
+     "detected_within_tolerance": 195,
+     "f1": 0.293896006028636,
+     "false_alarms": 738,
+     "true": 394
+    },
+    "rows": 1340
+   },
+   "lagged_ridge_unclipped": {
+    "clipped_share": 0.0,
+    "clipped_steps": 0,
+    "forecast_integral_kwh": {
+     "max": 540159220993.3927,
+     "median": 0.0,
+     "p99": 4475.203884278223
+    },
+    "forecast_steps": 32160,
+    "integral_mean_error_kwh": 403103915.474198,
+    "integral_median_relative_error": 0.05576966641143558,
+    "mean_mae_active": 603.0075326583425,
+    "mean_mae_inactive": 18107339.324800916,
+    "onsets": {
+     "detected_within_tolerance": 195,
+     "f1": 0.2943396226415094,
+     "false_alarms": 736,
+     "true": 394
+    },
+    "rows": 1340
+   },
+   "seasonal_naive": {
+    "clipped_share": null,
+    "clipped_steps": 0,
+    "forecast_integral_kwh": {
+     "max": 4758.457324218751,
+     "median": 0.0,
+     "p99": 4440.730078125001
+    },
+    "forecast_steps": 0,
+    "integral_mean_error_kwh": -7.004419746968282,
+    "integral_median_relative_error": 0.11082990879021752,
+    "mean_mae_active": 16.544621407047558,
+    "mean_mae_inactive": 1.6476326951892897,
+    "onsets": {
+     "detected_within_tolerance": 318,
+     "f1": 0.7803680981595092,
+     "false_alarms": 103,
+     "true": 394
+    },
+    "rows": 1340
+   }
+  },
+  "fixed_1kw": {
+   "holt_winters": {
+    "clipped_share": null,
+    "clipped_steps": 0,
+    "forecast_integral_kwh": {
+     "max": 4900.601462638374,
+     "median": 0.0,
+     "p99": 4623.116141214156
+    },
+    "forecast_steps": 0,
+    "integral_mean_error_kwh": -7.43446732497483,
+    "integral_median_relative_error": 0.11658240889713957,
+    "mean_mae_active": 16.465835330959237,
+    "mean_mae_inactive": 3.9357662717972515,
+    "onsets": {
+     "detected_within_tolerance": 209,
+     "f1": 0.5186104218362283,
+     "false_alarms": 217,
+     "true": 380
+    },
+    "rows": 1340
+   },
+   "lagged_ridge": {
+    "clipped_share": 0.0014614427860696517,
+    "clipped_steps": 47,
+    "forecast_integral_kwh": {
+     "max": 4945.099345530198,
+     "median": 0.0,
+     "p99": 4415.277140119007
+    },
+    "forecast_steps": 32160,
+    "integral_mean_error_kwh": -3.971577763359655,
+    "integral_median_relative_error": 0.05576966641143558,
+    "mean_mae_active": 13.842779983152235,
+    "mean_mae_inactive": 3.180089071067817,
+    "onsets": {
+     "detected_within_tolerance": 208,
+     "f1": 0.41434262948207173,
+     "false_alarms": 416,
+     "true": 380
+    },
+    "rows": 1340
+   },
+   "lagged_ridge_unclipped": {
+    "clipped_share": 0.0,
+    "clipped_steps": 0,
+    "forecast_integral_kwh": {
+     "max": 540159220993.3927,
+     "median": 0.0,
+     "p99": 4475.203884278223
+    },
+    "forecast_steps": 32160,
+    "integral_mean_error_kwh": 403103915.474198,
+    "integral_median_relative_error": 0.05576966641143558,
+    "mean_mae_active": 619.8401889444838,
+    "mean_mae_inactive": 18107339.350776788,
+    "onsets": {
+     "detected_within_tolerance": 208,
+     "f1": 0.4151696606786427,
+     "false_alarms": 414,
+     "true": 380
+    },
+    "rows": 1340
+   },
+   "seasonal_naive": {
+    "clipped_share": null,
+    "clipped_steps": 0,
+    "forecast_integral_kwh": {
+     "max": 4758.457324218751,
+     "median": 0.0,
+     "p99": 4440.730078125001
+    },
+    "forecast_steps": 0,
+    "integral_mean_error_kwh": -7.004419746968282,
+    "integral_median_relative_error": 0.11082990879021752,
+    "mean_mae_active": 16.982246913185154,
+    "mean_mae_inactive": 1.67486107679457,
+    "onsets": {
+     "detected_within_tolerance": 306,
+     "f1": 0.7786259541984732,
+     "false_alarms": 100,
+     "true": 380
+    },
+    "rows": 1340
+   }
+  },
+  "fixed_5kw": {
+   "holt_winters": {
+    "clipped_share": null,
+    "clipped_steps": 0,
+    "forecast_integral_kwh": {
+     "max": 4900.601462638374,
+     "median": 0.0,
+     "p99": 4623.116141214156
+    },
+    "forecast_steps": 0,
+    "integral_mean_error_kwh": -7.43446732497483,
+    "integral_median_relative_error": 0.11658240889713957,
+    "mean_mae_active": 17.355436787175336,
+    "mean_mae_inactive": 3.9939234105054062,
+    "onsets": {
+     "detected_within_tolerance": 221,
+     "f1": 0.6368876080691642,
+     "false_alarms": 123,
+     "true": 350
+    },
+    "rows": 1340
+   },
+   "lagged_ridge": {
+    "clipped_share": 0.0014614427860696517,
+    "clipped_steps": 47,
+    "forecast_integral_kwh": {
+     "max": 4945.099345530198,
+     "median": 0.0,
+     "p99": 4415.277140119007
+    },
+    "forecast_steps": 32160,
+    "integral_mean_error_kwh": -3.971577763359655,
+    "integral_median_relative_error": 0.05576966641143558,
+    "mean_mae_active": 14.627121256628934,
+    "mean_mae_inactive": 3.2418356158330752,
+    "onsets": {
+     "detected_within_tolerance": 241,
+     "f1": 0.6276041666666666,
+     "false_alarms": 177,
+     "true": 350
+    },
+    "rows": 1340
+   },
+   "lagged_ridge_unclipped": {
+    "clipped_share": 0.0,
+    "clipped_steps": 0,
+    "forecast_integral_kwh": {
+     "max": 540159220993.3927,
+     "median": 0.0,
+     "p99": 4475.203884278223
+    },
+    "forecast_steps": 32160,
+    "integral_mean_error_kwh": 403103915.474198,
+    "integral_median_relative_error": 0.05576966641143558,
+    "mean_mae_active": 17.15473712788421,
+    "mean_mae_inactive": 17326165.345975894,
+    "onsets": {
+     "detected_within_tolerance": 241,
+     "f1": 0.6292428198433421,
+     "false_alarms": 175,
+     "true": 350
+    },
+    "rows": 1340
+   },
+   "seasonal_naive": {
+    "clipped_share": null,
+    "clipped_steps": 0,
+    "forecast_integral_kwh": {
+     "max": 4758.457324218751,
+     "median": 0.0,
+     "p99": 4440.730078125001
+    },
+    "forecast_steps": 0,
+    "integral_mean_error_kwh": -7.004419746968282,
+    "integral_median_relative_error": 0.11082990879021752,
+    "mean_mae_active": 18.049258633482253,
+    "mean_mae_inactive": 1.773818701997221,
+    "onsets": {
+     "detected_within_tolerance": 294,
+     "f1": 0.8121546961325967,
+     "false_alarms": 80,
+     "true": 350
+    },
+    "rows": 1340
+   }
+  }
+ },
+ "bank_manifest": "3554941e158285b49828879b0a6880b7c918c4524037452a88449832375f540f",
+ "clip_factor": 5.0,
+ "context": 168,
+ "device_thresholds_kw": {
+  "greenhouse_cooling_kw": [
+   19.44
+  ],
+  "greenhouse_heating_kw": [
+   6.48
+  ]
+ },
+ "gate": {
+  "cases": 393,
+  "cases_used": 270,
+  "skipped": {
+   "no_effect": 0,
+   "short_context": 123,
+   "short_horizon": 0
+  },
+  "summary": {
+   "holt_winters": {
+    "by_factor": {
+     "COLD_WAVE": {
+      "pairs": 49,
+      "sign_agreement": 0.0
+     },
+     "HEAT_WAVE": {
+      "pairs": 37,
+      "sign_agreement": 0.0
+     },
+     "HIGH_RADIATION": {
+      "pairs": 23,
+      "sign_agreement": 0.0
+     },
+     "LOW_RADIATION": {
+      "pairs": 39,
+      "sign_agreement": 0.0
+     }
+    },
+    "clipped_steps": 0,
+    "effect_coverage": 0.8236802539282204,
+    "expressible_pairs": 148,
+    "forecast_steps": 0,
+    "inexpressible_pairs": 0,
+    "integral_median_relative_error": 1.0,
+    "integral_sign_agreement": 0.0,
+    "integral_spearman": null,
+    "intervals_95": {
+     "groups": {
+      "count": 51.0
+     },
+     "integral_median_relative_error": {
+      "high": 1.0,
+      "low": 1.0
+     },
+     "integral_sign_agreement": {
+      "high": 0.0,
+      "low": 0.0
+     },
+     "integral_spearman": {
+      "high": null,
+      "low": null
+     },
+     "median_relative_error": {
+      "high": 1.0,
+      "low": 1.0
+     },
+     "sign_agreement": {
+      "high": 0.0,
+      "low": 0.0
+     },
+     "spearman_peaks": {
+      "high": null,
+      "low": null
+     }
+    },
+    "median_relative_error": 1.0,
+    "pairs": 148,
+    "sign_agreement": 0.0,
+    "spearman_peaks": null
+   },
+   "lagged_ridge": {
+    "by_factor": {
+     "COLD_WAVE": {
+      "pairs": 49,
+      "sign_agreement": 0.673469387755102
+     },
+     "HEAT_WAVE": {
+      "pairs": 37,
+      "sign_agreement": 0.7027027027027027
+     },
+     "HIGH_RADIATION": {
+      "pairs": 23,
+      "sign_agreement": 0.5652173913043478
+     },
+     "LOW_RADIATION": {
+      "pairs": 39,
+      "sign_agreement": 0.5897435897435898
+     }
+    },
+    "clipped_steps": 290,
+    "effect_coverage": 0.8457869274808314,
+    "expressible_pairs": 148,
+    "forecast_steps": 20672,
+    "inexpressible_pairs": 0,
+    "integral_median_relative_error": 0.8637001858326688,
+    "integral_sign_agreement": 0.6824324324324325,
+    "integral_spearman": 0.7946900053964557,
+    "intervals_95": {
+     "groups": {
+      "count": 51.0
+     },
+     "integral_median_relative_error": {
+      "high": 1.0,
+      "low": 0.6535972944509943
+     },
+     "integral_sign_agreement": {
+      "high": 0.7692307692307693,
+      "low": 0.5935483870967742
+     },
+     "integral_spearman": {
+      "high": 0.8867199781469343,
+      "low": 0.6545807494258514
+     },
+     "median_relative_error": {
+      "high": 0.9717013929374072,
+      "low": 0.5649763069630718
+     },
+     "sign_agreement": {
+      "high": 0.7309941520467836,
+      "low": 0.5488721804511278
+     },
+     "spearman_peaks": {
+      "high": 0.7583499513710052,
+      "low": 0.48002504392324113
+     }
+    },
+    "median_relative_error": 0.8640475380951771,
+    "pairs": 148,
+    "sign_agreement": 0.6418918918918919,
+    "spearman_peaks": 0.6305764088739249
+   },
+   "lagged_ridge_unclipped": {
+    "by_factor": {
+     "COLD_WAVE": {
+      "pairs": 49,
+      "sign_agreement": 0.673469387755102
+     },
+     "HEAT_WAVE": {
+      "pairs": 37,
+      "sign_agreement": 0.7027027027027027
+     },
+     "HIGH_RADIATION": {
+      "pairs": 23,
+      "sign_agreement": 0.5652173913043478
+     },
+     "LOW_RADIATION": {
+      "pairs": 39,
+      "sign_agreement": 0.5897435897435898
+     }
+    },
+    "clipped_steps": 0,
+    "effect_coverage": 0.8338771693620568,
+    "expressible_pairs": 148,
+    "forecast_steps": 20672,
+    "inexpressible_pairs": 0,
+    "integral_median_relative_error": 0.886977225457459,
+    "integral_sign_agreement": 0.6756756756756757,
+    "integral_spearman": 0.7615279064045671,
+    "intervals_95": {
+     "groups": {
+      "count": 51.0
+     },
+     "integral_median_relative_error": {
+      "high": 1.0,
+      "low": 0.6572653314568752
+     },
+     "integral_sign_agreement": {
+      "high": 0.7659574468085106,
+      "low": 0.5818181818181818
+     },
+     "integral_spearman": {
+      "high": 0.8649966612323792,
+      "low": 0.6078921369211441
+     },
+     "median_relative_error": {
+      "high": 0.9717013929374072,
+      "low": 0.5649763069630718
+     },
+     "sign_agreement": {
+      "high": 0.7309941520467836,
+      "low": 0.5488721804511278
+     },
+     "spearman_peaks": {
+      "high": 0.743467671061799,
+      "low": 0.4174892704283201
+     }
+    },
+    "median_relative_error": 0.8640475380951771,
+    "pairs": 148,
+    "sign_agreement": 0.6418918918918919,
+    "spearman_peaks": 0.59220046372815
+   },
+   "seasonal_naive": {
+    "by_factor": {
+     "COLD_WAVE": {
+      "pairs": 49,
+      "sign_agreement": 0.0
+     },
+     "HEAT_WAVE": {
+      "pairs": 37,
+      "sign_agreement": 0.0
+     },
+     "HIGH_RADIATION": {
+      "pairs": 23,
+      "sign_agreement": 0.0
+     },
+     "LOW_RADIATION": {
+      "pairs": 39,
+      "sign_agreement": 0.0
+     }
+    },
+    "clipped_steps": 0,
+    "effect_coverage": 0.7645628218210568,
+    "expressible_pairs": 148,
+    "forecast_steps": 0,
+    "inexpressible_pairs": 0,
+    "integral_median_relative_error": 1.0,
+    "integral_sign_agreement": 0.0,
+    "integral_spearman": null,
+    "intervals_95": {
+     "groups": {
+      "count": 51.0
+     },
+     "integral_median_relative_error": {
+      "high": 1.0,
+      "low": 1.0
+     },
+     "integral_sign_agreement": {
+      "high": 0.0,
+      "low": 0.0
+     },
+     "integral_spearman": {
+      "high": null,
+      "low": null
+     },
+     "median_relative_error": {
+      "high": 1.0,
+      "low": 1.0
+     },
+     "sign_agreement": {
+      "high": 0.0,
+      "low": 0.0
+     },
+     "spearman_peaks": {
+      "high": null,
+      "low": null
+     }
+    },
+    "median_relative_error": 1.0,
+    "pairs": 148,
+    "sign_agreement": 0.0,
+    "spearman_peaks": null
+   }
+  }
+ },
+ "gate_rule": {
+  "sign_agreement_min": 0.8,
+  "spearman_peaks_min": 0.6
+ },
+ "horizon": 96,
+ "net_isolation": {
+  "clipped_share": 0.014028637770897833,
+  "clipped_steps": 290,
+  "difference": {
+   "effect_coverage": 0.011909758118774594,
+   "integral_median_relative_error": -0.02327703962479022,
+   "integral_sign_agreement": 0.006756756756756799,
+   "integral_spearman": 0.0331620989918886,
+   "median_relative_error": 0.0,
+   "sign_agreement": 0.0,
+   "spearman_peaks": 0.038375945145774804
+  },
+  "forecast_steps": 20672,
+  "gate_verdict_with_net": false,
+  "gate_verdict_without_net": false,
+  "primary_median_unchanged": false,
+  "verdict_unchanged": true,
+  "with_net": {
+   "effect_coverage": 0.8457869274808314,
+   "integral_median_relative_error": 0.8637001858326688,
+   "integral_sign_agreement": 0.6824324324324325,
+   "integral_spearman": 0.7946900053964557,
+   "median_relative_error": 0.8640475380951771,
+   "sign_agreement": 0.6418918918918919,
+   "spearman_peaks": 0.6305764088739249
+  },
+  "without_net": {
+   "effect_coverage": 0.8338771693620568,
+   "integral_median_relative_error": 0.886977225457459,
+   "integral_sign_agreement": 0.6756756756756757,
+   "integral_spearman": 0.7615279064045671,
+   "median_relative_error": 0.8640475380951771,
+   "sign_agreement": 0.6418918918918919,
+   "spearman_peaks": 0.59220046372815
+  }
+ },
+ "partition": "dev",
+ "report_hash": "f318f57804d9dcd5c99f84138a728976f03d47bad70e067ffb0ca609081d4c30",
+ "scenarios": 134,
+ "statement": "exploratory analysis of the development partition; synthetic data; truth of the simulated twin; the net is a safety measure, not a model improvement; no quality claim",
+ "status": "PASS",
+ "threshold_basis": {
+  "greenhouse_cooling_kw": {
+   "basis": "PROVISIONAL design convention (not a sourced value): the device counts as ON above 5 % of its rated thermal power, an engineering property of the installation and not a tuning knob",
+   "fraction": 0.05,
+   "nominal_from": "cooling_capacity_kw"
+  },
+  "greenhouse_heating_kw": {
+   "basis": "PROVISIONAL design convention (not a sourced value): the device counts as ON above 5 % of its rated thermal power, an engineering property of the installation and not a tuning knob",
+   "fraction": 0.05,
+   "nominal_from": "heating_capacity_kw"
+  }
+ },
+ "time_scale": {
+  "cycle_minutes": 1440.0,
+  "event_minutes": 360.0,
+  "onset_tolerance_minutes": 120.0,
+  "sampling_minutes": 60.0
+ }
+}
