@@ -169,3 +169,15 @@ def test_controller_outputs_are_never_a_plan_when_the_controller_is_on():
     frame_off = source.frame(ScenarioDescriptor(off, 1, 480, 120, sim.scenario_options(off, 1)))
     assert all(frame_off.catalogue.variables[n].role == "decision_covariate" for n in decisions if n in frame_off.series)
     assert intervention_plan_variables(Intervention("IRRIGATION", 10, 5, 2.0)) == ("irrigation_mm",) and intervention_plan_variables(Intervention("COLD_WAVE", 10, 5, 5.0)) == ()
+
+
+def test_the_on_threshold_of_a_device_is_a_fraction_of_the_rated_power_of_the_scenarios_equipment():
+    sim = TwinSimulator()
+    on = {"crop": "tomato", "environment": "greenhouse", "control": "on"}
+    off = {"crop": "tomato", "environment": "greenhouse", "control": "off"}
+    scenario_on = ScenarioDescriptor(on, 1, 480, 120, sim.scenario_options(on, 1))
+    equipment = scenario_on.options["control"]["equipment"]
+    thresholds = sim.catalogue_for(scenario_on).activation_thresholds()
+    assert thresholds == {"greenhouse_heating_kw": pytest.approx(0.05 * equipment["heating_capacity_kw"]), "greenhouse_cooling_kw": pytest.approx(0.05 * equipment["cooling_capacity_kw"])}
+    assert sim.catalogue_for(ScenarioDescriptor(off, 1, 480, 120, sim.scenario_options(off, 1))).activation_thresholds() == {}  # no controller, no device, no threshold
+    assert sim.catalogue().activation_thresholds() == {}  # a fraction alone (no installation) is not a threshold

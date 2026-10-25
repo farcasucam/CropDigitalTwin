@@ -65,8 +65,14 @@ class TwinSimulator:
     # -- the port ---------------------------------------------------------------------------------------------------------------------------------
     def catalogue(self) -> VariableCatalogue:
         """Roles of every variable the twin can produce (variables the twin does not represent are not part of its world)."""
-        variables = {name: VariableSpec(self._units[name][0], entry["role"], entry["why"]) for name, entry in self._roles["variables"].items() if self._units.get(name, ("", "NONE"))[1] != "NONE"}
+        variables = {name: VariableSpec(self._units[name][0], entry["role"], entry["why"], entry.get("activation", {}).get("fraction")) for name, entry in self._roles["variables"].items() if self._units.get(name, ("", "NONE"))[1] != "NONE"}
         return VariableCatalogue(variables, tuple(self._roles["default_targets"]))
+
+    def catalogue_for(self, scenario: ScenarioDescriptor) -> VariableCatalogue:
+        """The catalogue with the rated power of the scenario's installation: a device's ON threshold is a fraction of the equipment the scenario runs with (none without the controller: no device, no threshold)."""
+        equipment = (scenario.options.get("control") or {}).get("equipment", {})
+        nominal = {name: float(equipment[entry["activation"]["nominal_from"]]) for name, entry in self._roles["variables"].items() if "activation" in entry and name in self.catalogue().variables and entry["activation"]["nominal_from"] in equipment}
+        return self.catalogue().with_nominal(nominal)
 
     def factors(self) -> Mapping[str, FactorSpec]:
         cfg, probes = self._design["factors"], self._design["probes"]

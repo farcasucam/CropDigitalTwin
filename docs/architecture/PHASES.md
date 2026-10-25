@@ -96,3 +96,4 @@ Primero:
 6. UI.
 
 El frontend consume contratos existentes.
+| 6.3d | Ridge safety net and device-declared ON threshold | Ridge bounded to 5x the context range with `clipped_steps` (acted in 1.4 % of gate steps; verdict unchanged with/without); ON threshold = 5 % of rated power from `VariableCatalogue` (provisional convention); fixed 0/1/5 kW sweep kept as robustness report; exploratory, no quality claim |
