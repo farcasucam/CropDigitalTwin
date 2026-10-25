@@ -27,10 +27,15 @@ from agri_twin.infrastructure.energyplus_timeline import (
 )
 from agri_twin.infrastructure.energyplus_lockstep import LockstepMicroclimateEngine, LockstepSession
 from agri_twin.infrastructure.epw_weather import EpwLocation
-from agri_twin.infrastructure.greenhouse_idf import ThermalSpec
+from agri_twin.infrastructure.greenhouse_idf import EnvelopeSpec, ThermalSpec
 
 BACKENDS = ("SIMPLIFIED", "ENERGYPLUS")
-BACKEND_FIELDS = ("backend", "layout", "hvac", "crop_exchange")
+BACKEND_FIELDS = ("backend", "layout", "hvac", "crop_exchange", "parameters")
+# Values of the lumped model that a variant of the simplified greenhouse may override (name -> (spec, field)). Every one is a PROVISIONAL_DEFAULT of the envelope/thermal spec, so a variant is a
+# deliberate departure from a placeholder, never a sourced value; the EnergyPlus backend always uses the nominal values.
+PARAMETER_FIELDS = {"cover_u_w_m2k": ("envelope", "cover_u_w_m2k"), "cover_shgc": ("envelope", "cover_shgc"), "cover_area_fraction": ("envelope", "cover_area_fraction"),
+                    "infiltration_ach": ("thermal", "infiltration_ach"), "max_ventilation_ach": ("thermal", "max_ventilation_ach"), "vent_open_above_c": ("thermal", "vent_open_above_c"),
+                    "heating_setpoint_c": ("thermal", "heating_setpoint_c"), "heater_capacity_w_m2": ("thermal", "heater_capacity_w_m2"), "ground_temperature_c": ("thermal", "ground_temperature_c")}
 HVAC_FIELDS = ("cooling_setpoint_c", "cooling_capacity_w_m2")
 LAYOUT_FIELDS = ("typology", "span_m", "n_spans", "n_bays", "gutter_height_m", "ridge_rise_m", "pillar_spacing_m")
 DEFAULT_TYPOLOGY = GreenhouseTypology.MULTITUNEL_CAPILLA.value
@@ -50,26 +55,56 @@ class GreenhouseBackendError(ValueError):
 class GreenhouseBackendRequest:
     """Canonical backend selection. Only non-default (ENERGYPLUS) selections exist as objects; SIMPLIFIED is represented by None."""
 
-    __slots__ = ("backend", "layout", "hvac", "crop_exchange")
+    __slots__ = ("backend", "layout", "hvac", "crop_exchange", "parameters")
 
-    def __init__(self, backend: str, layout: tuple[tuple[str, Any], ...], hvac: tuple[tuple[str, float], ...] = (), crop_exchange: bool = False) -> None:
-        self.backend, self.layout, self.hvac, self.crop_exchange = backend, layout, hvac, crop_exchange
+    def __init__(self, backend: str, layout: tuple[tuple[str, Any], ...], hvac: tuple[tuple[str, float], ...] = (), crop_exchange: bool = False, parameters: tuple[tuple[str, float], ...] = ()) -> None:
+        self.backend, self.layout, self.hvac, self.crop_exchange, self.parameters = backend, layout, hvac, crop_exchange, parameters
 
     def to_dict(self) -> dict[str, Any]:
-        return {"backend": self.backend, "layout": dict(self.layout), **({"hvac": dict(self.hvac)} if self.hvac else {}), **({"crop_exchange": True} if self.crop_exchange else {})}  # no entry when absent: earlier requests keep their hashes
+        return {"backend": self.backend, "layout": dict(self.layout), **({"hvac": dict(self.hvac)} if self.hvac else {}), **({"crop_exchange": True} if self.crop_exchange else {}), **({"parameters": dict(self.parameters)} if self.parameters else {})}  # no entry when absent: earlier requests keep their hashes
 
     def __eq__(self, other: object) -> bool:
-        return isinstance(other, GreenhouseBackendRequest) and (self.backend, self.layout, self.hvac, self.crop_exchange) == (other.backend, other.layout, other.hvac, other.crop_exchange)
+        return isinstance(other, GreenhouseBackendRequest) and (self.backend, self.layout, self.hvac, self.crop_exchange, self.parameters) == (other.backend, other.layout, other.hvac, other.crop_exchange, other.parameters)
 
     def __hash__(self) -> int:
-        return hash((self.backend, self.layout, self.hvac, self.crop_exchange))
+        return hash((self.backend, self.layout, self.hvac, self.crop_exchange, self.parameters))
 
 
-def _simplified_request(layout: Any, crop_exchange: bool = False) -> GreenhouseBackendRequest:
+def _parameter_fields(parameters: Any) -> tuple[tuple[str, float], ...]:
+    """Optional overrides of the lumped model's placeholder values (a working-twin variant). Names are fixed, values finite and positive; nothing is assumed for a name that is absent."""
+    if parameters is None:
+        return ()
+    if not isinstance(parameters, Mapping):
+        raise GreenhouseBackendError("greenhouse.parameters must be a mapping", "greenhouse.parameters", "INVALID_REQUEST")
+    unknown = sorted(set(parameters) - set(PARAMETER_FIELDS))
+    if unknown:
+        raise GreenhouseBackendError(f"unknown parameters: {', '.join(unknown)}; allowed: {', '.join(PARAMETER_FIELDS)}", f"greenhouse.parameters.{unknown[0]}", "INVALID_REQUEST")
+    values: dict[str, float] = {}
+    for name, value in parameters.items():
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or value != value or abs(value) == float("inf") or value <= 0:
+            raise GreenhouseBackendError(f"{name} must be a finite positive number", f"greenhouse.parameters.{name}", "INVALID_REQUEST")
+        if name in ("cover_shgc", "cover_area_fraction") and value > 1.0:
+            raise GreenhouseBackendError(f"{name} is a fraction and cannot exceed 1", f"greenhouse.parameters.{name}", "INVALID_REQUEST")
+        values[name] = float(value)
+    return tuple(sorted(values.items()))
+
+
+def _parameter_specs(parameters: tuple[tuple[str, float], ...]) -> tuple[EnvelopeSpec | None, ThermalSpec | None]:
+    """The envelope and thermal specs with the overrides applied (marked USER_SUPPLIED: a variant, not a source); ``(None, None)`` without overrides, so the nominal path is untouched."""
+    if not parameters:
+        return None, None
+    changes: dict[str, dict[str, Sourced]] = {"envelope": {}, "thermal": {}}
+    for name, value in parameters:
+        spec, field = PARAMETER_FIELDS[name]
+        changes[spec][field] = Sourced(value, EvidenceStatus.USER_SUPPLIED, f"working-twin variant of {name}")
+    return replace(EnvelopeSpec(), **changes["envelope"]), replace(ThermalSpec(), **changes["thermal"])
+
+
+def _simplified_request(layout: Any, crop_exchange: bool = False, parameters: tuple[tuple[str, float], ...] = ()) -> GreenhouseBackendRequest:
     """The simplified backend is a lumped model of the SAME greenhouse the EnergyPlus backend simulates, so it carries a layout too (default typology when omitted)."""
     fields = _layout_fields(layout)
     _spec(fields)
-    return GreenhouseBackendRequest("SIMPLIFIED", tuple(sorted(fields.items())), crop_exchange=crop_exchange)
+    return GreenhouseBackendRequest("SIMPLIFIED", tuple(sorted(fields.items())), crop_exchange=crop_exchange, parameters=parameters)
 
 
 def parse_greenhouse_backend(document: Any, environment: str, runtime_event_types: tuple[str, ...] = ()) -> GreenhouseBackendRequest | None:
@@ -91,14 +126,19 @@ def parse_greenhouse_backend(document: Any, environment: str, runtime_event_type
     if crop_exchange and (backend != "SIMPLIFIED" or environment != "greenhouse"):
         raise GreenhouseBackendError("crop_exchange (transpiration, latent and sensible heat, CO2 uptake) is modelled by the simplified greenhouse only; EnergyPlus runs as a precomputed timeline without the crop",
                                      "greenhouse.crop_exchange", "UNSUPPORTED_ENVIRONMENT")
+    parameters = _parameter_fields(document.get("parameters"))
+    if parameters and backend != "SIMPLIFIED":
+        raise GreenhouseBackendError("greenhouse.parameters varies the lumped model of the simplified greenhouse (a working-twin variant); EnergyPlus always runs the nominal values", "greenhouse.parameters", "UNSUPPORTED_ENVIRONMENT")
     if hvac and backend != "ENERGYPLUS":
         raise GreenhouseBackendError("greenhouse.hvac configures the EnergyPlus ideal-loads cooling; the simplified model is cooled by the climate controller's equipment", "greenhouse.hvac", "UNSUPPORTED_ENVIRONMENT")
     if backend == "SIMPLIFIED":
         if environment != "greenhouse":
+            if parameters:
+                raise GreenhouseBackendError("parameters need the greenhouse environment (open-field runs have no greenhouse)", "greenhouse.parameters", "UNSUPPORTED_ENVIRONMENT")
             if layout is not None:
                 raise GreenhouseBackendError("a layout needs the greenhouse environment (open-field runs have no greenhouse)", "greenhouse.layout", "UNSUPPORTED_ENVIRONMENT")
             return None
-        return _simplified_request(layout, crop_exchange)
+        return _simplified_request(layout, crop_exchange, parameters)
     if environment != "greenhouse":
         raise GreenhouseBackendError("the ENERGYPLUS backend needs the greenhouse environment (open-field runs never use EnergyPlus)", "greenhouse.backend", "UNSUPPORTED_ENVIRONMENT")
     spec_fields = _layout_fields(layout)
@@ -189,7 +229,9 @@ def simplified_configuration(request: GreenhouseBackendRequest):
     """(lumped configuration, description) of the greenhouse of this request: derived from the same geometry and envelope as the EnergyPlus model."""
     from agri_twin.application.consistent_greenhouse import reduced_configuration
 
-    return reduced_configuration(layout_spec(request))
+    envelope, thermal = _parameter_specs(request.parameters)
+    configuration, description = reduced_configuration(layout_spec(request), envelope, thermal)
+    return configuration, ({**description, "parameter_overrides": dict(request.parameters)} if request.parameters else description)
 
 
 def describe(request: GreenhouseBackendRequest, lockstep: bool = False) -> dict[str, Any]:

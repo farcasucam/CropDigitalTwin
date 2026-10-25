@@ -1,0 +1,9 @@
+{
+  "status": "PROVISIONAL design conventions (decision D19). No sourced uncertainty range exists for the greenhouse thermal parameters: all of them are PROVISIONAL_DEFAULT values of the envelope/thermal spec and the parameter audit lists them with 'uncertainty: none'. The relative widths below are therefore declared choices that define levels of mismatch, NOT scientific uncertainty, and a variant is never presented as a plausible greenhouse.",
+  "parameters": ["cover_u_w_m2k", "cover_shgc", "cover_area_fraction", "infiltration_ach", "max_ventilation_ach"],
+  "not_varied": {"heating_setpoint_c": "a design decision of the controller, not an uncertain property", "heater_capacity_w_m2": "equipment, set by the scenario", "ground_temperature_c": "a Celsius value: a relative width has no meaning", "vent_open_above_c": "a controller setting"},
+  "levels": {"0": 0.0, "small": 0.1, "large": 0.3},
+  "variants_per_level": 7,
+  "seed": 20261025,
+  "fractions_capped_at_one": ["cover_shgc", "cover_area_fraction"]
+}

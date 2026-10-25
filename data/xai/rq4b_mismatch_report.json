@@ -1,0 +1,627 @@
+{
+ "cases": [
+  {
+   "factor": "COLD_WAVE",
+   "levels": {
+    "0": {
+     "energy_kwh": {
+      "max": 693.12744140625,
+      "median": 693.12744140625,
+      "min": 693.12744140625
+     },
+     "evidence_key": "effect:too_few_variants",
+     "evidence_level": "MODEL_ESTIMATED",
+     "median_direction_correct": true,
+     "peak_direction_correct": 1,
+     "ratio_median_over_truth": 1.896768188410503,
+     "support": [
+      1,
+      1
+     ],
+     "truth_inside_range": false,
+     "variant_direction_correct": 1,
+     "variants": 1
+    },
+    "large": {
+     "energy_kwh": {
+      "max": 852.0662109374999,
+      "median": 705.07177734375,
+      "min": 533.13662109375
+     },
+     "evidence_key": "effect:confirmed",
+     "evidence_level": "TWIN_CONFIRMED",
+     "median_direction_correct": true,
+     "peak_direction_correct": 7,
+     "ratio_median_over_truth": 1.9294542935688468,
+     "support": [
+      7,
+      7
+     ],
+     "truth_inside_range": false,
+     "variant_direction_correct": 7,
+     "variants": 7
+    },
+    "small": {
+     "energy_kwh": {
+      "max": 770.97919921875,
+      "median": 699.6137695312499,
+      "min": 641.7193359375
+     },
+     "evidence_key": "effect:confirmed",
+     "evidence_level": "TWIN_CONFIRMED",
+     "median_direction_correct": true,
+     "peak_direction_correct": 7,
+     "ratio_median_over_truth": 1.9145182587613914,
+     "support": [
+      7,
+      7
+     ],
+     "truth_inside_range": false,
+     "variant_direction_correct": 7,
+     "variants": 7
+    }
+   },
+   "season": 0,
+   "target": "greenhouse_heating_kw",
+   "truth_energy_kwh": 365.42548828124995,
+   "truth_peak_c": -5.380023287112502
+  },
+  {
+   "factor": "HEAT_WAVE",
+   "levels": {
+    "0": {
+     "energy_kwh": {
+      "max": 310.46572265625,
+      "median": 310.46572265625,
+      "min": 310.46572265625
+     },
+     "evidence_key": "effect:too_few_variants",
+     "evidence_level": "MODEL_ESTIMATED",
+     "median_direction_correct": true,
+     "peak_direction_correct": 0,
+     "ratio_median_over_truth": 1.2972731779871096,
+     "support": [
+      1,
+      1
+     ],
+     "truth_inside_range": false,
+     "variant_direction_correct": 1,
+     "variants": 1
+    },
+    "large": {
+     "energy_kwh": {
+      "max": 365.2119140625,
+      "median": 297.15292968750003,
+      "min": 232.8908203125
+     },
+     "evidence_key": "effect:confirmed",
+     "evidence_level": "TWIN_CONFIRMED",
+     "median_direction_correct": true,
+     "peak_direction_correct": 0,
+     "ratio_median_over_truth": 1.2416460089241448,
+     "support": [
+      7,
+      7
+     ],
+     "truth_inside_range": true,
+     "variant_direction_correct": 7,
+     "variants": 7
+    },
+    "small": {
+     "energy_kwh": {
+      "max": 359.8013671875,
+      "median": 307.23837890625003,
+      "min": 265.61513671875
+     },
+     "evidence_key": "effect:confirmed",
+     "evidence_level": "TWIN_CONFIRMED",
+     "median_direction_correct": true,
+     "peak_direction_correct": 0,
+     "ratio_median_over_truth": 1.283787803668815,
+     "support": [
+      7,
+      7
+     ],
+     "truth_inside_range": false,
+     "variant_direction_correct": 7,
+     "variants": 7
+    }
+   },
+   "season": 0,
+   "target": "greenhouse_cooling_kw",
+   "truth_energy_kwh": 239.32177734375003,
+   "truth_peak_c": -5.3114906207769685
+  },
+  {
+   "factor": "COLD_WAVE",
+   "levels": {
+    "0": {
+     "energy_kwh": {
+      "max": 693.71279296875,
+      "median": 693.71279296875,
+      "min": 693.71279296875
+     },
+     "evidence_key": "effect:too_few_variants",
+     "evidence_level": "MODEL_ESTIMATED",
+     "median_direction_correct": true,
+     "peak_direction_correct": 1,
+     "ratio_median_over_truth": 1.8912466843501328,
+     "support": [
+      1,
+      1
+     ],
+     "truth_inside_range": false,
+     "variant_direction_correct": 1,
+     "variants": 1
+    },
+    "large": {
+     "energy_kwh": {
+      "max": 842.494921875,
+      "median": 710.95693359375,
+      "min": 531.7681640625
+     },
+     "evidence_key": "effect:confirmed",
+     "evidence_level": "TWIN_CONFIRMED",
+     "median_direction_correct": true,
+     "peak_direction_correct": 7,
+     "ratio_median_over_truth": 1.938258825559078,
+     "support": [
+      7,
+      7
+     ],
+     "truth_inside_range": false,
+     "variant_direction_correct": 7,
+     "variants": 7
+    },
+    "small": {
+     "energy_kwh": {
+      "max": 783.8015624999999,
+      "median": 701.314453125,
+      "min": 642.0515624999999
+     },
+     "evidence_key": "effect:confirmed",
+     "evidence_level": "TWIN_CONFIRMED",
+     "median_direction_correct": true,
+     "peak_direction_correct": 7,
+     "ratio_median_over_truth": 1.9119708438463696,
+     "support": [
+      7,
+      7
+     ],
+     "truth_inside_range": false,
+     "variant_direction_correct": 7,
+     "variants": 7
+    }
+   },
+   "season": 1,
+   "target": "greenhouse_heating_kw",
+   "truth_energy_kwh": 366.80185546875,
+   "truth_peak_c": -5.45426876602696
+  },
+  {
+   "factor": "HEAT_WAVE",
+   "levels": {
+    "0": {
+     "energy_kwh": {
+      "max": 292.02714843750005,
+      "median": 292.02714843750005,
+      "min": 292.02714843750005
+     },
+     "evidence_key": "effect:too_few_variants",
+     "evidence_level": "MODEL_ESTIMATED",
+     "median_direction_correct": true,
+     "peak_direction_correct": 0,
+     "ratio_median_over_truth": 1.9699055546662396,
+     "support": [
+      1,
+      1
+     ],
+     "truth_inside_range": false,
+     "variant_direction_correct": 1,
+     "variants": 1
+    },
+    "large": {
+     "energy_kwh": {
+      "max": 349.71591796875003,
+      "median": 276.887109375,
+      "min": 223.56474609375002
+     },
+     "evidence_key": "effect:confirmed",
+     "evidence_level": "TWIN_CONFIRMED",
+     "median_direction_correct": true,
+     "peak_direction_correct": 0,
+     "ratio_median_over_truth": 1.8677765327357128,
+     "support": [
+      7,
+      7
+     ],
+     "truth_inside_range": false,
+     "variant_direction_correct": 7,
+     "variants": 7
+    },
+    "small": {
+     "energy_kwh": {
+      "max": 345.041015625,
+      "median": 288.44384765625,
+      "min": 250.64121093750003
+     },
+     "evidence_key": "effect:confirmed",
+     "evidence_level": "TWIN_CONFIRMED",
+     "median_direction_correct": true,
+     "peak_direction_correct": 0,
+     "ratio_median_over_truth": 1.9457339522971022,
+     "support": [
+      7,
+      7
+     ],
+     "truth_inside_range": false,
+     "variant_direction_correct": 7,
+     "variants": 7
+    }
+   },
+   "season": 1,
+   "target": "greenhouse_cooling_kw",
+   "truth_energy_kwh": 148.24423828125003,
+   "truth_peak_c": -5.2919414341145945
+  },
+  {
+   "factor": "COLD_WAVE",
+   "levels": {
+    "0": {
+     "energy_kwh": {
+      "max": 622.58466796875,
+      "median": 622.58466796875,
+      "min": 622.58466796875
+     },
+     "evidence_key": "effect:too_few_variants",
+     "evidence_level": "MODEL_ESTIMATED",
+     "median_direction_correct": true,
+     "peak_direction_correct": 1,
+     "ratio_median_over_truth": 1.826657073895284,
+     "support": [
+      1,
+      1
+     ],
+     "truth_inside_range": false,
+     "variant_direction_correct": 1,
+     "variants": 1
+    },
+    "large": {
+     "energy_kwh": {
+      "max": 809.2564453125,
+      "median": 634.5527343749999,
+      "min": 476.91123046875003
+     },
+     "evidence_key": "effect:confirmed",
+     "evidence_level": "TWIN_CONFIRMED",
+     "median_direction_correct": true,
+     "peak_direction_correct": 7,
+     "ratio_median_over_truth": 1.8617712588191606,
+     "support": [
+      7,
+      7
+     ],
+     "truth_inside_range": false,
+     "variant_direction_correct": 7,
+     "variants": 7
+    },
+    "small": {
+     "energy_kwh": {
+      "max": 694.59873046875,
+      "median": 628.6833984374999,
+      "min": 575.8040039062499
+     },
+     "evidence_key": "effect:confirmed",
+     "evidence_level": "TWIN_CONFIRMED",
+     "median_direction_correct": true,
+     "peak_direction_correct": 7,
+     "ratio_median_over_truth": 1.8445506869662085,
+     "support": [
+      7,
+      7
+     ],
+     "truth_inside_range": false,
+     "variant_direction_correct": 7,
+     "variants": 7
+    }
+   },
+   "season": 2,
+   "target": "greenhouse_heating_kw",
+   "truth_energy_kwh": 340.8328125,
+   "truth_peak_c": -5.449480278459152
+  },
+  {
+   "factor": "HEAT_WAVE",
+   "levels": {
+    "0": {
+     "energy_kwh": {
+      "max": 531.0404296875,
+      "median": 531.0404296875,
+      "min": 531.0404296875
+     },
+     "evidence_key": "effect:too_few_variants",
+     "evidence_level": "MODEL_ESTIMATED",
+     "median_direction_correct": true,
+     "peak_direction_correct": 0,
+     "ratio_median_over_truth": 1.553919866675925,
+     "support": [
+      1,
+      1
+     ],
+     "truth_inside_range": false,
+     "variant_direction_correct": 1,
+     "variants": 1
+    },
+    "large": {
+     "energy_kwh": {
+      "max": 626.17587890625,
+      "median": 518.43955078125,
+      "min": 415.25947265625
+     },
+     "evidence_key": "effect:confirmed",
+     "evidence_level": "TWIN_CONFIRMED",
+     "median_direction_correct": true,
+     "peak_direction_correct": 0,
+     "ratio_median_over_truth": 1.5170474272619954,
+     "support": [
+      7,
+      7
+     ],
+     "truth_inside_range": false,
+     "variant_direction_correct": 7,
+     "variants": 7
+    },
+    "small": {
+     "energy_kwh": {
+      "max": 612.12744140625,
+      "median": 526.3180664062501,
+      "min": 474.53818359375003
+     },
+     "evidence_key": "effect:confirmed",
+     "evidence_level": "TWIN_CONFIRMED",
+     "median_direction_correct": true,
+     "peak_direction_correct": 0,
+     "ratio_median_over_truth": 1.5401013818484828,
+     "support": [
+      7,
+      7
+     ],
+     "truth_inside_range": false,
+     "variant_direction_correct": 7,
+     "variants": 7
+    }
+   },
+   "season": 2,
+   "target": "greenhouse_cooling_kw",
+   "truth_energy_kwh": 341.74248046875005,
+   "truth_peak_c": -5.281575659069841
+  },
+  {
+   "factor": "COLD_WAVE",
+   "levels": {
+    "0": {
+     "energy_kwh": {
+      "max": 614.8406249999999,
+      "median": 614.8406249999999,
+      "min": 614.8406249999999
+     },
+     "evidence_key": "effect:too_few_variants",
+     "evidence_level": "MODEL_ESTIMATED",
+     "median_direction_correct": true,
+     "peak_direction_correct": 1,
+     "ratio_median_over_truth": 1.819177569218527,
+     "support": [
+      1,
+      1
+     ],
+     "truth_inside_range": false,
+     "variant_direction_correct": 1,
+     "variants": 1
+    },
+    "large": {
+     "energy_kwh": {
+      "max": 800.1755859374999,
+      "median": 626.22333984375,
+      "min": 473.30419921875
+     },
+     "evidence_key": "effect:confirmed",
+     "evidence_level": "TWIN_CONFIRMED",
+     "median_direction_correct": true,
+     "peak_direction_correct": 7,
+     "ratio_median_over_truth": 1.8528565075947294,
+     "support": [
+      7,
+      7
+     ],
+     "truth_inside_range": false,
+     "variant_direction_correct": 7,
+     "variants": 7
+    },
+    "small": {
+     "energy_kwh": {
+      "max": 687.87509765625,
+      "median": 620.7495117187499,
+      "min": 568.68486328125
+     },
+     "evidence_key": "effect:confirmed",
+     "evidence_level": "TWIN_CONFIRMED",
+     "median_direction_correct": true,
+     "peak_direction_correct": 7,
+     "ratio_median_over_truth": 1.8366606595361246,
+     "support": [
+      7,
+      7
+     ],
+     "truth_inside_range": false,
+     "variant_direction_correct": 7,
+     "variants": 7
+    }
+   },
+   "season": 3,
+   "target": "greenhouse_heating_kw",
+   "truth_energy_kwh": 337.97724609374995,
+   "truth_peak_c": -5.467287893531264
+  },
+  {
+   "factor": "HEAT_WAVE",
+   "levels": {
+    "0": {
+     "energy_kwh": {
+      "max": 532.29814453125,
+      "median": 532.29814453125,
+      "min": 532.29814453125
+     },
+     "evidence_key": "effect:too_few_variants",
+     "evidence_level": "MODEL_ESTIMATED",
+     "median_direction_correct": true,
+     "peak_direction_correct": 0,
+     "ratio_median_over_truth": 1.938720829732066,
+     "support": [
+      1,
+      1
+     ],
+     "truth_inside_range": false,
+     "variant_direction_correct": 1,
+     "variants": 1
+    },
+    "large": {
+     "energy_kwh": {
+      "max": 627.07763671875,
+      "median": 520.24306640625,
+      "min": 416.11376953125
+     },
+     "evidence_key": "effect:confirmed",
+     "evidence_level": "TWIN_CONFIRMED",
+     "median_direction_correct": true,
+     "peak_direction_correct": 0,
+     "ratio_median_over_truth": 1.8948141745894556,
+     "support": [
+      7,
+      7
+     ],
+     "truth_inside_range": false,
+     "variant_direction_correct": 7,
+     "variants": 7
+    },
+    "small": {
+     "energy_kwh": {
+      "max": 611.771484375,
+      "median": 527.8130859375001,
+      "min": 478.0028320312501
+     },
+     "evidence_key": "effect:confirmed",
+     "evidence_level": "TWIN_CONFIRMED",
+     "median_direction_correct": true,
+     "peak_direction_correct": 0,
+     "ratio_median_over_truth": 1.9223854796888509,
+     "support": [
+      7,
+      7
+     ],
+     "truth_inside_range": false,
+     "variant_direction_correct": 7,
+     "variants": 7
+    }
+   },
+   "season": 3,
+   "target": "greenhouse_cooling_kw",
+   "truth_energy_kwh": 274.5615234375,
+   "truth_peak_c": -5.6092675423734875
+  }
+ ],
+ "design": {
+  "fractions_capped_at_one": [
+   "cover_shgc",
+   "cover_area_fraction"
+  ],
+  "levels": {
+   "0": 0.0,
+   "large": 0.3,
+   "small": 0.1
+  },
+  "not_varied": {
+   "ground_temperature_c": "a Celsius value: a relative width has no meaning",
+   "heater_capacity_w_m2": "equipment, set by the scenario",
+   "heating_setpoint_c": "a design decision of the controller, not an uncertain property",
+   "vent_open_above_c": "a controller setting"
+  },
+  "parameters": [
+   "cover_u_w_m2k",
+   "cover_shgc",
+   "cover_area_fraction",
+   "infiltration_ach",
+   "max_ventilation_ach"
+  ],
+  "seed": 20261025,
+  "status": "PROVISIONAL design conventions (decision D19). No sourced uncertainty range exists for the greenhouse thermal parameters: all of them are PROVISIONAL_DEFAULT values of the envelope/thermal spec and the parameter audit lists them with 'uncertainty: none'. The relative widths below are therefore declared choices that define levels of mismatch, NOT scientific uncertainty, and a variant is never presented as a plausible greenhouse.",
+  "variants_per_level": 7
+ },
+ "design_hash": "72e9fcabea3fe3f02ca664f96209e4fba32e6627099e9198b346272adc99a38d",
+ "energyplus_version": "26.1.0",
+ "partition": "dev (synthetic)",
+ "report_hash": "3195f9b0eea24fa3d8573dd0f8119d9709fa526d2da44672eff7ecc7f056a728",
+ "scenario": {
+  "control": "on",
+  "crop": "tomato",
+  "environment": "greenhouse"
+ },
+ "statement": "exploratory; few cases, no intervals; synthetic data; both twins uncalibrated; widths of the mismatch levels are declared design choices (D19), not scientific uncertainty; no quality claim",
+ "status": "PASS",
+ "summary": {
+  "0": {
+   "cases": 8,
+   "confirmed_and_correct": 0,
+   "confirmed_claims": 0,
+   "evidence_keys": {
+    "effect:too_few_variants": 8
+   },
+   "median_direction_correct_cases": 8,
+   "ratio_median_over_truth": {
+    "max": 1.9699055546662396,
+    "median": 1.8589518791227084,
+    "min": 1.2972731779871096
+   },
+   "truth_inside_range_cases": 0,
+   "variant_direction_agreement": 1.0,
+   "variant_runs": 8
+  },
+  "large": {
+   "cases": 8,
+   "confirmed_and_correct": 8,
+   "confirmed_claims": 8,
+   "evidence_keys": {
+    "effect:confirmed": 8
+   },
+   "median_direction_correct_cases": 8,
+   "ratio_median_over_truth": {
+    "max": 1.938258825559078,
+    "median": 1.8647738957774367,
+    "min": 1.2416460089241448
+   },
+   "truth_inside_range_cases": 1,
+   "variant_direction_agreement": 1.0,
+   "variant_runs": 56
+  },
+  "small": {
+   "cases": 8,
+   "confirmed_and_correct": 8,
+   "confirmed_claims": 8,
+   "evidence_keys": {
+    "effect:confirmed": 8
+   },
+   "median_direction_correct_cases": 8,
+   "ratio_median_over_truth": {
+    "max": 1.9457339522971022,
+    "median": 1.878260765406289,
+    "min": 1.283787803668815
+   },
+   "truth_inside_range_cases": 0,
+   "variant_direction_agreement": 1.0,
+   "variant_runs": 56
+  }
+ },
+ "window": [
+  480,
+  240
+ ]
+}
