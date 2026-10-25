@@ -1,0 +1,2095 @@
+{
+ "activation_threshold_kw": 0.0,
+ "backends": [
+  "holt_winters",
+  "lagged_ridge",
+  "seasonal_naive",
+  "timesfm25",
+  "timesfm3"
+ ],
+ "backtest": {
+  "holt_winters": {
+   "both": {
+    "integral": {
+     "mean_error_kwh": -7.43446732497483,
+     "mean_forecast_kwh": 677.7554451487892,
+     "mean_true_kwh": 685.189912473764,
+     "median_relative_error": 0.11658240889713957
+    },
+    "mean_mae_active": 16.24005413018365,
+    "mean_mae_inactive": 3.9225570821692295,
+    "onsets": {
+     "detected_within_tolerance": 177,
+     "f1": 0.34071222329162654,
+     "false_alarms": 468,
+     "true": 394
+    },
+    "rows": 1340,
+    "rows_with_demand": 439,
+    "undefined_mase_rows": 692
+   },
+   "greenhouse_cooling_kw": {
+    "integral": {
+     "mean_error_kwh": -17.617387611872292,
+     "mean_forecast_kwh": 1319.0580053452172,
+     "mean_true_kwh": 1336.6753929570896,
+     "median_relative_error": 0.07858663668510775
+    },
+    "mean_mae_active": 20.383775090588777,
+    "mean_mae_inactive": 5.598353275614788,
+    "onsets": {
+     "detected_within_tolerance": 116,
+     "f1": 0.49572649572649574,
+     "false_alarms": 102,
+     "true": 250
+    },
+    "rows": 670,
+    "rows_with_demand": 290,
+    "undefined_mase_rows": 347
+   },
+   "greenhouse_heating_kw": {
+    "integral": {
+     "mean_error_kwh": 2.7484529619226334,
+     "mean_forecast_kwh": 36.45288495236107,
+     "mean_true_kwh": 33.70443199043843,
+     "median_relative_error": 0.7894549291027284
+    },
+    "mean_mae_active": 8.175093871677031,
+    "mean_mae_inactive": 2.3543119877059975,
+    "onsets": {
+     "detected_within_tolerance": 61,
+     "f1": 0.2136602451838879,
+     "false_alarms": 366,
+     "true": 144
+    },
+    "rows": 670,
+    "rows_with_demand": 149,
+    "undefined_mase_rows": 345
+   }
+  },
+  "lagged_ridge": {
+   "both": {
+    "integral": {
+     "mean_error_kwh": 403103915.474198,
+     "mean_forecast_kwh": 403104600.6641105,
+     "mean_true_kwh": 685.189912473764,
+     "median_relative_error": 0.05576966641143558
+    },
+    "mean_mae_active": 603.0075326583425,
+    "mean_mae_inactive": 18107339.324800916,
+    "onsets": {
+     "detected_within_tolerance": 195,
+     "f1": 0.2943396226415094,
+     "false_alarms": 736,
+     "true": 394
+    },
+    "rows": 1340,
+    "rows_with_demand": 439,
+    "undefined_mase_rows": 692
+   },
+   "greenhouse_cooling_kw": {
+    "integral": {
+     "mean_error_kwh": -26.409006557467542,
+     "mean_forecast_kwh": 1310.2663863996222,
+     "mean_true_kwh": 1336.6753929570896,
+     "median_relative_error": 0.02787941876687848
+    },
+    "mean_mae_active": 20.589613312146017,
+    "mean_mae_inactive": 5.673712505662119,
+    "onsets": {
+     "detected_within_tolerance": 134,
+     "f1": 0.45500848896434637,
+     "false_alarms": 205,
+     "true": 250
+    },
+    "rows": 670,
+    "rows_with_demand": 290,
+    "undefined_mase_rows": 347
+   },
+   "greenhouse_heating_kw": {
+    "integral": {
+     "mean_error_kwh": 806207857.3574026,
+     "mean_forecast_kwh": 806207891.0618346,
+     "mean_true_kwh": 33.70443199043843,
+     "median_relative_error": 0.4081448212980018
+    },
+    "mean_mae_active": 1736.5726105804697,
+    "mean_mae_inactive": 35052560.517685145,
+    "onsets": {
+     "detected_within_tolerance": 61,
+     "f1": 0.16576086956521738,
+     "false_alarms": 531,
+     "true": 144
+    },
+    "rows": 670,
+    "rows_with_demand": 149,
+    "undefined_mase_rows": 345
+   }
+  },
+  "seasonal_naive": {
+   "both": {
+    "integral": {
+     "mean_error_kwh": -7.004419746968282,
+     "mean_forecast_kwh": 678.1854927267957,
+     "mean_true_kwh": 685.189912473764,
+     "median_relative_error": 0.11082990879021752
+    },
+    "mean_mae_active": 16.544621407047558,
+    "mean_mae_inactive": 1.6476326951892897,
+    "onsets": {
+     "detected_within_tolerance": 318,
+     "f1": 0.7803680981595092,
+     "false_alarms": 103,
+     "true": 394
+    },
+    "rows": 1340,
+    "rows_with_demand": 439,
+    "undefined_mase_rows": 692
+   },
+   "greenhouse_cooling_kw": {
+    "integral": {
+     "mean_error_kwh": -19.948823752332085,
+     "mean_forecast_kwh": 1316.7265692047574,
+     "mean_true_kwh": 1336.6753929570896,
+     "median_relative_error": 0.07377470985717152
+    },
+    "mean_mae_active": 20.87926542122805,
+    "mean_mae_inactive": 3.2187736007327064,
+    "onsets": {
+     "detected_within_tolerance": 209,
+     "f1": 0.8393574297188755,
+     "false_alarms": 39,
+     "true": 250
+    },
+    "rows": 670,
+    "rows_with_demand": 290,
+    "undefined_mase_rows": 347
+   },
+   "greenhouse_heating_kw": {
+    "integral": {
+     "mean_error_kwh": 5.939984258395522,
+     "mean_forecast_kwh": 39.64441624883395,
+     "mean_true_kwh": 33.70443199043843,
+     "median_relative_error": 0.6450559701492538
+    },
+    "mean_mae_active": 8.108065943206332,
+    "mean_mae_inactive": 0.17732620597179352,
+    "onsets": {
+     "detected_within_tolerance": 109,
+     "f1": 0.6876971608832808,
+     "false_alarms": 64,
+     "true": 144
+    },
+    "rows": 670,
+    "rows_with_demand": 149,
+    "undefined_mase_rows": 345
+   }
+  },
+  "timesfm25": {
+   "both": {
+    "integral": {
+     "mean_error_kwh": -20.509171145352685,
+     "mean_forecast_kwh": 664.6807413284114,
+     "mean_true_kwh": 685.189912473764,
+     "median_relative_error": 0.09151276154225016
+    },
+    "mean_mae_active": 15.723517961546325,
+    "mean_mae_inactive": 2.396006485896416,
+    "onsets": {
+     "detected_within_tolerance": 212,
+     "f1": 0.1783761043331931,
+     "false_alarms": 1771,
+     "true": 394
+    },
+    "rows": 1340,
+    "rows_with_demand": 439,
+    "undefined_mase_rows": 692
+   },
+   "greenhouse_cooling_kw": {
+    "integral": {
+     "mean_error_kwh": -54.751368277713546,
+     "mean_forecast_kwh": 1281.924024679376,
+     "mean_true_kwh": 1336.6753929570896,
+     "median_relative_error": 0.05360686529674081
+    },
+    "mean_mae_active": 20.05599134525799,
+    "mean_mae_inactive": 4.208331771355458,
+    "onsets": {
+     "detected_within_tolerance": 140,
+     "f1": 0.2656546489563567,
+     "false_alarms": 664,
+     "true": 250
+    },
+    "rows": 670,
+    "rows_with_demand": 290,
+    "undefined_mase_rows": 347
+   },
+   "greenhouse_heating_kw": {
+    "integral": {
+     "mean_error_kwh": 13.73302598700817,
+     "mean_forecast_kwh": 47.437457977446606,
+     "mean_true_kwh": 33.70443199043843,
+     "median_relative_error": 0.712405125454922
+    },
+    "mean_mae_active": 7.291187214724971,
+    "mean_mae_inactive": 0.6999946142802684,
+    "onsets": {
+     "detected_within_tolerance": 72,
+     "f1": 0.10884353741496598,
+     "false_alarms": 1107,
+     "true": 144
+    },
+    "rows": 670,
+    "rows_with_demand": 149,
+    "undefined_mase_rows": 345
+   }
+  },
+  "timesfm3": {
+   "both": {
+    "integral": {
+     "mean_error_kwh": -6.573152195415427,
+     "mean_forecast_kwh": 678.6167602783486,
+     "mean_true_kwh": 685.189912473764,
+     "median_relative_error": 0.05708723589701101
+    },
+    "mean_mae_active": 11.9034203211301,
+    "mean_mae_inactive": 1.8715991020340546,
+    "onsets": {
+     "detected_within_tolerance": 240,
+     "f1": 0.2994385527136619,
+     "false_alarms": 969,
+     "true": 394
+    },
+    "rows": 1340,
+    "rows_with_demand": 439,
+    "undefined_mase_rows": 692
+   },
+   "greenhouse_cooling_kw": {
+    "integral": {
+     "mean_error_kwh": -20.526864624736046,
+     "mean_forecast_kwh": 1316.1485283323536,
+     "mean_true_kwh": 1336.6753929570896,
+     "median_relative_error": 0.03301415319159802
+    },
+    "mean_mae_active": 15.286511316404484,
+    "mean_mae_inactive": 3.6291853280261295,
+    "onsets": {
+     "detected_within_tolerance": 141,
+     "f1": 0.46766169154228854,
+     "false_alarms": 212,
+     "true": 250
+    },
+    "rows": 670,
+    "rows_with_demand": 290,
+    "undefined_mase_rows": 347
+   },
+   "greenhouse_heating_kw": {
+    "integral": {
+     "mean_error_kwh": 7.380560233905191,
+     "mean_forecast_kwh": 41.08499222434362,
+     "mean_true_kwh": 33.70443199043843,
+     "median_relative_error": 0.428958662363676
+    },
+    "mean_mae_active": 5.31888080012627,
+    "mean_mae_inactive": 0.2268131860683367,
+    "onsets": {
+     "detected_within_tolerance": 99,
+     "f1": 0.198,
+     "false_alarms": 757,
+     "true": 144
+    },
+    "rows": 670,
+    "rows_with_demand": 149,
+    "undefined_mase_rows": 345
+   }
+  }
+ },
+ "bank_manifest": "3554941e158285b49828879b0a6880b7c918c4524037452a88449832375f540f",
+ "context": 168,
+ "gate": {
+  "cases": 393,
+  "cases_used": 270,
+  "skipped": {
+   "no_effect": 0,
+   "short_context": 123,
+   "short_horizon": 0
+  },
+  "strata": {
+   "holt_winters": {
+    "by_target": {
+     "greenhouse_cooling_kw": {
+      "estimable": true,
+      "groups": 37,
+      "integral_sign_agreement": 0.0,
+      "integral_spearman": null,
+      "intervals_95": {
+       "groups": {
+        "count": 37.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "integral_sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "integral_spearman": {
+        "high": null,
+        "low": null
+       },
+       "median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "spearman_peaks": {
+        "high": null,
+        "low": null
+       }
+      },
+      "median_relative_error": 1.0,
+      "pairs": 85,
+      "sign_agreement": 0.0,
+      "spearman_peaks": null
+     },
+     "greenhouse_heating_kw": {
+      "estimable": true,
+      "groups": 34,
+      "integral_sign_agreement": 0.0,
+      "integral_spearman": null,
+      "intervals_95": {
+       "groups": {
+        "count": 34.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "integral_sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "integral_spearman": {
+        "high": null,
+        "low": null
+       },
+       "median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "spearman_peaks": {
+        "high": null,
+        "low": null
+       }
+      },
+      "median_relative_error": 1.0,
+      "pairs": 63,
+      "sign_agreement": 0.0,
+      "spearman_peaks": null
+     }
+    },
+    "by_target_and_activity": {
+     "greenhouse_cooling_kw|active": {
+      "estimable": true,
+      "groups": 30,
+      "integral_sign_agreement": 0.0,
+      "integral_spearman": null,
+      "intervals_95": {
+       "groups": {
+        "count": 30.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "integral_sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "integral_spearman": {
+        "high": null,
+        "low": null
+       },
+       "median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "spearman_peaks": {
+        "high": null,
+        "low": null
+       }
+      },
+      "median_relative_error": 1.0,
+      "pairs": 72,
+      "sign_agreement": 0.0,
+      "spearman_peaks": null
+     },
+     "greenhouse_cooling_kw|flat": {
+      "estimable": true,
+      "groups": 11,
+      "integral_sign_agreement": 0.0,
+      "integral_spearman": null,
+      "intervals_95": {
+       "groups": {
+        "count": 11.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "integral_sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "integral_spearman": {
+        "high": null,
+        "low": null
+       },
+       "median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "spearman_peaks": {
+        "high": null,
+        "low": null
+       }
+      },
+      "median_relative_error": 1.0,
+      "pairs": 13,
+      "sign_agreement": 0.0,
+      "spearman_peaks": null
+     },
+     "greenhouse_heating_kw|active": {
+      "estimable": true,
+      "groups": 30,
+      "integral_sign_agreement": 0.0,
+      "integral_spearman": null,
+      "intervals_95": {
+       "groups": {
+        "count": 30.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "integral_sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "integral_spearman": {
+        "high": null,
+        "low": null
+       },
+       "median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "spearman_peaks": {
+        "high": null,
+        "low": null
+       }
+      },
+      "median_relative_error": 1.0,
+      "pairs": 57,
+      "sign_agreement": 0.0,
+      "spearman_peaks": null
+     },
+     "greenhouse_heating_kw|flat": {
+      "estimable": false,
+      "groups": 4,
+      "pairs": 6,
+      "reason": "not estimable: fewer than 10 pairs"
+     }
+    },
+    "pooled_by_activity": {
+     "active": {
+      "estimable": true,
+      "groups": 47,
+      "integral_sign_agreement": 0.0,
+      "integral_spearman": null,
+      "intervals_95": {
+       "groups": {
+        "count": 47.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "integral_sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "integral_spearman": {
+        "high": null,
+        "low": null
+       },
+       "median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "spearman_peaks": {
+        "high": null,
+        "low": null
+       }
+      },
+      "median_relative_error": 1.0,
+      "pairs": 129,
+      "sign_agreement": 0.0,
+      "spearman_peaks": null
+     },
+     "flat": {
+      "estimable": true,
+      "groups": 14,
+      "integral_sign_agreement": 0.0,
+      "integral_spearman": null,
+      "intervals_95": {
+       "groups": {
+        "count": 14.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "integral_sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "integral_spearman": {
+        "high": null,
+        "low": null
+       },
+       "median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "spearman_peaks": {
+        "high": null,
+        "low": null
+       }
+      },
+      "median_relative_error": 1.0,
+      "pairs": 19,
+      "sign_agreement": 0.0,
+      "spearman_peaks": null
+     }
+    }
+   },
+   "lagged_ridge": {
+    "by_target": {
+     "greenhouse_cooling_kw": {
+      "estimable": true,
+      "groups": 37,
+      "integral_sign_agreement": 0.8117647058823529,
+      "integral_spearman": 0.8779159960952706,
+      "intervals_95": {
+       "groups": {
+        "count": 37.0
+       },
+       "integral_median_relative_error": {
+        "high": 0.6799706981655489,
+        "low": 0.46306026538785294
+       },
+       "integral_sign_agreement": {
+        "high": 0.9010989010989011,
+        "low": 0.6891891891891891
+       },
+       "integral_spearman": {
+        "high": 0.9431751344671196,
+        "low": 0.7736992746453022
+       },
+       "median_relative_error": {
+        "high": 0.756672822019129,
+        "low": 0.3871565667178035
+       },
+       "sign_agreement": {
+        "high": 0.8484848484848485,
+        "low": 0.625
+       },
+       "spearman_peaks": {
+        "high": 0.8002599800433073,
+        "low": 0.39317997270370014
+       }
+      },
+      "median_relative_error": 0.49396665686724833,
+      "pairs": 85,
+      "sign_agreement": 0.7529411764705882,
+      "spearman_peaks": 0.6064148188486794
+     },
+     "greenhouse_heating_kw": {
+      "estimable": true,
+      "groups": 34,
+      "integral_sign_agreement": 0.49206349206349204,
+      "integral_spearman": 0.2734653322763254,
+      "intervals_95": {
+       "groups": {
+        "count": 34.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.8045956370210905,
+        "low": 1.0
+       },
+       "integral_sign_agreement": {
+        "high": 0.631578947368421,
+        "low": 0.3548387096774194
+       },
+       "integral_spearman": {
+        "high": 0.5781404574173781,
+        "low": -0.07555008390439372
+       },
+       "median_relative_error": {
+        "high": 1.0504446606566713,
+        "low": 0.9531411093067823
+       },
+       "sign_agreement": {
+        "high": 0.631578947368421,
+        "low": 0.3548387096774194
+       },
+       "spearman_peaks": {
+        "high": 0.5609810006463789,
+        "low": -0.12373800660636211
+       }
+      },
+      "median_relative_error": 1.0,
+      "pairs": 63,
+      "sign_agreement": 0.49206349206349204,
+      "spearman_peaks": 0.24358733531938276
+     }
+    },
+    "by_target_and_activity": {
+     "greenhouse_cooling_kw|active": {
+      "estimable": true,
+      "groups": 30,
+      "integral_sign_agreement": 0.9583333333333334,
+      "integral_spearman": 0.8843977104636954,
+      "intervals_95": {
+       "groups": {
+        "count": 30.0
+       },
+       "integral_median_relative_error": {
+        "high": 0.5340767569342144,
+        "low": 0.40455781075199426
+       },
+       "integral_sign_agreement": {
+        "high": 1.0,
+        "low": 0.9090909090909091
+       },
+       "integral_spearman": {
+        "high": 0.9603510895883777,
+        "low": 0.7558562965378554
+       },
+       "median_relative_error": {
+        "high": 0.5515204924503064,
+        "low": 0.36633281712088006
+       },
+       "sign_agreement": {
+        "high": 0.9552238805970149,
+        "low": 0.8064516129032258
+       },
+       "spearman_peaks": {
+        "high": 0.8450312960956453,
+        "low": 0.3762225675022002
+       }
+      },
+      "median_relative_error": 0.40830122894202336,
+      "pairs": 72,
+      "sign_agreement": 0.8888888888888888,
+      "spearman_peaks": 0.6139498990214982
+     },
+     "greenhouse_cooling_kw|flat": {
+      "estimable": true,
+      "groups": 11,
+      "integral_sign_agreement": 0.0,
+      "integral_spearman": null,
+      "intervals_95": {
+       "groups": {
+        "count": 11.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "integral_sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "integral_spearman": {
+        "high": null,
+        "low": null
+       },
+       "median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "spearman_peaks": {
+        "high": null,
+        "low": null
+       }
+      },
+      "median_relative_error": 1.0,
+      "pairs": 13,
+      "sign_agreement": 0.0,
+      "spearman_peaks": null
+     },
+     "greenhouse_heating_kw|active": {
+      "estimable": true,
+      "groups": 30,
+      "integral_sign_agreement": 0.543859649122807,
+      "integral_spearman": 0.3080762250453721,
+      "intervals_95": {
+       "groups": {
+        "count": 30.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.9517421857346529,
+        "low": 0.9847977748988938
+       },
+       "integral_sign_agreement": {
+        "high": 0.6842105263157895,
+        "low": 0.4
+       },
+       "integral_spearman": {
+        "high": 0.6246374252780791,
+        "low": -0.1006423982869379
+       },
+       "median_relative_error": {
+        "high": 1.2612545423590393,
+        "low": 0.9122179836005305
+       },
+       "sign_agreement": {
+        "high": 0.6842105263157895,
+        "low": 0.4
+       },
+       "spearman_peaks": {
+        "high": 0.5986228813559322,
+        "low": -0.12723612869712023
+       }
+      },
+      "median_relative_error": 0.9758855491383471,
+      "pairs": 57,
+      "sign_agreement": 0.543859649122807,
+      "spearman_peaks": 0.26938034742027483
+     },
+     "greenhouse_heating_kw|flat": {
+      "estimable": false,
+      "groups": 4,
+      "pairs": 6,
+      "reason": "not estimable: fewer than 10 pairs"
+     }
+    },
+    "pooled_by_activity": {
+     "active": {
+      "estimable": true,
+      "groups": 47,
+      "integral_sign_agreement": 0.7751937984496124,
+      "integral_spearman": 0.8115831842576029,
+      "intervals_95": {
+       "groups": {
+        "count": 47.0
+       },
+       "integral_median_relative_error": {
+        "high": 0.9242934229087204,
+        "low": 0.5904431927768592
+       },
+       "integral_sign_agreement": {
+        "high": 0.8525641025641025,
+        "low": 0.697841726618705
+       },
+       "integral_spearman": {
+        "high": 0.9044405522357305,
+        "low": 0.663547603168106
+       },
+       "median_relative_error": {
+        "high": 0.8961420299874807,
+        "low": 0.45051577396511144
+       },
+       "sign_agreement": {
+        "high": 0.8102189781021898,
+        "low": 0.6608695652173913
+       },
+       "spearman_peaks": {
+        "high": 0.793419143040102,
+        "low": 0.45163136248328656
+       }
+      },
+      "median_relative_error": 0.6901981700284192,
+      "pairs": 129,
+      "sign_agreement": 0.7364341085271318,
+      "spearman_peaks": 0.63577054881667
+     },
+     "flat": {
+      "estimable": true,
+      "groups": 14,
+      "integral_sign_agreement": 0.0,
+      "integral_spearman": null,
+      "intervals_95": {
+       "groups": {
+        "count": 14.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "integral_sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "integral_spearman": {
+        "high": null,
+        "low": null
+       },
+       "median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "spearman_peaks": {
+        "high": null,
+        "low": null
+       }
+      },
+      "median_relative_error": 1.0,
+      "pairs": 19,
+      "sign_agreement": 0.0,
+      "spearman_peaks": null
+     }
+    }
+   },
+   "seasonal_naive": {
+    "by_target": {
+     "greenhouse_cooling_kw": {
+      "estimable": true,
+      "groups": 37,
+      "integral_sign_agreement": 0.0,
+      "integral_spearman": null,
+      "intervals_95": {
+       "groups": {
+        "count": 37.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "integral_sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "integral_spearman": {
+        "high": null,
+        "low": null
+       },
+       "median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "spearman_peaks": {
+        "high": null,
+        "low": null
+       }
+      },
+      "median_relative_error": 1.0,
+      "pairs": 85,
+      "sign_agreement": 0.0,
+      "spearman_peaks": null
+     },
+     "greenhouse_heating_kw": {
+      "estimable": true,
+      "groups": 34,
+      "integral_sign_agreement": 0.0,
+      "integral_spearman": null,
+      "intervals_95": {
+       "groups": {
+        "count": 34.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "integral_sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "integral_spearman": {
+        "high": null,
+        "low": null
+       },
+       "median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "spearman_peaks": {
+        "high": null,
+        "low": null
+       }
+      },
+      "median_relative_error": 1.0,
+      "pairs": 63,
+      "sign_agreement": 0.0,
+      "spearman_peaks": null
+     }
+    },
+    "by_target_and_activity": {
+     "greenhouse_cooling_kw|active": {
+      "estimable": true,
+      "groups": 30,
+      "integral_sign_agreement": 0.0,
+      "integral_spearman": null,
+      "intervals_95": {
+       "groups": {
+        "count": 30.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "integral_sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "integral_spearman": {
+        "high": null,
+        "low": null
+       },
+       "median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "spearman_peaks": {
+        "high": null,
+        "low": null
+       }
+      },
+      "median_relative_error": 1.0,
+      "pairs": 72,
+      "sign_agreement": 0.0,
+      "spearman_peaks": null
+     },
+     "greenhouse_cooling_kw|flat": {
+      "estimable": true,
+      "groups": 11,
+      "integral_sign_agreement": 0.0,
+      "integral_spearman": null,
+      "intervals_95": {
+       "groups": {
+        "count": 11.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "integral_sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "integral_spearman": {
+        "high": null,
+        "low": null
+       },
+       "median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "spearman_peaks": {
+        "high": null,
+        "low": null
+       }
+      },
+      "median_relative_error": 1.0,
+      "pairs": 13,
+      "sign_agreement": 0.0,
+      "spearman_peaks": null
+     },
+     "greenhouse_heating_kw|active": {
+      "estimable": true,
+      "groups": 30,
+      "integral_sign_agreement": 0.0,
+      "integral_spearman": null,
+      "intervals_95": {
+       "groups": {
+        "count": 30.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "integral_sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "integral_spearman": {
+        "high": null,
+        "low": null
+       },
+       "median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "spearman_peaks": {
+        "high": null,
+        "low": null
+       }
+      },
+      "median_relative_error": 1.0,
+      "pairs": 57,
+      "sign_agreement": 0.0,
+      "spearman_peaks": null
+     },
+     "greenhouse_heating_kw|flat": {
+      "estimable": false,
+      "groups": 4,
+      "pairs": 6,
+      "reason": "not estimable: fewer than 10 pairs"
+     }
+    },
+    "pooled_by_activity": {
+     "active": {
+      "estimable": true,
+      "groups": 47,
+      "integral_sign_agreement": 0.0,
+      "integral_spearman": null,
+      "intervals_95": {
+       "groups": {
+        "count": 47.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "integral_sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "integral_spearman": {
+        "high": null,
+        "low": null
+       },
+       "median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "spearman_peaks": {
+        "high": null,
+        "low": null
+       }
+      },
+      "median_relative_error": 1.0,
+      "pairs": 129,
+      "sign_agreement": 0.0,
+      "spearman_peaks": null
+     },
+     "flat": {
+      "estimable": true,
+      "groups": 14,
+      "integral_sign_agreement": 0.0,
+      "integral_spearman": null,
+      "intervals_95": {
+       "groups": {
+        "count": 14.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "integral_sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "integral_spearman": {
+        "high": null,
+        "low": null
+       },
+       "median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "spearman_peaks": {
+        "high": null,
+        "low": null
+       }
+      },
+      "median_relative_error": 1.0,
+      "pairs": 19,
+      "sign_agreement": 0.0,
+      "spearman_peaks": null
+     }
+    }
+   },
+   "timesfm25": {
+    "by_target": {
+     "greenhouse_cooling_kw": {
+      "estimable": true,
+      "groups": 37,
+      "integral_sign_agreement": 0.5058823529411764,
+      "integral_spearman": 0.23109243697478993,
+      "intervals_95": {
+       "groups": {
+        "count": 37.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.0128508111941785,
+        "low": 0.9829534622750283
+       },
+       "integral_sign_agreement": {
+        "high": 0.5909090909090909,
+        "low": 0.4189189189189189
+       },
+       "integral_spearman": {
+        "high": 0.4313171283210854,
+        "low": 0.005048932174438248
+       },
+       "median_relative_error": {
+        "high": 1.0253480430785396,
+        "low": 0.9975462129241869
+       },
+       "sign_agreement": {
+        "high": 0.5555555555555556,
+        "low": 0.38095238095238093
+       },
+       "spearman_peaks": {
+        "high": 0.2934772251602082,
+        "low": -0.163069645140569
+       }
+      },
+      "median_relative_error": 1.0006644280534598,
+      "pairs": 85,
+      "sign_agreement": 0.47058823529411764,
+      "spearman_peaks": 0.07579029666543823
+     },
+     "greenhouse_heating_kw": {
+      "estimable": true,
+      "groups": 34,
+      "integral_sign_agreement": 0.5079365079365079,
+      "integral_spearman": -0.4290034562211982,
+      "intervals_95": {
+       "groups": {
+        "count": 34.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.061240326748722,
+        "low": 0.9778010303677618
+       },
+       "integral_sign_agreement": {
+        "high": 0.6129032258064516,
+        "low": 0.4057971014492754
+       },
+       "integral_spearman": {
+        "high": -0.16103640537881272,
+        "low": -0.6502711372489116
+       },
+       "median_relative_error": {
+        "high": 1.0038383955892356,
+        "low": 0.9883173121237825
+       },
+       "sign_agreement": {
+        "high": 0.6129032258064516,
+        "low": 0.4057971014492754
+       },
+       "spearman_peaks": {
+        "high": -0.12162908532046202,
+        "low": -0.5958220359871826
+       }
+      },
+      "median_relative_error": 0.9997130406850924,
+      "pairs": 63,
+      "sign_agreement": 0.5079365079365079,
+      "spearman_peaks": -0.3752880184331797
+     }
+    },
+    "by_target_and_activity": {
+     "greenhouse_cooling_kw|active": {
+      "estimable": true,
+      "groups": 30,
+      "integral_sign_agreement": 0.4861111111111111,
+      "integral_spearman": 0.27577336163097305,
+      "intervals_95": {
+       "groups": {
+        "count": 30.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.0222490461243738,
+        "low": 0.9792082973179973
+       },
+       "integral_sign_agreement": {
+        "high": 0.5789473684210527,
+        "low": 0.391304347826087
+       },
+       "integral_spearman": {
+        "high": 0.4926517571884984,
+        "low": 0.021746665936912775
+       },
+       "median_relative_error": {
+        "high": 1.0317126763030362,
+        "low": 0.9970434900419212
+       },
+       "sign_agreement": {
+        "high": 0.5454545454545454,
+        "low": 0.3466666666666667
+       },
+       "spearman_peaks": {
+        "high": 0.3539614617681542,
+        "low": -0.16659180412687744
+       }
+      },
+      "median_relative_error": 1.020008739846509,
+      "pairs": 72,
+      "sign_agreement": 0.4444444444444444,
+      "spearman_peaks": 0.1057015146702108
+     },
+     "greenhouse_cooling_kw|flat": {
+      "estimable": true,
+      "groups": 11,
+      "integral_sign_agreement": 0.6153846153846154,
+      "integral_spearman": 0.47802197802197804,
+      "intervals_95": {
+       "groups": {
+        "count": 11.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.0011397821955448,
+        "low": 0.8976417582113085
+       },
+       "integral_sign_agreement": {
+        "high": 0.8333333333333334,
+        "low": 0.38461538461538464
+       },
+       "integral_spearman": {
+        "high": 0.8803418803418803,
+        "low": -0.14206128133704735
+       },
+       "median_relative_error": {
+        "high": 1.0004320043698787,
+        "low": 0.9935597435549455
+       },
+       "sign_agreement": {
+        "high": 0.8333333333333334,
+        "low": 0.38461538461538464
+       },
+       "spearman_peaks": {
+        "high": 0.8418079096045198,
+        "low": -0.1876750700280112
+       }
+      },
+      "median_relative_error": 0.9993731411779051,
+      "pairs": 13,
+      "sign_agreement": 0.6153846153846154,
+      "spearman_peaks": 0.44505494505494503
+     },
+     "greenhouse_heating_kw|active": {
+      "estimable": true,
+      "groups": 30,
+      "integral_sign_agreement": 0.49122807017543857,
+      "integral_spearman": -0.4398496240601504,
+      "intervals_95": {
+       "groups": {
+        "count": 30.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.1884734922028117,
+        "low": 0.9812149118099277
+       },
+       "integral_sign_agreement": {
+        "high": 0.5932203389830508,
+        "low": 0.38181818181818183
+       },
+       "integral_spearman": {
+        "high": -0.16341934351413023,
+        "low": -0.6665993782550769
+       },
+       "median_relative_error": {
+        "high": 1.0163042656177323,
+        "low": 0.9889171145439359
+       },
+       "sign_agreement": {
+        "high": 0.5932203389830508,
+        "low": 0.38181818181818183
+       },
+       "spearman_peaks": {
+        "high": -0.12833770955362553,
+        "low": -0.5997306160693371
+       }
+      },
+      "median_relative_error": 1.0001270076432882,
+      "pairs": 57,
+      "sign_agreement": 0.49122807017543857,
+      "spearman_peaks": -0.38371791547835105
+     },
+     "greenhouse_heating_kw|flat": {
+      "estimable": false,
+      "groups": 4,
+      "pairs": 6,
+      "reason": "not estimable: fewer than 10 pairs"
+     }
+    },
+    "pooled_by_activity": {
+     "active": {
+      "estimable": true,
+      "groups": 47,
+      "integral_sign_agreement": 0.4883720930232558,
+      "integral_spearman": 0.034749552772808584,
+      "intervals_95": {
+       "groups": {
+        "count": 47.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.0231319770417806,
+        "low": 0.9920309828389946
+       },
+       "integral_sign_agreement": {
+        "high": 0.5503875968992248,
+        "low": 0.42028985507246375
+       },
+       "integral_spearman": {
+        "high": 0.19689004873866336,
+        "low": -0.15545489415331787
+       },
+       "median_relative_error": {
+        "high": 1.024566455278577,
+        "low": 0.9984859712479472
+       },
+       "sign_agreement": {
+        "high": 0.5304347826086957,
+        "low": 0.3898305084745763
+       },
+       "spearman_peaks": {
+        "high": 0.10651191192144947,
+        "low": -0.26388080114154766
+       }
+      },
+      "median_relative_error": 1.0035727640913303,
+      "pairs": 129,
+      "sign_agreement": 0.46511627906976744,
+      "spearman_peaks": -0.06813544351315946
+     },
+     "flat": {
+      "estimable": true,
+      "groups": 14,
+      "integral_sign_agreement": 0.631578947368421,
+      "integral_spearman": 0.3238262707528288,
+      "intervals_95": {
+       "groups": {
+        "count": 14.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.000591560844408,
+        "low": 0.9261385359556398
+       },
+       "integral_sign_agreement": {
+        "high": 0.8235294117647058,
+        "low": 0.45454545454545453
+       },
+       "integral_spearman": {
+        "high": 0.7490909090909091,
+        "low": -0.2261682242990654
+       },
+       "median_relative_error": {
+        "high": 1.0001995806862973,
+        "low": 0.9896516698655788
+       },
+       "sign_agreement": {
+        "high": 0.8235294117647058,
+        "low": 0.45454545454545453
+       },
+       "spearman_peaks": {
+        "high": 0.7113095238095238,
+        "low": -0.1992506109672493
+       }
+      },
+      "median_relative_error": 0.9975462129241869,
+      "pairs": 19,
+      "sign_agreement": 0.631578947368421,
+      "spearman_peaks": 0.3431329860822658
+     }
+    }
+   },
+   "timesfm3": {
+    "by_target": {
+     "greenhouse_cooling_kw": {
+      "estimable": true,
+      "groups": 37,
+      "integral_sign_agreement": 0.7058823529411765,
+      "integral_spearman": 0.6639725488386393,
+      "intervals_95": {
+       "groups": {
+        "count": 37.0
+       },
+       "integral_median_relative_error": {
+        "high": 0.9586172673869535,
+        "low": 0.8094898319866279
+       },
+       "integral_sign_agreement": {
+        "high": 0.8051948051948052,
+        "low": 0.5822784810126582
+       },
+       "integral_spearman": {
+        "high": 0.803347963678107,
+        "low": 0.4822810090009548
+       },
+       "median_relative_error": {
+        "high": 0.970599041547825,
+        "low": 0.822305842443449
+       },
+       "sign_agreement": {
+        "high": 0.7608695652173914,
+        "low": 0.5416666666666666
+       },
+       "spearman_peaks": {
+        "high": 0.6331949631978682,
+        "low": 0.20768795730977993
+       }
+      },
+      "median_relative_error": 0.8721067164066901,
+      "pairs": 85,
+      "sign_agreement": 0.6588235294117647,
+      "spearman_peaks": 0.4269484544734419
+     },
+     "greenhouse_heating_kw": {
+      "estimable": true,
+      "groups": 34,
+      "integral_sign_agreement": 0.6031746031746031,
+      "integral_spearman": 0.3054518656568793,
+      "intervals_95": {
+       "groups": {
+        "count": 34.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.0,
+        "low": 0.9816087360311389
+       },
+       "integral_sign_agreement": {
+        "high": 0.7368421052631579,
+        "low": 0.46875
+       },
+       "integral_spearman": {
+        "high": 0.5712655489020372,
+        "low": 0.005572019787109442
+       },
+       "median_relative_error": {
+        "high": 1.0,
+        "low": 0.8935537317856637
+       },
+       "sign_agreement": {
+        "high": 0.7424242424242424,
+        "low": 0.4927536231884058
+       },
+       "spearman_peaks": {
+        "high": 0.5908522139370033,
+        "low": 0.10778110015638995
+       }
+      },
+      "median_relative_error": 0.981344467797647,
+      "pairs": 63,
+      "sign_agreement": 0.6190476190476191,
+      "spearman_peaks": 0.35532400817471116
+     }
+    },
+    "by_target_and_activity": {
+     "greenhouse_cooling_kw|active": {
+      "estimable": true,
+      "groups": 30,
+      "integral_sign_agreement": 0.8333333333333334,
+      "integral_spearman": 0.6739983278667439,
+      "intervals_95": {
+       "groups": {
+        "count": 30.0
+       },
+       "integral_median_relative_error": {
+        "high": 0.8902347948931004,
+        "low": 0.7831051479198228
+       },
+       "integral_sign_agreement": {
+        "high": 0.9253731343283582,
+        "low": 0.7384615384615385
+       },
+       "integral_spearman": {
+        "high": 0.8141496002628409,
+        "low": 0.48988454298883966
+       },
+       "median_relative_error": {
+        "high": 0.8788436248209284,
+        "low": 0.807067952512365
+       },
+       "sign_agreement": {
+        "high": 0.8771929824561403,
+        "low": 0.676056338028169
+       },
+       "spearman_peaks": {
+        "high": 0.6369885553402318,
+        "low": 0.18602886112108666
+       }
+      },
+      "median_relative_error": 0.8366746310745603,
+      "pairs": 72,
+      "sign_agreement": 0.7777777777777778,
+      "spearman_peaks": 0.42634337739508815
+     },
+     "greenhouse_cooling_kw|flat": {
+      "estimable": true,
+      "groups": 11,
+      "integral_sign_agreement": 0.0,
+      "integral_spearman": null,
+      "intervals_95": {
+       "groups": {
+        "count": 11.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "integral_sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "integral_spearman": {
+        "high": null,
+        "low": null
+       },
+       "median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "spearman_peaks": {
+        "high": null,
+        "low": null
+       }
+      },
+      "median_relative_error": 1.0,
+      "pairs": 13,
+      "sign_agreement": 0.0,
+      "spearman_peaks": null
+     },
+     "greenhouse_heating_kw|active": {
+      "estimable": true,
+      "groups": 30,
+      "integral_sign_agreement": 0.6666666666666666,
+      "integral_spearman": 0.325641690432979,
+      "intervals_95": {
+       "groups": {
+        "count": 30.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.0000030142514227,
+        "low": 0.9507134807177405
+       },
+       "integral_sign_agreement": {
+        "high": 0.803921568627451,
+        "low": 0.5230769230769231
+       },
+       "integral_spearman": {
+        "high": 0.6382806163828062,
+        "low": -0.0004807230074031343
+       },
+       "median_relative_error": {
+        "high": 0.9999245340415773,
+        "low": 0.8570784548413601
+       },
+       "sign_agreement": {
+        "high": 0.8076923076923077,
+        "low": 0.5636363636363636
+       },
+       "spearman_peaks": {
+        "high": 0.6344319167389418,
+        "low": 0.0951628056185697
+       }
+      },
+      "median_relative_error": 0.964788426976637,
+      "pairs": 57,
+      "sign_agreement": 0.6842105263157895,
+      "spearman_peaks": 0.3738656987295826
+     },
+     "greenhouse_heating_kw|flat": {
+      "estimable": false,
+      "groups": 4,
+      "pairs": 6,
+      "reason": "not estimable: fewer than 10 pairs"
+     }
+    },
+    "pooled_by_activity": {
+     "active": {
+      "estimable": true,
+      "groups": 47,
+      "integral_sign_agreement": 0.7596899224806202,
+      "integral_spearman": 0.6613651610017889,
+      "intervals_95": {
+       "groups": {
+        "count": 47.0
+       },
+       "integral_median_relative_error": {
+        "high": 0.9683107314868186,
+        "low": 0.8606043582573321
+       },
+       "integral_sign_agreement": {
+        "high": 0.831858407079646,
+        "low": 0.6829268292682927
+       },
+       "integral_spearman": {
+        "high": 0.7769339756304903,
+        "low": 0.5025684009781455
+       },
+       "median_relative_error": {
+        "high": 0.9393082096455551,
+        "low": 0.8404880038204376
+       },
+       "sign_agreement": {
+        "high": 0.8051948051948052,
+        "low": 0.6594202898550725
+       },
+       "spearman_peaks": {
+        "high": 0.6539119398332207,
+        "low": 0.3000152485513876
+       }
+      },
+      "median_relative_error": 0.8788436248209284,
+      "pairs": 129,
+      "sign_agreement": 0.7364341085271318,
+      "spearman_peaks": 0.48893945069777156
+     },
+     "flat": {
+      "estimable": true,
+      "groups": 14,
+      "integral_sign_agreement": 0.0,
+      "integral_spearman": null,
+      "intervals_95": {
+       "groups": {
+        "count": 14.0
+       },
+       "integral_median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "integral_sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "integral_spearman": {
+        "high": null,
+        "low": null
+       },
+       "median_relative_error": {
+        "high": 1.0,
+        "low": 1.0
+       },
+       "sign_agreement": {
+        "high": 0.0,
+        "low": 0.0
+       },
+       "spearman_peaks": {
+        "high": null,
+        "low": null
+       }
+      },
+      "median_relative_error": 1.0,
+      "pairs": 19,
+      "sign_agreement": 0.0,
+      "spearman_peaks": null
+     }
+    }
+   }
+  },
+  "summary": {
+   "holt_winters": {
+    "by_factor": {
+     "COLD_WAVE": {
+      "pairs": 49,
+      "sign_agreement": 0.0
+     },
+     "HEAT_WAVE": {
+      "pairs": 37,
+      "sign_agreement": 0.0
+     },
+     "HIGH_RADIATION": {
+      "pairs": 23,
+      "sign_agreement": 0.0
+     },
+     "LOW_RADIATION": {
+      "pairs": 39,
+      "sign_agreement": 0.0
+     }
+    },
+    "effect_coverage": 0.8236802539282204,
+    "expressible_pairs": 148,
+    "inexpressible_pairs": 0,
+    "integral_median_relative_error": 1.0,
+    "integral_sign_agreement": 0.0,
+    "integral_spearman": null,
+    "intervals_95": {
+     "groups": {
+      "count": 51.0
+     },
+     "integral_median_relative_error": {
+      "high": 1.0,
+      "low": 1.0
+     },
+     "integral_sign_agreement": {
+      "high": 0.0,
+      "low": 0.0
+     },
+     "integral_spearman": {
+      "high": null,
+      "low": null
+     },
+     "median_relative_error": {
+      "high": 1.0,
+      "low": 1.0
+     },
+     "sign_agreement": {
+      "high": 0.0,
+      "low": 0.0
+     },
+     "spearman_peaks": {
+      "high": null,
+      "low": null
+     }
+    },
+    "median_relative_error": 1.0,
+    "pairs": 148,
+    "sign_agreement": 0.0,
+    "spearman_peaks": null
+   },
+   "lagged_ridge": {
+    "by_factor": {
+     "COLD_WAVE": {
+      "pairs": 49,
+      "sign_agreement": 0.673469387755102
+     },
+     "HEAT_WAVE": {
+      "pairs": 37,
+      "sign_agreement": 0.7027027027027027
+     },
+     "HIGH_RADIATION": {
+      "pairs": 23,
+      "sign_agreement": 0.5652173913043478
+     },
+     "LOW_RADIATION": {
+      "pairs": 39,
+      "sign_agreement": 0.5897435897435898
+     }
+    },
+    "effect_coverage": 0.8338771693620568,
+    "expressible_pairs": 148,
+    "inexpressible_pairs": 0,
+    "integral_median_relative_error": 0.886977225457459,
+    "integral_sign_agreement": 0.6756756756756757,
+    "integral_spearman": 0.7615279064045671,
+    "intervals_95": {
+     "groups": {
+      "count": 51.0
+     },
+     "integral_median_relative_error": {
+      "high": 1.0,
+      "low": 0.6572653314568752
+     },
+     "integral_sign_agreement": {
+      "high": 0.7659574468085106,
+      "low": 0.5818181818181818
+     },
+     "integral_spearman": {
+      "high": 0.8649966612323792,
+      "low": 0.6078921369211441
+     },
+     "median_relative_error": {
+      "high": 0.9717013929374072,
+      "low": 0.5649763069630718
+     },
+     "sign_agreement": {
+      "high": 0.7309941520467836,
+      "low": 0.5488721804511278
+     },
+     "spearman_peaks": {
+      "high": 0.743467671061799,
+      "low": 0.4174892704283201
+     }
+    },
+    "median_relative_error": 0.8640475380951771,
+    "pairs": 148,
+    "sign_agreement": 0.6418918918918919,
+    "spearman_peaks": 0.59220046372815
+   },
+   "seasonal_naive": {
+    "by_factor": {
+     "COLD_WAVE": {
+      "pairs": 49,
+      "sign_agreement": 0.0
+     },
+     "HEAT_WAVE": {
+      "pairs": 37,
+      "sign_agreement": 0.0
+     },
+     "HIGH_RADIATION": {
+      "pairs": 23,
+      "sign_agreement": 0.0
+     },
+     "LOW_RADIATION": {
+      "pairs": 39,
+      "sign_agreement": 0.0
+     }
+    },
+    "effect_coverage": 0.7645628218210568,
+    "expressible_pairs": 148,
+    "inexpressible_pairs": 0,
+    "integral_median_relative_error": 1.0,
+    "integral_sign_agreement": 0.0,
+    "integral_spearman": null,
+    "intervals_95": {
+     "groups": {
+      "count": 51.0
+     },
+     "integral_median_relative_error": {
+      "high": 1.0,
+      "low": 1.0
+     },
+     "integral_sign_agreement": {
+      "high": 0.0,
+      "low": 0.0
+     },
+     "integral_spearman": {
+      "high": null,
+      "low": null
+     },
+     "median_relative_error": {
+      "high": 1.0,
+      "low": 1.0
+     },
+     "sign_agreement": {
+      "high": 0.0,
+      "low": 0.0
+     },
+     "spearman_peaks": {
+      "high": null,
+      "low": null
+     }
+    },
+    "median_relative_error": 1.0,
+    "pairs": 148,
+    "sign_agreement": 0.0,
+    "spearman_peaks": null
+   },
+   "timesfm25": {
+    "by_factor": {
+     "COLD_WAVE": {
+      "pairs": 49,
+      "sign_agreement": 0.42857142857142855
+     },
+     "HEAT_WAVE": {
+      "pairs": 37,
+      "sign_agreement": 0.5405405405405406
+     },
+     "HIGH_RADIATION": {
+      "pairs": 23,
+      "sign_agreement": 0.5217391304347826
+     },
+     "LOW_RADIATION": {
+      "pairs": 39,
+      "sign_agreement": 0.48717948717948717
+     }
+    },
+    "effect_coverage": 0.7165482370792221,
+    "expressible_pairs": 148,
+    "inexpressible_pairs": 0,
+    "integral_median_relative_error": 1.0004306953841526,
+    "integral_sign_agreement": 0.5067567567567568,
+    "integral_spearman": 0.03171171638069854,
+    "intervals_95": {
+     "groups": {
+      "count": 51.0
+     },
+     "integral_median_relative_error": {
+      "high": 1.011196027019596,
+      "low": 0.9908119359481113
+     },
+     "integral_sign_agreement": {
+      "high": 0.5655172413793104,
+      "low": 0.4492753623188406
+     },
+     "integral_spearman": {
+      "high": 0.18763754216006026,
+      "low": -0.15386677492492884
+     },
+     "median_relative_error": {
+      "high": 1.0037936793358924,
+      "low": 0.997883388714708
+     },
+     "sign_agreement": {
+      "high": 0.5454545454545454,
+      "low": 0.42758620689655175
+     },
+     "spearman_peaks": {
+      "high": 0.10842432811260984,
+      "low": -0.2398591700975207
+     }
+    },
+    "median_relative_error": 1.0002079929461245,
+    "pairs": 148,
+    "sign_agreement": 0.4864864864864865,
+    "spearman_peaks": -0.060655026160393796
+   },
+   "timesfm3": {
+    "by_factor": {
+     "COLD_WAVE": {
+      "pairs": 49,
+      "sign_agreement": 0.6530612244897959
+     },
+     "HEAT_WAVE": {
+      "pairs": 37,
+      "sign_agreement": 0.6216216216216216
+     },
+     "HIGH_RADIATION": {
+      "pairs": 23,
+      "sign_agreement": 0.6521739130434783
+     },
+     "LOW_RADIATION": {
+      "pairs": 39,
+      "sign_agreement": 0.6410256410256411
+     }
+    },
+    "effect_coverage": 0.8225929421294448,
+    "expressible_pairs": 148,
+    "inexpressible_pairs": 0,
+    "integral_median_relative_error": 0.9586172673869535,
+    "integral_sign_agreement": 0.6621621621621622,
+    "integral_spearman": 0.6095900409958652,
+    "intervals_95": {
+     "groups": {
+      "count": 51.0
+     },
+     "integral_median_relative_error": {
+      "high": 0.9948915651183463,
+      "low": 0.9009718779203405
+     },
+     "integral_sign_agreement": {
+      "high": 0.7417218543046358,
+      "low": 0.5780346820809249
+     },
+     "integral_spearman": {
+      "high": 0.7308451085149751,
+      "low": 0.4508489565158854
+     },
+     "median_relative_error": {
+      "high": 0.9979943983148784,
+      "low": 0.8599992811105419
+     },
+     "sign_agreement": {
+      "high": 0.7225806451612903,
+      "low": 0.5531914893617021
+     },
+     "spearman_peaks": {
+      "high": 0.5968316444312075,
+      "low": 0.2826950104147148
+     }
+    },
+    "median_relative_error": 0.9212984769018358,
+    "pairs": 148,
+    "sign_agreement": 0.6418918918918919,
+    "spearman_peaks": 0.4528563772202484
+   }
+  }
+ },
+ "horizon": 96,
+ "min_pairs_per_cell": 10,
+ "onset_tolerance_samples": 2,
+ "partition": "dev",
+ "report_hash": "232e73e5684051d974cc2a155d3255e25a840e5843cf43e5f9f5a2b952297fb4",
+ "scenarios": 134,
+ "service": {
+  "timesfm25": {
+   "health": {
+    "checkpoint": "google/timesfm-2.5-200m-pytorch",
+    "licence": "Apache-2.0",
+    "max_context": 2048,
+    "max_horizon": 256,
+    "model": "timesfm-2.5",
+    "past_only_covariates": "ignored",
+    "status": "ok",
+    "version": "unknown"
+   },
+   "url": "http://127.0.0.1:8088"
+  },
+  "timesfm3": {
+   "health": {
+    "checkpoint": "google/timesfm-3.0-pytorch",
+    "licence": "timesfm-non-commercial-license-v1.0 (research and benchmarking only)",
+    "max_context": 2048,
+    "max_horizon": 1024,
+    "model": "timesfm-3.0",
+    "past_only_covariates": "native",
+    "status": "ok",
+    "version": "unknown"
+   },
+   "url": "http://127.0.0.1:8089"
+  },
+  "used": false
+ },
+ "statement": "exploratory analysis of the development partition; synthetic data; truth of the simulated twin; not the preregistered evaluation; no quality claim",
+ "status": "PASS",
+ "time_scale": {
+  "cycle_minutes": 1440.0,
+  "event_minutes": 360.0,
+  "onset_tolerance_minutes": 120.0,
+  "sampling_minutes": 60.0
+ }
+}

@@ -1,0 +1,441 @@
+{
+ "activation_threshold_kw": 1.0,
+ "backends": [
+  "holt_winters",
+  "lagged_ridge",
+  "seasonal_naive",
+  "timesfm25",
+  "timesfm3"
+ ],
+ "backtest": {
+  "holt_winters": {
+   "both": {
+    "forecast_integral_kwh": {
+     "max": 4900.601462638374,
+     "median": 0.0,
+     "p90": 3571.1161661452743,
+     "p99": 4623.116141214156
+    },
+    "integral": {
+     "mean_error_kwh": -7.43446732497483,
+     "mean_forecast_kwh": 677.7554451487892,
+     "mean_true_kwh": 685.189912473764,
+     "median_relative_error": 0.11658240889713957
+    },
+    "mean_mae_active": 16.465835330959237,
+    "mean_mae_inactive": 3.9357662717972515,
+    "onsets": {
+     "detected_within_tolerance": 209,
+     "f1": 0.5186104218362283,
+     "false_alarms": 217,
+     "true": 380
+    },
+    "rows": 1340,
+    "rows_with_demand": 427,
+    "undefined_mase_rows": 692
+   },
+   "greenhouse_cooling_kw": {
+    "forecast_integral_kwh": {
+     "max": 4900.601462638374,
+     "median": 0.0,
+     "p90": 3992.666436364183,
+     "p99": 4748.589777454958
+    },
+    "integral": {
+     "mean_error_kwh": -17.617387611872292,
+     "mean_forecast_kwh": 1319.0580053452172,
+     "mean_true_kwh": 1336.6753929570896,
+     "median_relative_error": 0.07858663668510775
+    },
+    "mean_mae_active": 20.361776503756317,
+    "mean_mae_inactive": 5.620007560846728,
+    "onsets": {
+     "detected_within_tolerance": 127,
+     "f1": 0.5657015590200446,
+     "false_alarms": 72,
+     "true": 250
+    },
+    "rows": 670,
+    "rows_with_demand": 290,
+    "undefined_mase_rows": 347
+   },
+   "greenhouse_heating_kw": {
+    "forecast_integral_kwh": {
+     "max": 1822.5866376250647,
+     "median": 0.0,
+     "p90": 227.28134582736814,
+     "p99": 697.6154477679836
+    },
+    "integral": {
+     "mean_error_kwh": 2.7484529619226334,
+     "mean_forecast_kwh": 36.45288495236107,
+     "mean_true_kwh": 33.70443199043843,
+     "median_relative_error": 0.7894549291027284
+    },
+    "mean_mae_active": 8.21895255642527,
+    "mean_mae_inactive": 2.3596180804031888,
+    "onsets": {
+     "detected_within_tolerance": 82,
+     "f1": 0.45938375350140054,
+     "false_alarms": 145,
+     "true": 130
+    },
+    "rows": 670,
+    "rows_with_demand": 137,
+    "undefined_mase_rows": 345
+   }
+  },
+  "lagged_ridge": {
+   "both": {
+    "forecast_integral_kwh": {
+     "max": 540159220993.3927,
+     "median": 0.0,
+     "p90": 3680.7070969382116,
+     "p99": 4475.203884278223
+    },
+    "integral": {
+     "mean_error_kwh": 403103915.474198,
+     "mean_forecast_kwh": 403104600.6641105,
+     "mean_true_kwh": 685.189912473764,
+     "median_relative_error": 0.05576966641143558
+    },
+    "mean_mae_active": 619.8401889444838,
+    "mean_mae_inactive": 18107339.350776788,
+    "onsets": {
+     "detected_within_tolerance": 208,
+     "f1": 0.4151696606786427,
+     "false_alarms": 414,
+     "true": 380
+    },
+    "rows": 1340,
+    "rows_with_demand": 427,
+    "undefined_mase_rows": 692
+   },
+   "greenhouse_cooling_kw": {
+    "forecast_integral_kwh": {
+     "max": 4945.099345530198,
+     "median": 0.0,
+     "p90": 4028.0458535926377,
+     "p99": 4510.574279393016
+    },
+    "integral": {
+     "mean_error_kwh": -26.409006557467542,
+     "mean_forecast_kwh": 1310.2663863996222,
+     "mean_true_kwh": 1336.6753929570896,
+     "median_relative_error": 0.02787941876687848
+    },
+    "mean_mae_active": 20.563296465221544,
+    "mean_mae_inactive": 5.719403948604147,
+    "onsets": {
+     "detected_within_tolerance": 143,
+     "f1": 0.5355805243445693,
+     "false_alarms": 141,
+     "true": 250
+    },
+    "rows": 670,
+    "rows_with_demand": 290,
+    "undefined_mase_rows": 347
+   },
+   "greenhouse_heating_kw": {
+    "forecast_integral_kwh": {
+     "max": 540159220993.3927,
+     "median": 0.0,
+     "p90": 172.68433681732995,
+     "p99": 513.0716630110052
+    },
+    "integral": {
+     "mean_error_kwh": 806207857.3574026,
+     "mean_forecast_kwh": 806207891.0618346,
+     "mean_true_kwh": 33.70443199043843,
+     "median_relative_error": 0.4081448212980018
+    },
+    "mean_mae_active": 1888.3825160903673,
+    "mean_mae_inactive": 35052560.525210775,
+    "onsets": {
+     "detected_within_tolerance": 65,
+     "f1": 0.2777777777777778,
+     "false_alarms": 273,
+     "true": 130
+    },
+    "rows": 670,
+    "rows_with_demand": 137,
+    "undefined_mase_rows": 345
+   }
+  },
+  "seasonal_naive": {
+   "both": {
+    "forecast_integral_kwh": {
+     "max": 4758.457324218751,
+     "median": 0.0,
+     "p90": 3649.1053710937504,
+     "p99": 4440.730078125001
+    },
+    "integral": {
+     "mean_error_kwh": -7.004419746968282,
+     "mean_forecast_kwh": 678.1854927267957,
+     "mean_true_kwh": 685.189912473764,
+     "median_relative_error": 0.11082990879021752
+    },
+    "mean_mae_active": 16.982246913185154,
+    "mean_mae_inactive": 1.67486107679457,
+    "onsets": {
+     "detected_within_tolerance": 306,
+     "f1": 0.7786259541984732,
+     "false_alarms": 100,
+     "true": 380
+    },
+    "rows": 1340,
+    "rows_with_demand": 427,
+    "undefined_mase_rows": 692
+   },
+   "greenhouse_cooling_kw": {
+    "forecast_integral_kwh": {
+     "max": 4758.457324218751,
+     "median": 0.0,
+     "p90": 3966.5241210937506,
+     "p99": 4631.428125
+    },
+    "integral": {
+     "mean_error_kwh": -19.948823752332085,
+     "mean_forecast_kwh": 1316.7265692047574,
+     "mean_true_kwh": 1336.6753929570896,
+     "median_relative_error": 0.07377470985717152
+    },
+    "mean_mae_active": 20.857477220414548,
+    "mean_mae_inactive": 3.26648534027251,
+    "onsets": {
+     "detected_within_tolerance": 209,
+     "f1": 0.8410462776659959,
+     "false_alarms": 38,
+     "true": 250
+    },
+    "rows": 670,
+    "rows_with_demand": 290,
+    "undefined_mase_rows": 347
+   },
+   "greenhouse_heating_kw": {
+    "forecast_integral_kwh": {
+     "max": 599.305078125,
+     "median": 0.0,
+     "p90": 155.71142578124997,
+     "p99": 478.05029296875
+    },
+    "integral": {
+     "mean_error_kwh": 5.939984258395522,
+     "mean_forecast_kwh": 39.64441624883395,
+     "mean_true_kwh": 33.70443199043843,
+     "median_relative_error": 0.6450559701492538
+    },
+    "mean_mae_active": 8.779204657006144,
+    "mean_mae_inactive": 0.18538583321148278,
+    "onsets": {
+     "detected_within_tolerance": 97,
+     "f1": 0.671280276816609,
+     "false_alarms": 62,
+     "true": 130
+    },
+    "rows": 670,
+    "rows_with_demand": 137,
+    "undefined_mase_rows": 345
+   }
+  },
+  "timesfm25": {
+   "both": {
+    "forecast_integral_kwh": {
+     "max": 4818.199890136719,
+     "median": 0.6596998944878578,
+     "p90": 3566.446487426758,
+     "p99": 4476.031684875488
+    },
+    "integral": {
+     "mean_error_kwh": -20.509171145352685,
+     "mean_forecast_kwh": 664.6807413284114,
+     "mean_true_kwh": 685.189912473764,
+     "median_relative_error": 0.09151276154225016
+    },
+    "mean_mae_active": 16.036960714662786,
+    "mean_mae_inactive": 2.4111512570764924,
+    "onsets": {
+     "detected_within_tolerance": 223,
+     "f1": 0.5068181818181818,
+     "false_alarms": 277,
+     "true": 380
+    },
+    "rows": 1340,
+    "rows_with_demand": 427,
+    "undefined_mase_rows": 692
+   },
+   "greenhouse_cooling_kw": {
+    "forecast_integral_kwh": {
+     "max": 4818.199890136719,
+     "median": 1.1135589256882668,
+     "p90": 3969.1595916748047,
+     "p99": 4578.845138549805
+    },
+    "integral": {
+     "mean_error_kwh": -54.751368277713546,
+     "mean_forecast_kwh": 1281.924024679376,
+     "mean_true_kwh": 1336.6753929570896,
+     "median_relative_error": 0.05360686529674081
+    },
+    "mean_mae_active": 20.064541825733436,
+    "mean_mae_inactive": 4.228739204954364,
+    "onsets": {
+     "detected_within_tolerance": 145,
+     "f1": 0.6387665198237885,
+     "false_alarms": 59,
+     "true": 250
+    },
+    "rows": 670,
+    "rows_with_demand": 290,
+    "undefined_mase_rows": 347
+   },
+   "greenhouse_heating_kw": {
+    "forecast_integral_kwh": {
+     "max": 647.3880157470703,
+     "median": 0.4069466218352318,
+     "p90": 213.38243198394775,
+     "p99": 461.8199043273926
+    },
+    "integral": {
+     "mean_error_kwh": 13.73302598700817,
+     "mean_forecast_kwh": 47.437457977446606,
+     "mean_true_kwh": 33.70443199043843,
+     "median_relative_error": 0.712405125454922
+    },
+    "mean_mae_active": 7.511424056192069,
+    "mean_mae_inactive": 0.7102144760027234,
+    "onsets": {
+     "detected_within_tolerance": 78,
+     "f1": 0.36619718309859156,
+     "false_alarms": 218,
+     "true": 130
+    },
+    "rows": 670,
+    "rows_with_demand": 137,
+    "undefined_mase_rows": 345
+   }
+  },
+  "timesfm3": {
+   "both": {
+    "forecast_integral_kwh": {
+     "max": 4760.240798950195,
+     "median": 0.0,
+     "p90": 3677.7556686401367,
+     "p99": 4398.15535736084
+    },
+    "integral": {
+     "mean_error_kwh": -6.573152195415427,
+     "mean_forecast_kwh": 678.6167602783486,
+     "mean_true_kwh": 685.189912473764,
+     "median_relative_error": 0.05708723589701101
+    },
+    "mean_mae_active": 12.1393833605736,
+    "mean_mae_inactive": 1.8906067803116993,
+    "onsets": {
+     "detected_within_tolerance": 254,
+     "f1": 0.6571798188874515,
+     "false_alarms": 139,
+     "true": 380
+    },
+    "rows": 1340,
+    "rows_with_demand": 427,
+    "undefined_mase_rows": 692
+   },
+   "greenhouse_cooling_kw": {
+    "forecast_integral_kwh": {
+     "max": 4760.240798950195,
+     "median": 0.0,
+     "p90": 3998.652069091797,
+     "p99": 4553.764213562012
+    },
+    "integral": {
+     "mean_error_kwh": -20.526864624736046,
+     "mean_forecast_kwh": 1316.1485283323536,
+     "mean_true_kwh": 1336.6753929570896,
+     "median_relative_error": 0.03301415319159802
+    },
+    "mean_mae_active": 15.256326121012425,
+    "mean_mae_inactive": 3.6589288316608815,
+    "onsets": {
+     "detected_within_tolerance": 154,
+     "f1": 0.6511627906976745,
+     "false_alarms": 69,
+     "true": 250
+    },
+    "rows": 670,
+    "rows_with_demand": 290,
+    "undefined_mase_rows": 347
+   },
+   "greenhouse_heating_kw": {
+    "forecast_integral_kwh": {
+     "max": 527.0133295059204,
+     "median": 0.0,
+     "p90": 173.28298377990723,
+     "p99": 454.8955764770508
+    },
+    "integral": {
+     "mean_error_kwh": 7.380560233905191,
+     "mean_forecast_kwh": 41.08499222434362,
+     "mean_true_kwh": 33.70443199043843,
+     "median_relative_error": 0.428958662363676
+    },
+    "mean_mae_active": 5.541475327527912,
+    "mean_mae_inactive": 0.23577405464612128,
+    "onsets": {
+     "detected_within_tolerance": 100,
+     "f1": 0.6666666666666666,
+     "false_alarms": 70,
+     "true": 130
+    },
+    "rows": 670,
+    "rows_with_demand": 137,
+    "undefined_mase_rows": 345
+   }
+  }
+ },
+ "bank_manifest": "3554941e158285b49828879b0a6880b7c918c4524037452a88449832375f540f",
+ "context": 168,
+ "horizon": 96,
+ "min_pairs_per_cell": 10,
+ "onset_tolerance_samples": 2,
+ "partition": "dev",
+ "report_hash": "49b0ba310b8393c4c9ede42385b1eb20c9f1bf7df5520593a4b28539067b60ad",
+ "scenarios": 134,
+ "service": {
+  "timesfm25": {
+   "health": {
+    "checkpoint": "google/timesfm-2.5-200m-pytorch",
+    "licence": "Apache-2.0",
+    "max_context": 2048,
+    "max_horizon": 256,
+    "model": "timesfm-2.5",
+    "past_only_covariates": "ignored",
+    "status": "ok",
+    "version": "unknown"
+   },
+   "url": "http://127.0.0.1:8088"
+  },
+  "timesfm3": {
+   "health": {
+    "checkpoint": "google/timesfm-3.0-pytorch",
+    "licence": "timesfm-non-commercial-license-v1.0 (research and benchmarking only)",
+    "max_context": 2048,
+    "max_horizon": 1024,
+    "model": "timesfm-3.0",
+    "past_only_covariates": "native",
+    "status": "ok",
+    "version": "unknown"
+   },
+   "url": "http://127.0.0.1:8089"
+  },
+  "used": false
+ },
+ "status": "PASS",
+ "time_scale": {
+  "cycle_minutes": 1440.0,
+  "event_minutes": 360.0,
+  "onset_tolerance_minutes": 120.0,
+  "sampling_minutes": 60.0
+ }
+}
