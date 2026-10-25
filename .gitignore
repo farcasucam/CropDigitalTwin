@@ -11,3 +11,7 @@ docs/xai/TFG.pdf
 graphify-out/
 data/xai/_cache_c/
 data/xai/gctsb_c_dev/scenarios/
+
+# Python bytecode
+__pycache__/
+*.pyc
