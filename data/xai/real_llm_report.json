@@ -1,0 +1,449 @@
+{
+ "llm": "REAL (Spark, vLLM, temperature 0, seed 0)",
+ "models": {
+  "llama-3.1-8b": "meta-llama/Llama-3.1-8B-Instruct",
+  "olmo-3-7b": "allenai/Olmo-3-7B-Instruct",
+  "qwen2.5-7b": "Qwen/Qwen2.5-7B-Instruct"
+ },
+ "report_hash": "afe1fbd0b7e274f0c03f5124aec2f7d9ac9f275f0e6e7aafaf4bc1375035545d",
+ "rows": [
+  {
+   "attempts": 2,
+   "bundle_hash": "10b9409872a02d3d2090104cbe3dce4576a2f63661394fb5e536814439142013",
+   "case": "0_tomato_outdoor_off",
+   "claims": 2,
+   "corrections": {
+    "BLOCKED": 1,
+    "REWRITTEN": 2
+   },
+   "error": "",
+   "language": "en",
+   "model": "qwen2.5-7b",
+   "status": "OK",
+   "violations_by_rule": {
+    "NUMERIC_VALUE_MISMATCH": 5,
+    "RECOMMENDATION_UNCONFIRMED": 1
+   }
+  },
+  {
+   "attempts": 2,
+   "bundle_hash": "71dceaa7fe8c5f63de94e0f6d49f975ab91eefd198084376f82d51640fe262fd",
+   "case": "0_tomato_outdoor_off",
+   "claims": 0,
+   "corrections": {},
+   "error": "a recommendation cites claims that do not exist: ['ee5de46b2b', 'df2048225a', '007ead50ed', '0ecd4dfb8a']",
+   "language": "es",
+   "model": "qwen2.5-7b",
+   "status": "UNPARSEABLE",
+   "violations_by_rule": {}
+  },
+  {
+   "attempts": 2,
+   "bundle_hash": "959418069bdae36446b06463a1d91cfa958bcbc6805386972b1b50547bb21eac",
+   "case": "1_tomato_greenhouse_off",
+   "claims": 0,
+   "corrections": {},
+   "error": "the answer is not JSON: Expecting ',' delimiter at position 10869",
+   "language": "en",
+   "model": "qwen2.5-7b",
+   "status": "UNPARSEABLE",
+   "violations_by_rule": {}
+  },
+  {
+   "attempts": 1,
+   "bundle_hash": "933394274002bdeeca9562b1c19f081f8cf4663ee1177577022795eb401312d6",
+   "case": "1_tomato_greenhouse_off",
+   "claims": 1,
+   "corrections": {
+    "REMOVED": 1,
+    "REWRITTEN": 1
+   },
+   "error": "",
+   "language": "es",
+   "model": "qwen2.5-7b",
+   "status": "OK",
+   "violations_by_rule": {
+    "NUMBER_NOT_IN_FACT": 1,
+    "RECOMMENDATION_UNSUPPORTED": 1
+   }
+  },
+  {
+   "attempts": 2,
+   "bundle_hash": "c5fa9e40a4aa3164fd93325317c5e2a5fcf2e00bd720cdb223041efb7c7a5b17",
+   "case": "2_pepper_greenhouse_on",
+   "claims": 6,
+   "corrections": {
+    "REMOVED": 3
+   },
+   "error": "",
+   "language": "en",
+   "model": "qwen2.5-7b",
+   "status": "OK",
+   "violations_by_rule": {
+    "NUMBER_NOT_IN_FACT": 1,
+    "OVERCLAIM_CAUSAL": 1,
+    "RECOMMENDATION_UNSUPPORTED": 1
+   }
+  },
+  {
+   "attempts": 1,
+   "bundle_hash": "303333dabc4abb078014611f2182978a86850021c940c75d8352c0235b0180fe",
+   "case": "2_pepper_greenhouse_on",
+   "claims": 1,
+   "corrections": {
+    "REMOVED": 1
+   },
+   "error": "",
+   "language": "es",
+   "model": "qwen2.5-7b",
+   "status": "OK",
+   "violations_by_rule": {
+    "RECOMMENDATION_UNSUPPORTED": 1
+   }
+  },
+  {
+   "attempts": 2,
+   "bundle_hash": "904a6a6fb86af8c453c57c056f78dec17427981e511c2ec4b8e6c910f30b26a6",
+   "case": "3_pepper_greenhouse_on_on",
+   "claims": 8,
+   "corrections": {
+    "REMOVED": 1,
+    "REWRITTEN": 2
+   },
+   "error": "",
+   "language": "en",
+   "model": "qwen2.5-7b",
+   "status": "OK",
+   "violations_by_rule": {
+    "RECOMMENDATION_UNSUPPORTED": 1,
+    "UNIT_MISMATCH": 4
+   }
+  },
+  {
+   "attempts": 1,
+   "bundle_hash": "e40fc8949dc35b48b364a6a93e750ea3b9e72999e624aa052bd4f33642e408bd",
+   "case": "3_pepper_greenhouse_on_on",
+   "claims": 8,
+   "corrections": {
+    "REMOVED": 1,
+    "REWRITTEN": 8
+   },
+   "error": "",
+   "language": "es",
+   "model": "qwen2.5-7b",
+   "status": "OK",
+   "violations_by_rule": {
+    "NUMBER_NOT_IN_FACT": 6,
+    "NUMERIC_VALUE_MISMATCH": 3,
+    "RECOMMENDATION_UNSUPPORTED": 1,
+    "UNIT_MISMATCH": 8
+   }
+  },
+  {
+   "attempts": 2,
+   "bundle_hash": "f24b87ccbacc15fe5e80cbec52284c8c27b7f5a0b585dc7bf529dc47d4f02152",
+   "case": "0_tomato_outdoor_off",
+   "claims": 0,
+   "corrections": {},
+   "error": "the answer is not JSON: Unterminated string starting at at position 11548",
+   "language": "en",
+   "model": "llama-3.1-8b",
+   "status": "UNPARSEABLE",
+   "violations_by_rule": {}
+  },
+  {
+   "attempts": 1,
+   "bundle_hash": "1c32a43340e4979212e61a32a84f5526b996eef398f800fc922577a227e1ad6c",
+   "case": "0_tomato_outdoor_off",
+   "claims": 30,
+   "corrections": {
+    "REMOVED": 3
+   },
+   "error": "",
+   "language": "es",
+   "model": "llama-3.1-8b",
+   "status": "OK",
+   "violations_by_rule": {
+    "NUMBER_NOT_IN_FACT": 1,
+    "OVERCLAIM_CAUSAL": 1,
+    "RECOMMENDATION_UNSUPPORTED": 1
+   }
+  },
+  {
+   "attempts": 2,
+   "bundle_hash": "2650578b69a953ac4e3552aec149cecb0a9c40fa2965b6279f228ffcedcd0d76",
+   "case": "1_tomato_greenhouse_off",
+   "claims": 0,
+   "corrections": {},
+   "error": "the answer is not JSON: Unterminated string starting at at position 11367",
+   "language": "en",
+   "model": "llama-3.1-8b",
+   "status": "UNPARSEABLE",
+   "violations_by_rule": {}
+  },
+  {
+   "attempts": 1,
+   "bundle_hash": "308abbdef7280257b4e09e27f672e544609f65b0f49c09518a103c2536400c6c",
+   "case": "1_tomato_greenhouse_off",
+   "claims": 1,
+   "corrections": {
+    "REMOVED": 2
+   },
+   "error": "",
+   "language": "es",
+   "model": "llama-3.1-8b",
+   "status": "OK",
+   "violations_by_rule": {
+    "OVERCLAIM_CAUSAL": 2
+   }
+  },
+  {
+   "attempts": 2,
+   "bundle_hash": "761704ce430bc6fff6b684baedaf1b3cedc4fe4045ac5c6e548cd0c8c0c4b7bb",
+   "case": "2_pepper_greenhouse_on",
+   "claims": 0,
+   "corrections": {},
+   "error": "the answer is not JSON: Unterminated string starting at at position 10828",
+   "language": "en",
+   "model": "llama-3.1-8b",
+   "status": "UNPARSEABLE",
+   "violations_by_rule": {}
+  },
+  {
+   "attempts": 2,
+   "bundle_hash": "6e10c23f197e9e5376abf37674100c5d1b09cfd5bc362657411d737a3b263634",
+   "case": "2_pepper_greenhouse_on",
+   "claims": 0,
+   "corrections": {},
+   "error": "the answer is not JSON: Unterminated string starting at at position 11425",
+   "language": "es",
+   "model": "llama-3.1-8b",
+   "status": "UNPARSEABLE",
+   "violations_by_rule": {}
+  },
+  {
+   "attempts": 2,
+   "bundle_hash": "566ceba1f7fbb5aa2826ebcee58594a57864cf90b8e8d50e5a9ed3662965090e",
+   "case": "3_pepper_greenhouse_on_on",
+   "claims": 31,
+   "corrections": {
+    "REMOVED": 4
+   },
+   "error": "",
+   "language": "en",
+   "model": "llama-3.1-8b",
+   "status": "OK",
+   "violations_by_rule": {
+    "NUMBER_NOT_IN_FACT": 1,
+    "OVERCLAIM_CONFIRMED": 2,
+    "RECOMMENDATION_UNSUPPORTED": 1
+   }
+  },
+  {
+   "attempts": 1,
+   "bundle_hash": "f60013034fc325a1864a66d55d8b627024678e6a8f869152ef1dea4f5539e072",
+   "case": "3_pepper_greenhouse_on_on",
+   "claims": 9,
+   "corrections": {
+    "REMOVED": 1
+   },
+   "error": "",
+   "language": "es",
+   "model": "llama-3.1-8b",
+   "status": "OK",
+   "violations_by_rule": {
+    "NUMBER_NOT_IN_FACT": 1,
+    "OVERCLAIM_CAUSAL": 1
+   }
+  },
+  {
+   "attempts": 1,
+   "bundle_hash": "d35174b3f9afba85ffc41870f19ef687223ca155dee69475f7d9d7c69bc94eb7",
+   "case": "0_tomato_outdoor_off",
+   "claims": 2,
+   "corrections": {
+    "REMOVED": 1,
+    "REWRITTEN": 1
+   },
+   "error": "",
+   "language": "en",
+   "model": "olmo-3-7b",
+   "status": "OK",
+   "violations_by_rule": {
+    "NUMBER_NOT_IN_FACT": 1,
+    "NUMERIC_VALUE_MISMATCH": 27,
+    "OVERCLAIM_CONFIRMED": 1,
+    "TRACE_NO_FACT": 1,
+    "UNIT_MISMATCH": 1
+   }
+  },
+  {
+   "attempts": 2,
+   "bundle_hash": "cb1fa123965c621b26c85f234bc3ced6ae2cc75c31c6617552d63b8739e39b72",
+   "case": "0_tomato_outdoor_off",
+   "claims": 0,
+   "corrections": {},
+   "error": "the answer is not JSON: Unterminated string starting at at position 11583",
+   "language": "es",
+   "model": "olmo-3-7b",
+   "status": "UNPARSEABLE",
+   "violations_by_rule": {}
+  },
+  {
+   "attempts": 1,
+   "bundle_hash": "dc35efe211a5ecb4db709a5ffb2f79a7e6204055a64d542834a932360bab2008",
+   "case": "1_tomato_greenhouse_off",
+   "claims": 29,
+   "corrections": {
+    "BLOCKED": 1,
+    "REMOVED": 1,
+    "REWRITTEN": 24
+   },
+   "error": "",
+   "language": "en",
+   "model": "olmo-3-7b",
+   "status": "OK",
+   "violations_by_rule": {
+    "NUMBER_NOT_IN_FACT": 24,
+    "NUMERIC_VALUE_MISMATCH": 23,
+    "OVERCLAIM_CONFIRMED": 2,
+    "RECOMMENDATION_UNCONFIRMED": 1
+   }
+  },
+  {
+   "attempts": 1,
+   "bundle_hash": "b1bf2e0c5080969cc8801240016360126fd018330c69eeee7ee440a90c3218fd",
+   "case": "1_tomato_greenhouse_off",
+   "claims": 2,
+   "corrections": {
+    "REMOVED": 5,
+    "REWRITTEN": 1
+   },
+   "error": "",
+   "language": "es",
+   "model": "olmo-3-7b",
+   "status": "OK",
+   "violations_by_rule": {
+    "NUMBER_NOT_IN_FACT": 1,
+    "NUMERIC_VALUE_MISMATCH": 67,
+    "OVERCLAIM_CAUSAL": 3,
+    "OVERCLAIM_CONFIRMED": 2,
+    "RECOMMENDATION_UNSUPPORTED": 1,
+    "TRACE_NO_FACT": 1,
+    "UNIT_MISMATCH": 1
+   }
+  },
+  {
+   "attempts": 1,
+   "bundle_hash": "6749fad4efbe28ff435708548bb44a2c48af10f4d9a749857c0cb4c759226444",
+   "case": "2_pepper_greenhouse_on",
+   "claims": 8,
+   "corrections": {
+    "REMOVED": 2,
+    "REWRITTEN": 2
+   },
+   "error": "",
+   "language": "en",
+   "model": "olmo-3-7b",
+   "status": "OK",
+   "violations_by_rule": {
+    "NUMBER_NOT_IN_FACT": 2,
+    "NUMERIC_VALUE_MISMATCH": 1,
+    "OVERCLAIM_CAUSAL": 1,
+    "TRACE_NO_FACT": 1,
+    "UNIT_MISMATCH": 5
+   }
+  },
+  {
+   "attempts": 2,
+   "bundle_hash": "66e287ace6499c9a69e463b0874d5dd68195fcd4c0d0671ecc68aed6734e2fea",
+   "case": "2_pepper_greenhouse_on",
+   "claims": 1,
+   "corrections": {
+    "BLOCKED": 1,
+    "REWRITTEN": 1
+   },
+   "error": "",
+   "language": "es",
+   "model": "olmo-3-7b",
+   "status": "OK",
+   "violations_by_rule": {
+    "NUMBER_NOT_IN_FACT": 1,
+    "NUMERIC_VALUE_MISMATCH": 55,
+    "RECOMMENDATION_UNCONFIRMED": 1,
+    "UNIT_MISMATCH": 1
+   }
+  },
+  {
+   "attempts": 1,
+   "bundle_hash": "4626dc6f3ab9add64acea67aeddf2e6c07cfb2f6e7073e0a1f1945f663cab37e",
+   "case": "3_pepper_greenhouse_on_on",
+   "claims": 13,
+   "corrections": {
+    "REMOVED": 1,
+    "REWRITTEN": 2
+   },
+   "error": "",
+   "language": "en",
+   "model": "olmo-3-7b",
+   "status": "OK",
+   "violations_by_rule": {
+    "NUMBER_NOT_IN_FACT": 2,
+    "NUMERIC_VALUE_MISMATCH": 1,
+    "UNIT_MISMATCH": 1
+   }
+  },
+  {
+   "attempts": 2,
+   "bundle_hash": "b5c71c873d56284f798a99dfcf992fa8a5ad507c3ea1580e7777b84b762b9b44",
+   "case": "3_pepper_greenhouse_on_on",
+   "claims": 0,
+   "corrections": {},
+   "error": "claim ids must be unique",
+   "language": "es",
+   "model": "olmo-3-7b",
+   "status": "UNPARSEABLE",
+   "violations_by_rule": {}
+  }
+ ],
+ "statement": "first measurement on real models: four synthetic scenarios, one run per model, language and scenario; what the verifier flags is reported, not a quality result, not a rate with an interval, no human evaluation",
+ "status": "MEASURED",
+ "summary": {
+  "llama-3.1-8b": {
+   "attempts": 13,
+   "claims": 71,
+   "fact_ids_cited": 71,
+   "fact_ids_with_label": 40,
+   "recommendations_final": 2,
+   "runs": 8,
+   "runs_with_violations": 4,
+   "truncated_last_attempt": 4,
+   "unparseable": 4,
+   "violations": 11
+  },
+  "olmo-3-7b": {
+   "attempts": 11,
+   "claims": 55,
+   "fact_ids_cited": 159,
+   "fact_ids_with_label": 159,
+   "recommendations_final": 2,
+   "runs": 8,
+   "runs_with_violations": 6,
+   "truncated_last_attempt": 1,
+   "unparseable": 2,
+   "violations": 229
+  },
+  "qwen2.5-7b": {
+   "attempts": 13,
+   "claims": 26,
+   "fact_ids_cited": 96,
+   "fact_ids_with_label": 51,
+   "recommendations_final": 1,
+   "runs": 8,
+   "runs_with_violations": 6,
+   "truncated_last_attempt": 1,
+   "unparseable": 2,
+   "violations": 35
+  }
+ }
+}
