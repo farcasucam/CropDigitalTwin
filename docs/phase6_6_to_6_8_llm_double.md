@@ -27,3 +27,7 @@ Framework (tsxai, standard library only): `tsxai.llm` (the explanation schema), 
 * The verifier checks consistency with the facts, not that the facts are the right ones, and not that a true statement is useful or complete. Paraphrases that avoid the marker words (causal or confirmation) are a known blind spot of a rule-based check.
 * H5 (numeric faithfulness and causal over-claim rate) and the ablation arms A0-A4 are **not evaluated**: they need real models, repetitions and at least two LLMs.
 * Next: the three LLM containers of the Spark are stopped (they are not this project's: permission is needed to start them) and the access by SSH key is ready; then the double is replaced by an OpenAI-compatible client with record/replay, and the same verifier runs on real answers.
+
+## Spark LLM access (2026-10-26)
+
+SSH key access to the Spark works (`farcas@192.168.1.112`, no password). On the user's instruction ("sigue con el acceso a los LLM de la Spark") the three containers were started unchanged with `docker start fgkb-qwen fgkb-llama fgkb-olmo`. All three answer the OpenAI-compatible `/v1/chat/completions` from the laptop over the LAN: Qwen2.5-7B-Instruct on :8000, Llama-3.1-8B-Instruct on :8001, Olmo-3-7B-Instruct on :8002 (max-model-len 8192, seed 0). Free memory dropped to about 33 GiB (the three take about 0.22 each), so any new service must fit there. Next: the OpenAI-compatible client with record/replay (6.6), then the same verifier on real answers.
