@@ -32,7 +32,9 @@ from manual_phase6_7_verifier_double_test import twin_confirmation  # noqa: E402
 
 HOST = os.environ.get("SPARK_HOST", "192.168.1.112")
 MODELS = {"qwen2.5-7b": (8000, "Qwen/Qwen2.5-7B-Instruct"), "llama-3.1-8b": (8001, "meta-llama/Llama-3.1-8B-Instruct"), "olmo-3-7b": (8002, "allenai/Olmo-3-7B-Instruct")}
-RECORDS = ROOT / "data" / "xai" / "llm_records"
+DESIGN = sys.argv[sys.argv.index("--design") + 1] if "--design" in sys.argv else "v1"  # v1: one claim per fact (the first run); v2: short, bounded explanation (docs/phase6_6_real_llm.md section 5)
+RECORDS = ROOT / "data" / "xai" / ("llm_records" if DESIGN == "v1" else f"llm_records_{DESIGN}")
+REPORT = ROOT / "data" / "xai" / ("real_llm_report.json" if DESIGN == "v1" else f"real_llm_report_{DESIGN}.json")
 # The prompt takes 1.6-3.1k tokens and the models write one claim per fact; the first run with 2048 truncated 26 of 39 answers (finish_reason=length), kept in llm_records_max2048/. max_model_len is 8192 and the longest prompt takes about 3.4k, so 4096 is the most that always fits.
 MAX_TOKENS = 4096
 
@@ -74,12 +76,13 @@ def main(replay: bool) -> int:
         jobs = [(case, facts, pack, language) for case, facts, pack in cases for language in ("en", "es")]
         # decoding is memory-bandwidth bound, so the server batches simultaneous requests at almost the cost of one: all of a model's runs go at once (each request is still temperature 0 with a fixed seed)
         with ThreadPoolExecutor(max_workers=len(jobs)) as pool:
-            bundles = list(pool.map(lambda job: explain(job[1], job[2], model, job[3], max_tokens=MAX_TOKENS), jobs))
+            bundles = list(pool.map(lambda job: explain(job[1], job[2], model, job[3], max_tokens=MAX_TOKENS, design=DESIGN), jobs))
         for (case, facts, pack, language), bundle in zip(jobs, bundles):
             counts["runs"] += 1
             counts["truncated_last_attempt"] += bundle.model.get("finish_reason") == "length"
             counts["attempts"] += bundle.attempts
             counts["unparseable"] += bundle.status != "OK"
+            counts["flagged_claims"] += len({v.claim_id for v in bundle.report.violations if v.claim_id != "summary"}) if bundle.report else 0
             rules = Counter(v.rule for v in bundle.report.violations) if bundle.report else Counter()
             counts["runs_with_violations"] += bool(rules)
             counts["violations"] += sum(rules.values())
@@ -92,13 +95,14 @@ def main(replay: bool) -> int:
             # the replay of what was just recorded must give the identical bundles
             replayed = RecordedLanguageModel.load(path)
             for row, (case, facts, pack, language) in zip([r for r in rows if r["model"] == key], jobs):
-                assert explain(facts, pack, replayed, language, max_tokens=MAX_TOKENS).content_hash == row["bundle_hash"], (key, case, language)
+                assert explain(facts, pack, replayed, language, max_tokens=MAX_TOKENS, design=DESIGN).content_hash == row["bundle_hash"], (key, case, language)
         counts["fact_ids_cited"], counts["fact_ids_with_label"] = label_usage(path)
         summary[key] = dict(counts)
     report = {"status": "MEASURED", "llm": "REAL (Spark, vLLM, temperature 0, seed 0)", "models": {k: v[1] for k, v in MODELS.items()}, "summary": summary, "rows": rows,
               "statement": "first measurement on real models: four synthetic scenarios, one run per model, language and scenario; what the verifier flags is reported, not a quality result, not a rate with an interval, no human evaluation"}
     report["report_hash"] = content_hash({k: v for k, v in report.items() if k != "statement"})
-    out = ROOT / "data" / "xai" / "real_llm_report.json"
+    report["design"] = DESIGN
+    out = REPORT
     out.write_text(json.dumps(report, indent=1, sort_keys=True, allow_nan=False), encoding="utf-8")
     print(json.dumps({"summary": summary, "report_hash": report["report_hash"]}, indent=1))
     return 0

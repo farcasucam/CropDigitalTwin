@@ -1,11 +1,12 @@
 {
+ "design": "v1",
  "llm": "REAL (Spark, vLLM, temperature 0, seed 0)",
  "models": {
   "llama-3.1-8b": "meta-llama/Llama-3.1-8B-Instruct",
   "olmo-3-7b": "allenai/Olmo-3-7B-Instruct",
   "qwen2.5-7b": "Qwen/Qwen2.5-7B-Instruct"
  },
- "report_hash": "afe1fbd0b7e274f0c03f5124aec2f7d9ac9f275f0e6e7aafaf4bc1375035545d",
+ "report_hash": "664db87dda10f0c32d0cdf239781b78d140c084fe2162e0a5d72d154238a8732",
  "rows": [
   {
    "attempts": 2,
@@ -414,6 +415,7 @@
    "claims": 71,
    "fact_ids_cited": 71,
    "fact_ids_with_label": 40,
+   "flagged_claims": 6,
    "recommendations_final": 2,
    "runs": 8,
    "runs_with_violations": 4,
@@ -426,6 +428,7 @@
    "claims": 55,
    "fact_ids_cited": 159,
    "fact_ids_with_label": 159,
+   "flagged_claims": 39,
    "recommendations_final": 2,
    "runs": 8,
    "runs_with_violations": 6,
@@ -438,6 +441,7 @@
    "claims": 26,
    "fact_ids_cited": 96,
    "fact_ids_with_label": 51,
+   "flagged_claims": 20,
    "recommendations_final": 1,
    "runs": 8,
    "runs_with_violations": 6,
