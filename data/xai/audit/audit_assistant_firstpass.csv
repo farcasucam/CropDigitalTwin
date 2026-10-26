@@ -1,0 +1,53 @@
+row_id,assistant_category,note
+A001,OK,
+A002,FP_ARTIFACT,Spanish answer writes 5.88 and the fact writes 5 comma 88: same number
+A003,FP_ARTIFACT,Unicode minus sign in -0.188: the number is the fact's
+A004,MISS_SUBSTANTIVE,says an increase of 10.6 degC was confirmed in 7 of 7 variants; the fact confirms only the direction and says the size is not confirmed (variants gave 7.59-7.65)
+A005,OK,
+A006,TP_SUBSTANTIVE,-0.207 and declared -0.0295 are in no cited fact
+A007,OK,cites one extra unrelated fact; the text is the fact's
+A008,OK,
+A009,OK,
+A010,FP_ARTIFACT,declared 205 with unit sample is a sample index and correct; the rule only knows the fact's main unit
+A011,TP_MINOR,-0.188 rounded to -0.19
+A012,OK,
+A013,OK,
+A014,TP_MINOR,"says long runs are confirmed; the facts are observed: loose use of the word, not a causal claim"
+A015,OK,
+A016,FP_ARTIFACT,Spanish answer writes 0.744 and the fact 0 comma 744
+A017,TP_MINOR,"23 jumps is a count the model made, not a fact number"
+A018,OK,
+A019,OK,
+A020,MISS_SUBSTANTIVE,says the temperature increases; the fact says it shifts down at sample 188
+A021,TP_DECLARED_ONLY,claim text is the fact verbatim; the declared 10.0 degC belongs to no fact
+A022,FP_ARTIFACT,declared 133 h is in the fact and h is its unit; the rule only knows the fact's main unit
+A023,MISS_MINOR,"adds ""indicating potential external influences"" with no fact behind it (hedged)"
+A024,OK,
+A025,OK,
+A026,FP_ARTIFACT,Unicode minus sign
+A027,OK,
+A028,FP_ARTIFACT,133 horas is in the fact (total over 11 runs)
+A029,TP_SUBSTANTIVE,0.836 at sample 91 is not in the cited fact (which says 0.407 for other shifts)
+A030,FP_ARTIFACT,text is the facts verbatim; declared 78 h is the fact's
+A031,TP_DECLARED_ONLY,claim text is the fact verbatim; declared 10.0 degC belongs to no fact
+A032,OK,
+A033,MISS_MINOR,claim text is the fact verbatim; declared 10.0 degC with unit degC for a count of stretches is wrong and was not flagged
+A034,OK,
+A035,OK,
+A036,OK,
+A037,TP_DECLARED_ONLY,"claim text is the facts verbatim; declared unit h for a rate in degC/h"
+A038,TP_SUBSTANTIVE,1.96 kPa is not in the cited fact (max 1.8) and runs are called confirmed
+A039,TP_MINOR,"6 muestras is derived (155-160); the other numbers are the fact's with a decimal point"
+A040,FP_ARTIFACT,all three numbers are the fact's with a decimal point instead of a comma
+A041,FP_ARTIFACT,Unicode minus sign
+A042,TP_MINOR,"5 muestras is derived (83-88); the other numbers are the fact's with a decimal point"
+A043,OK,
+A044,TP_SUBSTANTIVE,"an observed jump is said to be confirmed by the twin, and 0.0898 is rounded to 0.09"
+A045,OK,"largest is not checked against all facts (the cited list is long)"
+A046,TP_DECLARED_ONLY,claim text is the fact verbatim; declared 10.0 degC belongs to no fact
+A047,TP_SUBSTANTIVE,6.5 is in no fact (the largest rise listed is 6.38)
+A048,MISS_SUBSTANTIVE,"suggests possible heating system malfunctions: an invented cause with no fact behind it"
+A049,TP_SUBSTANTIVE,"observed jumps said to be confirmed by the twin, range rounded to 0.8-1.1"
+A050,OK,
+A051,FP_ARTIFACT,text is the facts verbatim; declared unit sample is a count of samples
+A052,OK,

@@ -92,7 +92,8 @@ def main(replay: bool) -> int:
             counts["truncated_last_attempt"] += bundle.model.get("finish_reason") == "length"
             counts["attempts"] += bundle.attempts
             counts["unparseable"] += bundle.status != "OK"
-            counts["flagged_claims"] += len({v.claim_id for v in bundle.report.violations if v.claim_id != "summary"}) if bundle.report else 0
+            # only violations on real claim ids (the first version of this counter also counted "recommendation:n" and "caveat:n", which inflated the share of flagged claims)
+            counts["flagged_claims"] += len({v.claim_id for v in bundle.report.violations} & {c.claim_id for c in bundle.raw.claims}) if bundle.report else 0
             rules = Counter(v.rule for v in bundle.report.violations) if bundle.report else Counter()
             counts["runs_with_violations"] += bool(rules)
             counts["violations"] += sum(rules.values())

@@ -6,7 +6,7 @@
   "olmo-3-7b": "allenai/Olmo-3-7B-Instruct",
   "qwen2.5-7b": "Qwen/Qwen2.5-7B-Instruct"
  },
- "report_hash": "0ea61b7658648aae161c121101bc2028d296fdac061545efe040c9ffee421c79",
+ "report_hash": "e3747cbd89bedfb934f55a792b510808811943ba9f6da3a1b16d7de8eedbbe47",
  "rows": [
   {
    "attempts": 1,
@@ -431,7 +431,7 @@
    "claims": 38,
    "fact_ids_cited": 174,
    "fact_ids_with_label": 30,
-   "flagged_claims": 11,
+   "flagged_claims": 9,
    "recommendations_final": 15,
    "runs": 8,
    "runs_with_violations": 6,
@@ -444,7 +444,7 @@
    "claims": 29,
    "fact_ids_cited": 56,
    "fact_ids_with_label": 51,
-   "flagged_claims": 11,
+   "flagged_claims": 10,
    "recommendations_final": 0,
    "runs": 8,
    "runs_with_violations": 8,
@@ -457,7 +457,7 @@
    "claims": 37,
    "fact_ids_cited": 103,
    "fact_ids_with_label": 9,
-   "flagged_claims": 16,
+   "flagged_claims": 7,
    "recommendations_final": 9,
    "runs": 8,
    "runs_with_violations": 8,

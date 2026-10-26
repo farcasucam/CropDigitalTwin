@@ -6,7 +6,7 @@
   "olmo-3-7b": "allenai/Olmo-3-7B-Instruct",
   "qwen2.5-7b": "Qwen/Qwen2.5-7B-Instruct"
  },
- "report_hash": "664db87dda10f0c32d0cdf239781b78d140c084fe2162e0a5d72d154238a8732",
+ "report_hash": "13cf0a411de6426877c630765b0128f2006678756c73e9d109709ce78436b8f1",
  "rows": [
   {
    "attempts": 2,
@@ -407,6 +407,7 @@
    "violations_by_rule": {}
   }
  ],
+ "server": "fgkb",
  "statement": "first measurement on real models: four synthetic scenarios, one run per model, language and scenario; what the verifier flags is reported, not a quality result, not a rate with an interval, no human evaluation",
  "status": "MEASURED",
  "summary": {
@@ -415,7 +416,7 @@
    "claims": 71,
    "fact_ids_cited": 71,
    "fact_ids_with_label": 40,
-   "flagged_claims": 6,
+   "flagged_claims": 0,
    "recommendations_final": 2,
    "runs": 8,
    "runs_with_violations": 4,
@@ -428,7 +429,7 @@
    "claims": 55,
    "fact_ids_cited": 159,
    "fact_ids_with_label": 159,
-   "flagged_claims": 39,
+   "flagged_claims": 34,
    "recommendations_final": 2,
    "runs": 8,
    "runs_with_violations": 6,
@@ -441,7 +442,7 @@
    "claims": 26,
    "fact_ids_cited": 96,
    "fact_ids_with_label": 51,
-   "flagged_claims": 20,
+   "flagged_claims": 13,
    "recommendations_final": 1,
    "runs": 8,
    "runs_with_violations": 6,

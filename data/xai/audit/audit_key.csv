@@ -1,0 +1,53 @@
+﻿row_id,model,case,language,claim_id,flagged,rules,details
+A001,llama-3.1-8b,3_pepper_greenhouse_on_on,es,F:75a5423d19,False,,
+A002,qwen2.5-7b,0_tomato_outdoor_off,es,F:df2048225a,True,NUMBER_NOT_IN_FACT,numbers ['5.88'] are not in the cited facts
+A003,olmo-3-7b,0_tomato_outdoor_off,en,F:F:c8115fb47b,True,NUMBER_NOT_IN_FACT,numbers ['0.188'] are not in the cited facts
+A004,qwen2.5-7b,1_tomato_greenhouse_off,es,2cd4ae21c5,False,,
+A005,olmo-3-7b,1_tomato_greenhouse_off,es,F:9ec2e16ba4,False,,
+A006,qwen2.5-7b,1_tomato_greenhouse_off,en,c002,True,"NUMBER_NOT_IN_FACT,NUMERIC_VALUE_MISMATCH",numbers ['-0.207'] are not in the cited facts | -0.0295 is not a number of fact e10234d069
+A007,llama-3.1-8b,1_tomato_greenhouse_off,es,F:1e9673ff51,False,,
+A008,olmo-3-7b,0_tomato_outdoor_off,en,F:F:6c1cc6957e,False,,
+A009,olmo-3-7b,3_pepper_greenhouse_on_on,en,no_thresholds,False,,
+A010,llama-3.1-8b,1_tomato_greenhouse_off,en,6,True,UNIT_MISMATCH,unit 'sample' but the fact is in 'degC'
+A011,qwen2.5-7b,0_tomato_outdoor_off,en,c001,True,NUMBER_NOT_IN_FACT,numbers ['-0.19'] are not in the cited facts
+A012,llama-3.1-8b,0_tomato_outdoor_off,es,F:7029614251,False,,
+A013,olmo-3-7b,1_tomato_greenhouse_off,en,HEAT_DIR,False,,
+A014,olmo-3-7b,1_tomato_greenhouse_off,es,F:8,True,OVERCLAIM_CONFIRMED,confirmation wording ['confirmados'] above the evidence level of the cited facts
+A015,llama-3.1-8b,3_pepper_greenhouse_on_on,es,F:2939a4ba3c,False,,
+A016,qwen2.5-7b,0_tomato_outdoor_off,es,F:825a75a1d5,True,NUMBER_NOT_IN_FACT,numbers ['0.744'] are not in the cited facts
+A017,llama-3.1-8b,2_pepper_greenhouse_on,en,effects confirmed by the twin,True,NUMBER_NOT_IN_FACT,numbers ['23'] are not in the cited facts
+A018,qwen2.5-7b,3_pepper_greenhouse_on_on,en,3,False,,
+A019,llama-3.1-8b,1_tomato_greenhouse_off,es,F:9eff4038d4,False,,
+A020,qwen2.5-7b,3_pepper_greenhouse_on_on,en,5,False,,
+A021,llama-3.1-8b,2_pepper_greenhouse_on,es,F:a56684124c,True,NUMERIC_VALUE_MISMATCH,10.0 is not a number of fact 4061d679ac
+A022,llama-3.1-8b,0_tomato_outdoor_off,en,threshold_exceedances,True,UNIT_MISMATCH,unit 'h' but the fact is in 'degC'
+A023,qwen2.5-7b,2_pepper_greenhouse_on,en,2,False,,
+A024,olmo-3-7b,1_tomato_greenhouse_off,en,TEMP_LOW,False,,
+A025,qwen2.5-7b,2_pepper_greenhouse_on,es,46f5253775,False,,
+A026,olmo-3-7b,0_tomato_outdoor_off,en,F:F:287bf48eca,True,NUMBER_NOT_IN_FACT,numbers ['0.191'] are not in the cited facts
+A027,llama-3.1-8b,0_tomato_outdoor_off,en,blocked_by,False,,
+A028,qwen2.5-7b,0_tomato_outdoor_off,es,F:ee5de46b2b,True,UNIT_MISMATCH,unit 'h' but the fact is in 'degC'
+A029,qwen2.5-7b,3_pepper_greenhouse_on_on,en,4,True,"NUMBER_NOT_IN_FACT,NUMERIC_VALUE_MISMATCH","numbers ['0.836', '91'] are not in the cited facts | 0.836 is not a number of fact eaf4b15fb3"
+A030,llama-3.1-8b,1_tomato_greenhouse_off,en,4,True,UNIT_MISMATCH,unit 'h' but the fact is in 'degC'
+A031,llama-3.1-8b,2_pepper_greenhouse_on,es,F:25319a0d13,True,NUMERIC_VALUE_MISMATCH,10.0 is not a number of fact 0186eddada
+A032,llama-3.1-8b,1_tomato_greenhouse_off,es,F:b3098004e5,False,,
+A033,llama-3.1-8b,2_pepper_greenhouse_on,es,F:21435595c1,False,,
+A034,qwen2.5-7b,1_tomato_greenhouse_off,en,c001,False,,
+A035,qwen2.5-7b,3_pepper_greenhouse_on_on,en,1,False,,
+A036,llama-3.1-8b,1_tomato_greenhouse_off,es,F:2cd4ae21c5,False,,
+A037,llama-3.1-8b,1_tomato_greenhouse_off,en,2,True,UNIT_MISMATCH,unit 'h' but the fact is in 'degC/h' | unit 'h' but the fact is in 'degC/h'
+A038,olmo-3-7b,1_tomato_greenhouse_off,es,F:5ded0dfb24,True,"NUMBER_NOT_IN_FACT,OVERCLAIM_CONFIRMED","confirmation wording ['confirmados'] above the evidence level of the cited facts | numbers ['1.4', '1.96'] are not in the cited facts"
+A039,olmo-3-7b,1_tomato_greenhouse_off,es,F:981e3b441a,True,NUMBER_NOT_IN_FACT,"numbers ['5.38', '6', '0.897'] are not in the cited facts"
+A040,qwen2.5-7b,0_tomato_outdoor_off,es,F:02b8dd827e,True,NUMBER_NOT_IN_FACT,"numbers ['7.34', '17.2', '10.8'] are not in the cited facts"
+A041,olmo-3-7b,0_tomato_outdoor_off,en,F:F:81ab568ad2,True,NUMBER_NOT_IN_FACT,numbers ['0.192'] are not in the cited facts
+A042,olmo-3-7b,1_tomato_greenhouse_off,es,F:022a6b545b,True,NUMBER_NOT_IN_FACT,"numbers ['3.04', '5', '0.507'] are not in the cited facts"
+A043,qwen2.5-7b,3_pepper_greenhouse_on_on,es,f3c32cd6bb,False,,
+A044,olmo-3-7b,3_pepper_greenhouse_on_on,en,vpd_jumps_confirmed_by_twin,True,"NUMBER_NOT_IN_FACT,OVERCLAIM_CONFIRMED",confirmation wording ['confirmed'] above the evidence level of the cited facts | numbers ['0.09'] are not in the cited facts
+A045,qwen2.5-7b,0_tomato_outdoor_off,en,c003,False,,
+A046,llama-3.1-8b,2_pepper_greenhouse_on,es,F:92edd32667,True,NUMERIC_VALUE_MISMATCH,10.0 is not a number of fact 30efe4677e
+A047,olmo-3-7b,1_tomato_greenhouse_off,en,LARGEST_CHANGES,True,NUMBER_NOT_IN_FACT,numbers ['6.5'] are not in the cited facts
+A048,qwen2.5-7b,2_pepper_greenhouse_on,en,3,False,,
+A049,olmo-3-7b,3_pepper_greenhouse_on_on,en,temperature_jumps_confirmed_by_twin,True,"NUMBER_NOT_IN_FACT,OVERCLAIM_CONFIRMED","confirmation wording ['confirmed'] above the evidence level of the cited facts | numbers ['0.8', '1.1'] are not in the cited facts"
+A050,llama-3.1-8b,0_tomato_outdoor_off,en,forecasts,False,,
+A051,llama-3.1-8b,1_tomato_greenhouse_off,en,1,True,UNIT_MISMATCH,unit 'sample' but the fact is in 'degC' | unit 'sample' but the fact is in 'kPa' | unit 'sample' but the fact is in 'kPa'
+A052,olmo-3-7b,2_pepper_greenhouse_on,en,temperature_c shift down at sample 115 by 1.09 degC (confirmed by twin),False,,
