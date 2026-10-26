@@ -1,0 +1,158 @@
+{
+ "faithful_runs": 8,
+ "faithful_violations": 0,
+ "llm": "DOUBLE (no real model)",
+ "planted": {
+  "causal": {
+   "caught": 8,
+   "planted": 8
+  },
+  "confirmed": {
+   "caught": 8,
+   "planted": 8
+  },
+  "forbidden": {
+   "caught": 8,
+   "planted": 8
+  },
+  "number": {
+   "caught": 8,
+   "planted": 8
+  },
+  "phantom_fact": {
+   "caught": 8,
+   "planted": 8
+  },
+  "real_world": {
+   "caught": 8,
+   "planted": 8
+  },
+  "recommendation": {
+   "caught": 8,
+   "planted": 8
+  },
+  "unit": {
+   "caught": 8,
+   "planted": 8
+  },
+  "untraced": {
+   "caught": 8,
+   "planted": 8
+  }
+ },
+ "report_hash": "9845be703249e40c1b56af99d35ec121df2bc58b2bdf5d0c829da7ad54205959",
+ "rows": [
+  {
+   "bundle_hash": "b3b2238a5c15b47f15fab20a5aeb9ca9288ec2ee938e669b080c9b3df0becf71",
+   "by_level": {
+    "MODEL_ESTIMATED": 2,
+    "OBSERVED": 28
+   },
+   "case": "0_tomato_outdoor_off",
+   "claims": 30,
+   "facts": 30,
+   "language": "en"
+  },
+  {
+   "bundle_hash": "0f731670a697e230c80b8758f5a447f87f1990bb44c6784e1c62a519b3b21161",
+   "by_level": {
+    "MODEL_ESTIMATED": 2,
+    "OBSERVED": 28
+   },
+   "case": "0_tomato_outdoor_off",
+   "claims": 30,
+   "facts": 30,
+   "language": "es"
+  },
+  {
+   "bundle_hash": "d80417d40c9fa4153da7345ddf494781f8f65c39ae4d4e31be5ef0b1968a56ec",
+   "by_level": {
+    "ASSOCIATED": 2,
+    "MODEL_ESTIMATED": 2,
+    "OBSERVED": 35,
+    "TWIN_CONFIRMED": 1
+   },
+   "case": "1_tomato_greenhouse_off",
+   "claims": 40,
+   "facts": 40,
+   "language": "en",
+   "twin_variant_peaks_c": [
+    7.6229121969241405,
+    7.6231175929496295,
+    7.592715412885159,
+    7.650287664207223,
+    7.622107836030917,
+    7.606864985016557,
+    7.603482158321196
+   ]
+  },
+  {
+   "bundle_hash": "e2f73f3fc55375c8fd551b63c8374901378a3de3b9be12876d7ff322f2e1951d",
+   "by_level": {
+    "ASSOCIATED": 2,
+    "MODEL_ESTIMATED": 2,
+    "OBSERVED": 35,
+    "TWIN_CONFIRMED": 1
+   },
+   "case": "1_tomato_greenhouse_off",
+   "claims": 40,
+   "facts": 40,
+   "language": "es",
+   "twin_variant_peaks_c": [
+    7.6229121969241405,
+    7.6231175929496295,
+    7.592715412885159,
+    7.650287664207223,
+    7.622107836030917,
+    7.606864985016557,
+    7.603482158321196
+   ]
+  },
+  {
+   "bundle_hash": "83ef05d8c76caccdf8a97f3c13ada866926c5005f17e3a2a384c06df2bccb290",
+   "by_level": {
+    "MODEL_ESTIMATED": 2,
+    "OBSERVED": 59
+   },
+   "case": "2_pepper_greenhouse_on",
+   "claims": 61,
+   "facts": 61,
+   "language": "en"
+  },
+  {
+   "bundle_hash": "6b6668256caab3139b2b31ab2ec27813e15160d22608461043a1ec983cc22414",
+   "by_level": {
+    "MODEL_ESTIMATED": 2,
+    "OBSERVED": 59
+   },
+   "case": "2_pepper_greenhouse_on",
+   "claims": 61,
+   "facts": 61,
+   "language": "es"
+  },
+  {
+   "bundle_hash": "848548f3d2b9054ef981700528119123b49f732702a9834a843900ed0ac24bdc",
+   "by_level": {
+    "MODEL_ESTIMATED": 2,
+    "OBSERVED": 30
+   },
+   "case": "3_pepper_greenhouse_on_on",
+   "claims": 32,
+   "facts": 32,
+   "language": "en"
+  },
+  {
+   "bundle_hash": "d8cafca25596bd568e994cb62db6193095bb56eb296e84960859202aca214a7f",
+   "by_level": {
+    "MODEL_ESTIMATED": 2,
+    "OBSERVED": 30
+   },
+   "case": "3_pepper_greenhouse_on_on",
+   "claims": 32,
+   "facts": 32,
+   "language": "es"
+  }
+ ],
+ "statement": "coverage of the verifier's known rule classes with a double; not an estimate of a real model's errors; no quality claim; synthetic data",
+ "status": "PASS"
+}

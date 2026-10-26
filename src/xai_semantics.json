@@ -20,6 +20,9 @@
     "the twin is calibrated",
     "the twin is validated against the real system",
     "the forecaster proves a cause",
-    "a decision is recommended on the strength of an unconfirmed model estimate"
-  ]
+    "el gemelo está calibrado",
+    "el gemelo está validado frente al sistema real",
+    "el previsor demuestra una causa"
+  ],
+  "forbidden_claims_note": "phrases the verifier looks for in both languages; validation against the real system is also caught by pattern, and a recommendation on an unconfirmed estimate by the RECOMMENDATION_UNCONFIRMED rule"
 }
