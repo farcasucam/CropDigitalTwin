@@ -31,10 +31,20 @@ from manual_phase6_4_semantics_test import CASES, build  # noqa: E402
 from manual_phase6_7_verifier_double_test import twin_confirmation  # noqa: E402
 
 HOST = os.environ.get("SPARK_HOST", "192.168.1.112")
-MODELS = {"qwen2.5-7b": (8000, "Qwen/Qwen2.5-7B-Instruct"), "llama-3.1-8b": (8001, "meta-llama/Llama-3.1-8B-Instruct"), "olmo-3-7b": (8002, "allenai/Olmo-3-7B-Instruct")}
-DESIGN = sys.argv[sys.argv.index("--design") + 1] if "--design" in sys.argv else "v1"  # v1: one claim per fact (the first run); v2: short, bounded explanation (docs/phase6_6_real_llm.md section 5)
-RECORDS = ROOT / "data" / "xai" / ("llm_records" if DESIGN == "v1" else f"llm_records_{DESIGN}")
-REPORT = ROOT / "data" / "xai" / ("real_llm_report.json" if DESIGN == "v1" else f"real_llm_report_{DESIGN}.json")
+def argument(name: str, default: str) -> str:
+    return sys.argv[sys.argv.index(name) + 1] if name in sys.argv else default
+
+
+DESIGN = argument("--design", "v1")  # v1: one claim per fact (the first run); v2: short, bounded explanation (docs/phase6_6_real_llm.md section 5)
+# fgkb: the containers of the Spark's owner (default server settings, free whitespace under constrained decoding); agritwin: this project's own containers, same images and flags plus xgrammar without free whitespace (section 6)
+SERVER = argument("--server", "fgkb")
+PORTS = {"fgkb": (8000, 8001, 8002), "agritwin": (8010, 8011, 8012)}[SERVER]
+SERVER_CONFIG = {} if SERVER == "fgkb" else {"structured_outputs": "xgrammar, no free whitespace"}
+NAMES = (("qwen2.5-7b", "Qwen/Qwen2.5-7B-Instruct"), ("llama-3.1-8b", "meta-llama/Llama-3.1-8B-Instruct"), ("olmo-3-7b", "allenai/Olmo-3-7B-Instruct"))
+MODELS = {key: (port, model_id) for port, (key, model_id) in zip(PORTS, NAMES)}
+SUFFIX = ("" if DESIGN == "v1" else f"_{DESIGN}") + ("" if SERVER == "fgkb" else f"_{SERVER}")
+RECORDS = ROOT / "data" / "xai" / f"llm_records{SUFFIX}"
+REPORT = ROOT / "data" / "xai" / f"real_llm_report{SUFFIX}.json"
 # The prompt takes 1.6-3.1k tokens and the models write one claim per fact; the first run with 2048 truncated 26 of 39 answers (finish_reason=length), kept in llm_records_max2048/. max_model_len is 8192 and the longest prompt takes about 3.4k, so 4096 is the most that always fits.
 MAX_TOKENS = 4096
 
@@ -70,7 +80,7 @@ def main(replay: bool) -> int:
     rows, summary = [], {}
     for key, (port, model_id) in MODELS.items():
         path = RECORDS / f"{key}.json"
-        recording = None if replay else RecordingLanguageModel(OpenAILanguageModel(f"http://{HOST}:{port}", model_id, timeout=3600.0))
+        recording = None if replay else RecordingLanguageModel(OpenAILanguageModel(f"http://{HOST}:{port}", model_id, timeout=3600.0, server_config=SERVER_CONFIG))
         model = recording or RecordedLanguageModel.load(path)
         counts = Counter()
         jobs = [(case, facts, pack, language) for case, facts, pack in cases for language in ("en", "es")]
@@ -101,7 +111,7 @@ def main(replay: bool) -> int:
     report = {"status": "MEASURED", "llm": "REAL (Spark, vLLM, temperature 0, seed 0)", "models": {k: v[1] for k, v in MODELS.items()}, "summary": summary, "rows": rows,
               "statement": "first measurement on real models: four synthetic scenarios, one run per model, language and scenario; what the verifier flags is reported, not a quality result, not a rate with an interval, no human evaluation"}
     report["report_hash"] = content_hash({k: v for k, v in report.items() if k != "statement"})
-    report["design"] = DESIGN
+    report["design"], report["server"] = DESIGN, SERVER
     out = REPORT
     out.write_text(json.dumps(report, indent=1, sort_keys=True, allow_nan=False), encoding="utf-8")
     print(json.dumps({"summary": summary, "report_hash": report["report_hash"]}, indent=1))

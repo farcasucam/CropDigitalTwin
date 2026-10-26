@@ -55,3 +55,20 @@ Reading:
 * **Cost of the redesign, not measured:** v2 leaves facts without a claim. How many, and whether the dropped ones matter, is not yet measured.
 * Qwen's most frequent rule is `RECOMMENDATION_UNCONFIRMED` (8 of 8 runs): it writes a recommendation although no effect is confirmed, a prompt-following failure the verifier catches.
 * **Still not a ranking or a quality rate:** same limits as section 4 (8 runs, 4 synthetic scenarios, one prompt, no human audit). Whether the flagged claims are real errors is exactly what the manual audit of a sample (next step) must tell.
+
+## 6. Own containers without free whitespace (`--server agritwin`)
+
+The `fgkb-*` containers belong to the Spark's owner and could not be reconfigured; with the user's permission they were stopped (not removed: `docker start fgkb-qwen fgkb-llama fgkb-olmo` restores them) and three containers of this project were created: `agritwin-qwen` (8010), `agritwin-llama` (8011), `agritwin-olmo` (8012), same image, models and flags plus `--structured-outputs-config '{"backend": "xgrammar", "disable_any_whitespace": true}'` (the option needs the backend named; per request it had no effect). Weights come from the Hugging Face cache offline; no token is copied. The server configuration is part of every recorded model identity. Design v2, same scenarios, 8 runs per model; `llm_records_v2_agritwin/`, `real_llm_report_v2_agritwin.json` (hash 0ea61b76…).
+
+| | Qwen fgkb | Qwen agritwin | Llama fgkb | Llama agritwin | OLMo fgkb | OLMo agritwin |
+|---|---|---|---|---|---|---|
+| runs evaluable (of 8) | 8 | 8 | 8 | 7 | 6 | **8** |
+| final answer truncated | 0 | 0 | 0 | 0 | 2 | **0** |
+| claims written | 29 | 37 | 40 | 38 | 34 | 29 |
+| claims flagged | 16 (55%) | 16 (43%) | 11 (28%) | 11 (29%) | 15 (44%) | 11 (38%) |
+
+* **The whitespace loop was a server-side effect:** no answer is truncated, the largest whitespace share of an answer is 13% (against 82%) and the longest answer is 1.9k tokens. OLMo now answers 8 of 8.
+* **One new failure, Llama:** one answer has repeated claim ids (`claim ids must be unique`), a model error, not an infrastructure one.
+* **A warning about noise:** the only thing that changed for Qwen and Llama is the server's whitespace handling, yet their answers changed (Qwen wrote 29 claims and now 37) and the flagged share moved by up to 12 points (Qwen 55% to 43%). Differences of that size between two configurations, or between models, must not be read as effects; this is a floor for the run-to-run variation of this measurement, not an estimate of it.
+* Violations are now mostly `NUMBER_NOT_IN_FACT` (5-7 runs per model), `RECOMMENDATION_UNCONFIRMED` for Qwen (8 of 8 runs) and `OVERCLAIM_CONFIRMED` for OLMo (6 runs).
+* Unchanged limits: 8 runs, 4 synthetic scenarios, one prompt, no human audit, not a ranking. The manual audit of a sample of flagged and unflagged claims is the next step and is what decides whether these flags are real errors.

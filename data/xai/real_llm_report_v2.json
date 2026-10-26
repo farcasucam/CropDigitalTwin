@@ -422,6 +422,7 @@
    }
   }
  ],
+ "server": "fgkb",
  "statement": "first measurement on real models: four synthetic scenarios, one run per model, language and scenario; what the verifier flags is reported, not a quality result, not a rate with an interval, no human evaluation",
  "status": "MEASURED",
  "summary": {

@@ -1,0 +1,109 @@
+{
+ "name": "recorded:openai:Qwen/Qwen2.5-7B-Instruct",
+ "records": {
+  "1088017095ad369eaa739225a01021902c128801378b01e706b9e6ffcd51db86": {
+   "completion_tokens": 849,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "Qwen/Qwen2.5-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-baf7687b"
+   },
+   "prompt_tokens": 2505,
+   "text": "{\"caveats\": [], \"claims\": [{\"claim_id\": \"c001\", \"confidence\": \"high\", \"fact_ids\": [\"022a6b545b\", \"981e3b441a\"], \"numeric_values\": [{\"fact_id\": \"022a6b545b\", \"unit\": \"degC/h\", \"value\": 0.507}, {\"fact_id\": \"981e3b441a\", \"unit\": \"degC/h\", \"value\": 0.897}], \"text\": \"Temperature increases by 3.04 degC and 5.38 degC respectively.\"}, {\"claim_id\": \"c002\", \"confidence\": \"high\", \"fact_ids\": [\"58b591c0e4\", \"e10234d069\"], \"numeric_values\": [{\"fact_id\": \"58b591c0e4\", \"unit\": \"kPa/h\", \"value\": 0.0417}, {\"fact_id\": \"e10234d069\", \"unit\": \"kPa/h\", \"value\": -0.0295}], \"text\": \"VPD changes by 0.25 kPa and -0.207 kPa respectively.\"}, {\"claim_id\": \"c003\", \"confidence\": \"medium\", \"fact_ids\": [\"8b5b85dafd\", \"b045c2dfce\"], \"numeric_values\": [{\"fact_id\": \"8b5b85dafd\", \"unit\": \"degC\", \"value\": 12}, {\"fact_id\": \"b045c2dfce\", \"unit\": \"degC\", \"value\": 12}], \"text\": \"Temperature falls below 14 degC for 9 hours on two occasions.\"}, {\"claim_id\": \"c004\", \"confidence\": \"medium\", \"fact_ids\": [\"5990689ec9\", \"c07ba71a77\"], \"numeric_values\": [{\"fact_id\": \"5990689ec9\", \"unit\": \"kPa\", \"value\": 1.96}, {\"fact_id\": \"c07ba71a77\", \"unit\": \"kPa\", \"value\": 1.87}], \"text\": \"VPD exceeds 1.4 kPa for 4 hours and 9 hours respectively.\"}, {\"claim_id\": \"c005\", \"confidence\": \"low\", \"fact_ids\": [\"549a111255\"], \"numeric_values\": [{\"fact_id\": \"549a111255\", \"unit\": \"degC\", \"value\": 6.38}], \"text\": \"Temperature drops by 6.38 degC at sample 155.\"}, {\"claim_id\": \"c006\", \"confidence\": \"low\", \"fact_ids\": [\"4bfb16510f\"], \"numeric_values\": [{\"fact_id\": \"4bfb16510f\", \"unit\": \"kPa\", \"value\": 0.32}], \"text\": \"VPD drops by 0.32 kPa at sample 146.\"}], \"recommendations\": [{\"action\": \"Monitor temperature and VPD closely.\", \"blocked_by\": [], \"rationale_claim_ids\": [\"c001\", \"c002\", \"c003\", \"c004\"]}], \"summary\": \"The system shows significant temperature and VPD fluctuations, with multiple instances of temperature falling below critical levels and VPD exceeding stress thresholds. These events should be closely monitored.\"}"
+  },
+  "163079db7fdc964f22aa6d593f03fee949d98b8c3ddd8092cd7da044ec3acd8e": {
+   "completion_tokens": 666,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "Qwen/Qwen2.5-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-baf7687b"
+   },
+   "prompt_tokens": 3643,
+   "text": "{\"caveats\": [], \"claims\": [{\"claim_id\": \"30efe4677e\", \"confidence\": \"high\", \"fact_ids\": [\"30efe4677e\"], \"numeric_values\": [{\"fact_id\": \"30efe4677e\", \"unit\": \"degC\", \"value\": 0.339}], \"text\": \"La temperatura sube un neto de 0,339 degC entre las muestras 24 y 29.\"}, {\"claim_id\": \"46f5253775\", \"confidence\": \"high\", \"fact_ids\": [\"46f5253775\"], \"numeric_values\": [{\"fact_id\": \"46f5253775\", \"unit\": \"degC\", \"value\": 0.92}], \"text\": \"La temperatura baja un neto de 0,92 degC entre las muestras 56 y 61.\"}, {\"claim_id\": \"fc0b6b6b47\", \"confidence\": \"high\", \"fact_ids\": [\"fc0b6b6b47\"], \"numeric_values\": [{\"fact_id\": \"fc0b6b6b47\", \"unit\": \"degC\", \"value\": 0.722}], \"text\": \"La temperatura baja un neto de 0,722 degC entre las muestras 91 y 96.\"}, {\"claim_id\": \"0186eddada\", \"confidence\": \"high\", \"fact_ids\": [\"0186eddada\"], \"numeric_values\": [{\"fact_id\": \"0186eddada\", \"unit\": \"degC\", \"value\": 0.488}], \"text\": \"La temperatura sube un neto de 0,488 degC entre las muestras 97 y 102.\"}, {\"claim_id\": \"blocked_by\", \"confidence\": \"low\", \"fact_ids\": [\"a050abe838\"], \"numeric_values\": [], \"text\": \"Se prev\u00e9 que la temperatura est\u00e9 entre 13,7 y 25 degC desde la muestra 120 hasta la 167, terminando en 16,3 degC, pero esto no ha sido confirmado por el gemelo.\"}], \"recommendations\": [{\"action\": \"Monitorear la temperatura durante las pr\u00f3ximas muestras para verificar si sigue la tendencia prevista.\", \"blocked_by\": [], \"rationale_claim_ids\": [\"30efe4677e\", \"46f5253775\", \"fc0b6b6b47\", \"0186eddada\"]}], \"summary\": \"La temperatura ha experimentado variaciones significativas, con tendencias de aumento y disminuci\u00f3n. Se recomienda monitorear la temperatura para verificar la tendencia prevista.\"}"
+  },
+  "68f6a96e6a481db3efec2fe0419d31dbc3603fe8fee9e0a383fae0ff79e84994": {
+   "completion_tokens": 689,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "Qwen/Qwen2.5-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-baf7687b"
+   },
+   "prompt_tokens": 2167,
+   "text": "{\"caveats\": [], \"claims\": [{\"claim_id\": \"6bb0d09964\", \"confidence\": \"high\", \"fact_ids\": [\"6bb0d09964\"], \"numeric_values\": [{\"fact_id\": \"6bb0d09964\", \"unit\": \"degC\", \"value\": -0.119}], \"text\": \"La temperatura cay\u00f3 un neto de 0,713 degC (-0,119 degC/h) entre las muestras 91 y 96.\"}, {\"claim_id\": \"9296c2bc67\", \"confidence\": \"high\", \"fact_ids\": [\"9296c2bc67\"], \"numeric_values\": [{\"fact_id\": \"9296c2bc67\", \"unit\": \"degC\", \"value\": -0.0522}], \"text\": \"La temperatura subi\u00f3 un neto de 0,522 degC (-0,0522 degC/h) entre las muestras 121 y 130.\"}, {\"claim_id\": \"140186b430\", \"confidence\": \"high\", \"fact_ids\": [\"140186b430\"], \"numeric_values\": [{\"fact_id\": \"140186b430\", \"unit\": \"degC\", \"value\": 0.539}], \"text\": \"La temperatura subi\u00f3 en la muestra 43 0,539 degC (3,78 sigmas de ruido).\"}, {\"claim_id\": \"7d909c760a\", \"confidence\": \"high\", \"fact_ids\": [\"7d909c760a\"], \"numeric_values\": [{\"fact_id\": \"7d909c760a\", \"unit\": \"kW\", \"value\": 6.48}], \"text\": \"El calefactor se encendi\u00f3 en la muestra 3 (por encima de 6,48 kW).\"}, {\"claim_id\": \"f3c32cd6bb\", \"confidence\": \"high\", \"fact_ids\": [\"f3c32cd6bb\"], \"numeric_values\": [{\"fact_id\": \"f3c32cd6bb\", \"unit\": \"kWh\", \"value\": 1389}], \"text\": \"El calefactor funcion\u00f3 durante 57 horas, sumando 1389 kWh.\"}], \"recommendations\": [{\"action\": \"Revisar la temperatura\", \"blocked_by\": [], \"rationale_claim_ids\": [\"6bb0d09964\", \"9296c2bc67\", \"140186b430\"]}], \"summary\": \"Se han detectado variaciones significativas en la temperatura, con descensos y ascensos bruscos. El calefactor ha funcionado varias veces, indicando posibles problemas t\u00e9rmicos. Se recomienda revisar la temperatura.\"}"
+  },
+  "c3e5bc35ac6d7f5a725857c2ea9bf312c0aaf73e5c075b8bcbd570f479a2e270": {
+   "completion_tokens": 417,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "Qwen/Qwen2.5-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-baf7687b"
+   },
+   "prompt_tokens": 2751,
+   "text": "{\"caveats\": [\"blocked_by\"], \"claims\": [{\"claim_id\": \"ad07c33aef\", \"confidence\": \"high\", \"fact_ids\": [\"ad07c33aef\"], \"numeric_values\": [], \"text\": \"El sistema est\u00e1 establecido seg\u00fan crop_config.json\"}, {\"claim_id\": \"82055693b4\", \"confidence\": \"high\", \"fact_ids\": [\"82055693b4\"], \"numeric_values\": [], \"text\": \"La temperatura cay\u00f3 por debajo de 14\u00b0C durante m\u00faltiples episodios\"}, {\"claim_id\": \"5ded0dfb24\", \"confidence\": \"high\", \"fact_ids\": [\"5ded0dfb24\"], \"numeric_values\": [], \"text\": \"La vpd super\u00f3 1,4 kPa durante m\u00faltiples episodios\"}, {\"claim_id\": \"2cd4ae21c5\", \"confidence\": \"medium\", \"fact_ids\": [\"2cd4ae21c5\"], \"numeric_values\": [], \"text\": \"Un aumento de 10,6\u00b0C en la temperatura durante una oleada de calor fue confirmado en 7 de 7 variantes del gemelo\"}], \"recommendations\": [{\"action\": \"Monitorear la temperatura y la vpd con mayor frecuencia durante los pr\u00f3ximos d\u00edas\", \"blocked_by\": [], \"rationale_claim_ids\": [\"82055693b4\", \"5ded0dfb24\"]}], \"summary\": \"Se han confirmado m\u00faltiples episodios de ca\u00edda de temperatura por debajo de 14\u00b0C y superaci\u00f3n de 1,4 kPa en vpd. Adem\u00e1s, un aumento significativo de la temperatura durante una oleada de calor ha sido confirmado por el gemelo.\"}"
+  },
+  "c40f25daa2cc2b2d05afd6526265628a6eb8ff99a6d1460ac3f10d31c36e9e9f": {
+   "completion_tokens": 1506,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "Qwen/Qwen2.5-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-baf7687b"
+   },
+   "prompt_tokens": 3334,
+   "text": "{\"caveats\": [], \"claims\": [{\"claim_id\": \"1\", \"confidence\": \"high\", \"fact_ids\": [\"30efe4677e\", \"46f5253775\", \"4061d679ac\", \"fc0b6b6b47\", \"0186eddada\", \"622d7d1f71\", \"d7caa9ee8c\", \"54a8622b58\", \"eb5f96b6ac\", \"4abe4050ac\", \"21435595c1\", \"01e0776493\", \"8f7aa03fec\", \"6edeb71697\", \"b50353c733\", \"50766e1a37\"], \"numeric_values\": [{\"fact_id\": \"30efe4677e\", \"unit\": \"degC\", \"value\": 0.339}, {\"fact_id\": \"46f5253775\", \"unit\": \"degC\", \"value\": 0.92}, {\"fact_id\": \"4061d679ac\", \"unit\": \"degC\", \"value\": 0.387}, {\"fact_id\": \"fc0b6b6b47\", \"unit\": \"degC\", \"value\": 0.722}, {\"fact_id\": \"0186eddada\", \"unit\": \"degC\", \"value\": 0.488}, {\"fact_id\": \"622d7d1f71\", \"unit\": \"degC\", \"value\": 0.414}], \"text\": \"The temperature shows multiple rises and falls within the observed range.\"}, {\"claim_id\": \"2\", \"confidence\": \"high\", \"fact_ids\": [\"857aaafdcc\", \"d88f795a41\", \"d38136c96d\", \"855330ce23\", \"54202907d6\", \"6765e7a8a1\", \"952842eb82\", \"61ada98029\", \"92edd32667\", \"255e0707dc\", \"d1b6db488b\", \"a725ca26a6\", \"3df04fdc07\", \"cd97a2bd20\", \"9e4e01a74c\", \"e2a4dd9b0c\", \"5f5356163f\", \"833078e63c\", \"f5b99a2c8d\", \"0afa8696c7\", \"03431c6dfa\", \"25319a0d13\", \"0a1693de29\", \"a8b2929da3\"], \"numeric_values\": [{\"fact_id\": \"857aaafdcc\", \"unit\": \"degC\", \"value\": 0.0878}, {\"fact_id\": \"d88f795a41\", \"unit\": \"degC\", \"value\": 0.0788}, {\"fact_id\": \"d38136c96d\", \"unit\": \"degC\", \"value\": 0.535}, {\"fact_id\": \"855330ce23\", \"unit\": \"degC\", \"value\": 0.537}, {\"fact_id\": \"54202907d6\", \"unit\": \"degC\", \"value\": 0.292}, {\"fact_id\": \"6765e7a8a1\", \"unit\": \"degC\", \"value\": 0.153}], \"text\": \"Temperature exhibits significant jumps, indicating potential external influences.\"}, {\"claim_id\": \"3\", \"confidence\": \"medium\", \"fact_ids\": [\"46f5253775\", \"fc0b6b6b47\", \"61ada98029\", \"a725ca26a6\", \"3df04fdc07\", \"0a1693de29\", \"a8b2929da3\"], \"numeric_values\": [{\"fact_id\": \"46f5253775\", \"unit\": \"degC\", \"value\": 0.92}, {\"fact_id\": \"fc0b6b6b47\", \"unit\": \"degC\", \"value\": 0.722}, {\"fact_id\": \"61ada98029\", \"unit\": \"degC\", \"value\": 0.826}, {\"fact_id\": \"a725ca26a6\", \"unit\": \"degC\", \"value\": 1.09}, {\"fact_id\": \"3df04fdc07\", \"unit\": \"degC\", \"value\": 0.988}, {\"fact_id\": \"0a1693de29\", \"unit\": \"degC\", \"value\": 0.702}], \"text\": \"The largest temperature drops are significant, suggesting possible heating system malfunctions.\"}, {\"claim_id\": \"4\", \"confidence\": \"low\", \"fact_ids\": [\"ab1f235f8c\", \"6c8e45c304\", \"cb31e2acf3\", \"d9befca6f6\", \"ffc356b8f5\", \"87a141c8d4\"], \"numeric_values\": [{\"fact_id\": \"ab1f235f8c\", \"unit\": \"kWh\", \"value\": 1378}], \"text\": \"The greenhouse heating system has been active for a total of 1378 kWh, indicating consistent demand.\"}], \"recommendations\": [{\"action\": \"Monitor the heating system for potential malfunctions given the significant temperature drops.\", \"blocked_by\": [], \"rationale_claim_ids\": [\"3\"]}, {\"action\": \"Check the greenhouse cooling system for any issues, as it has not been used during the observation period.\", \"blocked_by\": [], \"rationale_claim_ids\": [\"1\"]}], \"summary\": \"The temperature shows multiple rises and falls, with significant jumps indicating potential external influences. The largest drops suggest possible heating system malfunctions. The greenhouse heating system has been active, but the cooling system has not been used.\"}"
+  },
+  "ed768f830003c796e47ffbd6707228b302dd99b4a2a93f1e1ab73059c508c1ea": {
+   "completion_tokens": 537,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "Qwen/Qwen2.5-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-baf7687b"
+   },
+   "prompt_tokens": 1931,
+   "text": "{\"caveats\": [], \"claims\": [{\"claim_id\": \"1\", \"confidence\": \"high\", \"fact_ids\": [\"F:6bb0d09964\"], \"numeric_values\": [{\"fact_id\": \"F:6bb0d09964\", \"unit\": \"degC/h\", \"value\": -0.119}], \"text\": \"Temperature decreases at a rate of -0.119 degC/h.\"}, {\"claim_id\": \"2\", \"confidence\": \"high\", \"fact_ids\": [\"F:97839affa6\"], \"numeric_values\": [{\"fact_id\": \"F:97839affa6\", \"unit\": \"degC/h\", \"value\": 0.0574}], \"text\": \"Temperature increases at a rate of 0.0574 degC/h.\"}, {\"claim_id\": \"3\", \"confidence\": \"high\", \"fact_ids\": [\"F:140186b430\"], \"numeric_values\": [{\"fact_id\": \"F:140186b430\", \"unit\": \"degC\", \"value\": 0.539}], \"text\": \"Temperature increases by 0.539 degC at sample 43.\"}, {\"claim_id\": \"4\", \"confidence\": \"high\", \"fact_ids\": [\"F:eaf4b15fb3\"], \"numeric_values\": [{\"fact_id\": \"F:eaf4b15fb3\", \"unit\": \"degC\", \"value\": 0.836}], \"text\": \"Temperature decreases by 0.836 degC at sample 91.\"}, {\"claim_id\": \"5\", \"confidence\": \"high\", \"fact_ids\": [\"F:2939a4ba3c\"], \"numeric_values\": [{\"fact_id\": \"F:2939a4ba3c\", \"unit\": \"degC\", \"value\": 0.516}], \"text\": \"Temperature increases by 0.516 degC at sample 188.\"}], \"recommendations\": [{\"action\": \"Monitor temperature changes closely.\", \"blocked_by\": [], \"rationale_claim_ids\": [\"1\", \"2\", \"3\", \"4\", \"5\"]}], \"summary\": \"The system shows temperature fluctuations with significant jumps and stable periods. Operators should focus on monitoring these changes.\"}"
+  },
+  "f74d36d7fb164278a1b58a108d521892cdba0d58798f713c4fc19a3e28a35af2": {
+   "completion_tokens": 937,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "Qwen/Qwen2.5-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-baf7687b"
+   },
+   "prompt_tokens": 1852,
+   "text": "{\"caveats\": [], \"claims\": [{\"claim_id\": \"c001\", \"confidence\": \"high\", \"fact_ids\": [\"c8115fb47b\", \"287bf48eca\", \"81ab568ad2\"], \"numeric_values\": [{\"fact_id\": \"c8115fb47b\", \"unit\": \"degC/h\", \"value\": -0.188}, {\"fact_id\": \"287bf48eca\", \"unit\": \"degC/h\", \"value\": -0.191}, {\"fact_id\": \"81ab568ad2\", \"unit\": \"degC/h\", \"value\": -0.192}], \"text\": \"Temperature is falling at a rate of approximately -0.19 degC/h.\"}, {\"claim_id\": \"c002\", \"confidence\": \"high\", \"fact_ids\": [\"ee5de46b2b\", \"df2048225a\", \"007ead50ed\", \"0ecd4dfb8a\"], \"numeric_values\": [{\"fact_id\": \"ee5de46b2b\", \"unit\": \"degC\", \"value\": 5.34}, {\"fact_id\": \"df2048225a\", \"unit\": \"degC\", \"value\": 5.88}, {\"fact_id\": \"007ead50ed\", \"unit\": \"degC\", \"value\": 5.67}, {\"fact_id\": \"0ecd4dfb8a\", \"unit\": \"degC\", \"value\": 5.83}], \"text\": \"Temperature fell below 14 degC for durations ranging from 133 to 15 hours, with the lowest drop being 5.67 degC.\"}, {\"claim_id\": \"c003\", \"confidence\": \"medium\", \"fact_ids\": [\"e49d3849bb\", \"89ed250193\", \"2718ebafc0\", \"7fe99aacc7\", \"8b1bfc57b9\", \"e203732e0b\", \"7a13427410\", \"95c9ca2c19\", \"825a75a1d5\"], \"numeric_values\": [{\"fact_id\": \"e49d3849bb\", \"unit\": \"degC\", \"value\": 2.45}, {\"fact_id\": \"89ed250193\", \"unit\": \"degC\", \"value\": 0.877}, {\"fact_id\": \"2718ebafc0\", \"unit\": \"degC\", \"value\": 1.15}, {\"fact_id\": \"7fe99aacc7\", \"unit\": \"degC\", \"value\": 1.14}, {\"fact_id\": \"8b1bfc57b9\", \"unit\": \"degC\", \"value\": 0.901}, {\"fact_id\": \"e203732e0b\", \"unit\": \"degC\", \"value\": 1.04}], \"text\": \"Temperature experienced multiple shifts, with the largest being a 2.45 degC increase.\"}, {\"claim_id\": \"c004\", \"confidence\": \"low\", \"fact_ids\": [\"02b8dd827e\"], \"numeric_values\": [{\"fact_id\": \"02b8dd827e\", \"unit\": \"degC\", \"value\": 10.8}], \"text\": \"The forecast predicts temperature_c will be around 10.8 degC from sample 120 to 167.\"}], \"recommendations\": [{\"action\": \"Alert the operator to the temperature drops below 14 degC, which could stress the plants.\", \"blocked_by\": [], \"rationale_claim_ids\": [\"c002\"]}], \"summary\": \"Temperature is decreasing, with significant drops below the critical threshold of 14 degC. Multiple temperature shifts have been observed, indicating variability. The forecast suggests temperatures will remain relatively low.\"}"
+  },
+  "fd7ca3f07f0cac6abf8b4696c1a9860bdda40e44fbba9e97f84888362bc87c2a": {
+   "completion_tokens": 659,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "Qwen/Qwen2.5-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-baf7687b"
+   },
+   "prompt_tokens": 2048,
+   "text": "{\"caveats\": [], \"claims\": [{\"claim_id\": \"F:ee5de46b2b\", \"confidence\": \"high\", \"fact_ids\": [\"F:ee5de46b2b\"], \"numeric_values\": [{\"fact_id\": \"F:ee5de46b2b\", \"unit\": \"h\", \"value\": 133}], \"text\": \"La temperatura cay\u00f3 por debajo de 14\u00b0C durante 133 horas.\"}, {\"claim_id\": \"F:df2048225a\", \"confidence\": \"high\", \"fact_ids\": [\"F:df2048225a\"], \"numeric_values\": [{\"fact_id\": \"F:df2048225a\", \"unit\": \"degC\", \"value\": 5.88}], \"text\": \"La temperatura cay\u00f3 hasta 5.88\u00b0C por debajo de 14\u00b0C.\"}, {\"claim_id\": \"F:825a75a1d5\", \"confidence\": \"high\", \"fact_ids\": [\"F:825a75a1d5\"], \"numeric_values\": [{\"fact_id\": \"F:825a75a1d5\", \"unit\": \"degC\", \"value\": 0.744}], \"text\": \"La temperatura aument\u00f3 0.744\u00b0C en la muestra 207.\"}, {\"claim_id\": \"F:02b8dd827e\", \"confidence\": \"medium\", \"fact_ids\": [\"F:02b8dd827e\"], \"numeric_values\": [{\"fact_id\": \"F:02b8dd827e\", \"unit\": \"degC\", \"value\": 7.34}, {\"fact_id\": \"F:02b8dd827e\", \"unit\": \"degC\", \"value\": 17.2}, {\"fact_id\": \"F:02b8dd827e\", \"unit\": \"degC\", \"value\": 10.8}], \"text\": \"El modelo predice que la temperatura estar\u00e1 entre 7.34\u00b0C y 17.2\u00b0C, finalizando en 10.8\u00b0C.\"}], \"recommendations\": [{\"action\": \"Monitorear la temperatura de cerca durante las pr\u00f3ximas 47 horas, ya que el modelo predice un aumento hasta 10.8\u00b0C.\", \"blocked_by\": [], \"rationale_claim_ids\": [\"F:02b8dd827e\"]}], \"summary\": \"Se han detectado varias ca\u00eddas significativas en la temperatura, especialmente entre las muestras 45 y 58, donde la temperatura cay\u00f3 5.88\u00b0C. El modelo predice un aumento en la temperatura en las pr\u00f3ximas horas, lo que podr\u00eda ser preocupante dada la tendencia anterior.\"}"
+  }
+ }
+}

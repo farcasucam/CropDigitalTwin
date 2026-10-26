@@ -1,0 +1,161 @@
+{
+ "name": "recorded:openai:allenai/Olmo-3-7B-Instruct",
+ "records": {
+  "091faceb5d74b7b107bedf1c1adaff470f025429b6e722a0bb5603245f9c5a9c": {
+   "completion_tokens": 493,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "allenai/Olmo-3-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-4dd413f0"
+   },
+   "prompt_tokens": 1648,
+   "text": "{\"caveats\": [], \"claims\": [{\"claim_id\": \"F:ee5de46b2b\", \"confidence\": \"high\", \"fact_ids\": [\"F:ee5de46b2b\"], \"numeric_values\": [], \"text\": \"temperature_c fell below 14\u00b0C (min threshold) in 11 runs, 133 h total, max 5.34\u00b0C.\"}, {\"claim_id\": \"F:F:6c1cc6957e\", \"confidence\": \"high\", \"fact_ids\": [\"F:6c1cc6957e\"], \"numeric_values\": [], \"text\": \"temperature_c is stable in 213 samples (0\u2013239).\"}, {\"claim_id\": \"F:F:c8115fb47b\", \"confidence\": \"high\", \"fact_ids\": [\"F:c8115fb47b\"], \"numeric_values\": [], \"text\": \"temperature_c fell 1.13\u00b0C (\u22120.188\u00b0C/h) from sample 28 to 33.\"}, {\"claim_id\": \"F:F:287bf48eca\", \"confidence\": \"high\", \"fact_ids\": [\"F:287bf48eca\"], \"numeric_values\": [], \"text\": \"temperature_c fell 1.14\u00b0C (\u22120.191\u00b0C/h) from sample 34 to 39.\"}, {\"claim_id\": \"F:F:81ab568ad2\", \"confidence\": \"high\", \"fact_ids\": [\"F:81ab568ad2\"], \"numeric_values\": [], \"text\": \"temperature_c fell 1.15\u00b0C (\u22120.192\u00b0C/h) from sample 40 to 45.\"}, {\"claim_id\": \"F:F:e49d3849bb\", \"confidence\": \"low\", \"fact_ids\": [\"F:e49d3849bb\"], \"numeric_values\": [], \"text\": \"temperature_c shifted up by 2.45\u00b0C at sample 22 (jump).\"}], \"recommendations\": [], \"summary\": \"temperature is dropping rapidly in several intervals, crossing the 14\u00b0C crop threshold multiple times; one large upward shift at sample 22. No confident forecast or action needed yet.\"}"
+  },
+  "1088017095ad369eaa739225a01021902c128801378b01e706b9e6ffcd51db86": {
+   "completion_tokens": 421,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "allenai/Olmo-3-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-4dd413f0"
+   },
+   "prompt_tokens": 2211,
+   "text": "{\"caveats\": [], \"claims\": [{\"claim_id\": \"HEAT_DIR\", \"confidence\": \"high\", \"fact_ids\": [\"F:2cd4ae21c5\"], \"numeric_values\": [], \"text\": \"Temperature is increasing due to the heat wave, direction confirmed by the twin.\"}, {\"claim_id\": \"TEMP_LOW\", \"confidence\": \"high\", \"fact_ids\": [\"F:82055693b4\", \"F:1e9673ff51\"], \"numeric_values\": [], \"text\": \"Temperature has fallen below the 14\u00b0C crop threshold multiple times, with observed minima of 12\u00b0C.\"}, {\"claim_id\": \"VPD_EXCEED\", \"confidence\": \"high\", \"fact_ids\": [\"F:5ded0dfb24\", \"F:b3098004e5\", \"F:c07ba71a77\", \"F:5990689ec9\"], \"numeric_values\": [], \"text\": \"VPD has exceeded the 1.4 kPa stress threshold in several extended periods.\"}, {\"claim_id\": \"LARGEST_CHANGES\", \"confidence\": \"low\", \"fact_ids\": [\"F:022a6b545b\", \"F:981e3b441a\", \"F:7cf3fd019d\", \"F:8d39e2a19d\", \"F:549a111255\"], \"numeric_values\": [], \"text\": \"The largest temperature and VPD changes observed are 6.5\u00b0C and 1.2 kPa, respectively, but their sizes are not confirmed by the twin.\"}], \"recommendations\": [], \"summary\": \"Temperature is trending upward (confirmed by twin) due to the heat wave, but the magnitude is not confirmed. Both temperature and VPD have crossed key thresholds (below 14\u00b0C and above 1.4 kPa), with observed extreme shifts. No strong recommendations can be made without confirmation on change sizes.\"}"
+  },
+  "14aa26a5d5b8279209e7d01d49a73460d67e8d42ced7b197c47d80f46c75ee09": {
+   "completion_tokens": 111,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "allenai/Olmo-3-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-4dd413f0"
+   },
+   "prompt_tokens": 3227,
+   "text": "{\"caveats\": [\"F:857aaafdcc\", \"F:d38136c96d\", \"F:54202907d6\", \"F:6765e7a8a1\"], \"claims\": [], \"recommendations\": [], \"summary\": \"temperature_c tiene jumps confirmados por gemelo en 4 cambios (mues 24, 43, 50, 91). No recomendaciones por falta de confirmaci\u00f3n gemeliana.\"}"
+  },
+  "163079db7fdc964f22aa6d593f03fee949d98b8c3ddd8092cd7da044ec3acd8e": {
+   "completion_tokens": 230,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "allenai/Olmo-3-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-4dd413f0"
+   },
+   "prompt_tokens": 3176,
+   "text": "{\"caveats\": [\"temperature_c sube entre 163 y 168 (0,02 degC/h) confirmado por gemelo [F:eb5f96b6ac]\", \"temperature_c baja entre 224 y 232 (-0,132 degC/h) confirmado por gemelo [F:b50353c733]\", \"temperature_c sube entre 233 y 239 (0,109 degC/h) confirmado por gemelo [F:50766e1a37]\"], \"claims\": [], \"recommendations\": [{\"action\": \"Revisar control de temperatura en rango 163-239\", \"blocked_by\": [], \"rationale_claim_ids\": [\"F:eb5f96b6ac\", \"F:b50353c733\", \"F:50766e1a37\"]}], \"summary\": \"3 efectos confirmados por gemelo: subida entre 163-168, bajada entre 224-232, subida entre 233-239. No recomendaciones sin claims confirmadas.\"}"
+  },
+  "68f6a96e6a481db3efec2fe0419d31dbc3603fe8fee9e0a383fae0ff79e84994": {
+   "completion_tokens": 275,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "allenai/Olmo-3-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-4dd413f0"
+   },
+   "prompt_tokens": 1954,
+   "text": "{\"caveats\": [\"temperature_c sube en muestra 43 (0,539 degC, confirmado por gemelo) [F:140186b430]\", \"temperature_c baja en muestra 91 (0,836 degC, confirmado por gemelo) [F:4898cefe8a]\", \"temperature_c sube en muestra 97 (0,832 degC, confirmado por gemelo) [F:089c106fd5]\", \"temperature_c baja en muestra 115 (0,863 degC, confirmado por gemelo) [F:75a5423d19]\"], \"claims\": [], \"recommendations\": [{\"action\": \"Revisar control de temperatura en zonas 43, 91, 97 y 115\", \"blocked_by\": [], \"rationale_claim_ids\": [\"F:140186b430\", \"F:4898cefe8a\", \"F:089c106fd5\", \"F:75a5423d19\"]}], \"summary\": \"4 efectos confirmados por gemelo: subidas y bajas significativas en temperature_c en muestras 43, 91, 97 y 115. No hay previsiones ni superaciones de umbral confirmadas.\"}"
+  },
+  "c3e5bc35ac6d7f5a725857c2ea9bf312c0aaf73e5c075b8bcbd570f479a2e270": {
+   "completion_tokens": 235,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "allenai/Olmo-3-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-4dd413f0"
+   },
+   "prompt_tokens": 2458,
+   "text": "{\"caveats\": [\"temperature_c sube por debajo de 14\u00b0C durante HEAT_WAVE, confirmado por gemelo [F:052a116954]\", \"temperature_c cae por debajo de 14\u00b0C en tramos largos, observado [F:1e9673ff51]\", \"vpd_kpa supera 1,4 kPa en tramos, observado [F:5ded0dfb24]\", \"vpd_kpa y temperature_c muestran cambios sincronizados con HEAT_WAVE, confirmado por gemelo [F:2cd4ae21c5]\"], \"claims\": [], \"recommendations\": [{\"action\": \"Revisar protocolo de riego y ventilaci\u00f3n durante eventos HEAT_WAVE\", \"blocked_by\": [], \"rationale_claim_ids\": [\"F:052a116954\", \"F:2cd4ae21c5\"]}], \"summary\": \"Prioritize mitigating heat stress (temperature and vpd over threshold) confirmed by gemelo during heat waves.\"}"
+  },
+  "c40f25daa2cc2b2d05afd6526265628a6eb8ff99a6d1460ac3f10d31c36e9e9f": {
+   "completion_tokens": 554,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "allenai/Olmo-3-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-4dd413f0"
+   },
+   "prompt_tokens": 2866,
+   "text": "{\"caveats\": [\"nothing to report\"], \"claims\": [{\"claim_id\": \"temperature_c shift down at sample 91 by 0.826 degC (confirmed by twin)\", \"confidence\": \"high\", \"fact_ids\": [\"F:61ada98029\"], \"numeric_values\": [], \"text\": \"temperature_c shifted down at sample 91 by 0.826 degC\"}, {\"claim_id\": \"temperature_c shift up at sample 97 by 0.739 degC (confirmed by twin)\", \"confidence\": \"high\", \"fact_ids\": [\"F:92edd32667\"], \"numeric_values\": [], \"text\": \"temperature_c shifted up at sample 97 by 0.739 degC\"}, {\"claim_id\": \"temperature_c shift down at sample 115 by 1.09 degC (confirmed by twin)\", \"confidence\": \"high\", \"fact_ids\": [\"F:a725ca26a6\"], \"numeric_values\": [], \"text\": \"temperature_c shifted down at sample 115 by 1.09 degC\"}, {\"claim_id\": \"temperature_c shift up at sample 233 by 0.763 degC (confirmed by twin)\", \"confidence\": \"high\", \"fact_ids\": [\"F:50766e1a37\"], \"numeric_values\": [], \"text\": \"temperature_c shifted up at sample 233 by 0.763 degC\"}, {\"claim_id\": \"temperature_c largest shift down in window is at sample 115 by 1.09 degC\", \"confidence\": \"high\", \"fact_ids\": [\"F:a725ca26a6\"], \"numeric_values\": [], \"text\": \"largest temperature_c shift down is 1.09 degC at sample 115\"}, {\"claim_id\": \"temperature_c shift up at sample 181 by 0.128 degC (confirmed by twin)\", \"confidence\": \"high\", \"fact_ids\": [\"F:5f5356163f\"], \"numeric_values\": [], \"text\": \"temperature_c shifted up at sample 181 by 0.128 degC\"}], \"recommendations\": [], \"summary\": \"Only two temperature_c shifts are confirmed by the twin (down at sample 91 by 0.826\u00b0C and up at sample 97 by 0.739\u00b0C). The largest temperature change in the window is a 1.09\u00b0C down shift at sample 115. No threshold exceedances or forecasts are confirmed by the twin. No recommended actions.\"}"
+  },
+  "c7a0fd3ad4088a6d9db362e935f6baa3f5119d5a8cfe1680aa4ef1a931f49a15": {
+   "completion_tokens": 286,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "allenai/Olmo-3-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-4dd413f0"
+   },
+   "prompt_tokens": 2013,
+   "text": "{\"caveats\": [\"F:140186b430\", \"F:4898cefe8a\", \"F:75a5423d19\"], \"claims\": [{\"claim_id\": \"F:140186b430\", \"confidence\": \"low\", \"fact_ids\": [\"F:140186b430\"], \"numeric_values\": [], \"text\": \"temperature_c sube en la muestra 43 0,539 degC (jump)\"}, {\"claim_id\": \"F:4898cefe8a\", \"confidence\": \"low\", \"fact_ids\": [\"F:4898cefe8a\"], \"numeric_values\": [], \"text\": \"temperature_c baja en la muestra 91 0,836 degC (jump)\"}, {\"claim_id\": \"F:75a5423d19\", \"confidence\": \"low\", \"fact_ids\": [\"F:75a5423d19\"], \"numeric_values\": [], \"text\": \"temperature_c baja en la muestra 115 0,863 degC (jump)\"}], \"recommendations\": [], \"summary\": \"solo efectos confirmados por gemelo: ninguno. blocked_by.\"}"
+  },
+  "d785d5a49234420f40c0e9a181500633d2273435fb4596249fb0a65c38934958": {
+   "completion_tokens": 504,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "allenai/Olmo-3-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-4dd413f0"
+   },
+   "prompt_tokens": 2499,
+   "text": "{\"caveats\": [], \"claims\": [{\"claim_id\": \"F:ad07c33aef\", \"confidence\": \"high\", \"fact_ids\": [\"ad07c33aef\"], \"numeric_values\": [], \"text\": \"Sistema en estado de establecimiento seg\u00fan crop_config.\"}, {\"claim_id\": \"F:9ec2e16ba4\", \"confidence\": \"high\", \"fact_ids\": [\"9ec2e16ba4\"], \"numeric_values\": [], \"text\": \"temperature_c est\u00e1 estable (228 muestras, 0-239)\"}, {\"claim_id\": \"F:022a6b545b\", \"confidence\": \"high\", \"fact_ids\": [\"022a6b545b\"], \"numeric_values\": [], \"text\": \"Cambio neto +3.04\u00b0C en 5 muestras (0.507\u00b0C/h promedio)\"}, {\"claim_id\": \"F:981e3b441a\", \"confidence\": \"high\", \"fact_ids\": [\"981e3b441a\"], \"numeric_values\": [], \"text\": \"Cambio neto +5.38\u00b0C en 6 muestras (0.897\u00b0C/h promedio)\"}, {\"claim_id\": \"F:8\", \"confidence\": \"high\", \"fact_ids\": [\"F:82055693b4\", \"F:1e9673ff51\", \"F:b045c2dfce\", \"F:8b5b85dafd\"], \"numeric_values\": [], \"text\": \"temperature_c < 14\u00b0C en tramos largos confirmados (m\u00ednimo 12\u00b0C)\"}, {\"claim_id\": \"F:5ded0dfb24\", \"confidence\": \"high\", \"fact_ids\": [\"5ded0dfb24\"], \"numeric_values\": [], \"text\": \"vpd_kpa > 1.4 kPa en tramos confirmados (m\u00e1ximo 1.96 kPa)\"}], \"recommendations\": [], \"summary\": \"Bloqueado: no hay afirmaciones confirmadas por gemelo sobre cambios de tama\u00f1o o causas. Solo confirma la estabilidad y los tramos de estr\u00e9s detectados.\"}"
+  },
+  "ed768f830003c796e47ffbd6707228b302dd99b4a2a93f1e1ab73059c508c1ea": {
+   "completion_tokens": 615,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "allenai/Olmo-3-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-4dd413f0"
+   },
+   "prompt_tokens": 1717,
+   "text": "{\"caveats\": [], \"claims\": [{\"claim_id\": \"temperature_jumps_confirmed_by_twin\", \"confidence\": \"high\", \"fact_ids\": [\"F:140186b430\", \"F:4898cefe8a\", \"F:089c106fd5\", \"F:75a5423d19\", \"F:cb3690f8eb\", \"F:2939a4ba3c\", \"F:d353c22ac8\"], \"numeric_values\": [{\"fact_id\": \"F:140186b430\", \"unit\": \"degC\", \"value\": 0.539}, {\"fact_id\": \"F:4898cefe8a\", \"unit\": \"degC\", \"value\": 0.836}, {\"fact_id\": \"F:089c106fd5\", \"unit\": \"degC\", \"value\": 0.832}, {\"fact_id\": \"F:75a5423d19\", \"unit\": \"degC\", \"value\": 0.863}, {\"fact_id\": \"F:cb3690f8eb\", \"unit\": \"degC\", \"value\": 1.05}, {\"fact_id\": \"F:2939a4ba3c\", \"unit\": \"degC\", \"value\": 0.516}], \"text\": \"Large temperature jumps (0.8\u20131.1 degC) are confirmed by the twin.\"}, {\"claim_id\": \"vpd_jumps_confirmed_by_twin\", \"confidence\": \"high\", \"fact_ids\": [\"F:ee4eac5810\"], \"numeric_values\": [{\"fact_id\": \"F:ee4eac5810\", \"unit\": \"kPa\", \"value\": 0.0898}], \"text\": \"A vpd jump of 0.09 kPa is confirmed by the twin.\"}, {\"claim_id\": \"no_thresholds\", \"confidence\": \"high\", \"fact_ids\": [\"F:590cb66f99\", \"F:c8c8a7d98c\", \"F:1de0a46bc6\"], \"numeric_values\": [], \"text\": \"No thresholds are defined for soil water, temperature, or vpd.\"}, {\"claim_id\": \"forecast_confirmed_by_twin\", \"confidence\": \"low\", \"fact_ids\": [\"F:295b5e288e\"], \"numeric_values\": [], \"text\": \"The temperature forecast (16.2 degC at sample 167) is a model estimate, not confirmed by the twin.\"}], \"recommendations\": [], \"summary\": \"Large temperature jumps (0.8\u20131.1 degC) and a vpd jump of 0.09 kPa are confirmed by the twin. No thresholds are set for monitored variables. The temperature forecast is a model estimate, not confirmed by the twin.\"}"
+  },
+  "f74d36d7fb164278a1b58a108d521892cdba0d58798f713c4fc19a3e28a35af2": {
+   "completion_tokens": 626,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "allenai/Olmo-3-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-4dd413f0"
+   },
+   "prompt_tokens": 1629,
+   "text": "{\"caveats\": [], \"claims\": [{\"claim_id\": \"F:ee5de46b2b\", \"confidence\": \"high\", \"fact_ids\": [\"F:ee5de46b2b\"], \"numeric_values\": [{\"fact_id\": \"F:ee5de46b2b\", \"unit\": \"degC\", \"value\": 14}], \"text\": \"temperature_c fell below 14 degC (threshold) in multiple runs.\"}, {\"claim_id\": \"F:ee5de46b2b\", \"confidence\": \"high\", \"fact_ids\": [\"F:df2048225a\", \"F:007ead50ed\", \"F:0ecd4dfb8a\"], \"numeric_values\": [], \"text\": \"Lowest temperature_c below threshold was 5.88, 5.67, and 5.83 degC.\"}, {\"claim_id\": \"F:e49d3849bb\", \"confidence\": \"high\", \"fact_ids\": [\"F:e49d3849bb\"], \"numeric_values\": [{\"fact_id\": \"F:e49d3849bb\", \"unit\": \"degC\", \"value\": 2.45}], \"text\": \"temperature_c shifted up by 2.45 degC at sample 22.\"}, {\"claim_id\": \"F:89ed250193\", \"confidence\": \"high\", \"fact_ids\": [\"F:89ed250193\"], \"numeric_values\": [{\"fact_id\": \"F:89ed250193\", \"unit\": \"degC\", \"value\": 0.877}], \"text\": \"temperature_c shifted down by 0.88 degC at sample 28.\"}, {\"claim_id\": \"F:2718ebafc0\", \"confidence\": \"high\", \"fact_ids\": [\"F:2718ebafc0\"], \"numeric_values\": [{\"fact_id\": \"F:2718ebafc0\", \"unit\": \"degC\", \"value\": 1.15}], \"text\": \"temperature_c shifted down by 1.15 degC at sample 34.\"}, {\"claim_id\": \"F:F7fe99aacc7\", \"confidence\": \"high\", \"fact_ids\": [\"F:F7fe99aacc7\"], \"numeric_values\": [{\"fact_id\": \"F:F7fe99aacc7\", \"unit\": \"degC\", \"value\": 1.14}], \"text\": \"Largest confirmed shift down was 1.15 degC at sample 40.\"}], \"recommendations\": [], \"summary\": \"Temperature has crossed the 14 degC threshold multiple times with notable jumps; largest confirmed shift is 2.45 degC up and 1.15 degC down. No recommendations from twin-confirmed effects.\"}"
+  },
+  "fd7ca3f07f0cac6abf8b4696c1a9860bdda40e44fbba9e97f84888362bc87c2a": {
+   "completion_tokens": 199,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "allenai/Olmo-3-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-4dd413f0"
+   },
+   "prompt_tokens": 1826,
+   "text": "{\"caveats\": [\"temperature_c sube en muestra 22 (F:e49d3849bb)\", \"temperature_c baja en muestra 28 (F:89ed250193)\", \"temperature_c baja en muestra 34 (F:2718ebafc0)\", \"temperature_c baja en muestra 40 (F:7fe99aacc7)\"], \"claims\": [], \"recommendations\": [{\"action\": \"Revisar causas de subidas en temperature_c en muestras 22, 70 y 207 (F:e49d3849bb, F:e203732e0b, F:825a75a1d5)\", \"blocked_by\": [], \"rationale_claim_ids\": []}], \"summary\": \"6 cambios de subida o bajada significativos en temperature_c y 3 saltos grandes; no hay efectos confirmados por gemelo.\"}"
+  }
+ }
+}
