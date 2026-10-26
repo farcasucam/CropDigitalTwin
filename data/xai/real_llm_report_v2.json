@@ -6,7 +6,7 @@
   "olmo-3-7b": "allenai/Olmo-3-7B-Instruct",
   "qwen2.5-7b": "Qwen/Qwen2.5-7B-Instruct"
  },
- "report_hash": "e32ac33e1bc481bb30866153b019000f671f04427b784ba7a499543220ac8a14",
+ "report_hash": "46bd933653db7a2a5b869926b0dcea97bbb86829ffe9e4348b345bc868f326f4",
  "rows": [
   {
    "attempts": 1,
@@ -44,7 +44,7 @@
   },
   {
    "attempts": 1,
-   "bundle_hash": "ed0bc6ec638f94e8eefd46580da67eae54f2a15dfa5af579cc48cf060496ec9b",
+   "bundle_hash": "0990b32ae79f1018c3cd4bbbaed8bac1611f08090ffe79be05a4dbba1828893e",
    "case": "1_tomato_greenhouse_off",
    "claims": 4,
    "corrections": {
@@ -59,7 +59,7 @@
     "NUMBER_NOT_IN_FACT": 1,
     "NUMERIC_VALUE_MISMATCH": 1,
     "RECOMMENDATION_UNCONFIRMED": 1,
-    "UNIT_MISMATCH": 2
+    "UNIT_MISMATCH": 1
    }
   },
   {
@@ -292,7 +292,7 @@
   },
   {
    "attempts": 1,
-   "bundle_hash": "f2bb74f7821019b9b132fd3e6347372829ed8897966aa1cd8e5d4c52b6bdf433",
+   "bundle_hash": "e80d030fdfc87fbfbe0c73931c25a0408a64cac82be00573d4ccfcf0d2992a67",
    "case": "0_tomato_outdoor_off",
    "claims": 6,
    "corrections": {
@@ -463,7 +463,7 @@
    "runs_with_violations": 8,
    "truncated_last_attempt": 0,
    "unparseable": 0,
-   "violations": 21
+   "violations": 20
   }
  }
 }

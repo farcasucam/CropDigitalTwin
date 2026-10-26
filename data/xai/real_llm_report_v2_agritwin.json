@@ -6,7 +6,7 @@
   "olmo-3-7b": "allenai/Olmo-3-7B-Instruct",
   "qwen2.5-7b": "Qwen/Qwen2.5-7B-Instruct"
  },
- "report_hash": "e3747cbd89bedfb934f55a792b510808811943ba9f6da3a1b16d7de8eedbbe47",
+ "report_hash": "91230d6e6b33cde1a617207070b013e1aa229929989e38e6abb942f7fdab37f3",
  "rows": [
   {
    "attempts": 1,
@@ -29,22 +29,20 @@
   },
   {
    "attempts": 1,
-   "bundle_hash": "4ca329bc459b60c4d91605c8eeb92bdbf6a5fbb28801b20aaabc2bad3bda8b75",
+   "bundle_hash": "c1cf4f67166d72106843c4d7d91b15993c8ee8f30062e519a183f0688baf4067",
    "case": "0_tomato_outdoor_off",
    "claims": 4,
    "corrections": {
     "BLOCKED": 1,
-    "REMOVED": 1,
-    "REWRITTEN": 4
+    "REMOVED": 1
    },
    "error": "",
    "language": "es",
    "model": "qwen2.5-7b",
    "status": "OK",
    "violations_by_rule": {
-    "NUMBER_NOT_IN_FACT": 4,
-    "RECOMMENDATION_UNCONFIRMED": 1,
-    "UNIT_MISMATCH": 1
+    "NUMBER_NOT_IN_FACT": 1,
+    "RECOMMENDATION_UNCONFIRMED": 1
    }
   },
   {
@@ -154,20 +152,18 @@
   },
   {
    "attempts": 1,
-   "bundle_hash": "ba2e578267b83910bd223303576743c324eaeb95973669ada8cccd1545c824df",
+   "bundle_hash": "2c97276e0b24f7680da821a8fc803e3c6d0b6563873da3ee12f834dba4399796",
    "case": "0_tomato_outdoor_off",
    "claims": 6,
    "corrections": {
-    "REMOVED": 1,
-    "REWRITTEN": 1
+    "REMOVED": 1
    },
    "error": "",
    "language": "en",
    "model": "llama-3.1-8b",
    "status": "OK",
    "violations_by_rule": {
-    "NUMBER_NOT_IN_FACT": 1,
-    "UNIT_MISMATCH": 1
+    "NUMBER_NOT_IN_FACT": 1
    }
   },
   {
@@ -188,13 +184,13 @@
   },
   {
    "attempts": 1,
-   "bundle_hash": "22287c0a370cc80f24cc7a84990b65ac877e2d4621b1537d30d0073c3fdf4d42",
+   "bundle_hash": "cff46024245bd1e4df5b2d7dae58ab349641050c3b461635b2569de4d0f5bc9c",
    "case": "1_tomato_greenhouse_off",
    "claims": 6,
    "corrections": {
     "BLOCKED": 2,
     "REMOVED": 1,
-    "REWRITTEN": 4
+    "REWRITTEN": 1
    },
    "error": "",
    "language": "en",
@@ -203,7 +199,7 @@
    "violations_by_rule": {
     "NUMBER_NOT_IN_FACT": 1,
     "RECOMMENDATION_UNCONFIRMED": 2,
-    "UNIT_MISMATCH": 7
+    "UNIT_MISMATCH": 2
    }
   },
   {
@@ -284,19 +280,18 @@
   },
   {
    "attempts": 2,
-   "bundle_hash": "0a8e53113a35b56396c7a4f72b6ef6b2af640b2c2fcd52a4c45ff536004387cb",
+   "bundle_hash": "8a23404db3bc89a3b5ad9be209f831d0c69cba04a5986b58cd78bead669c2ae1",
    "case": "0_tomato_outdoor_off",
    "claims": 6,
    "corrections": {
-    "REMOVED": 1,
-    "REWRITTEN": 3
+    "REMOVED": 1
    },
    "error": "",
    "language": "en",
    "model": "olmo-3-7b",
    "status": "OK",
    "violations_by_rule": {
-    "NUMBER_NOT_IN_FACT": 4
+    "NUMBER_NOT_IN_FACT": 1
    }
   },
   {
@@ -337,7 +332,7 @@
   },
   {
    "attempts": 2,
-   "bundle_hash": "c39d55927cab2b8611408ed901e7e58c18b5a0b7504bfc378125d934c8c8623a",
+   "bundle_hash": "9dc8a380e49728ae45fb195e2264e0d77d3c094f01e825a25060666e1dfea0ce",
    "case": "1_tomato_greenhouse_off",
    "claims": 6,
    "corrections": {
@@ -431,39 +426,39 @@
    "claims": 38,
    "fact_ids_cited": 174,
    "fact_ids_with_label": 30,
-   "flagged_claims": 9,
+   "flagged_claims": 5,
    "recommendations_final": 15,
    "runs": 8,
    "runs_with_violations": 6,
    "truncated_last_attempt": 0,
    "unparseable": 1,
-   "violations": 21
+   "violations": 15
   },
   "olmo-3-7b": {
    "attempts": 12,
    "claims": 29,
    "fact_ids_cited": 56,
    "fact_ids_with_label": 51,
-   "flagged_claims": 10,
+   "flagged_claims": 7,
    "recommendations_final": 0,
    "runs": 8,
    "runs_with_violations": 8,
    "truncated_last_attempt": 0,
    "unparseable": 0,
-   "violations": 27
+   "violations": 24
   },
   "qwen2.5-7b": {
    "attempts": 8,
    "claims": 37,
    "fact_ids_cited": 103,
    "fact_ids_with_label": 9,
-   "flagged_claims": 7,
+   "flagged_claims": 3,
    "recommendations_final": 9,
    "runs": 8,
    "runs_with_violations": 8,
    "truncated_last_attempt": 0,
    "unparseable": 0,
-   "violations": 22
+   "violations": 18
   }
  }
 }

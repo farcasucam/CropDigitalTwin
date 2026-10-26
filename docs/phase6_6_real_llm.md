@@ -1,6 +1,6 @@
 # Phase 6.6 with real language models: OpenAI-compatible client, record/replay, first run on the Spark
 
-Synthetic data, **four scenarios, one run per model, language and scenario (8 runs per model)**. Script: `manual_phase6_6_real_llm_test.py` (live, or `--replay` offline); report `data/xai/real_llm_report.json` (design v1, hash 13cf0a41…; the v1 counts of sections 2-3 are unchanged, `flagged_claims` was added afterwards) and `real_llm_report_v2.json` (design v2, hash e32ac33e…, section 5).
+Synthetic data, **four scenarios, one run per model, language and scenario (8 runs per model)**. Script: `manual_phase6_6_real_llm_test.py` (live, or `--replay` offline); report `data/xai/real_llm_report.json` (design v1, hash 81ef28d8… with the corrected verifier of section 8; the v1 counts of sections 2-3 are unchanged, `flagged_claims` was added afterwards) and `real_llm_report_v2.json` (design v2, hash 46bd9336…, section 5). **Sections 2-7 quote the counts of the verifier as it was before the fix of section 8; the JSON reports and the replay carry the corrected verifier's counts, compared in section 8.**.
 **Correction (2026-10-26):** the first version of `flagged_claims` also counted violations of recommendations and caveats, so the shares of flagged claims first written in sections 5 and 6 (43-55%) were inflated; the tables below carry the corrected counts (violations on real claim ids only); recorded answers `data/xai/llm_records/`.
 Models (vLLM 26.09 containers `fgkb-*` on the Spark, temperature 0, seed 0, structured output by JSON Schema): Qwen2.5-7B-Instruct, Llama-3.1-8B-Instruct, Olmo-3-7B-Instruct.
 
@@ -59,7 +59,7 @@ Reading:
 
 ## 6. Own containers without free whitespace (`--server agritwin`)
 
-The `fgkb-*` containers belong to the Spark's owner and could not be reconfigured; with the user's permission they were stopped (not removed: `docker start fgkb-qwen fgkb-llama fgkb-olmo` restores them) and three containers of this project were created: `agritwin-qwen` (8010), `agritwin-llama` (8011), `agritwin-olmo` (8012), same image, models and flags plus `--structured-outputs-config '{"backend": "xgrammar", "disable_any_whitespace": true}'` (the option needs the backend named; per request it had no effect). Weights come from the Hugging Face cache offline; no token is copied. The server configuration is part of every recorded model identity. Design v2, same scenarios, 8 runs per model; `llm_records_v2_agritwin/`, `real_llm_report_v2_agritwin.json` (hash e3747cbd…).
+The `fgkb-*` containers belong to the Spark's owner and could not be reconfigured; with the user's permission they were stopped (not removed: `docker start fgkb-qwen fgkb-llama fgkb-olmo` restores them) and three containers of this project were created: `agritwin-qwen` (8010), `agritwin-llama` (8011), `agritwin-olmo` (8012), same image, models and flags plus `--structured-outputs-config '{"backend": "xgrammar", "disable_any_whitespace": true}'` (the option needs the backend named; per request it had no effect). Weights come from the Hugging Face cache offline; no token is copied. The server configuration is part of every recorded model identity. Design v2, same scenarios, 8 runs per model; `llm_records_v2_agritwin/`, `real_llm_report_v2_agritwin.json` (hash 91230d6e… with the corrected verifier; e3747cbd… before).
 
 | | Qwen fgkb | Qwen agritwin | Llama fgkb | Llama agritwin | OLMo fgkb | OLMo agritwin |
 |---|---|---|---|---|---|---|
@@ -96,3 +96,21 @@ Material: `manual_phase6_6_audit_sample.py` builds, from the design v2 / own-con
 * **No claim about the models:** these are the verifier's precision and recall on a small sample, not an error rate of any model.
 
 **Backlog for the verifier (not done)**: (1) match numbers regardless of decimal separator and minus sign; (2) accept for a declared number any unit that appears next to that number in the fact; (3) a direction check (rise/fall words against the fact's direction); (4) a check that a number of an effect is not called confirmed when the fact says the size is not; (5) for hedged speculation, a second check (an entailment or judge model) that must itself be evaluated on this sheet. Items 1-2 remove the artifacts, 3-4 are rules with known false-negative limits, 5 is research.
+
+## 8. Verifier corrected: number spelling and units (`tsxai.verify`)
+
+Three changes, each tested to accept what is legitimate and still refuse what is wrong (`tests/test_verify_normalization.py`): (1) a decimal comma and a decimal point are the same number (`5.88` for the fact's `5,88`); (2) a Unicode minus is a minus (a dropped sign is still refused); (3) a declared unit is accepted if it is the fact's own unit, or the fact writes it right next to that very number (`133 h` inside a fact in degC), or it is a sample index that appears in the fact; a unit written elsewhere in the fact, or an invented one, is still refused. The double's report is unchanged (hash 9845be70…, 0 false positives, 9 of 9 classes caught 8 of 8) and the 176 tests pass.
+
+On the 52 audited claims (`manual_phase6_6_audit_recheck.py`, `data/xai/audit/audit_key_corrected_verifier.csv`): **all 11 artifacts are no longer flagged, the 15 flagged claims with a real error (6 substantive, 5 minor, 4 declared-numbers only) are still flagged, no claim the first pass judged correct became flagged, and the 5 misses are still missed.**
+**Caveat:** the fix was written after reading these very claims, so this checks that the fix removes the cases that motivated it; it is not an independent measurement of the new verifier. The audit sheet was not redrawn (a new sample drawn with the new verifier would have to be audited by someone else).
+
+Flagged claims over the claims written, before and after the fix:
+
+| report | Qwen | Llama | OLMo |
+|---|---|---|---|
+| v1 (fgkb) | 13 of 26 (50%), unchanged | 0 of 71, unchanged | 34 of 55 (62%) before, 33 (60%) after |
+| v2 (fgkb) | 5 of 29 (17%), unchanged | 7 of 40 (18%), unchanged | 9 of 34 (26%), unchanged |
+| v2 (own containers) | 7 of 37 (19%) before, **3 (8%)** after | 9 of 38 (24%) before, **5 (13%)** after | 10 of 29 (34%) before, **7 (24%)** after |
+
+In the run with own containers 15 of 104 claims are now flagged (26 before). The corrected noise between the two servers is up to 9 points (Qwen 17% to 8%) on 29-37 claims per model; still not an effect to interpret.
+Still open: items 3-5 of the backlog of section 7 (direction check, size called confirmed, hedged invented causes), which are the misses.

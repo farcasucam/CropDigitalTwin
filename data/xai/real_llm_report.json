@@ -6,7 +6,7 @@
   "olmo-3-7b": "allenai/Olmo-3-7B-Instruct",
   "qwen2.5-7b": "Qwen/Qwen2.5-7B-Instruct"
  },
- "report_hash": "13cf0a411de6426877c630765b0128f2006678756c73e9d109709ce78436b8f1",
+ "report_hash": "81ef28d85a2f55bd973199cea22308d2c82ac2aeb71c5ce1578ca3e23d5b54c7",
  "rows": [
   {
    "attempts": 2,
@@ -104,7 +104,7 @@
   },
   {
    "attempts": 2,
-   "bundle_hash": "904a6a6fb86af8c453c57c056f78dec17427981e511c2ec4b8e6c910f30b26a6",
+   "bundle_hash": "c13d88062e19bd7beb200e9086c258835d4bd0e56fcdaa8def87fb66a586735a",
    "case": "3_pepper_greenhouse_on_on",
    "claims": 8,
    "corrections": {
@@ -117,12 +117,12 @@
    "status": "OK",
    "violations_by_rule": {
     "RECOMMENDATION_UNSUPPORTED": 1,
-    "UNIT_MISMATCH": 4
+    "UNIT_MISMATCH": 2
    }
   },
   {
    "attempts": 1,
-   "bundle_hash": "e40fc8949dc35b48b364a6a93e750ea3b9e72999e624aa052bd4f33642e408bd",
+   "bundle_hash": "931191a57fa5c1b12de374a65a1bf5bc350de71da1dd94b66f9f940638ca9128",
    "case": "3_pepper_greenhouse_on_on",
    "claims": 8,
    "corrections": {
@@ -134,7 +134,6 @@
    "model": "qwen2.5-7b",
    "status": "OK",
    "violations_by_rule": {
-    "NUMBER_NOT_IN_FACT": 6,
     "NUMERIC_VALUE_MISMATCH": 3,
     "RECOMMENDATION_UNSUPPORTED": 1,
     "UNIT_MISMATCH": 8
@@ -336,12 +335,12 @@
   },
   {
    "attempts": 1,
-   "bundle_hash": "6749fad4efbe28ff435708548bb44a2c48af10f4d9a749857c0cb4c759226444",
+   "bundle_hash": "6fe77f87885e64d91287607d0dbadd440cd8eb6b1ede51b0694edcff1b561ef6",
    "case": "2_pepper_greenhouse_on",
    "claims": 8,
    "corrections": {
     "REMOVED": 2,
-    "REWRITTEN": 2
+    "REWRITTEN": 1
    },
    "error": "",
    "language": "en",
@@ -351,8 +350,7 @@
     "NUMBER_NOT_IN_FACT": 2,
     "NUMERIC_VALUE_MISMATCH": 1,
     "OVERCLAIM_CAUSAL": 1,
-    "TRACE_NO_FACT": 1,
-    "UNIT_MISMATCH": 5
+    "TRACE_NO_FACT": 1
    }
   },
   {
@@ -429,13 +427,13 @@
    "claims": 55,
    "fact_ids_cited": 159,
    "fact_ids_with_label": 159,
-   "flagged_claims": 34,
+   "flagged_claims": 33,
    "recommendations_final": 2,
    "runs": 8,
    "runs_with_violations": 6,
    "truncated_last_attempt": 1,
    "unparseable": 2,
-   "violations": 229
+   "violations": 224
   },
   "qwen2.5-7b": {
    "attempts": 13,
@@ -448,7 +446,7 @@
    "runs_with_violations": 6,
    "truncated_last_attempt": 1,
    "unparseable": 2,
-   "violations": 35
+   "violations": 27
   }
  }
 }
