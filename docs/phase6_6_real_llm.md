@@ -114,3 +114,27 @@ Flagged claims over the claims written, before and after the fix:
 
 In the run with own containers 15 of 104 claims are now flagged (26 before). The corrected noise between the two servers is up to 9 points (Qwen 17% to 8%) on 29-37 claims per model; still not an effect to interpret.
 Still open: items 3-5 of the backlog of section 7 (direction check, size called confirmed, hedged invented causes), which are the misses.
+
+## 9. Human audit of the 52 claims (one auditor)
+
+`data/xai/audit/audit_blind_annotated.csv` (52 verdicts, 16 with a note); analysis: `manual_phase6_6_audit_analysis.py`, `data/xai/audit/audit_analysis.json`. **One auditor: there is no inter-annotator agreement yet**, and the sample was drawn with the old verifier (all its 26 flags plus 26 random unflagged claims), so recall can be extrapolated only for the old verifier and only roughly. Not an error rate of any model.
+
+**Human verdicts:** 38 OK and 14 errors: 6 NUMBER, 5 OVERCLAIM, 3 UNSUPPORTED (no UNIT, no OTHER).
+
+| | flagged claims judged error (TP) | flagged but judged OK (FP) | errors not flagged (FN) | precision |
+|---|---|---|---|---|
+| old verifier (as sampled) | 10 | 16 | 4 | 38% |
+| corrected verifier, same 52 claims | 9 | 6 | 5 | 60% |
+| assistant first pass | 13 | 7 | 1 | 65% |
+
+* **The old verifier's flags were mostly not errors:** 16 of 26. The correction of section 8 removes 10 of those 16 flags and loses one true error (A002, below).
+* **The 6 flags that remain and the auditor judged OK** are not artifacts of spelling any more: 4 are errors only in the `declared_numbers` field while the claim text is the fact itself (A021, A031, A037, A046), 1 is a rounding (-0.188 written -0.19, A011) and 1 a count the model derived ("6 muestras" for samples 155 to 160, A039). So **the auditor judged the claim text, and did not count errors confined to the declared-numbers side field, nor a rounding, nor a derived count.** This is the answer to the borderline cases of `docs/xai/AUDIT_INSTRUCTIONS.md` section 4, as practiced by this one auditor; it still has to be fixed as a project criterion.
+* **5 errors are not flagged by the corrected verifier:** a direction reversed (A020), the size of an effect said to be confirmed when the fact says the size is not (A004), two invented causes in hedged wording ("suggesting possible heating system malfunctions", "potential external influences", A048 and A023) and A002 (`La temperatura cayó hasta 5.88°C por debajo de 14°C`, where 5.88 is the absolute minimum: read literally it says 5.88 degrees *below* 14, that is 8.12 °C below; the auditor applied the conservative reading and noted the doubt). The first pass had dismissed A002 as a formatting artifact; the auditor's reading is more careful. The number is in the fact, so a check on numbers cannot see it.
+* **The 9 true errors the corrected verifier catches** include the substantive ones with a wrong or invented number and the observed facts called "confirmed".
+* **Rough recall of the old verifier:** it caught 10 errors and 4 more were found among 26 unflagged claims sampled from 78, which extrapolates to about 12 missed: recall about 45%, with a very wide uncertainty. No recall figure is given for the corrected verifier (the sample frame is biased for it).
+* **Agreement of the assistant's first pass with the auditor:** 85% (44 of 52), kappa 0.66. Seven of the eight disagreements are the borderline cases above (the first pass counted them as errors), and one (A002) is the auditor being stricter.
+
+**What follows**
+1. Treat errors confined to `declared_numbers` as a separate class, not as a violation of the claim: they were 4 of the 6 remaining false flags. It is a design decision for the pipeline owner (the field exists so the verifier can check what the model says it copied, but nothing downstream shows it).
+2. The misses (direction, confirmed size, hedged invented causes, a relative reading of a number) are meaning errors; no further number or unit rule reaches them. Options: a direction check against the fact's rising or falling wording (cheap), a size check when a fact says the size is not confirmed (cheap, limited), and a second checker for hedged speculation, which must itself be evaluated on this sheet.
+3. A **second independent auditor** on the same blind sheet gives the agreement figure that this audit lacks.

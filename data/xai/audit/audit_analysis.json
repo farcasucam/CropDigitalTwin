@@ -1,0 +1,120 @@
+{
+ "assistant_first_pass": {
+  "FN": 1,
+  "FP": 7,
+  "TN": 31,
+  "TP": 13,
+  "precision": 0.65,
+  "recall_in_sample": 0.929
+ },
+ "claims_audited": 52,
+ "corrected_verifier_same_claims": {
+  "FN": 5,
+  "FP": 6,
+  "TN": 32,
+  "TP": 9,
+  "precision": 0.6,
+  "recall_in_sample": 0.643
+ },
+ "errors_missed_by_corrected_verifier": {
+  "A002": "NUMBER",
+  "A004": "OVERCLAIM",
+  "A020": "UNSUPPORTED",
+  "A023": "OVERCLAIM",
+  "A048": "UNSUPPORTED"
+ },
+ "flags_of_corrected_verifier_judged_ok": {
+  "A011": "NUMBER_NOT_IN_FACT",
+  "A021": "NUMERIC_VALUE_MISMATCH",
+  "A031": "NUMERIC_VALUE_MISMATCH",
+  "A037": "UNIT_MISMATCH",
+  "A039": "NUMBER_NOT_IN_FACT",
+  "A046": "NUMERIC_VALUE_MISMATCH"
+ },
+ "human_error_types_vs_corrected_rules": {
+  "A002": [
+   "NUMBER",
+   "-"
+  ],
+  "A004": [
+   "OVERCLAIM",
+   "-"
+  ],
+  "A006": [
+   "UNSUPPORTED",
+   "NUMBER_NOT_IN_FACT,NUMERIC_VALUE_MISMATCH"
+  ],
+  "A014": [
+   "OVERCLAIM",
+   "OVERCLAIM_CONFIRMED"
+  ],
+  "A017": [
+   "NUMBER",
+   "NUMBER_NOT_IN_FACT"
+  ],
+  "A020": [
+   "UNSUPPORTED",
+   "-"
+  ],
+  "A023": [
+   "OVERCLAIM",
+   "-"
+  ],
+  "A029": [
+   "NUMBER",
+   "NUMBER_NOT_IN_FACT,NUMERIC_VALUE_MISMATCH"
+  ],
+  "A038": [
+   "NUMBER",
+   "NUMBER_NOT_IN_FACT,OVERCLAIM_CONFIRMED"
+  ],
+  "A042": [
+   "NUMBER",
+   "NUMBER_NOT_IN_FACT"
+  ],
+  "A044": [
+   "OVERCLAIM",
+   "NUMBER_NOT_IN_FACT,OVERCLAIM_CONFIRMED"
+  ],
+  "A047": [
+   "NUMBER",
+   "NUMBER_NOT_IN_FACT"
+  ],
+  "A048": [
+   "UNSUPPORTED",
+   "-"
+  ],
+  "A049": [
+   "OVERCLAIM",
+   "NUMBER_NOT_IN_FACT,OVERCLAIM_CONFIRMED"
+  ]
+ },
+ "human_errors": 14,
+ "human_verdicts": {
+  "NUMBER": 6,
+  "OK": 38,
+  "OVERCLAIM": 5,
+  "UNSUPPORTED": 3
+ },
+ "human_vs_assistant": {
+  "agreement": 0.846,
+  "kappa": 0.656
+ },
+ "limits": "one auditor: no inter-annotator agreement; sample drawn with the old verifier; the assistant that wrote the verifier also made the first pass; 52 claims; not a model error rate",
+ "old_verifier_as_sampled": {
+  "FN": 4,
+  "FP": 16,
+  "TN": 22,
+  "TP": 10,
+  "precision": 0.385,
+  "recall_in_sample": 0.714
+ },
+ "old_verifier_recall_extrapolated": {
+  "caught_in_all_flags": 10,
+  "missed_extrapolated_to_78_unflagged": 12.0,
+  "missed_in_sample": 4,
+  "note": "26 unflagged sampled of 78; very wide uncertainty",
+  "recall": 0.45
+ },
+ "report_hash": "87870e3734602196f547211bed770d0cfd432af7ff635608cd2148ea7e48fac5"
+}
