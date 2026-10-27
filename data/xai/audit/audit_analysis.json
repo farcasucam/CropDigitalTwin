@@ -1,29 +1,52 @@
 {
+ "agreement_between_annotations": {
+  "binary_ok_vs_error": {
+   "agreement": 0.923,
+   "kappa": 0.805
+  },
+  "claims_where_one_says_ok_and_the_other_error": 4,
+  "claims_with_different_code": 7,
+  "six_codes": {
+   "agreement": 0.865,
+   "kappa": 0.694
+  }
+ },
  "assistant_first_pass": {
-  "FN": 1,
-  "FP": 7,
-  "TN": 31,
-  "TP": 13,
-  "precision": 0.65,
-  "recall_in_sample": 0.929
+  "annotation_1": {
+   "FN": 1,
+   "FP": 7,
+   "TN": 31,
+   "TP": 13,
+   "precision": 0.65,
+   "recall_in_sample": 0.929
+  },
+  "annotation_2": {
+   "FN": 3,
+   "FP": 9,
+   "TN": 29,
+   "TP": 11,
+   "precision": 0.55,
+   "recall_in_sample": 0.786
+  },
+  "error_in_both": {
+   "FN": 1,
+   "FP": 9,
+   "TN": 31,
+   "TP": 11,
+   "precision": 0.55,
+   "recall_in_sample": 0.917
+  },
+  "error_in_either": {
+   "FN": 3,
+   "FP": 7,
+   "TN": 29,
+   "TP": 13,
+   "precision": 0.65,
+   "recall_in_sample": 0.812
+  }
  },
  "claims_audited": 52,
- "corrected_verifier_same_claims": {
-  "FN": 5,
-  "FP": 6,
-  "TN": 32,
-  "TP": 9,
-  "precision": 0.6,
-  "recall_in_sample": 0.643
- },
- "errors_missed_by_corrected_verifier": {
-  "A002": "NUMBER",
-  "A004": "OVERCLAIM",
-  "A020": "UNSUPPORTED",
-  "A023": "OVERCLAIM",
-  "A048": "UNSUPPORTED"
- },
- "flags_of_corrected_verifier_judged_ok": {
+ "corrected_flags_judged_ok_by_both": {
   "A011": "NUMBER_NOT_IN_FACT",
   "A021": "NUMERIC_VALUE_MISMATCH",
   "A031": "NUMERIC_VALUE_MISMATCH",
@@ -31,90 +54,196 @@
   "A039": "NUMBER_NOT_IN_FACT",
   "A046": "NUMERIC_VALUE_MISMATCH"
  },
- "human_error_types_vs_corrected_rules": {
+ "corrected_verifier_same_claims": {
+  "annotation_1": {
+   "FN": 5,
+   "FP": 6,
+   "TN": 32,
+   "TP": 9,
+   "precision": 0.6,
+   "recall_in_sample": 0.643
+  },
+  "annotation_2": {
+   "FN": 7,
+   "FP": 8,
+   "TN": 30,
+   "TP": 7,
+   "precision": 0.467,
+   "recall_in_sample": 0.5
+  },
+  "error_in_both": {
+   "FN": 5,
+   "FP": 8,
+   "TN": 32,
+   "TP": 7,
+   "precision": 0.467,
+   "recall_in_sample": 0.583
+  },
+  "error_in_either": {
+   "FN": 7,
+   "FP": 6,
+   "TN": 30,
+   "TP": 9,
+   "precision": 0.6,
+   "recall_in_sample": 0.562
+  }
+ },
+ "disagreements": {
+  "A002": {
+   "annotation_1": "NUMBER",
+   "annotation_2": "UNSUPPORTED",
+   "assistant": "FP_ARTIFACT",
+   "corrected_flag": false,
+   "old_flag": true
+  },
+  "A006": {
+   "annotation_1": "UNSUPPORTED",
+   "annotation_2": "NUMBER",
+   "assistant": "TP_SUBSTANTIVE",
+   "corrected_flag": true,
+   "old_flag": true
+  },
+  "A013": {
+   "annotation_1": "OK",
+   "annotation_2": "OVERCLAIM",
+   "assistant": "OK",
+   "corrected_flag": false,
+   "old_flag": false
+  },
+  "A014": {
+   "annotation_1": "OVERCLAIM",
+   "annotation_2": "OK",
+   "assistant": "TP_MINOR",
+   "corrected_flag": true,
+   "old_flag": true
+  },
+  "A019": {
+   "annotation_1": "OK",
+   "annotation_2": "NUMBER",
+   "assistant": "OK",
+   "corrected_flag": false,
+   "old_flag": false
+  },
+  "A042": {
+   "annotation_1": "NUMBER",
+   "annotation_2": "OK",
+   "assistant": "TP_MINOR",
+   "corrected_flag": true,
+   "old_flag": true
+  },
+  "A048": {
+   "annotation_1": "UNSUPPORTED",
+   "annotation_2": "OVERCLAIM",
+   "assistant": "MISS_SUBSTANTIVE",
+   "corrected_flag": false,
+   "old_flag": false
+  }
+ },
+ "errors": {
+  "annotation_1": 14,
+  "annotation_2": 14,
+  "error_in_both": 12,
+  "error_in_either": 16
+ },
+ "errors_in_both_missed_by_corrected_verifier": {
   "A002": [
    "NUMBER",
-   "-"
+   "UNSUPPORTED"
   ],
   "A004": [
    "OVERCLAIM",
-   "-"
-  ],
-  "A006": [
-   "UNSUPPORTED",
-   "NUMBER_NOT_IN_FACT,NUMERIC_VALUE_MISMATCH"
-  ],
-  "A014": [
-   "OVERCLAIM",
-   "OVERCLAIM_CONFIRMED"
-  ],
-  "A017": [
-   "NUMBER",
-   "NUMBER_NOT_IN_FACT"
+   "OVERCLAIM"
   ],
   "A020": [
    "UNSUPPORTED",
-   "-"
+   "UNSUPPORTED"
   ],
   "A023": [
    "OVERCLAIM",
-   "-"
-  ],
-  "A029": [
-   "NUMBER",
-   "NUMBER_NOT_IN_FACT,NUMERIC_VALUE_MISMATCH"
-  ],
-  "A038": [
-   "NUMBER",
-   "NUMBER_NOT_IN_FACT,OVERCLAIM_CONFIRMED"
-  ],
-  "A042": [
-   "NUMBER",
-   "NUMBER_NOT_IN_FACT"
-  ],
-  "A044": [
-   "OVERCLAIM",
-   "NUMBER_NOT_IN_FACT,OVERCLAIM_CONFIRMED"
-  ],
-  "A047": [
-   "NUMBER",
-   "NUMBER_NOT_IN_FACT"
+   "OVERCLAIM"
   ],
   "A048": [
    "UNSUPPORTED",
-   "-"
-  ],
-  "A049": [
-   "OVERCLAIM",
-   "NUMBER_NOT_IN_FACT,OVERCLAIM_CONFIRMED"
+   "OVERCLAIM"
   ]
  },
- "human_errors": 14,
- "human_verdicts": {
-  "NUMBER": 6,
-  "OK": 38,
-  "OVERCLAIM": 5,
-  "UNSUPPORTED": 3
- },
- "human_vs_assistant": {
-  "agreement": 0.846,
-  "kappa": 0.656
- },
- "limits": "one auditor: no inter-annotator agreement; sample drawn with the old verifier; the assistant that wrote the verifier also made the first pass; 52 claims; not a model error rate",
+ "limits": "who made annotation 2 and whether it was blind to annotation 1 is not stated; sample drawn with the old verifier; the assistant that wrote the verifier also made the first pass; 52 claims; not a model error rate",
  "old_verifier_as_sampled": {
-  "FN": 4,
-  "FP": 16,
-  "TN": 22,
-  "TP": 10,
-  "precision": 0.385,
-  "recall_in_sample": 0.714
+  "annotation_1": {
+   "FN": 4,
+   "FP": 16,
+   "TN": 22,
+   "TP": 10,
+   "precision": 0.385,
+   "recall_in_sample": 0.714
+  },
+  "annotation_2": {
+   "FN": 6,
+   "FP": 18,
+   "TN": 20,
+   "TP": 8,
+   "precision": 0.308,
+   "recall_in_sample": 0.571
+  },
+  "error_in_both": {
+   "FN": 4,
+   "FP": 18,
+   "TN": 22,
+   "TP": 8,
+   "precision": 0.308,
+   "recall_in_sample": 0.667
+  },
+  "error_in_either": {
+   "FN": 6,
+   "FP": 16,
+   "TN": 20,
+   "TP": 10,
+   "precision": 0.385,
+   "recall_in_sample": 0.625
+  }
  },
  "old_verifier_recall_extrapolated": {
-  "caught_in_all_flags": 10,
-  "missed_extrapolated_to_78_unflagged": 12.0,
-  "missed_in_sample": 4,
-  "note": "26 unflagged sampled of 78; very wide uncertainty",
-  "recall": 0.45
+  "by_truth": {
+   "annotation_1": {
+    "caught": 10,
+    "missed_extrapolated": 12.0,
+    "missed_in_sample": 4,
+    "recall": 0.45
+   },
+   "annotation_2": {
+    "caught": 8,
+    "missed_extrapolated": 18.0,
+    "missed_in_sample": 6,
+    "recall": 0.31
+   },
+   "error_in_both": {
+    "caught": 8,
+    "missed_extrapolated": 12.0,
+    "missed_in_sample": 4,
+    "recall": 0.4
+   },
+   "error_in_either": {
+    "caught": 10,
+    "missed_extrapolated": 18.0,
+    "missed_in_sample": 6,
+    "recall": 0.36
+   }
+  },
+  "note": "26 unflagged sampled of 78; very wide uncertainty"
  },
- "report_hash": "87870e3734602196f547211bed770d0cfd432af7ff635608cd2148ea7e48fac5"
+ "report_hash": "714ecc02d3b28590ae737e57ae0a6890df689bbf04fc82bc9d4714e4bbcd11ee",
+ "verdicts": {
+  "annotation_1": {
+   "NUMBER": 6,
+   "OK": 38,
+   "OVERCLAIM": 5,
+   "UNSUPPORTED": 3
+  },
+  "annotation_2": {
+   "NUMBER": 6,
+   "OK": 38,
+   "OVERCLAIM": 6,
+   "UNSUPPORTED": 2
+  }
+ }
 }

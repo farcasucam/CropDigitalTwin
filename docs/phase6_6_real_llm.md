@@ -138,3 +138,34 @@ Still open: items 3-5 of the backlog of section 7 (direction check, size called 
 1. Treat errors confined to `declared_numbers` as a separate class, not as a violation of the claim: they were 4 of the 6 remaining false flags. It is a design decision for the pipeline owner (the field exists so the verifier can check what the model says it copied, but nothing downstream shows it).
 2. The misses (direction, confirmed size, hedged invented causes, a relative reading of a number) are meaning errors; no further number or unit rule reaches them. Options: a direction check against the fact's rising or falling wording (cheap), a size check when a fact says the size is not confirmed (cheap, limited), and a second checker for hedged speculation, which must itself be evaluated on this sheet.
 3. A **second independent auditor** on the same blind sheet gives the agreement figure that this audit lacks.
+
+## 10. Second annotation of the same 52 claims
+
+`data/xai/audit/audit_blind_annotated2.csv` (same rows, same blind columns, 14 notes); analysis: `manual_phase6_6_audit_analysis.py` (now reads both annotations), `audit_analysis.json`. **Who made annotation 2, and whether it was made blind to annotation 1, has not been stated**: the figures are agreement between two annotations; they count as independent-auditor agreement only once that is confirmed.
+
+**Agreement:** OK against error, 92.3% (48 of 52), kappa 0.80; the six codes, 86.5%, kappa 0.69. Seven claims get a different code, four of them OK in one and an error in the other (A013, A014, A019, A042). Errors: 14 in each annotation, **12 in both**, 16 in either.
+
+| disagreement | annotation 1 | annotation 2 | reading |
+|---|---|---|---|
+| A002 (`cayó hasta 5.88°C por debajo de 14°C`) | NUMBER | UNSUPPORTED | both error: the phrase can read as a drop relative to the threshold; they differ only in the code |
+| A006, A048 | UNSUPPORTED, UNSUPPORTED | NUMBER, OVERCLAIM | both error, different code |
+| A014 (`tramos largos confirmados`, facts are observed) | OVERCLAIM | OK | borderline wording; annotation 1 conservative |
+| A042 (`en 5 muestras` for samples 83 to 88) | NUMBER | OK | a derived count; annotation 1 conservative |
+| A013 (`increasing due to the heat wave, direction confirmed by the twin`) | OK | OVERCLAIM | see below |
+| A019 (forecast with 11,3-30,8 and 16 degC) | OK | NUMBER | **looks like a slip in annotation 2**: the claim is the cited fact word for word; the numbers in the note (7,34-17,2 and 10,8) belong to the facts of other rows. Not changed; to be confirmed by its author |
+
+* **A013 is a design question, not a slip.** The pack allows causal wording at the twin-confirmed level, and this fact is twin-confirmed; annotation 2 reads "due to the heat wave" as a cause stated about the real system, while the fact confirms only a direction across simulator variants. The project rule that the twin is never said to be validated against the real system points the same way as annotation 2. It deserves a decision (should causal wording at that level be limited to "in the twin"?).
+* **Robust results (they hold in both annotations):**
+  * the **5 errors the corrected verifier misses are errors in both annotations**: A002, A004 (size said confirmed), A020 (direction reversed), A023 and A048 (hedged invented causes);
+  * the **6 flags that remain and were judged OK are OK in both**: errors only in `declared_numbers` (A021, A031, A037, A046), a rounding (A011) and a derived count (A039). So treating the declared-numbers field as a separate class, as proposed in section 9, is supported by both.
+* **Verifier figures on the same 52 claims under four readings of the truth** (each is conditional on this sample and on a biased frame for the corrected verifier):
+
+| truth | old precision | old recall in sample | corrected precision | corrected recall in sample |
+|---|---|---|---|---|
+| annotation 1 | 38% | 71% | 60% | 64% |
+| annotation 2 | 31% | 57% | 47% | 50% |
+| error in both (12) | 31% | 67% | 47% | 58% |
+| error in either (16) | 38% | 63% | 60% | 56% |
+
+  The old verifier's recall extrapolated to its 78 unflagged claims is 31-45% depending on the truth, with a very wide uncertainty. Precision of the corrected verifier is 47-60%; the spread between the two annotations (13 points) is as large as most differences seen between configurations, so no precise figure should be quoted: **about half of its flags are errors, and it finds about half to two thirds of the errors that are in the sample.**
+* Limits unchanged: 52 claims, sample drawn with the old verifier, one prompt, synthetic scenarios, not a model error rate.
