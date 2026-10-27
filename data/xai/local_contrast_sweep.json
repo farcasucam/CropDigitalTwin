@@ -1,0 +1,211 @@
+{
+ "settings": [
+  {
+   "context": 60,
+   "k": 4.0,
+   "low": {
+    "hidden_abstained": 8,
+    "visible_cited": 82,
+    "visible_relevant_share": 0.622,
+    "visible_stretch_found": 8
+   },
+   "medium": {
+    "hidden_abstained": 8,
+    "visible_cited": 75,
+    "visible_relevant_share": 0.627,
+    "visible_stretch_found": 8
+   },
+   "min_run": 3
+  },
+  {
+   "context": 60,
+   "k": 2.0,
+   "low": {
+    "hidden_abstained": 3,
+    "visible_cited": 82,
+    "visible_relevant_share": 0.622,
+    "visible_stretch_found": 8
+   },
+   "medium": {
+    "hidden_abstained": 2,
+    "visible_cited": 77,
+    "visible_relevant_share": 0.532,
+    "visible_stretch_found": 8
+   },
+   "min_run": 3
+  },
+  {
+   "context": 60,
+   "k": 3.0,
+   "low": {
+    "hidden_abstained": 8,
+    "visible_cited": 82,
+    "visible_relevant_share": 0.622,
+    "visible_stretch_found": 8
+   },
+   "medium": {
+    "hidden_abstained": 8,
+    "visible_cited": 75,
+    "visible_relevant_share": 0.627,
+    "visible_stretch_found": 8
+   },
+   "min_run": 3
+  },
+  {
+   "context": 60,
+   "k": 6.0,
+   "low": {
+    "hidden_abstained": 8,
+    "visible_cited": 82,
+    "visible_relevant_share": 0.622,
+    "visible_stretch_found": 8
+   },
+   "medium": {
+    "hidden_abstained": 8,
+    "visible_cited": 75,
+    "visible_relevant_share": 0.627,
+    "visible_stretch_found": 8
+   },
+   "min_run": 3
+  },
+  {
+   "context": 60,
+   "k": 8.0,
+   "low": {
+    "hidden_abstained": 8,
+    "visible_cited": 82,
+    "visible_relevant_share": 0.622,
+    "visible_stretch_found": 8
+   },
+   "medium": {
+    "hidden_abstained": 8,
+    "visible_cited": 75,
+    "visible_relevant_share": 0.627,
+    "visible_stretch_found": 8
+   },
+   "min_run": 3
+  },
+  {
+   "context": 60,
+   "k": 4.0,
+   "low": {
+    "hidden_abstained": 7,
+    "visible_cited": 82,
+    "visible_relevant_share": 0.622,
+    "visible_stretch_found": 8
+   },
+   "medium": {
+    "hidden_abstained": 0,
+    "visible_cited": 84,
+    "visible_relevant_share": 0.25,
+    "visible_stretch_found": 8
+   },
+   "min_run": 1
+  },
+  {
+   "context": 60,
+   "k": 4.0,
+   "low": {
+    "hidden_abstained": 8,
+    "visible_cited": 82,
+    "visible_relevant_share": 0.622,
+    "visible_stretch_found": 8
+   },
+   "medium": {
+    "hidden_abstained": 8,
+    "visible_cited": 75,
+    "visible_relevant_share": 0.627,
+    "visible_stretch_found": 8
+   },
+   "min_run": 2
+  },
+  {
+   "context": 60,
+   "k": 4.0,
+   "low": {
+    "hidden_abstained": 8,
+    "visible_cited": 82,
+    "visible_relevant_share": 0.622,
+    "visible_stretch_found": 8
+   },
+   "medium": {
+    "hidden_abstained": 8,
+    "visible_cited": 75,
+    "visible_relevant_share": 0.627,
+    "visible_stretch_found": 8
+   },
+   "min_run": 5
+  },
+  {
+   "context": 60,
+   "k": 4.0,
+   "low": {
+    "hidden_abstained": 8,
+    "visible_cited": 82,
+    "visible_relevant_share": 0.622,
+    "visible_stretch_found": 8
+   },
+   "medium": {
+    "hidden_abstained": 8,
+    "visible_cited": 73,
+    "visible_relevant_share": 0.616,
+    "visible_stretch_found": 8
+   },
+   "min_run": 8
+  },
+  {
+   "context": 0,
+   "k": 4.0,
+   "low": {
+    "hidden_abstained": 8,
+    "visible_cited": 64,
+    "visible_relevant_share": 1.0,
+    "visible_stretch_found": 8
+   },
+   "medium": {
+    "hidden_abstained": 8,
+    "visible_cited": 68,
+    "visible_relevant_share": 1.0,
+    "visible_stretch_found": 8
+   },
+   "min_run": 3
+  },
+  {
+   "context": 20,
+   "k": 4.0,
+   "low": {
+    "hidden_abstained": 8,
+    "visible_cited": 75,
+    "visible_relevant_share": 1.0,
+    "visible_stretch_found": 8
+   },
+   "medium": {
+    "hidden_abstained": 8,
+    "visible_cited": 79,
+    "visible_relevant_share": 1.0,
+    "visible_stretch_found": 8
+   },
+   "min_run": 3
+  },
+  {
+   "context": 120,
+   "k": 4.0,
+   "low": {
+    "hidden_abstained": 8,
+    "visible_cited": 84,
+    "visible_relevant_share": 0.417,
+    "visible_stretch_found": 8
+   },
+   "medium": {
+    "hidden_abstained": 8,
+    "visible_cited": 79,
+    "visible_relevant_share": 0.392,
+    "visible_stretch_found": 8
+   },
+   "min_run": 3
+  }
+ ],
+ "statement": "sensitivity of a detector's conventions on 8 related synthetic plants; not a rate with an interval",
+ "status": "MEASURED",
+ "sweep_hash": "af3439eac3798745c5ee8167752a11604160797eed5b3d995c351f0337a8fcf3"
+}

@@ -45,7 +45,7 @@ def facts_in(frame, scale, start, stop):
     return ordered([replace(f, window=(f.window[0] + start, f.window[1] + start)) if f.window else f for f in facts])
 
 
-def run() -> dict:
+def run(k: float = 4.0, min_run: int = 3, context: int = CONTEXT) -> dict:
     simulator = PlcReactor()
     scale = time_scale_of(simulator)
     design = BenchmarkDesign()
@@ -65,8 +65,8 @@ def run() -> dict:
                     cut = [{n: tuple(obs[n][:pair.horizon]) for n in TARGETS} for obs in seen]
                     frames = [MultivariateFrame(tuple(records[s.scenario_id]["time"][:pair.horizon]), series, catalogue, {n: "SYNTHETIC" for n in TARGETS}, {}) for s, series in zip((pair.base, pair.variant), cut)]
                     expected = "distinguish" if pair.identifiable[level] else "abstain"
-                    stretch = differing_stretch(cut[0], cut[1], TARGETS)
-                    methods = {"global": (0, pair.horizon), "local": None if stretch is None else (max(0, stretch[0] - CONTEXT), min(pair.horizon, stretch[1] + 1 + CONTEXT))}
+                    stretch = differing_stretch(cut[0], cut[1], TARGETS, k, min_run)
+                    methods = {"global": (0, pair.horizon), "local": None if stretch is None else (max(0, stretch[0] - context), min(pair.horizon, stretch[1] + 1 + context))}
                     for method, bounds in methods.items():
                         if bounds is None:
                             diff, both = FactDifference((), (), ()), []
@@ -86,7 +86,7 @@ def run() -> dict:
         c["differences"] += row["differences"]
         c["expected_distinguish"] += row["expected"] == "distinguish"
         c["stretch_found"] += row["stretch"] is not None
-    report = {"status": "MEASURED", "model": "none (B0 literal list, B1 template)", "levels": list(LEVELS), "context": CONTEXT, "summary": {k: dict(v) for k, v in sorted(summary.items())}, "rows": rows,
+    report = {"status": "MEASURED", "model": "none (B0 literal list, B1 template)", "levels": list(LEVELS), "context": context, "summary": {k: dict(v) for k, v in sorted(summary.items())}, "rows": rows,
               "statement": "behaviour of two realisations without a language model on constructed pairs of the PLC reactor with sensor noise: not a result for any language model, not a rate with an interval, no human evaluation"}
     report["report_hash"] = content_hash({k: v for k, v in report.items() if k != "statement"})
     return report

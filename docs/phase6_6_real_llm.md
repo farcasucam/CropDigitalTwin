@@ -265,4 +265,18 @@ Following an external review (`data/xai/Propuesta de mejora LLM.txt`), explanati
 
 * **Reading:** with sensor noise the global comparison of facts fails the hidden pair completely (two histories identical in truth look different through independent noise, so 250-300 spurious differences and an invented contrast in every answer, B1's abstention included), while the local analysis abstains in all 8 and its stretch is found in all 8 visible pairs. On the visible pair the local analysis roughly doubles the share of relevant citations under noise (31% to 62%, 25% to 63%), still far from clean: about 40% of what is cited lies outside the true divergence, the 60-sample context producing facts of its own.
 * **Limits:** the level none is true by construction (the stretch is the oracle's); the thresholds of `differing_stretch` are fixed conventions and one setting was run, so sensitivity to them is unknown; medium noise includes drift and a dropout yet gave the same result, but 8 related plants say little about a rate; the abstention is the template's and the stretch detector's, not a language model's. The test a model can fail (asked why the plants will end differently) is still not run.
-* **Next:** pairs for threshold crossing, evidence type and uncertainty; sweep `k`, `min_run` and the context; then B2 to B4 with a model, only after that.
+* **Sweep of the three conventions (`manual_phase6_6_local_contrast_sweep.py`, hash af3439ea…; one convention at a time around k=4, min_run=3, context=60; same 8 plants).**
+
+| setting | hidden pairs abstained (low / medium noise, of 8) | visible pairs, share of B1 citations on an affected variable and window (low / medium) |
+|---|---|---|
+| k = 3, 4, 6, 8 | 8 / 8 | 62% / 63% |
+| k = 2 | **3 / 2** | 62% / 53% |
+| min_run = 2, 3, 5, 8 | 8 / 8 | 62% / 62-63% |
+| min_run = 1 | 7 / **0** | 62% / **25%** |
+| context = 0 or 20 | 8 / 8 | **100% / 100%** |
+| context = 60 (default) | 8 / 8 | 62% / 63% |
+| context = 120 | 8 / 8 | 42% / 39% |
+
+* **Reading:** abstention is robust over a wide range (any k from 3 to 8, any run from 2 to 8) and fails only when the detector is made trigger-happy (k = 2, a single sample), as expected. The share of relevant citations is governed by one thing, the **context around the stretch**: the wider the window analysed, the more facts of stretches where the data do not differ. At 0 or 20 samples it is 100%, but **that is largely true by construction**: the facts come from a window that is the divergence's own, so they overlap it; it measures locality, not explanation quality, and a window that short may starve the analysis of context (not measured here). The 62% of the previous table was therefore set by an arbitrary 60.
+* **Decision recorded:** the context is a development choice made after seeing this sweep (declared, not hidden); no value is claimed optimal. Before any test partition the context must be fixed on development pairs with a criterion other than this relevance share (for example, how much of the trend or change-point context a human needs), and not read as better than the oracle's own window.
+* **Next:** pairs for threshold crossing, evidence type and uncertainty; then B2 to B4 with a model, only after that.
