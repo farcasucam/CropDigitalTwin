@@ -169,3 +169,35 @@ Still open: items 3-5 of the backlog of section 7 (direction check, size called 
 
   The old verifier's recall extrapolated to its 78 unflagged claims is 31-45% depending on the truth, with a very wide uncertainty. Precision of the corrected verifier is 47-60%; the spread between the two annotations (13 points) is as large as most differences seen between configurations, so no precise figure should be quoted: **about half of its flags are errors, and it finds about half to two thirds of the errors that are in the sample.**
 * Limits unchanged: 52 claims, sample drawn with the old verifier, one prompt, synthetic scenarios, not a model error rate.
+
+## 11. Four independent annotations of the same 52 claims
+
+`data/xai/audit/audit_blind_annotated.csv`, `…2.csv`, `…3.csv`, `…4.csv` (the fourth carries only `row_id`, `verdict` and `note`; for it the claim text could not be checked against the sheet that was sent). **Nobody saw any other annotation or the verifier's output**, so these are four independent annotators (their identities and expertise are not recorded here). Analysis: `manual_phase6_6_audit_analysis.py` (reads every `audit_blind_annotated*.csv`), `audit_analysis.json`. This section supersedes the caveat about the unknown author in section 10.
+
+**Errors per annotator:** 14, 14, 13, 10 of 52 (annotator 4 is the most lenient). **Claims by number of annotators saying error:** 0 of 4: 36; 1 of 4: 1; 2 of 4: 4; 3 of 4: 2; 4 of 4: 9.
+**Agreement:** Fleiss kappa 0.78 for OK against error and 0.75 for the six codes; Cohen kappa between pairs 0.68 to 0.95 (binary) and 0.61 to 0.87 (six codes). All four agree on OK against error in 45 of 52 claims.
+
+**The 7 claims with split votes**
+
+| claim | errors of 4 | reading |
+|---|---|---|
+| A019 (forecast, word for word the fact) | 1 | the single `NUMBER` was a slip (section 10): the majority says OK |
+| A002 (`cayó hasta 5.88°C por debajo de 14°C`) | 2 | genuinely ambiguous (absolute minimum or drop below the threshold); two annotators read it as a number error |
+| A013 (`increasing due to the heat wave, direction confirmed by the twin`) | 2 | the design question of section 10 stays open: two annotators see an overclaim, two accept causal wording at the twin-confirmed level |
+| A014 (`tramos largos confirmados`, facts observed), A042 (`en 5 muestras`, a derived count) | 2 each | borderline wording and derived number; no majority |
+| A017 (`23 jumps`, a count the model made), A038 (1.96 kPa when the cited fact says 1.8) | 3 each | majority error; annotator 4 accepted both |
+
+**Results that hold across the four annotators**
+* **The 4 meaning errors the corrected verifier misses and every annotator marks** are A004 (size said confirmed), A020 (direction reversed), A023 and A048 (hedged invented causes); A002 is no longer one of them (2 of 4).
+* **The 6 flags that remain and all four judged OK:** errors only in `declared_numbers` (A021, A031, A037, A046), a rounding (A011) and a derived count (A039). No annotator counted any of them; this is the strongest support for treating the declared-numbers field as a separate class and for not counting roundings or derived counts as claim errors.
+* **Verifier on the same 52 claims** (corrected verifier flags 15; old verifier 26), against different readings of the truth:
+
+| truth | errors | old precision | old recall in sample | corrected precision | corrected recall in sample |
+|---|---|---|---|---|---|
+| majority (3 or 4 of 4) | 11 | 27% | 64% | **47%** (7 of 15) | **64%** (7 of 11) |
+| unanimous (4 of 4) | 9 | 19% | 56% | 33% | 56% |
+| each annotator | 10 to 14 | 19-38% | 50-71% | 33-60% | 50-69% |
+
+* **Recall of the old verifier extrapolated to its 78 unflagged claims** is 25-45% depending on who is the truth (37% against the majority), with a very wide uncertainty. No recall figure is given for the corrected verifier (biased sample frame).
+* **Reading in words:** a bit under half of the corrected verifier's flags are errors for the majority, and it finds about two thirds of the sample's errors; what it misses is meaning (direction, size, invented causes), and what it wrongly flags is the declared-numbers field, roundings and derived counts. The spread between annotators (precision 33-60%) is as large as the effect of the fixes made so far, so quote ranges, not a single figure.
+* Limits unchanged: 52 claims, sample drawn with the old verifier, one prompt, synthetic scenarios, not a model error rate; the corrected verifier was fixed after reading the claims of the first annotation's period, so its figures on this sample are not independent.

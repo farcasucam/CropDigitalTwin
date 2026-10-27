@@ -1,16 +1,27 @@
 {
- "agreement_between_annotations": {
-  "binary_ok_vs_error": {
-   "agreement": 0.923,
-   "kappa": 0.805
+ "agreement": {
+  "claims_all_annotators_agree_on_ok_vs_error": 45,
+  "claims_with_split_votes": 7,
+  "cohen_kappa_binary_by_pair": {
+   "annotation_1-annotation_2": 0.805,
+   "annotation_1-annotation_3": 0.95,
+   "annotation_1-annotation_4": 0.678,
+   "annotation_2-annotation_3": 0.75,
+   "annotation_2-annotation_4": 0.785,
+   "annotation_3-annotation_4": 0.722
   },
-  "claims_where_one_says_ok_and_the_other_error": 4,
-  "claims_with_different_code": 7,
-  "six_codes": {
-   "agreement": 0.865,
-   "kappa": 0.694
-  }
+  "cohen_kappa_six_codes_by_pair": {
+   "annotation_1-annotation_2": 0.694,
+   "annotation_1-annotation_3": 0.865,
+   "annotation_1-annotation_4": 0.606,
+   "annotation_2-annotation_3": 0.774,
+   "annotation_2-annotation_4": 0.802,
+   "annotation_3-annotation_4": 0.743
+  },
+  "fleiss_kappa_binary_ok_vs_error": 0.784,
+  "fleiss_kappa_six_codes": 0.748
  },
+ "annotators": 4,
  "assistant_first_pass": {
   "annotation_1": {
    "FN": 1,
@@ -28,25 +39,56 @@
    "precision": 0.55,
    "recall_in_sample": 0.786
   },
-  "error_in_both": {
-   "FN": 1,
-   "FP": 9,
-   "TN": 31,
-   "TP": 11,
-   "precision": 0.55,
-   "recall_in_sample": 0.917
+  "annotation_3": {
+   "FN": 0,
+   "FP": 7,
+   "TN": 32,
+   "TP": 13,
+   "precision": 0.65,
+   "recall_in_sample": 1.0
   },
-  "error_in_either": {
+  "annotation_4": {
+   "FN": 1,
+   "FP": 11,
+   "TN": 31,
+   "TP": 9,
+   "precision": 0.45,
+   "recall_in_sample": 0.9
+  },
+  "at_least_one_error": {
    "FN": 3,
    "FP": 7,
    "TN": 29,
    "TP": 13,
    "precision": 0.65,
    "recall_in_sample": 0.812
+  },
+  "majority_error": {
+   "FN": 0,
+   "FP": 9,
+   "TN": 32,
+   "TP": 11,
+   "precision": 0.55,
+   "recall_in_sample": 1.0
+  },
+  "unanimous_error": {
+   "FN": 0,
+   "FP": 11,
+   "TN": 32,
+   "TP": 9,
+   "precision": 0.45,
+   "recall_in_sample": 1.0
   }
  },
  "claims_audited": 52,
- "corrected_flags_judged_ok_by_both": {
+ "claims_by_number_of_annotators_saying_error": {
+  "0": 36,
+  "1": 1,
+  "2": 4,
+  "3": 2,
+  "4": 9
+ },
+ "corrected_flags_judged_ok_by_all": {
   "A011": "NUMBER_NOT_IN_FACT",
   "A021": "NUMERIC_VALUE_MISMATCH",
   "A031": "NUMERIC_VALUE_MISMATCH",
@@ -71,103 +113,60 @@
    "precision": 0.467,
    "recall_in_sample": 0.5
   },
-  "error_in_both": {
-   "FN": 5,
-   "FP": 8,
-   "TN": 32,
-   "TP": 7,
-   "precision": 0.467,
-   "recall_in_sample": 0.583
+  "annotation_3": {
+   "FN": 4,
+   "FP": 6,
+   "TN": 33,
+   "TP": 9,
+   "precision": 0.6,
+   "recall_in_sample": 0.692
   },
-  "error_in_either": {
+  "annotation_4": {
+   "FN": 5,
+   "FP": 10,
+   "TN": 32,
+   "TP": 5,
+   "precision": 0.333,
+   "recall_in_sample": 0.5
+  },
+  "at_least_one_error": {
    "FN": 7,
    "FP": 6,
    "TN": 30,
    "TP": 9,
    "precision": 0.6,
    "recall_in_sample": 0.562
+  },
+  "majority_error": {
+   "FN": 4,
+   "FP": 8,
+   "TN": 33,
+   "TP": 7,
+   "precision": 0.467,
+   "recall_in_sample": 0.636
+  },
+  "unanimous_error": {
+   "FN": 4,
+   "FP": 10,
+   "TN": 33,
+   "TP": 5,
+   "precision": 0.333,
+   "recall_in_sample": 0.556
   }
  },
- "disagreements": {
-  "A002": {
-   "annotation_1": "NUMBER",
-   "annotation_2": "UNSUPPORTED",
-   "assistant": "FP_ARTIFACT",
-   "corrected_flag": false,
-   "old_flag": true
-  },
-  "A006": {
-   "annotation_1": "UNSUPPORTED",
-   "annotation_2": "NUMBER",
-   "assistant": "TP_SUBSTANTIVE",
-   "corrected_flag": true,
-   "old_flag": true
-  },
-  "A013": {
-   "annotation_1": "OK",
-   "annotation_2": "OVERCLAIM",
-   "assistant": "OK",
-   "corrected_flag": false,
-   "old_flag": false
-  },
-  "A014": {
-   "annotation_1": "OVERCLAIM",
-   "annotation_2": "OK",
-   "assistant": "TP_MINOR",
-   "corrected_flag": true,
-   "old_flag": true
-  },
-  "A019": {
-   "annotation_1": "OK",
-   "annotation_2": "NUMBER",
-   "assistant": "OK",
-   "corrected_flag": false,
-   "old_flag": false
-  },
-  "A042": {
-   "annotation_1": "NUMBER",
-   "annotation_2": "OK",
-   "assistant": "TP_MINOR",
-   "corrected_flag": true,
-   "old_flag": true
-  },
-  "A048": {
-   "annotation_1": "UNSUPPORTED",
-   "annotation_2": "OVERCLAIM",
-   "assistant": "MISS_SUBSTANTIVE",
-   "corrected_flag": false,
-   "old_flag": false
-  }
- },
- "errors": {
+ "errors_per_annotator": {
   "annotation_1": 14,
   "annotation_2": 14,
-  "error_in_both": 12,
-  "error_in_either": 16
+  "annotation_3": 13,
+  "annotation_4": 10
  },
- "errors_in_both_missed_by_corrected_verifier": {
-  "A002": [
-   "NUMBER",
-   "UNSUPPORTED"
-  ],
-  "A004": [
-   "OVERCLAIM",
-   "OVERCLAIM"
-  ],
-  "A020": [
-   "UNSUPPORTED",
-   "UNSUPPORTED"
-  ],
-  "A023": [
-   "OVERCLAIM",
-   "OVERCLAIM"
-  ],
-  "A048": [
-   "UNSUPPORTED",
-   "OVERCLAIM"
-  ]
- },
- "limits": "who made annotation 2 and whether it was blind to annotation 1 is not stated; sample drawn with the old verifier; the assistant that wrote the verifier also made the first pass; 52 claims; not a model error rate",
+ "files": [
+  "audit_blind_annotated.csv",
+  "audit_blind_annotated2.csv",
+  "audit_blind_annotated3.csv",
+  "audit_blind_annotated4.csv"
+ ],
+ "limits": "52 claims; sample drawn with the old verifier; the assistant that wrote the verifier also made the first pass; annotator identities and expertise are not recorded here; not a model error rate",
  "old_verifier_as_sampled": {
   "annotation_1": {
    "FN": 4,
@@ -185,21 +184,45 @@
    "precision": 0.308,
    "recall_in_sample": 0.571
   },
-  "error_in_both": {
+  "annotation_3": {
    "FN": 4,
-   "FP": 18,
+   "FP": 17,
    "TN": 22,
-   "TP": 8,
-   "precision": 0.308,
-   "recall_in_sample": 0.667
+   "TP": 9,
+   "precision": 0.346,
+   "recall_in_sample": 0.692
   },
-  "error_in_either": {
+  "annotation_4": {
+   "FN": 5,
+   "FP": 21,
+   "TN": 21,
+   "TP": 5,
+   "precision": 0.192,
+   "recall_in_sample": 0.5
+  },
+  "at_least_one_error": {
    "FN": 6,
    "FP": 16,
    "TN": 20,
    "TP": 10,
    "precision": 0.385,
    "recall_in_sample": 0.625
+  },
+  "majority_error": {
+   "FN": 4,
+   "FP": 19,
+   "TN": 22,
+   "TP": 7,
+   "precision": 0.269,
+   "recall_in_sample": 0.636
+  },
+  "unanimous_error": {
+   "FN": 4,
+   "FP": 21,
+   "TN": 22,
+   "TP": 5,
+   "precision": 0.192,
+   "recall_in_sample": 0.556
   }
  },
  "old_verifier_recall_extrapolated": {
@@ -216,22 +239,138 @@
     "missed_in_sample": 6,
     "recall": 0.31
    },
-   "error_in_both": {
-    "caught": 8,
+   "annotation_3": {
+    "caught": 9,
     "missed_extrapolated": 12.0,
     "missed_in_sample": 4,
-    "recall": 0.4
+    "recall": 0.43
    },
-   "error_in_either": {
+   "annotation_4": {
+    "caught": 5,
+    "missed_extrapolated": 15.0,
+    "missed_in_sample": 5,
+    "recall": 0.25
+   },
+   "at_least_one_error": {
     "caught": 10,
     "missed_extrapolated": 18.0,
     "missed_in_sample": 6,
     "recall": 0.36
+   },
+   "majority_error": {
+    "caught": 7,
+    "missed_extrapolated": 12.0,
+    "missed_in_sample": 4,
+    "recall": 0.37
+   },
+   "unanimous_error": {
+    "caught": 5,
+    "missed_extrapolated": 12.0,
+    "missed_in_sample": 4,
+    "recall": 0.29
    }
   },
   "note": "26 unflagged sampled of 78; very wide uncertainty"
  },
- "report_hash": "714ecc02d3b28590ae737e57ae0a6890df689bbf04fc82bc9d4714e4bbcd11ee",
+ "report_hash": "be9bfba457b2e7f661b0c9b450fe98b850061983e09e6bbd1a97fae48808d627",
+ "split_votes": {
+  "A002": {
+   "annotation_1": "NUMBER",
+   "annotation_2": "UNSUPPORTED",
+   "annotation_3": "OK",
+   "annotation_4": "OK",
+   "assistant": "FP_ARTIFACT",
+   "corrected_flag": false,
+   "errors_of_4": 2,
+   "old_flag": true
+  },
+  "A013": {
+   "annotation_1": "OK",
+   "annotation_2": "OVERCLAIM",
+   "annotation_3": "OK",
+   "annotation_4": "OVERCLAIM",
+   "assistant": "OK",
+   "corrected_flag": false,
+   "errors_of_4": 2,
+   "old_flag": false
+  },
+  "A014": {
+   "annotation_1": "OVERCLAIM",
+   "annotation_2": "OK",
+   "annotation_3": "OVERCLAIM",
+   "annotation_4": "OK",
+   "assistant": "TP_MINOR",
+   "corrected_flag": true,
+   "errors_of_4": 2,
+   "old_flag": true
+  },
+  "A017": {
+   "annotation_1": "NUMBER",
+   "annotation_2": "NUMBER",
+   "annotation_3": "NUMBER",
+   "annotation_4": "OK",
+   "assistant": "TP_MINOR",
+   "corrected_flag": true,
+   "errors_of_4": 3,
+   "old_flag": true
+  },
+  "A019": {
+   "annotation_1": "OK",
+   "annotation_2": "NUMBER",
+   "annotation_3": "OK",
+   "annotation_4": "OK",
+   "assistant": "OK",
+   "corrected_flag": false,
+   "errors_of_4": 1,
+   "old_flag": false
+  },
+  "A038": {
+   "annotation_1": "NUMBER",
+   "annotation_2": "NUMBER",
+   "annotation_3": "NUMBER",
+   "annotation_4": "OK",
+   "assistant": "TP_SUBSTANTIVE",
+   "corrected_flag": true,
+   "errors_of_4": 3,
+   "old_flag": true
+  },
+  "A042": {
+   "annotation_1": "NUMBER",
+   "annotation_2": "OK",
+   "annotation_3": "NUMBER",
+   "annotation_4": "OK",
+   "assistant": "TP_MINOR",
+   "corrected_flag": true,
+   "errors_of_4": 2,
+   "old_flag": true
+  }
+ },
+ "unanimous_errors_missed_by_corrected_verifier": {
+  "A004": [
+   "OVERCLAIM",
+   "OVERCLAIM",
+   "OVERCLAIM",
+   "OVERCLAIM"
+  ],
+  "A020": [
+   "UNSUPPORTED",
+   "UNSUPPORTED",
+   "UNSUPPORTED",
+   "UNSUPPORTED"
+  ],
+  "A023": [
+   "OVERCLAIM",
+   "OVERCLAIM",
+   "OVERCLAIM",
+   "OVERCLAIM"
+  ],
+  "A048": [
+   "UNSUPPORTED",
+   "OVERCLAIM",
+   "OVERCLAIM",
+   "OVERCLAIM"
+  ]
+ },
  "verdicts": {
   "annotation_1": {
    "NUMBER": 6,
@@ -244,6 +383,18 @@
    "OK": 38,
    "OVERCLAIM": 6,
    "UNSUPPORTED": 2
+  },
+  "annotation_3": {
+   "NUMBER": 6,
+   "OK": 39,
+   "OVERCLAIM": 6,
+   "UNSUPPORTED": 1
+  },
+  "annotation_4": {
+   "NUMBER": 3,
+   "OK": 42,
+   "OVERCLAIM": 6,
+   "UNSUPPORTED": 1
   }
  }
 }

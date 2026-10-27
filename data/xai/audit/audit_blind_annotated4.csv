@@ -1,0 +1,53 @@
+row_id,verdict,note
+A001,OK,
+A002,OK,
+A003,OK,
+A004,OVERCLAIM,size of temperature change claimed as confirmed; evidence says size not confirmed
+A005,OK,
+A006,NUMBER,second value is -0.207 kPa but evidence gives +0.252 kPa
+A007,OK,
+A008,OK,
+A009,OK,
+A010,OK,
+A011,OK,
+A012,OK,
+A013,OVERCLAIM,claims heat wave causes increase; evidence only confirms direction
+A014,OK,
+A015,OK,
+A016,OK,
+A017,OK,
+A018,OK,
+A019,OK,
+A020,UNSUPPORTED,increase stated but evidence says decrease
+A021,OK,
+A022,OK,
+A023,OVERCLAIM,external influences not supported
+A024,OK,
+A025,OK,
+A026,OK,
+A027,OK,
+A028,OK,
+A029,NUMBER,0.836 degC not present in cited fact
+A030,OK,
+A031,OK,
+A032,OK,
+A033,OK,
+A034,OK,
+A035,OK,
+A036,OK,
+A037,OK,
+A038,OK,
+A039,OK,
+A040,OK,
+A041,OK,
+A042,OK,
+A043,OK,
+A044,OVERCLAIM,confirmed by twin not supported by cited fact
+A045,OK,
+A046,OK,
+A047,NUMBER,claims 6.5C but evidence shows 6.38C
+A048,OVERCLAIM,heating system malfunction speculation
+A049,OVERCLAIM,twin confirmation not present in cited facts
+A050,OK,
+A051,OK,
+A052,OK,
