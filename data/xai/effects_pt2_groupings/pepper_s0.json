@@ -1,0 +1,584 @@
+{
+ "cells": [
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": true,
+   "other_players_share_change": {
+    "cold_wave": 0.0,
+    "wind": 0.0
+   },
+   "outcome": "heating_energy",
+   "pair": [
+    "heat_wave",
+    "high_radiation"
+   ],
+   "policy": "reactive",
+   "relative_discrepancy": 0.0,
+   "total_effect": 194.13896484375
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": true,
+   "other_players_share_change": {
+    "high_radiation": 0.0,
+    "wind": 0.0
+   },
+   "outcome": "heating_energy",
+   "pair": [
+    "heat_wave",
+    "cold_wave"
+   ],
+   "policy": "reactive",
+   "relative_discrepancy": 0.0,
+   "total_effect": 194.13896484375
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": true,
+   "other_players_share_change": {
+    "cold_wave": 0.0,
+    "high_radiation": 0.0
+   },
+   "outcome": "heating_energy",
+   "pair": [
+    "heat_wave",
+    "wind"
+   ],
+   "policy": "reactive",
+   "relative_discrepancy": 0.0,
+   "total_effect": 194.13896484375
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": true,
+   "other_players_share_change": {
+    "heat_wave": 0.0,
+    "wind": 0.0
+   },
+   "outcome": "heating_energy",
+   "pair": [
+    "high_radiation",
+    "cold_wave"
+   ],
+   "policy": "reactive",
+   "relative_discrepancy": 0.0,
+   "total_effect": 194.13896484375
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": true,
+   "other_players_share_change": {
+    "cold_wave": 0.0,
+    "heat_wave": 0.0
+   },
+   "outcome": "heating_energy",
+   "pair": [
+    "high_radiation",
+    "wind"
+   ],
+   "policy": "reactive",
+   "relative_discrepancy": 0.0,
+   "total_effect": 194.13896484375
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": true,
+   "other_players_share_change": {
+    "heat_wave": 0.0,
+    "high_radiation": 0.0
+   },
+   "outcome": "heating_energy",
+   "pair": [
+    "cold_wave",
+    "wind"
+   ],
+   "policy": "reactive",
+   "relative_discrepancy": 0.0,
+   "total_effect": 194.13896484375
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": false,
+   "other_players_share_change": {
+    "cold_wave": 5.684341886080802e-14,
+    "wind": 0.0
+   },
+   "outcome": "cooling_energy",
+   "pair": [
+    "heat_wave",
+    "high_radiation"
+   ],
+   "policy": "reactive",
+   "relative_discrepancy": 0.0,
+   "total_effect": 3840.65771484375
+  },
+  {
+   "efficiency_residual": -4.547473508864641e-13,
+   "has_null_member": false,
+   "other_players_share_change": {
+    "high_radiation": 1.1368683772161603e-13,
+    "wind": 0.0
+   },
+   "outcome": "cooling_energy",
+   "pair": [
+    "heat_wave",
+    "cold_wave"
+   ],
+   "policy": "reactive",
+   "relative_discrepancy": 1.184035091512873e-16,
+   "total_effect": 3840.65771484375
+  },
+  {
+   "efficiency_residual": -4.547473508864641e-13,
+   "has_null_member": true,
+   "other_players_share_change": {
+    "cold_wave": 0.0,
+    "high_radiation": 0.0
+   },
+   "outcome": "cooling_energy",
+   "pair": [
+    "heat_wave",
+    "wind"
+   ],
+   "policy": "reactive",
+   "relative_discrepancy": 1.184035091512873e-16,
+   "total_effect": 3840.65771484375
+  },
+  {
+   "efficiency_residual": -4.547473508864641e-13,
+   "has_null_member": false,
+   "other_players_share_change": {
+    "heat_wave": -4.547473508864641e-13,
+    "wind": 0.0
+   },
+   "outcome": "cooling_energy",
+   "pair": [
+    "high_radiation",
+    "cold_wave"
+   ],
+   "policy": "reactive",
+   "relative_discrepancy": 1.4800438643910913e-17,
+   "total_effect": 3840.65771484375
+  },
+  {
+   "efficiency_residual": -4.547473508864641e-13,
+   "has_null_member": true,
+   "other_players_share_change": {
+    "cold_wave": 0.0,
+    "heat_wave": -4.547473508864641e-13
+   },
+   "outcome": "cooling_energy",
+   "pair": [
+    "high_radiation",
+    "wind"
+   ],
+   "policy": "reactive",
+   "relative_discrepancy": 0.0,
+   "total_effect": 3840.65771484375
+  },
+  {
+   "efficiency_residual": -4.547473508864641e-13,
+   "has_null_member": true,
+   "other_players_share_change": {
+    "heat_wave": -4.547473508864641e-13,
+    "high_radiation": 0.0
+   },
+   "outcome": "cooling_energy",
+   "pair": [
+    "cold_wave",
+    "wind"
+   ],
+   "policy": "reactive",
+   "relative_discrepancy": 0.0,
+   "total_effect": 3840.65771484375
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": false,
+   "other_players_share_change": {
+    "cold_wave": 0.0,
+    "wind": 0.0
+   },
+   "outcome": "hours_vpd_above_stage_max",
+   "pair": [
+    "heat_wave",
+    "high_radiation"
+   ],
+   "policy": "reactive",
+   "relative_discrepancy": 0.0,
+   "total_effect": 18.0
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": false,
+   "other_players_share_change": {
+    "high_radiation": 0.0,
+    "wind": 0.0
+   },
+   "outcome": "hours_vpd_above_stage_max",
+   "pair": [
+    "heat_wave",
+    "cold_wave"
+   ],
+   "policy": "reactive",
+   "relative_discrepancy": 0.0,
+   "total_effect": 18.0
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": true,
+   "other_players_share_change": {
+    "cold_wave": 0.0,
+    "high_radiation": 0.0
+   },
+   "outcome": "hours_vpd_above_stage_max",
+   "pair": [
+    "heat_wave",
+    "wind"
+   ],
+   "policy": "reactive",
+   "relative_discrepancy": 0.0,
+   "total_effect": 18.0
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": false,
+   "other_players_share_change": {
+    "heat_wave": 0.0,
+    "wind": 0.0
+   },
+   "outcome": "hours_vpd_above_stage_max",
+   "pair": [
+    "high_radiation",
+    "cold_wave"
+   ],
+   "policy": "reactive",
+   "relative_discrepancy": 0.0,
+   "total_effect": 18.0
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": true,
+   "other_players_share_change": {
+    "cold_wave": 0.0,
+    "heat_wave": 0.0
+   },
+   "outcome": "hours_vpd_above_stage_max",
+   "pair": [
+    "high_radiation",
+    "wind"
+   ],
+   "policy": "reactive",
+   "relative_discrepancy": 0.0,
+   "total_effect": 18.0
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": true,
+   "other_players_share_change": {
+    "heat_wave": 0.0,
+    "high_radiation": 0.0
+   },
+   "outcome": "hours_vpd_above_stage_max",
+   "pair": [
+    "cold_wave",
+    "wind"
+   ],
+   "policy": "reactive",
+   "relative_discrepancy": 0.0,
+   "total_effect": 18.0
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": false,
+   "other_players_share_change": {
+    "cold_wave": 0.0,
+    "wind": 0.0
+   },
+   "outcome": "hours_temperature_above_stage_max",
+   "pair": [
+    "heat_wave",
+    "high_radiation"
+   ],
+   "policy": "replayed",
+   "relative_discrepancy": 0.0,
+   "total_effect": 27.0
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": true,
+   "other_players_share_change": {
+    "high_radiation": 0.0,
+    "wind": 0.0
+   },
+   "outcome": "hours_temperature_above_stage_max",
+   "pair": [
+    "heat_wave",
+    "cold_wave"
+   ],
+   "policy": "replayed",
+   "relative_discrepancy": 0.0,
+   "total_effect": 27.0
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": true,
+   "other_players_share_change": {
+    "cold_wave": 0.0,
+    "high_radiation": 0.0
+   },
+   "outcome": "hours_temperature_above_stage_max",
+   "pair": [
+    "heat_wave",
+    "wind"
+   ],
+   "policy": "replayed",
+   "relative_discrepancy": 0.0,
+   "total_effect": 27.0
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": true,
+   "other_players_share_change": {
+    "heat_wave": 0.0,
+    "wind": 0.0
+   },
+   "outcome": "hours_temperature_above_stage_max",
+   "pair": [
+    "high_radiation",
+    "cold_wave"
+   ],
+   "policy": "replayed",
+   "relative_discrepancy": 0.0,
+   "total_effect": 27.0
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": true,
+   "other_players_share_change": {
+    "cold_wave": 0.0,
+    "heat_wave": 0.0
+   },
+   "outcome": "hours_temperature_above_stage_max",
+   "pair": [
+    "high_radiation",
+    "wind"
+   ],
+   "policy": "replayed",
+   "relative_discrepancy": 0.0,
+   "total_effect": 27.0
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": true,
+   "other_players_share_change": {
+    "heat_wave": 0.0,
+    "high_radiation": 0.0
+   },
+   "outcome": "hours_temperature_above_stage_max",
+   "pair": [
+    "cold_wave",
+    "wind"
+   ],
+   "policy": "replayed",
+   "relative_discrepancy": 0.0,
+   "total_effect": 27.0
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": false,
+   "other_players_share_change": {
+    "cold_wave": 0.0,
+    "wind": 0.0
+   },
+   "outcome": "hours_vpd_above_stage_max",
+   "pair": [
+    "heat_wave",
+    "high_radiation"
+   ],
+   "policy": "replayed",
+   "relative_discrepancy": 0.0,
+   "total_effect": 36.0
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": false,
+   "other_players_share_change": {
+    "high_radiation": 0.0,
+    "wind": 0.0
+   },
+   "outcome": "hours_vpd_above_stage_max",
+   "pair": [
+    "heat_wave",
+    "cold_wave"
+   ],
+   "policy": "replayed",
+   "relative_discrepancy": 0.0,
+   "total_effect": 36.0
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": true,
+   "other_players_share_change": {
+    "cold_wave": 0.0,
+    "high_radiation": 0.0
+   },
+   "outcome": "hours_vpd_above_stage_max",
+   "pair": [
+    "heat_wave",
+    "wind"
+   ],
+   "policy": "replayed",
+   "relative_discrepancy": 0.0,
+   "total_effect": 36.0
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": false,
+   "other_players_share_change": {
+    "heat_wave": 0.0,
+    "wind": 0.0
+   },
+   "outcome": "hours_vpd_above_stage_max",
+   "pair": [
+    "high_radiation",
+    "cold_wave"
+   ],
+   "policy": "replayed",
+   "relative_discrepancy": 0.0,
+   "total_effect": 36.0
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": true,
+   "other_players_share_change": {
+    "cold_wave": 0.0,
+    "heat_wave": 0.0
+   },
+   "outcome": "hours_vpd_above_stage_max",
+   "pair": [
+    "high_radiation",
+    "wind"
+   ],
+   "policy": "replayed",
+   "relative_discrepancy": 0.0,
+   "total_effect": 36.0
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": true,
+   "other_players_share_change": {
+    "heat_wave": 0.0,
+    "high_radiation": 0.0
+   },
+   "outcome": "hours_vpd_above_stage_max",
+   "pair": [
+    "cold_wave",
+    "wind"
+   ],
+   "policy": "replayed",
+   "relative_discrepancy": 0.0,
+   "total_effect": 36.0
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": false,
+   "other_players_share_change": {
+    "cold_wave": 0.0,
+    "wind": 0.0
+   },
+   "outcome": "temperature_peak",
+   "pair": [
+    "heat_wave",
+    "high_radiation"
+   ],
+   "policy": "replayed",
+   "relative_discrepancy": 0.0,
+   "total_effect": 8.758440224684822
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": true,
+   "other_players_share_change": {
+    "high_radiation": 0.0,
+    "wind": 0.0
+   },
+   "outcome": "temperature_peak",
+   "pair": [
+    "heat_wave",
+    "cold_wave"
+   ],
+   "policy": "replayed",
+   "relative_discrepancy": 1.0140828696836677e-16,
+   "total_effect": 8.758440224684822
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": true,
+   "other_players_share_change": {
+    "cold_wave": 0.0,
+    "high_radiation": 0.0
+   },
+   "outcome": "temperature_peak",
+   "pair": [
+    "heat_wave",
+    "wind"
+   ],
+   "policy": "replayed",
+   "relative_discrepancy": 1.0140828696836677e-16,
+   "total_effect": 8.758440224684822
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": true,
+   "other_players_share_change": {
+    "heat_wave": -8.881784197001252e-16,
+    "wind": 0.0
+   },
+   "outcome": "temperature_peak",
+   "pair": [
+    "high_radiation",
+    "cold_wave"
+   ],
+   "policy": "replayed",
+   "relative_discrepancy": 0.0,
+   "total_effect": 8.758440224684822
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": true,
+   "other_players_share_change": {
+    "cold_wave": 0.0,
+    "heat_wave": -8.881784197001252e-16
+   },
+   "outcome": "temperature_peak",
+   "pair": [
+    "high_radiation",
+    "wind"
+   ],
+   "policy": "replayed",
+   "relative_discrepancy": 0.0,
+   "total_effect": 8.758440224684822
+  },
+  {
+   "efficiency_residual": 0.0,
+   "has_null_member": true,
+   "other_players_share_change": {
+    "heat_wave": -8.881784197001252e-16,
+    "high_radiation": 0.0
+   },
+   "outcome": "temperature_peak",
+   "pair": [
+    "cold_wave",
+    "wind"
+   ],
+   "policy": "replayed",
+   "relative_discrepancy": 0.0,
+   "total_effect": 8.758440224684822
+  }
+ ],
+ "episode": {
+  "crop": "pepper",
+  "season": 0
+ }
+}

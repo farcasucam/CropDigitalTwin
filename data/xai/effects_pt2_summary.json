@@ -1,0 +1,634 @@
+{
+ "R1_masking_of_peak_temperature": {
+  "by_class": {
+   "masked": 9,
+   "not masked": 0,
+   "partly masked": 0
+  },
+  "episodes_with_material_replayed_contrast": 9,
+  "per_episode": [
+   {
+    "class": "masked",
+    "episode": "lettuce:0",
+    "ratio": 0.0
+   },
+   {
+    "class": "masked",
+    "episode": "lettuce:1",
+    "ratio": 0.0
+   },
+   {
+    "class": "masked",
+    "episode": "lettuce:2",
+    "ratio": 0.0
+   },
+   {
+    "class": "masked",
+    "episode": "pepper:0",
+    "ratio": 1.4212606280209224e-07
+   },
+   {
+    "class": "masked",
+    "episode": "pepper:1",
+    "ratio": 0.0
+   },
+   {
+    "class": "masked",
+    "episode": "pepper:2",
+    "ratio": 3.1217635581746233e-07
+   },
+   {
+    "class": "masked",
+    "episode": "tomato:0",
+    "ratio": 1.6182907942682436e-07
+   },
+   {
+    "class": "masked",
+    "episode": "tomato:1",
+    "ratio": 1.0343289716964978e-06
+   },
+   {
+    "class": "masked",
+    "episode": "tomato:2",
+    "ratio": 1.7326489629111565e-07
+   }
+  ],
+  "ratios": {
+   "max": 1.0343289716964978e-06,
+   "median": 1.4212606280209224e-07,
+   "min": 0.0,
+   "n": 9
+  }
+ },
+ "R2_interaction": {
+  "material_interactions_above_10_percent": 12,
+  "of": 54,
+  "relative_gap": {
+   "max": 0.14865333362626015,
+   "median": 0.049754299754299756,
+   "min": 0.0,
+   "n": 54
+  }
+ },
+ "R3_S1_interaction_free_score": {
+  "kendall_tau_b": {
+   "max": 1.0,
+   "median": 1.0,
+   "min": 0.7745966692414834,
+   "n": 54
+  },
+  "max_relative_error": {
+   "max": 0.07432666681313008,
+   "median": 0.024877149877149878,
+   "min": 0.0,
+   "n": 54
+  },
+  "top_player_agrees": {
+   "of": 54,
+   "yes": 54
+  }
+ },
+ "R4_S2_grouping": {
+  "material_above_10_percent": 0,
+  "merge_heat_wave_and_radiation_relative_discrepancy": {
+   "max": 8.154806077514432e-08,
+   "median": 0.0,
+   "min": 0.0,
+   "n": 54
+  },
+  "split_heat_wave_relative_discrepancy": {
+   "max": 0.04694015208901285,
+   "median": 0.0,
+   "min": 0.0,
+   "n": 54
+  },
+  "split_material_above_10_percent": 0
+ },
+ "R5_S3_levels": {
+  "kendall_tau_b": {
+   "max": 1.0,
+   "median": 1.0,
+   "min": 0.18257418583505536,
+   "n": 107
+  },
+  "top_player_same": {
+   "of": 108,
+   "yes": 104
+  }
+ },
+ "R5_S4_reference": {
+  "kendall_tau_b": {
+   "max": 1.0,
+   "median": 1.0,
+   "min": 0.18257418583505536,
+   "n": 54
+  },
+  "top_player_same": {
+   "of": 54,
+   "yes": 54
+  }
+ },
+ "cells": [
+  {
+   "episode": "lettuce:0",
+   "interaction_relative_gap": 0.09140973219876959,
+   "outcome": "cooling_energy",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 2576.844140625
+  },
+  {
+   "episode": "lettuce:0",
+   "interaction_relative_gap": 4.869257231795696e-16,
+   "outcome": "heating_energy",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "cold_wave",
+   "total_effect": 700.43642578125
+  },
+  {
+   "episode": "lettuce:0",
+   "interaction_relative_gap": 0.0,
+   "outcome": "hours_vpd_above_stage_max",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 2.0
+  },
+  {
+   "episode": "lettuce:0",
+   "interaction_relative_gap": 0.09523809523809523,
+   "outcome": "hours_temperature_above_stage_max",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 21.0
+  },
+  {
+   "episode": "lettuce:0",
+   "interaction_relative_gap": 0.038461538461538464,
+   "outcome": "hours_vpd_above_stage_max",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 26.0
+  },
+  {
+   "episode": "lettuce:0",
+   "interaction_relative_gap": 0.14865333362626015,
+   "outcome": "temperature_peak",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 6.441882156109262
+  },
+  {
+   "episode": "lettuce:1",
+   "interaction_relative_gap": 0.09615405052125968,
+   "outcome": "cooling_energy",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 2233.01337890625
+  },
+  {
+   "episode": "lettuce:1",
+   "interaction_relative_gap": 1.6488191579316222e-16,
+   "outcome": "heating_energy",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "cold_wave",
+   "total_effect": 689.50458984375
+  },
+  {
+   "episode": "lettuce:1",
+   "interaction_relative_gap": 0.0,
+   "outcome": "hours_vpd_above_stage_max",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 3.0
+  },
+  {
+   "episode": "lettuce:1",
+   "interaction_relative_gap": 0.0,
+   "outcome": "hours_temperature_above_stage_max",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 19.0
+  },
+  {
+   "episode": "lettuce:1",
+   "interaction_relative_gap": 0.0,
+   "outcome": "hours_vpd_above_stage_max",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 24.0
+  },
+  {
+   "episode": "lettuce:1",
+   "interaction_relative_gap": 0.13122650288226018,
+   "outcome": "temperature_peak",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 6.31083126626427
+  },
+  {
+   "episode": "lettuce:2",
+   "interaction_relative_gap": 0.09205218706668344,
+   "outcome": "cooling_energy",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 2259.045703125
+  },
+  {
+   "episode": "lettuce:2",
+   "interaction_relative_gap": 1.4242653804323229e-16,
+   "outcome": "heating_energy",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "cold_wave",
+   "total_effect": 399.10693359375
+  },
+  {
+   "episode": "lettuce:2",
+   "interaction_relative_gap": 0.0,
+   "outcome": "hours_vpd_above_stage_max",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 3.0
+  },
+  {
+   "episode": "lettuce:2",
+   "interaction_relative_gap": 0.0,
+   "outcome": "hours_temperature_above_stage_max",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 19.0
+  },
+  {
+   "episode": "lettuce:2",
+   "interaction_relative_gap": 0.0,
+   "outcome": "hours_vpd_above_stage_max",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 24.0
+  },
+  {
+   "episode": "lettuce:2",
+   "interaction_relative_gap": 0.13319672243952443,
+   "outcome": "temperature_peak",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 6.305778837627297
+  },
+  {
+   "episode": "pepper:0",
+   "interaction_relative_gap": 0.06586548858475702,
+   "outcome": "cooling_energy",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 3840.65771484375
+  },
+  {
+   "episode": "pepper:0",
+   "interaction_relative_gap": 0.0,
+   "outcome": "heating_energy",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "cold_wave",
+   "total_effect": 194.13896484375
+  },
+  {
+   "episode": "pepper:0",
+   "interaction_relative_gap": 0.05555555555555555,
+   "outcome": "hours_vpd_above_stage_max",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 18.0
+  },
+  {
+   "episode": "pepper:0",
+   "interaction_relative_gap": 0.037037037037037035,
+   "outcome": "hours_temperature_above_stage_max",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 27.0
+  },
+  {
+   "episode": "pepper:0",
+   "interaction_relative_gap": 0.027777777777777776,
+   "outcome": "hours_vpd_above_stage_max",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 36.0
+  },
+  {
+   "episode": "pepper:0",
+   "interaction_relative_gap": 0.13149678511790794,
+   "outcome": "temperature_peak",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 8.758440224684822
+  },
+  {
+   "episode": "pepper:1",
+   "interaction_relative_gap": 0.12293376652986755,
+   "outcome": "cooling_energy",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 3330.6187499999996
+  },
+  {
+   "episode": "pepper:1",
+   "interaction_relative_gap": 0.0,
+   "outcome": "heating_energy",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "cold_wave",
+   "total_effect": 229.59228515625
+  },
+  {
+   "episode": "pepper:1",
+   "interaction_relative_gap": 0.045454545454545456,
+   "outcome": "hours_vpd_above_stage_max",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 22.0
+  },
+  {
+   "episode": "pepper:1",
+   "interaction_relative_gap": 0.07407407407407407,
+   "outcome": "hours_temperature_above_stage_max",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 27.0
+  },
+  {
+   "episode": "pepper:1",
+   "interaction_relative_gap": 0.029411764705882353,
+   "outcome": "hours_vpd_above_stage_max",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 34.0
+  },
+  {
+   "episode": "pepper:1",
+   "interaction_relative_gap": 0.10340464037862314,
+   "outcome": "temperature_peak",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 8.908485732457269
+  },
+  {
+   "episode": "pepper:2",
+   "interaction_relative_gap": 0.11687097975365653,
+   "outcome": "cooling_energy",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 3250.1961914062504
+  },
+  {
+   "episode": "pepper:2",
+   "interaction_relative_gap": 0.0,
+   "outcome": "heating_energy",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "cold_wave",
+   "total_effect": 196.08486328125
+  },
+  {
+   "episode": "pepper:2",
+   "interaction_relative_gap": 0.045454545454545456,
+   "outcome": "hours_vpd_above_stage_max",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 22.0
+  },
+  {
+   "episode": "pepper:2",
+   "interaction_relative_gap": 0.038461538461538464,
+   "outcome": "hours_temperature_above_stage_max",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 26.0
+  },
+  {
+   "episode": "pepper:2",
+   "interaction_relative_gap": 0.05405405405405406,
+   "outcome": "hours_vpd_above_stage_max",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 37.0
+  },
+  {
+   "episode": "pepper:2",
+   "interaction_relative_gap": 0.10582285040689678,
+   "outcome": "temperature_peak",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 8.842014739783743
+  },
+  {
+   "episode": "tomato:0",
+   "interaction_relative_gap": 0.1243699040628122,
+   "outcome": "cooling_energy",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 2043.1458984375001
+  },
+  {
+   "episode": "tomato:0",
+   "interaction_relative_gap": 0.009628812936420398,
+   "outcome": "heating_energy",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "cold_wave",
+   "total_effect": 322.85302734375
+  },
+  {
+   "episode": "tomato:0",
+   "interaction_relative_gap": 0.0,
+   "outcome": "hours_vpd_above_stage_max",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 32.0
+  },
+  {
+   "episode": "tomato:0",
+   "interaction_relative_gap": 0.07692307692307693,
+   "outcome": "hours_temperature_above_stage_max",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 26.0
+  },
+  {
+   "episode": "tomato:0",
+   "interaction_relative_gap": 0.11428571428571428,
+   "outcome": "hours_vpd_above_stage_max",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 35.0
+  },
+  {
+   "episode": "tomato:0",
+   "interaction_relative_gap": 0.05692590525761727,
+   "outcome": "temperature_peak",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 9.197927885741695
+  },
+  {
+   "episode": "tomato:1",
+   "interaction_relative_gap": 0.13148128912852575,
+   "outcome": "cooling_energy",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 2513.0803710937503
+  },
+  {
+   "episode": "tomato:1",
+   "interaction_relative_gap": 0.000364353024957968,
+   "outcome": "heating_energy",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "cold_wave",
+   "total_effect": 477.6231445312499
+  },
+  {
+   "episode": "tomato:1",
+   "interaction_relative_gap": 0.0,
+   "outcome": "hours_vpd_above_stage_max",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 29.0
+  },
+  {
+   "episode": "tomato:1",
+   "interaction_relative_gap": 0.08,
+   "outcome": "hours_temperature_above_stage_max",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 25.0
+  },
+  {
+   "episode": "tomato:1",
+   "interaction_relative_gap": 0.0,
+   "outcome": "hours_vpd_above_stage_max",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 34.0
+  },
+  {
+   "episode": "tomato:1",
+   "interaction_relative_gap": 0.09303627819218054,
+   "outcome": "temperature_peak",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 9.047942663941985
+  },
+  {
+   "episode": "tomato:2",
+   "interaction_relative_gap": 0.14800674775814604,
+   "outcome": "cooling_energy",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 2138.21015625
+  },
+  {
+   "episode": "tomato:2",
+   "interaction_relative_gap": 1.1653689311383117e-16,
+   "outcome": "heating_energy",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "cold_wave",
+   "total_effect": 487.77187499999997
+  },
+  {
+   "episode": "tomato:2",
+   "interaction_relative_gap": 0.0,
+   "outcome": "hours_vpd_above_stage_max",
+   "policy": "reactive",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 25.0
+  },
+  {
+   "episode": "tomato:2",
+   "interaction_relative_gap": 0.08,
+   "outcome": "hours_temperature_above_stage_max",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 25.0
+  },
+  {
+   "episode": "tomato:2",
+   "interaction_relative_gap": 0.08823529411764706,
+   "outcome": "hours_vpd_above_stage_max",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 34.0
+  },
+  {
+   "episode": "tomato:2",
+   "interaction_relative_gap": 0.05959982968574142,
+   "outcome": "temperature_peak",
+   "policy": "replayed",
+   "s1_top_agrees": true,
+   "top_player": "heat_wave",
+   "total_effect": 9.071965499390064
+  }
+ ],
+ "episode_hashes": {
+  "lettuce:0": "8511b7de053b4111df7b2e1f14dd553517b8f92130318ab633ebffef5e65e929",
+  "lettuce:1": "e6935093f85e9657e94d3c0a09350b780aeb2d01358d6ea11c1376feb786c82c",
+  "lettuce:2": "c662ba6ee484a07e389752066b45e9a6b87f1a6528adff8b5e8fc40606aafa1f",
+  "pepper:0": "77d8c93518e25bd03c7d96da484faab74baa2bd6a2c69ab57027ac31d18490ca",
+  "pepper:1": "98dda039cd80d691f000c89d035deb051ad58d7944b841bca5f75272dcfc013b",
+  "pepper:2": "5c8fc1b59f70beb10e9177cc678fe4d056bb8dcb193ed240b961b8098fb8b264",
+  "tomato:0": "b1af4cebe8e3c7eae7b0b20e6cbfa741f6a3e432a937122cf9ede27d7db8d2f8",
+  "tomato:1": "241abee2eaae76bc6d7c4e9dfb05d159421d0fa543be1d56e141cee41ac556ec",
+  "tomato:2": "9fc9c71c60531162fcda701430fe1d62f7a5fffb483e3ad4885a5cee3627ccb6"
+ },
+ "episodes": 9,
+ "material_cells": 54,
+ "status": "DEVELOPMENT: nine cells of one synthetic generator, no inferential test, no confirmatory claim; thresholds are provisional conventions fixed before the runs (see the script's docstring)",
+ "summary_hash": "7fd98abd439756d22ec294ebb3b4107205bb549495856005d7a43fcfe38bdb49"
+}

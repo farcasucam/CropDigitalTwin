@@ -1,0 +1,88 @@
+{
+ "all_merges": {
+  "material_above_10_percent": 0,
+  "relative_discrepancy": {
+   "max": 8.154806077514432e-08,
+   "median": 0.0,
+   "min": 0.0,
+   "n": 324
+  }
+ },
+ "by_pair": {
+  "cold_wave+wind": {
+   "cells": 54,
+   "material_above_10_percent": 0,
+   "relative_discrepancy": {
+    "max": 1.7606593107855653e-16,
+    "median": 0.0,
+    "min": 0.0,
+    "n": 54
+   }
+  },
+  "heat_wave+cold_wave": {
+   "cells": 54,
+   "material_above_10_percent": 0,
+   "relative_discrepancy": {
+    "max": 8.154806067858144e-08,
+    "median": 0.0,
+    "min": 0.0,
+    "n": 54
+   }
+  },
+  "heat_wave+high_radiation": {
+   "cells": 54,
+   "material_above_10_percent": 0,
+   "relative_discrepancy": {
+    "max": 8.154806077514432e-08,
+    "median": 0.0,
+    "min": 0.0,
+    "n": 54
+   }
+  },
+  "heat_wave+wind": {
+   "cells": 54,
+   "material_above_10_percent": 0,
+   "relative_discrepancy": {
+    "max": 1.3664283380001927e-16,
+    "median": 0.0,
+    "min": 0.0,
+    "n": 54
+   }
+  },
+  "high_radiation+cold_wave": {
+   "cells": 54,
+   "material_above_10_percent": 0,
+   "relative_discrepancy": {
+    "max": 8.154806067858144e-08,
+    "median": 0.0,
+    "min": 0.0,
+    "n": 54
+   }
+  },
+  "high_radiation+wind": {
+   "cells": 54,
+   "material_above_10_percent": 0,
+   "relative_discrepancy": {
+    "max": 4.908178868328316e-17,
+    "median": 0.0,
+    "min": 0.0,
+    "n": 54
+   }
+  }
+ },
+ "material_outcome_cells": 54,
+ "max_abs_efficiency_residual": 4.547473508864641e-13,
+ "merge_cells": 324,
+ "merges_without_a_null_member": {
+  "cells": 88,
+  "material_above_10_percent": 0,
+  "relative_discrepancy": {
+   "max": 8.154806077514432e-08,
+   "median": 0.0,
+   "min": 0.0,
+   "n": 88
+  }
+ },
+ "status": "DEVELOPMENT: nine cells of one synthetic generator; counts and ranges only",
+ "summary_hash": "f2b41cbcc28cb5add096e00bab260bb2f725fc4532191d0528915a74b2d10bf0"
+}

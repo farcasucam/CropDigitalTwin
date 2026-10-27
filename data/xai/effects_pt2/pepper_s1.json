@@ -1,0 +1,1748 @@
+{
+ "base": {
+  "reactive": {
+   "outcomes": {
+    "cooling_energy": {
+     "efficiency_residual": 0.0,
+     "factual": 5691.1833984375,
+     "interaction_gap": -409.4455078124993,
+     "leave_one_out": {
+      "cold_wave": -146.51191406250018,
+      "heat_wave": 3477.1306640625,
+      "high_radiation": 409.4455078124993,
+      "wind": 0.0
+     },
+     "reference": 2360.5646484375,
+     "shapley": {
+      "cold_wave": -146.5119140625,
+      "heat_wave": 3272.4079101562497,
+      "high_radiation": 204.72275390624978,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": -146.51191406250018,
+      "heat_wave": 3067.6851562499996,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 3330.6187499999996,
+     "unit": "kWh (thermal)"
+    },
+    "heating_energy": {
+     "efficiency_residual": 0.0,
+     "factual": 229.59228515625,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": 229.59228515625,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "reference": 0.0,
+     "shapley": {
+      "cold_wave": 229.59228515625,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 229.59228515625,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 229.59228515625,
+     "unit": "kWh (thermal)"
+    },
+    "hours_temperature_above_stage_max": {
+     "efficiency_residual": 0.0,
+     "factual": 0.0,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "reference": 0.0,
+     "shapley": {
+      "cold_wave": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 0.0,
+     "unit": "h"
+    },
+    "hours_vpd_above_stage_max": {
+     "efficiency_residual": 0.0,
+     "factual": 71.0,
+     "interaction_gap": 1.0,
+     "leave_one_out": {
+      "cold_wave": -4.0,
+      "heat_wave": 24.0,
+      "high_radiation": 1.0,
+      "wind": 0.0
+     },
+     "reference": 49.0,
+     "shapley": {
+      "cold_wave": -4.0,
+      "heat_wave": 24.5,
+      "high_radiation": 1.5,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": -4.0,
+      "heat_wave": 25.0,
+      "high_radiation": 2.0,
+      "wind": 0.0
+     },
+     "total_effect": 22.0,
+     "unit": "h"
+    },
+    "temperature_peak": {
+     "efficiency_residual": 0.0,
+     "factual": 24.999999454354725,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "reference": 24.999999454354725,
+     "shapley": {
+      "cold_wave": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 0.0,
+     "unit": "degC"
+    }
+   },
+   "policy_check": null,
+   "report_hash": "7e4a9d673c8d24404a99606c799890bc4838ee66f113fa9ab3ce8a676e92b886"
+  },
+  "replayed": {
+   "outcomes": {
+    "cooling_energy": {
+     "efficiency_residual": 0.0,
+     "factual": 2360.5646484375,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "reference": 2360.5646484375,
+     "shapley": {
+      "cold_wave": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 0.0,
+     "unit": "kWh (thermal)"
+    },
+    "heating_energy": {
+     "efficiency_residual": 0.0,
+     "factual": 0.0,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "reference": 0.0,
+     "shapley": {
+      "cold_wave": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 0.0,
+     "unit": "kWh (thermal)"
+    },
+    "hours_temperature_above_stage_max": {
+     "efficiency_residual": 0.0,
+     "factual": 27.0,
+     "interaction_gap": -2.0,
+     "leave_one_out": {
+      "cold_wave": 0.0,
+      "heat_wave": 27.0,
+      "high_radiation": 2.0,
+      "wind": 0.0
+     },
+     "reference": 0.0,
+     "shapley": {
+      "cold_wave": 0.0,
+      "heat_wave": 26.0,
+      "high_radiation": 1.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 0.0,
+      "heat_wave": 25.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 27.0,
+     "unit": "h"
+    },
+    "hours_vpd_above_stage_max": {
+     "efficiency_residual": 0.0,
+     "factual": 83.0,
+     "interaction_gap": 1.0,
+     "leave_one_out": {
+      "cold_wave": -9.0,
+      "heat_wave": 40.0,
+      "high_radiation": 2.0,
+      "wind": 0.0
+     },
+     "reference": 49.0,
+     "shapley": {
+      "cold_wave": -9.0,
+      "heat_wave": 40.5,
+      "high_radiation": 2.5,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": -9.0,
+      "heat_wave": 41.0,
+      "high_radiation": 3.0,
+      "wind": 0.0
+     },
+     "total_effect": 34.0,
+     "unit": "h"
+    },
+    "temperature_peak": {
+     "efficiency_residual": 0.0,
+     "factual": 33.908485186811994,
+     "interaction_gap": 0.921178763482839,
+     "leave_one_out": {
+      "cold_wave": 0.0,
+      "heat_wave": 6.7691050921324845,
+      "high_radiation": 1.2182018768419454,
+      "wind": 0.0
+     },
+     "reference": 24.999999454354725,
+     "shapley": {
+      "cold_wave": 0.0,
+      "heat_wave": 7.229694473873904,
+      "high_radiation": 1.6787912585833649,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 0.0,
+      "heat_wave": 7.6902838556153235,
+      "high_radiation": 2.1393806403247844,
+      "wind": 0.0
+     },
+     "total_effect": 8.908485732457269,
+     "unit": "degC"
+    }
+   },
+   "policy_check": {
+    "reproduces_source_run": true,
+    "source": [],
+    "trace_actuators": [
+     "cooling",
+     "extractors",
+     "heating",
+     "irrigation_mm",
+     "irrigation_target_vwc",
+     "shade",
+     "vents"
+    ],
+    "trace_hash": "8210c44644aa5c59cd7c65002f09b3464d00dc2edf894637b7b62fad818ea4b2"
+   },
+   "report_hash": "eafcfd447966d615a94e80843e870755f52d88c75dd44547273eae83f28ead13"
+  }
+ },
+ "checks": {
+  "levels_replay_reproduces": true,
+  "max_abs_efficiency_residual": 4.547473508864641e-13,
+  "replay_reproduces_source_run_everywhere": true,
+  "split_factual_equals_base_factual_max_abs_difference": 0.0
+ },
+ "engine_runs": {
+  "cache_hits": 46,
+  "executed": 174
+ },
+ "episode": {
+  "crop": "pepper",
+  "month_of_window": 4,
+  "season": 1,
+  "thresholds": {
+   "hours_temperature_above_stage_max": 28.0,
+   "hours_vpd_above_stage_max": 1.5
+  },
+  "window_hours": 336,
+  "window_start_hour": 960
+ },
+ "episode_hash": "98dda039cd80d691f000c89d035deb051ad58d7944b841bca5f75272dcfc013b",
+ "levels": {
+  "0.5": {
+   "reactive": {
+    "outcomes": {
+     "cooling_energy": {
+      "efficiency_residual": 0.0,
+      "factual": 4121.95869140625,
+      "interaction_gap": -143.1659179687499,
+      "leave_one_out": {
+       "cold_wave": -141.88447265625018,
+       "heat_wave": 1903.2785156250002,
+       "high_radiation": 143.1659179687499,
+       "wind": 0.0
+      },
+      "reference": 2360.5646484375,
+      "shapley": {
+       "cold_wave": -141.8844726562501,
+       "heat_wave": 1831.695556640625,
+       "high_radiation": 71.58295898437503,
+       "wind": 0.0
+      },
+      "singleton": {
+       "cold_wave": -141.88447265625018,
+       "heat_wave": 1760.1125976562498,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "total_effect": 1761.39404296875,
+      "unit": "kWh (thermal)"
+     },
+     "heating_energy": {
+      "efficiency_residual": 0.0,
+      "factual": 26.791699218749997,
+      "interaction_gap": 0.0,
+      "leave_one_out": {
+       "cold_wave": 26.791699218749997,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "reference": 0.0,
+      "shapley": {
+       "cold_wave": 26.791699218749997,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "singleton": {
+       "cold_wave": 26.791699218749997,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "total_effect": 26.791699218749997,
+      "unit": "kWh (thermal)"
+     },
+     "hours_temperature_above_stage_max": {
+      "efficiency_residual": 0.0,
+      "factual": 0.0,
+      "interaction_gap": 0.0,
+      "leave_one_out": {
+       "cold_wave": 0.0,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "reference": 0.0,
+      "shapley": {
+       "cold_wave": 0.0,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "singleton": {
+       "cold_wave": 0.0,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "total_effect": 0.0,
+      "unit": "h"
+     },
+     "hours_vpd_above_stage_max": {
+      "efficiency_residual": 0.0,
+      "factual": 53.0,
+      "interaction_gap": -1.0,
+      "leave_one_out": {
+       "cold_wave": -3.0,
+       "heat_wave": 6.0,
+       "high_radiation": 2.0,
+       "wind": 0.0
+      },
+      "reference": 49.0,
+      "shapley": {
+       "cold_wave": -3.0,
+       "heat_wave": 5.5,
+       "high_radiation": 1.5,
+       "wind": 0.0
+      },
+      "singleton": {
+       "cold_wave": -3.0,
+       "heat_wave": 5.0,
+       "high_radiation": 1.0,
+       "wind": 0.0
+      },
+      "total_effect": 4.0,
+      "unit": "h"
+     },
+     "temperature_peak": {
+      "efficiency_residual": 0.0,
+      "factual": 24.999999454354725,
+      "interaction_gap": 0.0,
+      "leave_one_out": {
+       "cold_wave": 0.0,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "reference": 24.999999454354725,
+      "shapley": {
+       "cold_wave": 0.0,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "singleton": {
+       "cold_wave": 0.0,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "total_effect": 0.0,
+      "unit": "degC"
+     }
+    },
+    "policy_check": null,
+    "report_hash": "fd31ec224e7c1ce0052315f23a94e46dcddfbb089d1f88ea7c702cd582647c33"
+   },
+   "replayed": {
+    "outcomes": {
+     "cooling_energy": {
+      "efficiency_residual": 0.0,
+      "factual": 2360.5646484375,
+      "interaction_gap": 0.0,
+      "leave_one_out": {
+       "cold_wave": 0.0,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "reference": 2360.5646484375,
+      "shapley": {
+       "cold_wave": 0.0,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "singleton": {
+       "cold_wave": 0.0,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "total_effect": 0.0,
+      "unit": "kWh (thermal)"
+     },
+     "heating_energy": {
+      "efficiency_residual": 0.0,
+      "factual": 0.0,
+      "interaction_gap": 0.0,
+      "leave_one_out": {
+       "cold_wave": 0.0,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "reference": 0.0,
+      "shapley": {
+       "cold_wave": 0.0,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "singleton": {
+       "cold_wave": 0.0,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "total_effect": 0.0,
+      "unit": "kWh (thermal)"
+     },
+     "hours_temperature_above_stage_max": {
+      "efficiency_residual": 0.0,
+      "factual": 21.0,
+      "interaction_gap": -2.0,
+      "leave_one_out": {
+       "cold_wave": 0.0,
+       "heat_wave": 21.0,
+       "high_radiation": 2.0,
+       "wind": 0.0
+      },
+      "reference": 0.0,
+      "shapley": {
+       "cold_wave": 0.0,
+       "heat_wave": 20.0,
+       "high_radiation": 1.0,
+       "wind": 0.0
+      },
+      "singleton": {
+       "cold_wave": 0.0,
+       "heat_wave": 19.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "total_effect": 21.0,
+      "unit": "h"
+     },
+     "hours_vpd_above_stage_max": {
+      "efficiency_residual": 0.0,
+      "factual": 69.0,
+      "interaction_gap": -1.0,
+      "leave_one_out": {
+       "cold_wave": -5.0,
+       "heat_wave": 23.0,
+       "high_radiation": 3.0,
+       "wind": 0.0
+      },
+      "reference": 49.0,
+      "shapley": {
+       "cold_wave": -5.0,
+       "heat_wave": 22.5,
+       "high_radiation": 2.5,
+       "wind": 0.0
+      },
+      "singleton": {
+       "cold_wave": -5.0,
+       "heat_wave": 22.0,
+       "high_radiation": 2.0,
+       "wind": 0.0
+      },
+      "total_effect": 20.0,
+      "unit": "h"
+     },
+     "temperature_peak": {
+      "efficiency_residual": 0.0,
+      "factual": 29.45416829539058,
+      "interaction_gap": 0.46036207623993164,
+      "leave_one_out": {
+       "cold_wave": 0.0,
+       "heat_wave": 3.384776636535104,
+       "high_radiation": 0.6090301282608195,
+       "wind": 0.0
+      },
+      "reference": 24.999999454354725,
+      "shapley": {
+       "cold_wave": 0.0,
+       "heat_wave": 3.61495767465507,
+       "high_radiation": 0.8392111663807853,
+       "wind": 0.0
+      },
+      "singleton": {
+       "cold_wave": 0.0,
+       "heat_wave": 3.845138712775036,
+       "high_radiation": 1.0693922045007511,
+       "wind": 0.0
+      },
+      "total_effect": 4.454168841035855,
+      "unit": "degC"
+     }
+    },
+    "policy_check": {
+     "reproduces_source_run": true,
+     "source": [],
+     "trace_actuators": [
+      "cooling",
+      "extractors",
+      "heating",
+      "irrigation_mm",
+      "irrigation_target_vwc",
+      "shade",
+      "vents"
+     ],
+     "trace_hash": "8210c44644aa5c59cd7c65002f09b3464d00dc2edf894637b7b62fad818ea4b2"
+    },
+    "report_hash": "c958f9e9ee8919db601ff3287d723ac13b5c87453d36b8dd5eefc9a1fc4ae22a"
+   }
+  },
+  "1.5": {
+   "reactive": {
+    "outcomes": {
+     "cooling_energy": {
+      "efficiency_residual": 0.0,
+      "factual": 7517.029394531251,
+      "interaction_gap": -661.3918945312516,
+      "leave_one_out": {
+       "cold_wave": -149.35957031249927,
+       "heat_wave": 5304.210644531251,
+       "high_radiation": 663.0055664062502,
+       "wind": 0.0
+      },
+      "reference": 2360.5646484375,
+      "shapley": {
+       "cold_wave": -149.35957031249987,
+       "heat_wave": 4973.514697265626,
+       "high_radiation": 332.3096191406249,
+       "wind": 0.0
+      },
+      "singleton": {
+       "cold_wave": -149.35957031250018,
+       "heat_wave": 4642.81875,
+       "high_radiation": 1.613671874999909,
+       "wind": 0.0
+      },
+      "total_effect": 5156.46474609375,
+      "unit": "kWh (thermal)"
+     },
+     "heating_energy": {
+      "efficiency_residual": 0.0,
+      "factual": 626.6663085937499,
+      "interaction_gap": 0.0,
+      "leave_one_out": {
+       "cold_wave": 626.6663085937499,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "reference": 0.0,
+      "shapley": {
+       "cold_wave": 626.6663085937499,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "singleton": {
+       "cold_wave": 626.6663085937499,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "total_effect": 626.6663085937499,
+      "unit": "kWh (thermal)"
+     },
+     "hours_temperature_above_stage_max": {
+      "efficiency_residual": 0.0,
+      "factual": 0.0,
+      "interaction_gap": 0.0,
+      "leave_one_out": {
+       "cold_wave": 0.0,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "reference": 0.0,
+      "shapley": {
+       "cold_wave": 0.0,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "singleton": {
+       "cold_wave": 0.0,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "total_effect": 0.0,
+      "unit": "h"
+     },
+     "hours_vpd_above_stage_max": {
+      "efficiency_residual": 0.0,
+      "factual": 75.0,
+      "interaction_gap": 1.0,
+      "leave_one_out": {
+       "cold_wave": 0.0,
+       "heat_wave": 24.0,
+       "high_radiation": 1.0,
+       "wind": 0.0
+      },
+      "reference": 49.0,
+      "shapley": {
+       "cold_wave": 0.0,
+       "heat_wave": 24.5,
+       "high_radiation": 1.5,
+       "wind": 0.0
+      },
+      "singleton": {
+       "cold_wave": 0.0,
+       "heat_wave": 25.0,
+       "high_radiation": 2.0,
+       "wind": 0.0
+      },
+      "total_effect": 26.0,
+      "unit": "h"
+     },
+     "temperature_peak": {
+      "efficiency_residual": 0.0,
+      "factual": 24.999999761448983,
+      "interaction_gap": -2.3387514147543698e-11,
+      "leave_one_out": {
+       "cold_wave": 3.070942575789104e-07,
+       "heat_wave": 1.8474111129762605e-13,
+       "high_radiation": 2.320277303624607e-11,
+       "wind": 0.0
+      },
+      "reference": 24.999999454354725,
+      "shapley": {
+       "cold_wave": 3.0708254605826824e-07,
+       "heat_wave": 1.0125233984581428e-13,
+       "high_radiation": 1.1610268302320037e-11,
+       "wind": 0.0
+      },
+      "singleton": {
+       "cold_wave": 3.070708167740577e-07,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "total_effect": 3.070942575789104e-07,
+      "unit": "degC"
+     }
+    },
+    "policy_check": null,
+    "report_hash": "3da85483538abdecfffcb5c688d65cb9de4c527188076cf6621cd7bec93adde4"
+   },
+   "replayed": {
+    "outcomes": {
+     "cooling_energy": {
+      "efficiency_residual": 0.0,
+      "factual": 2360.5646484375,
+      "interaction_gap": 0.0,
+      "leave_one_out": {
+       "cold_wave": 0.0,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "reference": 2360.5646484375,
+      "shapley": {
+       "cold_wave": 0.0,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "singleton": {
+       "cold_wave": 0.0,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "total_effect": 0.0,
+      "unit": "kWh (thermal)"
+     },
+     "heating_energy": {
+      "efficiency_residual": 0.0,
+      "factual": 0.0,
+      "interaction_gap": 0.0,
+      "leave_one_out": {
+       "cold_wave": 0.0,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "reference": 0.0,
+      "shapley": {
+       "cold_wave": 0.0,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "singleton": {
+       "cold_wave": 0.0,
+       "heat_wave": 0.0,
+       "high_radiation": 0.0,
+       "wind": 0.0
+      },
+      "total_effect": 0.0,
+      "unit": "kWh (thermal)"
+     },
+     "hours_temperature_above_stage_max": {
+      "efficiency_residual": 0.0,
+      "factual": 35.0,
+      "interaction_gap": 0.0,
+      "leave_one_out": {
+       "cold_wave": 0.0,
+       "heat_wave": 32.0,
+       "high_radiation": 3.0,
+       "wind": 0.0
+      },
+      "reference": 0.0,
+      "shapley": {
+       "cold_wave": 0.0,
+       "heat_wave": 32.0,
+       "high_radiation": 3.0,
+       "wind": 0.0
+      },
+      "singleton": {
+       "cold_wave": 0.0,
+       "heat_wave": 32.0,
+       "high_radiation": 3.0,
+       "wind": 0.0
+      },
+      "total_effect": 35.0,
+      "unit": "h"
+     },
+     "hours_vpd_above_stage_max": {
+      "efficiency_residual": 0.0,
+      "factual": 85.0,
+      "interaction_gap": 2.0,
+      "leave_one_out": {
+       "cold_wave": -9.0,
+       "heat_wave": 39.0,
+       "high_radiation": 4.0,
+       "wind": 0.0
+      },
+      "reference": 49.0,
+      "shapley": {
+       "cold_wave": -9.0,
+       "heat_wave": 40.0,
+       "high_radiation": 5.0,
+       "wind": 0.0
+      },
+      "singleton": {
+       "cold_wave": -9.0,
+       "heat_wave": 41.0,
+       "high_radiation": 6.0,
+       "wind": 0.0
+      },
+      "total_effect": 36.0,
+      "unit": "h"
+     },
+     "temperature_peak": {
+      "efficiency_residual": 0.0,
+      "factual": 38.36280207823339,
+      "interaction_gap": 1.3819954507257712,
+      "leave_one_out": {
+       "cold_wave": 0.0,
+       "heat_wave": 10.15343354772984,
+       "high_radiation": 1.827373625423057,
+       "wind": 0.0
+      },
+      "reference": 24.999999454354725,
+      "shapley": {
+       "cold_wave": 0.0,
+       "heat_wave": 10.844431273092725,
+       "high_radiation": 2.5183713507859427,
+       "wind": 0.0
+      },
+      "singleton": {
+       "cold_wave": 0.0,
+       "heat_wave": 11.535428998455611,
+       "high_radiation": 3.2093690761488283,
+       "wind": 0.0
+      },
+      "total_effect": 13.362802623878668,
+      "unit": "degC"
+     }
+    },
+    "policy_check": {
+     "reproduces_source_run": true,
+     "source": [],
+     "trace_actuators": [
+      "cooling",
+      "extractors",
+      "heating",
+      "irrigation_mm",
+      "irrigation_target_vwc",
+      "shade",
+      "vents"
+     ],
+     "trace_hash": "8210c44644aa5c59cd7c65002f09b3464d00dc2edf894637b7b62fad818ea4b2"
+    },
+    "report_hash": "60c985dd3d7c0d2f551ad9bff37cf5cfcae59df1e8ad13b8b8b07f6bbdd67a74"
+   }
+  }
+ },
+ "merged": {
+  "reactive": {
+   "outcomes": {
+    "cooling_energy": {
+     "efficiency_residual": 0.0,
+     "factual": 5691.1833984375,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": -146.51191406250018,
+      "weather_spell": 3477.1306640625,
+      "wind": 0.0
+     },
+     "reference": 2360.5646484375,
+     "shapley": {
+      "cold_wave": -146.51191406250018,
+      "weather_spell": 3477.1306640625,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": -146.51191406250018,
+      "weather_spell": 3477.1306640625,
+      "wind": 0.0
+     },
+     "total_effect": 3330.6187499999996,
+     "unit": "kWh (thermal)"
+    },
+    "heating_energy": {
+     "efficiency_residual": 0.0,
+     "factual": 229.59228515625,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": 229.59228515625,
+      "weather_spell": 0.0,
+      "wind": 0.0
+     },
+     "reference": 0.0,
+     "shapley": {
+      "cold_wave": 229.59228515625,
+      "weather_spell": 0.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 229.59228515625,
+      "weather_spell": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 229.59228515625,
+     "unit": "kWh (thermal)"
+    },
+    "hours_temperature_above_stage_max": {
+     "efficiency_residual": 0.0,
+     "factual": 0.0,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": 0.0,
+      "weather_spell": 0.0,
+      "wind": 0.0
+     },
+     "reference": 0.0,
+     "shapley": {
+      "cold_wave": 0.0,
+      "weather_spell": 0.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 0.0,
+      "weather_spell": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 0.0,
+     "unit": "h"
+    },
+    "hours_vpd_above_stage_max": {
+     "efficiency_residual": 0.0,
+     "factual": 71.0,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": -4.0,
+      "weather_spell": 26.0,
+      "wind": 0.0
+     },
+     "reference": 49.0,
+     "shapley": {
+      "cold_wave": -4.0,
+      "weather_spell": 26.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": -4.0,
+      "weather_spell": 26.0,
+      "wind": 0.0
+     },
+     "total_effect": 22.0,
+     "unit": "h"
+    },
+    "temperature_peak": {
+     "efficiency_residual": 0.0,
+     "factual": 24.999999454354725,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": 0.0,
+      "weather_spell": 0.0,
+      "wind": 0.0
+     },
+     "reference": 24.999999454354725,
+     "shapley": {
+      "cold_wave": 0.0,
+      "weather_spell": 0.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 0.0,
+      "weather_spell": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 0.0,
+     "unit": "degC"
+    }
+   },
+   "policy_check": null,
+   "report_hash": "8231ed056dff050dbe3d5e572b4d0d527476b16528c04dc5461e8a2e3738cc3c"
+  },
+  "replayed": {
+   "outcomes": {
+    "cooling_energy": {
+     "efficiency_residual": 0.0,
+     "factual": 2360.5646484375,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": 0.0,
+      "weather_spell": 0.0,
+      "wind": 0.0
+     },
+     "reference": 2360.5646484375,
+     "shapley": {
+      "cold_wave": 0.0,
+      "weather_spell": 0.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 0.0,
+      "weather_spell": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 0.0,
+     "unit": "kWh (thermal)"
+    },
+    "heating_energy": {
+     "efficiency_residual": 0.0,
+     "factual": 0.0,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": 0.0,
+      "weather_spell": 0.0,
+      "wind": 0.0
+     },
+     "reference": 0.0,
+     "shapley": {
+      "cold_wave": 0.0,
+      "weather_spell": 0.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 0.0,
+      "weather_spell": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 0.0,
+     "unit": "kWh (thermal)"
+    },
+    "hours_temperature_above_stage_max": {
+     "efficiency_residual": 0.0,
+     "factual": 27.0,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": 0.0,
+      "weather_spell": 27.0,
+      "wind": 0.0
+     },
+     "reference": 0.0,
+     "shapley": {
+      "cold_wave": 0.0,
+      "weather_spell": 27.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 0.0,
+      "weather_spell": 27.0,
+      "wind": 0.0
+     },
+     "total_effect": 27.0,
+     "unit": "h"
+    },
+    "hours_vpd_above_stage_max": {
+     "efficiency_residual": 0.0,
+     "factual": 83.0,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": -9.0,
+      "weather_spell": 43.0,
+      "wind": 0.0
+     },
+     "reference": 49.0,
+     "shapley": {
+      "cold_wave": -9.0,
+      "weather_spell": 43.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": -9.0,
+      "weather_spell": 43.0,
+      "wind": 0.0
+     },
+     "total_effect": 34.0,
+     "unit": "h"
+    },
+    "temperature_peak": {
+     "efficiency_residual": 0.0,
+     "factual": 33.908485186811994,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": 0.0,
+      "weather_spell": 8.908485732457269,
+      "wind": 0.0
+     },
+     "reference": 24.999999454354725,
+     "shapley": {
+      "cold_wave": 0.0,
+      "weather_spell": 8.908485732457269,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 0.0,
+      "weather_spell": 8.908485732457269,
+      "wind": 0.0
+     },
+     "total_effect": 8.908485732457269,
+     "unit": "degC"
+    }
+   },
+   "policy_check": {
+    "reproduces_source_run": true,
+    "source": [],
+    "trace_actuators": [
+     "cooling",
+     "extractors",
+     "heating",
+     "irrigation_mm",
+     "irrigation_target_vwc",
+     "shade",
+     "vents"
+    ],
+    "trace_hash": "8210c44644aa5c59cd7c65002f09b3464d00dc2edf894637b7b62fad818ea4b2"
+   },
+   "report_hash": "d47d29e2188897213e70965c89538681c320b684db0b20390cfccbecf4db71ee"
+  }
+ },
+ "reference": {
+  "reactive": {
+   "outcomes": {
+    "cooling_energy": {
+     "efficiency_residual": 0.0,
+     "factual": 4350.38818359375,
+     "interaction_gap": -324.39550781249955,
+     "leave_one_out": {
+      "cold_wave": -53.702050781250364,
+      "heat_wave": 2829.21767578125,
+      "high_radiation": 324.3955078125,
+      "wind": 0.0
+     },
+     "reference": 1574.87255859375,
+     "shapley": {
+      "cold_wave": -53.70205078125006,
+      "heat_wave": 2667.019921875,
+      "high_radiation": 162.19775390625006,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": -53.70205078124991,
+      "heat_wave": 2504.82216796875,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 2775.515625,
+     "unit": "kWh (thermal)"
+    },
+    "heating_energy": {
+     "efficiency_residual": 0.0,
+     "factual": 295.08837890624994,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": 295.08837890624994,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "reference": 0.0,
+     "shapley": {
+      "cold_wave": 295.08837890624994,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 295.08837890624994,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 295.08837890624994,
+     "unit": "kWh (thermal)"
+    },
+    "hours_temperature_above_stage_max": {
+     "efficiency_residual": 0.0,
+     "factual": 0.0,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "reference": 0.0,
+     "shapley": {
+      "cold_wave": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 0.0,
+     "unit": "h"
+    },
+    "hours_vpd_above_stage_max": {
+     "efficiency_residual": 0.0,
+     "factual": 67.0,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": -4.0,
+      "heat_wave": 25.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "reference": 46.0,
+     "shapley": {
+      "cold_wave": -4.0,
+      "heat_wave": 25.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": -4.0,
+      "heat_wave": 25.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 21.0,
+     "unit": "h"
+    },
+    "temperature_peak": {
+     "efficiency_residual": 0.0,
+     "factual": 24.99999789083637,
+     "interaction_gap": -2.1877514626567063e-06,
+     "leave_one_out": {
+      "cold_wave": 2.146259788560201e-06,
+      "heat_wave": -1.8440005504771761e-06,
+      "high_radiation": -1.4070861098502974e-07,
+      "wind": 0.0
+     },
+     "reference": 24.999999917037204,
+     "shapley": {
+      "cold_wave": 7.154199295200669e-07,
+      "heat_wave": -2.2224563522854623e-06,
+      "high_radiation": -5.191644127933159e-07,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 0.0,
+      "heat_wave": -1.8854922245736816e-06,
+      "high_radiation": -1.8220028508153518e-07,
+      "wind": 0.0
+     },
+     "total_effect": -2.0262008355587113e-06,
+     "unit": "degC"
+    }
+   },
+   "policy_check": null,
+   "report_hash": "4c9f78a6d7d2e9b8f75b7355a989ce8d0cf6f75173d76add183dd89ce103c3f1"
+  },
+  "replayed": {
+   "outcomes": {
+    "cooling_energy": {
+     "efficiency_residual": 0.0,
+     "factual": 1574.87255859375,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "reference": 1574.87255859375,
+     "shapley": {
+      "cold_wave": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 0.0,
+     "unit": "kWh (thermal)"
+    },
+    "heating_energy": {
+     "efficiency_residual": 0.0,
+     "factual": 0.0,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "reference": 0.0,
+     "shapley": {
+      "cold_wave": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 0.0,
+     "unit": "kWh (thermal)"
+    },
+    "hours_temperature_above_stage_max": {
+     "efficiency_residual": 0.0,
+     "factual": 23.0,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": 0.0,
+      "heat_wave": 23.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "reference": 0.0,
+     "shapley": {
+      "cold_wave": 0.0,
+      "heat_wave": 23.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 0.0,
+      "heat_wave": 23.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 23.0,
+     "unit": "h"
+    },
+    "hours_vpd_above_stage_max": {
+     "efficiency_residual": 0.0,
+     "factual": 80.0,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": -8.0,
+      "heat_wave": 41.0,
+      "high_radiation": 1.0,
+      "wind": 0.0
+     },
+     "reference": 46.0,
+     "shapley": {
+      "cold_wave": -8.0,
+      "heat_wave": 41.0,
+      "high_radiation": 1.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": -8.0,
+      "heat_wave": 41.0,
+      "high_radiation": 1.0,
+      "wind": 0.0
+     },
+     "total_effect": 34.0,
+     "unit": "h"
+    },
+    "temperature_peak": {
+     "efficiency_residual": 0.0,
+     "factual": 33.65125440646385,
+     "interaction_gap": 1.139096247804634,
+     "leave_one_out": {
+      "cold_wave": 0.0,
+      "heat_wave": 6.4536965408172975,
+      "high_radiation": 1.0584617008047132,
+      "wind": 0.0
+     },
+     "reference": 24.999999917037204,
+     "shapley": {
+      "cold_wave": 0.0,
+      "heat_wave": 7.0232446647196145,
+      "high_radiation": 1.6280098247070303,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 0.0,
+      "heat_wave": 7.5927927886219315,
+      "high_radiation": 2.1975579486093473,
+      "wind": 0.0
+     },
+     "total_effect": 8.651254489426645,
+     "unit": "degC"
+    }
+   },
+   "policy_check": {
+    "reproduces_source_run": true,
+    "source": [],
+    "trace_actuators": [
+     "cooling",
+     "extractors",
+     "heating",
+     "irrigation_mm",
+     "irrigation_target_vwc",
+     "shade",
+     "vents"
+    ],
+    "trace_hash": "980aa74fa5b1eab2d999f47367c8bc28769d90c7758ef901bfdf848ac6914c04"
+   },
+   "report_hash": "c5b2529baefe01d5121c0215547a2aeb57430ebf5b62ddde362d46a06adda8e1"
+  }
+ },
+ "split": {
+  "reactive": {
+   "outcomes": {
+    "cooling_energy": {
+     "efficiency_residual": 4.547473508864641e-13,
+     "factual": 5691.1833984375,
+     "interaction_gap": -416.2561523437489,
+     "leave_one_out": {
+      "cold_wave": -146.51191406250018,
+      "heat_wave_a": 1516.73291015625,
+      "heat_wave_b": 1967.2083984374995,
+      "high_radiation": 409.4455078124993,
+      "wind": 0.0
+     },
+     "reference": 2360.5646484375,
+     "shapley": {
+      "cold_wave": -146.51191406250004,
+      "heat_wave_a": 1513.3275878906252,
+      "heat_wave_b": 1759.080322265625,
+      "high_radiation": 204.7227539062498,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": -146.51191406250018,
+      "heat_wave_a": 1509.922265625,
+      "heat_wave_b": 1550.95224609375,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 3330.6187499999996,
+     "unit": "kWh (thermal)"
+    },
+    "heating_energy": {
+     "efficiency_residual": 0.0,
+     "factual": 229.59228515625,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": 229.59228515625,
+      "heat_wave_a": 0.0,
+      "heat_wave_b": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "reference": 0.0,
+     "shapley": {
+      "cold_wave": 229.59228515625,
+      "heat_wave_a": 0.0,
+      "heat_wave_b": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 229.59228515625,
+      "heat_wave_a": 0.0,
+      "heat_wave_b": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 229.59228515625,
+     "unit": "kWh (thermal)"
+    },
+    "hours_temperature_above_stage_max": {
+     "efficiency_residual": 0.0,
+     "factual": 0.0,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": 0.0,
+      "heat_wave_a": 0.0,
+      "heat_wave_b": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "reference": 0.0,
+     "shapley": {
+      "cold_wave": 0.0,
+      "heat_wave_a": 0.0,
+      "heat_wave_b": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 0.0,
+      "heat_wave_a": 0.0,
+      "heat_wave_b": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 0.0,
+     "unit": "h"
+    },
+    "hours_vpd_above_stage_max": {
+     "efficiency_residual": 0.0,
+     "factual": 71.0,
+     "interaction_gap": 1.0,
+     "leave_one_out": {
+      "cold_wave": -4.0,
+      "heat_wave_a": 13.0,
+      "heat_wave_b": 11.0,
+      "high_radiation": 1.0,
+      "wind": 0.0
+     },
+     "reference": 49.0,
+     "shapley": {
+      "cold_wave": -4.0,
+      "heat_wave_a": 13.0,
+      "heat_wave_b": 11.500000000000002,
+      "high_radiation": 1.5,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": -4.0,
+      "heat_wave_a": 13.0,
+      "heat_wave_b": 12.0,
+      "high_radiation": 2.0,
+      "wind": 0.0
+     },
+     "total_effect": 22.0,
+     "unit": "h"
+    },
+    "temperature_peak": {
+     "efficiency_residual": 0.0,
+     "factual": 24.999999454354725,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": 0.0,
+      "heat_wave_a": 0.0,
+      "heat_wave_b": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "reference": 24.999999454354725,
+     "shapley": {
+      "cold_wave": 0.0,
+      "heat_wave_a": 0.0,
+      "heat_wave_b": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 0.0,
+      "heat_wave_a": 0.0,
+      "heat_wave_b": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 0.0,
+     "unit": "degC"
+    }
+   },
+   "policy_check": null,
+   "report_hash": "7bffcab67218296d56578a907312ad1b36da4d85ed60c7ef982e9fbd57b62428"
+  },
+  "replayed": {
+   "outcomes": {
+    "cooling_energy": {
+     "efficiency_residual": 0.0,
+     "factual": 2360.5646484375,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": 0.0,
+      "heat_wave_a": 0.0,
+      "heat_wave_b": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "reference": 2360.5646484375,
+     "shapley": {
+      "cold_wave": 0.0,
+      "heat_wave_a": 0.0,
+      "heat_wave_b": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 0.0,
+      "heat_wave_a": 0.0,
+      "heat_wave_b": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 0.0,
+     "unit": "kWh (thermal)"
+    },
+    "heating_energy": {
+     "efficiency_residual": 0.0,
+     "factual": 0.0,
+     "interaction_gap": 0.0,
+     "leave_one_out": {
+      "cold_wave": 0.0,
+      "heat_wave_a": 0.0,
+      "heat_wave_b": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "reference": 0.0,
+     "shapley": {
+      "cold_wave": 0.0,
+      "heat_wave_a": 0.0,
+      "heat_wave_b": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 0.0,
+      "heat_wave_a": 0.0,
+      "heat_wave_b": 0.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 0.0,
+     "unit": "kWh (thermal)"
+    },
+    "hours_temperature_above_stage_max": {
+     "efficiency_residual": 0.0,
+     "factual": 27.0,
+     "interaction_gap": -2.0,
+     "leave_one_out": {
+      "cold_wave": 0.0,
+      "heat_wave_a": 13.0,
+      "heat_wave_b": 14.0,
+      "high_radiation": 2.0,
+      "wind": 0.0
+     },
+     "reference": 0.0,
+     "shapley": {
+      "cold_wave": 0.0,
+      "heat_wave_a": 13.0,
+      "heat_wave_b": 13.000000000000002,
+      "high_radiation": 1.0,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 0.0,
+      "heat_wave_a": 13.0,
+      "heat_wave_b": 12.0,
+      "high_radiation": 0.0,
+      "wind": 0.0
+     },
+     "total_effect": 27.0,
+     "unit": "h"
+    },
+    "hours_vpd_above_stage_max": {
+     "efficiency_residual": 0.0,
+     "factual": 83.0,
+     "interaction_gap": 1.0,
+     "leave_one_out": {
+      "cold_wave": -9.0,
+      "heat_wave_a": 21.0,
+      "heat_wave_b": 19.0,
+      "high_radiation": 2.0,
+      "wind": 0.0
+     },
+     "reference": 49.0,
+     "shapley": {
+      "cold_wave": -9.0,
+      "heat_wave_a": 21.0,
+      "heat_wave_b": 19.5,
+      "high_radiation": 2.5000000000000004,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": -9.0,
+      "heat_wave_a": 21.0,
+      "heat_wave_b": 20.0,
+      "high_radiation": 3.0,
+      "wind": 0.0
+     },
+     "total_effect": 34.0,
+     "unit": "h"
+    },
+    "temperature_peak": {
+     "efficiency_residual": 0.0,
+     "factual": 33.908485186811994,
+     "interaction_gap": 6.340334548450517,
+     "leave_one_out": {
+      "cold_wave": 0.0,
+      "heat_wave_a": 0.12273594289528234,
+      "heat_wave_b": 1.2272133642695238,
+      "high_radiation": 1.2182018768419454,
+      "wind": 0.0
+     },
+     "reference": 24.999999454354725,
+     "shapley": {
+      "cold_wave": 0.0,
+      "heat_wave_a": 3.5283788711954656,
+      "heat_wave_b": 4.074940887024487,
+      "high_radiation": 1.3051659742373167,
+      "wind": 0.0
+     },
+     "singleton": {
+      "cold_wave": 0.0,
+      "heat_wave_a": 7.681272368187745,
+      "heat_wave_b": 7.6699189784715465,
+      "high_radiation": 2.1393806403247844,
+      "wind": 0.0
+     },
+     "total_effect": 8.908485732457269,
+     "unit": "degC"
+    }
+   },
+   "policy_check": {
+    "reproduces_source_run": true,
+    "source": [],
+    "trace_actuators": [
+     "cooling",
+     "extractors",
+     "heating",
+     "irrigation_mm",
+     "irrigation_target_vwc",
+     "shade",
+     "vents"
+    ],
+    "trace_hash": "8210c44644aa5c59cd7c65002f09b3464d00dc2edf894637b7b62fad818ea4b2"
+   },
+   "report_hash": "6a87422ee6008501e439fa299f9906b980a3fd666325f2e0fc03d0108b6de95b"
+  }
+ }
+}

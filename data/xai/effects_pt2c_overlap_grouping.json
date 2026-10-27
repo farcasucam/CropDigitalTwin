@@ -1,0 +1,187 @@
+{
+ "cells": [
+  {
+   "interaction_relative_gap": 17.35425193269668,
+   "leave_one_out": {
+    "cold_wave": 4.6669921875,
+    "heat_wave": -625.503515625,
+    "high_radiation": -17.687109375
+   },
+   "merges": {
+    "heat_wave+cold_wave": {
+     "merged_share": -11.030712890624997,
+     "relative_discrepancy": 0.4154160982264665,
+     "sum_of_members_shares": 3.421142578125
+    },
+    "heat_wave+high_radiation": {
+     "merged_share": -391.809814453125,
+     "relative_discrepancy": 0.4154160982264686,
+     "sum_of_members_shares": -377.35795898437493
+    },
+    "high_radiation+cold_wave": {
+     "merged_share": 289.90722656249994,
+     "relative_discrepancy": 0.41541609822646697,
+     "sum_of_members_shares": 304.35908203124995
+    }
+   },
+   "outcome": "heating_energy",
+   "policy": "reactive",
+   "shapley": {
+    "cold_wave": 342.56909179687494,
+    "heat_wave": -339.14794921874994,
+    "high_radiation": -38.210009765624996
+   },
+   "total_effect": -34.788867187499996
+  },
+  {
+   "interaction_relative_gap": 7.0,
+   "leave_one_out": {
+    "cold_wave": -28.0,
+    "heat_wave": 1.0,
+    "high_radiation": 3.0
+   },
+   "merges": {
+    "heat_wave+cold_wave": {
+     "merged_share": 3.0,
+     "relative_discrepancy": 0.041666666666666075,
+     "sum_of_members_shares": 2.8333333333333357
+    },
+    "heat_wave+high_radiation": {
+     "merged_share": 18.5,
+     "relative_discrepancy": 0.041666666666666075,
+     "sum_of_members_shares": 18.333333333333336
+    },
+    "high_radiation+cold_wave": {
+     "merged_share": -13.0,
+     "relative_discrepancy": 0.04166666666666652,
+     "sum_of_members_shares": -13.166666666666666
+    }
+   },
+   "outcome": "hours_vpd_above_stage_max",
+   "policy": "reactive",
+   "shapley": {
+    "cold_wave": -14.333333333333332,
+    "heat_wave": 17.166666666666668,
+    "high_radiation": 1.1666666666666667
+   },
+   "total_effect": 4.0
+  },
+  {
+   "interaction_relative_gap": 0.4666666666666667,
+   "leave_one_out": {
+    "cold_wave": -8.0,
+    "heat_wave": 15.0,
+    "high_radiation": 15.0
+   },
+   "merges": {
+    "heat_wave+cold_wave": {
+     "merged_share": 4.5,
+     "relative_discrepancy": 0.2,
+     "sum_of_members_shares": 7.5
+    },
+    "heat_wave+high_radiation": {
+     "merged_share": 19.0,
+     "relative_discrepancy": 0.2,
+     "sum_of_members_shares": 22.0
+    },
+    "high_radiation+cold_wave": {
+     "merged_share": -2.5,
+     "relative_discrepancy": 0.2,
+     "sum_of_members_shares": 0.5
+    }
+   },
+   "outcome": "hours_temperature_above_stage_max",
+   "policy": "replayed",
+   "shapley": {
+    "cold_wave": -7.0,
+    "heat_wave": 14.5,
+    "high_radiation": 7.5
+   },
+   "total_effect": 15.0
+  },
+  {
+   "interaction_relative_gap": 0.9285714285714286,
+   "leave_one_out": {
+    "cold_wave": -24.0,
+    "heat_wave": 20.0,
+    "high_radiation": 5.0
+   },
+   "merges": {
+    "heat_wave+cold_wave": {
+     "merged_share": 7.5,
+     "relative_discrepancy": 0.10714285714285714,
+     "sum_of_members_shares": 9.0
+    },
+    "heat_wave+high_radiation": {
+     "merged_share": 31.0,
+     "relative_discrepancy": 0.10714285714285714,
+     "sum_of_members_shares": 32.5
+    },
+    "high_radiation+cold_wave": {
+     "merged_share": -15.0,
+     "relative_discrepancy": 0.10714285714285714,
+     "sum_of_members_shares": -13.5
+    }
+   },
+   "outcome": "hours_vpd_above_stage_max",
+   "policy": "replayed",
+   "shapley": {
+    "cold_wave": -18.5,
+    "heat_wave": 27.5,
+    "high_radiation": 5.0
+   },
+   "total_effect": 14.0
+  },
+  {
+   "interaction_relative_gap": 0.5790381837729928,
+   "leave_one_out": {
+    "cold_wave": -5.00859550407759,
+    "heat_wave": 4.2873553017033785,
+    "high_radiation": 2.5539895979808165
+   },
+   "merges": {
+    "heat_wave+cold_wave": {
+     "merged_share": 1.7346305447441601,
+     "relative_discrepancy": 0.11520411460790984,
+     "sum_of_members_shares": 2.2361968704300548
+    },
+    "heat_wave+high_radiation": {
+     "merged_share": 6.8580166082460075,
+     "relative_discrepancy": 0.11520411460790984,
+     "sum_of_members_shares": 7.359582933931902
+    },
+    "high_radiation+cold_wave": {
+     "merged_share": -1.3899084244946263,
+     "relative_discrepancy": 0.11520411460790984,
+     "sum_of_members_shares": -0.8883420988087316
+    }
+   },
+   "outcome": "temperature_peak",
+   "policy": "replayed",
+   "shapley": {
+    "cold_wave": -3.0058640811552895,
+    "heat_wave": 5.242060951585344,
+    "high_radiation": 2.117521982346558
+   },
+   "total_effect": 4.353718852776613
+  }
+ ],
+ "episode": {
+  "labels": {
+   "control": "on",
+   "crop": "tomato",
+   "environment": "greenhouse"
+  },
+  "players_overlap_hours": [
+   48,
+   96
+  ],
+  "season": 0,
+  "window_start_hour": 960
+ },
+ "material_merges_above_10_percent": 12,
+ "max_relative_discrepancy": 0.4154160982264686,
+ "merges": 15,
+ "report_hash": "26025cac77e0e13bb4ca92e76e240faec444d029d0d3ea155d7106c79a57225c",
+ "status": "DEVELOPMENT: one episode, a demonstration of whether grouping can matter, not of how often"
+}
