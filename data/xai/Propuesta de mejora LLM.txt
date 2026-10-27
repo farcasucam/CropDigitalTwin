@@ -1,0 +1,316 @@
+Mi recomendación es reorientar el experimento, no abandonar todavía los LLM ni seguir afinando prompts a ciegas. Tenéis tres problemas distintos mezclados: qué información contiene realmente el gemelo, qué debe comunicar una explicación y cómo comprobar que lo comunicado es correcto. Mientras esos tres niveles no se separen, mejorar una métrica puede no mejorar el sistema.
+
+La vía con más posibilidades, a partir de tu resumen y de la literatura consultada, es esta:
+
+Mantener banco y bucle cerrado como núcleo del artículo.
+
+Convertir la explicación en una tarea contrastiva y verificable: «¿por qué ocurre A y no B?, ¿qué sabemos y qué no podemos concluir?».
+
+Comparar plantilla, LLM e híbrido con igual información y presupuesto de salida.
+
+Incorporar verificación semántica y retorno a plantilla, sin confundir aceptación del verificador con verdad.
+
+Probar adaptación ligera de un modelo solo después de tener un conjunto de evaluación independiente.
+
+Esto no garantiza un resultado positivo ni una publicación Q1. Sí ofrece una forma de descubrir un resultado relevante sin depender de que los LLM ganen donde una regla ya funciona mejor.
+
+1. Qué dice la literatura y qué implica para vuestro proyecto
+He encontrado cuatro líneas especialmente pertinentes.
+
+Línea	Evidencia localizada	Implicación para vosotros
+Descripción de series	CaTS-Bench incluye 11 dominios y 1.746 descripciones revisadas por humanos; encuentra dificultades incluso en modelos propietarios y mejoras al ajustar modelos abiertos con datos sintéticos.	Hay margen para especialización, pero «un LLM describe tendencias» ya no basta como novedad. 
+Fidelidad semántica	Una metaevaluación de 29 métodos encuentra limitaciones importantes para evaluar consistencia entre datos estructurados y texto; los mejores resultados siguen lejos de una comprobación infalible.	Vuestro problema con el verificador no es excepcional. Sustituirlo por un juez LLM no lo resuelve automáticamente. 
+Generación y selección de candidatos	DataTuner combina generación con un clasificador de fidelidad semántica para seleccionar salidas.	Generar varios candidatos y comprobarlos tiene antecedentes sólidos; habría que demostrar el valor específico en vuestro dominio y sus costes. 
+Fidelidad más cobertura	Un preprint reciente estudia explícitamente que una explicación puede ser precisa pero casi vacía, y propone evaluar precisión y cobertura con un oráculo estructurado.	«Cero violaciones, pero poca información» no sería por sí solo una contribución novedosa. Vuestra diferenciación debería estar en intervención, incertidumbre, errores semánticos y utilidad. 
+El último trabajo es particularmente cercano a vuestra situación, pero es un preprint y reconoce límites importantes: su verificador no penaliza ciertas inserciones causales o de entidades fuera del esquema y no incorpora validación humana de su evaluador. Lo usaría para posicionar el artículo, no como referencia incuestionable ni como expectativa de resultados.
+
+Mi lectura: vuestro posible valor diferencial no está en «verificar números de una explicación», sino en estudiar si una explicación conserva el alcance epistemológico de la evidencia y ayuda a distinguir situaciones operacionalmente diferentes.
+
+2. Primera corrección: no tratar los niveles de evidencia como una escala única
+Revisaría antes de ampliar experimentos esta relación:
+
+OBSERVED < ASSOCIATED < MODEL_ESTIMATED < TWIN_CONFIRMED
+
+Puede inducir a una sobreafirmación que el propio sistema pretende evitar. Una observación directa, una asociación y un contrafactual simulado son tipos diferentes de evidencia; no necesariamente grados crecientes de verdad.
+
+La literatura sobre validación de gemelos distingue precisamente entre resultados observados y evidencia contrafactual condicionada a la estructura y los supuestos del modelo. Una intervención simulada no confirma automáticamente una causa en el sistema real. Aunque las fuentes localizadas lo desarrollan en medicina, la distinción metodológica es pertinente para vuestro caso agrícola.
+
+Cambio propuesto
+Separaría al menos estas dimensiones:
+
+Dimensión	Ejemplos
+Procedencia	Sensor, estadística observacional, pronosticador, simulador
+Tipo de afirmación	Descripción, asociación, predicción, efecto de intervención
+Ámbito de validez	Trayectoria observada, simulación, sistema real validado
+Incertidumbre	Intervalo, sensibilidad, desacuerdo entre modelos
+Supuestos necesarios	Estado inicial, política de control, parámetros, mecanismos
+Para A013 establecería una política explícita:
+
+Permitido, si el experimento lo respalda: «En la simulación, manteniendo las demás condiciones, la intervención X redujo Y».
+
+No permitido solo por estar etiquetado TWIN_CONFIRMED: «X causó la reducción observada en la explotación».
+
+Si no hubo intervención controlada en el gemelo, tampoco permitiría la primera formulación.
+
+Además, distinguiría fidelidad al registro de hechos de validez de ese registro. v3 puede preservar perfectamente un hecho mal extraído o una inferencia demasiado fuerte.
+
+Y una precisión importante para el título y las hipótesis: conservar etiquetas de evidencia es alineación epistemológica; no demuestra por sí solo calibración probabilística. Si no estimáis probabilidades o intervalos y evaluáis su comportamiento, conviene acotar qué significa «calibradas».
+
+3. Estrategia prioritaria: pasar de resumir hechos a explicar contrastes
+Ahora el LLM compite contra una regla en seleccionar pocos hechos. Si la regla ya define bastante bien qué es importante, esa competición tiene escaso recorrido.
+
+Propondría una tarea más conectada con C2:
+
+«Dos trayectorias tienen una evolución inicial parecida, pero terminan de forma diferente bajo control. Explica qué evidencia permite distinguirlas y qué conclusiones no están justificadas».
+
+Esto aprovecha el umbral latente y el bucle cerrado, en lugar de añadir una narración genérica al final.
+
+Experimento concreto
+Construid pares de escenarios con cambios controlados:
+
+Par	Qué se modifica	Qué debe reflejar la explicación
+Intervención	Política de actuación	Diferencia atribuible a la intervención dentro del simulador
+Umbral	Cruce o no cruce del umbral	Cambio de régimen, cuando sea identificable
+Dirección	Efecto positivo frente a negativo	Inversión correcta del sentido
+Evidencia	Asociación frente a intervención simulada	Cambio en la fuerza del lenguaje
+Incertidumbre	Efecto preciso frente a intervalo amplio	Diferencia entre efecto claro e inconcluso
+Observabilidad	Estado latente disponible frente a oculto	Respuesta informativa frente a reconocimiento de insuficiencia
+El último caso puede ser especialmente valioso: si dos situaciones son indistinguibles con la información entregada al sistema, la respuesta correcta no debe inventar cuál ocurrió.
+
+Separad dos registros:
+
+El oráculo del banco conoce el estado completo y los mecanismos.
+
+El sistema explicador solo recibe la información que tendría disponible en la tarea.
+
+No penalicéis al explicador por no recuperar información que se le ha ocultado. Evaluad si reconoce correctamente ese límite.
+
+Qué medir
+Además de precisión y cobertura:
+
+Corrección del contraste: identifica la diferencia respaldada por los datos.
+
+Sensibilidad: cambia la explicación cuando cambia un hecho relevante.
+
+Invariancia: no cambia sustancialmente ante formato, orden o paráfrasis irrelevantes.
+
+Abstención adecuada: declara insuficiencia cuando el contraste no es identificable.
+
+Sobreafirmación: transforma o no una simulación en una conclusión sobre el mundo real.
+
+Estas son propuestas experimentales, no resultados que pueda anticipar. Su ventaja es que convierten «explica bien» en comportamientos refutables.
+
+4. Segunda estrategia: un verificador semántico por capas, no más reglas aisladas
+Sí añadiría comprobaciones baratas de dirección y tamaño, pero dentro de una arquitectura explícita.
+
+Representación propuesta
+Cada afirmación debería poder contrastarse contra una estructura de este tipo:
+
+json
+{
+  "fact_id": "F17",
+  "variable": "soil_moisture",
+  "time_window": ["t0", "t1"],
+  "relation": "decreases",
+  "magnitude": {
+    "value": 4.2,
+    "unit": "percentage_points",
+    "status": "estimated"
+  },
+  "evidence_type": "simulated_intervention",
+  "scope": "within_simulator",
+  "assumptions": ["fixed_weather", "same_initial_state"]
+}
+Es un ejemplo de diseño, no una propuesta de nombres obligatorios.
+
+El problema importante es comprobar la afirmación que aparece en el texto, no aceptar los campos que el generador declara haber utilizado. Un modelo puede citar F17 y escribir lo contrario.
+
+Capas del verificador
+Normalización: decimales, Unicode, unidades y referencias.
+
+Comprobación estructural: ids, entidades, variables y ventanas.
+
+Comprobación numérica: valor, signo, tolerancia, unidad y denominador.
+
+Comprobación semántica: dirección, negación, comparación, magnitud y modalidad.
+
+Comprobación epistemológica: asociación, causalidad, ámbito y supuestos.
+
+Para la parte semántica probaría inferencia textual o un extractor independiente. Hay antecedentes de comprobación bidireccional entre datos verbalizados y texto para detectar alucinaciones y omisiones, pero no debe presentarse como garantía de corrección.
+
+Dos precauciones esenciales
+Si el extractor no entiende una frase, debe marcarla como no evaluable; no dejarla pasar silenciosamente.
+
+La evaluación humana debe revisar también contenido fuera de la ontología. Un verificador limitado puede producir puntuaciones excelentes porque no detecta aquello que no sabe representar, limitación reconocida expresamente en el preprint próximo a vuestro enfoque.
+
+Sobre los números declarados: sí, los separaría en categorías —incorrecto, no respaldado, unidad incorrecta y magnitud indebidamente confirmada— y distinguiría incidencia de gravedad. Un decimal mal redondeado y una dirección invertida no tienen la misma consecuencia.
+
+5. Tercera estrategia: LLM para redactar, pero con una ganancia exigible
+La propuesta del agente —selección por regla y redacción por LLM— es razonable como experimento. No la daría por buena antes de medir qué aporta.
+
+Compararía estas cinco condiciones:
+
+Sistema	Selección	Realización
+B0	Regla	Lista literal de hechos
+B1	Regla	Plantilla discursiva cuidada
+B2	Regla	Redacción LLM
+B3	Regla	Redacción LLM, verificación y retorno a plantilla
+B4	LLM	Redacción LLM
+B1 es fundamental: comparar contra una lista poco legible puede atribuir al LLM una ventaja que conseguiría una plantilla bien diseñada.
+
+Mantendría iguales:
+
+Información disponible.
+
+Hechos obligatorios.
+
+Presupuesto de palabras o afirmaciones.
+
+Pregunta del usuario.
+
+Condiciones de presentación.
+
+El LLM debería ganar en algún resultado externo a su propio texto:
+
+Mayor acierto al interpretar el episodio.
+
+Menor tiempo para responder.
+
+Mejor identificación de cuándo no hay evidencia suficiente.
+
+Menos decisiones basadas en causas inexistentes.
+
+La preferencia subjetiva y la fluidez serían secundarias. Un texto agradable que induce más errores no constituye una mejora.
+
+Generación de candidatos
+Si B2 mejora comprensión pero introduce errores, probaría pocos candidatos, selección semántica y retorno a B1 cuando ninguno sea aceptable. La combinación generación–clasificador de fidelidad tiene antecedentes en DataTuner.
+
+Registraría por separado:
+
+Calidad antes del filtro.
+
+Calidad después del filtro.
+
+Frecuencia de retorno a plantilla.
+
+Latencia y coste.
+
+Porcentaje de salidas efectivamente redactadas por el LLM.
+
+Si casi siempre termina usando la plantilla, el producto puede funcionar, pero no habría evidencia de una aportación sustancial del generador.
+
+6. Cuarta estrategia: adaptación ligera, después de aislar el cuello de botella
+No ampliaría ahora indiscriminadamente el número de modelos. Primero haría un diagnóstico pequeño:
+
+Un modelo actual con ejemplos contrastivos bien elegidos.
+
+Una condición con un modelo de mayor capacidad, si el presupuesto y la política de datos lo permiten.
+
+Una condición especializada mediante ajuste ligero, solo si aparece una señal útil.
+
+CaTS-Bench respalda que el ajuste con datos sintéticos puede mejorar la descripción de series, aunque eso no demuestra que vaya a resolver vuestra tarea concreta.
+
+Datos de entrenamiento que sí probaría
+Paráfrasis fieles con preservación de modalidad.
+
+Pares «aumenta/disminuye».
+
+«Estimado/observado».
+
+«Asociado/causado en simulación».
+
+Diferencias entre porcentaje y puntos porcentuales.
+
+Ejemplos donde la respuesta correcta sea «no puede determinarse».
+
+Contrastes que requieran comunicar incertidumbre, no eliminarla.
+
+No entrenaría únicamente con v3 como objetivo y evaluaría contra variantes de esa misma plantilla: sería fácil demostrar imitación de plantilla, no capacidad explicativa. El trabajo reciente sobre oráculos completos reconoce precisamente ese riesgo en sus modelos ajustados.
+
+La separación de entrenamiento y prueba debe hacerse por familias de escenarios, composiciones y mecanismos relevantes, no solo por semillas o frases.
+
+7. Antes de una auditoría grande: corregir el diseño de medición
+Aquí discrepo parcialmente de la recomendación «unas 300 afirmaciones».
+
+No es una cifra incorrecta como presupuesto inicial, pero no tiene significado estadístico suficiente sin precisar qué queréis estimar: prevalencia de errores, recall del verificador, diferencias entre sistemas o comprensión humana.
+
+Vuestra auditoría actual tiene un problema adicional
+Habéis sobremuestreado afirmaciones marcadas por el verificador antiguo. Por tanto:
+
+El 7/15 de precisión y el 7/11 de recall describen esa muestra auditada.
+
+No se trasladan directamente a todas las generaciones.
+
+Si conocéis las probabilidades de inclusión y conserváis los estratos, podéis plantear una estimación ponderada; si no, mantendría esas cifras como diagnóstico de desarrollo.
+
+El hecho de que la selección dependiera del verificador antiguo también importa al evaluar el corregido.
+
+Dos conjuntos diferentes
+Conjunto	Cómo obtenerlo	Para qué sirve
+Prueba de estrés	Errores controlados y paráfrasis válidas	Detectar debilidades por categoría
+Auditoría natural	Muestreo probabilístico de generaciones nuevas	Estimar comportamiento en uso
+En la prueba de estrés incluiría inversiones de dirección, cambios temporales, causas añadidas con lenguaje cauto, magnitudes sobreafirmadas y citas a hechos incorrectos. Añadiría negativos difíciles: frases correctas con coma decimal, sinónimos, conversiones válidas y orden distinto.
+
+La prueba de estrés no estima la prevalencia natural de errores. La auditoría natural no garantiza suficientes casos raros para diagnosticar cada fallo. Necesitáis ambas.
+
+Para comparar sistemas, agruparía el análisis por episodio: varias afirmaciones del mismo escenario no equivalen a observaciones independientes. Y no contaría cuatro anotadores como cuatro réplicas del sistema.
+
+8. Cómo reforzar también C2 y evitar una objeción importante
+Mantener C2 como núcleo tiene sentido, pero vigilaría esta interpretación:
+
+«Un pronosticador falla cuando las decisiones cambian la distribución que intenta predecir».
+
+Ese fenómeno ya está relacionado con la predicción performativa: las predicciones desencadenan acciones que modifican los resultados y la distribución futura.
+
+Para que vuestro resultado sea más fuerte, probaría, si aún no están incluidos:
+
+Pronosticador sin acciones.
+
+Pronosticador condicionado a acciones o política.
+
+Modelo con actualización en línea.
+
+Modelo dinámico sencillo orientado al control.
+
+Oráculo con acceso al estado latente.
+
+Distintas políticas y grados de desplazamiento respecto al entrenamiento.
+
+La pregunta interesante pasa a ser: ¿el fallo procede de ignorar las acciones, de no observar el estado latente, del umbral no lineal o de una combinación?
+
+Dos experimentos especialmente informativos serían:
+
+Retirar o suavizar el umbral manteniendo lo demás.
+
+Revelar el estado latente manteniendo el umbral.
+
+Si el fallo desaparece de forma diferenciada, tendréis una explicación mecanística mucho más convincente que una tabla de errores.
+
+Además, esto conecta de manera natural las dos partes del artículo: el sistema lingüístico tendría que comunicar qué mecanismo está respaldado y cuándo no puede identificarlo.
+
+9. Orden de ejecución que daría al agente
+Propongo esta secuencia como plan de trabajo, no como cálculo de potencia ni compromiso de resultados:
+
+Fase	Trabajo	Decisión que permite
+1	Congelar el diagnóstico actual; separar procedencia, alcance y fuerza de evidencia	Evitar optimizar sobre conceptos ambiguos
+2	Generar nuevos episodios contrastivos y pruebas de estrés	Comprobar que las tareas son identificables y el verificador discrimina
+3	Comparar B0–B4 sobre los mismos episodios	Localizar si el LLM aporta selección, redacción o nada
+4	Aplicar una sola intervención prometedora: ejemplos, selección de candidatos o ajuste ligero	Evitar una búsqueda indefinida de configuraciones
+5	Congelar método, umbrales y análisis; abrir una prueba nueva	Obtener evidencia confirmatoria independiente
+6	Realizar evaluación humana de comprensión si existe señal suficiente	Medir utilidad, no solo conformidad formal
+No renombraría estas condiciones como A0–A4 sin revisar qué significan vuestras ablaciones existentes.
+
+Criterios de continuidad
+Si B1 iguala a B2/B3 en comprensión y es más fiel o barato: conservar plantilla y cerrar el resultado negativo del LLM.
+
+Si B3 mejora comprensión con errores críticos controlados: desarrollar el híbrido y cuantificar cuánto depende del retorno a plantilla.
+
+Si solo mejora un modelo de mayor capacidad: acotar la conclusión sobre los modelos pequeños, sin generalizar a todos los LLM.
+
+Si el verificador mejora solo con errores sintéticos: no afirmar que está validado sobre generaciones naturales.
+
+Si los contrastes no son identificables con la entrada: corregir la tarea o esperar abstención, no más razonamiento inventado.
+
+Sobre Git: no borraría ramas ni worktrees que sostienen resultados previos hasta conservar commits, configuraciones y artefactos reproducibles. Integrar código validado es una decisión distinta de congelar el protocolo experimental.
+
+El primer encargo concreto al agente sería: implementar el generador de pares contrastivos y la separación entre oráculo completo e información disponible, antes de lanzar otra campaña de modelos. Es el cambio que más puede aumentar el valor científico de vuestros experimentos sin exigir, de entrada, una auditoría masiva ni una infraestructura nueva.
