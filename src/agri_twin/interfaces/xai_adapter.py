@@ -34,6 +34,8 @@ from agri_twin.application.interactive_simulation import VARIABLES, InteractiveS
 from agri_twin.application.runtime_events import SPEC_INDEX
 from agri_twin.application.scientific_benchmark import KNOWN_CROPS
 from agri_twin.application.seasonal_synthetic_campaign import ANNUAL_GREENHOUSE_CROPS, campaign_cycle
+from agri_twin.domain.climate_control import RuleBasedClimateController
+from agri_twin.interfaces.xai_effects import RecordingController, ReplayController, trace_of
 
 ROLES_FILE = Path(__file__).resolve().parents[2] / "xai_variable_roles.json"
 DESIGN_FILE = Path(__file__).resolve().parents[2] / "xai_benchmark_design.json"
@@ -114,7 +116,7 @@ class TwinSimulator:
             options["control"] = {"actuators": dict(control["actuators"]), "equipment": equipment}
         return options
 
-    def run(self, scenario: ScenarioDescriptor, interventions: Sequence[Intervention] = ()) -> RunResult:
+    def _request(self, scenario: ScenarioDescriptor, interventions: Sequence[Intervention]) -> dict[str, Any]:
         crop, environment = scenario.labels["crop"], scenario.labels["environment"]
         _, origin, _ = campaign_cycle(crop)
         w0, w1 = scenario.window_start, scenario.window_start + scenario.window_hours
@@ -128,14 +130,43 @@ class TwinSimulator:
         control = scenario.options.get("control")
         if control:
             request["control"] = {"actuators": dict(control["actuators"]), "equipment": dict(control["equipment"])}
-        response = self._service.run_simulation(request)
+        return request
+
+    @staticmethod
+    def _result(response: Any, scenario: ScenarioDescriptor) -> RunResult:
         if response.execution_status.value != "COMPLETED":
             raise RuntimeError(f"the twin did not complete the run: {[error.message for error in response.errors]}")
+        w0, w1 = scenario.window_start, scenario.window_start + scenario.window_hours
         trajectory = response.result.trajectory
         a, b = w0 - 1, w1 - 1  # the trajectory starts at the first step after the campaign start: sample j is the hour ending origin + (j + 1) h
         series = {name: list(values[a:b]) for name, values in trajectory.items() if name != "time" and None not in values[a:b]}
         run_hash = content_hash({"request": response.hashes["request_hash"], "trajectory": response.result.trajectory_hash, "window": [w0, w1]})
         return RunResult(series, list(trajectory["time"][a:b]), run_hash)
+
+    def run(self, scenario: ScenarioDescriptor, interventions: Sequence[Intervention] = ()) -> RunResult:
+        return self._result(self._service.run_simulation(self._request(scenario, interventions)), scenario)
+
+    def run_traced(self, scenario: ScenarioDescriptor, interventions: Sequence[Intervention] = (), replay: Mapping[str, Sequence[float]] | None = None) -> tuple[RunResult, dict[str, list[float]]]:
+        """The run and the controller's command trajectory over the window; with ``replay`` those commands (the fields it names) are imposed from the window start (see ``xai_effects``).
+        Only a scenario with the climate controller on has commands to record. The trace is what was actually commanded, so the trace of a replayed run is the replay."""
+        if not scenario.options.get("control"):
+            raise ValueError("only a scenario with the climate controller on has actuation to record or replay")
+        first = scenario.window_start - 1
+        if first < 0:
+            raise ValueError("a window that starts at the campaign start has no step before it to replay from")
+        holder: list[RecordingController] = []
+
+        def factory(request: Any) -> RecordingController:
+            controller = RuleBasedClimateController(request.control)
+            if replay:
+                controller = ReplayController(controller, replay, first)
+            recorder = RecordingController(controller)
+            holder.append(recorder)
+            return recorder
+
+        service = InteractiveSimulationService(controller_factory=factory)
+        result = self._result(service.run_simulation(self._request(scenario, interventions)), scenario)
+        return result, trace_of(holder[0].decisions, first, scenario.window_hours)
 
 
 CONTROLLER_DRIVEN = ("past_only_covariate", "set by the climate controller in this scenario (control on): an output of the controller reacting to the state, so not a plan; its future values are never given to a forecaster")

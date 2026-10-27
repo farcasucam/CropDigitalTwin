@@ -934,8 +934,9 @@ class InteractiveSimulationService:
     SimulationClock); nothing global is written.
     """
 
-    def __init__(self, *, timer: Callable[[], float] | None = None) -> None:
+    def __init__(self, *, timer: Callable[[], float] | None = None, controller_factory: Callable[[Any], Any] | None = None) -> None:
         self._timer = timer  # caller-injected operational timer (None: no timings); excluded from hashes
+        self._controller_factory = controller_factory  # request -> a ClimateController that replaces the rule-based one for that run (None: the rules; used to record or replay a controller's decisions; not applied to the EnergyPlus prefix replay of a resumed run, which always uses the rules)
         self._executions: dict[str, _Execution] = {}
         self._sequence = 0
 
@@ -1089,7 +1090,7 @@ class InteractiveSimulationService:
         engine_arguments: dict[str, Any] = {}
         lockstep_session = None
         if request.control is not None:
-            engine_arguments["control"] = ControlSession(request.control, request.crop)
+            engine_arguments["control"] = ControlSession(request.control, request.crop, None if self._controller_factory is None else self._controller_factory(request))
         water_factory = water_engine_factory(request)
         if water_factory is not None:
             engine_arguments["water_engine_factory"] = water_factory
