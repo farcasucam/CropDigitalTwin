@@ -1,0 +1,1331 @@
+{
+ "name": "recorded:openai:meta-llama/Llama-3.1-8B-Instruct",
+ "records": {
+  "03c7477ea5b0268a054a36d33f162d23276c921b50ed2bd7ce82fcc5cf1900b7": {
+   "completion_tokens": 699,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 712,
+   "text": "{\"caveats\": [\"The given information does not show that the two situations are the same.\"], \"claims\": [{\"claim_id\": \"1\", \"confidence\": \"high\", \"fact_ids\": [\"6f64c33c52\", \"ccd3130f8d\"], \"numeric_values\": [{\"fact_id\": \"6f64c33c52\", \"unit\": \"K\", \"value\": 382}, {\"fact_id\": \"ccd3130f8d\", \"unit\": \"K\", \"value\": 28.2}], \"text\": \"Situation A: temperature exceeds 380 K from sample 318 to 322, peak 382 K, 0.0833 h. Situation B: temperature shifts down at sample 325 by 28.2 K.\"}, {\"claim_id\": \"2\", \"confidence\": \"high\", \"fact_ids\": [\"c5abd5ca58\", \"0fcc372745\"], \"numeric_values\": [{\"fact_id\": \"c5abd5ca58\", \"unit\": \"K\", \"value\": 21.8}, {\"fact_id\": \"0fcc372745\", \"unit\": \"K\", \"value\": 10}], \"text\": \"Situation A: temperature shifts up at sample 311 by 21.8 K. Situation B: temperature shifts up at sample 305 by 10 K.\"}, {\"claim_id\": \"3\", \"confidence\": \"high\", \"fact_ids\": [\"d2e5bf4a43\", \"9226c3e608\"], \"numeric_values\": [{\"fact_id\": \"d2e5bf4a43\", \"unit\": \"K/min\", \"value\": 0.818}, {\"fact_id\": \"9226c3e608\", \"unit\": \"K/min\", \"value\": 2.84}], \"text\": \"Situation A: cooling_duty shifts down at sample 335 by 0.818 K/min. Situation B: cooling_duty shifts down at sample 329 by 2.84 K/min.\"}, {\"claim_id\": \"4\", \"confidence\": \"high\", \"fact_ids\": [\"e799aa0e56\", \"daf8cc2309\"], \"numeric_values\": [{\"fact_id\": \"e799aa0e56\", \"unit\": \"K/min\", \"value\": 1.39}, {\"fact_id\": \"daf8cc2309\", \"unit\": \"K/min\", \"value\": 2.27}], \"text\": \"Situation A: cooling_duty shifts up at sample 315 by 1.39 K/min. Situation B: cooling_duty shifts up at sample 309 by 2.27 K/min.\"}, {\"claim_id\": \"5\", \"confidence\": \"high\", \"fact_ids\": [\"c9f6fede20\"], \"numeric_values\": [{\"fact_id\": \"c9f6fede20\", \"unit\": \"K/min\", \"value\": 0.0811}], \"text\": \"Situation A: cooling_duty has 1 further small shifts between samples 355 and 355, the largest 0.0811 K/min.\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "043daf6f8c95415fca4ea4bfea324c85cfc3260288f22580547638da7f1a2e66": {
+   "completion_tokens": 1397,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 4293,
+   "text": "{\"caveats\": [\"The differences between the two situations are based on the provided facts and may not be exhaustive.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:41bc81752d\", \"F:a71c68e807\", \"F:98a52e0c4e\"], \"numeric_values\": [{\"fact_id\": \"F:41bc81752d\", \"unit\": \"mol/L/h\", \"value\": -0.119}, {\"fact_id\": \"F:a71c68e807\", \"unit\": \"mol/L/h\", \"value\": -0.0581}, {\"fact_id\": \"F:98a52e0c4e\", \"unit\": \"samples\", \"value\": 128}], \"text\": \"A: concentration falls from sample 20 to 45 by 0.0515 mol/L net (-0.119 mol/L/h) and from sample 46 to 74 by 0.0281 mol/L net (-0.0581 mol/L/h) and is stable in 4 stretches (together 128 samples) between samples 75 and 310.\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"F:e7f48c63cd\", \"F:073152f7bd\", \"F:7ca9523e7f\"], \"numeric_values\": [{\"fact_id\": \"F:e7f48c63cd\", \"unit\": \"mol/L/h\", \"value\": -0.111}, {\"fact_id\": \"F:073152f7bd\", \"unit\": \"mol/L/h\", \"value\": -0.0538}, {\"fact_id\": \"F:7ca9523e7f\", \"unit\": \"samples\", \"value\": 87}], \"text\": \"B: concentration falls from sample 20 to 45 by 0.0483 mol/L net (-0.111 mol/L/h) and from sample 46 to 74 by 0.026 mol/L net (-0.0538 mol/L/h) and is stable in 3 stretches (together 87 samples) between samples 75 and 278.\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:98a52e0c4e\", \"F:ca97e110d9\", \"F:d7e5cab1cd\"], \"numeric_values\": [{\"fact_id\": \"F:98a52e0c4e\", \"unit\": \"samples\", \"value\": 128}, {\"fact_id\": \"F:ca97e110d9\", \"unit\": \"mol/L/h\", \"value\": 0.0773}, {\"fact_id\": \"F:d7e5cab1cd\", \"unit\": \"mol/L/h\", \"value\": 0.0604}], \"text\": \"A: concentration is stable in 4 stretches (together 128 samples) between samples 75 and 310 and rises from sample 135 to 159 by 0.0322 mol/L net (0.0773 mol/L/h) and from sample 160 to 190 by 0.0312 mol/L net (0.0604 mol/L/h).\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"F:7ca9523e7f\", \"F:8778e80059\", \"F:70661365fe\"], \"numeric_values\": [{\"fact_id\": \"F:7ca9523e7f\", \"unit\": \"samples\", \"value\": 87}, {\"fact_id\": \"F:8778e80059\", \"unit\": \"mol/L/h\", \"value\": 0.228}, {\"fact_id\": \"F:70661365fe\", \"unit\": \"mol/L/h\", \"value\": 0.0643}], \"text\": \"B: concentration is stable in 3 stretches (together 87 samples) between samples 75 and 278 and rises from sample 124 to 143 by 0.0759 mol/L net (0.228 mol/L/h) and from sample 188 to 220 by 0.0354 mol/L net (0.0643 mol/L/h).\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:98a52e0c4e\", \"F:ed47bd5587\", \"F:bf90ca7c42\"], \"numeric_values\": [{\"fact_id\": \"F:98a52e0c4e\", \"unit\": \"samples\", \"value\": 128}, {\"fact_id\": \"F:ed47bd5587\", \"unit\": \"mol/L/h\", \"value\": 0.0829}, {\"fact_id\": \"F:bf90ca7c42\", \"unit\": \"mol/L/h\", \"value\": 0.0916}], \"text\": \"A: concentration is stable in 4 stretches (together 128 samples) between samples 75 and 310 and rises from sample 191 to 216 by 0.0359 mol/L net (0.0829 mol/L/h) and from sample 246 to 271 by 0.0397 mol/L net (0.0916 mol/L/h).\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"F:7ca9523e7f\", \"F:70661365fe\", \"F:c81ab9e710\"], \"numeric_values\": [{\"fact_id\": \"F:7ca9523e7f\", \"unit\": \"samples\", \"value\": 87}, {\"fact_id\": \"F:70661365fe\", \"unit\": \"mol/L/h\", \"value\": 0.0643}, {\"fact_id\": \"F:c81ab9e710\", \"unit\": \"mol/L/h\", \"value\": 0.0574}], \"text\": \"B: concentration is stable in 3 stretches (together 87 samples) between samples 75 and 278 and rises from sample 188 to 220 by 0.0354 mol/L net (0.0643 mol/L/h) and from sample 279 to 310 by 0.0306 mol/L net (0.0574 mol/L/h).\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart based on the differences in concentration and cooling_duty values.\"}"
+  },
+  "0c59250f3525ea0fc7e96e2373f90cec6d67e31bac68739ecf042667834b7719": {
+   "completion_tokens": 52,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 5556,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "11cc48f008a20125a006d21872bfc335362523566dc29b5852558c17072085b0": {
+   "completion_tokens": 52,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 4709,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "125e2130e811f98179b42cf0b087bcf3cf544c46c7d8e8bc56ae336152356468": {
+   "completion_tokens": 850,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 3430,
+   "text": "{\"caveats\": [\"The differences between the two situations are based on the given facts and may not be the only differences.\"], \"claims\": [{\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"F:b50d77694b\", \"F:8593333ade\"], \"numeric_values\": [{\"fact_id\": \"F:b50d77694b\", \"unit\": \"mol/L/h\", \"value\": -0.319}, {\"fact_id\": \"F:8593333ade\", \"unit\": \"mol/L/h\", \"value\": 0.0667}], \"text\": \"concentration falls by -0.319 mol/L/h and rises by 0.0667 mol/L/h\"}, {\"claim_id\": \"situation B\", \"confidence\": \"high\", \"fact_ids\": [\"F:2602f47981\", \"F:cf51dc9a18\"], \"numeric_values\": [{\"fact_id\": \"F:2602f47981\", \"unit\": \"mol/L/h\", \"value\": -0.236}, {\"fact_id\": \"F:cf51dc9a18\", \"unit\": \"K/min/h\", \"value\": 1.62}], \"text\": \"concentration falls by -0.236 mol/L/h and cooling_duty rises by 1.62 K/min/h\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"F:6d1709ca09\", \"F:de22bf9bff\"], \"numeric_values\": [{\"fact_id\": \"F:6d1709ca09\", \"unit\": \"mol/L/h\", \"value\": 0.0819}, {\"fact_id\": \"F:de22bf9bff\", \"unit\": \"mol/L/h\", \"value\": 0.0751}], \"text\": \"concentration rises by 0.0819 mol/L/h and 0.0751 mol/L/h\"}, {\"claim_id\": \"situation B\", \"confidence\": \"high\", \"fact_ids\": [\"F:307a88dff1\", \"F:7cbc6e68db\"], \"numeric_values\": [{\"fact_id\": \"F:307a88dff1\", \"unit\": \"K/min/h\", \"value\": 0.582}, {\"fact_id\": \"F:7cbc6e68db\", \"unit\": \"K/min/h\", \"value\": 0.461}], \"text\": \"cooling_duty rises by 0.582 K/min/h and 0.461 K/min/h\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"F:62aced25a2\", \"F:e7acc8b88e\"], \"numeric_values\": [{\"fact_id\": \"F:62aced25a2\", \"unit\": \"K/min/h\", \"value\": -1.88}, {\"fact_id\": \"e7acc8b88e\", \"unit\": \"K/min/h\", \"value\": -1.12}], \"text\": \"cooling_duty falls by -1.88 K/min/h and -1.12 K/min/h\"}, {\"claim_id\": \"situation B\", \"confidence\": \"high\", \"fact_ids\": [\"F:f0e8fe3205\", \"F:67b647c780\"], \"numeric_values\": [{\"fact_id\": \"F:f0e8fe3205\", \"unit\": \"K/min/h\", \"value\": -1.85}, {\"fact_id\": \"F:67b647c780\", \"unit\": \"K/min/h\", \"value\": -1.12}], \"text\": \"cooling_duty falls by -1.85 K/min/h and -1.12 K/min/h\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart based on the differences in concentration and cooling_duty rates.\"}"
+  },
+  "17816694a67aeb7c4b55fa19ecc6027d68977c6fbce8edd65bfcd3f66c5cccc8": {
+   "completion_tokens": 854,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 1804,
+   "text": "{\"caveats\": [\"The differences between the two situations are based on the given facts and may not be comprehensive or definitive.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:e7316f0aae\", \"F:8a29f73883\"], \"numeric_values\": [{\"fact_id\": \"F:e7316f0aae\", \"unit\": \"mol/L\", \"value\": -0.519}, {\"fact_id\": \"F:8a29f73883\", \"unit\": \"mol/L/h\", \"value\": -0.2}], \"text\": \"concentration falls by -0.519 mol/L/h\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:39b1d21d27\", \"F:3c2b79cc1f\"], \"numeric_values\": [{\"fact_id\": \"F:39b1d21d27\", \"unit\": \"K/min\", \"value\": -2.19}, {\"fact_id\": \"F:3c2b79cc1f\", \"unit\": \"K/min/h\", \"value\": -2.89}], \"text\": \"cooling_duty falls by -2.89 K/min/h\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:946fcec4d3\", \"F:5ae79754d4\"], \"numeric_values\": [{\"fact_id\": \"F:946fcec4d3\", \"unit\": \"K\", \"value\": 24.9}, {\"fact_id\": \"F:5ae79754d4\", \"unit\": \"K/h\", \"value\": -4.16}], \"text\": \"temperature rises by 24.9 K/h\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"F:5ec219069d\", \"F:3fdc1b6232\"], \"numeric_values\": [{\"fact_id\": \"F:5ec219069d\", \"unit\": \"mol/L\", \"value\": -0.308}, {\"fact_id\": \"F:3fdc1b6232\", \"unit\": \"samples\", \"value\": 20}], \"text\": \"concentration falls by -0.308 mol/L/h\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"F:b7254587de\", \"F:cac830aa10\"], \"numeric_values\": [{\"fact_id\": \"F:b7254587de\", \"unit\": \"K/min\", \"value\": -3.15}, {\"fact_id\": \"F:cac830aa10\", \"unit\": \"K/min/h\", \"value\": 5.43}], \"text\": \"cooling_duty falls by -3.15 K/min/h\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"F:08218cd4b5\", \"F:9f3fa8f22e\"], \"numeric_values\": [{\"fact_id\": \"F:08218cd4b5\", \"unit\": \"K\", \"value\": 12.2}, {\"fact_id\": \"F:9f3fa8f22e\", \"unit\": \"K/h\", \"value\": -49.2}], \"text\": \"temperature rises by 12.2 K/h\"}], \"recommendations\": [], \"summary\": \"The two situations can be distinguished by the following differences: A has a higher rate of concentration fall (-0.519 mol/L/h vs -0.308 mol/L/h), a higher rate of cooling_duty fall (-2.89 K/min/h vs -3.15 K/min/h), a higher rate of temperature rise (24.9 K/h vs 12.2 K/h), and a different pattern of temperature stability (stable for 32 samples vs stable for 20 samples).\"}"
+  },
+  "1889488dccce6e2dda4c90f56c3b63186f025f3cf0eb758754f5beda7f91399f": {
+   "completion_tokens": 982,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 2950,
+   "text": "{\"caveats\": [\"The differences between the two situations are based on the given facts and may not be exhaustive.\"], \"claims\": [{\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"93fbd251bc\", \"fcb31123fb\"], \"numeric_values\": [{\"fact_id\": \"93fbd251bc\", \"unit\": \"mol/L/h\", \"value\": -0.284}, {\"fact_id\": \"fcb31123fb\", \"unit\": \"mol/L/h\", \"value\": -0.345}], \"text\": \"concentration falls by -0.284 mol/L/h in situation A and by -0.345 mol/L/h in situation B\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"8907695cff\", \"cdc333b27d\"], \"numeric_values\": [{\"fact_id\": \"8907695cff\", \"unit\": \"samples\", \"value\": 264}, {\"fact_id\": \"cdc333b27d\", \"unit\": \"samples\", \"value\": 285}], \"text\": \"concentration is stable in 7 stretches of 264 samples in situation A and in 9 stretches of 285 samples in situation B\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"9fa20d693a\", \"62255cabc4\"], \"numeric_values\": [{\"fact_id\": \"9fa20d693a\", \"unit\": \"K/min/h\", \"value\": 2.03}, {\"fact_id\": \"62255cabc4\", \"unit\": \"K/min/h\", \"value\": 2.35}], \"text\": \"cooling_duty rises by 2.03 K/min/h in situation A and by 2.35 K/min/h in situation B\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"6dfa90853d\", \"9c6966aab6\"], \"numeric_values\": [{\"fact_id\": \"6dfa90853d\", \"unit\": \"K/min/h\", \"value\": -2}, {\"fact_id\": \"9c6966aab6\", \"unit\": \"K/min/h\", \"value\": -1.95}], \"text\": \"cooling_duty falls by -2 K/min/h in situation A and by -1.95 K/min/h in situation B\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"2f55798fe6\", \"2c18a586f1\"], \"numeric_values\": [{\"fact_id\": \"2f55798fe6\", \"unit\": \"K/min/h\", \"value\": 1.1}, {\"fact_id\": \"2c18a586f1\", \"unit\": \"K/min/h\", \"value\": 1.36}], \"text\": \"cooling_duty rises by 1.1 K/min/h in situation A and by 1.36 K/min/h in situation B\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"39ded936e7\", \"d5bda07d6e\"], \"numeric_values\": [{\"fact_id\": \"39ded936e7\", \"unit\": \"K/min/h\", \"value\": -1.03}, {\"fact_id\": \"d5bda07d6e\", \"unit\": \"K/min/h\", \"value\": -1.02}], \"text\": \"cooling_duty falls by -1.03 K/min/h in situation A and by -1.02 K/min/h in situation B\"}], \"recommendations\": [], \"summary\": \"The two situations can be distinguished by the following differences: concentration falls by -0.284 mol/L/h in situation A and by -0.345 mol/L/h in situation B, concentration is stable in 7 stretches of 264 samples in situation A and in 9 stretches of 285 samples in situation B, cooling_duty rises by 2.03 K/min/h in situation A and by 2.35 K/min/h in situation B, cooling_duty falls by -2 K/min/h in situation A and by -1.95 K/min/h in situation B, cooling_duty rises by 1.1 K/min/h in situation A and by 1.36 K/min/h in situation B, cooling_duty falls by -1.03 K/min/h in situation A and by -1.02 K/min/h in situation B.\"}"
+  },
+  "1b15242802a0cdacef8fd00b999d4c6b9307478d4ef4f00850119c2b8da6d05e": {
+   "completion_tokens": 794,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 3034,
+   "text": "{\"caveats\": [\"The following claims are based on the given facts and do not imply causality.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"358ecd2dbf\", \"e34dedc424\"], \"numeric_values\": [{\"fact_id\": \"358ecd2dbf\", \"unit\": \"mol/L/h\", \"value\": -0.383}, {\"fact_id\": \"e34dedc424\", \"unit\": \"mol/L/h\", \"value\": -0.183}], \"text\": \"concentration falls by -0.383 mol/L/h and -0.183 mol/L/h\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"66667cc800\", \"ef49fe2849\"], \"numeric_values\": [{\"fact_id\": \"66667cc800\", \"unit\": \"mol/L/h\", \"value\": -0.175}, {\"fact_id\": \"ef49fe2849\", \"unit\": \"mol/L/h\", \"value\": -0.169}], \"text\": \"concentration falls by -0.175 mol/L/h and -0.169 mol/L/h\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"a04e82fb62\", \"c900bb2989\"], \"numeric_values\": [{\"fact_id\": \"a04e82fb62\", \"unit\": \"mol/L/h\", \"value\": 0.969}, {\"fact_id\": \"c900bb2989\", \"unit\": \"mol/L/h\", \"value\": -0.495}], \"text\": \"concentration rises by 0.969 mol/L/h and falls by -0.495 mol/L/h\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"e26ac315aa\", \"b2802db235\"], \"numeric_values\": [{\"fact_id\": \"e26ac315aa\", \"unit\": \"mol/L/h\", \"value\": 0.744}, {\"fact_id\": \"b2802db235\", \"unit\": \"mol/L/h\", \"value\": -0.155}], \"text\": \"concentration rises by 0.744 mol/L/h and falls by -0.155 mol/L/h\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"ff558a25d1\", \"de2c4d3fdc\"], \"numeric_values\": [{\"fact_id\": \"ff558a25d1\", \"unit\": \"K/min/h\", \"value\": -1.86}, {\"fact_id\": \"de2c4d3fdc\", \"unit\": \"K/min/h\", \"value\": -4.71}], \"text\": \"cooling_duty falls by -1.86 K/min/h and -4.71 K/min/h\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"831b0b1e9c\", \"7b51bb148f\"], \"numeric_values\": [{\"fact_id\": \"831b0b1e9c\", \"unit\": \"K/min/h\", \"value\": -1.65}, {\"fact_id\": \"7b51bb148f\", \"unit\": \"K/min/h\", \"value\": -0.88}], \"text\": \"cooling_duty falls by -1.65 K/min/h and -0.88 K/min/h\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart based on the following differences: the rate of concentration change, the rate of cooling duty change, and the temperature change.\"}"
+  },
+  "1be126b2fd65c665a41780fc3c4fd05ecdac269b12f611ad9a408562dc67386e": {
+   "completion_tokens": 335,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 357,
+   "text": "{\"caveats\": [\"The calibration status is the same in both situations.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"low\", \"fact_ids\": [\"F:539ef7750e\"], \"numeric_values\": [{\"fact_id\": \"F:539ef7750e\", \"unit\": \"K\", \"value\": 343}, {\"fact_id\": \"F:539ef7750e\", \"unit\": \"K\", \"value\": 357}, {\"fact_id\": \"F:539ef7750e\", \"unit\": \"%\", \"value\": 80}], \"text\": \"concerns A, relies on F:539ef7750e, 343 K, 357 K, 80 %\"}, {\"claim_id\": \"B\", \"confidence\": \"low\", \"fact_ids\": [\"F:c5df96b92e\"], \"numeric_values\": [{\"fact_id\": \"F:c5df96b92e\", \"unit\": \"K\", \"value\": 332}, {\"fact_id\": \"F:c5df96b92e\", \"unit\": \"K\", \"value\": 365}, {\"fact_id\": \"F:c5df96b92e\", \"unit\": \"%\", \"value\": 80}], \"text\": \"concerns B, relies on F:c5df96b92e, 332 K, 365 K, 80 %\"}], \"recommendations\": [], \"summary\": \"They can be told apart with the given information.\"}"
+  },
+  "1eb084f9fd392e45ed6d2ef03b5ea9aec9166d4d3ee2f923643edeefd618e5b9": {
+   "completion_tokens": 549,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 548,
+   "text": "{\"caveats\": [\"The direction of the temperature shift at sample 311 is the same in both situations, but the noise sigma is different.\"], \"claims\": [{\"claim_id\": \"claim1\", \"confidence\": \"low\", \"fact_ids\": [\"F:6c18688a5f\", \"F:56c58dc41b\"], \"numeric_values\": [{\"fact_id\": \"F:6c18688a5f\", \"unit\": \"K\", \"value\": 21}, {\"fact_id\": \"F:56c58dc41b\", \"unit\": \"K\", \"value\": 21}, {\"fact_id\": \"F:56c58dc41b\", \"unit\": \"noise sigmas\", \"value\": 632}], \"text\": \"A: temperature shifts up by 21 K, B: temperature shifts up by 21 K (jump, 632 noise sigmas)\"}, {\"claim_id\": \"claim2\", \"confidence\": \"low\", \"fact_ids\": [\"F:e52f3fc77f\", \"F:ff5312eb57\"], \"numeric_values\": [{\"fact_id\": \"F:e52f3fc77f\", \"unit\": \"K\", \"value\": 2.89}, {\"fact_id\": \"F:ff5312eb57\", \"unit\": \"K\", \"value\": 2.89}, {\"fact_id\": \"F:ff5312eb57\", \"unit\": \"noise sigmas\", \"value\": 86.7}], \"text\": \"A: temperature shifts up by 2.89 K, B: temperature shifts up by 2.89 K (jump, 86.7 noise sigmas)\"}, {\"claim_id\": \"claim3\", \"confidence\": \"low\", \"fact_ids\": [\"F:b19eacf86d\"], \"numeric_values\": [{\"fact_id\": \"F:b19eacf86d\", \"unit\": \"K/min\", \"value\": -0.601}], \"text\": \"A: cooling_duty shifts down by 0.601 K/min\"}, {\"claim_id\": \"claim4\", \"confidence\": \"low\", \"fact_ids\": [\"F:d600d2f683\"], \"numeric_values\": [{\"fact_id\": \"F:d600d2f683\", \"unit\": \"mol/L\", \"value\": -0.074}], \"text\": \"A: concentration shifts down by 0.074 mol/L\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "23e7d7b306944540668cd8ae7057d8353cad3ef277bbf4287a8c6d754fe2ccad": {
+   "completion_tokens": 736,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 722,
+   "text": "{\"caveats\": [\"The given information does not account for the time between samples.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"2e327427aa\", \"65ef10f140\"], \"numeric_values\": [{\"fact_id\": \"2e327427aa\", \"unit\": \"h\", \"value\": 0.15}, {\"fact_id\": \"65ef10f140\", \"unit\": \"h\", \"value\": 0.2}, {\"fact_id\": \"2e327427aa\", \"unit\": \"K\", \"value\": 385}, {\"fact_id\": \"65ef10f140\", \"unit\": \"K\", \"value\": 384}], \"text\": \"A has temperature exceeding 380 K for 0.15 h from sample 323 to 331 and for 0.2 h from sample 390 to 401.\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"36d6c71555\"], \"numeric_values\": [{\"fact_id\": \"36d6c71555\", \"unit\": \"K\", \"value\": 23.4}, {\"fact_id\": \"36d6c71555\", \"unit\": \"sigma\", \"value\": 23.6}], \"text\": \"A has a temperature shift up by 23.4 K at sample 316.\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"5c91568835\"], \"numeric_values\": [{\"fact_id\": \"5c91568835\", \"unit\": \"K\", \"value\": 26.9}, {\"fact_id\": \"5c91568835\", \"unit\": \"sigma\", \"value\": 27.1}], \"text\": \"A has a temperature shift down by 26.9 K at sample 339.\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"458892e655\"], \"numeric_values\": [{\"fact_id\": \"458892e655\", \"unit\": \"K\", \"value\": 8.6}, {\"fact_id\": \"458892e655\", \"unit\": \"sigma\", \"value\": 8.68}], \"text\": \"A has a temperature shift up by 8.6 K at sample 365.\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"98758c8232\"], \"numeric_values\": [{\"fact_id\": \"98758c8232\", \"unit\": \"K\", \"value\": 11.5}, {\"fact_id\": \"98758c8232\", \"unit\": \"sigma\", \"value\": 11.6}], \"text\": \"A has a temperature shift down by 11.5 K at sample 406.\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"bb41d9ec82\"], \"numeric_values\": [{\"fact_id\": \"bb41d9ec82\", \"unit\": \"K\", \"value\": 19}, {\"fact_id\": \"bb41d9ec82\", \"unit\": \"sigma\", \"value\": 24.2}], \"text\": \"B has a temperature shift up by 19 K at sample 316.\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "28429cb6b03fa347e359d0d9616c75bdfcb92d5f9b99d4c00ba372f9cfb9bb48": {
+   "completion_tokens": 52,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 3014,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "2acb7f1d90c9c53e4f97705aeab0931f2ca90a29da9a393e9a9b429f82ccc46b": {
+   "completion_tokens": 475,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 555,
+   "text": "{\"caveats\": [\"The direction of the changes in temperature, cooling_duty, and concentration cannot be concluded for situation A, as the facts only mention the event SETPOINT as a coincidence, not a cause.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"low\", \"fact_ids\": [\"F:584b631fc7\", \"F:f850ec6b15\", \"F:f054db7d72\"], \"numeric_values\": [{\"fact_id\": \"F:584b631fc7\", \"unit\": \"K\", \"value\": 1.84}, {\"fact_id\": \"F:f850ec6b15\", \"unit\": \"K/min\", \"value\": 0.988}, {\"fact_id\": \"F:f054db7d72\", \"unit\": \"mol/L\", \"value\": 0.0986}], \"text\": \"situation A, temperature shifts up by 1.84 K, cooling_duty shifts down by 0.988 K/min, and concentration shifts down by 0.0986 mol/L, all coinciding with the event SETPOINT.\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"F:e1ba2751be\", \"F:d1a109c6ab\", \"F:34ee8c97bf\"], \"numeric_values\": [{\"fact_id\": \"F:e1ba2751be\", \"unit\": \"K\", \"value\": 1.84}, {\"fact_id\": \"F:d1a109c6ab\", \"unit\": \"K/min\", \"value\": 0.988}, {\"fact_id\": \"F:34ee8c97bf\", \"unit\": \"mol/L\", \"value\": 0.0986}], \"text\": \"situation B, temperature shifts up by 1.84 K, cooling_duty shifts down by 0.988 K/min, and concentration shifts down by 0.0986 mol/L, with jumps of 5.08, 26.6, and 26.2 noise sigmas, respectively.\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "2fe380eb2f980341543da392739e5bd0c678a77b85af00d31ff6298781e3a5a8": {
+   "completion_tokens": 52,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 4227,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "349afef81f4f5fcf8397738a73b3bcf8802c7278a7d3c5c7b39f73b040728cfe": {
+   "completion_tokens": 953,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 1763,
+   "text": "{\"caveats\": [\"The differences between the two situations are based on the given facts and may not be comprehensive or definitive.\"], \"claims\": [{\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"78eb84ab78\", \"e8ad40511f\"], \"numeric_values\": [{\"fact_id\": \"78eb84ab78\", \"unit\": \"mol/L\", \"value\": -0.436}, {\"fact_id\": \"e8ad40511f\", \"unit\": \"mol/L\", \"value\": -0.169}], \"text\": \"concentration falls by -0.436 mol/L/h and -0.169 mol/L/h\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"f3c1d67cba\", \"966bed49f7\"], \"numeric_values\": [{\"fact_id\": \"f3c1d67cba\", \"unit\": \"K/min\", \"value\": -2.2}, {\"fact_id\": \"966bed49f7\", \"unit\": \"K/min\", \"value\": -3.95}], \"text\": \"cooling_duty falls by -2.2 K/min/h and -3.95 K/min/h\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"62ca0580af\", \"e777240de5\", \"f7a91726e4\"], \"numeric_values\": [{\"fact_id\": \"62ca0580af\", \"unit\": \"K\", \"value\": 24.2}, {\"fact_id\": \"e777240de5\", \"unit\": \"K\", \"value\": -5.37}, {\"fact_id\": \"f7a91726e4\", \"unit\": \"K\", \"value\": -4.5}], \"text\": \"temperature rises by 24.2 K/h, falls by -5.37 K/h, and falls by -4.5 K/h\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"f7a91726e4\", \"65d409d651\"], \"numeric_values\": [{\"fact_id\": \"f7a91726e4\", \"unit\": \"K\", \"value\": -4.5}, {\"fact_id\": \"65d409d651\", \"unit\": \"h\", \"value\": 0.0667}], \"text\": \"temperature falls by -4.5 K/h and exceeds 380 K for 0.0667 h\"}, {\"claim_id\": \"situation B\", \"confidence\": \"high\", \"fact_ids\": [\"efb669fa4e\", \"9adc24ac02\"], \"numeric_values\": [{\"fact_id\": \"efb669fa4e\", \"unit\": \"mol/L\", \"value\": -0.209}, {\"fact_id\": \"9adc24ac02\", \"unit\": \"mol/L/h\", \"value\": 0.375}], \"text\": \"concentration falls by -0.209 mol/L/h and rises by 0.375 mol/L/h\"}, {\"claim_id\": \"situation B\", \"confidence\": \"high\", \"fact_ids\": [\"d883cca1f6\", \"4a50411de4\"], \"numeric_values\": [{\"fact_id\": \"d883cca1f6\", \"unit\": \"K/min\", \"value\": -2.76}, {\"fact_id\": \"4a50411de4\", \"unit\": \"K/min/h\", \"value\": 5.77}], \"text\": \"cooling_duty falls by -2.76 K/min/h and rises by 5.77 K/min/h\"}], \"recommendations\": [], \"summary\": \"The two situations can be distinguished by the following differences: situation A has a larger net decrease in concentration (-0.436 mol/L/h vs -0.209 mol/L/h), a larger net decrease in cooling_duty (-2.2 K/min/h vs -2.76 K/min/h), a larger net increase in temperature (24.2 K/h vs -39.6 K/h), and a temperature exceeding 380 K for 0.0667 h. Situation B has a net increase in concentration (0.375 mol/L/h), a net increase in cooling_duty (5.77 K/min/h), and a temperature rising by 13.7 K/h.\"}"
+  },
+  "35c0cd4a198130262a9c6014d4b581a0c7f5fb19ee90de4612ee2bc1aec135a5": {
+   "completion_tokens": 962,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 3065,
+   "text": "{\"caveats\": [\"The forecast for temperature in Situation B is not directly comparable to Situation A because the nominal 80% interval spans a different range.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"medium\", \"fact_ids\": [\"0bfb4b7128\", \"24d52b303f\"], \"numeric_values\": [{\"fact_id\": \"0bfb4b7128\", \"unit\": \"mol/L\", \"value\": 0.0933}, {\"fact_id\": \"24d52b303f\", \"unit\": \"K/min\", \"value\": 0.657}], \"text\": \"concentration falls from sample 0 to 19 by 0.0933 mol/L net (-0.28 mol/L/h), cooling_duty rises from sample 0 to 19 by 0.657 K/min net (1.97 K/min/h)\"}, {\"claim_id\": \"B\", \"confidence\": \"medium\", \"fact_ids\": [\"0bfb4b7128\", \"24d52b303f\"], \"numeric_values\": [{\"fact_id\": \"0bfb4b7128\", \"unit\": \"mol/L\", \"value\": 0.0933}, {\"fact_id\": \"24d52b303f\", \"unit\": \"K/min\", \"value\": 0.657}], \"text\": \"concentration falls from sample 0 to 19 by 0.0933 mol/L net (-0.28 mol/L/h), cooling_duty rises from sample 0 to 19 by 0.657 K/min net (1.97 K/min/h)\"}, {\"claim_id\": \"A\", \"confidence\": \"medium\", \"fact_ids\": [\"6ed7c7fdd5\", \"91142733aa\"], \"numeric_values\": [{\"fact_id\": \"6ed7c7fdd5\", \"unit\": \"samples\", \"value\": 280}, {\"fact_id\": \"91142733aa\", \"unit\": \"samples\", \"value\": 273}], \"text\": \"concentration is stable in 9 stretches (together 280 samples) between samples 20 and 299, temperature is stable in 5 stretches (together 273 samples) between samples 27 and 299\"}, {\"claim_id\": \"B\", \"confidence\": \"medium\", \"fact_ids\": [\"6ed7c7fdd5\", \"91142733aa\"], \"numeric_values\": [{\"fact_id\": \"6ed7c7fdd5\", \"unit\": \"samples\", \"value\": 280}, {\"fact_id\": \"91142733aa\", \"unit\": \"samples\", \"value\": 273}], \"text\": \"concentration is stable in 9 stretches (together 280 samples) between samples 20 and 299, temperature is stable in 5 stretches (together 273 samples) between samples 27 and 299\"}, {\"claim_id\": \"A\", \"confidence\": \"medium\", \"fact_ids\": [\"c8763e6c77\", \"f3cd036779\"], \"numeric_values\": [{\"fact_id\": \"c8763e6c77\", \"unit\": \"K/min\", \"value\": -0.682}, {\"fact_id\": \"f3cd036779\", \"unit\": \"K/min\", \"value\": -0.395}], \"text\": \"cooling_duty falls from sample 20 to 39 by 0.682 K/min net (-2.05 K/min/h), cooling_duty falls from sample 60 to 79 by 0.395 K/min net (-1.19 K/min/h)\"}, {\"claim_id\": \"B\", \"confidence\": \"medium\", \"fact_ids\": [\"c8763e6c77\", \"f3cd036779\"], \"numeric_values\": [{\"fact_id\": \"c8763e6c77\", \"unit\": \"K/min\", \"value\": -0.682}, {\"fact_id\": \"f3cd036779\", \"unit\": \"K/min\", \"value\": -0.395}], \"text\": \"cooling_duty falls from sample 20 to 39 by 0.682 K/min net (-2.05 K/min/h), cooling_duty falls from sample 60 to 79 by 0.395 K/min net (-1.19 K/min/h)\"}], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "36f80d9389f24d5c8d13b34dbf789ff6794251dd073d3d86967d0a0417a83574": {
+   "completion_tokens": 399,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 557,
+   "text": "{\"caveats\": [\"The direction of the jumps in B is confirmed by the twin, but the size is not known.\"], \"claims\": [{\"claim_id\": \"1\", \"confidence\": \"high\", \"fact_ids\": [\"F:3ab2bfd126\", \"F:277c9ff6c8\", \"F:2a6431ab32\"], \"numeric_values\": [{\"fact_id\": \"F:3ab2bfd126\", \"unit\": \"K\", \"value\": 3.81}, {\"fact_id\": \"F:277c9ff6c8\", \"unit\": \"K/min\", \"value\": 1.03}, {\"fact_id\": \"F:2a6431ab32\", \"unit\": \"mol/L\", \"value\": 0.133}], \"text\": \"situation B, [3.81 K, 1.03 K/min, 0.133 mol/L]\"}, {\"claim_id\": \"2\", \"confidence\": \"low\", \"fact_ids\": [\"F:3ab2bfd126\", \"F:277c9ff6c8\", \"F:2a6431ab32\"], \"numeric_values\": [{\"fact_id\": \"F:3ab2bfd126\", \"unit\": \"sigmas\", \"value\": 10.8}, {\"fact_id\": \"F:277c9ff6c8\", \"unit\": \"sigmas\", \"value\": 27.8}, {\"fact_id\": \"F:2a6431ab32\", \"unit\": \"sigmas\", \"value\": 36.3}], \"text\": \"situation B, [10.8 sigmas, 27.8 sigmas, 36.3 sigmas]\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "3b8a5cc9266f305d56d9332f2965cce0d885cf9c0a69071eaff5274dc0a6882a": {
+   "completion_tokens": 1331,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 3177,
+   "text": "{\"caveats\": [\"The differences between the two situations are based on the given facts and may not be exhaustive.\"], \"claims\": [{\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"F:404cacd29f\", \"F:e175347604\"], \"numeric_values\": [{\"fact_id\": \"F:404cacd29f\", \"unit\": \"mol/L/h\", \"value\": -0.202}, {\"fact_id\": \"F:e175347604\", \"unit\": \"samples\", \"value\": 216}], \"text\": \"concentration falls from sample 0 to 19 by 0.0672 mol/L net (-0.202 mol/L/h) and is stable in 7 stretches (together 216 samples) between samples 20 and 279.\"}, {\"claim_id\": \"situation B\", \"confidence\": \"high\", \"fact_ids\": [\"F:d974d144ff\", \"F:cdbffeeefc\"], \"numeric_values\": [{\"fact_id\": \"F:d974d144ff\", \"unit\": \"mol/L/h\", \"value\": -0.192}, {\"fact_id\": \"F:cdbffeeefc\", \"unit\": \"samples\", \"value\": 201}], \"text\": \"concentration falls from sample 0 to 19 by 0.064 mol/L net (-0.192 mol/L/h) and is stable in 7 stretches (together 201 samples) between samples 20 and 286.\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"F:16daf1d2b4\", \"F:948deb6e29\"], \"numeric_values\": [{\"fact_id\": \"F:16daf1d2b4\", \"unit\": \"mol/L/h\", \"value\": 0.0971}, {\"fact_id\": \"F:948deb6e29\", \"unit\": \"mol/L/h\", \"value\": 0.0927}], \"text\": \"concentration rises from sample 121 to 142 by 0.0356 mol/L net (0.0971 mol/L/h) and from sample 143 to 164 by 0.034 mol/L net (0.0927 mol/L/h).\"}, {\"claim_id\": \"situation B\", \"confidence\": \"high\", \"fact_ids\": [\"F:19c344b1cb\", \"F:08a6afd70d\"], \"numeric_values\": [{\"fact_id\": \"F:19c344b1cb\", \"unit\": \"mol/L/h\", \"value\": 0.078}, {\"fact_id\": \"F:08a6afd70d\", \"unit\": \"mol/L/h\", \"value\": 0.0878}], \"text\": \"concentration rises from sample 111 to 136 by 0.0338 mol/L net (0.078 mol/L/h) and from sample 157 to 176 by 0.0293 mol/L net (0.0878 mol/L/h).\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"F:b20b7a0cfa\", \"F:5386210d36\"], \"numeric_values\": [{\"fact_id\": \"F:b20b7a0cfa\", \"unit\": \"K/min/h\", \"value\": 1.69}, {\"fact_id\": \"F:5386210d36\", \"unit\": \"K/min/h\", \"value\": -1.51}], \"text\": \"cooling_duty rises from sample 0 to 19 by 0.563 K/min net (1.69 K/min/h) and falls from sample 20 to 39 by 0.504 K/min net (-1.51 K/min/h).\"}, {\"claim_id\": \"situation B\", \"confidence\": \"high\", \"fact_ids\": [\"F:bc0199f29e\", \"F:78d8bcb465\"], \"numeric_values\": [{\"fact_id\": \"F:bc0199f29e\", \"unit\": \"K/min/h\", \"value\": 1.6}, {\"fact_id\": \"F:78d8bcb465\", \"unit\": \"K/min/h\", \"value\": -1.61}], \"text\": \"cooling_duty rises from sample 0 to 19 by 0.532 K/min net (1.6 K/min/h) and falls from sample 20 to 39 by 0.536 K/min net (-1.61 K/min/h).\"}], \"recommendations\": [], \"summary\": \"The two situations can be distinguished by the following differences: concentration falls from sample 0 to 19 by 0.0672 mol/L net (-0.202 mol/L/h) and is stable in 7 stretches (together 216 samples) between samples 20 and 279 in situation A, and by 0.064 mol/L net (-0.192 mol/L/h) and is stable in 7 stretches (together 201 samples) between samples 20 and 286 in situation B. Additionally, concentration rises from sample 121 to 142 by 0.0356 mol/L net (0.0971 mol/L/h) and from sample 143 to 164 by 0.034 mol/L net (0.0927 mol/L/h) in situation A, and rises from sample 111 to 136 by 0.0338 mol/L net (0.078 mol/L/h) and from sample 157 to 176 by 0.0293 mol/L net (0.0878 mol/L/h) in situation B. Furthermore, cooling_duty rises from sample 0 to 19 by 0.563 K/min net (1.69 K/min/h) and falls from sample 20 to 39 by 0.504 K/min net (-1.51 K/min/h) in situation A, and rises from sample 0 to 19 by 0.532 K/min net (1.6 K/min/h) and falls from sample 20 to 39 by 0.536 K/min net (-1.61 K/min/h) in situation B.\"}"
+  },
+  "3f9d4219b60cf1a600db34c12f2ee5c689cfbd03557d9f648b888fbb585e39e4": {
+   "completion_tokens": 785,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 377,
+   "text": "{\"caveats\": [\"The temperature intervals are not calibrated.\"], \"claims\": [{\"claim_id\": \"claim1\", \"confidence\": \"low\", \"fact_ids\": [\"F:2c4e7af711\"], \"numeric_values\": [{\"fact_id\": \"F:2c4e7af711\", \"unit\": \"K\", \"value\": 14}, {\"fact_id\": \"F:2c4e7af711\", \"unit\": \"K\", \"value\": 16}], \"text\": \"A, [14, 16] K, spans 342 to 356 K\"}, {\"claim_id\": \"claim2\", \"confidence\": \"low\", \"fact_ids\": [\"F:182685a51d\"], \"numeric_values\": [{\"fact_id\": \"F:182685a51d\", \"unit\": \"K\", \"value\": 32}, {\"fact_id\": \"F:182685a51d\", \"unit\": \"K\", \"value\": 32}], \"text\": \"B, [32, 32] K, spans 331 to 363 K\"}, {\"claim_id\": \"claim3\", \"confidence\": \"low\", \"fact_ids\": [\"F:2c4e7af711\", \"F:182685a51d\"], \"numeric_values\": [{\"fact_id\": \"F:2c4e7af711\", \"unit\": \"K\", \"value\": 14}, {\"fact_id\": \"F:182685a51d\", \"unit\": \"K\", \"value\": 32}], \"text\": \"A, B, [14, 32] K, spans 342 to 356 K, 331 to 363 K\"}, {\"claim_id\": \"claim4\", \"confidence\": \"low\", \"fact_ids\": [\"F:2c4e7af711\", \"F:182685a51d\"], \"numeric_values\": [{\"fact_id\": \"F:2c4e7af711\", \"unit\": \"K\", \"value\": 16}, {\"fact_id\": \"F:182685a51d\", \"unit\": \"K\", \"value\": 32}], \"text\": \"A, B, [16, 32] K, spans 342 to 356 K, 331 to 363 K\"}, {\"claim_id\": \"claim5\", \"confidence\": \"low\", \"fact_ids\": [\"F:2c4e7af711\", \"F:182685a51d\"], \"numeric_values\": [{\"fact_id\": \"F:2c4e7af711\", \"unit\": \"K\", \"value\": 14}, {\"fact_id\": \"F:182685a51d\", \"unit\": \"K\", \"value\": 32}], \"text\": \"A, B, [14, 32] K, 342 to 356 K, 331 to 363 K\"}, {\"claim_id\": \"claim6\", \"confidence\": \"low\", \"fact_ids\": [\"F:2c4e7af711\", \"F:182685a51d\"], \"numeric_values\": [{\"fact_id\": \"F:2c4e7af711\", \"unit\": \"K\", \"value\": 16}, {\"fact_id\": \"F:182685a51d\", \"unit\": \"K\", \"value\": 32}], \"text\": \"A, B, [16, 32] K, 342 to 356 K, 331 to 363 K\"}], \"recommendations\": [], \"summary\": \"They cannot be told apart with the given information.\"}"
+  },
+  "4511fd72576f34bbd908d4b8a8cacb19b32ce58a21d7eb7e073d26d7e7b3942b": {
+   "completion_tokens": 270,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 358,
+   "text": "{\"caveats\": [\"The temperature intervals are not calibrated, so their accuracy is uncertain.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"low\", \"fact_ids\": [\"551a262a87\"], \"numeric_values\": [{\"fact_id\": \"551a262a87\", \"unit\": \"K\", \"value\": 10}, {\"fact_id\": \"551a262a87\", \"unit\": \"K\", \"value\": 14}], \"text\": \"concerns A, relies on F:551a262a87, spans 10 to 14 K\"}, {\"claim_id\": \"B\", \"confidence\": \"low\", \"fact_ids\": [\"d8f9c3954e\"], \"numeric_values\": [{\"fact_id\": \"d8f9c3954e\", \"unit\": \"K\", \"value\": 31}, {\"fact_id\": \"d8f9c3954e\", \"unit\": \"K\", \"value\": 31}], \"text\": \"concerns B, relies on F:d8f9c3954e, spans 31 K\"}], \"recommendations\": [], \"summary\": \"They can be told apart with the given information.\"}"
+  },
+  "49cacc440d676d4875c9715cf6308e6e97a0e7fa196a901eabfe8b8fca491800": {
+   "completion_tokens": 52,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 4211,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "4a895e90338060b8caaf04fab71af098d515db390ec8d0a1f43981128ef84210": {
+   "completion_tokens": 52,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 2961,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "4ef93c7a03717c8f63b4c4ebcbc24c9bcbcf8700ccce353e86494aaf6c78e01c": {
+   "completion_tokens": 514,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 730,
+   "text": "{\"caveats\": [\"The given information does not show that the two situations are the same.\"], \"claims\": [{\"claim_id\": \"1\", \"confidence\": \"high\", \"fact_ids\": [\"F:439ab5641b\"], \"numeric_values\": [{\"fact_id\": \"F:439ab5641b\", \"unit\": \"K\", \"value\": 381}, {\"fact_id\": \"F:439ab5641b\", \"unit\": \"h\", \"value\": 0.0167}], \"text\": \"A, 381 K, 0.0167 h\"}, {\"claim_id\": \"2\", \"confidence\": \"high\", \"fact_ids\": [\"F:86453f0e30\"], \"numeric_values\": [{\"fact_id\": \"F:86453f0e30\", \"unit\": \"K\", \"value\": 22}], \"text\": \"A, 22 K\"}, {\"claim_id\": \"3\", \"confidence\": \"high\", \"fact_ids\": [\"F:ef3956fae1\"], \"numeric_values\": [{\"fact_id\": \"F:ef3956fae1\", \"unit\": \"K\", \"value\": 15.5}], \"text\": \"B, 15.5 K\"}, {\"claim_id\": \"4\", \"confidence\": \"high\", \"fact_ids\": [\"F:ffd9844074\"], \"numeric_values\": [{\"fact_id\": \"F:ffd9844074\", \"unit\": \"K\", \"value\": 2.94}], \"text\": \"A, 2.94 K\"}, {\"claim_id\": \"5\", \"confidence\": \"high\", \"fact_ids\": [\"F:8e9ed7d724\"], \"numeric_values\": [{\"fact_id\": \"F:8e9ed7d724\", \"unit\": \"K\", \"value\": 3.69}], \"text\": \"B, 3.69 K\"}, {\"claim_id\": \"6\", \"confidence\": \"high\", \"fact_ids\": [\"F:93ebbbdbfb\"], \"numeric_values\": [{\"fact_id\": \"F:93ebbbdbfb\", \"unit\": \"K\", \"value\": 1.93}], \"text\": \"A, 1.93 K\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "5108ed6aacf46db529459f43855a58d600e68e512b70622aef9a4a76915ad1ea": {
+   "completion_tokens": 524,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 746,
+   "text": "{\"caveats\": [\"The given information does not show that the two situations are the same.\"], \"claims\": [{\"claim_id\": \"claim1\", \"confidence\": \"high\", \"fact_ids\": [\"F:c61973522e\"], \"numeric_values\": [{\"fact_id\": \"F:c61973522e\", \"unit\": \"K\", \"value\": 386}, {\"fact_id\": \"F:c61973522e\", \"unit\": \"h\", \"value\": 0.15}], \"text\": \"A, [386 K, 0.15 h]\"}, {\"claim_id\": \"claim2\", \"confidence\": \"high\", \"fact_ids\": [\"F:088706bbbb\"], \"numeric_values\": [{\"fact_id\": \"F:088706bbbb\", \"unit\": \"K\", \"value\": 24.8}], \"text\": \"A, [24.8 K]\"}, {\"claim_id\": \"claim3\", \"confidence\": \"high\", \"fact_ids\": [\"F:9d56a6a6cb\"], \"numeric_values\": [{\"fact_id\": \"F:9d56a6a6cb\", \"unit\": \"K\", \"value\": 17}], \"text\": \"B, [17 K]\"}, {\"claim_id\": \"claim4\", \"confidence\": \"high\", \"fact_ids\": [\"F:513e80b08b\"], \"numeric_values\": [{\"fact_id\": \"F:513e80b08b\", \"unit\": \"K\", \"value\": 28.1}], \"text\": \"A, [28.1 K]\"}, {\"claim_id\": \"claim5\", \"confidence\": \"high\", \"fact_ids\": [\"F:5fda04bb26\"], \"numeric_values\": [{\"fact_id\": \"F:5fda04bb26\", \"unit\": \"K\", \"value\": 14.4}], \"text\": \"B, [14.4 K]\"}, {\"claim_id\": \"claim6\", \"confidence\": \"high\", \"fact_ids\": [\"F:38c26394e6\"], \"numeric_values\": [{\"fact_id\": \"F:38c26394e6\", \"unit\": \"K/min\", \"value\": 2.84}], \"text\": \"A, [2.84 K/min]\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "51d219efb38796ee52dd2aefdc7a9e49cc3a63ed7a8fa17ae1e3765e7acf0aee": {
+   "completion_tokens": 465,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 558,
+   "text": "{\"caveats\": [\"The direction of the jumps in B cannot be compared to the direction of the shifts in A, as the facts do not provide information about the direction of the shifts in A.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:1d07be8a55\", \"F:de28ad261a\", \"F:23c20f0d28\"], \"numeric_values\": [{\"fact_id\": \"F:1d07be8a55\", \"unit\": \"K\", \"value\": 3.23}, {\"fact_id\": \"F:de28ad261a\", \"unit\": \"K/min\", \"value\": 0.627}, {\"fact_id\": \"F:23c20f0d28\", \"unit\": \"mol/L\", \"value\": 0.0916}], \"text\": \"situation A: temperature shifts up by 3.23 K, cooling_duty shifts down by 0.627 K/min, concentration shifts down by 0.0916 mol/L, all coinciding with the event SETPOINT.\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"F:dd2a4c4826\", \"F:04c045e4c1\", \"F:ff7c0ce340\"], \"numeric_values\": [{\"fact_id\": \"F:dd2a4c4826\", \"unit\": \"K\", \"value\": 3.23}, {\"fact_id\": \"F:04c045e4c1\", \"unit\": \"K/min\", \"value\": 0.627}, {\"fact_id\": \"F:ff7c0ce340\", \"unit\": \"mol/L\", \"value\": 0.0916}], \"text\": \"situation B: temperature shifts up by 3.23 K, cooling_duty shifts down by 0.627 K/min, concentration shifts down by 0.0916 mol/L, all with a jump.\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "535b59a8ccf3bb51491fb8f6e77f87f507d936dad9c554ac4e99bc48bfa6a54d": {
+   "completion_tokens": 913,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 711,
+   "text": "{\"caveats\": [\"The given information does not account for the time between samples, which might be relevant for understanding the differences between the two situations.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:439ab5641b\", \"F:86453f0e30\"], \"numeric_values\": [{\"fact_id\": \"F:439ab5641b\", \"unit\": \"K\", \"value\": 381}, {\"fact_id\": \"F:86453f0e30\", \"unit\": \"K\", \"value\": 22}, {\"fact_id\": \"F:439ab5641b\", \"unit\": \"h\", \"value\": 0.0167}], \"text\": \"A has a temperature exceeding 380 K from sample 321 to 321, peaking at 381 K, and a temperature shift up at sample 311 by 22 K.\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:439ab5641b\", \"F:ffd9844074\"], \"numeric_values\": [{\"fact_id\": \"F:439ab5641b\", \"unit\": \"K\", \"value\": 381}, {\"fact_id\": \"F:ffd9844074\", \"unit\": \"K\", \"value\": 2.94}], \"text\": \"A has a temperature exceeding 380 K from sample 321 to 321, peaking at 381 K, and a temperature shift down at sample 409 by 2.94 K.\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:439ab5641b\", \"F:93ebbbdbfb\"], \"numeric_values\": [{\"fact_id\": \"F:439ab5641b\", \"unit\": \"K\", \"value\": 381}, {\"fact_id\": \"F:93ebbbdbfb\", \"unit\": \"K\", \"value\": 1.93}], \"text\": \"A has a temperature exceeding 380 K from sample 321 to 321, peaking at 381 K, and a temperature shift up at sample 342 by 1.93 K.\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:439ab5641b\", \"F:54d7e09dca\"], \"numeric_values\": [{\"fact_id\": \"F:439ab5641b\", \"unit\": \"K\", \"value\": 381}, {\"fact_id\": \"F:54d7e09dca\", \"unit\": \"K\", \"value\": 27.3}], \"text\": \"A has a temperature exceeding 380 K from sample 321 to 321, peaking at 381 K, and a temperature shift down at sample 429 by 27.3 K.\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"F:d97d356663\", \"F:ef3956fae1\"], \"numeric_values\": [{\"fact_id\": \"F:d97d356663\", \"unit\": \"K\", \"value\": -18.1}, {\"fact_id\": \"F:ef3956fae1\", \"unit\": \"K\", \"value\": 15.5}], \"text\": \"B has a temperature shift down at sample 428 by 18.1 K and a temperature shift up at sample 308 by 15.5 K.\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"F:d97d356663\", \"F:8e9ed7d724\"], \"numeric_values\": [{\"fact_id\": \"F:d97d356663\", \"unit\": \"K\", \"value\": -18.1}, {\"fact_id\": \"F:8e9ed7d724\", \"unit\": \"K\", \"value\": 3.69}], \"text\": \"B has a temperature shift down at sample 428 by 18.1 K and a temperature shift down at sample 328 by 3.69 K.\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "56edf038a9a37d3666aea0bb79bb4c3f150347435932419a36172103a3a3018a": {
+   "completion_tokens": 515,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 743,
+   "text": "{\"caveats\": [\"The differences in temperature shifts may be due to noise, as indicated by the number of noise sigmas.\"], \"claims\": [{\"claim_id\": \"claim1\", \"confidence\": \"high\", \"fact_ids\": [\"f7d3be1b7b\"], \"numeric_values\": [{\"fact_id\": \"f7d3be1b7b\", \"unit\": \"K\", \"value\": 381}, {\"fact_id\": \"f7d3be1b7b\", \"unit\": \"h\", \"value\": 0.05}], \"text\": \"A, 381 K, 0.05 h\"}, {\"claim_id\": \"claim2\", \"confidence\": \"high\", \"fact_ids\": [\"6da91081b8\"], \"numeric_values\": [{\"fact_id\": \"6da91081b8\", \"unit\": \"K\", \"value\": 27.6}], \"text\": \"A, -27.6 K\"}, {\"claim_id\": \"claim3\", \"confidence\": \"high\", \"fact_ids\": [\"09f333eb15\"], \"numeric_values\": [{\"fact_id\": \"09f333eb15\", \"unit\": \"K\", \"value\": 17.7}], \"text\": \"B, -17.7 K\"}, {\"claim_id\": \"claim4\", \"confidence\": \"high\", \"fact_ids\": [\"9769f8e275\"], \"numeric_values\": [{\"fact_id\": \"9769f8e275\", \"unit\": \"K\", \"value\": 21.8}], \"text\": \"A, 21.8 K\"}, {\"claim_id\": \"claim5\", \"confidence\": \"high\", \"fact_ids\": [\"f941db63f1\"], \"numeric_values\": [{\"fact_id\": \"f941db63f1\", \"unit\": \"K\", \"value\": 16}], \"text\": \"B, 16 K\"}, {\"claim_id\": \"claim6\", \"confidence\": \"high\", \"fact_ids\": [\"5242af3ad1\"], \"numeric_values\": [{\"fact_id\": \"5242af3ad1\", \"unit\": \"K\", \"value\": 2.42}], \"text\": \"A, -2.42 K\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "57b53b09d897c1a9093e5a29fe8acc93d782bfa4e094bde7dcb28dbf9749e590": {
+   "completion_tokens": 333,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 359,
+   "text": "{\"caveats\": [\"The temperature intervals are not calibrated, so their accuracy is uncertain.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"low\", \"fact_ids\": [\"F:8c0326abed\"], \"numeric_values\": [{\"fact_id\": \"F:8c0326abed\", \"unit\": \"K\", \"value\": 15}, {\"fact_id\": \"F:8c0326abed\", \"unit\": \"K\", \"value\": 345}, {\"fact_id\": \"F:8c0326abed\", \"unit\": \"K\", \"value\": 355}], \"text\": \"A, F:8c0326abed, 345 K, 355 K\"}, {\"claim_id\": \"B\", \"confidence\": \"low\", \"fact_ids\": [\"F:e60d8dc9d8\"], \"numeric_values\": [{\"fact_id\": \"F:e60d8dc9d8\", \"unit\": \"K\", \"value\": 32}, {\"fact_id\": \"F:e60d8dc9d8\", \"unit\": \"K\", \"value\": 333}, {\"fact_id\": \"F:e60d8dc9d8\", \"unit\": \"K\", \"value\": 365}], \"text\": \"B, F:e60d8dc9d8, 32 K, 333 K, 365 K\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart based on the temperature intervals.\"}"
+  },
+  "5b385d16681c752e682c64631e99be573f47767edf425da6e2e8118838a3cda7": {
+   "completion_tokens": 885,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 693,
+   "text": "{\"caveats\": [\"The given information does not show that the two situations are the same.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"6f64c33c52\", \"c5abd5ca58\"], \"numeric_values\": [{\"fact_id\": \"6f64c33c52\", \"unit\": \"K\", \"value\": 382}, {\"fact_id\": \"c5abd5ca58\", \"unit\": \"K\", \"value\": 21.8}, {\"fact_id\": \"c5abd5ca58\", \"unit\": \"sigma\", \"value\": 29.1}, {\"fact_id\": \"6f64c33c52\", \"unit\": \"h\", \"value\": 0.0833}], \"text\": \"temperature exceeds 380 K from sample 318 to 322, peak 382 K, 0.0833 h, and temperature shifts up at sample 311 by 21.8 K\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"6f64c33c52\", \"c9f6fede20\"], \"numeric_values\": [{\"fact_id\": \"6f64c33c52\", \"unit\": \"K\", \"value\": 382}, {\"fact_id\": \"c9f6fede20\", \"unit\": \"K/min\", \"value\": 0.0811}], \"text\": \"temperature exceeds 380 K from sample 318 to 322, peak 382 K, 0.0833 h, and cooling_duty has 1 further small shifts between samples 355 and 355, the largest 0.0811 K/min\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"c5abd5ca58\", \"e799aa0e56\"], \"numeric_values\": [{\"fact_id\": \"c5abd5ca58\", \"unit\": \"K\", \"value\": 21.8}, {\"fact_id\": \"e799aa0e56\", \"unit\": \"K/min\", \"value\": 1.39}], \"text\": \"temperature shifts up at sample 311 by 21.8 K, and cooling_duty shifts up at sample 315 by 1.39 K/min\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"ccd3130f8d\", \"0fcc372745\"], \"numeric_values\": [{\"fact_id\": \"ccd3130f8d\", \"unit\": \"K\", \"value\": -28.2}, {\"fact_id\": \"0fcc372745\", \"unit\": \"K\", \"value\": 10}], \"text\": \"temperature shifts down at sample 325 by 28.2 K, and temperature shifts up at sample 305 by 10 K\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"0fcc372745\", \"9226c3e608\"], \"numeric_values\": [{\"fact_id\": \"0fcc372745\", \"unit\": \"K\", \"value\": 10}, {\"fact_id\": \"9226c3e608\", \"unit\": \"K/min\", \"value\": 2.84}], \"text\": \"temperature shifts up at sample 305 by 10 K, and cooling_duty shifts down at sample 329 by 2.84 K/min\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"ccd3130f8d\", \"daf8cc2309\"], \"numeric_values\": [{\"fact_id\": \"ccd3130f8d\", \"unit\": \"K\", \"value\": -28.2}, {\"fact_id\": \"daf8cc2309\", \"unit\": \"K/min\", \"value\": 2.27}], \"text\": \"temperature shifts down at sample 325 by 28.2 K, and cooling_duty shifts up at sample 309 by 2.27 K/min\"}], \"recommendations\": [], \"summary\": \"They cannot be told apart with the given information.\"}"
+  },
+  "5d0431cd97b3d004ff0efc105f84a03d4fb9111b15007d4eeedc62b40f07159a": {
+   "completion_tokens": 180,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 375,
+   "text": "{\"caveats\": [\"The temperature intervals are not calibrated.\"], \"claims\": [{\"claim_id\": \"claim1\", \"confidence\": \"low\", \"fact_ids\": [\"F:7a94729643\", \"F:9728f33348\"], \"numeric_values\": [{\"fact_id\": \"F:7a94729643\", \"unit\": \"K\", \"value\": 11}, {\"fact_id\": \"F:9728f33348\", \"unit\": \"K\", \"value\": 33}], \"text\": \"A: 345 to 356 K, B: 334 to 367 K\"}], \"recommendations\": [], \"summary\": \"Situation A has a temperature interval of 345 to 356 K, while situation B has a temperature interval of 334 to 367 K.\"}"
+  },
+  "5e416294e93326b4d10ccef0f251d08ad5a272c89e863a5c30f580621d3d2dde": {
+   "completion_tokens": 52,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 3197,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "60b78a981b292c32ea1216bd2791d0cc042ac220db52070744c13962152398f6": {
+   "completion_tokens": 446,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 556,
+   "text": "{\"caveats\": [\"The direction of the temperature, cooling_duty, and concentration shifts is the same in both situations, but the evidence level differs.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"low\", \"fact_ids\": [\"F:cf507553b0\", \"F:f41e053e31\", \"F:82693d81b3\"], \"numeric_values\": [{\"fact_id\": \"F:cf507553b0\", \"unit\": \"K\", \"value\": 2.22}, {\"fact_id\": \"F:f41e053e31\", \"unit\": \"K/min\", \"value\": 1.03}, {\"fact_id\": \"F:82693d81b3\", \"unit\": \"mol/L\", \"value\": 0.119}], \"text\": \"situation A: temperature shifts up by 2.22 K, cooling_duty shifts down by 1.03 K/min, and concentration shifts down by 0.119 mol/L, all coinciding with the event SETPOINT.\"}, {\"claim_id\": \"B\", \"confidence\": \"low\", \"fact_ids\": [\"F:fb82202b0d\", \"F:3806d2212f\", \"F:d2af53f0a9\"], \"numeric_values\": [{\"fact_id\": \"F:fb82202b0d\", \"unit\": \"K\", \"value\": 2.22}, {\"fact_id\": \"F:3806d2212f\", \"unit\": \"K/min\", \"value\": 1.03}, {\"fact_id\": \"F:d2af53f0a9\", \"unit\": \"mol/L\", \"value\": 0.119}], \"text\": \"situation B: temperature shifts up by 2.22 K, cooling_duty shifts down by 1.03 K/min, and concentration shifts down by 0.119 mol/L, all observed as jumps.\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "60ebb451454fe157659fcde8cd6909a2a337eb36725499c0c45a4db55dd10774": {
+   "completion_tokens": 470,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 377,
+   "text": "{\"caveats\": [\"The information about calibration is not relevant to the temperature values.\"], \"claims\": [{\"claim_id\": \"claim1\", \"confidence\": \"low\", \"fact_ids\": [\"2dee82f84f\", \"76ccf574d8\"], \"numeric_values\": [{\"fact_id\": \"2dee82f84f\", \"unit\": \"K\", \"value\": 11}, {\"fact_id\": \"76ccf574d8\", \"unit\": \"K\", \"value\": 33}], \"text\": \"A concerns 11 K, B concerns 33 K\"}, {\"claim_id\": \"claim2\", \"confidence\": \"low\", \"fact_ids\": [\"2dee82f84f\", \"76ccf574d8\"], \"numeric_values\": [{\"fact_id\": \"2dee82f84f\", \"unit\": \"K\", \"value\": 16}, {\"fact_id\": \"76ccf574d8\", \"unit\": \"K\", \"value\": 36}], \"text\": \"A concerns 16 K, B concerns 36 K\"}, {\"claim_id\": \"claim3\", \"confidence\": \"low\", \"fact_ids\": [\"2dee82f84f\", \"76ccf574d8\"], \"numeric_values\": [{\"fact_id\": \"2dee82f84f\", \"unit\": \"K\", \"value\": 345}, {\"fact_id\": \"76ccf574d8\", \"unit\": \"K\", \"value\": 333}], \"text\": \"A concerns 345 K, B concerns 333 K\"}, {\"claim_id\": \"claim4\", \"confidence\": \"low\", \"fact_ids\": [\"2dee82f84f\", \"76ccf574d8\"], \"numeric_values\": [{\"fact_id\": \"2dee82f84f\", \"unit\": \"K\", \"value\": 356}, {\"fact_id\": \"76ccf574d8\", \"unit\": \"K\", \"value\": 366}], \"text\": \"A concerns 356 K, B concerns 366 K\"}], \"recommendations\": [], \"summary\": \"They can be told apart with the given information.\"}"
+  },
+  "637e804be6cdef42bf9d011b01ca350eaf5bdb83dd2ed2fd140dae75f4df39fb": {
+   "completion_tokens": 647,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 724,
+   "text": "{\"caveats\": [\"The given information does not show that the two situations are the same.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:7773b01766\", \"F:49dcba79bb\"], \"numeric_values\": [{\"fact_id\": \"F:7773b01766\", \"unit\": \"h\", \"value\": 0.15}, {\"fact_id\": \"F:49dcba79bb\", \"unit\": \"K\", \"value\": 24.5}], \"text\": \"temperature exceeds 380 K from sample 324 to 332, peak 386 K, 0.15 h and temperature shifts up at sample 316 by 24.5 K\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:47116e8ad4\", \"F:c7987710fc\"], \"numeric_values\": [{\"fact_id\": \"F:47116e8ad4\", \"unit\": \"h\", \"value\": 0.183}, {\"fact_id\": \"F:c7987710fc\", \"unit\": \"K\", \"value\": 22.6}], \"text\": \"temperature exceeds 380 K from sample 399 to 409, peak 384 K, 0.183 h and temperature shifts down at sample 430 by 22.6 K\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:5efde03b0d\"], \"numeric_values\": [{\"fact_id\": \"F:5efde03b0d\", \"unit\": \"K\", \"value\": 27.7}], \"text\": \"temperature shifts down at sample 340 by 27.7 K\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:b93b87e30d\"], \"numeric_values\": [{\"fact_id\": \"F:b93b87e30d\", \"unit\": \"K\", \"value\": 8}], \"text\": \"temperature shifts up at sample 370 by 8 K\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"F:f04ce7dfe5\"], \"numeric_values\": [{\"fact_id\": \"F:f04ce7dfe5\", \"unit\": \"K\", \"value\": 20.6}], \"text\": \"temperature shifts up at sample 316 by 20.6 K\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"F:4be37d5f9e\"], \"numeric_values\": [{\"fact_id\": \"F:4be37d5f9e\", \"unit\": \"K\", \"value\": 18.5}], \"text\": \"temperature shifts down at sample 430 by 18.5 K\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "65eeb4762f9a5415731dfbd68c957e6ab4346cab900ea7a7bc5466c68d006356": {
+   "completion_tokens": 592,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 727,
+   "text": "{\"caveats\": [\"The given information does not show that the two situations are the same.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:c61973522e\", \"F:088706bbbb\"], \"numeric_values\": [{\"fact_id\": \"F:c61973522e\", \"unit\": \"K\", \"value\": 386}, {\"fact_id\": \"F:088706bbbb\", \"unit\": \"K\", \"value\": 24.8}], \"text\": \"temperature exceeds 380 K from sample 324 to 332, peak 386 K, 0.15 h and temperature shifts up at sample 317 by 24.8 K\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:513e80b08b\"], \"numeric_values\": [{\"fact_id\": \"F:513e80b08b\", \"unit\": \"K\", \"value\": 28.1}], \"text\": \"temperature shifts down at sample 340 by 28.1 K\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:38c26394e6\"], \"numeric_values\": [{\"fact_id\": \"F:38c26394e6\", \"unit\": \"K/min\", \"value\": 2.84}], \"text\": \"cooling_duty shifts down at sample 345 by 2.84 K/min\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:5e1be6b8fa\"], \"numeric_values\": [{\"fact_id\": \"F:5e1be6b8fa\", \"unit\": \"K/min\", \"value\": 2.46}], \"text\": \"cooling_duty shifts up at sample 325 by 2.46 K/min\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"F:9d56a6a6cb\"], \"numeric_values\": [{\"fact_id\": \"F:9d56a6a6cb\", \"unit\": \"K\", \"value\": 17}], \"text\": \"temperature shifts up at sample 313 by 17 K\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"F:5fda04bb26\"], \"numeric_values\": [{\"fact_id\": \"F:5fda04bb26\", \"unit\": \"K\", \"value\": 14.4}], \"text\": \"temperature shifts down at sample 333 by 14.4 K\"}], \"recommendations\": [], \"summary\": \"They cannot be told apart with the given information.\"}"
+  },
+  "67c4c3418e366d3c8588fd44e45ad5965b558570c9dcc7354c9d54f821852f0b": {
+   "completion_tokens": 52,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 2953,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "68dd728051ed9fd44900440b76aecdc0c8bf87d4af859b77bdb2195af467ea33": {
+   "completion_tokens": 52,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 3121,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "69a472d0012aaff722e4abb562fad5633e475d5260373f68c3c641b55a8791a8": {
+   "completion_tokens": 72,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 1783,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information, which does not show that they are the same.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information, which does not show that they are the same.\"}"
+  },
+  "6dc984a831dd3d5d3175455a0074eafee2abce13f690fe9417c16b942b7287e9": {
+   "completion_tokens": 52,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 3212,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "6fbbf1f5db08c382b33833eab673317f12f9c2f6773b5f31835e20dcea3b829e": {
+   "completion_tokens": 797,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 1933,
+   "text": "{\"caveats\": [\"The differences between the two situations are based on the given facts and may not be the only differences.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:13328299c6\", \"F:5efc837e7b\"], \"numeric_values\": [{\"fact_id\": \"F:13328299c6\", \"unit\": \"mol/L\", \"value\": -0.404}, {\"fact_id\": \"F:5efc837e7b\", \"unit\": \"K/min\", \"value\": -1.79}], \"text\": \"concentration falls by -0.404 mol/L/h and cooling_duty falls by -1.79 K/min/h\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:bda724ccf3\", \"F:d179970e86\"], \"numeric_values\": [{\"fact_id\": \"F:bda724ccf3\", \"unit\": \"mol/L\", \"value\": -0.231}, {\"fact_id\": \"F:d179970e86\", \"unit\": \"K/min\", \"value\": -1.83}], \"text\": \"concentration falls by -0.231 mol/L/h and cooling_duty falls by -1.83 K/min/h\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:c52162f008\", \"F:66f1c22703\"], \"numeric_values\": [{\"fact_id\": \"F:c52162f008\", \"unit\": \"mol/L\", \"value\": 0.301}, {\"fact_id\": \"F:66f1c22703\", \"unit\": \"K/min\", \"value\": -0.575}], \"text\": \"concentration rises by 0.301 mol/L and cooling_duty falls by -0.575 K/min/h\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:a863ae8a5e\", \"F:70a0122b58\"], \"numeric_values\": [{\"fact_id\": \"F:a863ae8a5e\", \"unit\": \"K\", \"value\": 13.3}, {\"fact_id\": \"F:70a0122b58\", \"unit\": \"samples\", \"value\": 23}], \"text\": \"temperature rises by 13.3 K and is stable for 23 samples\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:9cd91db7b7\", \"F:d7eeb2d255\"], \"numeric_values\": [{\"fact_id\": \"F:9cd91db7b7\", \"unit\": \"K\", \"value\": -10.6}, {\"fact_id\": \"F:d7eeb2d255\", \"unit\": \"K\", \"value\": 9.61}], \"text\": \"temperature falls by -10.6 K and rises by 9.61 K\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:c61973522e\", \"F:c61973522e\"], \"numeric_values\": [{\"fact_id\": \"F:c61973522e\", \"unit\": \"K\", \"value\": 386}, {\"fact_id\": \"F:c61973522e\", \"unit\": \"h\", \"value\": 0.15}], \"text\": \"temperature exceeds 380 K with a peak of 386 K for 0.15 h\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart based on the given facts.\"}"
+  },
+  "70d9984310b7a50a2c843bee74af1a6233053f813825c43dc415b2a954a8005d": {
+   "completion_tokens": 599,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 763,
+   "text": "{\"caveats\": [\"The given information does not allow to conclude which situation is the normal one.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:2fda563e23\", \"F:fde13de8e9\"], \"numeric_values\": [{\"fact_id\": \"F:2fda563e23\", \"unit\": \"K\", \"value\": 386}, {\"fact_id\": \"F:fde13de8e9\", \"unit\": \"K\", \"value\": 24.2}], \"text\": \"temperature exceeds 380 K from sample 323 to 331, peak 386 K, 0.15 h and temperature shifts up at sample 316 by 24.2 K\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:2da40781d8\"], \"numeric_values\": [{\"fact_id\": \"F:2da40781d8\", \"unit\": \"K\", \"value\": 27.3}], \"text\": \"temperature shifts down at sample 339 by 27.3 K\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:ccd983407c\"], \"numeric_values\": [{\"fact_id\": \"F:ccd983407c\", \"unit\": \"K\", \"value\": 3.99}], \"text\": \"temperature shifts up at sample 361 by 3.99 K\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:6d71c2027f\"], \"numeric_values\": [{\"fact_id\": \"F:6d71c2027f\", \"unit\": \"K/min\", \"value\": -2.88}], \"text\": \"cooling_duty shifts down at sample 345 by 2.88 K/min\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:84b8f94099\"], \"numeric_values\": [{\"fact_id\": \"F:84b8f94099\", \"unit\": \"K/min\", \"value\": 2.47}], \"text\": \"cooling_duty shifts up at sample 325 by 2.47 K/min\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"F:48d6a28282\"], \"numeric_values\": [{\"fact_id\": \"F:48d6a28282\", \"unit\": \"K\", \"value\": 17.2}], \"text\": \"temperature shifts up at sample 313 by 17.2 K\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "75af661b312c28436bd7d2598bd7730dade27c96e5fa32de93b9a9568bd78134": {
+   "completion_tokens": 1069,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 1725,
+   "text": "{\"caveats\": [\"The differences between the two situations are based on the given facts and do not imply causality.\"], \"claims\": [{\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"F:7335549c68\", \"F:57e3b0ce55\"], \"numeric_values\": [{\"fact_id\": \"F:7335549c68\", \"unit\": \"mol/L\", \"value\": -0.287}, {\"fact_id\": \"F:57e3b0ce55\", \"unit\": \"mol/L/h\", \"value\": -0.117}], \"text\": \"concentration falls by -0.287 mol/L/h\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"F:34295b1179\", \"F:602144deff\", \"F:98dd1b6155\"], \"numeric_values\": [{\"fact_id\": \"F:34295b1179\", \"unit\": \"K/min\", \"value\": -1.82}, {\"fact_id\": \"F:602144deff\", \"unit\": \"K/min/h\", \"value\": -3.25}, {\"fact_id\": \"F:98dd1b6155\", \"unit\": \"K/min\", \"value\": 0.348}], \"text\": \"cooling_duty falls by -1.82 K/min/h, then rises by 0.348 K/min/h\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"F:fba7b1321b\", \"F:28a991af76\"], \"numeric_values\": [{\"fact_id\": \"F:fba7b1321b\", \"unit\": \"K\", \"value\": 25.4}, {\"fact_id\": \"F:28a991af76\", \"unit\": \"K/h\", \"value\": -5.29}], \"text\": \"temperature rises by 25.4 K/h, then falls by -5.29 K/h\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"F:de766397ea\", \"F:a4294954fd\"], \"numeric_values\": [{\"fact_id\": \"F:de766397ea\", \"unit\": \"mol/L\", \"value\": 43.7}, {\"fact_id\": \"F:a4294954fd\", \"unit\": \"noise sigmas\", \"value\": 4.63}], \"text\": \"concentration shifts down by 43.7 noise sigmas\"}, {\"claim_id\": \"situation B\", \"confidence\": \"high\", \"fact_ids\": [\"F:c7602cc84e\", \"F:95c8a9a8d0\"], \"numeric_values\": [{\"fact_id\": \"F:c7602cc84e\", \"unit\": \"mol/L/h\", \"value\": 0.476}, {\"fact_id\": \"F:95c8a9a8d0\", \"unit\": \"mol/L/h\", \"value\": 1.06}], \"text\": \"concentration rises by 0.476 mol/L/h, then by 1.06 mol/L/h\"}, {\"claim_id\": \"situation B\", \"confidence\": \"high\", \"fact_ids\": [\"F:716f950f14\", \"F:cd9199a838\"], \"numeric_values\": [{\"fact_id\": \"F:716f950f14\", \"unit\": \"K/min/h\", \"value\": -2.45}, {\"fact_id\": \"F:cd9199a838\", \"unit\": \"K/min/h\", \"value\": 5.56}], \"text\": \"cooling_duty falls by -2.45 K/min/h, then rises by 5.56 K/min/h\"}], \"recommendations\": [], \"summary\": \"Situation A and Situation B can be told apart based on the following differences: concentration falls by -0.287 mol/L/h in Situation A, but rises by 0.476 mol/L/h in Situation B; cooling_duty falls by -1.82 K/min/h, then rises by 0.348 K/min/h in Situation A, but falls by -2.45 K/min/h, then rises by 5.56 K/min/h in Situation B; temperature rises by 25.4 K/h, then falls by -5.29 K/h in Situation A, but falls by -38.4 K/h in Situation B; concentration shifts down by 43.7 noise sigmas in Situation A, but concentration shifts up by 28.7 noise sigmas in Situation B; cooling_duty shifts up by 24 noise sigmas in Situation A, but cooling_duty shifts up by 48.6 noise sigmas in Situation B; temperature shifts up by 31.2 noise sigmas in Situation A, but temperature shifts up by 12.1 noise sigmas in Situation B.\"}"
+  },
+  "7badcc71b4e626b9bceafbfcd5105761f70397ec549611954b795bbf9730264a": {
+   "completion_tokens": 52,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 4201,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "7d7b11f99aeb143ca52b58ac91dd3bb84b84390c056b0a9d5f38421731a39985": {
+   "completion_tokens": 52,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 5624,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "7e1e004ab02d1deaedd630cb6eef627d3afd74cabc59c652906a3f19dd0fba1d": {
+   "completion_tokens": 528,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 688,
+   "text": "{\"caveats\": [\"The given information does not allow to conclude the exact timing of the temperature shifts in A and B, as the time unit is not specified.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"f8d02363c2\"], \"numeric_values\": [{\"fact_id\": \"f8d02363c2\", \"unit\": \"K\", \"value\": 382}, {\"fact_id\": \"f8d02363c2\", \"unit\": \"h\", \"value\": 0.1}], \"text\": \"temperature exceeds 380 K for 0.1 h\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"8d716d4ac9\"], \"numeric_values\": [{\"fact_id\": \"8d716d4ac9\", \"unit\": \"K\", \"value\": 18}], \"text\": \"temperature shifts down by 18 K\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"e6630e3b2c\"], \"numeric_values\": [{\"fact_id\": \"e6630e3b2c\", \"unit\": \"K\", \"value\": 22.2}], \"text\": \"temperature shifts up by 22.2 K\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"2af1a92505\"], \"numeric_values\": [{\"fact_id\": \"2af1a92505\", \"unit\": \"K\", \"value\": 16.2}], \"text\": \"temperature shifts up by 16.2 K\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"844455c317\"], \"numeric_values\": [{\"fact_id\": \"844455c317\", \"unit\": \"K\", \"value\": 2.92}], \"text\": \"temperature shifts down by 2.92 K\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"93f3c43a5a\"], \"numeric_values\": [{\"fact_id\": \"93f3c43a5a\", \"unit\": \"K\", \"value\": 4.14}], \"text\": \"temperature shifts down by 4.14 K\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "7fff2b636eb46bf0aa5b82e41f3bcb00ac3a483cf21855e80188fa3093042ba9": {
+   "completion_tokens": 72,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 1889,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information, which does not show that they are the same.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information, which does not show that they are the same.\"}"
+  },
+  "81ce8e9b231455bae5b8046acc850ec4a4699f6166619c12d6a6089809f87297": {
+   "completion_tokens": 52,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 3344,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "8276cf9a064b3f0312e8b11877c72307ff5873c4dbb60b8a9c133a1529d45a9f": {
+   "completion_tokens": 587,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 358,
+   "text": "{\"caveats\": [\"The temperature intervals are not calibrated.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"low\", \"fact_ids\": [\"2c4e7af711\"], \"numeric_values\": [{\"fact_id\": \"2c4e7af711\", \"unit\": \"K\", \"value\": 14}, {\"fact_id\": \"2c4e7af711\", \"unit\": \"K\", \"value\": 16}], \"text\": \"concerns A, relies on [F:2c4e7af711], 342 K, 356 K\"}, {\"claim_id\": \"B\", \"confidence\": \"low\", \"fact_ids\": [\"182685a51d\"], \"numeric_values\": [{\"fact_id\": \"182685a51d\", \"unit\": \"K\", \"value\": 32}, {\"fact_id\": \"182685a51d\", \"unit\": \"K\", \"value\": 32}], \"text\": \"concerns B, relies on [F:182685a51d], 331 K, 363 K\"}, {\"claim_id\": \"A\", \"confidence\": \"low\", \"fact_ids\": [\"2c4e7af711\"], \"numeric_values\": [{\"fact_id\": \"2c4e7af711\", \"unit\": \"K\", \"value\": 14}], \"text\": \"concerns A, relies on [F:2c4e7af711], 342 K\"}, {\"claim_id\": \"B\", \"confidence\": \"low\", \"fact_ids\": [\"182685a51d\"], \"numeric_values\": [{\"fact_id\": \"182685a51d\", \"unit\": \"K\", \"value\": 32}], \"text\": \"concerns B, relies on [F:182685a51d], 331 K\"}, {\"claim_id\": \"A\", \"confidence\": \"low\", \"fact_ids\": [\"2c4e7af711\"], \"numeric_values\": [{\"fact_id\": \"2c4e7af711\", \"unit\": \"K\", \"value\": 16}], \"text\": \"concerns A, relies on [F:2c4e7af711], 356 K\"}, {\"claim_id\": \"B\", \"confidence\": \"low\", \"fact_ids\": [\"182685a51d\"], \"numeric_values\": [{\"fact_id\": \"182685a51d\", \"unit\": \"K\", \"value\": 32}], \"text\": \"concerns B, relies on [F:182685a51d], 363 K\"}], \"recommendations\": [], \"summary\": \"They can be told apart with the given information.\"}"
+  },
+  "82ada729f01c15178366ae495efa02e0d9a202e9042f9c70c910524264b1d8a6": {
+   "completion_tokens": 1032,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 1806,
+   "text": "{\"caveats\": [\"The differences between the two situations are based on the given data and may not reflect the actual system behavior.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"1046d92f8f\", \"1d6bfbc697\"], \"numeric_values\": [{\"fact_id\": \"1046d92f8f\", \"unit\": \"mol/L\", \"value\": -0.455}, {\"fact_id\": \"1d6bfbc697\", \"unit\": \"mol/L\", \"value\": 0.553}], \"text\": \"concentration falls by -0.455 mol/L/h and rises by 0.553 mol/L/h\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"64788dd2e5\", \"f26ef646a7\", \"40cfb10a33\"], \"numeric_values\": [{\"fact_id\": \"64788dd2e5\", \"unit\": \"K/min\", \"value\": -1.29}, {\"fact_id\": \"f26ef646a7\", \"unit\": \"K/min\", \"value\": -4.78}, {\"fact_id\": \"40cfb10a33\", \"unit\": \"K/min\", \"value\": -0.381}], \"text\": \"cooling_duty falls by -1.29 K/min/h, -4.78 K/min/h, and -0.381 K/min/h\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"6ce95cac8e\", \"a6e8008a26\"], \"numeric_values\": [{\"fact_id\": \"6ce95cac8e\", \"unit\": \"K\", \"value\": 33.7}, {\"fact_id\": \"a6e8008a26\", \"unit\": \"samples\", \"value\": 65}], \"text\": \"temperature rises by 33.7 K/h and is stable for 65 samples\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"0b7d819fb4\"], \"numeric_values\": [{\"fact_id\": \"0b7d819fb4\", \"unit\": \"K\", \"value\": 386}], \"text\": \"temperature exceeds 380 K with a peak of 386 K\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"886930745d\", \"175425d226\", \"6aaebe84f2\", \"3540666538\", \"8582aca59c\", \"ec432fc846\"], \"numeric_values\": [{\"fact_id\": \"886930745d\", \"unit\": \"mol/L\", \"value\": 0.548}, {\"fact_id\": \"175425d226\", \"unit\": \"mol/L\", \"value\": 0.354}, {\"fact_id\": \"6aaebe84f2\", \"unit\": \"K/min\", \"value\": 2.44}, {\"fact_id\": \"3540666538\", \"unit\": \"K/min\", \"value\": -2.78}, {\"fact_id\": \"8582aca59c\", \"unit\": \"K\", \"value\": 24.3}, {\"fact_id\": \"ec432fc846\", \"unit\": \"K\", \"value\": -26.8}], \"text\": \"concentration shifts down by 0.548 mol/L, up by 0.354 mol/L, cooling_duty shifts up by 2.44 K/min, down by -2.78 K/min, temperature shifts up by 24.3 K, and down by -26.8 K\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"95008332d0\", \"6d0689bab7\", \"788e63ff67\", \"eda19e2f72\"], \"numeric_values\": [{\"fact_id\": \"95008332d0\", \"unit\": \"mol/L\", \"value\": -0.139}, {\"fact_id\": \"6d0689bab7\", \"unit\": \"mol/L\", \"value\": -0.115}, {\"fact_id\": \"788e63ff67\", \"unit\": \"mol/L\", \"value\": 0.111}, {\"fact_id\": \"eda19e2f72\", \"unit\": \"mol/L\", \"value\": -0.345}], \"text\": \"concentration falls by -0.139 mol/L, -0.115 mol/L, rises by 0.111 mol/L, and falls by -0.345 mol/L\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart based on the differences in concentration and cooling_duty rates, as well as the temperature changes and stability.\"}"
+  },
+  "8488f2b693f3e06613e237280a7e03fb8f55950d65d29075f4c9c833a412b8e7": {
+   "completion_tokens": 563,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 743,
+   "text": "{\"caveats\": [\"The given information does not show that situations A and B are the same.\"], \"claims\": [{\"claim_id\": \"claim1\", \"confidence\": \"high\", \"fact_ids\": [\"F:7773b01766\"], \"numeric_values\": [{\"fact_id\": \"F:7773b01766\", \"unit\": \"K\", \"value\": 386}, {\"fact_id\": \"F:7773b01766\", \"unit\": \"h\", \"value\": 0.15}], \"text\": \"A, 386 K, 0.15 h\"}, {\"claim_id\": \"claim2\", \"confidence\": \"high\", \"fact_ids\": [\"F:47116e8ad4\"], \"numeric_values\": [{\"fact_id\": \"F:47116e8ad4\", \"unit\": \"K\", \"value\": 384}, {\"fact_id\": \"F:47116e8ad4\", \"unit\": \"h\", \"value\": 0.183}], \"text\": \"A, 384 K, 0.183 h\"}, {\"claim_id\": \"claim3\", \"confidence\": \"high\", \"fact_ids\": [\"F:49dcba79bb\"], \"numeric_values\": [{\"fact_id\": \"F:49dcba79bb\", \"unit\": \"K\", \"value\": 24.5}], \"text\": \"A, 24.5 K\"}, {\"claim_id\": \"claim4\", \"confidence\": \"high\", \"fact_ids\": [\"F:f04ce7dfe5\"], \"numeric_values\": [{\"fact_id\": \"F:f04ce7dfe5\", \"unit\": \"K\", \"value\": 20.6}], \"text\": \"B, 20.6 K\"}, {\"claim_id\": \"claim5\", \"confidence\": \"high\", \"fact_ids\": [\"F:c7987710fc\"], \"numeric_values\": [{\"fact_id\": \"F:c7987710fc\", \"unit\": \"K\", \"value\": 22.6}], \"text\": \"A, 22.6 K\"}, {\"claim_id\": \"claim6\", \"confidence\": \"high\", \"fact_ids\": [\"F:4be37d5f9e\"], \"numeric_values\": [{\"fact_id\": \"F:4be37d5f9e\", \"unit\": \"K\", \"value\": 18.5}], \"text\": \"B, 18.5 K\"}], \"recommendations\": [], \"summary\": \"Situations A and B can be told apart with the given information.\"}"
+  },
+  "89324876182e96cdb801f3dbfc51869040791e7db7368502481cef2529ff7716": {
+   "completion_tokens": 631,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 356,
+   "text": "{\"caveats\": [\"The temperature intervals are not calibrated.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"medium\", \"fact_ids\": [\"7a94729643\"], \"numeric_values\": [{\"fact_id\": \"7a94729643\", \"unit\": \"K\", \"value\": 11}, {\"fact_id\": \"7a94729643\", \"unit\": \"K\", \"value\": 345}, {\"fact_id\": \"7a94729643\", \"unit\": \"K\", \"value\": 356}], \"text\": \"concerns A, relies on [F:7a94729643], spans 345 to 356 K\"}, {\"claim_id\": \"B\", \"confidence\": \"medium\", \"fact_ids\": [\"9728f33348\"], \"numeric_values\": [{\"fact_id\": \"9728f33348\", \"unit\": \"K\", \"value\": 33}, {\"fact_id\": \"9728f33348\", \"unit\": \"K\", \"value\": 334}, {\"fact_id\": \"9728f33348\", \"unit\": \"K\", \"value\": 367}], \"text\": \"concerns B, relies on [F:9728f33348], spans 334 to 367 K\"}, {\"claim_id\": \"A\", \"confidence\": \"medium\", \"fact_ids\": [\"7a94729643\"], \"numeric_values\": [{\"fact_id\": \"7a94729643\", \"unit\": \"K\", \"value\": 11}], \"text\": \"concerns A, relies on [F:7a94729643], spans 11 K less than B\"}, {\"claim_id\": \"B\", \"confidence\": \"medium\", \"fact_ids\": [\"9728f33348\"], \"numeric_values\": [{\"fact_id\": \"9728f33348\", \"unit\": \"K\", \"value\": 33}], \"text\": \"concerns B, relies on [F:9728f33348], spans 33 K more than A\"}, {\"claim_id\": \"A\", \"confidence\": \"medium\", \"fact_ids\": [\"7a94729643\"], \"numeric_values\": [{\"fact_id\": \"7a94729643\", \"unit\": \"K\", \"value\": 345}], \"text\": \"concerns A, relies on [F:7a94729643], lower bound is 345 K\"}, {\"claim_id\": \"B\", \"confidence\": \"medium\", \"fact_ids\": [\"9728f33348\"], \"numeric_values\": [{\"fact_id\": \"9728f33348\", \"unit\": \"K\", \"value\": 334}], \"text\": \"concerns B, relies on [F:9728f33348], lower bound is 334 K\"}], \"recommendations\": [], \"summary\": \"They can be told apart with the given information.\"}"
+  },
+  "89901ead4df49633e211c92ef23f5c16696ca37114c38215463e5b0fe5faa15c": {
+   "completion_tokens": 233,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 357,
+   "text": "{\"caveats\": [\"The temperature intervals are not calibrated.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"low\", \"fact_ids\": [\"4162fe97f4\"], \"numeric_values\": [{\"fact_id\": \"4162fe97f4\", \"unit\": \"K\", \"value\": 343}, {\"fact_id\": \"4162fe97f4\", \"unit\": \"K\", \"value\": 357}], \"text\": \"A concerns 343 K, 357 K\"}, {\"claim_id\": \"B\", \"confidence\": \"low\", \"fact_ids\": [\"e5ebe6ce29\"], \"numeric_values\": [{\"fact_id\": \"e5ebe6ce29\", \"unit\": \"K\", \"value\": 332}, {\"fact_id\": \"e5ebe6ce29\", \"unit\": \"K\", \"value\": 365}], \"text\": \"B concerns 332 K, 365 K\"}], \"recommendations\": [], \"summary\": \"They can be told apart with the given information.\"}"
+  },
+  "89e615553d66939d757ea60f65e0125ae63b3c21e8ff8c48f4ff6d38c0237a53": {
+   "completion_tokens": 842,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 725,
+   "text": "{\"caveats\": [\"The direction of the temperature and cooling_duty jumps cannot be compared between the two situations.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"8582aca59c\", \"0b7d819fb4\"], \"numeric_values\": [{\"fact_id\": \"8582aca59c\", \"unit\": \"K\", \"value\": 24.3}, {\"fact_id\": \"0b7d819fb4\", \"unit\": \"h\", \"value\": 0.15}, {\"fact_id\": \"0b7d819fb4\", \"unit\": \"K\", \"value\": 386}], \"text\": \"temperature shifts up at sample 317 by 24.3 K (jump, 29.3 noise sigmas) and temperature exceeds 380 K from sample 325 to 333, peak 386 K, 0.15 h\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"ec432fc846\"], \"numeric_values\": [{\"fact_id\": \"ec432fc846\", \"unit\": \"K\", \"value\": 26.8}], \"text\": \"temperature shifts down at sample 341 by 26.8 K (jump, 32.3 noise sigmas)\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"3540666538\"], \"numeric_values\": [{\"fact_id\": \"3540666538\", \"unit\": \"K/min\", \"value\": 2.78}], \"text\": \"cooling_duty shifts down at sample 347 by 2.78 K/min (jump, 46.1 noise sigmas)\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"6aaebe84f2\"], \"numeric_values\": [{\"fact_id\": \"6aaebe84f2\", \"unit\": \"K/min\", \"value\": 2.44}], \"text\": \"cooling_duty shifts up at sample 327 by 2.44 K/min (jump, 40.5 noise sigmas)\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"bea8381ae0\"], \"numeric_values\": [{\"fact_id\": \"bea8381ae0\", \"unit\": \"K\", \"value\": 17.7}], \"text\": \"temperature shifts up at sample 313 by 17.7 K (jump, 19.6 noise sigmas)\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"1a87017f17\"], \"numeric_values\": [{\"fact_id\": \"1a87017f17\", \"unit\": \"K\", \"value\": 12.5}], \"text\": \"temperature shifts down at sample 333 by 12.5 K (jump, 13.8 noise sigmas)\"}], \"recommendations\": [], \"summary\": \"Situation A is characterized by a temperature exceeding 380 K from sample 325 to 333, peak 386 K, 0.15 h, a temperature shift up at sample 317 by 24.3 K (jump, 29.3 noise sigmas), a temperature shift down at sample 341 by 26.8 K (jump, 32.3 noise sigmas), a cooling_duty shift down at sample 347 by 2.78 K/min (jump, 46.1 noise sigmas), and a cooling_duty shift up at sample 327 by 2.44 K/min (jump, 40.5 noise sigmas). Situation B is characterized by a temperature shift up at sample 313 by 17.7 K (jump, 19.6 noise sigmas) and a temperature shift down at sample 333 by 12.5 K (jump, 13.8 noise sigmas).\"}"
+  },
+  "8a2fcec10789d249aacf478e2d1fd908760b0928680a89fda72a596c115084ca": {
+   "completion_tokens": 538,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 734,
+   "text": "{\"caveats\": [\"The given information does not show that the two situations are the same.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:5a25661530\", \"F:941656d637\"], \"numeric_values\": [{\"fact_id\": \"F:5a25661530\", \"unit\": \"K\", \"value\": 386}, {\"fact_id\": \"F:941656d637\", \"unit\": \"h\", \"value\": 0.183}], \"text\": \"temperature exceeds 380 K for 0.183 h\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:720742aa2f\"], \"numeric_values\": [{\"fact_id\": \"F:720742aa2f\", \"unit\": \"K\", \"value\": 24.2}], \"text\": \"temperature shifts up by 24.2 K\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:12d66f1d83\"], \"numeric_values\": [{\"fact_id\": \"F:12d66f1d83\", \"unit\": \"K\", \"value\": 27.9}], \"text\": \"temperature shifts down by 27.9 K\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:8c5549aaff\"], \"numeric_values\": [{\"fact_id\": \"F:8c5549aaff\", \"unit\": \"K\", \"value\": 9.31}], \"text\": \"temperature shifts up by 9.31 K\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:9d388d3c0f\"], \"numeric_values\": [{\"fact_id\": \"F:9d388d3c0f\", \"unit\": \"K\", \"value\": 11.7}], \"text\": \"temperature shifts down by 11.7 K\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"F:a162c1f400\"], \"numeric_values\": [{\"fact_id\": \"F:a162c1f400\", \"unit\": \"K\", \"value\": 19.7}], \"text\": \"temperature shifts up by 19.7 K\"}], \"recommendations\": [], \"summary\": \"They cannot be told apart with the given information.\"}"
+  },
+  "8bdac5415f9c53a18303a37614657ae92531c44d61eef9fb4ed55cef083ab400": {
+   "completion_tokens": 973,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 3936,
+   "text": "{\"caveats\": [\"The forecast intervals are not directly comparable because they are not calibrated.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"low\", \"fact_ids\": [\"F:2dee82f84f\", \"F:76ccf574d8\"], \"numeric_values\": [{\"fact_id\": \"F:2dee82f84f\", \"unit\": \"K\", \"value\": 345}, {\"fact_id\": \"F:76ccf574d8\", \"unit\": \"K\", \"value\": 333}, {\"fact_id\": \"F:76ccf574d8\", \"unit\": \"K\", \"value\": 366}, {\"fact_id\": \"F:32378dd942\", \"unit\": \"K\", \"value\": 350}], \"text\": \"Situation A's temperature forecast interval is lower than Situation B's.\"}, {\"claim_id\": \"B\", \"confidence\": \"low\", \"fact_ids\": [\"F:2dee82f84f\", \"F:76ccf574d8\"], \"numeric_values\": [{\"fact_id\": \"F:2dee82f84f\", \"unit\": \"K\", \"value\": 356}, {\"fact_id\": \"F:76ccf574d8\", \"unit\": \"K\", \"value\": 350}, {\"fact_id\": \"F:76ccf574d8\", \"unit\": \"K\", \"value\": 351}], \"text\": \"Situation B's temperature forecast interval is higher than Situation A's.\"}, {\"claim_id\": \"C\", \"confidence\": \"low\", \"fact_ids\": [\"F:2dee82f84f\", \"F:76ccf574d8\"], \"numeric_values\": [{\"fact_id\": \"F:2dee82f84f\", \"unit\": \"K\", \"value\": 345}, {\"fact_id\": \"F:76ccf574d8\", \"unit\": \"K\", \"value\": 333}, {\"fact_id\": \"F:76ccf574d8\", \"unit\": \"K\", \"value\": 366}, {\"fact_id\": \"F:32378dd942\", \"unit\": \"K\", \"value\": 350}], \"text\": \"Situation A's temperature forecast interval is wider than Situation B's.\"}, {\"claim_id\": \"D\", \"confidence\": \"low\", \"fact_ids\": [\"F:2dee82f84f\", \"F:76ccf574d8\"], \"numeric_values\": [{\"fact_id\": \"F:2dee82f84f\", \"unit\": \"K\", \"value\": 356}, {\"fact_id\": \"F:76ccf574d8\", \"unit\": \"K\", \"value\": 350}, {\"fact_id\": \"F:76ccf574d8\", \"unit\": \"K\", \"value\": 351}], \"text\": \"Situation B's temperature forecast interval is narrower than Situation A's.\"}, {\"claim_id\": \"E\", \"confidence\": \"low\", \"fact_ids\": [\"F:2dee82f84f\", \"F:76ccf574d8\"], \"numeric_values\": [{\"fact_id\": \"F:2dee82f84f\", \"unit\": \"K\", \"value\": 345}, {\"fact_id\": \"F:76ccf574d8\", \"unit\": \"K\", \"value\": 333}, {\"fact_id\": \"F:76ccf574d8\", \"unit\": \"K\", \"value\": 366}, {\"fact_id\": \"F:32378dd942\", \"unit\": \"K\", \"value\": 350}], \"text\": \"Situation A's temperature forecast interval is not comparable to Situation B's.\"}, {\"claim_id\": \"F\", \"confidence\": \"low\", \"fact_ids\": [\"F:2dee82f84f\", \"F:76ccf574d8\"], \"numeric_values\": [{\"fact_id\": \"F:2dee82f84f\", \"unit\": \"K\", \"value\": 356}, {\"fact_id\": \"F:76ccf574d8\", \"unit\": \"K\", \"value\": 350}, {\"fact_id\": \"F:76ccf574d8\", \"unit\": \"K\", \"value\": 351}], \"text\": \"Situation B's temperature forecast interval is not comparable to Situation A's.\"}], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "8ca1bbb274519a2d9589cbc9c342296ae713a1d3afff36ed2425cf7bb1dfb055": {
+   "completion_tokens": 52,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 4567,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "8da9a91a4e0baf3b6747786eee68ee0760f616ae8946acb7dfb304e31ae15b67": {
+   "completion_tokens": 732,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 765,
+   "text": "{\"caveats\": [\"The given information does not allow to conclude the exact timing of the temperature shifts, only the order of the samples.\", \"The given information does not allow to conclude the exact duration of the temperature shifts, only the order of the samples.\"], \"claims\": [{\"claim_id\": \"claim1\", \"confidence\": \"high\", \"fact_ids\": [\"F:efedd43387\"], \"numeric_values\": [{\"fact_id\": \"F:efedd43387\", \"unit\": \"K\", \"value\": 381}, {\"fact_id\": \"F:efedd43387\", \"unit\": \"h\", \"value\": 0.0667}], \"text\": \"A, [381 K, 0.0667 h]\"}, {\"claim_id\": \"claim2\", \"confidence\": \"high\", \"fact_ids\": [\"F:d5331cf281\"], \"numeric_values\": [{\"fact_id\": \"F:d5331cf281\", \"unit\": \"K\", \"value\": 27.5}, {\"fact_id\": \"F:d5331cf281\", \"unit\": \"sigma\", \"value\": 43.9}], \"text\": \"A, [27.5 K, 43.9 sigma]\"}, {\"claim_id\": \"claim3\", \"confidence\": \"high\", \"fact_ids\": [\"F:dabf28e0d3\"], \"numeric_values\": [{\"fact_id\": \"F:dabf28e0d3\", \"unit\": \"K\", \"value\": 18.1}, {\"fact_id\": \"F:dabf28e0d3\", \"unit\": \"sigma\", \"value\": 35.5}], \"text\": \"B, [18.1 K, 35.5 sigma]\"}, {\"claim_id\": \"claim4\", \"confidence\": \"high\", \"fact_ids\": [\"F:afb3346306\"], \"numeric_values\": [{\"fact_id\": \"F:afb3346306\", \"unit\": \"K\", \"value\": 21.9}, {\"fact_id\": \"F:afb3346306\", \"unit\": \"sigma\", \"value\": 35}], \"text\": \"A, [21.9 K, 35 sigma]\"}, {\"claim_id\": \"claim5\", \"confidence\": \"high\", \"fact_ids\": [\"F:8e2ebb9e64\"], \"numeric_values\": [{\"fact_id\": \"F:8e2ebb9e64\", \"unit\": \"K\", \"value\": 15.7}, {\"fact_id\": \"F:8e2ebb9e64\", \"unit\": \"sigma\", \"value\": 30.9}], \"text\": \"B, [15.7 K, 30.9 sigma]\"}, {\"claim_id\": \"claim6\", \"confidence\": \"high\", \"fact_ids\": [\"F:91d3f2d4a2\"], \"numeric_values\": [{\"fact_id\": \"F:91d3f2d4a2\", \"unit\": \"K\", \"value\": 2.65}, {\"fact_id\": \"F:91d3f2d4a2\", \"unit\": \"sigma\", \"value\": 4.24}], \"text\": \"A, [2.65 K, 4.24 sigma]\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "8e6af4615b5baf73e588501892b2aef378c1dfb1ef44787e0b8e62e181accd80": {
+   "completion_tokens": 541,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 782,
+   "text": "{\"caveats\": [\"The direction of the temperature and cooling_duty shifts in A and B cannot be compared.\"], \"claims\": [{\"claim_id\": \"claim1\", \"confidence\": \"low\", \"fact_ids\": [\"F:0a93c17e2c\"], \"numeric_values\": [{\"fact_id\": \"F:0a93c17e2c\", \"unit\": \"K\", \"value\": 386}, {\"fact_id\": \"F:0a93c17e2c\", \"unit\": \"h\", \"value\": 0.15}], \"text\": \"A, [386 K, 0.15 h]\"}, {\"claim_id\": \"claim2\", \"confidence\": \"low\", \"fact_ids\": [\"F:5f361c2801\"], \"numeric_values\": [{\"fact_id\": \"F:5f361c2801\", \"unit\": \"K\", \"value\": 23.4}], \"text\": \"A, [23.4 K]\"}, {\"claim_id\": \"claim3\", \"confidence\": \"low\", \"fact_ids\": [\"F:e9772dd619\"], \"numeric_values\": [{\"fact_id\": \"F:e9772dd619\", \"unit\": \"K\", \"value\": 27.2}], \"text\": \"A, [27.2 K]\"}, {\"claim_id\": \"claim4\", \"confidence\": \"low\", \"fact_ids\": [\"F:e892e0daeb\"], \"numeric_values\": [{\"fact_id\": \"F:e892e0daeb\", \"unit\": \"K\", \"value\": 4.72}], \"text\": \"A, [4.72 K]\"}, {\"claim_id\": \"claim5\", \"confidence\": \"low\", \"fact_ids\": [\"F:28e1a764df\"], \"numeric_values\": [{\"fact_id\": \"F:28e1a764df\", \"unit\": \"K/min\", \"value\": -2.85}], \"text\": \"A, [-2.85 K/min]\"}, {\"claim_id\": \"claim6\", \"confidence\": \"low\", \"fact_ids\": [\"F:18ed754e52\"], \"numeric_values\": [{\"fact_id\": \"F:18ed754e52\", \"unit\": \"K/min\", \"value\": 2.43}], \"text\": \"A, [2.43 K/min]\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "8fddc3117d4ef1de7d96b449e79315bf097df826eb0ad01de1645660cf456dcf": {
+   "completion_tokens": 286,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 360,
+   "text": "{\"caveats\": [\"The calibration status is the same for both situations.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"low\", \"fact_ids\": [\"F:73d2a6f2da\"], \"numeric_values\": [{\"fact_id\": \"F:73d2a6f2da\", \"unit\": \"K\", \"value\": 13}, {\"fact_id\": \"F:73d2a6f2da\", \"unit\": \"K\", \"value\": 17}], \"text\": \"concerns A, relies on F:73d2a6f2da, 13 K, 17 K\"}, {\"claim_id\": \"B\", \"confidence\": \"low\", \"fact_ids\": [\"F:991fa6fd4f\"], \"numeric_values\": [{\"fact_id\": \"F:991fa6fd4f\", \"unit\": \"K\", \"value\": 34}, {\"fact_id\": \"F:991fa6fd4f\", \"unit\": \"K\", \"value\": 34}], \"text\": \"concerns B, relies on F:991fa6fd4f, 34 K, 34 K\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "903ca1a5cb5e48afba1b96463bf6645a53d0dffc2131e3d4ee788811d6302f26": {
+   "completion_tokens": 52,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 3104,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "9746d8414e61d60a8e6aa92dd079835f1e6a41f0fda6328ab882dd6a5093acb2": {
+   "completion_tokens": 564,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 724,
+   "text": "{\"caveats\": [\"The given information does not show that the two situations are the same.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"f7d3be1b7b\", \"6da91081b8\"], \"numeric_values\": [{\"fact_id\": \"f7d3be1b7b\", \"unit\": \"K\", \"value\": 381}, {\"fact_id\": \"6da91081b8\", \"unit\": \"K\", \"value\": 27.6}], \"text\": \"temperature exceeds 380 K from sample 319 to 321, peak 381 K, 0.05 h and temperature shifts down at sample 428 by 27.6 K\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"9769f8e275\"], \"numeric_values\": [{\"fact_id\": \"9769f8e275\", \"unit\": \"K\", \"value\": 21.8}], \"text\": \"temperature shifts up at sample 311 by 21.8 K\"}, {\"claim_id\": \"A\", \"confidence\": \"low\", \"fact_ids\": [\"5242af3ad1\"], \"numeric_values\": [{\"fact_id\": \"5242af3ad1\", \"unit\": \"K\", \"value\": 2.42}], \"text\": \"temperature shifts down at sample 408 by 2.42 K\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"09f333eb15\"], \"numeric_values\": [{\"fact_id\": \"09f333eb15\", \"unit\": \"K\", \"value\": 17.7}], \"text\": \"temperature shifts down at sample 428 by 17.7 K\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"f941db63f1\"], \"numeric_values\": [{\"fact_id\": \"f941db63f1\", \"unit\": \"K\", \"value\": 16}], \"text\": \"temperature shifts up at sample 307 by 16 K\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"6f20aa9f54\"], \"numeric_values\": [{\"fact_id\": \"6f20aa9f54\", \"unit\": \"K\", \"value\": 4.13}], \"text\": \"temperature shifts down at sample 327 by 4.13 K\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "98fe0e559fd9a66a1c98e91b0108e1beeb6cd1ebb69f912dbf404ecfbe246ed2": {
+   "completion_tokens": 696,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 782,
+   "text": "{\"caveats\": [\"The direction of the temperature and cooling_duty shifts in A and B cannot be compared.\"], \"claims\": [{\"claim_id\": \"claim1\", \"confidence\": \"high\", \"fact_ids\": [\"F:2fda563e23\"], \"numeric_values\": [{\"fact_id\": \"F:2fda563e23\", \"unit\": \"K\", \"value\": 386}, {\"fact_id\": \"F:2fda563e23\", \"unit\": \"h\", \"value\": 0.15}], \"text\": \"A, [386 K, 0.15 h]\"}, {\"claim_id\": \"claim2\", \"confidence\": \"high\", \"fact_ids\": [\"F:fde13de8e9\"], \"numeric_values\": [{\"fact_id\": \"F:fde13de8e9\", \"unit\": \"K\", \"value\": 24.2}, {\"fact_id\": \"F:fde13de8e9\", \"unit\": \"sigma\", \"value\": 27.6}], \"text\": \"A, [24.2 K, 27.6 sigma]\"}, {\"claim_id\": \"claim3\", \"confidence\": \"high\", \"fact_ids\": [\"F:48d6a28282\"], \"numeric_values\": [{\"fact_id\": \"F:48d6a28282\", \"unit\": \"K\", \"value\": 17.2}, {\"fact_id\": \"F:48d6a28282\", \"unit\": \"sigma\", \"value\": 16.9}], \"text\": \"B, [17.2 K, 16.9 sigma]\"}, {\"claim_id\": \"claim4\", \"confidence\": \"high\", \"fact_ids\": [\"F:2da40781d8\"], \"numeric_values\": [{\"fact_id\": \"F:2da40781d8\", \"unit\": \"K\", \"value\": 27.3}, {\"fact_id\": \"F:2da40781d8\", \"unit\": \"sigma\", \"value\": 31.1}], \"text\": \"A, [27.3 K, 31.1 sigma]\"}, {\"claim_id\": \"claim5\", \"confidence\": \"high\", \"fact_ids\": [\"F:e155a59fad\"], \"numeric_values\": [{\"fact_id\": \"F:e155a59fad\", \"unit\": \"K\", \"value\": 14.9}, {\"fact_id\": \"F:e155a59fad\", \"unit\": \"sigma\", \"value\": 14.7}], \"text\": \"B, [14.9 K, 14.7 sigma]\"}, {\"claim_id\": \"claim6\", \"confidence\": \"high\", \"fact_ids\": [\"F:ccd983407c\"], \"numeric_values\": [{\"fact_id\": \"F:ccd983407c\", \"unit\": \"K\", \"value\": 3.99}, {\"fact_id\": \"F:ccd983407c\", \"unit\": \"sigma\", \"value\": 4.55}], \"text\": \"A, [3.99 K, 4.55 sigma]\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "99d6b627c3dd2c06b0e75557b3e8a95e2b820efe5d250b27da5a9aecea914449": {
+   "completion_tokens": 420,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 549,
+   "text": "{\"caveats\": [\"The direction of the changes in temperature, cooling_duty, and concentration cannot be concluded for situation A, as the facts only mention the event SETPOINT as a coincidence, not a cause.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"low\", \"fact_ids\": [\"7dffcc8de6\", \"dd6004888b\", \"2ea5f85375\"], \"numeric_values\": [{\"fact_id\": \"7dffcc8de6\", \"unit\": \"K\", \"value\": 1.97}, {\"fact_id\": \"dd6004888b\", \"unit\": \"K/min\", \"value\": 0.928}, {\"fact_id\": \"2ea5f85375\", \"unit\": \"mol/L\", \"value\": 0.105}], \"text\": \"A has temperature shifts up by 1.97 K, cooling_duty shifts down by 0.928 K/min, and concentration shifts down by 0.105 mol/L, all coinciding with the event SETPOINT.\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"35865ac015\", \"0bbbbdcb59\", \"13ffceb165\"], \"numeric_values\": [{\"fact_id\": \"35865ac015\", \"unit\": \"K\", \"value\": 1.97}, {\"fact_id\": \"0bbbbdcb59\", \"unit\": \"K/min\", \"value\": 0.928}, {\"fact_id\": \"13ffceb165\", \"unit\": \"mol/L\", \"value\": 0.105}], \"text\": \"B has temperature shifts up by 1.97 K, cooling_duty shifts down by 0.928 K/min, and concentration shifts down by 0.105 mol/L, all observed as jumps.\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "9a9a6317f5afd754bea3bd96df6ed61f8cc47ba1ec1eec658e8f760d90aa2e8c": {
+   "completion_tokens": 1536,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "length",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 3450,
+   "text": "{\"caveats\": [\"The following claims are based on the given facts and may not be comprehensive or definitive.\"], \"claims\": [{\"claim_id\": \"1\", \"confidence\": \"high\", \"fact_ids\": [\"F:b50d77694b\", \"F:2602f47981\"], \"numeric_values\": [{\"fact_id\": \"F:b50d77694b\", \"unit\": \"mol/L/h\", \"value\": -0.319}, {\"fact_id\": \"F:2602f47981\", \"unit\": \"mol/L/h\", \"value\": -0.236}], \"text\": \"Situation A: concentration falls by -0.319 mol/L/h, Situation B: concentration falls by -0.236 mol/L/h\"}, {\"claim_id\": \"2\", \"confidence\": \"high\", \"fact_ids\": [\"F:8593333ade\", \"F:6d1709ca09\", \"F:de22bf9bff\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9bff\", \"F:6d1709ca09\", \"F:8593333ade\", \"F:de22bf9"
+  },
+  "9ae2a2d17ebf532f32f8f6107e301b8f0f9a4d306ed0d35b5d014a90acae1fba": {
+   "completion_tokens": 52,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 5644,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "a09d547ad987427961c97d2f028cc49c8f2a81a5fcbab457f6a9f8b8a2e8418f": {
+   "completion_tokens": 597,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 763,
+   "text": "{\"caveats\": [\"The given information does not allow to conclude which situation is the normal one.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:0a93c17e2c\", \"F:5f361c2801\"], \"numeric_values\": [{\"fact_id\": \"F:0a93c17e2c\", \"unit\": \"K\", \"value\": 386}, {\"fact_id\": \"F:5f361c2801\", \"unit\": \"K\", \"value\": 23.4}], \"text\": \"temperature exceeds 380 K from sample 323 to 331, peak 386 K, 0.15 h and temperature shifts up at sample 317 by 23.4 K\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:e9772dd619\"], \"numeric_values\": [{\"fact_id\": \"F:e9772dd619\", \"unit\": \"K\", \"value\": 27.2}], \"text\": \"temperature shifts down at sample 339 by 27.2 K\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:e892e0daeb\"], \"numeric_values\": [{\"fact_id\": \"F:e892e0daeb\", \"unit\": \"K\", \"value\": 4.72}], \"text\": \"temperature shifts up at sample 361 by 4.72 K\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:28e1a764df\"], \"numeric_values\": [{\"fact_id\": \"F:28e1a764df\", \"unit\": \"K/min\", \"value\": -2.85}], \"text\": \"cooling_duty shifts down at sample 345 by 2.85 K/min\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:18ed754e52\"], \"numeric_values\": [{\"fact_id\": \"F:18ed754e52\", \"unit\": \"K/min\", \"value\": 2.43}], \"text\": \"cooling_duty shifts up at sample 325 by 2.43 K/min\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"F:5343610c5a\"], \"numeric_values\": [{\"fact_id\": \"F:5343610c5a\", \"unit\": \"K\", \"value\": 16.8}], \"text\": \"temperature shifts up at sample 313 by 16.8 K\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "a454502f2f4e3f7f01940662c9ee6faf037b19170a36066698c906032b4889c5": {
+   "completion_tokens": 645,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 3064,
+   "text": "{\"caveats\": [\"The forecast intervals are not directly comparable because they are for different temperature ranges.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"medium\", \"fact_ids\": [\"72a0654a6e\", \"e9a5a8d97f\"], \"numeric_values\": [{\"fact_id\": \"72a0654a6e\", \"unit\": \"mol/L\", \"value\": 0.0926}, {\"fact_id\": \"e9a5a8d97f\", \"unit\": \"K\", \"value\": 349}], \"text\": \"concentration falls by 0.0926 mol/L net and temperature ends at 349 K\"}, {\"claim_id\": \"B\", \"confidence\": \"low\", \"fact_ids\": [\"d8f9c3954e\"], \"numeric_values\": [{\"fact_id\": \"d8f9c3954e\", \"unit\": \"K\", \"value\": 334}], \"text\": \"temperature: the model's nominal 80 % interval spans 334 to 365 K\"}, {\"claim_id\": \"A\", \"confidence\": \"medium\", \"fact_ids\": [\"72a0654a6e\", \"f:1dfea6ce14\"], \"numeric_values\": [{\"fact_id\": \"72a0654a6e\", \"unit\": \"mol/L\", \"value\": 0.0926}, {\"fact_id\": \"1dfea6ce14\", \"unit\": \"samples\", \"value\": 259}], \"text\": \"concentration falls by 0.0926 mol/L net in 259 samples\"}, {\"claim_id\": \"B\", \"confidence\": \"low\", \"fact_ids\": [\"f:1dfea6ce14\"], \"numeric_values\": [{\"fact_id\": \"1dfea6ce14\", \"unit\": \"samples\", \"value\": 259}], \"text\": \"concentration is stable in 259 samples\"}, {\"claim_id\": \"A\", \"confidence\": \"medium\", \"fact_ids\": [\"72a0654a6e\", \"f:3176f17fcc\"], \"numeric_values\": [{\"fact_id\": \"72a0654a6e\", \"unit\": \"mol/L\", \"value\": 0.0926}, {\"fact_id\": \"3176f17fcc\", \"unit\": \"K\", \"value\": 3.93}], \"text\": \"concentration falls by 0.0926 mol/L net and temperature rises by 3.93 K net\"}, {\"claim_id\": \"B\", \"confidence\": \"low\", \"fact_ids\": [\"f:3176f17fcc\"], \"numeric_values\": [{\"fact_id\": \"3176f17fcc\", \"unit\": \"K\", \"value\": 3.93}], \"text\": \"temperature rises by 3.93 K net\"}], \"recommendations\": [], \"summary\": \"Situation A and Situation B can be told apart with the given information.\"}"
+  },
+  "a49a5edbc489604739fcc6e4225289694ac6416620252e09e46d4dbd5a4dfab3": {
+   "completion_tokens": 581,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 358,
+   "text": "{\"caveats\": [\"The temperature intervals are not calibrated.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"low\", \"fact_ids\": [\"2dee82f84f\"], \"numeric_values\": [{\"fact_id\": \"2dee82f84f\", \"unit\": \"K\", \"value\": 11}, {\"fact_id\": \"2dee82f84f\", \"unit\": \"K\", \"value\": 16}], \"text\": \"concerns A, relies on F:2dee82f84f, 11 K, 16 K\"}, {\"claim_id\": \"B\", \"confidence\": \"low\", \"fact_ids\": [\"76ccf574d8\"], \"numeric_values\": [{\"fact_id\": \"76ccf574d8\", \"unit\": \"K\", \"value\": 33}, {\"fact_id\": \"76ccf574d8\", \"unit\": \"K\", \"value\": 33}], \"text\": \"concerns B, relies on F:76ccf574d8, 33 K, 33 K\"}, {\"claim_id\": \"A\", \"confidence\": \"low\", \"fact_ids\": [\"2dee82f84f\"], \"numeric_values\": [{\"fact_id\": \"2dee82f84f\", \"unit\": \"K\", \"value\": 345}, {\"fact_id\": \"2dee82f84f\", \"unit\": \"K\", \"value\": 356}], \"text\": \"concerns A, relies on F:2dee82f84f, 345 K, 356 K\"}, {\"claim_id\": \"B\", \"confidence\": \"low\", \"fact_ids\": [\"76ccf574d8\"], \"numeric_values\": [{\"fact_id\": \"76ccf574d8\", \"unit\": \"K\", \"value\": 333}, {\"fact_id\": \"76ccf574d8\", \"unit\": \"K\", \"value\": 366}], \"text\": \"concerns B, relies on F:76ccf574d8, 333 K, 366 K\"}, {\"claim_id\": \"A\", \"confidence\": \"low\", \"fact_ids\": [\"2dee82f84f\"], \"numeric_values\": [], \"text\": \"concerns A, relies on F:2dee82f84f\"}, {\"claim_id\": \"B\", \"confidence\": \"low\", \"fact_ids\": [\"76ccf574d8\"], \"numeric_values\": [], \"text\": \"concerns B, relies on F:76ccf574d8\"}], \"recommendations\": [], \"summary\": \"They can be told apart with the given information.\"}"
+  },
+  "a5c44c7dc5a9c7ca17865b1094ca5fcb1847bf912c9b0f2de18171825ee6c0bf": {
+   "completion_tokens": 805,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 685,
+   "text": "{\"caveats\": [\"The given information does not allow to conclude if the temperature and cooling_duty shifts are related or independent.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"f6f2945fb0\", \"65d409d651\"], \"numeric_values\": [{\"fact_id\": \"f6f2945fb0\", \"unit\": \"K\", \"value\": 21.7}, {\"fact_id\": \"65d409d651\", \"unit\": \"h\", \"value\": 0.0667}], \"text\": \"temperature shifts up at sample 311 by 21.7 K (jump, 37.8 noise sigmas) for 0.0667 h\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"647ff1a79e\", \"65d409d651\"], \"numeric_values\": [{\"fact_id\": \"647ff1a79e\", \"unit\": \"K/min\", \"value\": -0.875}, {\"fact_id\": \"65d409d651\", \"unit\": \"h\", \"value\": 0.0667}], \"text\": \"cooling_duty shifts down at sample 336 by 0.875 K/min for 0.0667 h\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"7ccf62bcac\", \"65d409d651\"], \"numeric_values\": [{\"fact_id\": \"7ccf62bcac\", \"unit\": \"K/min\", \"value\": 1.25}, {\"fact_id\": \"65d409d651\", \"unit\": \"h\", \"value\": 0.0667}], \"text\": \"cooling_duty shifts up at sample 316 by 1.25 K/min for 0.0667 h\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"37b042ccb1\", \"18607d290d\"], \"numeric_values\": [{\"fact_id\": \"37b042ccb1\", \"unit\": \"K\", \"value\": 9.31}, {\"fact_id\": \"18607d290d\", \"unit\": \"K\", \"value\": -24.5}], \"text\": \"temperature shifts up at sample 305 by 9.31 K and down at sample 325 by 24.5 K\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"8da0f7d947\", \"d2283c75bd\"], \"numeric_values\": [{\"fact_id\": \"8da0f7d947\", \"unit\": \"K/min\", \"value\": 1.87}, {\"fact_id\": \"d2283c75bd\", \"unit\": \"K/min\", \"value\": -2.5}], \"text\": \"cooling_duty shifts up at sample 308 by 1.87 K/min and down at sample 328 by 2.5 K/min\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"6aa2d0da8d\", \"18607d290d\"], \"numeric_values\": [{\"fact_id\": \"6aa2d0da8d\", \"unit\": \"K\", \"value\": 2.48}, {\"fact_id\": \"18607d290d\", \"unit\": \"K\", \"value\": -24.5}], \"text\": \"temperature shifts up at sample 355 by 2.48 K and down at sample 325 by 24.5 K\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "a6334ab952e1da803c5f7984bfd06013691945a30bb3332884b25c12b812bf93": {
+   "completion_tokens": 1041,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 3685,
+   "text": "{\"caveats\": [\"The forecast for situation A is not distinguishable from situation B, but the nominal 80% interval is different.\"], \"claims\": [{\"claim_id\": \"claim1\", \"confidence\": \"high\", \"fact_ids\": [\"F:e06e1cc550\", \"F:ac924c99ae\"], \"numeric_values\": [{\"fact_id\": \"F:e06e1cc550\", \"unit\": \"mol/L\", \"value\": 0.0968}, {\"fact_id\": \"F:ac924c99ae\", \"unit\": \"K\", \"value\": 4.13}], \"text\": \"Situation A: concentration falls from sample 0 to 19 by 0.0968 mol/L net (-0.29 mol/L/h), temperature rises from sample 0 to 30 by 4.13 K net (8 K/h)\"}, {\"claim_id\": \"claim2\", \"confidence\": \"high\", \"fact_ids\": [\"F:1722c54c19\", \"F:f3ad12433f\"], \"numeric_values\": [{\"fact_id\": \"F:1722c54c19\", \"unit\": \"mol/L\", \"value\": 0.0271}, {\"fact_id\": \"F:f3ad12433f\", \"unit\": \"mol/L\", \"value\": 0.0314}], \"text\": \"Situation A: concentration rises from sample 181 to 202 by 0.0271 mol/L net (0.074 mol/L/h), concentration rises from sample 203 to 225 by 0.0314 mol/L net (0.0818 mol/L/h)\"}, {\"claim_id\": \"claim3\", \"confidence\": \"high\", \"fact_ids\": [\"F:81ed58d3b6\", \"F:e3e7013d02\"], \"numeric_values\": [{\"fact_id\": \"F:81ed58d3b6\", \"unit\": \"K/min\", \"value\": 0.606}, {\"fact_id\": \"F:e3e7013d02\", \"unit\": \"K/min\", \"value\": -0.682}], \"text\": \"Situation A: cooling_duty rises from sample 0 to 19 by 0.606 K/min net (1.82 K/min/h), cooling_duty falls from sample 20 to 39 by 0.682 K/min net (-2.05 K/min/h)\"}, {\"claim_id\": \"claim4\", \"confidence\": \"high\", \"fact_ids\": [\"F:30c276e10a\", \"F:ef5ba1d353\"], \"numeric_values\": [{\"fact_id\": \"F:30c276e10a\", \"unit\": \"K/min\", \"value\": 0.373}, {\"fact_id\": \"F:ef5ba1d353\", \"unit\": \"K/min\", \"value\": -0.474}], \"text\": \"Situation A: cooling_duty shifts up at sample 20 by 0.373 K/min (jump, 14.3 noise sigmas), cooling_duty shifts down at sample 40 by 0.474 K/min (jump, 18.2 noise sigmas)\"}, {\"claim_id\": \"claim5\", \"confidence\": \"high\", \"fact_ids\": [\"F:6d25e2cc18\", \"F:74607043a4\"], \"numeric_values\": [{\"fact_id\": \"F:6d25e2cc18\", \"unit\": \"K\", \"value\": 1.64}, {\"fact_id\": \"F:74607043a4\", \"unit\": \"K\", \"value\": 2.04}], \"text\": \"Situation A: temperature shifts down at sample 31 by 1.64 K (jump, 3.01 noise sigmas), temperature shifts up at sample 51 by 2.04 K (jump, 3.74 noise sigmas)\"}, {\"claim_id\": \"claim6\", \"confidence\": \"low\", \"fact_ids\": [\"F:9728f33348\", \"F:d0c311e34f\"], \"numeric_values\": [{\"fact_id\": \"F:9728f33348\", \"unit\": \"K\", \"value\": 334}, {\"fact_id\": \"F:d0c311e34f\", \"unit\": \"K\", \"value\": 350}], \"text\": \"Situation A: the model's nominal 80% interval spans 334 to 367 K, Situation B: the model's nominal 80% interval spans 334 to 367 K, but the forecast for situation A is not distinguishable from situation B, but the nominal 80% interval is different.\"}], \"recommendations\": [], \"summary\": \"Situation A and situation B can be told apart with the given information.\"}"
+  },
+  "ab5482497b06ef06d89c278602efda7504ec4874dc5d20d1726d6552055b0dea": {
+   "completion_tokens": 520,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 704,
+   "text": "{\"caveats\": [\"The given information does not show that the two situations are the same.\"], \"claims\": [{\"claim_id\": \"1\", \"confidence\": \"high\", \"fact_ids\": [\"F:65d409d651\"], \"numeric_values\": [{\"fact_id\": \"F:65d409d651\", \"unit\": \"K\", \"value\": 381}, {\"fact_id\": \"F:65d409d651\", \"unit\": \"h\", \"value\": 0.0667}], \"text\": \"A, 381 K, 0.0667 h\"}, {\"claim_id\": \"2\", \"confidence\": \"high\", \"fact_ids\": [\"F:f6f2945fb0\"], \"numeric_values\": [{\"fact_id\": \"F:f6f2945fb0\", \"unit\": \"K\", \"value\": 21.7}], \"text\": \"A, 21.7 K\"}, {\"claim_id\": \"3\", \"confidence\": \"high\", \"fact_ids\": [\"F:18607d290d\"], \"numeric_values\": [{\"fact_id\": \"F:18607d290d\", \"unit\": \"K\", \"value\": 24.5}], \"text\": \"B, -24.5 K\"}, {\"claim_id\": \"4\", \"confidence\": \"high\", \"fact_ids\": [\"F:647ff1a79e\"], \"numeric_values\": [{\"fact_id\": \"F:647ff1a79e\", \"unit\": \"K/min\", \"value\": -0.875}], \"text\": \"A, -0.875 K/min\"}, {\"claim_id\": \"5\", \"confidence\": \"high\", \"fact_ids\": [\"F:37b042ccb1\"], \"numeric_values\": [{\"fact_id\": \"F:37b042ccb1\", \"unit\": \"K\", \"value\": 9.31}], \"text\": \"B, 9.31 K\"}, {\"claim_id\": \"6\", \"confidence\": \"high\", \"fact_ids\": [\"F:7ccf62bcac\"], \"numeric_values\": [{\"fact_id\": \"F:7ccf62bcac\", \"unit\": \"K/min\", \"value\": 1.25}], \"text\": \"A, 1.25 K/min\"}], \"recommendations\": [], \"summary\": \"They cannot be told apart with the given information.\"}"
+  },
+  "adf66b2696708efba25ce2ac8ddc60aa48889cc02cb9bed7b213e144a06260b5": {
+   "completion_tokens": 815,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 3084,
+   "text": "{\"caveats\": [\"The differences between the two situations are based on the given facts and may not be comprehensive or representative of the actual system.\"], \"claims\": [{\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"F:ea14594f49\", \"F:713c26d0d5\"], \"numeric_values\": [{\"fact_id\": \"F:ea14594f49\", \"unit\": \"mol/L\", \"value\": 0.134}, {\"fact_id\": \"F:713c26d0d5\", \"unit\": \"mol/L\", \"value\": 0.0651}], \"text\": \"concentration falls by 0.134 mol/L and 0.0651 mol/L net in situation A\"}, {\"claim_id\": \"situation B\", \"confidence\": \"high\", \"fact_ids\": [\"F:7a4c72f5fa\", \"F:076062150a\"], \"numeric_values\": [{\"fact_id\": \"F:7a4c72f5fa\", \"unit\": \"mol/L\", \"value\": 0.0747}, {\"fact_id\": \"F:076062150a\", \"unit\": \"mol/L\", \"value\": 0.128}], \"text\": \"concentration falls by 0.0747 mol/L and 0.128 mol/L net in situation B\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"F:494a3c987d\", \"F:430 to 449 by 0.421 mol/L net\"], \"numeric_values\": [{\"fact_id\": \"F:494a3c987d\", \"unit\": \"mol/L\", \"value\": 0.421}], \"text\": \"concentration rises by 0.421 mol/L net in situation A\"}, {\"claim_id\": \"situation B\", \"confidence\": \"high\", \"fact_ids\": [\"F:1ab97027be\", \"F:430 to 449 by 0.294 mol/L net\"], \"numeric_values\": [{\"fact_id\": \"F:1ab97027be\", \"unit\": \"mol/L\", \"value\": 0.294}], \"text\": \"concentration rises by 0.294 mol/L net in situation B\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"F:6537396552\", \"F:6537396552\"], \"numeric_values\": [{\"fact_id\": \"F:6537396552\", \"unit\": \"K/min\", \"value\": -1.66}], \"text\": \"cooling_duty falls by -1.66 K/min/h net in situation A\"}, {\"claim_id\": \"situation B\", \"confidence\": \"high\", \"fact_ids\": [\"F:c2a6687aa5\", \"F:c2a6687aa5\"], \"numeric_values\": [{\"fact_id\": \"F:c2a6687aa5\", \"unit\": \"K/min\", \"value\": -1.42}], \"text\": \"cooling_duty falls by -1.42 K/min/h net in situation B\"}], \"recommendations\": [], \"summary\": \"The two situations can be distinguished by the following differences: concentration falls by 0.134 mol/L and 0.0651 mol/L net in situation A, and by 0.0747 mol/L and 0.128 mol/L net in situation B. Additionally, concentration rises by 0.421 mol/L net in situation A, and by 0.294 mol/L net in situation B. Furthermore, cooling_duty falls by -1.66 K/min/h net in situation A, and by -1.42 K/min/h net in situation B.\"}"
+  },
+  "b1be9cae167fa9a5380703df92ff178f3b1a1055fc0490823646957f5f1eb079": {
+   "completion_tokens": 823,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 1825,
+   "text": "{\"caveats\": [\"The differences between the two situations are based on the given facts and may not be the only differences.\"], \"claims\": [{\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"F:706dd43c45\", \"F:81e0f25448\"], \"numeric_values\": [{\"fact_id\": \"F:706dd43c45\", \"unit\": \"mol/L\", \"value\": -0.389}, {\"fact_id\": \"F:81e0f25448\", \"unit\": \"samples\", \"value\": 60}], \"text\": \"concentration falls by -0.389 mol/L/h over 60 samples\"}, {\"claim_id\": \"situation B\", \"confidence\": \"high\", \"fact_ids\": [\"F:246a2710f6\", \"F:81ef2c79f8\"], \"numeric_values\": [{\"fact_id\": \"F:246a2710f6\", \"unit\": \"mol/L\", \"value\": -0.162}, {\"fact_id\": \"F:81ef2c79f8\", \"unit\": \"samples\", \"value\": 24}], \"text\": \"concentration falls by -0.162 mol/L/h over 24 samples\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"F:142e3addf9\", \"F:c5b48dc761\"], \"numeric_values\": [{\"fact_id\": \"F:142e3addf9\", \"unit\": \"K/min\", \"value\": -2.35}, {\"fact_id\": \"F:c5b48dc761\", \"unit\": \"K/min\", \"value\": -2.79}], \"text\": \"cooling_duty falls by -2.35 K/min/h and -2.79 K/min/h\"}, {\"claim_id\": \"situation B\", \"confidence\": \"high\", \"fact_ids\": [\"F:71eb4c4c58\", \"F:93b65ea847\"], \"numeric_values\": [{\"fact_id\": \"F:71eb4c4c58\", \"unit\": \"K/min\", \"value\": -2.81}, {\"fact_id\": \"F:93b65ea847\", \"unit\": \"samples\", \"value\": 46}], \"text\": \"cooling_duty falls by -2.81 K/min/h over 46 samples\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"F:3e05cae0c5\", \"F:5a9769a093\"], \"numeric_values\": [{\"fact_id\": \"F:3e05cae0c5\", \"unit\": \"K\", \"value\": 22.7}, {\"fact_id\": \"F:5a9769a093\", \"unit\": \"K/h\", \"value\": -7.76}], \"text\": \"temperature rises by 22.7 K/h and falls by -7.76 K/h\"}, {\"claim_id\": \"situation B\", \"confidence\": \"high\", \"fact_ids\": [\"F:5a0b4b5a30\", \"F:0ea82ecad7\"], \"numeric_values\": [{\"fact_id\": \"F:5a0b4b5a30\", \"unit\": \"K/h\", \"value\": 9.51}, {\"fact_id\": \"0ea82ecad7\", \"unit\": \"K/h\", \"value\": -38.3}], \"text\": \"temperature rises by 9.51 K/h and falls by -38.3 K/h\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart based on the differences in concentration, cooling_duty, and temperature changes.\"}"
+  },
+  "b415423b6be69fef318a87bf6bfe6c37ae793ce6051f7b58df9c41b31ea466bc": {
+   "completion_tokens": 561,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 680,
+   "text": "{\"caveats\": [\"The given information does not account for the temperature shifts between samples 343 and 343 in situation A.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"cf42379561\", \"bcc5f0bdc7\", \"7e8ef4011d\"], \"numeric_values\": [{\"fact_id\": \"cf42379561\", \"unit\": \"K\", \"value\": 21.7}, {\"fact_id\": \"bcc5f0bdc7\", \"unit\": \"K/min\", \"value\": 0.769}, {\"fact_id\": \"7e8ef4011d\", \"unit\": \"K/min\", \"value\": 1.08}], \"text\": \"Temperature shifts up by 21.7 K at sample 311, cooling_duty shifts down by 0.769 K/min at sample 337, and cooling_duty shifts up by 1.08 K/min at sample 317.\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"21f60ce68a\", \"1e9a6b9db6\", \"6c32d158a2\", \"d2f53d87a1\"], \"numeric_values\": [{\"fact_id\": \"21f60ce68a\", \"unit\": \"K\", \"value\": 26.6}, {\"fact_id\": \"1e9a6b9db6\", \"unit\": \"K\", \"value\": 9.86}, {\"fact_id\": \"6c32d158a2\", \"unit\": \"K/min\", \"value\": 2.55}, {\"fact_id\": \"d2f53d87a1\", \"unit\": \"K/min\", \"value\": 2.02}], \"text\": \"Temperature shifts down by 26.6 K at sample 327, temperature shifts up by 9.86 K at sample 307, cooling_duty shifts down by 2.55 K/min at sample 330, and cooling_duty shifts up by 2.02 K/min at sample 310.\"}, {\"claim_id\": \"B\", \"confidence\": \"low\", \"fact_ids\": [\"81191ceee4\"], \"numeric_values\": [{\"fact_id\": \"81191ceee4\", \"unit\": \"K\", \"value\": 2.65}], \"text\": \"Temperature shifts down by 2.65 K at sample 347.\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "b450c2c009ced0af9f53def6eb4904b54a19953dc1cbfe5d6290629e5bbe1e09": {
+   "completion_tokens": 49,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 295,
+   "text": "{\"caveats\": [\"The given information does not show that they are the same.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"They cannot be told apart with the given information.\"}"
+  },
+  "bc0296deb46dfbfeb4331195c84cba30f6f308c680e62a0680fd02f25e58eb12": {
+   "completion_tokens": 584,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 687,
+   "text": "{\"caveats\": [\"The given information does not allow to conclude if the temperature and cooling_duty shifts are related.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"84f411b42a\", \"81c31bc657\"], \"numeric_values\": [{\"fact_id\": \"84f411b42a\", \"unit\": \"K\", \"value\": 381}, {\"fact_id\": \"81c31bc657\", \"unit\": \"K\", \"value\": 21.7}, {\"fact_id\": \"84f411b42a\", \"unit\": \"h\", \"value\": 0.0667}], \"text\": \"temperature exceeds 380 K from sample 318 to 321, peak 381 K, 0.0667 h\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"81c31bc657\"], \"numeric_values\": [{\"fact_id\": \"81c31bc657\", \"unit\": \"K\", \"value\": 21.7}], \"text\": \"temperature shifts up at sample 311 by 21.7 K\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"0ea6274a04\"], \"numeric_values\": [{\"fact_id\": \"0ea6274a04\", \"unit\": \"K\", \"value\": -23.5}], \"text\": \"temperature shifts down at sample 325 by 23.5 K\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"7f0899ebdf\"], \"numeric_values\": [{\"fact_id\": \"7f0899ebdf\", \"unit\": \"K\", \"value\": 9.34}], \"text\": \"temperature shifts up at sample 355 by 9.34 K\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"d1f9afcc6b\"], \"numeric_values\": [{\"fact_id\": \"d1f9afcc6b\", \"unit\": \"K\", \"value\": 9.12}], \"text\": \"temperature shifts up at sample 305 by 9.12 K\"}, {\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"0ec16ab802\"], \"numeric_values\": [{\"fact_id\": \"0ec16ab802\", \"unit\": \"K/min\", \"value\": -0.719}], \"text\": \"cooling_duty shifts down at sample 336 by 0.719 K/min\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "bcd02ea7af546c8f84abe24f6132b0534ba26b5fe63b84d93a46214bbad2625f": {
+   "completion_tokens": 52,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 3054,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "c0c55bfe77795e7ee170b1cf86fc334aceb89925416df017768be6a6ebcaefe1": {
+   "completion_tokens": 215,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 4111,
+   "text": "{\"caveats\": [\"The differences between the two situations are based on the given facts and may not be exhaustive.\"], \"claims\": [{\"claim_id\": \"A vs B\", \"confidence\": \"high\", \"fact_ids\": [\"F:657c090378\", \"F:6299d16201\"], \"numeric_values\": [{\"fact_id\": \"F:657c090378\", \"unit\": \"mol/L\", \"value\": 0.101}, {\"fact_id\": \"F:6299d16201\", \"unit\": \"mol/L\", \"value\": 0.0779}], \"text\": \"Situation A: concentration rises from sample 0 to 19 by 0.101 mol/L net, Situation B: concentration rises from sample 0 to 19 by 0.0779 mol/L net\"}], \"recommendations\": [], \"summary\": \"Situation A and Situation B can be distinguished by the rate of concentration increase from sample 0 to 19.\"}"
+  },
+  "c1eafe687650e082014e23792434b2a37e56b865c012455af4540c84ccd80243": {
+   "completion_tokens": 468,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 548,
+   "text": "{\"caveats\": [\"The direction of the temperature shift at sample 311 is the same in both situations, but the noise sigma is different.\"], \"claims\": [{\"claim_id\": \"claim1\", \"confidence\": \"low\", \"fact_ids\": [\"F:c468497c2e\", \"F:06bd741869\"], \"numeric_values\": [{\"fact_id\": \"F:c468497c2e\", \"unit\": \"K\", \"value\": 21}, {\"fact_id\": \"F:06bd741869\", \"unit\": \"noise sigmas\", \"value\": 517}], \"text\": \"situation A, [21 K], situation B, [517 noise sigmas]\"}, {\"claim_id\": \"claim2\", \"confidence\": \"low\", \"fact_ids\": [\"F:6ab4de9831\", \"F:5ee7bfebc9\"], \"numeric_values\": [{\"fact_id\": \"F:6ab4de9831\", \"unit\": \"K\", \"value\": 3.01}, {\"fact_id\": \"F:5ee7bfebc9\", \"unit\": \"noise sigmas\", \"value\": 74.1}], \"text\": \"situation A, [3.01 K], situation B, [74.1 noise sigmas]\"}, {\"claim_id\": \"claim3\", \"confidence\": \"low\", \"fact_ids\": [\"F:77e440c9e1\"], \"numeric_values\": [{\"fact_id\": \"F:77e440c9e1\", \"unit\": \"K/min\", \"value\": 0.544}], \"text\": \"situation A, [0.544 K/min]\"}, {\"claim_id\": \"claim4\", \"confidence\": \"low\", \"fact_ids\": [\"F:c58629bebb\"], \"numeric_values\": [{\"fact_id\": \"F:c58629bebb\", \"unit\": \"mol/L\", \"value\": 0.0592}], \"text\": \"situation A, [0.0592 mol/L]\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "cd9f7ca8eb0be7b5e04e998b209f4a4c7b8d73d0e317d35190913b11ef96a803": {
+   "completion_tokens": 571,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 753,
+   "text": "{\"caveats\": [\"The given information does not show that situations A and B are the same.\"], \"claims\": [{\"claim_id\": \"claim1\", \"confidence\": \"high\", \"fact_ids\": [\"F:5a25661530\"], \"numeric_values\": [{\"fact_id\": \"F:5a25661530\", \"unit\": \"K\", \"value\": 386}, {\"fact_id\": \"F:5a25661530\", \"unit\": \"h\", \"value\": 0.15}], \"text\": \"situation A, 386 K, 0.15 h\"}, {\"claim_id\": \"claim2\", \"confidence\": \"high\", \"fact_ids\": [\"F:941656d637\"], \"numeric_values\": [{\"fact_id\": \"F:941656d637\", \"unit\": \"K\", \"value\": 384}, {\"fact_id\": \"F:941656d637\", \"unit\": \"h\", \"value\": 0.183}], \"text\": \"situation A, 384 K, 0.183 h\"}, {\"claim_id\": \"claim3\", \"confidence\": \"high\", \"fact_ids\": [\"F:720742aa2f\"], \"numeric_values\": [{\"fact_id\": \"F:720742aa2f\", \"unit\": \"K\", \"value\": 24.2}], \"text\": \"situation A, 24.2 K\"}, {\"claim_id\": \"claim4\", \"confidence\": \"high\", \"fact_ids\": [\"F:a162c1f400\"], \"numeric_values\": [{\"fact_id\": \"F:a162c1f400\", \"unit\": \"K\", \"value\": 19.7}], \"text\": \"situation B, 19.7 K\"}, {\"claim_id\": \"claim5\", \"confidence\": \"high\", \"fact_ids\": [\"F:12d66f1d83\"], \"numeric_values\": [{\"fact_id\": \"F:12d66f1d83\", \"unit\": \"K\", \"value\": 27.9}], \"text\": \"situation A, 27.9 K\"}, {\"claim_id\": \"claim6\", \"confidence\": \"high\", \"fact_ids\": [\"F:9d0fb4d025\"], \"numeric_values\": [{\"fact_id\": \"F:9d0fb4d025\", \"unit\": \"K\", \"value\": 13.2}], \"text\": \"situation B, 13.2 K\"}], \"recommendations\": [], \"summary\": \"situations A and B can be told apart with the given information.\"}"
+  },
+  "cfdc9efa278ff74193a4f002e86c2d1cb8d4e01097206588ea84c230eed6bbe9": {
+   "completion_tokens": 1020,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 3665,
+   "text": "{\"caveats\": [\"The forecast for situation A is not available.\"], \"claims\": [{\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"F:e06e1cc550\", \"F:ac924c99ae\"], \"numeric_values\": [{\"fact_id\": \"F:e06e1cc550\", \"unit\": \"mol/L\", \"value\": 0.0968}, {\"fact_id\": \"F:ac924c99ae\", \"unit\": \"K\", \"value\": 4.13}], \"text\": \"concentration falls from sample 0 to 19 by 0.0968 mol/L net (-0.29 mol/L/h) and temperature rises from sample 0 to 30 by 4.13 K net (8 K/h)\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"F:1722c54c19\", \"F:f3ad12433f\"], \"numeric_values\": [{\"fact_id\": \"F:1722c54c19\", \"unit\": \"mol/L\", \"value\": 0.0271}, {\"fact_id\": \"F:f3ad12433f\", \"unit\": \"mol/L\", \"value\": 0.0314}], \"text\": \"concentration rises from sample 181 to 202 by 0.0271 mol/L net (0.074 mol/L/h) and concentration rises from sample 203 to 225 by 0.0314 mol/L net (0.0818 mol/L/h)\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"F:81ed58d3b6\", \"F:e3e7013d02\"], \"numeric_values\": [{\"fact_id\": \"F:81ed58d3b6\", \"unit\": \"K/min\", \"value\": 0.606}, {\"fact_id\": \"F:e3e7013d02\", \"unit\": \"K/min\", \"value\": 0.682}], \"text\": \"cooling_duty rises from sample 0 to 19 by 0.606 K/min net (1.82 K/min/h) and cooling_duty falls from sample 20 to 39 by 0.682 K/min net (-2.05 K/min/h)\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"F:8bb3b4a48e\", \"F:cc9acb2259\"], \"numeric_values\": [{\"fact_id\": \"F:8bb3b4a48e\", \"unit\": \"samples\", \"value\": 160}, {\"fact_id\": \"F:cc9acb2259\", \"unit\": \"K/min\", \"value\": 0.13}], \"text\": \"cooling_duty is stable in 6 stretches (together 160 samples) between samples 120 and 299 and cooling_duty rises from sample 200 to 219 by 0.13 K/min net (0.389 K/min/h)\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"F:1722c54c19\", \"F:8bb3b4a48e\"], \"numeric_values\": [{\"fact_id\": \"F:1722c54c19\", \"unit\": \"mol/L\", \"value\": 0.0271}, {\"fact_id\": \"F:8bb3b4a48e\", \"unit\": \"samples\", \"value\": 160}], \"text\": \"concentration rises from sample 181 to 202 by 0.0271 mol/L net (0.074 mol/L/h) and cooling_duty is stable in 6 stretches (together 160 samples) between samples 120 and 299\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"F:81ed58d3b6\", \"F:8bb3b4a48e\"], \"numeric_values\": [{\"fact_id\": \"F:81ed58d3b6\", \"unit\": \"K/min\", \"value\": 0.606}, {\"fact_id\": \"F:8bb3b4a48e\", \"unit\": \"samples\", \"value\": 160}], \"text\": \"cooling_duty rises from sample 0 to 19 by 0.606 K/min net (1.82 K/min/h) and cooling_duty is stable in 6 stretches (together 160 samples) between samples 120 and 299\"}], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "cffd107083b8889fba39295edc9efac4c2bc913a4eb5a22b68b68dcf09b833f8": {
+   "completion_tokens": 550,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 741,
+   "text": "{\"caveats\": [\"The given information does not show that the two situations are the same.\"], \"claims\": [{\"claim_id\": \"claim1\", \"confidence\": \"high\", \"fact_ids\": [\"F:2e327427aa\"], \"numeric_values\": [{\"fact_id\": \"F:2e327427aa\", \"unit\": \"K\", \"value\": 385}, {\"fact_id\": \"F:2e327427aa\", \"unit\": \"h\", \"value\": 0.15}], \"text\": \"A, 385 K, 0.15 h\"}, {\"claim_id\": \"claim2\", \"confidence\": \"high\", \"fact_ids\": [\"F:65ef10f140\"], \"numeric_values\": [{\"fact_id\": \"F:65ef10f140\", \"unit\": \"K\", \"value\": 384}, {\"fact_id\": \"F:65ef10f140\", \"unit\": \"h\", \"value\": 0.2}], \"text\": \"A, 384 K, 0.2 h\"}, {\"claim_id\": \"claim3\", \"confidence\": \"high\", \"fact_ids\": [\"F:36d6c71555\"], \"numeric_values\": [{\"fact_id\": \"F:36d6c71555\", \"unit\": \"K\", \"value\": 23.4}], \"text\": \"A, 23.4 K\"}, {\"claim_id\": \"claim4\", \"confidence\": \"high\", \"fact_ids\": [\"F:bb41d9ec82\"], \"numeric_values\": [{\"fact_id\": \"F:bb41d9ec82\", \"unit\": \"K\", \"value\": 19}], \"text\": \"B, 19 K\"}, {\"claim_id\": \"claim5\", \"confidence\": \"high\", \"fact_ids\": [\"F:5c91568835\"], \"numeric_values\": [{\"fact_id\": \"F:5c91568835\", \"unit\": \"K\", \"value\": 26.9}], \"text\": \"A, 26.9 K\"}, {\"claim_id\": \"claim6\", \"confidence\": \"high\", \"fact_ids\": [\"F:1e76190388\"], \"numeric_values\": [{\"fact_id\": \"F:1e76190388\", \"unit\": \"K\", \"value\": 12.7}], \"text\": \"B, 12.7 K\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "d02d8d10b983f6d34ac82fe0b00f141c76f099b9b314fe15fdf7e12748453063": {
+   "completion_tokens": 52,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 5449,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "d3b1ac1e648af3aae6fdfa208278f32bcdebcb5d391cb90d05876c21f6ee290b": {
+   "completion_tokens": 510,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 707,
+   "text": "{\"caveats\": [\"The given information does not show that the two situations are the same.\"], \"claims\": [{\"claim_id\": \"claim1\", \"confidence\": \"high\", \"fact_ids\": [\"f8d02363c2\"], \"numeric_values\": [{\"fact_id\": \"f8d02363c2\", \"unit\": \"K\", \"value\": 382}, {\"fact_id\": \"f8d02363c2\", \"unit\": \"h\", \"value\": 0.1}], \"text\": \"A, 382 K, 0.1 h\"}, {\"claim_id\": \"claim2\", \"confidence\": \"high\", \"fact_ids\": [\"8d716d4ac9\"], \"numeric_values\": [{\"fact_id\": \"8d716d4ac9\", \"unit\": \"K\", \"value\": 18}], \"text\": \"B, -18 K\"}, {\"claim_id\": \"claim3\", \"confidence\": \"high\", \"fact_ids\": [\"e6630e3b2c\"], \"numeric_values\": [{\"fact_id\": \"e6630e3b2c\", \"unit\": \"K\", \"value\": 22.2}], \"text\": \"A, 22.2 K\"}, {\"claim_id\": \"claim4\", \"confidence\": \"high\", \"fact_ids\": [\"2af1a92505\"], \"numeric_values\": [{\"fact_id\": \"2af1a92505\", \"unit\": \"K\", \"value\": 16.2}], \"text\": \"B, 16.2 K\"}, {\"claim_id\": \"claim5\", \"confidence\": \"high\", \"fact_ids\": [\"844455c317\"], \"numeric_values\": [{\"fact_id\": \"844455c317\", \"unit\": \"K\", \"value\": 2.92}], \"text\": \"A, -2.92 K\"}, {\"claim_id\": \"claim6\", \"confidence\": \"high\", \"fact_ids\": [\"93f3c43a5a\"], \"numeric_values\": [{\"fact_id\": \"93f3c43a5a\", \"unit\": \"K\", \"value\": 4.14}], \"text\": \"B, -4.14 K\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "d430b0a543357ce81a2e717df2fe657c27ae976776f57e2795b8f9a1d1dba64c": {
+   "completion_tokens": 52,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 4313,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "d4956411effec50ce04d3e87c9de93eb38130fc2a0e41182bbddbca6b10f2c0e": {
+   "completion_tokens": 877,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 3025,
+   "text": "{\"caveats\": [\"The differences between the two situations are based on the given facts and may not be exhaustive.\"], \"claims\": [{\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"21d8e4e2a8\", \"1ddda7e449\"], \"numeric_values\": [{\"fact_id\": \"21d8e4e2a8\", \"unit\": \"mol/L\", \"value\": -0.338}, {\"fact_id\": \"1ddda7e449\", \"unit\": \"mol/L/h\", \"value\": -0.177}], \"text\": \"concentration falls by -0.338 mol/L/h\"}, {\"claim_id\": \"situation B\", \"confidence\": \"high\", \"fact_ids\": [\"0b519903b0\", \"a72aa7516d\"], \"numeric_values\": [{\"fact_id\": \"0b519903b0\", \"unit\": \"mol/L\", \"value\": -0.22}, {\"fact_id\": \"a72aa7516d\", \"unit\": \"K/min/h\", \"value\": -0.988}], \"text\": \"concentration falls by -0.22 mol/L/h and cooling_duty falls by -0.988 K/min/h\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"142eb7d7de\", \"d2d49c35f9\"], \"numeric_values\": [{\"fact_id\": \"142eb7d7de\", \"unit\": \"K/min\", \"value\": -1.99}, {\"fact_id\": \"d2d49c35f9\", \"unit\": \"K/min/h\", \"value\": -4.05}], \"text\": \"cooling_duty falls by -1.99 K/min/h\"}, {\"claim_id\": \"situation B\", \"confidence\": \"high\", \"fact_ids\": [\"bbca68f365\", \"a72aa7516d\"], \"numeric_values\": [{\"fact_id\": \"bbca68f365\", \"unit\": \"K/min\", \"value\": -1.98}, {\"fact_id\": \"a72aa7516d\", \"unit\": \"K/min/h\", \"value\": -0.988}], \"text\": \"cooling_duty falls by -1.98 K/min/h\"}, {\"claim_id\": \"situation A\", \"confidence\": \"high\", \"fact_ids\": [\"11008a8a2c\", \"83cb5311de\"], \"numeric_values\": [{\"fact_id\": \"11008a8a2c\", \"unit\": \"K\", \"value\": 17.5}, {\"fact_id\": \"83cb5311de\", \"unit\": \"K/h\", \"value\": -7.08}], \"text\": \"temperature rises by 17.5 K/h\"}, {\"claim_id\": \"situation B\", \"confidence\": \"high\", \"fact_ids\": [\"39425444e2\", \"410033b34a\"], \"numeric_values\": [{\"fact_id\": \"39425444e2\", \"unit\": \"K\", \"value\": 8.69}, {\"fact_id\": \"410033b34a\", \"unit\": \"K/h\", \"value\": 9.84}], \"text\": \"temperature rises by 8.69 K/h and 9.84 K/h\"}], \"recommendations\": [], \"summary\": \"The two situations can be distinguished by the following differences: situation A has a concentration that falls by -0.338 mol/L/h, while situation B has a concentration that falls by -0.22 mol/L/h and cooling_duty falls by -0.988 K/min/h. Situation A has a cooling_duty that falls by -1.99 K/min/h, while situation B has a cooling_duty that falls by -1.98 K/min/h. Situation A has a temperature that rises by 17.5 K/h, while situation B has a temperature that rises by 8.69 K/h and 9.84 K/h.\"}"
+  },
+  "d8d9d2ee9075594ccb9a2b04188cf52089ddcedbecde7ef162966eaecb6d6cf1": {
+   "completion_tokens": 60,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 1885,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information, which does not show that they are the same.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"They cannot be told apart with the given information.\"}"
+  },
+  "d91232615154680950975a20031e78384b7bb9e28f68848c69895e83ec970b30": {
+   "completion_tokens": 515,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 684,
+   "text": "{\"caveats\": [\"The given information does not account for the time between samples, which may affect the interpretation of the temperature shifts.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"F:428992eec9\", \"F:1be7648151\", \"F:0c2736da26\", \"F:3d97dca931\", \"F:e6c78cf02e\"], \"numeric_values\": [{\"fact_id\": \"F:428992eec9\", \"unit\": \"K\", \"value\": 386}, {\"fact_id\": \"F:1be7648151\", \"unit\": \"K\", \"value\": 24.4}, {\"fact_id\": \"F:0c2736da26\", \"unit\": \"K\", \"value\": 27.4}, {\"fact_id\": \"F:3d97dca931\", \"unit\": \"h\", \"value\": 0.167}, {\"fact_id\": \"F:e6c78cf02e\", \"unit\": \"K\", \"value\": 9.43}], \"text\": \"situation A has temperature peaks of 386 K, temperature shifts up by 24.4 K and 9.43 K, and temperature shifts down by 27.4 K.\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"F:1fdf52b1bf\", \"F:291ef5c277\", \"F:66fe6ce28e\", \"F:cec60cad4a\"], \"numeric_values\": [{\"fact_id\": \"F:1fdf52b1bf\", \"unit\": \"K\", \"value\": 20}, {\"fact_id\": \"F:291ef5c277\", \"unit\": \"K\", \"value\": -16.8}, {\"fact_id\": \"F:66fe6ce28e\", \"unit\": \"K\", \"value\": 11.9}, {\"fact_id\": \"F:cec60cad4a\", \"unit\": \"K\", \"value\": 10.2}], \"text\": \"situation B has temperature shifts up by 20 K and 10.2 K, and temperature shifts down by 16.8 K.\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "dc9d90a50a1f179cd0e5fdb8f0d1b1ed91284bf8ec6af29592adfa7a4d3b90e2": {
+   "completion_tokens": 52,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 3084,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "ddcfb5eda1025d7e628de7138814a7569609d18b2089109c564c064759109706": {
+   "completion_tokens": 60,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 1826,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information, which does not show that they are the same.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"They cannot be told apart with the given information.\"}"
+  },
+  "df5903694554a75f45a285a9d54253997dcb8523150f2fe98e5d024390975bad": {
+   "completion_tokens": 52,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 4343,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "e5a1b625b86ae5a85c5bda27ea85ada426c919d7f119dc189822829a2953067b": {
+   "completion_tokens": 52,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 3045,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "e753c4c20546f38d26e31e6f0bcb6e5fdc1e120eaf7c44313f83998e0fa6f140": {
+   "completion_tokens": 52,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 3085,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "e856dfa3622387edaf97868498be3d45630150fa2daabce8e746db2715bbaba1": {
+   "completion_tokens": 397,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 556,
+   "text": "{\"caveats\": [\"The given information does not show that the two situations are the same.\"], \"claims\": [{\"claim_id\": \"A\", \"confidence\": \"high\", \"fact_ids\": [\"52c78329e8\", \"5357a4ed20\", \"1dccf7d7dd\", \"c7b2253b42\"], \"numeric_values\": [{\"fact_id\": \"52c78329e8\", \"unit\": \"K\", \"value\": 21.1}, {\"fact_id\": \"5357a4ed20\", \"unit\": \"K\", \"value\": 2.82}, {\"fact_id\": \"1dccf7d7dd\", \"unit\": \"K/min\", \"value\": -0.493}, {\"fact_id\": \"c7b2253b42\", \"unit\": \"mol/L\", \"value\": -0.0529}], \"text\": \"situation A: temperature shifts up by 21.1 K, temperature shifts up by 2.82 K, cooling_duty shifts down by 0.493 K/min, concentration shifts down by 0.0529 mol/L\"}, {\"claim_id\": \"B\", \"confidence\": \"high\", \"fact_ids\": [\"c063529da3\", \"0e7dc5da8a\"], \"numeric_values\": [{\"fact_id\": \"c063529da3\", \"unit\": \"K\", \"value\": 21.1}, {\"fact_id\": \"0e7dc5da8a\", \"unit\": \"K\", \"value\": 2.82}], \"text\": \"situation B: temperature shifts up by 21.1 K, temperature shifts up by 2.82 K\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "ea4c870c4ea4c9bfed72de67af32ccb10521c6eeff13559b7ad7173929402710": {
+   "completion_tokens": 72,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 1953,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information, which does not show that they are the same.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information, which does not show that they are the same.\"}"
+  },
+  "eac8b8bbf195aa2d20ba95d72f22c471a09aceeb018ca96f3b976ff53ccd4f29": {
+   "completion_tokens": 794,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 1824,
+   "text": "{\"caveats\": [\"The differences between the two situations are based on the given facts and may not be comprehensive.\"], \"claims\": [{\"claim_id\": \"1\", \"confidence\": \"high\", \"fact_ids\": [\"F:e7316f0aae\", \"F:5ec219069d\"], \"numeric_values\": [{\"fact_id\": \"F:e7316f0aae\", \"unit\": \"mol/L\", \"value\": -0.519}, {\"fact_id\": \"F:5ec219069d\", \"unit\": \"mol/L/h\", \"value\": -0.308}], \"text\": \"Situation A: -0.519 mol/L/h, Situation B: -0.308 mol/L/h\"}, {\"claim_id\": \"2\", \"confidence\": \"high\", \"fact_ids\": [\"F:8a29f73883\", \"F:3fdc1b6232\"], \"numeric_values\": [{\"fact_id\": \"F:8a29f73883\", \"unit\": \"mol/L\", \"value\": -0.2}, {\"fact_id\": \"F:3fdc1b6232\", \"unit\": \"mol/L\", \"value\": 0}], \"text\": \"Situation A: -0.2 mol/L, Situation B: 0 mol/L\"}, {\"claim_id\": \"3\", \"confidence\": \"high\", \"fact_ids\": [\"F:d15bee0f77\", \"F:3fdc1b6232\"], \"numeric_values\": [{\"fact_id\": \"F:d15bee0f77\", \"unit\": \"samples\", \"value\": 31}, {\"fact_id\": \"F:3fdc1b6232\", \"unit\": \"samples\", \"value\": 20}], \"text\": \"Situation A: 31 samples, Situation B: 20 samples\"}, {\"claim_id\": \"4\", \"confidence\": \"high\", \"fact_ids\": [\"F:39b1d21d27\", \"F:b7254587de\"], \"numeric_values\": [{\"fact_id\": \"F:39b1d21d27\", \"unit\": \"K/min\", \"value\": -2.19}, {\"fact_id\": \"F:b7254587de\", \"unit\": \"K/min\", \"value\": -3.15}], \"text\": \"Situation A: -2.19 K/min/h, Situation B: -3.15 K/min/h\"}, {\"claim_id\": \"5\", \"confidence\": \"high\", \"fact_ids\": [\"F:3c2b79cc1f\", \"F:cac830aa10\"], \"numeric_values\": [{\"fact_id\": \"F:3c2b79cc1f\", \"unit\": \"K/min\", \"value\": -2.89}, {\"fact_id\": \"F:cac830aa10\", \"unit\": \"K/min\", \"value\": 5.43}], \"text\": \"Situation A: -2.89 K/min/h, Situation B: 5.43 K/min/h\"}, {\"claim_id\": \"6\", \"confidence\": \"high\", \"fact_ids\": [\"F:e22ee8ebb0\", \"F:b72785080b\"], \"numeric_values\": [{\"fact_id\": \"F:e22ee8ebb0\", \"unit\": \"K/min\", \"value\": 2.92}, {\"fact_id\": \"F:b72785080b\", \"unit\": \"samples\", \"value\": 47}], \"text\": \"Situation A: 2.92 K/min/h, Situation B: 47 samples\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "ec537f302f6698709dc0f0d0d376a043c7559f720f00ecd7fb55d7294b422fb4": {
+   "completion_tokens": 513,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 706,
+   "text": "{\"caveats\": [\"The given information does not show that the two situations are the same.\"], \"claims\": [{\"claim_id\": \"claim1\", \"confidence\": \"high\", \"fact_ids\": [\"84f411b42a\"], \"numeric_values\": [{\"fact_id\": \"84f411b42a\", \"unit\": \"K\", \"value\": 381}, {\"fact_id\": \"84f411b42a\", \"unit\": \"h\", \"value\": 0.0667}], \"text\": \"A, 381 K, 0.0667 h\"}, {\"claim_id\": \"claim2\", \"confidence\": \"high\", \"fact_ids\": [\"81c31bc657\"], \"numeric_values\": [{\"fact_id\": \"81c31bc657\", \"unit\": \"K\", \"value\": 21.7}], \"text\": \"A, 21.7 K\"}, {\"claim_id\": \"claim3\", \"confidence\": \"high\", \"fact_ids\": [\"0ec16ab802\"], \"numeric_values\": [{\"fact_id\": \"0ec16ab802\", \"unit\": \"K/min\", \"value\": -0.719}], \"text\": \"A, -0.719 K/min\"}, {\"claim_id\": \"claim4\", \"confidence\": \"high\", \"fact_ids\": [\"7f0899ebdf\"], \"numeric_values\": [{\"fact_id\": \"7f0899ebdf\", \"unit\": \"K\", \"value\": 9.34}], \"text\": \"B, 9.34 K\"}, {\"claim_id\": \"claim5\", \"confidence\": \"high\", \"fact_ids\": [\"40f762e9e4\"], \"numeric_values\": [{\"fact_id\": \"40f762e9e4\", \"unit\": \"K/min\", \"value\": -2.53}], \"text\": \"B, -2.53 K/min\"}, {\"claim_id\": \"claim6\", \"confidence\": \"high\", \"fact_ids\": [\"d1f9afcc6b\"], \"numeric_values\": [{\"fact_id\": \"d1f9afcc6b\", \"unit\": \"K\", \"value\": 9.12}], \"text\": \"B, 9.12 K\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "ec581fba9fe24d7dee11aa698dad7f4ad826d1d83c071117d07b7b592bba1e9f": {
+   "completion_tokens": 793,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 1845,
+   "text": "{\"caveats\": [\"The facts do not say why the two situations differ.\"], \"claims\": [{\"claim_id\": \"1\", \"confidence\": \"high\", \"fact_ids\": [\"F:706dd43c45\", \"F:246a2710f6\"], \"numeric_values\": [{\"fact_id\": \"F:706dd43c45\", \"unit\": \"mol/L\", \"value\": -0.389}, {\"fact_id\": \"F:246a2710f6\", \"unit\": \"mol/L/h\", \"value\": -0.162}], \"text\": \"A: -0.389 mol/L/h, B: -0.162 mol/L/h\"}, {\"claim_id\": \"2\", \"confidence\": \"high\", \"fact_ids\": [\"F:142e3addf9\", \"F:71eb4c4c58\"], \"numeric_values\": [{\"fact_id\": \"F:142e3addf9\", \"unit\": \"K/min/h\", \"value\": -2.35}, {\"fact_id\": \"F:71eb4c4c58\", \"unit\": \"K/min/h\", \"value\": -2.81}], \"text\": \"A: -2.35 K/min/h, B: -2.81 K/min/h\"}, {\"claim_id\": \"3\", \"confidence\": \"high\", \"fact_ids\": [\"F:81e0f25448\", \"F:81ef2c79f8\"], \"numeric_values\": [{\"fact_id\": \"F:81e0f25448\", \"unit\": \"samples\", \"value\": 60}, {\"fact_id\": \"F:81ef2c79f8\", \"unit\": \"samples\", \"value\": 24}], \"text\": \"A: 60 samples, B: 24 samples\"}, {\"claim_id\": \"4\", \"confidence\": \"high\", \"fact_ids\": [\"F:3e05cae0c5\", \"F:5a0b4b5a30\"], \"numeric_values\": [{\"fact_id\": \"F:3e05cae0c5\", \"unit\": \"K/h\", \"value\": 22.7}, {\"fact_id\": \"F:5a0b4b5a30\", \"unit\": \"K/h\", \"value\": 9.51}], \"text\": \"A: 22.7 K/h, B: 9.51 K/h\"}, {\"claim_id\": \"5\", \"confidence\": \"high\", \"fact_ids\": [\"F:5a9769a093\", \"F:baec9b5724\"], \"numeric_values\": [{\"fact_id\": \"F:5a9769a093\", \"unit\": \"K/h\", \"value\": -7.76}, {\"fact_id\": \"F:baec9b5724\", \"unit\": \"K/h\", \"value\": -17.4}], \"text\": \"A: -7.76 K/h, B: -17.4 K/h\"}, {\"claim_id\": \"6\", \"confidence\": \"high\", \"fact_ids\": [\"F:9768229729\", \"F:c24e210330\"], \"numeric_values\": [{\"fact_id\": \"F:9768229729\", \"unit\": \"K/h\", \"value\": -4.49}, {\"fact_id\": \"F:c24e210330\", \"unit\": \"K/h\", \"value\": 8.39}], \"text\": \"A: -4.49 K/h, B: 8.39 K/h\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "ed984d010a0590e2383c22e886fa7bd4543c97fb133927648ca8faef541e2e78": {
+   "completion_tokens": 755,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 744,
+   "text": "{\"caveats\": [\"The given information does not show that the two situations are the same.\"], \"claims\": [{\"claim_id\": \"claim1\", \"confidence\": \"high\", \"fact_ids\": [\"F:0b7d819fb4\"], \"numeric_values\": [{\"fact_id\": \"F:0b7d819fb4\", \"unit\": \"K\", \"value\": 386}, {\"fact_id\": \"F:0b7d819fb4\", \"unit\": \"h\", \"value\": 0.15}], \"text\": \"Situation A: temperature exceeds 380 K from sample 325 to 333, peak 386 K, 0.15 h\"}, {\"claim_id\": \"claim2\", \"confidence\": \"high\", \"fact_ids\": [\"F:8582aca59c\"], \"numeric_values\": [{\"fact_id\": \"F:8582aca59c\", \"unit\": \"K\", \"value\": 24.3}], \"text\": \"Situation A: temperature shifts up at sample 317 by 24.3 K\"}, {\"claim_id\": \"claim3\", \"confidence\": \"high\", \"fact_ids\": [\"F:bea8381ae0\"], \"numeric_values\": [{\"fact_id\": \"F:bea8381ae0\", \"unit\": \"K\", \"value\": 17.7}], \"text\": \"Situation B: temperature shifts up at sample 313 by 17.7 K\"}, {\"claim_id\": \"claim4\", \"confidence\": \"high\", \"fact_ids\": [\"F:ec432fc846\"], \"numeric_values\": [{\"fact_id\": \"F:ec432fc846\", \"unit\": \"K\", \"value\": 26.8}], \"text\": \"Situation A: temperature shifts down at sample 341 by 26.8 K\"}, {\"claim_id\": \"claim5\", \"confidence\": \"high\", \"fact_ids\": [\"F:1a87017f17\"], \"numeric_values\": [{\"fact_id\": \"F:1a87017f17\", \"unit\": \"K\", \"value\": 12.5}], \"text\": \"Situation B: temperature shifts down at sample 333 by 12.5 K\"}, {\"claim_id\": \"claim6\", \"confidence\": \"high\", \"fact_ids\": [\"F:7d21c0b1b9\"], \"numeric_values\": [{\"fact_id\": \"F:7d21c0b1b9\", \"unit\": \"K\", \"value\": 10.5}], \"text\": \"Situation B: temperature shifts up at sample 360 by 10.5 K\"}], \"recommendations\": [], \"summary\": \"Situation A: temperature exceeds 380 K from sample 325 to 333, peak 386 K, 0.15 h, temperature shifts up at sample 317 by 24.3 K, temperature shifts down at sample 341 by 26.8 K, cooling_duty shifts down at sample 347 by 2.78 K/min, cooling_duty shifts up at sample 327 by 2.44 K/min. Situation B: temperature shifts up at sample 313 by 17.7 K, temperature shifts down at sample 333 by 12.5 K, temperature shifts up at sample 360 by 10.5 K, cooling_duty shifts down at sample 341 by 2.28 K/min, cooling_duty shifts up at sample 321 by 1.95 K/min.\"}"
+  },
+  "fa3795840f5e117cf54a22d880dd20832fd609d800677ae63afa525ffe9b8ad9": {
+   "completion_tokens": 938,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 699,
+   "text": "{\"caveats\": [\"The given information does not show that the two situations are the same.\"], \"claims\": [{\"claim_id\": \"1\", \"confidence\": \"high\", \"fact_ids\": [\"21f60ce68a\", \"cf42379561\"], \"numeric_values\": [{\"fact_id\": \"cf42379561\", \"unit\": \"K\", \"value\": 21.7}, {\"fact_id\": \"21f60ce68a\", \"unit\": \"K\", \"value\": 26.6}], \"text\": \"A: temperature shifts up at sample 311 by 21.7 K (jump, 31 noise sigmas)\"}, {\"claim_id\": \"2\", \"confidence\": \"high\", \"fact_ids\": [\"21f60ce68a\", \"1e9a6b9db6\"], \"numeric_values\": [{\"fact_id\": \"21f60ce68a\", \"unit\": \"K\", \"value\": 26.6}, {\"fact_id\": \"1e9a6b9db6\", \"unit\": \"K\", \"value\": 9.86}], \"text\": \"B: temperature shifts down at sample 327 by 26.6 K (jump, 50.6 noise sigmas) and temperature shifts up at sample 307 by 9.86 K (jump, 18.8 noise sigmas)\"}, {\"claim_id\": \"3\", \"confidence\": \"high\", \"fact_ids\": [\"cf42379561\", \"1e9a6b9db6\"], \"numeric_values\": [{\"fact_id\": \"cf42379561\", \"unit\": \"K\", \"value\": 21.7}, {\"fact_id\": \"1e9a6b9db6\", \"unit\": \"K\", \"value\": 9.86}], \"text\": \"A: temperature shifts up at sample 311 by 21.7 K (jump, 31 noise sigmas) and B: temperature shifts up at sample 307 by 9.86 K (jump, 18.8 noise sigmas)\"}, {\"claim_id\": \"4\", \"confidence\": \"high\", \"fact_ids\": [\"21f60ce68a\", \"6c32d158a2\"], \"numeric_values\": [{\"fact_id\": \"21f60ce68a\", \"unit\": \"K\", \"value\": 26.6}, {\"fact_id\": \"6c32d158a2\", \"unit\": \"K/min\", \"value\": 2.55}], \"text\": \"B: temperature shifts down at sample 327 by 26.6 K (jump, 50.6 noise sigmas) and B: cooling_duty shifts down at sample 330 by 2.55 K/min (jump, 49.6 noise sigmas)\"}, {\"claim_id\": \"5\", \"confidence\": \"high\", \"fact_ids\": [\"cf42379561\", \"6c32d158a2\"], \"numeric_values\": [{\"fact_id\": \"cf42379561\", \"unit\": \"K\", \"value\": 21.7}, {\"fact_id\": \"6c32d158a2\", \"unit\": \"K/min\", \"value\": 2.55}], \"text\": \"A: temperature shifts up at sample 311 by 21.7 K (jump, 31 noise sigmas) and A: cooling_duty shifts down at sample 337 by 0.769 K/min (jump, 16.4 noise sigmas)\"}, {\"claim_id\": \"6\", \"confidence\": \"high\", \"fact_ids\": [\"21f60ce68a\", \"d2f53d87a1\"], \"numeric_values\": [{\"fact_id\": \"21f60ce68a\", \"unit\": \"K\", \"value\": 26.6}, {\"fact_id\": \"d2f53d87a1\", \"unit\": \"K/min\", \"value\": 2.02}], \"text\": \"B: temperature shifts down at sample 327 by 26.6 K (jump, 50.6 noise sigmas) and B: cooling_duty shifts up at sample 310 by 2.02 K/min (jump, 39.3 noise sigmas)\"}], \"recommendations\": [], \"summary\": \"The two situations can be told apart with the given information.\"}"
+  },
+  "fb16185502b51498a60ec56beb08cb5608738050d3405d1e99b125df2bf94906": {
+   "completion_tokens": 52,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 2970,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information.\"}"
+  },
+  "fb7516dbbc1096a0b5e672bcc8fad14ce669acb87269242f5d1b77da1cab09de": {
+   "completion_tokens": 72,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "meta-llama/Llama-3.1-8B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-09a452f1"
+   },
+   "prompt_tokens": 1745,
+   "text": "{\"caveats\": [\"The two situations cannot be told apart with the given information, which does not show that they are the same.\"], \"claims\": [], \"recommendations\": [], \"summary\": \"The two situations cannot be told apart with the given information, which does not show that they are the same.\"}"
+  }
+ }
+}
