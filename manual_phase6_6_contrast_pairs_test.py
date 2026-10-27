@@ -22,7 +22,8 @@ from tsxai.analysis import AnalyzerConfig, analyze_frame  # noqa: E402
 from tsxai.core import Intervention, ScenarioDescriptor, content_hash, paired_frames, time_scale_of  # noqa: E402
 from tsxai.forecast import LaggedRegressionBackend  # noqa: E402
 from tsxai.forecast.evaluation import request_from_view  # noqa: E402
-from tsxai.report.contrast import b0_list, b1_template, fact_difference, score_answer  # noqa: E402
+from tsxai.bench import divergences  # noqa: E402
+from tsxai.report.contrast import b0_list, b1_template, fact_difference, relevance_score, score_answer  # noqa: E402
 from tsxai.semantics import SemanticEnricher, ordered  # noqa: E402
 from tsxai.verify import verify  # noqa: E402
 
@@ -87,13 +88,16 @@ def run() -> dict:
             expected, gap = oracle(series_a, series_b)
             diff = fact_difference(facts_a, facts_b)
             both = ordered([*facts_a, *facts_b])
+            affected = divergences(series_a, series_b, ANALYSED)
+            # the reference for precision: how relevant is a difference picked at random, i.e. all of them (the budget-free list)
+            everything = relevance_score(b1_template(diff, pack, "en", max_claims=10_000), both, affected)
             for language in ("en", "es"):
                 for realise in (b0_list, b1_template):
                     answer = realise(diff, pack, language)
                     verdict = verify(answer.explanation, both, pack, language)
-                    score = score_answer(answer, diff, expected, both)
+                    score = {**score_answer(answer, diff, expected, both), **relevance_score(answer, both, affected, direction_valid=(kind == "presence"))}
                     rows.append({"case": f"{index}_{CASES[index][0]}", "pair": name, "kind": kind, "language": language, "expected": expected, "oracle_gap": round(gap, 6), "facts_a": len(facts_a), "facts_b": len(facts_b),
-                                 "differences": {"only_a": len(diff.only_a), "only_b": len(diff.only_b), "changed": len(diff.changed)}, "verifier_violations": len(verdict.violations), "claims": len(answer.explanation.claims),
+                                 "differences": {"only_a": len(diff.only_a), "only_b": len(diff.only_b), "changed": len(diff.changed)}, "verifier_violations": len(verdict.violations), "claims": len(answer.explanation.claims), "all_differences_precision": everything["precision"],
                                  "answer_hash": answer.explanation.content_hash, **score})
     by_system = {s: Counter() for s in ("B0", "B1")}
     for row in rows:
@@ -104,6 +108,16 @@ def run() -> dict:
         c["scope_missing"] += not row["scope_stated"]
         c["sensitivity_gap"] += row["sensitivity_gap"]
         c["verifier_violations"] += row["verifier_violations"]
+        c["cited_relevant"] += row["cited_relevant"]
+        c["cited_irrelevant"] += row["cited_irrelevant"]
+        c["direction_checked"] += row["direction_checked"]
+        c["direction_correct"] += row["direction_correct"]
+        if row["all_differences_precision"] is not None:
+            c["reference_precision_sum_x1000"] += round(1000 * row["all_differences_precision"])
+            c["reference_answers"] += 1
+        if row["coverage"] is not None:
+            c["coverage_answers"] += 1
+            c["coverage_sum_x1000"] += round(1000 * row["coverage"])
     report = {"status": "MEASURED", "model": "none (B0 literal list, B1 template)", "summary": {k: dict(v) for k, v in by_system.items()}, "rows": rows,
               "statement": "behaviour of two realisations without a language model on constructed pairs of the twin: not a result for any language model, not a rate with an interval, no human evaluation"}
     report["report_hash"] = content_hash({k: v for k, v in report.items() if k != "statement"})
@@ -116,7 +130,7 @@ def main() -> int:
     (ROOT / "data" / "xai" / "contrast_pairs_report.json").write_text(json.dumps(report, indent=1, sort_keys=True, allow_nan=False), encoding="utf-8")
     for row in report["rows"]:
         if row["language"] == "en":
-            print({k: row[k] for k in ("case", "pair", "system", "expected", "differences", "correct", "invented_contrast", "scope_stated", "sensitivity_gap", "verifier_violations")})
+            print({k: row[k] for k in ("case", "pair", "system", "expected", "correct", "precision", "coverage", "affected_variables", "direction_checked", "direction_correct", "claims")})
     print(json.dumps({"summary": report["summary"], "report_hash": report["report_hash"]}, indent=1))
     return 0
 
