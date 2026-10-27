@@ -64,20 +64,21 @@ def run() -> dict:
             for pair in pairs:
                 facts_a, series_a = facts_of(source, scale, pair.base, pair.horizon)
                 facts_b, series_b = facts_of(source, scale, pair.variant, pair.horizon)
-                diff = fact_difference(facts_a, facts_b)
                 both = ordered([*facts_a, *facts_b])
                 affected = divergences(series_a, series_b, TARGETS)
-                for language in ("en", "es"):
-                    for realise in (b0_list, b1_template):
-                        answer = realise(diff, PACK, language)
-                        violations = len(verify(answer.explanation, both, PACK, language).violations)
-                        score = {**score_answer(answer, diff, pair.expected, both), **relevance_score(answer, both, affected)}
-                        rows.append({"unit": unit, "season": season, "kind": pair.kind, "language": language, "expected": pair.expected, "horizon": pair.horizon, "first_divergence": pair.first_divergence,
-                                     "differences": {"only_a": len(diff.only_a), "only_b": len(diff.only_b), "changed": len(diff.changed)}, "claims": len(answer.explanation.claims),
-                                     "verifier_violations": violations, "answer_hash": answer.explanation.content_hash, **score})
+                for matching, tolerance in (("strict", 0), ("tolerant", scale.tolerance)):  # tolerant: a finding may move by the host's own matching tolerance and stay the same finding
+                    diff = fact_difference(facts_a, facts_b, window_tolerance=tolerance)
+                    for language in ("en", "es"):
+                        for realise in (b0_list, b1_template):
+                            answer = realise(diff, PACK, language)
+                            violations = len(verify(answer.explanation, both, PACK, language).violations)
+                            score = {**score_answer(answer, diff, pair.expected, both), **relevance_score(answer, both, affected)}
+                            rows.append({"unit": unit, "season": season, "kind": pair.kind, "matching": matching, "language": language, "expected": pair.expected, "horizon": pair.horizon,
+                                         "first_divergence": pair.first_divergence, "differences": {"only_a": len(diff.only_a), "only_b": len(diff.only_b), "changed": len(diff.changed)},
+                                         "claims": len(answer.explanation.claims), "verifier_violations": violations, "answer_hash": answer.explanation.content_hash, **score})
     summary: dict[str, dict] = {}
     for row in rows:
-        c = summary.setdefault(f"{row['kind']}|{row['system']}", Counter())
+        c = summary.setdefault(f"{row['kind']}|{row['matching']}|{row['system']}", Counter())
         c["answers"] += 1
         c["correct"] += row["correct"]
         c["abstained"] += row["abstained"]
@@ -97,9 +98,12 @@ def main() -> int:
     report = run()
     assert run()["report_hash"] == report["report_hash"], "a second run must give the identical report"
     (ROOT / "data" / "xai" / "hidden_state_report.json").write_text(json.dumps(report, indent=1, sort_keys=True, allow_nan=False), encoding="utf-8")
-    first = {(r["unit"], r["season"], r["kind"]): (r["horizon"], r["first_divergence"], r["expected"]) for r in report["rows"] if r["language"] == "en"}
-    for key, value in sorted(first.items()):
-        print(key, value)
+    diffs = {(r["kind"], r["matching"]): [] for r in report["rows"]}
+    for r in report["rows"]:
+        if r["language"] == "en" and r["system"] == "B1":
+            diffs[(r["kind"], r["matching"])].append(sum(r["differences"].values()))
+    for key, value in sorted(diffs.items()):
+        print(key, "differences per pair:", value)
     print(json.dumps({"plants": report["plants"], "summary": report["summary"], "report_hash": report["report_hash"]}, indent=1))
     return 0
 
