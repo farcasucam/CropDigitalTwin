@@ -201,3 +201,20 @@ Still open: items 3-5 of the backlog of section 7 (direction check, size called 
 * **Recall of the old verifier extrapolated to its 78 unflagged claims** is 25-45% depending on who is the truth (37% against the majority), with a very wide uncertainty. No recall figure is given for the corrected verifier (biased sample frame).
 * **Reading in words:** a bit under half of the corrected verifier's flags are errors for the majority, and it finds about two thirds of the sample's errors; what it misses is meaning (direction, size, invented causes), and what it wrongly flags is the declared-numbers field, roundings and derived counts. The spread between annotators (precision 33-60%) is as large as the effect of the fixes made so far, so quote ranges, not a single figure.
 * Limits unchanged: 52 claims, sample drawn with the old verifier, one prompt, synthetic scenarios, not a model error rate; the corrected verifier was fixed after reading the claims of the first annotation's period, so its figures on this sample are not independent.
+
+## 12. Design v3, select and render (step 3 of the improvement plan)
+
+`tsxai.report.selection`: the model returns only an ordered list of fact ids (the schema allows only the ids shown, at most 6); each chosen fact becomes a claim made of the fact's own wording, with no summary, recommendation or caveat of the model's. Numbers, units, directions and evidence levels are the facts' by construction. `RuleSelector` is the baseline **without a language model** (fixed priority: confirmed what-if effects, forecasts, other what-ifs, threshold exceedances, changes next to an event, other changes, trends; larger magnitude first). Run: `manual_phase6_6_real_llm_test.py --design v3 --server agritwin` (`real_llm_report_v3_agritwin.json`, `llm_records_v3_agritwin/`); 8 runs per model on the same four scenarios, own containers; 181 tests pass.
+
+| | Qwen | Llama | OLMo | rule, no model |
+|---|---|---|---|---|
+| runs evaluable, truncated | 8, 0 | 8, 0 | 8, 0 | 8, 0 |
+| verifier violations | **0** | **0** | **0** | **0** |
+| claims written | 48 | 44 | 43 | 48 |
+| mean Jaccard with the rule's selection | 0.24 | 0.31 | 0.17 | 1 |
+| interpretive facts reported (of 22 slots) | 4 (18%) | 11 (50%) | 5 (23%) | 18 (82%) |
+
+* **Faithfulness is solved by construction, and it is also a test of the verifier:** 24 model runs plus 8 rule runs, 0 violations (v2 free text, own containers: 8-24% of claims flagged, and 4 errors that all four annotators marked in the audited sample were not flagged by the corrected verifier).
+* **Selection is where the models fall short:** they follow the stated priority poorly. Qwen picks many trends (17 of 48) and thresholds, OLMo mostly change points (23 of 43), Llama forecasts and change points; the rule picks forecasts and threshold exceedances. There is no position bias (OLMo takes 2 of 43 ids from the first six listed). The single twin-confirmed effect (heat wave scenario, 2 runs) is reported by Llama, OLMo and the rule in 2 of 2 and by Qwen in 1 of 2.
+* **Reading, with its limits:** with this interface the language models add nothing to selection over a trivial rule, and the free-text arm's extra value (and its errors) would lie in synthesis, which is what the audit shows to be unreliable. **The "interpretive facts" criterion is a convention fixed here and exploratory; the four scenarios offer only 11 such facts (8 forecasts, 2 associated changes, 1 confirmed effect), so the coverage figures rest on very few facts.** "More important" is not defined by ground truth here; a defensible definition needs the planted truth of a larger bank (events and interventions of the bench) or the expert study (RQ7).
+* **What this changes for the paper's argument:** a no-model baseline and a select-and-render arm are now part of the ablation (factor O in `PREREGISTRATION.md` section 8): free text (v2), select-and-render by a model (v3) and select-and-render by rule. The claim "the pipeline is faithful" is trivial for v3; the open question is what a model adds, measured with humans and over a large bank.

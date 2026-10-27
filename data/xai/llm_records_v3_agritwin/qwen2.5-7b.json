@@ -1,0 +1,109 @@
+{
+ "name": "recorded:openai:Qwen/Qwen2.5-7B-Instruct",
+ "records": {
+  "5c5750601b1468ff8cadf07a9d291066a371267aecea1152560668f12a22ba5d": {
+   "completion_tokens": 69,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "Qwen/Qwen2.5-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-baf7687b"
+   },
+   "prompt_tokens": 3459,
+   "text": "{\"selected\": [\"46f5253775\", \"fc0b6b6b47\", \"0186eddada\", \"855330ce23\", \"a725ca26a6\", \"a56684124c\"]}"
+  },
+  "6e6ad87d595ab9902135f4224d84175d82dd0f51c95d47da0ba598f54e10adad": {
+   "completion_tokens": 65,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "Qwen/Qwen2.5-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-baf7687b"
+   },
+   "prompt_tokens": 1864,
+   "text": "{\"selected\": [\"ee5de46b2b\", \"df2048225a\", \"007ead50ed\", \"0ecd4dfb8a\", \"e49d3849bb\", \"89ed250193\"]}"
+  },
+  "896c7513d72666ba822b0120b45ed52c08ab0d437ca80cb77b32c6d65763a375": {
+   "completion_tokens": 70,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "Qwen/Qwen2.5-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-baf7687b"
+   },
+   "prompt_tokens": 2370,
+   "text": "{\"selected\": [\"ad07c33aef\", \"82055693b4\", \"1e9673ff51\", \"5ded0dfb24\", \"b3098004e5\", \"549a111255\"]}"
+  },
+  "8b2a18174a57990dc07ef2122c09004e72895f046eb891990474deacaaf37fc4": {
+   "completion_tokens": 69,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "Qwen/Qwen2.5-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-baf7687b"
+   },
+   "prompt_tokens": 2567,
+   "text": "{\"selected\": [\"ad07c33aef\", \"82055693b4\", \"b3098004e5\", \"1e9673ff51\", \"9eff4038d4\", \"2cd4ae21c5\"]}"
+  },
+  "98be4cde65c440fba5b20b2f9feb4194dca7f905d65cd5f3a335a98acd22d0ac": {
+   "completion_tokens": 67,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "Qwen/Qwen2.5-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-baf7687b"
+   },
+   "prompt_tokens": 1983,
+   "text": "{\"selected\": [\"6bb0d09964\", \"97839affa6\", \"9296c2bc67\", \"1208b56e4b\", \"afffe76a6f\", \"c2f9fb4ab6\"]}"
+  },
+  "a971f6630898b1697a0a89ff458e5730058afa7f4db988bd00c700770b6af567": {
+   "completion_tokens": 69,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "Qwen/Qwen2.5-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-baf7687b"
+   },
+   "prompt_tokens": 1796,
+   "text": "{\"selected\": [\"6bb0d09964\", \"97839affa6\", \"cb3690f8eb\", \"295b5e288e\", \"5f4487642a\", \"f3c32cd6bb\"]}"
+  },
+  "b3d901e12c71e6da48c7f48429225bf34df1423ccccf792026bff429dbee785d": {
+   "completion_tokens": 65,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "Qwen/Qwen2.5-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-baf7687b"
+   },
+   "prompt_tokens": 1717,
+   "text": "{\"selected\": [\"ee5de46b2b\", \"df2048225a\", \"007ead50ed\", \"0ecd4dfb8a\", \"e49d3849bb\", \"89ed250193\"]}"
+  },
+  "fc4e84ea151f8802ec71f526bc34e480671a5a43ab067be93f362fdf6585a98b": {
+   "completion_tokens": 68,
+   "model": {
+    "engine": "vllm",
+    "finish_reason": "stop",
+    "max_model_len": "8192",
+    "name": "Qwen/Qwen2.5-7B-Instruct",
+    "structured_outputs": "xgrammar, no free whitespace",
+    "system_fingerprint": "vllm-0.29.0+5013de39.dev-baf7687b"
+   },
+   "prompt_tokens": 3199,
+   "text": "{\"selected\": [\"30efe4677e\", \"46f5253775\", \"4061d679ac\", \"fc0b6b6b47\", \"0186eddada\", \"b50353c733\"]}"
+  }
+ }
+}

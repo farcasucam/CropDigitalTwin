@@ -24,7 +24,7 @@ from tsxai.adapters import OpenAILanguageModel  # noqa: E402
 from tsxai.core import content_hash  # noqa: E402
 from tsxai.forecast import LaggedRegressionBackend  # noqa: E402
 from tsxai.llm import RecordedLanguageModel, RecordingLanguageModel  # noqa: E402
-from tsxai.report import explain  # noqa: E402
+from tsxai.report import RuleSelector, explain, rule_selection  # noqa: E402
 
 from agri_twin.interfaces.xai_adapter import TwinSimulator, twin_series_source  # noqa: E402
 from manual_phase6_4_semantics_test import CASES, build  # noqa: E402
@@ -74,6 +74,20 @@ def label_usage(path: Path) -> tuple[int, int]:
     return cited, labelled
 
 
+MAX_CLAIMS = 6
+
+
+def selection_stats(facts, bundle) -> dict[str, int]:
+    """Design v3 only. Overlap with the rule baseline (in thousandths of Jaccard) and coverage of the interpretive facts (evidence level above OBSERVED), capped at the number of slots, so a selector can reach 100%.
+    The interpretive-facts criterion is a convention fixed here, exploratory until it is preregistered; it is not a claim of what an operator needs."""
+    chosen = {c.fact_ids[0] for c in bundle.raw.claims} if bundle.raw else set()
+    rule = set(rule_selection(facts, MAX_CLAIMS))
+    key = [f.fact_id for f in facts if f.evidence_level != "OBSERVED"]
+    union = chosen | rule
+    return {"selection_runs": 1, "selected": len(chosen), "jaccard_with_rule_x1000": round(1000 * len(chosen & rule) / len(union)) if union else 1000,
+            "interpretive_slots": min(len(key), MAX_CLAIMS), "interpretive_covered": len(chosen & set(key))}
+
+
 def main(replay: bool) -> int:
     cases = list(scenarios())
     RECORDS.mkdir(parents=True, exist_ok=True)
@@ -99,6 +113,8 @@ def main(replay: bool) -> int:
             counts["violations"] += sum(rules.values())
             counts["claims"] += len(bundle.raw.claims) if bundle.raw else 0
             counts["recommendations_final"] += len(bundle.final.recommendations) if bundle.final else 0
+            if DESIGN == "v3" and bundle.raw:
+                counts.update(selection_stats(facts, bundle))
             rows.append({"model": key, "case": case, "language": language, "status": bundle.status, "error": bundle.error, "attempts": bundle.attempts, "claims": len(bundle.raw.claims) if bundle.raw else 0,
                          "violations_by_rule": dict(sorted(rules.items())), "corrections": dict(Counter(c.action for c in bundle.report.corrections)) if bundle.report else {}, "bundle_hash": bundle.content_hash})
         if recording is not None:
@@ -109,6 +125,16 @@ def main(replay: bool) -> int:
                 assert explain(facts, pack, replayed, language, max_tokens=MAX_TOKENS, design=DESIGN).content_hash == row["bundle_hash"], (key, case, language)
         counts["fact_ids_cited"], counts["fact_ids_with_label"] = label_usage(path)
         summary[key] = dict(counts)
+    if DESIGN == "v3":  # the baseline without a language model: the fixed-priority selection, rendered and verified the same way
+        counts = Counter()
+        for case, facts, pack in cases:
+            for language in ("en", "es"):
+                bundle = explain(facts, pack, RuleSelector(facts, MAX_CLAIMS), language, design="v3", max_claims=MAX_CLAIMS)
+                counts["runs"] += 1
+                counts["violations"] += len(bundle.report.violations)
+                counts["claims"] += len(bundle.raw.claims)
+                counts.update(selection_stats(facts, bundle))
+        summary["rule-selector (no model)"] = dict(counts)
     report = {"status": "MEASURED", "llm": "REAL (Spark, vLLM, temperature 0, seed 0)", "models": {k: v[1] for k, v in MODELS.items()}, "summary": summary, "rows": rows,
               "statement": "first measurement on real models: four synthetic scenarios, one run per model, language and scenario; what the verifier flags is reported, not a quality result, not a rate with an interval, no human evaluation"}
     report["report_hash"] = content_hash({k: v for k, v in report.items() if k != "statement"})
