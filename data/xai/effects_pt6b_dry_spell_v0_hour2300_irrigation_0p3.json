@@ -1,0 +1,714 @@
+{
+ "report_hash": "80ff5c6b37787fc3cb8c253b5ff9bb6b3c2cfc5b298a9df6098faba54345b35e",
+ "seasons": {
+  "34": {
+   "climatology_baseline": {
+    "biomass_fruit_end": {
+     "data_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "data_total": 0.0,
+     "false_effect": false,
+     "interaction_relative_to_sum_abs_shares": 0.0,
+     "irrigation_share": 0.0,
+     "material": false,
+     "truth_leave_one_out": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_total": 0.0
+    },
+    "biomass_total_end": {
+     "data_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "data_total": 0.0,
+     "false_effect": false,
+     "interaction_relative_to_sum_abs_shares": 0.0,
+     "irrigation_share": 0.0,
+     "material": false,
+     "truth_leave_one_out": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_total": 0.0
+    },
+    "hours_water_stress": {
+     "data_shapley": {
+      "extra_irrigation": -12.0,
+      "heat_wave": -14.999999999999998,
+      "high_radiation": 12.999999999999998
+     },
+     "data_total": -14.0,
+     "explained_fraction": -0.1076923076923077,
+     "interaction_relative_to_sum_abs_shares": 0.8846153846153846,
+     "irrigation_share": 0.3641025641025641,
+     "kendall_tau_b": 0.3333333333333333,
+     "material": true,
+     "normalised_error": 0.4564102564102564,
+     "sign_of": 3,
+     "sign_right": 1,
+     "top_agrees": false,
+     "truth_leave_one_out": {
+      "extra_irrigation": 7.0,
+      "heat_wave": 1.0,
+      "high_radiation": 7.0
+     },
+     "truth_shapley": {
+      "extra_irrigation": 47.33333333333333,
+      "heat_wave": 35.83333333333333,
+      "high_radiation": 46.83333333333333
+     },
+     "truth_total": 130.0
+    }
+   },
+   "oracle_baseline": {
+    "biomass_fruit_end": {
+     "data_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "data_total": 0.0,
+     "false_effect": false,
+     "interaction_relative_to_sum_abs_shares": 0.0,
+     "irrigation_share": 0.0,
+     "material": false,
+     "truth_leave_one_out": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_total": 0.0
+    },
+    "biomass_total_end": {
+     "data_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "data_total": 0.0,
+     "false_effect": false,
+     "interaction_relative_to_sum_abs_shares": 0.0,
+     "irrigation_share": 0.0,
+     "material": false,
+     "truth_leave_one_out": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_total": 0.0
+    },
+    "hours_water_stress": {
+     "data_shapley": {
+      "extra_irrigation": -5.333333333333333,
+      "heat_wave": -12.833333333333332,
+      "high_radiation": 13.166666666666666
+     },
+     "data_total": -5.0,
+     "explained_fraction": -0.038461538461538464,
+     "interaction_relative_to_sum_abs_shares": 0.8846153846153846,
+     "irrigation_share": 0.3641025641025641,
+     "kendall_tau_b": 0.3333333333333333,
+     "material": true,
+     "normalised_error": 0.40512820512820513,
+     "sign_of": 3,
+     "sign_right": 1,
+     "top_agrees": false,
+     "truth_leave_one_out": {
+      "extra_irrigation": 7.0,
+      "heat_wave": 1.0,
+      "high_radiation": 7.0
+     },
+     "truth_shapley": {
+      "extra_irrigation": 47.33333333333333,
+      "heat_wave": 35.83333333333333,
+      "high_radiation": 46.83333333333333
+     },
+     "truth_total": 130.0
+    }
+   }
+  },
+  "35": {
+   "climatology_baseline": {
+    "biomass_fruit_end": {
+     "data_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "data_total": 0.0,
+     "false_effect": false,
+     "interaction_relative_to_sum_abs_shares": 0.0,
+     "irrigation_share": 0.0,
+     "material": false,
+     "truth_leave_one_out": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_total": 0.0
+    },
+    "biomass_total_end": {
+     "data_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "data_total": 0.0,
+     "false_effect": false,
+     "interaction_relative_to_sum_abs_shares": 0.0,
+     "irrigation_share": 0.0,
+     "material": false,
+     "truth_leave_one_out": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_total": 0.0
+    },
+    "hours_water_stress": {
+     "data_shapley": {
+      "extra_irrigation": 111.5,
+      "heat_wave": -12.999999999999998,
+      "high_radiation": 9.499999999999998
+     },
+     "data_total": 108.0,
+     "explained_fraction": 0.5714285714285714,
+     "interaction_relative_to_sum_abs_shares": 0.7883597883597884,
+     "irrigation_share": 0.35185185185185186,
+     "kendall_tau_b": 0.3333333333333333,
+     "material": true,
+     "normalised_error": 0.34391534391534384,
+     "sign_of": 3,
+     "sign_right": 2,
+     "top_agrees": false,
+     "truth_leave_one_out": {
+      "extra_irrigation": 12.0,
+      "heat_wave": 10.0,
+      "high_radiation": 18.0
+     },
+     "truth_shapley": {
+      "extra_irrigation": 66.5,
+      "heat_wave": 51.99999999999999,
+      "high_radiation": 70.5
+     },
+     "truth_total": 189.0
+    }
+   },
+   "oracle_baseline": {
+    "biomass_fruit_end": {
+     "data_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "data_total": 0.0,
+     "false_effect": false,
+     "interaction_relative_to_sum_abs_shares": 0.0,
+     "irrigation_share": 0.0,
+     "material": false,
+     "truth_leave_one_out": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_total": 0.0
+    },
+    "biomass_total_end": {
+     "data_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "data_total": 0.0,
+     "false_effect": false,
+     "interaction_relative_to_sum_abs_shares": 0.0,
+     "irrigation_share": 0.0,
+     "material": false,
+     "truth_leave_one_out": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_total": 0.0
+    },
+    "hours_water_stress": {
+     "data_shapley": {
+      "extra_irrigation": 114.33333333333333,
+      "heat_wave": -12.166666666666666,
+      "high_radiation": 6.833333333333333
+     },
+     "data_total": 109.0,
+     "explained_fraction": 0.5767195767195767,
+     "interaction_relative_to_sum_abs_shares": 0.7883597883597884,
+     "irrigation_share": 0.35185185185185186,
+     "kendall_tau_b": 0.3333333333333333,
+     "material": true,
+     "normalised_error": 0.3395061728395061,
+     "sign_of": 3,
+     "sign_right": 2,
+     "top_agrees": false,
+     "truth_leave_one_out": {
+      "extra_irrigation": 12.0,
+      "heat_wave": 10.0,
+      "high_radiation": 18.0
+     },
+     "truth_shapley": {
+      "extra_irrigation": 66.5,
+      "heat_wave": 51.99999999999999,
+      "high_radiation": 70.5
+     },
+     "truth_total": 189.0
+    }
+   }
+  },
+  "37": {
+   "climatology_baseline": {
+    "biomass_fruit_end": {
+     "data_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "data_total": 0.0,
+     "false_effect": false,
+     "interaction_relative_to_sum_abs_shares": 0.0,
+     "irrigation_share": 0.0,
+     "material": false,
+     "truth_leave_one_out": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_total": 0.0
+    },
+    "biomass_total_end": {
+     "data_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "data_total": 0.0,
+     "false_effect": false,
+     "interaction_relative_to_sum_abs_shares": 0.0,
+     "irrigation_share": 0.0,
+     "material": false,
+     "truth_leave_one_out": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_total": 0.0
+    },
+    "hours_water_stress": {
+     "data_shapley": {
+      "extra_irrigation": 27.333333333333332,
+      "heat_wave": -17.666666666666664,
+      "high_radiation": 18.333333333333332
+     },
+     "data_total": 28.0,
+     "explained_fraction": 0.2692307692307692,
+     "interaction_relative_to_sum_abs_shares": 0.8461538461538461,
+     "irrigation_share": 0.36858974358974356,
+     "kendall_tau_b": 0.3333333333333333,
+     "material": true,
+     "normalised_error": 0.42788461538461536,
+     "sign_of": 3,
+     "sign_right": 2,
+     "top_agrees": false,
+     "truth_leave_one_out": {
+      "extra_irrigation": 8.0,
+      "heat_wave": 0.0,
+      "high_radiation": 8.0
+     },
+     "truth_shapley": {
+      "extra_irrigation": 38.33333333333333,
+      "heat_wave": 26.833333333333332,
+      "high_radiation": 38.833333333333336
+     },
+     "truth_total": 104.0
+    }
+   },
+   "oracle_baseline": {
+    "biomass_fruit_end": {
+     "data_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "data_total": 0.0,
+     "false_effect": false,
+     "interaction_relative_to_sum_abs_shares": 0.0,
+     "irrigation_share": 0.0,
+     "material": false,
+     "truth_leave_one_out": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_total": 0.0
+    },
+    "biomass_total_end": {
+     "data_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "data_total": 0.0,
+     "false_effect": false,
+     "interaction_relative_to_sum_abs_shares": 0.0,
+     "irrigation_share": 0.0,
+     "material": false,
+     "truth_leave_one_out": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_total": 0.0
+    },
+    "hours_water_stress": {
+     "data_shapley": {
+      "extra_irrigation": 33.83333333333333,
+      "heat_wave": -19.166666666666668,
+      "high_radiation": 14.333333333333332
+     },
+     "data_total": 29.0,
+     "explained_fraction": 0.27884615384615385,
+     "interaction_relative_to_sum_abs_shares": 0.8461538461538461,
+     "irrigation_share": 0.36858974358974356,
+     "kendall_tau_b": 0.3333333333333333,
+     "material": true,
+     "normalised_error": 0.4423076923076923,
+     "sign_of": 3,
+     "sign_right": 2,
+     "top_agrees": false,
+     "truth_leave_one_out": {
+      "extra_irrigation": 8.0,
+      "heat_wave": 0.0,
+      "high_radiation": 8.0
+     },
+     "truth_shapley": {
+      "extra_irrigation": 38.33333333333333,
+      "heat_wave": 26.833333333333332,
+      "high_radiation": 38.833333333333336
+     },
+     "truth_total": 104.0
+    }
+   }
+  },
+  "38": {
+   "climatology_baseline": {
+    "biomass_fruit_end": {
+     "data_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "data_total": 0.0,
+     "false_effect": false,
+     "interaction_relative_to_sum_abs_shares": 0.0,
+     "irrigation_share": 0.0,
+     "material": false,
+     "truth_leave_one_out": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_total": 0.0
+    },
+    "biomass_total_end": {
+     "data_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "data_total": 0.0,
+     "false_effect": false,
+     "interaction_relative_to_sum_abs_shares": 0.0,
+     "irrigation_share": 0.0,
+     "material": false,
+     "truth_leave_one_out": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_total": 0.0
+    },
+    "hours_water_stress": {
+     "data_shapley": {
+      "extra_irrigation": 77.66666666666666,
+      "heat_wave": 1.6666666666666665,
+      "high_radiation": 10.666666666666666
+     },
+     "data_total": 90.0,
+     "explained_fraction": 0.6976744186046512,
+     "interaction_relative_to_sum_abs_shares": 0.6434108527131783,
+     "irrigation_share": 0.36950904392764855,
+     "kendall_tau_b": 0.3333333333333333,
+     "material": true,
+     "normalised_error": 0.29069767441860467,
+     "sign_of": 3,
+     "sign_right": 3,
+     "top_agrees": false,
+     "truth_leave_one_out": {
+      "extra_irrigation": 16.0,
+      "heat_wave": 12.0,
+      "high_radiation": 18.0
+     },
+     "truth_shapley": {
+      "extra_irrigation": 47.666666666666664,
+      "heat_wave": 33.166666666666664,
+      "high_radiation": 48.166666666666664
+     },
+     "truth_total": 129.0
+    }
+   },
+   "oracle_baseline": {
+    "biomass_fruit_end": {
+     "data_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "data_total": 0.0,
+     "false_effect": false,
+     "interaction_relative_to_sum_abs_shares": 0.0,
+     "irrigation_share": 0.0,
+     "material": false,
+     "truth_leave_one_out": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_total": 0.0
+    },
+    "biomass_total_end": {
+     "data_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "data_total": 0.0,
+     "false_effect": false,
+     "interaction_relative_to_sum_abs_shares": 0.0,
+     "irrigation_share": 0.0,
+     "material": false,
+     "truth_leave_one_out": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_shapley": {
+      "extra_irrigation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_total": 0.0
+    },
+    "hours_water_stress": {
+     "data_shapley": {
+      "extra_irrigation": 75.66666666666666,
+      "heat_wave": -1.3333333333333337,
+      "high_radiation": 8.666666666666666
+     },
+     "data_total": 83.0,
+     "explained_fraction": 0.6434108527131783,
+     "interaction_relative_to_sum_abs_shares": 0.6434108527131783,
+     "irrigation_share": 0.36950904392764855,
+     "kendall_tau_b": 0.3333333333333333,
+     "material": true,
+     "normalised_error": 0.3062015503875969,
+     "sign_of": 3,
+     "sign_right": 2,
+     "top_agrees": false,
+     "truth_leave_one_out": {
+      "extra_irrigation": 16.0,
+      "heat_wave": 12.0,
+      "high_radiation": 18.0
+     },
+     "truth_shapley": {
+      "extra_irrigation": 47.666666666666664,
+      "heat_wave": 33.166666666666664,
+      "high_radiation": 48.166666666666664
+     },
+     "truth_total": 129.0
+    }
+   }
+  }
+ },
+ "status": "DEVELOPMENT: tomato outdoor hot window, four held-out DEV seasons, three players with irrigation as a farmer intervention, a simple surrogate told the applied irrigation; counts and ranges only",
+ "summary": {
+  "climatology_baseline/biomass_fruit_end": {
+   "explained_fraction_range": null,
+   "false_effects": "0/4",
+   "interaction_range": null,
+   "material_cells": 0,
+   "normalised_error_range": null,
+   "of": 4,
+   "sign_right": "0/0",
+   "top_agrees": 0,
+   "true_irrigation_share_range": null
+  },
+  "climatology_baseline/biomass_total_end": {
+   "explained_fraction_range": null,
+   "false_effects": "0/4",
+   "interaction_range": null,
+   "material_cells": 0,
+   "normalised_error_range": null,
+   "of": 4,
+   "sign_right": "0/0",
+   "top_agrees": 0,
+   "true_irrigation_share_range": null
+  },
+  "climatology_baseline/hours_water_stress": {
+   "explained_fraction_range": [
+    -0.108,
+    0.698
+   ],
+   "false_effects": "0/0",
+   "interaction_range": [
+    0.643,
+    0.885
+   ],
+   "material_cells": 4,
+   "normalised_error_range": [
+    0.291,
+    0.456
+   ],
+   "of": 4,
+   "sign_right": "8/12",
+   "top_agrees": 0,
+   "true_irrigation_share_range": [
+    0.352,
+    0.37
+   ]
+  },
+  "oracle_baseline/biomass_fruit_end": {
+   "explained_fraction_range": null,
+   "false_effects": "0/4",
+   "interaction_range": null,
+   "material_cells": 0,
+   "normalised_error_range": null,
+   "of": 4,
+   "sign_right": "0/0",
+   "top_agrees": 0,
+   "true_irrigation_share_range": null
+  },
+  "oracle_baseline/biomass_total_end": {
+   "explained_fraction_range": null,
+   "false_effects": "0/4",
+   "interaction_range": null,
+   "material_cells": 0,
+   "normalised_error_range": null,
+   "of": 4,
+   "sign_right": "0/0",
+   "top_agrees": 0,
+   "true_irrigation_share_range": null
+  },
+  "oracle_baseline/hours_water_stress": {
+   "explained_fraction_range": [
+    -0.038,
+    0.643
+   ],
+   "false_effects": "0/0",
+   "interaction_range": [
+    0.643,
+    0.885
+   ],
+   "material_cells": 4,
+   "normalised_error_range": [
+    0.306,
+    0.442
+   ],
+   "of": 4,
+   "sign_right": "7/12",
+   "top_agrees": 0,
+   "true_irrigation_share_range": [
+    0.352,
+    0.37
+   ]
+  }
+ }
+}
