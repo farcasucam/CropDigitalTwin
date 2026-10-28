@@ -1,0 +1,1534 @@
+{
+ "break_of_masking_largest_scale_not_masked": {
+  "lettuce": 0.3,
+  "pepper": 0.5,
+  "tomato": 0.5
+ },
+ "cells": [
+  {
+   "cooling_capacity_kw": 388.8,
+   "crop": "tomato",
+   "masking_class": "masked",
+   "masking_ratio": 1.6182907942682436e-07,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 2043.1458984375001,
+      "reference": 0.0,
+      "total_effect": 2043.1458984375001
+     },
+     "hours_cooling_saturated": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "temperature_peak": {
+      "factual": 25.999990103457773,
+      "reference": 25.999991591949975,
+      "total_effect": -1.4884922023838953e-06
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 26.0,
+      "reference": 0.0,
+      "total_effect": 26.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 35.19791947769167,
+      "reference": 25.999991591949975,
+      "total_effect": 9.197927885741695
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 0.0,
+   "saturated_hours_reference_reactive": 0.0,
+   "scale": 1.0
+  },
+  {
+   "cooling_capacity_kw": 194.4,
+   "crop": "tomato",
+   "masking_class": "partly masked",
+   "masking_ratio": 0.06265579502554011,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 1990.6303710937502,
+      "reference": 0.0,
+      "total_effect": 1990.6303710937502
+     },
+     "hours_cooling_saturated": {
+      "factual": 2.0,
+      "reference": 0.0,
+      "total_effect": 2.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "temperature_peak": {
+      "factual": 26.576295076218706,
+      "reference": 25.999991591949975,
+      "total_effect": 0.5763034842687311
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 26.0,
+      "reference": 0.0,
+      "total_effect": 26.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 35.19791947769167,
+      "reference": 25.999991591949975,
+      "total_effect": 9.197927885741695
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 2.0,
+   "saturated_hours_reference_reactive": 0.0,
+   "scale": 0.5
+  },
+  {
+   "cooling_capacity_kw": 116.64,
+   "crop": "tomato",
+   "masking_class": "partly masked",
+   "masking_ratio": 0.2586400953399237,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 1661.5433496093751,
+      "reference": 0.0,
+      "total_effect": 1661.5433496093751
+     },
+     "hours_cooling_saturated": {
+      "factual": 10.0,
+      "reference": 0.0,
+      "total_effect": 10.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 2.0,
+      "reference": 0.0,
+      "total_effect": 2.0
+     },
+     "temperature_peak": {
+      "factual": 28.37894453724795,
+      "reference": 25.999991591949975,
+      "total_effect": 2.378952945297975
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 26.0,
+      "reference": 0.0,
+      "total_effect": 26.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 35.19791947769167,
+      "reference": 25.999991591949975,
+      "total_effect": 9.197927885741695
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 10.0,
+   "saturated_hours_reference_reactive": 0.0,
+   "scale": 0.3
+  },
+  {
+   "cooling_capacity_kw": 77.76,
+   "crop": "tomato",
+   "masking_class": "partly masked",
+   "masking_ratio": 0.3993862440439119,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 1239.4993359375,
+      "reference": 0.0,
+      "total_effect": 1239.4993359375
+     },
+     "hours_cooling_saturated": {
+      "factual": 13.0,
+      "reference": 0.0,
+      "total_effect": 13.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 7.0,
+      "reference": 0.0,
+      "total_effect": 7.0
+     },
+     "temperature_peak": {
+      "factual": 29.67351746322311,
+      "reference": 25.999991591949975,
+      "total_effect": 3.673525871273135
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 26.0,
+      "reference": 0.0,
+      "total_effect": 26.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 35.19791947769167,
+      "reference": 25.999991591949975,
+      "total_effect": 9.197927885741695
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 13.0,
+   "saturated_hours_reference_reactive": 0.0,
+   "scale": 0.2
+  },
+  {
+   "cooling_capacity_kw": 58.32,
+   "crop": "tomato",
+   "masking_class": "partly masked",
+   "masking_ratio": 0.42272820343774725,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 943.5531005859375,
+      "reference": 0.0,
+      "total_effect": 943.5531005859375
+     },
+     "hours_cooling_saturated": {
+      "factual": 14.0,
+      "reference": 0.0,
+      "total_effect": 14.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 9.0,
+      "reference": 0.0,
+      "total_effect": 9.0
+     },
+     "temperature_peak": {
+      "factual": 29.88821512243952,
+      "reference": 25.999991591949975,
+      "total_effect": 3.888223530489544
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 26.0,
+      "reference": 0.0,
+      "total_effect": 26.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 35.19791947769167,
+      "reference": 25.999991591949975,
+      "total_effect": 9.197927885741695
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 14.0,
+   "saturated_hours_reference_reactive": 0.0,
+   "scale": 0.15
+  },
+  {
+   "cooling_capacity_kw": 38.88,
+   "crop": "tomato",
+   "masking_class": "partly masked",
+   "masking_ratio": 0.44607016576733605,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 661.821416015625,
+      "reference": 0.0,
+      "total_effect": 661.821416015625
+     },
+     "hours_cooling_saturated": {
+      "factual": 15.0,
+      "reference": 0.0,
+      "total_effect": 15.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 10.0,
+      "reference": 0.0,
+      "total_effect": 10.0
+     },
+     "temperature_peak": {
+      "factual": 30.102912808658775,
+      "reference": 25.999991591949975,
+      "total_effect": 4.1029212167088005
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 26.0,
+      "reference": 0.0,
+      "total_effect": 26.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 35.19791947769167,
+      "reference": 25.999991591949975,
+      "total_effect": 9.197927885741695
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 15.0,
+   "saturated_hours_reference_reactive": 0.0,
+   "scale": 0.1
+  },
+  {
+   "cooling_capacity_kw": 27.216,
+   "crop": "tomato",
+   "masking_class": "partly masked",
+   "masking_ratio": 0.4600777766109345,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 466.12715625000004,
+      "reference": 0.0,
+      "total_effect": 466.12715625000004
+     },
+     "hours_cooling_saturated": {
+      "factual": 16.0,
+      "reference": 0.0,
+      "total_effect": 16.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 11.0,
+      "reference": 0.0,
+      "total_effect": 11.0
+     },
+     "temperature_peak": {
+      "factual": 30.231753803049727,
+      "reference": 25.999991591949975,
+      "total_effect": 4.231762211099753
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 26.0,
+      "reference": 0.0,
+      "total_effect": 26.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 35.19791947769167,
+      "reference": 25.999991591949975,
+      "total_effect": 9.197927885741695
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 16.0,
+   "saturated_hours_reference_reactive": 0.0,
+   "scale": 0.07
+  },
+  {
+   "cooling_capacity_kw": 19.44,
+   "crop": "tomato",
+   "masking_class": "partly masked",
+   "masking_ratio": 0.46942418083177756,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 341.099384765625,
+      "reference": 0.0,
+      "total_effect": 341.099384765625
+     },
+     "hours_cooling_saturated": {
+      "factual": 17.0,
+      "reference": 0.0,
+      "total_effect": 17.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 11.0,
+      "reference": 0.0,
+      "total_effect": 11.0
+     },
+     "temperature_peak": {
+      "factual": 30.317721355064034,
+      "reference": 25.999991591949975,
+      "total_effect": 4.317729763114059
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 26.0,
+      "reference": 0.0,
+      "total_effect": 26.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 35.19791947769167,
+      "reference": 25.999991591949975,
+      "total_effect": 9.197927885741695
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 17.0,
+   "saturated_hours_reference_reactive": 0.0,
+   "scale": 0.05
+  },
+  {
+   "cooling_capacity_kw": 11.664,
+   "crop": "tomato",
+   "masking_class": "partly masked",
+   "masking_ratio": 0.47877058505262027,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 208.973830078125,
+      "reference": 0.0,
+      "total_effect": 208.973830078125
+     },
+     "hours_cooling_saturated": {
+      "factual": 17.0,
+      "reference": 0.0,
+      "total_effect": 17.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 12.0,
+      "reference": 0.0,
+      "total_effect": 12.0
+     },
+     "temperature_peak": {
+      "factual": 30.403688907078337,
+      "reference": 25.999991591949975,
+      "total_effect": 4.403697315128362
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 26.0,
+      "reference": 0.0,
+      "total_effect": 26.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 35.19791947769167,
+      "reference": 25.999991591949975,
+      "total_effect": 9.197927885741695
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 17.0,
+   "saturated_hours_reference_reactive": 0.0,
+   "scale": 0.03
+  },
+  {
+   "cooling_capacity_kw": 388.8,
+   "crop": "pepper",
+   "masking_class": "masked",
+   "masking_ratio": 1.4212606280209224e-07,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 5166.19423828125,
+      "reference": 1325.5365234375001,
+      "total_effect": 3840.65771484375
+     },
+     "hours_cooling_saturated": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "temperature_peak": {
+      "factual": 24.999994915470612,
+      "reference": 24.999996160273238,
+      "total_effect": -1.2448026254219258e-06
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 1325.5365234375001,
+      "reference": 1325.5365234375001,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 27.0,
+      "reference": 0.0,
+      "total_effect": 27.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 33.75843638495806,
+      "reference": 24.999996160273238,
+      "total_effect": 8.758440224684822
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 0.0,
+   "saturated_hours_reference_reactive": 0.0,
+   "scale": 1.0
+  },
+  {
+   "cooling_capacity_kw": 194.4,
+   "crop": "pepper",
+   "masking_class": "not masked",
+   "masking_ratio": 0.5031474223433845,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 4888.286718750001,
+      "reference": 1325.406005859375,
+      "total_effect": 3562.8807128906255
+     },
+     "hours_cooling_saturated": {
+      "factual": 10.0,
+      "reference": 0.0,
+      "total_effect": 10.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 3.0,
+      "reference": 0.0,
+      "total_effect": 3.0
+     },
+     "temperature_peak": {
+      "factual": 29.40678278307202,
+      "reference": 24.99999616027324,
+      "total_effect": 4.40678662279878
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 1325.406005859375,
+      "reference": 1325.406005859375,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 27.0,
+      "reference": 0.0,
+      "total_effect": 27.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 33.75843638495806,
+      "reference": 24.99999616027324,
+      "total_effect": 8.758440224684819
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 10.0,
+   "saturated_hours_reference_reactive": 0.0,
+   "scale": 0.5
+  },
+  {
+   "cooling_capacity_kw": 116.64,
+   "crop": "pepper",
+   "masking_class": "not masked",
+   "masking_ratio": 0.9104876129049837,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 3781.637666015625,
+      "reference": 1324.281181640625,
+      "total_effect": 2457.356484375
+     },
+     "hours_cooling_saturated": {
+      "factual": 21.0,
+      "reference": 1.0,
+      "total_effect": 20.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 13.0,
+      "reference": 0.0,
+      "total_effect": 13.0
+     },
+     "temperature_peak": {
+      "factual": 32.975486734516814,
+      "reference": 25.011606188036207,
+      "total_effect": 7.963880546480606
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 1324.281181640625,
+      "reference": 1324.281181640625,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 1.0,
+      "reference": 1.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 27.0,
+      "reference": 0.0,
+      "total_effect": 27.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 33.75843638495806,
+      "reference": 25.011606188036207,
+      "total_effect": 8.746830196921852
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 21.0,
+   "saturated_hours_reference_reactive": 1.0,
+   "scale": 0.3
+  },
+  {
+   "cooling_capacity_kw": 77.76,
+   "crop": "pepper",
+   "masking_class": "not masked",
+   "masking_ratio": 0.9577231766949778,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 2839.2888867187503,
+      "reference": 1191.9244921875002,
+      "total_effect": 1647.3643945312501
+     },
+     "hours_cooling_saturated": {
+      "factual": 29.0,
+      "reference": 8.0,
+      "total_effect": 21.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 16.0,
+      "reference": 0.0,
+      "total_effect": 16.0
+     },
+     "temperature_peak": {
+      "factual": 33.406740085449485,
+      "reference": 25.439545039429845,
+      "total_effect": 7.96719504601964
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 1191.9244921875002,
+      "reference": 1191.9244921875002,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 8.0,
+      "reference": 8.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 27.0,
+      "reference": 0.0,
+      "total_effect": 27.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 33.75843638495806,
+      "reference": 25.439545039429845,
+      "total_effect": 8.318891345528215
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 29.0,
+   "saturated_hours_reference_reactive": 8.0,
+   "scale": 0.2
+  },
+  {
+   "cooling_capacity_kw": 58.32,
+   "crop": "pepper",
+   "masking_class": "not masked",
+   "masking_ratio": 0.9832171476751098,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 2268.1119287109377,
+      "reference": 998.9613720703126,
+      "total_effect": 1269.1505566406252
+     },
+     "hours_cooling_saturated": {
+      "factual": 31.0,
+      "reference": 13.0,
+      "total_effect": 18.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 18.0,
+      "reference": 0.0,
+      "total_effect": 18.0
+     },
+     "temperature_peak": {
+      "factual": 33.622416483386274,
+      "reference": 25.65374125098147,
+      "total_effect": 7.968675232404806
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 998.9613720703126,
+      "reference": 998.9613720703126,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 13.0,
+      "reference": 13.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 27.0,
+      "reference": 0.0,
+      "total_effect": 27.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 33.75843638495806,
+      "reference": 25.65374125098147,
+      "total_effect": 8.104695133976591
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 31.0,
+   "saturated_hours_reference_reactive": 13.0,
+   "scale": 0.15
+  },
+  {
+   "cooling_capacity_kw": 38.88,
+   "crop": "pepper",
+   "masking_class": "not masked",
+   "masking_ratio": 0.997218821769913,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 1629.545185546875,
+      "reference": 746.6269921875,
+      "total_effect": 882.918193359375
+     },
+     "hours_cooling_saturated": {
+      "factual": 34.0,
+      "reference": 13.0,
+      "total_effect": 21.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 19.0,
+      "reference": 0.0,
+      "total_effect": 19.0
+     },
+     "temperature_peak": {
+      "factual": 33.83808180428413,
+      "reference": 25.867948943103737,
+      "total_effect": 7.970132861180392
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 746.6269921875,
+      "reference": 746.6269921875,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 13.0,
+      "reference": 13.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 27.0,
+      "reference": 0.0,
+      "total_effect": 27.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 33.86030998482035,
+      "reference": 25.867948943103737,
+      "total_effect": 7.9923610417166095
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 34.0,
+   "saturated_hours_reference_reactive": 13.0,
+   "scale": 0.1
+  },
+  {
+   "cooling_capacity_kw": 27.216,
+   "crop": "pepper",
+   "masking_class": "not masked",
+   "masking_ratio": 0.9973036057250503,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 1148.0736708984375,
+      "reference": 565.8333310546875,
+      "total_effect": 582.24033984375
+     },
+     "hours_cooling_saturated": {
+      "factual": 40.0,
+      "reference": 18.0,
+      "total_effect": 22.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 20.0,
+      "reference": 0.0,
+      "total_effect": 20.0
+     },
+     "temperature_peak": {
+      "factual": 33.967252045138274,
+      "reference": 25.99647279760821,
+      "total_effect": 7.970779247530064
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 565.8333310546875,
+      "reference": 565.8333310546875,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 18.0,
+      "reference": 18.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 27.0,
+      "reference": 0.0,
+      "total_effect": 27.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 33.988802517237794,
+      "reference": 25.99647279760821,
+      "total_effect": 7.992329719629584
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 40.0,
+   "saturated_hours_reference_reactive": 18.0,
+   "scale": 0.07
+  },
+  {
+   "cooling_capacity_kw": 19.44,
+   "crop": "pepper",
+   "masking_class": "not masked",
+   "masking_ratio": 0.9973651658215501,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 834.4712548828126,
+      "reference": 423.45123046875005,
+      "total_effect": 411.0200244140625
+     },
+     "hours_cooling_saturated": {
+      "factual": 41.0,
+      "reference": 19.0,
+      "total_effect": 22.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 20.0,
+      "reference": 0.0,
+      "total_effect": 20.0
+     },
+     "temperature_peak": {
+      "factual": 34.053405799125485,
+      "reference": 26.082156164715546,
+      "total_effect": 7.97124963440994
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 423.45123046875005,
+      "reference": 423.45123046875005,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 19.0,
+      "reference": 19.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 27.0,
+      "reference": 0.0,
+      "total_effect": 27.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 34.07446420551609,
+      "reference": 26.082156164715546,
+      "total_effect": 7.992308040800541
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 41.0,
+   "saturated_hours_reference_reactive": 19.0,
+   "scale": 0.05
+  },
+  {
+   "cooling_capacity_kw": 11.664,
+   "crop": "pepper",
+   "masking_class": "not masked",
+   "masking_ratio": 0.997426752016244,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 511.226912109375,
+      "reference": 270.1037548828125,
+      "total_effect": 241.1231572265625
+     },
+     "hours_cooling_saturated": {
+      "factual": 43.0,
+      "reference": 21.0,
+      "total_effect": 22.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 20.0,
+      "reference": 0.0,
+      "total_effect": 20.0
+     },
+     "temperature_peak": {
+      "factual": 34.13955975817802,
+      "reference": 26.167839201568388,
+      "total_effect": 7.971720556609629
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 270.1037548828125,
+      "reference": 270.1037548828125,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 21.0,
+      "reference": 21.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 27.0,
+      "reference": 0.0,
+      "total_effect": 27.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 34.16012589379439,
+      "reference": 26.167839201568388,
+      "total_effect": 7.992286692225999
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 43.0,
+   "saturated_hours_reference_reactive": 21.0,
+   "scale": 0.03
+  },
+  {
+   "cooling_capacity_kw": 388.8,
+   "crop": "lettuce",
+   "masking_class": "masked",
+   "masking_ratio": 0.0,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 2655.32080078125,
+      "reference": 78.47666015624999,
+      "total_effect": 2576.844140625
+     },
+     "hours_cooling_saturated": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "temperature_peak": {
+      "factual": 19.999977811271684,
+      "reference": 19.999977811271684,
+      "total_effect": 0.0
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 78.47666015624999,
+      "reference": 78.47666015624999,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 21.0,
+      "reference": 0.0,
+      "total_effect": 21.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 26.441859967380946,
+      "reference": 19.999977811271684,
+      "total_effect": 6.441882156109262
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 0.0,
+   "saturated_hours_reference_reactive": 0.0,
+   "scale": 1.0
+  },
+  {
+   "cooling_capacity_kw": 194.4,
+   "crop": "lettuce",
+   "masking_class": "masked",
+   "masking_ratio": 0.0,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 2620.0335937500004,
+      "reference": 78.464794921875,
+      "total_effect": 2541.568798828125
+     },
+     "hours_cooling_saturated": {
+      "factual": 1.0,
+      "reference": 0.0,
+      "total_effect": 1.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "temperature_peak": {
+      "factual": 19.999977811271684,
+      "reference": 19.999977811271684,
+      "total_effect": 0.0
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 78.464794921875,
+      "reference": 78.464794921875,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 21.0,
+      "reference": 0.0,
+      "total_effect": 21.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 26.441859967380946,
+      "reference": 19.999977811271684,
+      "total_effect": 6.441882156109262
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 1.0,
+   "saturated_hours_reference_reactive": 0.0,
+   "scale": 0.5
+  },
+  {
+   "cooling_capacity_kw": 116.64,
+   "crop": "lettuce",
+   "masking_class": "partly masked",
+   "masking_ratio": 0.38400546442441186,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 2242.4438671875,
+      "reference": 78.4529296875,
+      "total_effect": 2163.9909375
+     },
+     "hours_cooling_saturated": {
+      "factual": 10.0,
+      "reference": 0.0,
+      "total_effect": 10.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 2.0,
+      "reference": 0.0,
+      "total_effect": 2.0
+     },
+     "temperature_peak": {
+      "factual": 22.473695760395753,
+      "reference": 19.999977811271684,
+      "total_effect": 2.473717949124069
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 78.4529296875,
+      "reference": 78.4529296875,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 21.0,
+      "reference": 0.0,
+      "total_effect": 21.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 26.441859967380946,
+      "reference": 19.999977811271684,
+      "total_effect": 6.441882156109262
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 10.0,
+   "saturated_hours_reference_reactive": 0.0,
+   "scale": 0.3
+  },
+  {
+   "cooling_capacity_kw": 77.76,
+   "crop": "lettuce",
+   "masking_class": "not masked",
+   "masking_ratio": 0.5713928074598306,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 1734.0328125,
+      "reference": 78.45292968750002,
+      "total_effect": 1655.5798828125
+     },
+     "hours_cooling_saturated": {
+      "factual": 16.0,
+      "reference": 0.0,
+      "total_effect": 16.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 7.0,
+      "reference": 0.0,
+      "total_effect": 7.0
+     },
+     "temperature_peak": {
+      "factual": 23.68082294177634,
+      "reference": 19.999977811271684,
+      "total_effect": 3.6808451305046574
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 78.45292968750002,
+      "reference": 78.45292968750002,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 21.0,
+      "reference": 0.0,
+      "total_effect": 21.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 26.441859967380946,
+      "reference": 19.999977811271684,
+      "total_effect": 6.441882156109262
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 16.0,
+   "saturated_hours_reference_reactive": 0.0,
+   "scale": 0.2
+  },
+  {
+   "cooling_capacity_kw": 58.32,
+   "crop": "lettuce",
+   "masking_class": "not masked",
+   "masking_ratio": 0.6103069278970906,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 1399.79390625,
+      "reference": 78.4493701171875,
+      "total_effect": 1321.3445361328124
+     },
+     "hours_cooling_saturated": {
+      "factual": 18.0,
+      "reference": 0.0,
+      "total_effect": 18.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 7.0,
+      "reference": 0.0,
+      "total_effect": 7.0
+     },
+     "temperature_peak": {
+      "factual": 23.931503119841814,
+      "reference": 19.999977811271684,
+      "total_effect": 3.93152530857013
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 78.4493701171875,
+      "reference": 78.4493701171875,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 0.0,
+      "reference": 0.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 21.0,
+      "reference": 0.0,
+      "total_effect": 21.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 26.441859967380946,
+      "reference": 19.999977811271684,
+      "total_effect": 6.441882156109262
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 18.0,
+   "saturated_hours_reference_reactive": 0.0,
+   "scale": 0.15
+  },
+  {
+   "cooling_capacity_kw": 38.88,
+   "crop": "lettuce",
+   "masking_class": "not masked",
+   "masking_ratio": 0.6436696741919653,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 1014.6673828125,
+      "reference": 74.73673828125001,
+      "total_effect": 939.93064453125
+     },
+     "hours_cooling_saturated": {
+      "factual": 23.0,
+      "reference": 1.0,
+      "total_effect": 22.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 11.0,
+      "reference": 0.0,
+      "total_effect": 11.0
+     },
+     "temperature_peak": {
+      "factual": 24.146421999877568,
+      "reference": 19.999977811271684,
+      "total_effect": 4.146444188605884
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 74.73673828125001,
+      "reference": 74.73673828125001,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 1.0,
+      "reference": 1.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 21.0,
+      "reference": 0.0,
+      "total_effect": 21.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 26.441859967380946,
+      "reference": 19.999977811271684,
+      "total_effect": 6.441882156109262
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 23.0,
+   "saturated_hours_reference_reactive": 1.0,
+   "scale": 0.1
+  },
+  {
+   "cooling_capacity_kw": 27.216,
+   "crop": "lettuce",
+   "masking_class": "not masked",
+   "masking_ratio": 0.6636873219688905,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 719.3884482421876,
+      "reference": 62.3805205078125,
+      "total_effect": 657.007927734375
+     },
+     "hours_cooling_saturated": {
+      "factual": 25.0,
+      "reference": 2.0,
+      "total_effect": 23.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 13.0,
+      "reference": 0.0,
+      "total_effect": 13.0
+     },
+     "temperature_peak": {
+      "factual": 24.275373327899022,
+      "reference": 19.999977811271684,
+      "total_effect": 4.275395516627338
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 62.3805205078125,
+      "reference": 62.3805205078125,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 2.0,
+      "reference": 2.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 21.0,
+      "reference": 0.0,
+      "total_effect": 21.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 26.441859967380946,
+      "reference": 19.999977811271684,
+      "total_effect": 6.441882156109262
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 25.0,
+   "saturated_hours_reference_reactive": 2.0,
+   "scale": 0.07
+  },
+  {
+   "cooling_capacity_kw": 19.44,
+   "crop": "lettuce",
+   "masking_class": "not masked",
+   "masking_ratio": 0.6770324204868405,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 513.411064453125,
+      "reference": 46.851064453125005,
+      "total_effect": 466.56000000000006
+     },
+     "hours_cooling_saturated": {
+      "factual": 26.0,
+      "reference": 2.0,
+      "total_effect": 24.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 13.0,
+      "reference": 0.0,
+      "total_effect": 13.0
+     },
+     "temperature_peak": {
+      "factual": 24.361340879913325,
+      "reference": 19.999977811271684,
+      "total_effect": 4.361363068641641
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 46.851064453125005,
+      "reference": 46.851064453125005,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 2.0,
+      "reference": 2.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 21.0,
+      "reference": 0.0,
+      "total_effect": 21.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 26.441859967380946,
+      "reference": 19.999977811271684,
+      "total_effect": 6.441882156109262
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 26.0,
+   "saturated_hours_reference_reactive": 2.0,
+   "scale": 0.05
+  },
+  {
+   "cooling_capacity_kw": 11.664,
+   "crop": "lettuce",
+   "masking_class": "not masked",
+   "masking_ratio": 0.6903775190047912,
+   "policies": {
+    "reactive": {
+     "cooling_energy": {
+      "factual": 311.25737109375,
+      "reference": 31.32137109375,
+      "total_effect": 279.93600000000004
+     },
+     "hours_cooling_saturated": {
+      "factual": 26.0,
+      "reference": 2.0,
+      "total_effect": 24.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 13.0,
+      "reference": 0.0,
+      "total_effect": 13.0
+     },
+     "temperature_peak": {
+      "factual": 24.44730843192763,
+      "reference": 19.999977811271684,
+      "total_effect": 4.447330620655947
+     }
+    },
+    "replayed": {
+     "cooling_energy": {
+      "factual": 31.32137109375,
+      "reference": 31.32137109375,
+      "total_effect": 0.0
+     },
+     "hours_cooling_saturated": {
+      "factual": 2.0,
+      "reference": 2.0,
+      "total_effect": 0.0
+     },
+     "hours_temperature_above_stage_max": {
+      "factual": 21.0,
+      "reference": 0.0,
+      "total_effect": 21.0
+     },
+     "reproduces_source_run": true,
+     "temperature_peak": {
+      "factual": 26.441859967380946,
+      "reference": 19.999977811271684,
+      "total_effect": 6.441882156109262
+     }
+    }
+   },
+   "saturated_hours_all_on_reactive": 26.0,
+   "saturated_hours_reference_reactive": 2.0,
+   "scale": 0.03
+  }
+ ],
+ "grid": [
+  1.0,
+  0.5,
+  0.3,
+  0.2,
+  0.15,
+  0.1,
+  0.07,
+  0.05,
+  0.03
+ ],
+ "report_hash": "96bd8d8fac0f6aa7a29ea753e3f16ad42a41499966022245ae40511cf9ecf2f7",
+ "status": "DEVELOPMENT: one seed per crop, the four PT-2 perturbations applied together, only the cooling capacity varies; the equipment is illustrative"
+}
