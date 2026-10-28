@@ -11,6 +11,6 @@ The graph (child: parents, lag 0 within a step, `@1` previous step, `?` assumed 
 * Predicted descendants that did not move are many: WIND changes only its own series (on this greenhouse outdoor wind reaches no other variable), RAIN and CO2 the same, IRRIGATION two. The graph over-declares what the code allows; whether those edges are structurally null, below a threshold or inactive in the greenhouse mode cannot be told from one probe level.
 
 ## What it does not say
-* **Low power.** Descendant sets cover most of the 42 series (36 of 42 for the weather factors), so a missing edge can only show in the few variables outside them. A pass says there is no omission among those, not that the graph is right.
+* **Low power.** Descendant sets cover most of the 41 series (37 of 41 for the weather factors under the reactive policy, 23 to 25 under replay), so a missing edge can only show in the few variables outside them. A pass says there is no omission among those, not that the graph is right.
 * Lags and edge directions inside the descendant set are not tested; no individual edge is confirmed by this check; one probe level per factor; one synthetic generator; the controller-feedback edges (greenhouse-crop feedback is off here) are not exercised.
 * Use: the declared graph is a documented structural prior for the data-based methods of 7.5 (which need to know what may cause what), with the check as a guard that it is not contradicted by the twin; never as discovered structure.
