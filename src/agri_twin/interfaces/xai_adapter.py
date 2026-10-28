@@ -42,6 +42,7 @@ DESIGN_FILE = Path(__file__).resolve().parents[2] / "xai_benchmark_design.json"
 SEMANTICS_FILE = Path(__file__).resolve().parents[2] / "xai_semantics.json"
 CROP_CONFIG_FILE = Path(__file__).resolve().parents[2] / "crop_config.json"
 NAME = "agri-twin-interactive/1"
+EQUIPMENT_FACTORS = {"COOLING_CAPACITY": "cooling_capacity_kw"}  # interventions on the installation, not on the weather: a multiplier of a rated capacity for the whole run (see ``_request``)
 
 
 def _load(path: Path) -> dict[str, Any]:
@@ -122,14 +123,24 @@ class TwinSimulator:
         w0, w1 = scenario.window_start, scenario.window_start + scenario.window_hours
         request: dict[str, Any] = {"crop": crop, "environment": environment, "seed": scenario.season, "end_time": (origin + timedelta(hours=w1)).isoformat(),
                                    "options": {"include_trajectory": True, "compute_trajectory_hash": True}}
-        if interventions:
+        events = [item for item in interventions if item.factor not in EQUIPMENT_FACTORS]
+        if events:
             request["runtime_events"] = [{"event_type": item.factor, "start_simulation_time": (origin + timedelta(hours=w0 + item.start)).isoformat(), "duration_hours": item.duration,
-                                          **({"intensity": item.level} if item.level is not None else {})} for item in interventions]
+                                          **({"intensity": item.level} if item.level is not None else {})} for item in events]
         if scenario.options.get("greenhouse"):
             request["greenhouse"] = dict(scenario.options["greenhouse"])
         control = scenario.options.get("control")
         if control:
-            request["control"] = {"actuators": dict(control["actuators"]), "equipment": dict(control["equipment"])}
+            equipment = dict(control["equipment"])
+            for item in interventions:
+                if item.factor in EQUIPMENT_FACTORS:
+                    if item.start != 0 or item.duration != scenario.window_hours or item.level is None or item.level <= 0:
+                        raise ValueError(f"{item.factor} is a whole-run change of the installation (start 0, the window's duration, a positive multiplier)")
+                    key = EQUIPMENT_FACTORS[item.factor]
+                    equipment[key] = equipment[key] * item.level
+            request["control"] = {"actuators": dict(control["actuators"]), "equipment": equipment}
+        elif any(item.factor in EQUIPMENT_FACTORS for item in interventions):
+            raise ValueError("an equipment intervention needs a scenario with the climate controller on")
         return request
 
     @staticmethod

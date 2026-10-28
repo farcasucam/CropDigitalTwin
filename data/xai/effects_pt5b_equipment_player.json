@@ -1,0 +1,507 @@
+{
+ "capacity_scale": 0.3,
+ "report_hash": "937c04083776a260054d23e6c2f2bf0b39ecc7a15769ecb24d60766345461d30",
+ "seasons": {
+  "34": {
+   "climatology_baseline": {
+    "cooling_energy": {
+     "data_shapley": {
+      "heat_wave": 1617.5292771641193,
+      "high_radiation": 6.5656850377041565
+     },
+     "data_total": 1624.0949622018234,
+     "equipment_share": 0.06845614182828211,
+     "explained_fraction": 1.125448984828592,
+     "interaction_relative_to_sum_abs_shares": 0.09066944345750211,
+     "material": true,
+     "truth_shapley": {
+      "cooling_degradation": -114.4571923828125,
+      "heat_wave": 1477.5250341796875,
+      "high_radiation": 79.99620117187501
+     },
+     "truth_total": 1443.06404296875
+    },
+    "hours_temperature_above_stage_max": {
+     "data_shapley": {
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "data_total": 0.0,
+     "equipment_share": 0.3333333333333333,
+     "explained_fraction": 0.0,
+     "interaction_relative_to_sum_abs_shares": 2.0,
+     "material": true,
+     "truth_shapley": {
+      "cooling_degradation": 0.3333333333333333,
+      "heat_wave": 0.3333333333333333,
+      "high_radiation": 0.3333333333333333
+     },
+     "truth_total": 1.0
+    },
+    "temperature_peak": {
+     "data_shapley": {
+      "heat_wave": 0.25088963947656673,
+      "high_radiation": 0.24935091969887502
+     },
+     "data_total": 0.5002405591754417,
+     "equipment_share": 0.39501320839082754,
+     "explained_fraction": 0.233306345971878,
+     "interaction_relative_to_sum_abs_shares": 1.62991758653461,
+     "material": true,
+     "truth_shapley": {
+      "cooling_degradation": 0.8469620807953983,
+      "heat_wave": 0.846962196470697,
+      "high_radiation": 0.4502118245257484
+     },
+     "truth_total": 2.144136101791844
+    }
+   },
+   "oracle_baseline": {
+    "cooling_energy": {
+     "data_shapley": {
+      "heat_wave": 1438.920654927068,
+      "high_radiation": -0.865560472075078
+     },
+     "data_total": 1438.0550944549927,
+     "equipment_share": 0.06845614182828211,
+     "explained_fraction": 0.9965289492603165,
+     "interaction_relative_to_sum_abs_shares": 0.09066944345750211,
+     "material": true,
+     "truth_shapley": {
+      "cooling_degradation": -114.4571923828125,
+      "heat_wave": 1477.5250341796875,
+      "high_radiation": 79.99620117187501
+     },
+     "truth_total": 1443.06404296875
+    },
+    "hours_temperature_above_stage_max": {
+     "data_shapley": {
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "data_total": 0.0,
+     "equipment_share": 0.3333333333333333,
+     "explained_fraction": 0.0,
+     "interaction_relative_to_sum_abs_shares": 2.0,
+     "material": true,
+     "truth_shapley": {
+      "cooling_degradation": 0.3333333333333333,
+      "heat_wave": 0.3333333333333333,
+      "high_radiation": 0.3333333333333333
+     },
+     "truth_total": 1.0
+    },
+    "temperature_peak": {
+     "data_shapley": {
+      "heat_wave": 0.16474357675386742,
+      "high_radiation": 0.11828494468816331
+     },
+     "data_total": 0.2830285214420307,
+     "equipment_share": 0.39501320839082754,
+     "explained_fraction": 0.1320011920910735,
+     "interaction_relative_to_sum_abs_shares": 1.62991758653461,
+     "material": true,
+     "truth_shapley": {
+      "cooling_degradation": 0.8469620807953983,
+      "heat_wave": 0.846962196470697,
+      "high_radiation": 0.4502118245257484
+     },
+     "truth_total": 2.144136101791844
+    }
+   }
+  },
+  "35": {
+   "climatology_baseline": {
+    "cooling_energy": {
+     "data_shapley": {
+      "heat_wave": 1976.7700583274118,
+      "high_radiation": 8.122267230574636
+     },
+     "data_total": 1984.8923255579864,
+     "equipment_share": 0.06175014902763456,
+     "explained_fraction": 1.0739968802558548,
+     "interaction_relative_to_sum_abs_shares": 0.09650012961371368,
+     "material": true,
+     "truth_shapley": {
+      "cooling_degradation": -130.20275390625005,
+      "heat_wave": 1900.152421875,
+      "high_radiation": 78.18635742187499
+     },
+     "truth_total": 1848.136025390625
+    },
+    "hours_temperature_above_stage_max": {
+     "data_shapley": {
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "data_total": 0.0,
+     "equipment_share": 0.39999999999999997,
+     "explained_fraction": 0.0,
+     "interaction_relative_to_sum_abs_shares": 1.6,
+     "material": true,
+     "truth_shapley": {
+      "cooling_degradation": 1.9999999999999998,
+      "heat_wave": 1.9999999999999998,
+      "high_radiation": 1.0
+     },
+     "truth_total": 5.0
+    },
+    "temperature_peak": {
+     "data_shapley": {
+      "heat_wave": 0.43661034149870304,
+      "high_radiation": 0.21745391185444518
+     },
+     "data_total": 0.6540642533531482,
+     "equipment_share": 0.485525378503159,
+     "explained_fraction": 0.2256673199544739,
+     "interaction_relative_to_sum_abs_shares": 1.0868386459319477,
+     "material": true,
+     "truth_shapley": {
+      "cooling_degradation": 1.4072254424731896,
+      "heat_wave": 1.4072310217767263,
+      "high_radiation": 0.08389963571661477
+     },
+     "truth_total": 2.8983560999665308
+    }
+   },
+   "oracle_baseline": {
+    "cooling_energy": {
+     "data_shapley": {
+      "heat_wave": 1903.6641087998846,
+      "high_radiation": 20.638415373197095
+     },
+     "data_total": 1924.3025241730818,
+     "equipment_share": 0.06175014902763456,
+     "explained_fraction": 1.0412126043408294,
+     "interaction_relative_to_sum_abs_shares": 0.09650012961371368,
+     "material": true,
+     "truth_shapley": {
+      "cooling_degradation": -130.20275390625005,
+      "heat_wave": 1900.152421875,
+      "high_radiation": 78.18635742187499
+     },
+     "truth_total": 1848.136025390625
+    },
+    "hours_temperature_above_stage_max": {
+     "data_shapley": {
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "data_total": 0.0,
+     "equipment_share": 0.39999999999999997,
+     "explained_fraction": 0.0,
+     "interaction_relative_to_sum_abs_shares": 1.6,
+     "material": true,
+     "truth_shapley": {
+      "cooling_degradation": 1.9999999999999998,
+      "heat_wave": 1.9999999999999998,
+      "high_radiation": 1.0
+     },
+     "truth_total": 5.0
+    },
+    "temperature_peak": {
+     "data_shapley": {
+      "heat_wave": 0.6918970778399185,
+      "high_radiation": 0.03987717898422716
+     },
+     "data_total": 0.7317742568241457,
+     "equipment_share": 0.485525378503159,
+     "explained_fraction": 0.252479071440737,
+     "interaction_relative_to_sum_abs_shares": 1.0868386459319477,
+     "material": true,
+     "truth_shapley": {
+      "cooling_degradation": 1.4072254424731896,
+      "heat_wave": 1.4072310217767263,
+      "high_radiation": 0.08389963571661477
+     },
+     "truth_total": 2.8983560999665308
+    }
+   }
+  },
+  "37": {
+   "climatology_baseline": {
+    "cooling_energy": {
+     "data_shapley": {
+      "heat_wave": 1593.7491609166755,
+      "high_radiation": 6.3978439964122344
+     },
+     "data_total": 1600.1470049130878,
+     "equipment_share": 0.07618740311495804,
+     "explained_fraction": 1.058523485725653,
+     "interaction_relative_to_sum_abs_shares": 0.11055373335905835,
+     "material": true,
+     "truth_shapley": {
+      "cooling_degradation": -135.87473144531248,
+      "heat_wave": 1566.5609619140625,
+      "high_radiation": 80.99208984375002
+     },
+     "truth_total": 1511.6783203125
+    },
+    "hours_temperature_above_stage_max": {
+     "data_shapley": {
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "data_total": 0.0,
+     "equipment_share": 0.3333333333333333,
+     "explained_fraction": 0.0,
+     "interaction_relative_to_sum_abs_shares": 2.0,
+     "material": true,
+     "truth_shapley": {
+      "cooling_degradation": 0.3333333333333333,
+      "heat_wave": 0.3333333333333333,
+      "high_radiation": 0.3333333333333333
+     },
+     "truth_total": 1.0
+    },
+    "temperature_peak": {
+     "data_shapley": {
+      "heat_wave": 0.3051240032231348,
+      "high_radiation": 0.3151938531271057
+     },
+     "data_total": 0.6203178563502405,
+     "equipment_share": 0.4239040228282083,
+     "explained_fraction": 0.3001748199825747,
+     "interaction_relative_to_sum_abs_shares": 1.4565775226584272,
+     "material": true,
+     "truth_shapley": {
+      "cooling_degradation": 0.8760069707189372,
+      "heat_wave": 0.8760067488855836,
+      "high_radiation": 0.31450823712139686
+     },
+     "truth_total": 2.066521956725918
+    }
+   },
+   "oracle_baseline": {
+    "cooling_energy": {
+     "data_shapley": {
+      "heat_wave": 1590.8532822317436,
+      "high_radiation": 10.043148030679465
+     },
+     "data_total": 1600.896430262423,
+     "equipment_share": 0.07618740311495804,
+     "explained_fraction": 1.0590192428846101,
+     "interaction_relative_to_sum_abs_shares": 0.11055373335905835,
+     "material": true,
+     "truth_shapley": {
+      "cooling_degradation": -135.87473144531248,
+      "heat_wave": 1566.5609619140625,
+      "high_radiation": 80.99208984375002
+     },
+     "truth_total": 1511.6783203125
+    },
+    "hours_temperature_above_stage_max": {
+     "data_shapley": {
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "data_total": 0.0,
+     "equipment_share": 0.3333333333333333,
+     "explained_fraction": 0.0,
+     "interaction_relative_to_sum_abs_shares": 2.0,
+     "material": true,
+     "truth_shapley": {
+      "cooling_degradation": 0.3333333333333333,
+      "heat_wave": 0.3333333333333333,
+      "high_radiation": 0.3333333333333333
+     },
+     "truth_total": 1.0
+    },
+    "temperature_peak": {
+     "data_shapley": {
+      "heat_wave": 0.4022611910956577,
+      "high_radiation": 0.252239277384934
+     },
+     "data_total": 0.6545004684805917,
+     "equipment_share": 0.4239040228282083,
+     "explained_fraction": 0.31671595181961953,
+     "interaction_relative_to_sum_abs_shares": 1.4565775226584272,
+     "material": true,
+     "truth_shapley": {
+      "cooling_degradation": 0.8760069707189372,
+      "heat_wave": 0.8760067488855836,
+      "high_radiation": 0.31450823712139686
+     },
+     "truth_total": 2.066521956725918
+    }
+   }
+  },
+  "38": {
+   "climatology_baseline": {
+    "cooling_energy": {
+     "data_shapley": {
+      "heat_wave": 1616.9326616928658,
+      "high_radiation": 5.39788390633084
+     },
+     "data_total": 1622.3305455991967,
+     "equipment_share": 0.05976966096211299,
+     "explained_fraction": 1.0875026551943379,
+     "interaction_relative_to_sum_abs_shares": 0.06859470217411714,
+     "material": true,
+     "truth_shapley": {
+      "cooling_degradation": -101.26977539062503,
+      "heat_wave": 1510.6341796875,
+      "high_radiation": 82.43015624999994
+     },
+     "truth_total": 1491.794560546875
+    },
+    "hours_temperature_above_stage_max": {
+     "data_shapley": {
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "data_total": 0.0,
+     "material": false,
+     "truth_shapley": {
+      "cooling_degradation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_total": 0.0
+    },
+    "temperature_peak": {
+     "data_shapley": {
+      "heat_wave": 0.13043647981301376,
+      "high_radiation": 0.2942050116232622
+     },
+     "data_total": 0.42464149143627594,
+     "equipment_share": 0.4999999999998119,
+     "explained_fraction": 0.21484597708440206,
+     "interaction_relative_to_sum_abs_shares": 0.9999999999989001,
+     "material": true,
+     "truth_shapley": {
+      "cooling_degradation": 0.9882463176615499,
+      "heat_wave": 0.9882463176615783,
+      "high_radiation": 7.152796873318341e-13
+     },
+     "truth_total": 1.9764926353238437
+    }
+   },
+   "oracle_baseline": {
+    "cooling_energy": {
+     "data_shapley": {
+      "heat_wave": 1683.613835299122,
+      "high_radiation": 6.978756736877642
+     },
+     "data_total": 1690.5925920359996,
+     "equipment_share": 0.05976966096211299,
+     "explained_fraction": 1.1332609976914298,
+     "interaction_relative_to_sum_abs_shares": 0.06859470217411714,
+     "material": true,
+     "truth_shapley": {
+      "cooling_degradation": -101.26977539062503,
+      "heat_wave": 1510.6341796875,
+      "high_radiation": 82.43015624999994
+     },
+     "truth_total": 1491.794560546875
+    },
+    "hours_temperature_above_stage_max": {
+     "data_shapley": {
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "data_total": 0.0,
+     "material": false,
+     "truth_shapley": {
+      "cooling_degradation": 0.0,
+      "heat_wave": 0.0,
+      "high_radiation": 0.0
+     },
+     "truth_total": 0.0
+    },
+    "temperature_peak": {
+     "data_shapley": {
+      "heat_wave": 0.44999810933330053,
+      "high_radiation": 0.0
+     },
+     "data_total": 0.44999810933330053,
+     "equipment_share": 0.4999999999998119,
+     "explained_fraction": 0.2276750751765738,
+     "interaction_relative_to_sum_abs_shares": 0.9999999999989001,
+     "material": true,
+     "truth_shapley": {
+      "cooling_degradation": 0.9882463176615499,
+      "heat_wave": 0.9882463176615783,
+      "high_radiation": 7.152796873318341e-13
+     },
+     "truth_total": 1.9764926353238437
+    }
+   }
+  }
+ },
+ "status": "DEVELOPMENT: tomato, four held-out DEV seasons, one installation fault level; counts and ranges only",
+ "summary": {
+  "climatology_baseline/cooling_energy": {
+   "equipment_share_range": [
+    0.06,
+    0.076
+   ],
+   "explained_fraction_range": [
+    1.059,
+    1.125
+   ],
+   "material_cells": 4,
+   "of": 4
+  },
+  "climatology_baseline/hours_temperature_above_stage_max": {
+   "equipment_share_range": [
+    0.333,
+    0.4
+   ],
+   "explained_fraction_range": [
+    0.0,
+    0.0
+   ],
+   "material_cells": 3,
+   "of": 4
+  },
+  "climatology_baseline/temperature_peak": {
+   "equipment_share_range": [
+    0.395,
+    0.5
+   ],
+   "explained_fraction_range": [
+    0.215,
+    0.3
+   ],
+   "material_cells": 4,
+   "of": 4
+  },
+  "oracle_baseline/cooling_energy": {
+   "equipment_share_range": [
+    0.06,
+    0.076
+   ],
+   "explained_fraction_range": [
+    0.997,
+    1.133
+   ],
+   "material_cells": 4,
+   "of": 4
+  },
+  "oracle_baseline/hours_temperature_above_stage_max": {
+   "equipment_share_range": [
+    0.333,
+    0.4
+   ],
+   "explained_fraction_range": [
+    0.0,
+    0.0
+   ],
+   "material_cells": 3,
+   "of": 4
+  },
+  "oracle_baseline/temperature_peak": {
+   "equipment_share_range": [
+    0.395,
+    0.5
+   ],
+   "explained_fraction_range": [
+    0.132,
+    0.317
+   ],
+   "material_cells": 4,
+   "of": 4
+  }
+ }
+}

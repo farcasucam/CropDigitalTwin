@@ -112,3 +112,17 @@ def test_the_effects_engine_divides_a_twin_contrast_and_replayed_energy_is_fixed
     assert replayed["outcomes"]["cooling_energy"]["total_effect"] == 0.0  # the commands are the reference's: nothing for the energy to change
     assert reactive["outcomes"]["cooling_energy"]["total_effect"] > 0.0  # ... while the reactive controller did spend energy
     assert reactive["report_hash"] == ResimulationEngine(simulator).evaluate(EffectQuery(scenario, outcomes, players))["report_hash"]
+
+
+def test_a_cooling_capacity_intervention_caps_the_cooling_power_and_only_applies_to_the_whole_run(twin):
+    simulator, scenario = twin
+    rated = scenario.options["control"]["equipment"]["cooling_capacity_kw"]
+    nominal = simulator.run(scenario, HEAT)
+    reduced = simulator.run(scenario, HEAT + (Intervention("COOLING_CAPACITY", 0, scenario.window_hours, 0.05),))
+    assert max(nominal.series["greenhouse_cooling_kw"]) > 0.05 * rated  # the nominal run needs more than the reduced installation can give
+    assert max(reduced.series["greenhouse_cooling_kw"]) <= 0.05 * rated + 1e-9
+    assert max(reduced.series["temperature_c"]) > max(nominal.series["temperature_c"])  # the installation can no longer hold the air
+    with pytest.raises(ValueError):
+        simulator.run(scenario, (Intervention("COOLING_CAPACITY", 5, scenario.window_hours - 5, 0.5),))  # a whole-run change only
+    with pytest.raises(ValueError):
+        simulator.run(ScenarioDescriptor({**LABELS, "control": "off"}, 0, 24 * 40, 48, {}), (Intervention("COOLING_CAPACITY", 0, 48, 0.5),))  # needs the controller
