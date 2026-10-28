@@ -1,0 +1,1890 @@
+{
+ "regimes": [
+  {
+   "scale": 1.0,
+   "seasons": {
+    "34": {
+     "cells": {
+      "climatology_baseline": {
+       "cooling_energy": {
+        "34": {
+         "data_shapley": {
+          "cold_wave": -3.846331009195277,
+          "heat_wave": 1617.529277164119,
+          "high_radiation": 6.565685037704233,
+          "wind": -50.98038327255745
+         },
+         "data_total": 1569.2682479200707,
+         "kendall_tau_b": 0.9128709291752769,
+         "material": true,
+         "normalised_error": 0.06698600497093794,
+         "sign_of": 2,
+         "sign_right": 2,
+         "top_agrees": true,
+         "total_relative_error": 0.08407547459838383,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 1591.9822265625,
+          "high_radiation": 121.33388671875014,
+          "wind": 0.0
+         },
+         "truth_total": 1713.3161132812502
+        }
+       },
+       "heating_energy": {
+        "34": {
+         "data_shapley": {
+          "cold_wave": 669.8528925336578,
+          "heat_wave": 49.09606003827819,
+          "high_radiation": -1.817922674521848,
+          "wind": 30.134394768538456
+         },
+         "data_total": 747.2654246659527,
+         "kendall_tau_b": 0.3333333333333333,
+         "material": true,
+         "normalised_error": 0.1998694928904003,
+         "sign_of": 3,
+         "sign_right": 2,
+         "top_agrees": true,
+         "total_relative_error": 0.7357987372535711,
+         "truth_shapley": {
+          "cold_wave": 557.345654296875,
+          "heat_wave": -87.65244140625003,
+          "high_radiation": -39.190869140625004,
+          "wind": 0.0
+         },
+         "truth_total": 430.5023437499999
+        }
+       },
+       "hours_temperature_above_stage_max": {
+        "34": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.0,
+          "high_radiation": 0.0,
+          "wind": 0.0
+         },
+         "data_total": 0.0,
+         "false_effect": false,
+         "material": false,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.0,
+          "high_radiation": 0.0,
+          "wind": 0.0
+         },
+         "truth_total": 0.0
+        }
+       },
+       "temperature_peak": {
+        "34": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.25691460505419583,
+          "high_radiation": 0.2553758852765042,
+          "wind": -0.012049931155258282
+         },
+         "data_total": 0.5002405591754417,
+         "false_effect": true,
+         "material": false,
+         "truth_shapley": {
+          "cold_wave": -1.3892857383031771e-05,
+          "heat_wave": 6.633928088343547e-06,
+          "high_radiation": 5.38699676925584e-06,
+          "wind": 0.0
+         },
+         "truth_total": -1.8719325254323849e-06
+        }
+       }
+      },
+      "oracle_baseline": {
+       "cooling_energy": {
+        "34": {
+         "data_shapley": {
+          "cold_wave": -66.55380908545433,
+          "heat_wave": 1438.920654927068,
+          "high_radiation": -0.8655604720750798,
+          "wind": -13.675833516155327
+         },
+         "data_total": 1357.8254518533831,
+         "kendall_tau_b": 0.9128709291752769,
+         "material": true,
+         "normalised_error": 0.08933644553327456,
+         "sign_of": 2,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.20748690721588475,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 1591.9822265625,
+          "high_radiation": 121.33388671875014,
+          "wind": 0.0
+         },
+         "truth_total": 1713.3161132812502
+        }
+       },
+       "heating_energy": {
+        "34": {
+         "data_shapley": {
+          "cold_wave": 615.8240907926111,
+          "heat_wave": -0.4985516722361752,
+          "high_radiation": -2.96281918545489,
+          "wind": -4.69440642137899
+         },
+         "data_total": 607.6683135135411,
+         "kendall_tau_b": 0.0,
+         "material": true,
+         "normalised_error": 0.1273827761222624,
+         "sign_of": 3,
+         "sign_right": 3,
+         "top_agrees": true,
+         "total_relative_error": 0.4115331132004812,
+         "truth_shapley": {
+          "cold_wave": 557.345654296875,
+          "heat_wave": -87.65244140625003,
+          "high_radiation": -39.190869140625004,
+          "wind": 0.0
+         },
+         "truth_total": 430.5023437499999
+        }
+       },
+       "hours_temperature_above_stage_max": {
+        "34": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.0,
+          "high_radiation": 0.0,
+          "wind": 0.0
+         },
+         "data_total": 0.0,
+         "false_effect": false,
+         "material": false,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.0,
+          "high_radiation": 0.0,
+          "wind": 0.0
+         },
+         "truth_total": 0.0
+        }
+       },
+       "temperature_peak": {
+        "34": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.16474357675386742,
+          "high_radiation": 0.11828494468816331,
+          "wind": 0.0
+         },
+         "data_total": 0.2830285214420307,
+         "false_effect": true,
+         "material": false,
+         "truth_shapley": {
+          "cold_wave": -1.3892857383031771e-05,
+          "heat_wave": 6.633928088343547e-06,
+          "high_radiation": 5.38699676925584e-06,
+          "wind": 0.0
+         },
+         "truth_total": -1.8719325254323849e-06
+        }
+       }
+      }
+     }
+    },
+    "35": {
+     "cells": {
+      "climatology_baseline": {
+       "cooling_energy": {
+        "35": {
+         "data_shapley": {
+          "cold_wave": -34.80588073223174,
+          "heat_wave": 1976.7700583274118,
+          "high_radiation": 8.122267230574693,
+          "wind": -78.79726050571813
+         },
+         "data_total": 1871.2891843200366,
+         "kendall_tau_b": 0.9128709291752769,
+         "material": true,
+         "normalised_error": 0.055500646817479495,
+         "sign_of": 2,
+         "sign_right": 2,
+         "top_agrees": true,
+         "total_relative_error": 0.13296493406551352,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 2030.3551757812502,
+          "high_radiation": 127.9072265625,
+          "wind": 0.0
+         },
+         "truth_total": 2158.26240234375
+        }
+       },
+       "heating_energy": {
+        "35": {
+         "data_shapley": {
+          "cold_wave": 923.8429980478293,
+          "heat_wave": 77.93507613817688,
+          "high_radiation": 0.16314642613917846,
+          "wind": 5.7371199820974965
+         },
+         "data_total": 1007.6783405942429,
+         "kendall_tau_b": 0.6666666666666666,
+         "material": true,
+         "normalised_error": 0.19385019787474006,
+         "sign_of": 1,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.35524635639542734,
+         "truth_shapley": {
+          "cold_wave": 769.6028320312499,
+          "heat_wave": -9.915380859374988,
+          "high_radiation": -16.148583984375012,
+          "wind": 0.0
+         },
+         "truth_total": 743.5388671874999
+        }
+       },
+       "hours_temperature_above_stage_max": {
+        "35": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.0,
+          "high_radiation": 0.0,
+          "wind": 0.0
+         },
+         "data_total": 0.0,
+         "false_effect": false,
+         "material": false,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.0,
+          "high_radiation": 0.0,
+          "wind": 0.0
+         },
+         "truth_total": 0.0
+        }
+       },
+       "temperature_peak": {
+        "35": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.4429009359491545,
+          "high_radiation": 0.22374450630489662,
+          "wind": -0.012581188900902873
+         },
+         "data_total": 0.6540642533531482,
+         "false_effect": true,
+         "material": false,
+         "truth_shapley": {
+          "cold_wave": -1.5379396399358332e-06,
+          "heat_wave": 6.348273356474958e-06,
+          "high_radiation": 8.025562798034494e-07,
+          "wind": 0.0
+         },
+         "truth_total": 5.612889996342574e-06
+        }
+       }
+      },
+      "oracle_baseline": {
+       "cooling_energy": {
+        "35": {
+         "data_shapley": {
+          "cold_wave": -13.329643614954932,
+          "heat_wave": 1903.6641087998846,
+          "high_radiation": 20.638415373197056,
+          "wind": -51.266224597866405
+         },
+         "data_total": 1859.7066559602604,
+         "kendall_tau_b": 0.9128709291752769,
+         "material": true,
+         "normalised_error": 0.058700492972395886,
+         "sign_of": 2,
+         "sign_right": 2,
+         "top_agrees": true,
+         "total_relative_error": 0.13833153283830327,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 2030.3551757812502,
+          "high_radiation": 127.9072265625,
+          "wind": 0.0
+         },
+         "truth_total": 2158.26240234375
+        }
+       },
+       "heating_energy": {
+        "35": {
+         "data_shapley": {
+          "cold_wave": 879.618024688869,
+          "heat_wave": 128.56710979137364,
+          "high_radiation": -12.261430098894332,
+          "wind": 17.560329407500422
+         },
+         "data_total": 1013.4840337888488,
+         "kendall_tau_b": 0.6666666666666666,
+         "material": true,
+         "normalised_error": 0.17404583324909606,
+         "sign_of": 1,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.3630545469969039,
+         "truth_shapley": {
+          "cold_wave": 769.6028320312499,
+          "heat_wave": -9.915380859374988,
+          "high_radiation": -16.148583984375012,
+          "wind": 0.0
+         },
+         "truth_total": 743.5388671874999
+        }
+       },
+       "hours_temperature_above_stage_max": {
+        "35": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.0,
+          "high_radiation": 0.0,
+          "wind": 0.0
+         },
+         "data_total": 0.0,
+         "false_effect": false,
+         "material": false,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.0,
+          "high_radiation": 0.0,
+          "wind": 0.0
+         },
+         "truth_total": 0.0
+        }
+       },
+       "temperature_peak": {
+        "35": {
+         "data_shapley": {
+          "cold_wave": -0.0027832401924339223,
+          "heat_wave": 0.3874620146749728,
+          "high_radiation": 0.03092127001362262,
+          "wind": 0.3161742123279841
+         },
+         "data_total": 0.7317742568241457,
+         "false_effect": true,
+         "material": false,
+         "truth_shapley": {
+          "cold_wave": -1.5379396399358332e-06,
+          "heat_wave": 6.348273356474958e-06,
+          "high_radiation": 8.025562798034494e-07,
+          "wind": 0.0
+         },
+         "truth_total": 5.612889996342574e-06
+        }
+       }
+      }
+     }
+    },
+    "37": {
+     "cells": {
+      "climatology_baseline": {
+       "cooling_energy": {
+        "37": {
+         "data_shapley": {
+          "cold_wave": -35.28643442486836,
+          "heat_wave": 1593.7491609166755,
+          "high_radiation": 6.397843996412235,
+          "wind": -38.44302978233201
+         },
+         "data_total": 1526.4175407058874,
+         "kendall_tau_b": 0.9128709291752769,
+         "material": true,
+         "normalised_error": 0.06474310514400558,
+         "sign_of": 2,
+         "sign_right": 2,
+         "top_agrees": true,
+         "total_relative_error": 0.1645806931063993,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 1702.435693359375,
+          "high_radiation": 124.69174804687498,
+          "wind": 0.0
+         },
+         "truth_total": 1827.12744140625
+        }
+       },
+       "heating_energy": {
+        "37": {
+         "data_shapley": {
+          "cold_wave": 590.0297147150244,
+          "heat_wave": 58.895914255995734,
+          "high_radiation": -3.9808320624097,
+          "wind": 8.883710413125238
+         },
+         "data_total": 653.8285073217357,
+         "kendall_tau_b": 0.3333333333333333,
+         "material": true,
+         "normalised_error": 0.2213067229145934,
+         "sign_of": 2,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.5197344767595694,
+         "truth_shapley": {
+          "cold_wave": 528.58037109375,
+          "heat_wave": -79.84907226562501,
+          "high_radiation": -18.50581054687501,
+          "wind": 0.0
+         },
+         "truth_total": 430.22548828125
+        }
+       },
+       "hours_temperature_above_stage_max": {
+        "37": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.0,
+          "high_radiation": 0.0,
+          "wind": 0.0
+         },
+         "data_total": 0.0,
+         "false_effect": false,
+         "material": false,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.0,
+          "high_radiation": 0.0,
+          "wind": 0.0
+         },
+         "truth_total": 0.0
+        }
+       },
+       "temperature_peak": {
+        "37": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.3069315717272936,
+          "high_radiation": 0.31700142163126444,
+          "wind": -0.003615137008317504
+         },
+         "data_total": 0.6203178563502405,
+         "false_effect": true,
+         "material": false,
+         "truth_shapley": {
+          "cold_wave": 2.581420310103037e-07,
+          "heat_wave": -5.524360110105893e-08,
+          "high_radiation": -3.4561162761311454e-07,
+          "wind": 0.0
+         },
+         "truth_total": -1.427131977038698e-07
+        }
+       }
+      },
+      "oracle_baseline": {
+       "cooling_energy": {
+        "37": {
+         "data_shapley": {
+          "cold_wave": -48.935215790737985,
+          "heat_wave": 1590.8532822317436,
+          "high_radiation": 10.043148030679465,
+          "wind": -63.94338184622474
+         },
+         "data_total": 1488.0178326254604,
+         "kendall_tau_b": 0.9128709291752769,
+         "material": true,
+         "normalised_error": 0.06274800400784093,
+         "sign_of": 2,
+         "sign_right": 2,
+         "top_agrees": true,
+         "total_relative_error": 0.18559712973266584,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 1702.435693359375,
+          "high_radiation": 124.69174804687498,
+          "wind": 0.0
+         },
+         "truth_total": 1827.12744140625
+        }
+       },
+       "heating_energy": {
+        "37": {
+         "data_shapley": {
+          "cold_wave": 597.4690193472517,
+          "heat_wave": -9.556959939379508,
+          "high_radiation": -4.162500577057195,
+          "wind": -19.814099999827814
+         },
+         "data_total": 563.9354588309872,
+         "kendall_tau_b": 0.3333333333333333,
+         "material": true,
+         "normalised_error": 0.11212021000298822,
+         "sign_of": 2,
+         "sign_right": 2,
+         "top_agrees": true,
+         "total_relative_error": 0.3107904440620387,
+         "truth_shapley": {
+          "cold_wave": 528.58037109375,
+          "heat_wave": -79.84907226562501,
+          "high_radiation": -18.50581054687501,
+          "wind": 0.0
+         },
+         "truth_total": 430.22548828125
+        }
+       },
+       "hours_temperature_above_stage_max": {
+        "37": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.0,
+          "high_radiation": 0.0,
+          "wind": 0.0
+         },
+         "data_total": 0.0,
+         "false_effect": false,
+         "material": false,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.0,
+          "high_radiation": 0.0,
+          "wind": 0.0
+         },
+         "truth_total": 0.0
+        }
+       },
+       "temperature_peak": {
+        "37": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.4022611910956577,
+          "high_radiation": 0.252239277384934,
+          "wind": 0.0
+         },
+         "data_total": 0.6545004684805917,
+         "false_effect": true,
+         "material": false,
+         "truth_shapley": {
+          "cold_wave": 2.581420310103037e-07,
+          "heat_wave": -5.524360110105893e-08,
+          "high_radiation": -3.4561162761311454e-07,
+          "wind": 0.0
+         },
+         "truth_total": -1.427131977038698e-07
+        }
+       }
+      }
+     }
+    },
+    "38": {
+     "cells": {
+      "climatology_baseline": {
+       "cooling_energy": {
+        "38": {
+         "data_shapley": {
+          "cold_wave": -34.61925060952263,
+          "heat_wave": 1616.9326616928658,
+          "high_radiation": 5.397883906330842,
+          "wind": -37.54612253149283
+         },
+         "data_total": 1550.1651724581814,
+         "kendall_tau_b": 0.9128709291752769,
+         "material": true,
+         "normalised_error": 0.06708782019406873,
+         "sign_of": 2,
+         "sign_right": 2,
+         "top_agrees": true,
+         "total_relative_error": 0.10581442793307878,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 1611.903955078125,
+          "high_radiation": 121.70170898437493,
+          "wind": 0.0
+         },
+         "truth_total": 1733.6056640625
+        }
+       },
+       "heating_energy": {
+        "38": {
+         "data_shapley": {
+          "cold_wave": 906.2447669722418,
+          "heat_wave": 72.90034292574848,
+          "high_radiation": -0.6156842332010606,
+          "wind": 6.6411522753810415
+         },
+         "data_total": 985.1705779401702,
+         "kendall_tau_b": 0.3333333333333333,
+         "material": true,
+         "normalised_error": 0.23376168871955985,
+         "sign_of": 2,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.5551798263223835,
+         "truth_shapley": {
+          "cold_wave": 718.43994140625,
+          "heat_wave": -68.37539062499998,
+          "high_radiation": -16.587597656249997,
+          "wind": 0.0
+         },
+         "truth_total": 633.476953125
+        }
+       },
+       "hours_temperature_above_stage_max": {
+        "38": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.0,
+          "high_radiation": 0.0,
+          "wind": 0.0
+         },
+         "data_total": 0.0,
+         "false_effect": false,
+         "material": false,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.0,
+          "high_radiation": 0.0,
+          "wind": 0.0
+         },
+         "truth_total": 0.0
+        }
+       },
+       "temperature_peak": {
+        "38": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.1276882990300662,
+          "high_radiation": 0.2914568308403146,
+          "wind": 0.005496361565895095
+         },
+         "data_total": 0.42464149143627594,
+         "false_effect": true,
+         "material": false,
+         "truth_shapley": {
+          "cold_wave": -3.1088129327135525e-06,
+          "heat_wave": -5.6023153523672896e-08,
+          "high_radiation": 9.118631775587951e-13,
+          "wind": 0.0
+         },
+         "truth_total": -3.1648351743740477e-06
+        }
+       }
+      },
+      "oracle_baseline": {
+       "cooling_energy": {
+        "38": {
+         "data_shapley": {
+          "cold_wave": -63.41206737625118,
+          "heat_wave": 1683.613835299122,
+          "high_radiation": 6.978756736877736,
+          "wind": 11.418375752407615
+         },
+         "data_total": 1638.5989004121561,
+         "kendall_tau_b": 0.5477225575051661,
+         "material": true,
+         "normalised_error": 0.06617592144839762,
+         "sign_of": 2,
+         "sign_right": 2,
+         "top_agrees": true,
+         "total_relative_error": 0.054802984104070536,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 1611.903955078125,
+          "high_radiation": 121.70170898437493,
+          "wind": 0.0
+         },
+         "truth_total": 1733.6056640625
+        }
+       },
+       "heating_energy": {
+        "38": {
+         "data_shapley": {
+          "cold_wave": 850.6843709576976,
+          "heat_wave": 25.390967789144625,
+          "high_radiation": -7.168504234378709,
+          "wind": -41.59022521473639
+         },
+         "data_total": 827.3166092977272,
+         "kendall_tau_b": 0.0,
+         "material": true,
+         "normalised_error": 0.16460536135073198,
+         "sign_of": 2,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.3059932255096232,
+         "truth_shapley": {
+          "cold_wave": 718.43994140625,
+          "heat_wave": -68.37539062499998,
+          "high_radiation": -16.587597656249997,
+          "wind": 0.0
+         },
+         "truth_total": 633.476953125
+        }
+       },
+       "hours_temperature_above_stage_max": {
+        "38": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.0,
+          "high_radiation": 0.0,
+          "wind": 0.0
+         },
+         "data_total": 0.0,
+         "false_effect": false,
+         "material": false,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.0,
+          "high_radiation": 0.0,
+          "wind": 0.0
+         },
+         "truth_total": 0.0
+        }
+       },
+       "temperature_peak": {
+        "38": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.3506139319683239,
+          "high_radiation": 0.0,
+          "wind": 0.09938417736497662
+         },
+         "data_total": 0.44999810933330053,
+         "false_effect": true,
+         "material": false,
+         "truth_shapley": {
+          "cold_wave": -3.1088129327135525e-06,
+          "heat_wave": -5.6023153523672896e-08,
+          "high_radiation": 9.118631775587951e-13,
+          "wind": 0.0
+         },
+         "truth_total": -3.1648351743740477e-06
+        }
+       }
+      }
+     }
+    }
+   },
+   "summary": {
+    "climatology_baseline/cooling_energy": {
+     "false_effects": "0/0",
+     "material_cells": 4,
+     "normalised_error_range": [
+      0.056,
+      0.067
+     ],
+     "of": 4,
+     "sign_right": "8/8",
+     "top_agrees": 4,
+     "total_relative_error_range": [
+      0.084,
+      0.165
+     ]
+    },
+    "climatology_baseline/heating_energy": {
+     "false_effects": "0/0",
+     "material_cells": 4,
+     "normalised_error_range": [
+      0.194,
+      0.234
+     ],
+     "of": 4,
+     "sign_right": "5/8",
+     "top_agrees": 4,
+     "total_relative_error_range": [
+      0.355,
+      0.736
+     ]
+    },
+    "climatology_baseline/hours_temperature_above_stage_max": {
+     "false_effects": "0/4",
+     "material_cells": 0,
+     "normalised_error_range": null,
+     "of": 4,
+     "sign_right": "0/0",
+     "top_agrees": 0,
+     "total_relative_error_range": null
+    },
+    "climatology_baseline/temperature_peak": {
+     "false_effects": "4/4",
+     "material_cells": 0,
+     "normalised_error_range": null,
+     "of": 4,
+     "sign_right": "0/0",
+     "top_agrees": 0,
+     "total_relative_error_range": null
+    },
+    "oracle_baseline/cooling_energy": {
+     "false_effects": "0/0",
+     "material_cells": 4,
+     "normalised_error_range": [
+      0.059,
+      0.089
+     ],
+     "of": 4,
+     "sign_right": "7/8",
+     "top_agrees": 4,
+     "total_relative_error_range": [
+      0.055,
+      0.207
+     ]
+    },
+    "oracle_baseline/heating_energy": {
+     "false_effects": "0/0",
+     "material_cells": 4,
+     "normalised_error_range": [
+      0.112,
+      0.174
+     ],
+     "of": 4,
+     "sign_right": "7/8",
+     "top_agrees": 4,
+     "total_relative_error_range": [
+      0.306,
+      0.412
+     ]
+    },
+    "oracle_baseline/hours_temperature_above_stage_max": {
+     "false_effects": "0/4",
+     "material_cells": 0,
+     "normalised_error_range": null,
+     "of": 4,
+     "sign_right": "0/0",
+     "top_agrees": 0,
+     "total_relative_error_range": null
+    },
+    "oracle_baseline/temperature_peak": {
+     "false_effects": "4/4",
+     "material_cells": 0,
+     "normalised_error_range": null,
+     "of": 4,
+     "sign_right": "0/0",
+     "top_agrees": 0,
+     "total_relative_error_range": null
+    }
+   },
+   "surrogate_relative_rmse_over_series_std": {
+    "greenhouse_cooling_kw": {
+     "max": 0.4757431214876593,
+     "min": 0.35075515695499143
+    },
+    "greenhouse_heating_kw": {
+     "max": 0.4513454722617129,
+     "min": 0.3523765971796458
+    },
+    "temperature_c": {
+     "max": 0.10408661151705537,
+     "min": 0.09684786104140558
+    }
+   },
+   "training_seasons": [
+    1,
+    2,
+    4,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    16,
+    17,
+    18,
+    19,
+    21,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    30
+   ]
+  },
+  {
+   "scale": 0.3,
+   "seasons": {
+    "34": {
+     "cells": {
+      "climatology_baseline": {
+       "cooling_energy": {
+        "34": {
+         "data_shapley": {
+          "cold_wave": 32.437061611013355,
+          "heat_wave": 1427.6225940896902,
+          "high_radiation": -3.6596565228491684,
+          "wind": -30.72650932597984
+         },
+         "data_total": 1425.6734898518746,
+         "kendall_tau_b": 0.5477225575051661,
+         "material": true,
+         "normalised_error": 0.043648107807957234,
+         "sign_of": 1,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.012051130510534159,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 1383.7366845703125,
+          "high_radiation": 59.32735839843747,
+          "wind": 0.0
+         },
+         "truth_total": 1443.06404296875
+        }
+       },
+       "heating_energy": {
+        "34": {
+         "data_shapley": {
+          "cold_wave": 669.8530628946337,
+          "heat_wave": 49.09614996603208,
+          "high_radiation": -1.8178779389244717,
+          "wind": 30.1345640949994
+         },
+         "data_total": 747.2658990167406,
+         "kendall_tau_b": 0.3333333333333333,
+         "material": true,
+         "normalised_error": 0.2001758479403906,
+         "sign_of": 3,
+         "sign_right": 2,
+         "top_agrees": true,
+         "total_relative_error": 0.7381951911460716,
+         "truth_shapley": {
+          "cold_wave": 557.345654296875,
+          "heat_wave": -87.98071289062503,
+          "high_radiation": -39.455859375000024,
+          "wind": 0.0
+         },
+         "truth_total": 429.9090820312499
+        }
+       },
+       "hours_temperature_above_stage_max": {
+        "34": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 1.5,
+          "high_radiation": -0.5,
+          "wind": 0.0
+         },
+         "data_total": 1.0,
+         "kendall_tau_b": 0.0,
+         "material": true,
+         "normalised_error": 1.0,
+         "sign_of": 2,
+         "sign_right": 1,
+         "top_agrees": false,
+         "total_relative_error": 0.0,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.5,
+          "high_radiation": 0.5,
+          "wind": 0.0
+         },
+         "truth_total": 1.0
+        }
+       },
+       "temperature_peak": {
+        "34": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 1.7140323208191284,
+          "high_radiation": 0.029838124052673127,
+          "wind": 0.0030029879436964295
+         },
+         "data_total": 1.746873432815498,
+         "kendall_tau_b": 0.9128709291752769,
+         "material": true,
+         "normalised_error": 0.30104203553279535,
+         "sign_of": 2,
+         "sign_right": 2,
+         "top_agrees": true,
+         "total_relative_error": 0.18527866241529883,
+         "truth_shapley": {
+          "cold_wave": -1.1914861943888392e-05,
+          "heat_wave": 1.4688276223097596,
+          "high_radiation": 0.675320394344028,
+          "wind": 0.0
+         },
+         "truth_total": 2.144136101791844
+        }
+       }
+      },
+      "oracle_baseline": {
+       "cooling_energy": {
+        "34": {
+         "data_shapley": {
+          "cold_wave": -6.121748028879278,
+          "heat_wave": 1299.4262893977748,
+          "high_radiation": -8.091776381005042,
+          "wind": -17.545528413957918
+         },
+         "data_total": 1267.6672365739325,
+         "kendall_tau_b": 0.5477225575051661,
+         "material": true,
+         "normalised_error": 0.05842456929291216,
+         "sign_of": 1,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.12154471400588823,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 1383.7366845703125,
+          "high_radiation": 59.32735839843747,
+          "wind": 0.0
+         },
+         "truth_total": 1443.06404296875
+        }
+       },
+       "heating_energy": {
+        "34": {
+         "data_shapley": {
+          "cold_wave": 615.8238830586554,
+          "heat_wave": -0.49805172326838704,
+          "high_radiation": -2.9627918434132114,
+          "wind": -4.694548216516407
+         },
+         "data_total": 607.6684912754574,
+         "kendall_tau_b": 0.0,
+         "material": true,
+         "normalised_error": 0.12775252886820085,
+         "sign_of": 3,
+         "sign_right": 3,
+         "top_agrees": true,
+         "total_relative_error": 0.41348140030985964,
+         "truth_shapley": {
+          "cold_wave": 557.345654296875,
+          "heat_wave": -87.98071289062503,
+          "high_radiation": -39.455859375000024,
+          "wind": 0.0
+         },
+         "truth_total": 429.9090820312499
+        }
+       },
+       "hours_temperature_above_stage_max": {
+        "34": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.0,
+          "high_radiation": 0.0,
+          "wind": 0.0
+         },
+         "data_total": 0.0,
+         "kendall_tau_b": null,
+         "material": true,
+         "normalised_error": 0.5,
+         "sign_of": 2,
+         "sign_right": 0,
+         "top_agrees": true,
+         "total_relative_error": 1.0,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.5,
+          "high_radiation": 0.5,
+          "wind": 0.0
+         },
+         "truth_total": 1.0
+        }
+       },
+       "temperature_peak": {
+        "34": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 1.3092466262261482,
+          "high_radiation": 0.0,
+          "wind": 0.0
+         },
+         "data_total": 1.3092466262261482,
+         "kendall_tau_b": 0.7745966692414834,
+         "material": true,
+         "normalised_error": 0.3149580329423637,
+         "sign_of": 2,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.38938268651322216,
+         "truth_shapley": {
+          "cold_wave": -1.1914861943888392e-05,
+          "heat_wave": 1.4688276223097596,
+          "high_radiation": 0.675320394344028,
+          "wind": 0.0
+         },
+         "truth_total": 2.144136101791844
+        }
+       }
+      }
+     }
+    },
+    "35": {
+     "cells": {
+      "climatology_baseline": {
+       "cooling_energy": {
+        "35": {
+         "data_shapley": {
+          "cold_wave": 5.400489182448191,
+          "heat_wave": 1652.8073150418547,
+          "high_radiation": 0.0797346669383372,
+          "wind": -10.450994220123672
+         },
+         "data_total": 1647.8365446711177,
+         "kendall_tau_b": 0.5477225575051661,
+         "material": true,
+         "normalised_error": 0.0768356795962536,
+         "sign_of": 1,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.10837918744491314,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 1794.8101025390624,
+          "high_radiation": 53.325922851562495,
+          "wind": 0.0
+         },
+         "truth_total": 1848.136025390625
+        }
+       },
+       "heating_energy": {
+        "35": {
+         "data_shapley": {
+          "cold_wave": 923.8432311484762,
+          "heat_wave": 77.93489016928105,
+          "high_radiation": 0.16319685426719133,
+          "wind": 5.737474705588049
+         },
+         "data_total": 1007.6787928776125,
+         "kendall_tau_b": 0.6666666666666666,
+         "material": true,
+         "normalised_error": 0.19365796492482304,
+         "sign_of": 1,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.35669028292412297,
+         "truth_shapley": {
+          "cold_wave": 769.6028320312499,
+          "heat_wave": -10.362304687499998,
+          "high_radiation": -16.492675781249996,
+          "wind": 0.0
+         },
+         "truth_total": 742.7478515624999
+        }
+       },
+       "hours_temperature_above_stage_max": {
+        "35": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 6.0,
+          "high_radiation": -1.0,
+          "wind": 0.0
+         },
+         "data_total": 5.0,
+         "kendall_tau_b": 0.2,
+         "material": true,
+         "normalised_error": 0.5,
+         "sign_of": 2,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.0,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 3.5,
+          "high_radiation": 1.5,
+          "wind": 0.0
+         },
+         "truth_total": 5.0
+        }
+       },
+       "temperature_peak": {
+        "35": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 3.1848160138181667,
+          "high_radiation": 0.030873384020228063,
+          "wind": 0.0058089246281708045
+         },
+         "data_total": 3.221498322466566,
+         "kendall_tau_b": 0.9128709291752769,
+         "material": true,
+         "normalised_error": 0.14225586155766456,
+         "sign_of": 1,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.11149155291986607,
+         "truth_shapley": {
+          "cold_wave": -1.5379396399358332e-06,
+          "heat_wave": 2.7725074321546583,
+          "high_radiation": 0.1258502057515122,
+          "wind": 0.0
+         },
+         "truth_total": 2.8983560999665308
+        }
+       }
+      },
+      "oracle_baseline": {
+       "cooling_energy": {
+        "35": {
+         "data_shapley": {
+          "cold_wave": 0.7168427192214447,
+          "heat_wave": 1591.7890678657109,
+          "high_radiation": 6.520496968496555,
+          "wind": 4.7924954461514355
+         },
+         "data_total": 1603.8189029995806,
+         "kendall_tau_b": 0.9128709291752769,
+         "material": true,
+         "normalised_error": 0.10985178140794084,
+         "sign_of": 1,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.13219650449668888,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 1794.8101025390624,
+          "high_radiation": 53.325922851562495,
+          "wind": 0.0
+         },
+         "truth_total": 1848.136025390625
+        }
+       },
+       "heating_energy": {
+        "35": {
+         "data_shapley": {
+          "cold_wave": 879.618329931031,
+          "heat_wave": 128.56684471196837,
+          "high_radiation": -12.261386623975378,
+          "wind": 17.560539799225808
+         },
+         "data_total": 1013.4843278182498,
+         "kendall_tau_b": 0.6666666666666666,
+         "material": true,
+         "normalised_error": 0.1744337832074042,
+         "sign_of": 1,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.3645065760691308,
+         "truth_shapley": {
+          "cold_wave": 769.6028320312499,
+          "heat_wave": -10.362304687499998,
+          "high_radiation": -16.492675781249996,
+          "wind": 0.0
+         },
+         "truth_total": 742.7478515624999
+        }
+       },
+       "hours_temperature_above_stage_max": {
+        "35": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 6.0,
+          "high_radiation": -1.0,
+          "wind": 0.0
+         },
+         "data_total": 5.0,
+         "kendall_tau_b": 0.2,
+         "material": true,
+         "normalised_error": 0.5,
+         "sign_of": 2,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.0,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 3.5,
+          "high_radiation": 1.5,
+          "wind": 0.0
+         },
+         "truth_total": 5.0
+        }
+       },
+       "temperature_peak": {
+        "35": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 3.1480811516076046,
+          "high_radiation": 0.019124402067570635,
+          "wind": 0.16286068048050475
+         },
+         "data_total": 3.33006623415568,
+         "kendall_tau_b": 0.5477225575051661,
+         "material": true,
+         "normalised_error": 0.1295814965180583,
+         "sign_of": 1,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.14894999761904157,
+         "truth_shapley": {
+          "cold_wave": -1.5379396399358332e-06,
+          "heat_wave": 2.7725074321546583,
+          "high_radiation": 0.1258502057515122,
+          "wind": 0.0
+         },
+         "truth_total": 2.8983560999665308
+        }
+       }
+      }
+     }
+    },
+    "37": {
+     "cells": {
+      "climatology_baseline": {
+       "cooling_energy": {
+        "37": {
+         "data_shapley": {
+          "cold_wave": 14.626283910461993,
+          "heat_wave": 1386.6748111537536,
+          "high_radiation": -5.387225891634447,
+          "wind": -4.442748110951833
+         },
+         "data_total": 1391.4711210616294,
+         "kendall_tau_b": 0.18257418583505536,
+         "material": true,
+         "normalised_error": 0.043568295934113724,
+         "sign_of": 1,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.07951903366982264,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 1452.5360595703125,
+          "high_radiation": 59.142260742187545,
+          "wind": 0.0
+         },
+         "truth_total": 1511.6783203125
+        }
+       },
+       "heating_energy": {
+        "37": {
+         "data_shapley": {
+          "cold_wave": 590.0298098541616,
+          "heat_wave": 58.895839173663894,
+          "high_radiation": -3.980770472947532,
+          "wind": 8.884000005941497
+         },
+         "data_total": 653.8288785608195,
+         "kendall_tau_b": 0.3333333333333333,
+         "material": true,
+         "normalised_error": 0.22164077106347244,
+         "sign_of": 2,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.5216937975373169,
+         "truth_shapley": {
+          "cold_wave": 528.58037109375,
+          "heat_wave": -80.18129882812501,
+          "high_radiation": -18.727294921875004,
+          "wind": 0.0
+         },
+         "truth_total": 429.67177734375
+        }
+       },
+       "hours_temperature_above_stage_max": {
+        "37": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 1.5,
+          "high_radiation": -0.5,
+          "wind": 0.0
+         },
+         "data_total": 1.0,
+         "kendall_tau_b": 0.0,
+         "material": true,
+         "normalised_error": 1.0,
+         "sign_of": 2,
+         "sign_right": 1,
+         "top_agrees": false,
+         "total_relative_error": 0.0,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.5,
+          "high_radiation": 0.5,
+          "wind": 0.0
+         },
+         "truth_total": 1.0
+        }
+       },
+       "temperature_peak": {
+        "37": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 1.6491145684980957,
+          "high_radiation": 0.06587591127884451,
+          "wind": -0.015697401940936828
+         },
+         "data_total": 1.6992930778360034,
+         "kendall_tau_b": 0.9128709291752769,
+         "material": true,
+         "normalised_error": 0.19641065147209194,
+         "sign_of": 2,
+         "sign_right": 2,
+         "top_agrees": true,
+         "total_relative_error": 0.17770383600072243,
+         "truth_shapley": {
+          "cold_wave": 6.726706895202977e-09,
+          "heat_wave": 1.5947591149184466,
+          "high_radiation": 0.4717628350807642,
+          "wind": 0.0
+         },
+         "truth_total": 2.066521956725918
+        }
+       }
+      },
+      "oracle_baseline": {
+       "cooling_energy": {
+        "37": {
+         "data_shapley": {
+          "cold_wave": -10.560243839893312,
+          "heat_wave": 1416.4938087839223,
+          "high_radiation": 1.1659211877220303,
+          "wind": 7.535590189122068
+         },
+         "data_total": 1414.6350763208732,
+         "kendall_tau_b": 0.5477225575051661,
+         "material": true,
+         "normalised_error": 0.03835229941147825,
+         "sign_of": 1,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.0641956973832672,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 1452.5360595703125,
+          "high_radiation": 59.142260742187545,
+          "wind": 0.0
+         },
+         "truth_total": 1511.6783203125
+        }
+       },
+       "heating_energy": {
+        "37": {
+         "data_shapley": {
+          "cold_wave": 597.4690859592043,
+          "heat_wave": -9.557331227364786,
+          "high_radiation": -4.162462976459937,
+          "wind": -19.814038697959017
+         },
+         "data_total": 563.9352530574206,
+         "kendall_tau_b": 0.3333333333333333,
+         "material": true,
+         "normalised_error": 0.11255013483519376,
+         "sign_of": 2,
+         "sign_right": 2,
+         "top_agrees": true,
+         "total_relative_error": 0.31247915919377656,
+         "truth_shapley": {
+          "cold_wave": 528.58037109375,
+          "heat_wave": -80.18129882812501,
+          "high_radiation": -18.727294921875004,
+          "wind": 0.0
+         },
+         "truth_total": 429.67177734375
+        }
+       },
+       "hours_temperature_above_stage_max": {
+        "37": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.0,
+          "high_radiation": 0.0,
+          "wind": 0.0
+         },
+         "data_total": 0.0,
+         "kendall_tau_b": null,
+         "material": true,
+         "normalised_error": 0.5,
+         "sign_of": 2,
+         "sign_right": 0,
+         "top_agrees": true,
+         "total_relative_error": 1.0,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.5,
+          "high_radiation": 0.5,
+          "wind": 0.0
+         },
+         "truth_total": 1.0
+        }
+       },
+       "temperature_peak": {
+        "37": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.7501731057271783,
+          "high_radiation": 0.04776167992199731,
+          "wind": 0.0
+         },
+         "data_total": 0.7979347856491756,
+         "kendall_tau_b": 1.0,
+         "material": true,
+         "normalised_error": 0.40869926711515964,
+         "sign_of": 2,
+         "sign_right": 2,
+         "top_agrees": true,
+         "total_relative_error": 0.6138754862719296,
+         "truth_shapley": {
+          "cold_wave": 6.726706895202977e-09,
+          "heat_wave": 1.5947591149184466,
+          "high_radiation": 0.4717628350807642,
+          "wind": 0.0
+         },
+         "truth_total": 2.066521956725918
+        }
+       }
+      }
+     }
+    },
+    "38": {
+     "cells": {
+      "climatology_baseline": {
+       "cooling_energy": {
+        "38": {
+         "data_shapley": {
+          "cold_wave": 9.492824685411271,
+          "heat_wave": 1399.5850580913109,
+          "high_radiation": -4.0721734791613,
+          "wind": -9.892141525092057
+         },
+         "data_total": 1395.113567772469,
+         "kendall_tau_b": 0.5477225575051661,
+         "material": true,
+         "normalised_error": 0.04482289661752168,
+         "sign_of": 1,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.06480851675646529,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 1429.0001806640623,
+          "high_radiation": 62.79437988281245,
+          "wind": 0.0
+         },
+         "truth_total": 1491.794560546875
+        }
+       },
+       "heating_energy": {
+        "38": {
+         "data_shapley": {
+          "cold_wave": 906.2449542454094,
+          "heat_wave": 72.90010551267167,
+          "high_radiation": -0.6156404504202915,
+          "wind": 6.641541815578345
+         },
+         "data_total": 985.1709611232391,
+         "kendall_tau_b": 0.3333333333333333,
+         "material": true,
+         "normalised_error": 0.2336790944225354,
+         "sign_of": 2,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.5558798427582292,
+         "truth_shapley": {
+          "cold_wave": 718.4399414062499,
+          "heat_wave": -68.53754882812501,
+          "high_radiation": -16.71020507812503,
+          "wind": 0.0
+         },
+         "truth_total": 633.1921874999999
+        }
+       },
+       "hours_temperature_above_stage_max": {
+        "38": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 3.0,
+          "high_radiation": 0.0,
+          "wind": 0.0
+         },
+         "data_total": 3.0,
+         "false_effect": true,
+         "material": false,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.0,
+          "high_radiation": 0.0,
+          "wind": 0.0
+         },
+         "truth_total": 0.0
+        }
+       },
+       "temperature_peak": {
+        "38": {
+         "data_shapley": {
+          "cold_wave": -0.00044093262620255774,
+          "heat_wave": 1.8891572177634757,
+          "high_radiation": 0.053736666184178716,
+          "wind": -0.03788383345188132
+         },
+         "data_total": 1.9045691178695705,
+         "kendall_tau_b": 0.7071067811865476,
+         "material": true,
+         "normalised_error": 0.04418777358333646,
+         "sign_of": 1,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.036389468986049965,
+         "truth_shapley": {
+          "cold_wave": -1.526394785974124e-06,
+          "heat_wave": 1.976494161718272,
+          "high_radiation": 3.5763984366591706e-13,
+          "wind": 0.0
+         },
+         "truth_total": 1.9764926353238437
+        }
+       }
+      },
+      "oracle_baseline": {
+       "cooling_energy": {
+        "38": {
+         "data_shapley": {
+          "cold_wave": -35.657435409859964,
+          "heat_wave": 1465.4400389988864,
+          "high_radiation": 2.165227989189307,
+          "wind": -3.0558277705547563
+         },
+         "data_total": 1428.8920038076612,
+         "kendall_tau_b": 0.9128709291752769,
+         "material": true,
+         "normalised_error": 0.04064175691282665,
+         "sign_of": 1,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.04216569653944461,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 1429.0001806640623,
+          "high_radiation": 62.79437988281245,
+          "wind": 0.0
+         },
+         "truth_total": 1491.794560546875
+        }
+       },
+       "heating_energy": {
+        "38": {
+         "data_shapley": {
+          "cold_wave": 850.6843226604765,
+          "heat_wave": 25.390716907169423,
+          "high_radiation": -7.16845096241405,
+          "wind": -41.59025279504336
+         },
+         "data_total": 827.3163358101885,
+         "kendall_tau_b": 0.0,
+         "material": true,
+         "normalised_error": 0.1645469776699837,
+         "sign_of": 2,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.3065801381356883,
+         "truth_shapley": {
+          "cold_wave": 718.4399414062499,
+          "heat_wave": -68.53754882812501,
+          "high_radiation": -16.71020507812503,
+          "wind": 0.0
+         },
+         "truth_total": 633.1921874999999
+        }
+       },
+       "hours_temperature_above_stage_max": {
+        "38": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.0,
+          "high_radiation": 0.0,
+          "wind": 0.0
+         },
+         "data_total": 0.0,
+         "false_effect": false,
+         "material": false,
+         "truth_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 0.0,
+          "high_radiation": 0.0,
+          "wind": 0.0
+         },
+         "truth_total": 0.0
+        }
+       },
+       "temperature_peak": {
+        "38": {
+         "data_shapley": {
+          "cold_wave": 0.0,
+          "heat_wave": 1.0598237549198437,
+          "high_radiation": 0.0,
+          "wind": 0.13524554467119998
+         },
+         "data_total": 1.1950692995910437,
+         "kendall_tau_b": 0.7745966692414834,
+         "material": true,
+         "normalised_error": 0.46378568509471385,
+         "sign_of": 1,
+         "sign_right": 1,
+         "top_agrees": true,
+         "total_relative_error": 0.39535858710890953,
+         "truth_shapley": {
+          "cold_wave": -1.526394785974124e-06,
+          "heat_wave": 1.976494161718272,
+          "high_radiation": 3.5763984366591706e-13,
+          "wind": 0.0
+         },
+         "truth_total": 1.9764926353238437
+        }
+       }
+      }
+     }
+    }
+   },
+   "summary": {
+    "climatology_baseline/cooling_energy": {
+     "false_effects": "0/0",
+     "material_cells": 4,
+     "normalised_error_range": [
+      0.044,
+      0.077
+     ],
+     "of": 4,
+     "sign_right": "4/4",
+     "top_agrees": 4,
+     "total_relative_error_range": [
+      0.012,
+      0.108
+     ]
+    },
+    "climatology_baseline/heating_energy": {
+     "false_effects": "0/0",
+     "material_cells": 4,
+     "normalised_error_range": [
+      0.194,
+      0.234
+     ],
+     "of": 4,
+     "sign_right": "5/8",
+     "top_agrees": 4,
+     "total_relative_error_range": [
+      0.357,
+      0.738
+     ]
+    },
+    "climatology_baseline/hours_temperature_above_stage_max": {
+     "false_effects": "1/1",
+     "material_cells": 3,
+     "normalised_error_range": [
+      0.5,
+      1.0
+     ],
+     "of": 4,
+     "sign_right": "3/6",
+     "top_agrees": 1,
+     "total_relative_error_range": [
+      0.0,
+      0.0
+     ]
+    },
+    "climatology_baseline/temperature_peak": {
+     "false_effects": "0/0",
+     "material_cells": 4,
+     "normalised_error_range": [
+      0.044,
+      0.301
+     ],
+     "of": 4,
+     "sign_right": "6/6",
+     "top_agrees": 4,
+     "total_relative_error_range": [
+      0.036,
+      0.185
+     ]
+    },
+    "oracle_baseline/cooling_energy": {
+     "false_effects": "0/0",
+     "material_cells": 4,
+     "normalised_error_range": [
+      0.038,
+      0.11
+     ],
+     "of": 4,
+     "sign_right": "4/4",
+     "top_agrees": 4,
+     "total_relative_error_range": [
+      0.042,
+      0.132
+     ]
+    },
+    "oracle_baseline/heating_energy": {
+     "false_effects": "0/0",
+     "material_cells": 4,
+     "normalised_error_range": [
+      0.113,
+      0.174
+     ],
+     "of": 4,
+     "sign_right": "7/8",
+     "top_agrees": 4,
+     "total_relative_error_range": [
+      0.307,
+      0.413
+     ]
+    },
+    "oracle_baseline/hours_temperature_above_stage_max": {
+     "false_effects": "0/1",
+     "material_cells": 3,
+     "normalised_error_range": [
+      0.5,
+      0.5
+     ],
+     "of": 4,
+     "sign_right": "1/6",
+     "top_agrees": 3,
+     "total_relative_error_range": [
+      0.0,
+      1.0
+     ]
+    },
+    "oracle_baseline/temperature_peak": {
+     "false_effects": "0/0",
+     "material_cells": 4,
+     "normalised_error_range": [
+      0.13,
+      0.464
+     ],
+     "of": 4,
+     "sign_right": "5/6",
+     "top_agrees": 4,
+     "total_relative_error_range": [
+      0.149,
+      0.614
+     ]
+    }
+   },
+   "surrogate_relative_rmse_over_series_std": {
+    "greenhouse_cooling_kw": {
+     "max": 0.38207059889199907,
+     "min": 0.3235231115519994
+    },
+    "greenhouse_heating_kw": {
+     "max": 0.4516000328367438,
+     "min": 0.35249061043053814
+    },
+    "temperature_c": {
+     "max": 0.11605831886157142,
+     "min": 0.0954966144781223
+    }
+   },
+   "training_seasons": [
+    1,
+    2,
+    4,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    16,
+    17,
+    18,
+    19,
+    21,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    30
+   ]
+  }
+ ],
+ "report_hash": "a51797da6ad022430878354c66b51b50a49157ee2a152e8cb7d7c6a81cc997df",
+ "status": "DEVELOPMENT: tomato, four held-out DEV seasons per regime, candidate segments given, a simple surrogate; counts and ranges only"
+}
