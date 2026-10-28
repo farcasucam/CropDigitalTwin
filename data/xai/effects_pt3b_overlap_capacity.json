@@ -1,0 +1,685 @@
+{
+ "cells": [
+  {
+   "cooling_capacity_kw": 388.8,
+   "crop": "tomato",
+   "rows": [
+    {
+     "efficiency_residual": 0.0,
+     "interaction_relative_gap": 0.4666666666666667,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.2,
+      "heat_wave+high_radiation": 0.2,
+      "high_radiation+cold_wave": 0.2
+     },
+     "outcome": "hours_temperature_above_stage_max",
+     "policy": "replayed",
+     "s1_max_relative_error": 0.4666666666666667,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -7.0,
+      "heat_wave": 14.5,
+      "high_radiation": 7.5
+     },
+     "total_effect": 15.0
+    },
+    {
+     "efficiency_residual": 0.0,
+     "interaction_relative_gap": 0.5790381837729928,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.11520411460790984,
+      "heat_wave+high_radiation": 0.11520411460790984,
+      "high_radiation+cold_wave": 0.11520411460790984
+     },
+     "outcome": "temperature_peak",
+     "policy": "replayed",
+     "s1_max_relative_error": 0.6904129954043956,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -3.0058640811552895,
+      "heat_wave": 5.242060951585344,
+      "high_radiation": 2.117521982346558
+     },
+     "total_effect": 4.353718852776613
+    }
+   ],
+   "scale": 1.0
+  },
+  {
+   "cooling_capacity_kw": 194.4,
+   "crop": "tomato",
+   "rows": [
+    {
+     "efficiency_residual": 0.0,
+     "interaction_relative_gap": 0.4666666666666667,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.2,
+      "heat_wave+high_radiation": 0.2,
+      "high_radiation+cold_wave": 0.2
+     },
+     "outcome": "hours_temperature_above_stage_max",
+     "policy": "replayed",
+     "s1_max_relative_error": 0.4666666666666667,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -7.0,
+      "heat_wave": 14.5,
+      "high_radiation": 7.5
+     },
+     "total_effect": 15.0
+    },
+    {
+     "efficiency_residual": 0.0,
+     "interaction_relative_gap": 0.5790381837729928,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.11520411460790984,
+      "heat_wave+high_radiation": 0.11520411460790984,
+      "high_radiation+cold_wave": 0.11520411460790984
+     },
+     "outcome": "temperature_peak",
+     "policy": "replayed",
+     "s1_max_relative_error": 0.6904129954043956,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -3.0058640811552895,
+      "heat_wave": 5.242060951585344,
+      "high_radiation": 2.117521982346558
+     },
+     "total_effect": 4.353718852776613
+    }
+   ],
+   "scale": 0.5
+  },
+  {
+   "cooling_capacity_kw": 116.64,
+   "crop": "tomato",
+   "rows": [
+    {
+     "efficiency_residual": 0.0,
+     "interaction_relative_gap": 0.4666666666666667,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.2,
+      "heat_wave+high_radiation": 0.2,
+      "high_radiation+cold_wave": 0.2
+     },
+     "outcome": "hours_temperature_above_stage_max",
+     "policy": "replayed",
+     "s1_max_relative_error": 0.4666666666666667,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -7.0,
+      "heat_wave": 14.5,
+      "high_radiation": 7.5
+     },
+     "total_effect": 15.0
+    },
+    {
+     "efficiency_residual": 0.0,
+     "interaction_relative_gap": 0.5790381837729928,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.11520411460790984,
+      "heat_wave+high_radiation": 0.11520411460790984,
+      "high_radiation+cold_wave": 0.11520411460790984
+     },
+     "outcome": "temperature_peak",
+     "policy": "replayed",
+     "s1_max_relative_error": 0.6904129954043956,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -3.0058640811552895,
+      "heat_wave": 5.242060951585344,
+      "high_radiation": 2.117521982346558
+     },
+     "total_effect": 4.353718852776613
+    }
+   ],
+   "scale": 0.3
+  },
+  {
+   "cooling_capacity_kw": 58.32,
+   "crop": "tomato",
+   "rows": [
+    {
+     "efficiency_residual": 0.0,
+     "interaction_relative_gap": 0.4666666666666667,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.2,
+      "heat_wave+high_radiation": 0.2,
+      "high_radiation+cold_wave": 0.2
+     },
+     "outcome": "hours_temperature_above_stage_max",
+     "policy": "replayed",
+     "s1_max_relative_error": 0.4666666666666667,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -7.0,
+      "heat_wave": 14.5,
+      "high_radiation": 7.5
+     },
+     "total_effect": 15.0
+    },
+    {
+     "efficiency_residual": 0.0,
+     "interaction_relative_gap": 0.5790381837729928,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.11520411460790984,
+      "heat_wave+high_radiation": 0.11520411460790984,
+      "high_radiation+cold_wave": 0.11520411460790984
+     },
+     "outcome": "temperature_peak",
+     "policy": "replayed",
+     "s1_max_relative_error": 0.6904129954043956,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -3.0058640811552895,
+      "heat_wave": 5.242060951585344,
+      "high_radiation": 2.117521982346558
+     },
+     "total_effect": 4.353718852776613
+    }
+   ],
+   "scale": 0.15
+  },
+  {
+   "cooling_capacity_kw": 388.8,
+   "crop": "pepper",
+   "rows": [
+    {
+     "efficiency_residual": -2.2737367544323206e-13,
+     "interaction_relative_gap": 1.150889961909347,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.013475689478578273,
+      "heat_wave+high_radiation": 0.013475689478578409,
+      "high_radiation+cold_wave": 0.013475689478578001
+     },
+     "outcome": "cooling_energy",
+     "policy": "reactive",
+     "s1_max_relative_error": 0.7216455917267289,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -1447.0918945312499,
+      "heat_wave": 2706.0486328125,
+      "high_radiation": 416.91269531249975
+     },
+     "total_effect": 1675.86943359375
+    },
+    {
+     "efficiency_residual": 0.0,
+     "interaction_relative_gap": 1.2222222222222223,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.1111111111111111,
+      "heat_wave+high_radiation": 0.1111111111111111,
+      "high_radiation+cold_wave": 0.1111111111111111
+     },
+     "outcome": "hours_temperature_above_stage_max",
+     "policy": "replayed",
+     "s1_max_relative_error": 1.2222222222222223,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -11.0,
+      "heat_wave": 16.5,
+      "high_radiation": 3.5
+     },
+     "total_effect": 9.0
+    },
+    {
+     "efficiency_residual": -4.440892098500626e-16,
+     "interaction_relative_gap": 0.781095223173548,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.12702978519302108,
+      "heat_wave+high_radiation": 0.12702978519302086,
+      "high_radiation+cold_wave": 0.1270297851930212
+     },
+     "outcome": "temperature_peak",
+     "policy": "replayed",
+     "s1_max_relative_error": 0.7571714973003668,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -3.0067066595632115,
+      "heat_wave": 5.319774778097182,
+      "high_radiation": 1.6579015834997208
+     },
+     "total_effect": 3.970969702033692
+    }
+   ],
+   "scale": 1.0
+  },
+  {
+   "cooling_capacity_kw": 194.4,
+   "crop": "pepper",
+   "rows": [
+    {
+     "efficiency_residual": 0.0,
+     "interaction_relative_gap": 0.8939233477402182,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.023062941866788762,
+      "heat_wave+high_radiation": 0.023062941866788624,
+      "high_radiation+cold_wave": 0.023062941866788898
+     },
+     "outcome": "cooling_energy",
+     "policy": "reactive",
+     "s1_max_relative_error": 0.6260733606205455,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -1275.8033935546875,
+      "heat_wave": 2586.73974609375,
+      "high_radiation": 347.2064208984376
+     },
+     "total_effect": 1658.1427734375002
+    },
+    {
+     "efficiency_residual": -1.1102230246251565e-16,
+     "interaction_relative_gap": 38.11621759668708,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 5.197210514989795,
+      "heat_wave+high_radiation": 5.197210514989797,
+      "high_radiation+cold_wave": 5.197210514989794
+     },
+     "outcome": "temperature_peak",
+     "policy": "reactive",
+     "s1_max_relative_error": 14.360906497378284,
+     "s1_top_agrees": false,
+     "shapley": {
+      "cold_wave": -1.6345478548926888,
+      "heat_wave": 1.0999134786597407,
+      "high_radiation": 0.6484537129119771
+     },
+     "total_effect": 0.11381933667902899
+    },
+    {
+     "efficiency_residual": 0.0,
+     "interaction_relative_gap": 1.2222222222222223,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.1111111111111111,
+      "heat_wave+high_radiation": 0.1111111111111111,
+      "high_radiation+cold_wave": 0.1111111111111111
+     },
+     "outcome": "hours_temperature_above_stage_max",
+     "policy": "replayed",
+     "s1_max_relative_error": 1.2222222222222223,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -11.0,
+      "heat_wave": 16.5,
+      "high_radiation": 3.5
+     },
+     "total_effect": 9.0
+    },
+    {
+     "efficiency_residual": -4.440892098500626e-16,
+     "interaction_relative_gap": 0.7810954536969228,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.12702976920727066,
+      "heat_wave+high_radiation": 0.12702976920727044,
+      "high_radiation+cold_wave": 0.12702976920727077
+     },
+     "outcome": "temperature_peak",
+     "policy": "replayed",
+     "s1_max_relative_error": 0.7571714813196767,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -3.0067065960641832,
+      "heat_wave": 5.319774918363006,
+      "high_radiation": 1.6579013797348687
+     },
+     "total_effect": 3.970969702033692
+    }
+   ],
+   "scale": 0.5
+  },
+  {
+   "cooling_capacity_kw": 116.64,
+   "crop": "pepper",
+   "rows": [
+    {
+     "efficiency_residual": 0.0,
+     "interaction_relative_gap": 0.9328065405040431,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.02820207107850585,
+      "heat_wave+high_radiation": 0.028202071078505753,
+      "high_radiation+cold_wave": 0.02820207107850585
+     },
+     "outcome": "cooling_energy",
+     "policy": "reactive",
+     "s1_max_relative_error": 0.5774261770210455,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -913.440322265625,
+      "heat_wave": 1903.354453125,
+      "high_radiation": 180.40851562499995
+     },
+     "total_effect": 1170.322646484375
+    },
+    {
+     "efficiency_residual": 0.0,
+     "interaction_relative_gap": 2.4736081374159182,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.023317065921940598,
+      "heat_wave+high_radiation": 0.023317065921940803,
+      "high_radiation+cold_wave": 0.02331706592194039
+     },
+     "outcome": "temperature_peak",
+     "policy": "reactive",
+     "s1_max_relative_error": 1.3316300069394496,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -2.8655914890962024,
+      "heat_wave": 4.606364781683479,
+      "high_radiation": 0.4109711452899714
+     },
+     "total_effect": 2.151744437877248
+    },
+    {
+     "efficiency_residual": 0.0,
+     "interaction_relative_gap": 1.2222222222222223,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.1111111111111111,
+      "heat_wave+high_radiation": 0.1111111111111111,
+      "high_radiation+cold_wave": 0.1111111111111111
+     },
+     "outcome": "hours_temperature_above_stage_max",
+     "policy": "replayed",
+     "s1_max_relative_error": 1.2222222222222223,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -11.0,
+      "heat_wave": 16.5,
+      "high_radiation": 3.5
+     },
+     "total_effect": 9.0
+    },
+    {
+     "efficiency_residual": 8.881784197001252e-16,
+     "interaction_relative_gap": 0.7804536346937844,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.12738117632979773,
+      "heat_wave+high_radiation": 0.12738117632979773,
+      "high_radiation+cold_wave": 0.12738117632979767
+     },
+     "outcome": "temperature_peak",
+     "policy": "replayed",
+     "s1_max_relative_error": 0.7593074215436274,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -3.0068734784801974,
+      "heat_wave": 5.3140534012328535,
+      "high_radiation": 1.65217975151807
+     },
+     "total_effect": 3.9593596742707255
+    }
+   ],
+   "scale": 0.3
+  },
+  {
+   "cooling_capacity_kw": 58.32,
+   "crop": "pepper",
+   "rows": [
+    {
+     "efficiency_residual": 0.0,
+     "interaction_relative_gap": 1.0876620485223214,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.032171163950485394,
+      "heat_wave+high_radiation": 0.0321711639504856,
+      "high_radiation+cold_wave": 0.0321711639504855
+     },
+     "outcome": "cooling_energy",
+     "policy": "reactive",
+     "s1_max_relative_error": 0.6427108380087273,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -547.4654736328124,
+      "heat_wave": 1034.7119165039062,
+      "high_radiation": 72.3393676757811
+     },
+     "total_effect": 559.5858105468749
+    },
+    {
+     "efficiency_residual": 4.440892098500626e-16,
+     "interaction_relative_gap": 2.473206914407027,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.01642745669316943,
+      "heat_wave+high_radiation": 0.016427456693169223,
+      "high_radiation+cold_wave": 0.01642745669316943
+     },
+     "outcome": "temperature_peak",
+     "policy": "reactive",
+     "s1_max_relative_error": 1.3711200754436164,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -2.9525677228828164,
+      "heat_wave": 4.780156129499256,
+      "high_radiation": 0.32561540396500627
+     },
+     "total_effect": 2.153203810581445
+    },
+    {
+     "efficiency_residual": 0.0,
+     "interaction_relative_gap": 1.2222222222222223,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.1111111111111111,
+      "heat_wave+high_radiation": 0.1111111111111111,
+      "high_radiation+cold_wave": 0.1111111111111111
+     },
+     "outcome": "hours_temperature_above_stage_max",
+     "policy": "replayed",
+     "s1_max_relative_error": 1.2222222222222223,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -11.0,
+      "heat_wave": 16.5,
+      "high_radiation": 3.5
+     },
+     "total_effect": 9.0
+    },
+    {
+     "efficiency_residual": 0.0,
+     "interaction_relative_gap": 1.0066729088109783,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.1250609829965351,
+      "heat_wave+high_radiation": 0.1250609829965351,
+      "high_radiation+cold_wave": 0.1250609829965351
+     },
+     "outcome": "temperature_peak",
+     "policy": "replayed",
+     "s1_max_relative_error": 0.8793129825905084,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -2.9173809525898697,
+      "heat_wave": 4.992109397099002,
+      "high_radiation": 1.2424961668163323
+     },
+     "total_effect": 3.3172246113254644
+    }
+   ],
+   "scale": 0.15
+  },
+  {
+   "cooling_capacity_kw": 388.8,
+   "crop": "lettuce",
+   "rows": [
+    {
+     "efficiency_residual": -2.2737367544323206e-13,
+     "interaction_relative_gap": 6.088298545224541,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.14130297280202464,
+      "heat_wave+high_radiation": 0.1413029728020245,
+      "high_radiation+cold_wave": 0.1413029728020245
+     },
+     "outcome": "cooling_energy",
+     "policy": "reactive",
+     "s1_max_relative_error": 3.100980392156863,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -1163.4218261718752,
+      "heat_wave": 1411.2509765625,
+      "high_radiation": 127.34956054687503
+     },
+     "total_effect": 375.17871093750006
+    },
+    {
+     "efficiency_residual": 0.0,
+     "interaction_relative_gap": 2.445450159056774,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.049819605302637335,
+      "heat_wave+high_radiation": 0.049819605302637036,
+      "high_radiation+cold_wave": 0.049819605302637335
+     },
+     "outcome": "temperature_peak",
+     "policy": "replayed",
+     "s1_max_relative_error": 1.772544684831024,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -2.596198574743199,
+      "heat_wave": 3.4015045779532973,
+      "high_radiation": 0.6593671285652475
+     },
+     "total_effect": 1.4646731317753456
+    }
+   ],
+   "scale": 1.0
+  },
+  {
+   "cooling_capacity_kw": 194.4,
+   "crop": "lettuce",
+   "rows": [
+    {
+     "efficiency_residual": -3.410605131648481e-13,
+     "interaction_relative_gap": 5.955596318669156,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.12471404324404195,
+      "heat_wave+high_radiation": 0.12471404324404164,
+      "high_radiation+cold_wave": 0.12471404324404134
+     },
+     "outcome": "cooling_energy",
+     "policy": "reactive",
+     "s1_max_relative_error": 3.0512402880124827,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -1144.7241943359377,
+      "heat_wave": 1398.7608398437499,
+      "high_radiation": 121.13020019531247
+     },
+     "total_effect": 375.166845703125
+    },
+    {
+     "efficiency_residual": 0.0,
+     "interaction_relative_gap": 2.445450159056774,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.049819605302637335,
+      "heat_wave+high_radiation": 0.049819605302637036,
+      "high_radiation+cold_wave": 0.049819605302637335
+     },
+     "outcome": "temperature_peak",
+     "policy": "replayed",
+     "s1_max_relative_error": 1.772544684831024,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -2.596198574743199,
+      "heat_wave": 3.4015045779532973,
+      "high_radiation": 0.6593671285652475
+     },
+     "total_effect": 1.4646731317753456
+    }
+   ],
+   "scale": 0.5
+  },
+  {
+   "cooling_capacity_kw": 116.64,
+   "crop": "lettuce",
+   "rows": [
+    {
+     "efficiency_residual": 2.2737367544323206e-13,
+     "interaction_relative_gap": 4.624297859420069,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.019716866555335503,
+      "heat_wave+high_radiation": 0.019716866555335808,
+      "high_radiation+cold_wave": 0.019716866555335808
+     },
+     "outcome": "cooling_energy",
+     "policy": "reactive",
+     "s1_max_relative_error": 2.4905970092606644,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -934.3480517578123,
+      "heat_wave": 1227.759873046875,
+      "high_radiation": 81.73841308593745
+     },
+     "total_effect": 375.150234375
+    },
+    {
+     "efficiency_residual": 0.0,
+     "interaction_relative_gap": 2.445450159056774,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.049819605302637335,
+      "heat_wave+high_radiation": 0.049819605302637036,
+      "high_radiation+cold_wave": 0.049819605302637335
+     },
+     "outcome": "temperature_peak",
+     "policy": "replayed",
+     "s1_max_relative_error": 1.772544684831024,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -2.596198574743199,
+      "heat_wave": 3.4015045779532973,
+      "high_radiation": 0.6593671285652475
+     },
+     "total_effect": 1.4646731317753456
+    }
+   ],
+   "scale": 0.3
+  },
+  {
+   "cooling_capacity_kw": 58.32,
+   "crop": "lettuce",
+   "rows": [
+    {
+     "efficiency_residual": -1.1368683772161603e-13,
+     "interaction_relative_gap": 3.084152879460425,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.009094752214599612,
+      "heat_wave+high_radiation": 0.009094752214599612,
+      "high_radiation+cold_wave": 0.009094752214599981
+     },
+     "outcome": "cooling_energy",
+     "policy": "reactive",
+     "s1_max_relative_error": 1.6999692550104721,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -524.8473706054688,
+      "heat_wave": 790.454794921875,
+      "high_radiation": 43.13190673828126
+     },
+     "total_effect": 308.73933105468757
+    },
+    {
+     "efficiency_residual": 0.0,
+     "interaction_relative_gap": 2.445450159056774,
+     "merge_relative_discrepancy": {
+      "heat_wave+cold_wave": 0.049819605302637335,
+      "heat_wave+high_radiation": 0.049819605302637036,
+      "high_radiation+cold_wave": 0.049819605302637335
+     },
+     "outcome": "temperature_peak",
+     "policy": "replayed",
+     "s1_max_relative_error": 1.772544684831024,
+     "s1_top_agrees": true,
+     "shapley": {
+      "cold_wave": -2.596198574743199,
+      "heat_wave": 3.4015045779532973,
+      "high_radiation": 0.6593671285652475
+     },
+     "total_effect": 1.4646731317753456
+    }
+   ],
+   "scale": 0.15
+  }
+ ],
+ "report_hash": "9b2eae7609ab155a3c4532bbbcafaf866a79e7b94c23be34a151fd127fa0fd78",
+ "scales": [
+  1.0,
+  0.5,
+  0.3,
+  0.15
+ ],
+ "status": "DEVELOPMENT: one seed per crop, three overlapping perturbations, cooling capacity scaled; no inference"
+}
