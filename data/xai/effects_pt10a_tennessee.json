@@ -1,0 +1,728 @@
+{
+ "compensation": {
+  "reactor_cooling_valve_mean": {
+   "idv1": {
+    "1": {
+     "ratio": null,
+     "reactive": -0.391417037517917,
+     "replayed": 0.0,
+     "same_sign": null
+    },
+    "2": {
+     "ratio": null,
+     "reactive": -0.3924712203874077,
+     "replayed": 0.0,
+     "same_sign": null
+    },
+    "3": {
+     "ratio": null,
+     "reactive": -0.3887759316530091,
+     "replayed": 0.0,
+     "same_sign": null
+    }
+   },
+   "idv4": {
+    "1": {
+     "ratio": null,
+     "reactive": 2.509149748177653,
+     "replayed": 0.0,
+     "same_sign": null
+    },
+    "2": {
+     "ratio": null,
+     "reactive": 2.5037679577109544,
+     "replayed": 0.0,
+     "same_sign": null
+    },
+    "3": {
+     "ratio": null,
+     "reactive": 2.4964819652620727,
+     "replayed": 0.0,
+     "same_sign": null
+    }
+   },
+   "idv5": {
+    "1": {
+     "ratio": null,
+     "reactive": 0.16046522751057896,
+     "replayed": 0.0,
+     "same_sign": null
+    },
+    "2": {
+     "ratio": null,
+     "reactive": 0.16563116665766367,
+     "replayed": 0.0,
+     "same_sign": null
+    },
+    "3": {
+     "ratio": null,
+     "reactive": 0.16219922876913864,
+     "replayed": 0.0,
+     "same_sign": null
+    }
+   }
+  },
+  "reactor_level_mean": {
+   "idv1": {
+    "1": {
+     "ratio": 0.14637748451294033,
+     "reactive": 0.03266534902905486,
+     "replayed": 0.2231582892529289,
+     "same_sign": true
+    },
+    "2": {
+     "ratio": 0.14567079394136373,
+     "reactive": 0.03277376750510778,
+     "replayed": 0.2249851642759637,
+     "same_sign": true
+    },
+    "3": {
+     "ratio": 0.14215241290133224,
+     "reactive": 0.033017782652827066,
+     "replayed": 0.23227029340504163,
+     "same_sign": true
+    }
+   },
+   "idv4": {
+    "1": {
+     "ratio": 0.010367150876285912,
+     "reactive": -0.008062797691676355,
+     "replayed": -0.7777255089553492,
+     "same_sign": true
+    },
+    "2": {
+     "ratio": 0.010275543185789425,
+     "reactive": -0.008056379624617211,
+     "replayed": -0.7840344280542552,
+     "same_sign": true
+    },
+    "3": {
+     "ratio": 0.010115149421998136,
+     "reactive": -0.008028612133600177,
+     "replayed": -0.7937215555253966,
+     "same_sign": true
+    }
+   },
+   "idv5": {
+    "1": {
+     "ratio": 0.6325677566740009,
+     "reactive": 0.5613002322245132,
+     "replayed": 0.8873361411523604,
+     "same_sign": true
+    },
+    "2": {
+     "ratio": 0.635571036379881,
+     "reactive": 0.5626183579678165,
+     "replayed": 0.8852171130585305,
+     "same_sign": true
+    },
+    "3": {
+     "ratio": 0.6369680650882342,
+     "reactive": 0.5616560472736225,
+     "replayed": 0.8817648451430931,
+     "same_sign": true
+    }
+   }
+  },
+  "reactor_pressure_max": {
+   "idv1": {
+    "1": {
+     "ratio": 0.15123671688677265,
+     "reactive": 13.408103615456714,
+     "replayed": 88.65640494890566,
+     "same_sign": true
+    },
+    "2": {
+     "ratio": 0.14664903601848758,
+     "reactive": 13.124618833444476,
+     "replayed": 89.49679581794112,
+     "same_sign": true
+    },
+    "3": {
+     "ratio": 0.1834178498184326,
+     "reactive": 16.201832987745775,
+     "replayed": 88.33291309315943,
+     "same_sign": true
+    }
+   },
+   "idv4": {
+    "1": {
+     "ratio": 0.010345239475812019,
+     "reactive": -0.5004985904478568,
+     "replayed": -48.37960412787561,
+     "same_sign": true
+    },
+    "2": {
+     "ratio": 0.014632026427495332,
+     "reactive": -0.7214827951303656,
+     "replayed": -49.308467197312666,
+     "same_sign": true
+    },
+    "3": {
+     "ratio": 0.01166456065669679,
+     "reactive": -0.5568874745588346,
+     "replayed": -47.741830228223606,
+     "same_sign": true
+    }
+   },
+   "idv5": {
+    "1": {
+     "ratio": -0.16299233897346488,
+     "reactive": 4.971698688267073,
+     "replayed": -30.502652576060424,
+     "same_sign": false
+    },
+    "2": {
+     "ratio": -0.2560614458844762,
+     "reactive": 7.407230699660507,
+     "replayed": -28.927551643218976,
+     "same_sign": false
+    },
+    "3": {
+     "ratio": -0.05686799548813054,
+     "reactive": 1.6680548976401044,
+     "replayed": -29.332050186088587,
+     "same_sign": false
+    }
+   }
+  },
+  "reactor_temperature_mean": {
+   "idv1": {
+    "1": {
+     "ratio": 0.0026148361553663536,
+     "reactive": -0.0054723249206508244,
+     "replayed": -2.092798399402627,
+     "same_sign": true
+    },
+    "2": {
+     "ratio": 0.002633129335108271,
+     "reactive": -0.005529126096760706,
+     "replayed": -2.099830807032255,
+     "same_sign": true
+    },
+    "3": {
+     "ratio": 0.002656732626845538,
+     "reactive": -0.00545315083748458,
+     "replayed": -2.0525779607560133,
+     "same_sign": true
+    }
+   },
+   "idv4": {
+    "1": {
+     "ratio": 0.0014303301776046155,
+     "reactive": 0.013052678030073631,
+     "replayed": 9.125639823899295,
+     "same_sign": true
+    },
+    "2": {
+     "ratio": 0.0014271688319121404,
+     "reactive": 0.013023486472619084,
+     "replayed": 9.12540000973118,
+     "same_sign": true
+    },
+    "3": {
+     "ratio": 0.0014234001691620557,
+     "reactive": 0.01295507892100763,
+     "replayed": 9.101501602767254,
+     "same_sign": true
+    }
+   },
+   "idv5": {
+    "1": {
+     "ratio": -0.0011619982178136513,
+     "reactive": -0.003254244190064999,
+     "replayed": 2.8005586757163856,
+     "same_sign": false
+    },
+    "2": {
+     "ratio": -0.00110764532742411,
+     "reactive": -0.0031113153116990584,
+     "replayed": 2.808945458141004,
+     "same_sign": false
+    },
+    "3": {
+     "ratio": -0.0011417947028283199,
+     "reactive": -0.00319085731991701,
+     "replayed": 2.7945981112129816,
+     "same_sign": false
+    }
+   }
+  }
+ },
+ "report_hash": "d8d9064baf6f8c9806120475c69d59659e27aac6fbb9615d0346d490e76d5ccc",
+ "results": {
+  "1": {
+   "reactive": {
+    "inviable": [],
+    "outcomes": {
+     "reactor_cooling_valve_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.001997556130119887,
+      "shapley": {
+       "idv1": -0.391417037517917,
+       "idv4": 2.509149748177653,
+       "idv5": 0.16046522751057896
+      },
+      "total_effect": 2.2781979381703152
+     },
+     "reactor_level_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.02016679928178972,
+      "shapley": {
+       "idv1": 0.03266534902905486,
+       "idv4": -0.008062797691676355,
+       "idv5": 0.5613002322245132
+      },
+      "total_effect": 0.5859027835618917
+     },
+     "reactor_pressure_max": {
+      "interaction_relative_to_sum_abs_shares": 0.5720472215104218,
+      "shapley": {
+       "idv1": 13.408103615456714,
+       "idv4": -0.5004985904478568,
+       "idv5": 4.971698688267073
+      },
+      "total_effect": 17.87930371327593
+     },
+     "reactor_temperature_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.0024759422975046933,
+      "shapley": {
+       "idv1": -0.0054723249206508244,
+       "idv4": 0.013052678030073631,
+       "idv5": -0.003254244190064999
+      },
+      "total_effect": 0.004326108919357807
+     }
+    },
+    "policy_check": null
+   },
+   "replayed_all": {
+    "inviable": [],
+    "outcomes": {
+     "reactor_cooling_valve_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.0,
+      "shapley": {
+       "idv1": 0.0,
+       "idv4": 0.0,
+       "idv5": 0.0
+      },
+      "total_effect": 0.0
+     },
+     "reactor_level_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.026544499122267164,
+      "shapley": {
+       "idv1": 0.2231582892529289,
+       "idv4": -0.7777255089553492,
+       "idv5": 0.8873361411523604
+      },
+      "total_effect": 0.3327689214499401
+     },
+     "reactor_pressure_max": {
+      "interaction_relative_to_sum_abs_shares": 0.08897045366467017,
+      "shapley": {
+       "idv1": 88.65640494890566,
+       "idv4": -48.37960412787561,
+       "idv5": -30.502652576060424
+      },
+      "total_effect": 9.774148244969638
+     },
+     "reactor_temperature_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.06560799576211673,
+      "shapley": {
+       "idv1": -2.092798399402627,
+       "idv4": 9.125639823899295,
+       "idv5": 2.8005586757163856
+      },
+      "total_effect": 9.833400100213055
+     }
+    },
+    "policy_check": {
+     "reproduces_source_run": true,
+     "source": [],
+     "trace_actuators": [
+      "mv_01",
+      "mv_02",
+      "mv_03",
+      "mv_04",
+      "mv_05",
+      "mv_06",
+      "mv_07",
+      "mv_08",
+      "mv_09",
+      "mv_10",
+      "mv_11",
+      "mv_12"
+     ],
+     "trace_hash": "32daceb0f466a965a3b2227cb2f3f95f50dcf85f4f4b3bb5ffd3088ad4b4324b"
+    }
+   },
+   "replayed_cooling": {
+    "inviable": [],
+    "outcomes": {
+     "reactor_cooling_valve_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.0,
+      "shapley": {
+       "idv1": 0.0,
+       "idv4": 0.0,
+       "idv5": 0.0
+      },
+      "total_effect": 0.0
+     },
+     "reactor_level_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.034534981976614886,
+      "shapley": {
+       "idv1": 0.35086436336650684,
+       "idv4": -2.572953509751035,
+       "idv5": 0.40320192169337565
+      },
+      "total_effect": -1.818887224691153
+     },
+     "reactor_pressure_max": {
+      "interaction_relative_to_sum_abs_shares": 0.09174535874877941,
+      "shapley": {
+       "idv1": 66.40801631550251,
+       "idv4": -36.32189170892949,
+       "idv5": -22.091225908241235
+      },
+      "total_effect": 7.994898698331781
+     },
+     "reactor_temperature_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.021833664184469942,
+      "shapley": {
+       "idv1": -1.8523755482838926,
+       "idv4": 7.599389800875473,
+       "idv5": 1.8815436498213693
+      },
+      "total_effect": 7.62855790241295
+     }
+    },
+    "policy_check": {
+     "reproduces_source_run": true,
+     "source": [],
+     "trace_actuators": [
+      "mv_10",
+      "mv_11"
+     ],
+     "trace_hash": "b3b665bd6997773a4ea521ee156ce08b802f51c5810f240fd03d56140ac35f80"
+    }
+   }
+  },
+  "2": {
+   "reactive": {
+    "inviable": [],
+    "outcomes": {
+     "reactor_cooling_valve_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.001898750106883659,
+      "shapley": {
+       "idv1": -0.3924712203874077,
+       "idv4": 2.5037679577109544,
+       "idv5": 0.16563116665766367
+      },
+      "total_effect": 2.2769279039812105
+     },
+     "reactor_level_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.02016238069847846,
+      "shapley": {
+       "idv1": 0.03277376750510778,
+       "idv4": -0.008056379624617211,
+       "idv5": 0.5626183579678165
+      },
+      "total_effect": 0.5873357458483071
+     },
+     "reactor_pressure_max": {
+      "interaction_relative_to_sum_abs_shares": 0.42413948184529066,
+      "shapley": {
+       "idv1": 13.124618833444476,
+       "idv4": -0.7214827951303656,
+       "idv5": 7.407230699660507
+      },
+      "total_effect": 19.81036673797462
+     },
+     "reactor_temperature_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.002620027187769079,
+      "shapley": {
+       "idv1": -0.005529126096760706,
+       "idv4": 0.013023486472619084,
+       "idv5": -0.0031113153116990584
+      },
+      "total_effect": 0.004383045064159319
+     }
+    },
+    "policy_check": null
+   },
+   "replayed_all": {
+    "inviable": [],
+    "outcomes": {
+     "reactor_cooling_valve_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.0,
+      "shapley": {
+       "idv1": 0.0,
+       "idv4": 0.0,
+       "idv5": 0.0
+      },
+      "total_effect": 0.0
+     },
+     "reactor_level_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.026793993450916657,
+      "shapley": {
+       "idv1": 0.2249851642759637,
+       "idv4": -0.7840344280542552,
+       "idv5": 0.8852171130585305
+      },
+      "total_effect": 0.3261678492802389
+     },
+     "reactor_pressure_max": {
+      "interaction_relative_to_sum_abs_shares": 0.08607358614087285,
+      "shapley": {
+       "idv1": 89.49679581794112,
+       "idv4": -49.308467197312666,
+       "idv5": -28.927551643218976
+      },
+      "total_effect": 11.260776977409478
+     },
+     "reactor_temperature_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.06558504074892392,
+      "shapley": {
+       "idv1": -2.099830807032255,
+       "idv4": 9.12540000973118,
+       "idv5": 2.808945458141004
+      },
+      "total_effect": 9.834514660839929
+     }
+    },
+    "policy_check": {
+     "reproduces_source_run": true,
+     "source": [],
+     "trace_actuators": [
+      "mv_01",
+      "mv_02",
+      "mv_03",
+      "mv_04",
+      "mv_05",
+      "mv_06",
+      "mv_07",
+      "mv_08",
+      "mv_09",
+      "mv_10",
+      "mv_11",
+      "mv_12"
+     ],
+     "trace_hash": "29ffc6a7d9925f26cce9f81dc979f74946126ee296860f0f84643a0cb6ec7deb"
+    }
+   },
+   "replayed_cooling": {
+    "inviable": [],
+    "outcomes": {
+     "reactor_cooling_valve_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.0,
+      "shapley": {
+       "idv1": 0.0,
+       "idv4": 0.0,
+       "idv5": 0.0
+      },
+      "total_effect": 0.0
+     },
+     "reactor_level_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.03344968631380879,
+      "shapley": {
+       "idv1": 0.3534889359630805,
+       "idv4": -2.5810175115253147,
+       "idv5": 0.3987936218882334
+      },
+      "total_effect": -1.828734953674001
+     },
+     "reactor_pressure_max": {
+      "interaction_relative_to_sum_abs_shares": 0.10212839445618228,
+      "shapley": {
+       "idv1": 66.78964583505876,
+       "idv4": -38.17736509763631,
+       "idv5": -20.58896044549351
+      },
+      "total_effect": 8.02332029192894
+     },
+     "reactor_temperature_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.022054660359378062,
+      "shapley": {
+       "idv1": -1.857527828597232,
+       "idv4": 7.591889382834568,
+       "idv5": 1.8883133667359595
+      },
+      "total_effect": 7.622674920973296
+     }
+    },
+    "policy_check": {
+     "reproduces_source_run": true,
+     "source": [],
+     "trace_actuators": [
+      "mv_10",
+      "mv_11"
+     ],
+     "trace_hash": "0bf502e5afcd73e2a71f53afdd1a97a89bac0d3bd5983dd3a454fa2b89477638"
+    }
+   }
+  },
+  "3": {
+   "reactive": {
+    "inviable": [],
+    "outcomes": {
+     "reactor_cooling_valve_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.0019379499185417164,
+      "shapley": {
+       "idv1": -0.3887759316530091,
+       "idv4": 2.4964819652620727,
+       "idv5": 0.16219922876913864
+      },
+      "total_effect": 2.2699052623782023
+     },
+     "reactor_level_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.02017154871021803,
+      "shapley": {
+       "idv1": 0.033017782652827066,
+       "idv4": -0.008028612133600177,
+       "idv5": 0.5616560472736225
+      },
+      "total_effect": 0.5866452177928494
+     },
+     "reactor_pressure_max": {
+      "interaction_relative_to_sum_abs_shares": 0.862585731226015,
+      "shapley": {
+       "idv1": 16.201832987745775,
+       "idv4": -0.5568874745588346,
+       "idv5": 1.6680548976401044
+      },
+      "total_effect": 17.313000410827044
+     },
+     "reactor_temperature_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.0024382522944685777,
+      "shapley": {
+       "idv1": -0.00545315083748458,
+       "idv4": 0.01295507892100763,
+       "idv5": -0.00319085731991701
+      },
+      "total_effect": 0.00431107076360604
+     }
+    },
+    "policy_check": null
+   },
+   "replayed_all": {
+    "inviable": [],
+    "outcomes": {
+     "reactor_cooling_valve_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.0,
+      "shapley": {
+       "idv1": 0.0,
+       "idv4": 0.0,
+       "idv5": 0.0
+      },
+      "total_effect": 0.0
+     },
+     "reactor_level_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.02616408140828717,
+      "shapley": {
+       "idv1": 0.23227029340504163,
+       "idv4": -0.7937215555253966,
+       "idv5": 0.8817648451430931
+      },
+      "total_effect": 0.32031358302273816
+     },
+     "reactor_pressure_max": {
+      "interaction_relative_to_sum_abs_shares": 0.09343966237688708,
+      "shapley": {
+       "idv1": 88.33291309315943,
+       "idv4": -47.741830228223606,
+       "idv5": -29.332050186088587
+      },
+      "total_effect": 11.259032678847234
+     },
+     "reactor_temperature_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.06684599810636135,
+      "shapley": {
+       "idv1": -2.0525779607560133,
+       "idv4": 9.101501602767254,
+       "idv5": 2.7945981112129816
+      },
+      "total_effect": 9.843521753224223
+     }
+    },
+    "policy_check": {
+     "reproduces_source_run": true,
+     "source": [],
+     "trace_actuators": [
+      "mv_01",
+      "mv_02",
+      "mv_03",
+      "mv_04",
+      "mv_05",
+      "mv_06",
+      "mv_07",
+      "mv_08",
+      "mv_09",
+      "mv_10",
+      "mv_11",
+      "mv_12"
+     ],
+     "trace_hash": "6e828ba8011ab4dccbd6d386a69322064081a1ccac0b5401ac66587c16091703"
+    }
+   },
+   "replayed_cooling": {
+    "inviable": [],
+    "outcomes": {
+     "reactor_cooling_valve_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.0,
+      "shapley": {
+       "idv1": 0.0,
+       "idv4": 0.0,
+       "idv5": 0.0
+      },
+      "total_effect": 0.0
+     },
+     "reactor_level_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.03367404783741884,
+      "shapley": {
+       "idv1": 0.35370791224287973,
+       "idv4": -2.5812531418270503,
+       "idv5": 0.3952044115144607
+      },
+      "total_effect": -1.83234081806971
+     },
+     "reactor_pressure_max": {
+      "interaction_relative_to_sum_abs_shares": 0.07553228356694662,
+      "shapley": {
+       "idv1": 67.50906991777106,
+       "idv4": -36.74855448574863,
+       "idv5": -21.809605637125287
+      },
+      "total_effect": 8.950909794897143
+     },
+     "reactor_temperature_mean": {
+      "interaction_relative_to_sum_abs_shares": 0.022647667803080557,
+      "shapley": {
+       "idv1": -1.8390125064010001,
+       "idv4": 7.595397774985454,
+       "idv5": 1.8824673440370934
+      },
+      "total_effect": 7.638852612621548
+     }
+    },
+    "policy_check": {
+     "reproduces_source_run": true,
+     "source": [],
+     "trace_actuators": [
+      "mv_10",
+      "mv_11"
+     ],
+     "trace_hash": "6abdcdb4fd1a60c2cdc2969a5c3075189e6575842a40b1696aabd217b0d81950"
+    }
+   }
+  }
+ },
+ "seasons": [
+  1,
+  2,
+  3
+ ],
+ "simulator": "tennessee-eastman-python/1",
+ "status": "DEVELOPMENT: Tennessee Eastman (third-party python backend), truth by re-simulation, three noise seeds, one disturbance design, no data-based method",
+ "window": [
+  600,
+  1800
+ ]
+}
