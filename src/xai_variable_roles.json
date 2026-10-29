@@ -69,6 +69,14 @@
       "role": "past_only_covariate",
       "why": "fixed fraction of the pool (zero unless set): a consequence of the pool"
     },
+    "plant_nitrogen_kg_ha": {
+      "role": "past_only_covariate",
+      "why": "nitrogen held by the crop in the optional NITROGEN_DEMAND model (placeholder parameters): a consequence of the uptake"
+    },
+    "critical_nitrogen_kg_ha": {
+      "role": "past_only_covariate",
+      "why": "critical nitrogen of the biomass the crop is growing towards in the optional NITROGEN_DEMAND model: a consequence of the biomass and the potential growth"
+    },
     "nutrient_status": {
       "role": "past_only_covariate",
       "why": "pool over the reserve; it is the nutrient factor that multiplies the growth"

@@ -195,10 +195,14 @@ class CropGrowthState:
     irreversible_damage: float = 0.0
     # Non-chill-hour chilling state (Utah units, Dynamic portions); None for Chilling Hours.
     chilling_state: ChillingAccumulation | None = None
+    # Nitrogen held by the crop in the optional NITROGEN_DEMAND nutrient model; None for the reduced single-pool model (and then absent from ``to_dict``, so historical states keep their representation).
+    plant_nitrogen_kg_ha: float | None = None
 
     def __post_init__(self) -> None:
         if self.simulation_time.tzinfo is None:
             raise ValueError("simulation_time must be timezone-aware")
+        if self.plant_nitrogen_kg_ha is not None and (not math.isfinite(self.plant_nitrogen_kg_ha) or self.plant_nitrogen_kg_ha < 0):
+            raise ValueError("plant_nitrogen_kg_ha must be finite and non-negative")
         if self.chilling_state is not None and not isinstance(self.chilling_state, ChillingAccumulation):
             raise ValueError("chilling_state must be a ChillingAccumulation or None")
         if not self.crop_key or not self.variety or not self.current_stage:
@@ -261,6 +265,8 @@ class CropGrowthState:
             del payload["chilling_state"]
         else:
             payload["chilling_state"] = self.chilling_state.to_dict()
+        if self.plant_nitrogen_kg_ha is None:
+            del payload["plant_nitrogen_kg_ha"]
         return payload
 
     @classmethod

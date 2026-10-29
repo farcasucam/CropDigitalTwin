@@ -63,7 +63,7 @@ class CropDigitalTwinOrchestrator:
     microclimate is persistent state carried from step to step.
     """
 
-    def __init__(self, clock: SimulationClock, weather_engine: WeatherEngine, crop: CropGrowthState, soil: SoilState, greenhouse_mode: str = "outdoor", microclimate: GreenhouseMicroclimateState | None = None, phenology: PhenologyEngine | None = None, greenhouse_engine: object | None = None, water_engine: WaterBalanceEngine | None = None, co2_response: "Callable[[float], float] | None" = None) -> None:
+    def __init__(self, clock: SimulationClock, weather_engine: WeatherEngine, crop: CropGrowthState, soil: SoilState, greenhouse_mode: str = "outdoor", microclimate: GreenhouseMicroclimateState | None = None, phenology: PhenologyEngine | None = None, greenhouse_engine: object | None = None, water_engine: WaterBalanceEngine | None = None, co2_response: "Callable[[float], float] | None" = None, nutrient_engine: object | None = None) -> None:
         self.clock = clock
         self.weather_engine = weather_engine
         normalized = replace(crop, root_depth_m=1.0) if crop.root_depth_m <= 0 else crop
@@ -83,7 +83,7 @@ class CropDigitalTwinOrchestrator:
         self.water = water_engine if water_engine is not None else WaterBalanceEngine()
         if hasattr(self.greenhouse, "use_water_engine"):
             self.greenhouse.use_water_engine(self.water)
-        self.nutrients = NutrientBalanceEngine()
+        self.nutrients = nutrient_engine if nutrient_engine is not None else NutrientBalanceEngine()  # an injected engine (NITROGEN_DEMAND) keeps the interface of the reduced one
         self.climate = ClimateStressEngine()
         self.microclimate = microclimate
         self.last_snapshot: CropSimulationSnapshot | None = None
@@ -114,7 +114,11 @@ class CropDigitalTwinOrchestrator:
         potential_state = self.radiation.advance(phenological, crop_weather, dt_seconds)
         potential_growth = potential_state.biomass_total - phenological.biomass_total
         water_result = self.water.advance(self.soil, crop_weather, dt_seconds, phenological, irrigation, when=simulation_time, indoors=self.greenhouse_mode != "outdoor")
-        nutrient_result = self.nutrients.advance(phenological, potential_growth, dt_seconds, fertilization)
+        leaching_per_mm = getattr(self.nutrients, "leaching_per_mm", None)  # only an engine that leaches with the drainage declares it
+        if leaching_per_mm is None:
+            nutrient_result = self.nutrients.advance(phenological, potential_growth, dt_seconds, fertilization)
+        else:
+            nutrient_result = self.nutrients.advance(phenological, potential_growth, dt_seconds, fertilization, min(1.0, leaching_per_mm * water_result.drainage_mm))
         climate_result = self.climate.advance(nutrient_result.state, crop_weather, dt_seconds, microclimate.environment, water_result.water_stress, nutrient_result.nutrient_factor)
         co2_factor = self.co2_response(microclimate.indoor_state.co2_ppm)
         combined = climate_result.temperature_factor * climate_result.radiation_factor * climate_result.water_factor * climate_result.vpd_factor * climate_result.nutrient_factor * co2_factor

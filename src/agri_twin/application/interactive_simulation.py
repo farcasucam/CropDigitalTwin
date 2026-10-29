@@ -100,7 +100,9 @@ from agri_twin.application.model_options import (
     co2_response_function,
     describe as describe_model_options,
     describe_co2,
+    describe_nutrients,
     et0_site,
+    nutrient_engine,
     parse_model_options,
     water_engine_factory,
 )
@@ -278,6 +280,10 @@ def _water(name: str) -> Callable[[CropSimulationSnapshot], float]:
     return lambda s: getattr(s.water_balance, name)
 
 
+def nitrogen_model_of(request: Any) -> bool:
+    return request.model_options is not None and request.model_options.nutrient_model == "NITROGEN_DEMAND"
+
+
 def _nutrient(name: str) -> Callable[[CropSimulationSnapshot], float | None]:
     return lambda s: getattr(s.nutrients, name) if s.nutrients is not None else None
 
@@ -300,6 +306,8 @@ VARIABLES: tuple[VariableSpec, ...] = (
     VariableSpec("nutrient_applied_kg_ha", "kg_ha-1_per_step", "nutrients.nutrient_applied_kg_ha", "fertiliser OFFERED to the pool in the step (the pool is capped at the reserve, so not all of it is retained)", getter=_nutrient("nutrient_applied_kg_ha")),
     VariableSpec("nutrient_extracted_kg_ha", "kg_ha-1_per_step", "nutrients.nutrient_extracted_kg_ha", "nutrient taken up by the crop in the step", getter=_nutrient("nutrient_extracted_kg_ha")),
     VariableSpec("nutrient_leached_kg_ha", "kg_ha-1_per_step", "nutrients.nutrient_leached_kg_ha", "nutrient leached in the step (fixed fraction of the pool, 0 unless set)", getter=_nutrient("nutrient_leached_kg_ha")),
+    VariableSpec("plant_nitrogen_kg_ha", "kg_ha-1", "nutrients.plant_nitrogen_kg_ha", "nitrogen held by the crop (NITROGEN_DEMAND model; placeholder parameters)", "NITROGEN", _nutrient("plant_nitrogen_kg_ha"), "the reduced nutrient model has no crop nitrogen"),
+    VariableSpec("critical_nitrogen_kg_ha", "kg_ha-1", "nutrients.critical_nitrogen_kg_ha", "critical nitrogen of the biomass the crop is growing towards (NITROGEN_DEMAND model; placeholder parameters)", "NITROGEN", _nutrient("critical_nitrogen_kg_ha"), "the reduced nutrient model has no critical nitrogen"),
     VariableSpec("nutrient_status", "fraction", "nutrients.nutrient_status", "available pool over the reserve; it multiplies the growth (nutrient factor)", getter=_nutrient("nutrient_status")),
     VariableSpec("temperature_c", "degC", "weather.temperature_c", "air temperature experienced by the crop (indoor in greenhouse modes)", getter=lambda s: s.weather.temperature_c),
     VariableSpec("relative_humidity_pct", "%", "weather.relative_humidity_pct", "relative humidity experienced by the crop", getter=lambda s: s.weather.relative_humidity_pct),
@@ -364,9 +372,11 @@ FLUX_TOTALS = ("irrigation_mm", "precipitation_mm", "drainage_mm", "transpiratio
 BACKEND_UNSUPPORTED_VARIABLES = {"ENERGYPLUS": {"co2_ppm": "the EnergyPlus backend does not model CO2 (no value is fabricated)"}}
 
 
-def variable_availability(spec: VariableSpec, crop: str, environment: str, backend: str = "SIMPLIFIED", control: bool = False) -> Availability:
+def variable_availability(spec: VariableSpec, crop: str, environment: str, backend: str = "SIMPLIFIED", control: bool = False, nitrogen_model: bool = False) -> Availability:
     if spec.scope == "NONE":
         return Availability.NOT_SUPPORTED
+    if spec.scope == "NITROGEN":
+        return Availability.AVAILABLE if nitrogen_model else Availability.NOT_APPLICABLE
     if spec.scope == "CONTROL":
         return Availability.AVAILABLE if control else Availability.NOT_APPLICABLE
     if spec.name in BACKEND_UNSUPPORTED_VARIABLES.get(backend, {}) and environment == "greenhouse":
@@ -1106,6 +1116,9 @@ class InteractiveSimulationService:
         co2_function = co2_response_function(request)
         if co2_function is not None:
             engine_arguments["co2_response"] = co2_function
+        nitrogen_engine = nutrient_engine(request)
+        if nitrogen_engine is not None:
+            engine_arguments["nutrient_engine"] = nitrogen_engine
         if request.greenhouse is not None and request.greenhouse.backend == "SIMPLIFIED":
             engine_arguments["greenhouse_engine_factory"] = lumped_engine_factory(simplified_configuration(request.greenhouse)[0], request.greenhouse.crop_exchange)
         if request.greenhouse is not None and request.greenhouse.backend == "ENERGYPLUS":
@@ -1282,6 +1295,7 @@ def effective_configuration(request: SimulationRequest, spec: CampaignSpec, scen
     if request.model_options is not None:
         effective["evapotranspiration"] = describe_model_options(request)
         effective["co2_growth_response"] = describe_co2(request)
+        effective["nutrient_model"] = describe_nutrients(request)
     if request.runtime_events:
         effective["runtime_events"] = [event.to_dict() | {"provenance": "USER_DEFINED_EVENT", "classification": "USER_DEFINED_SYNTHETIC_FORCING"} for event in request.runtime_events]
         effective["event_sequence_hash"] = event_sequence_hash(request.runtime_events)
@@ -1331,7 +1345,7 @@ def project_result(execution: _Execution) -> SimulationResult:
     catalogue, series = [], {}
     for name in selected:
         spec = VARIABLE_INDEX[name]
-        availability = variable_availability(spec, request.crop, request.environment, request.backend, request.control is not None)
+        availability = variable_availability(spec, request.crop, request.environment, request.backend, request.control is not None, nitrogen_model_of(request))
         unit = MODEL_SPECS[request.dormancy.effective_chilling_model].unit.value if name == "chilling_accumulated" else spec.unit
         catalogue.append({"name": name, "unit": unit, "availability": availability.value, "source": spec.source, "description": spec.description,
                           "reason": None if availability is Availability.AVAILABLE else BACKEND_UNSUPPORTED_VARIABLES.get(request.backend, {}).get(name, spec.reason)})

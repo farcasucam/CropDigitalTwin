@@ -225,7 +225,7 @@ class ScenarioRunner:
 
     def run(self, scenario: Scenario, *, phenology: PhenologyEngine | None = None, observer: Callable[[CropSimulationSnapshot, int], bool] | None = None,
             greenhouse_engine_factory: Callable[[Scenario, WeatherProvider], object] | None = None, control: object | None = None,
-            water_engine_factory: Callable[[Scenario, WeatherEngine], object] | None = None, co2_response: Callable[[float], float] | None = None) -> ScenarioResult:
+            water_engine_factory: Callable[[Scenario, WeatherEngine], object] | None = None, co2_response: Callable[[float], float] | None = None, nutrient_engine: object | None = None) -> ScenarioResult:
         """Run the scenario step by step.
 
         ``phenology`` optionally configures the orchestrator's PhenologyEngine (for
@@ -235,6 +235,7 @@ class ScenarioRunner:
         events on the same actuator replace them. None keeps the unchanged historical behaviour.
         ``water_engine_factory`` optionally builds the water balance (e.g. with FAO-56 Penman-Monteith) from the scenario and its weather engine; None keeps the historical estimate.
         ``co2_response`` optionally replaces the growth response to CO2 (e.g. the logarithmic one); None keeps min(1, CO2/420).
+        ``nutrient_engine`` optionally replaces the reduced single-pool nutrient model (e.g. the nitrogen demand model); None keeps it.
         ``observer`` is called after every completed step with the snapshot and the
         number of completed steps; returning False stops the run cooperatively at that
         step boundary (status ``STOPPED``, snapshots up to and including that step).
@@ -246,7 +247,7 @@ class ScenarioRunner:
         weather = WeatherEngine(WeatherConfiguration(simulation=WeatherConfiguration().simulation), provider=provider)
         engine = greenhouse_engine_factory(scenario, provider) if greenhouse_engine_factory is not None else None
         water = water_engine_factory(scenario, weather) if water_engine_factory is not None else None
-        orchestrator = CropDigitalTwinOrchestrator(clock, weather, scenario.initial_crop, scenario.initial_soil, scenario.greenhouse_mode, scenario.initial_microclimate, phenology, engine, water, co2_response)
+        orchestrator = CropDigitalTwinOrchestrator(clock, weather, scenario.initial_crop, scenario.initial_soil, scenario.greenhouse_mode, scenario.initial_microclimate, phenology, engine, water, co2_response, nutrient_engine)
         snapshots: list[CropSimulationSnapshot] = []
         current = scenario.start
         try:

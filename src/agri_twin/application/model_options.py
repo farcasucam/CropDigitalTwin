@@ -6,6 +6,8 @@ Every option defaults to the historical behaviour, and a request that does not u
   (FAO-56 hourly: radiation, temperature, humidity, wind and pressure; needs the site, which comes from the weather location or the plot, never from a default).
 * ``co2_response``: ``HISTORICAL_CAPPED`` (default: ``min(1, CO2/420)``, enrichment gives no benefit) or ``LOG_RELATIVE_GAIN`` (growth factor 1 at 420 ppm and 1 + gain at twice that, logarithmic; the gain per doubling
   comes from ``src/co2_response.json``, a generic C3 literature value with its citation and status, or from the request's ``co2_gain_per_doubling``).
+* ``nutrient_model``: ``REDUCED_POOL`` (default: one available pool capped at a reserve) or ``NITROGEN_DEMAND`` (nutrient line, level 1: demand driven uptake, a critical-dilution style nitrogen nutrition index, leaching
+  that follows the drainage; every parameter is an UNSOURCED PLACEHOLDER, see ``domain/nitrogen_demand.py``). ``soil_nitrogen_initial_kg_ha`` (NITROGEN_DEMAND only): the user's starting soil nitrogen, by default the state's pool.
 * ``indoor_wind_m_s``: air speed inside a greenhouse for the Penman-Monteith aerodynamic term (default 0: still air; the outdoor wind does not reach the crop). The user's value, not a model value.
 """
 
@@ -21,7 +23,9 @@ from agri_twin.domain.co2_response import LogarithmicCo2Response
 from agri_twin.domain.evapotranspiration import Et0Site, EvapotranspirationError, PenmanMonteithEt0
 from agri_twin.domain.farm import FarmConfigRepository
 
-OPTION_FIELDS = ("et0_method", "indoor_wind_m_s", "co2_response", "co2_gain_per_doubling")
+OPTION_FIELDS = ("et0_method", "indoor_wind_m_s", "co2_response", "co2_gain_per_doubling", "nutrient_model", "soil_nitrogen_initial_kg_ha")
+NUTRIENT_MODELS = ("REDUCED_POOL", "NITROGEN_DEMAND")
+DEFAULT_NUTRIENT_MODEL = NUTRIENT_MODELS[0]
 CO2_RESPONSES = ("HISTORICAL_CAPPED", "LOG_RELATIVE_GAIN")
 DEFAULT_CO2 = CO2_RESPONSES[0]
 CO2_FILE = Path(__file__).resolve().parents[2] / "co2_response.json"
@@ -44,6 +48,8 @@ class ModelOptions:
     indoor_wind_m_s: float = 0.0
     co2_response: str = DEFAULT_CO2
     co2_gain_per_doubling: float | None = None  # None: the value of src/co2_response.json
+    nutrient_model: str = DEFAULT_NUTRIENT_MODEL
+    soil_nitrogen_initial_kg_ha: float | None = None
 
     def to_dict(self) -> dict[str, Any]:
         document: dict[str, Any] = {}
@@ -55,6 +61,10 @@ class ModelOptions:
             document["co2_response"] = self.co2_response
         if self.co2_gain_per_doubling is not None:
             document["co2_gain_per_doubling"] = self.co2_gain_per_doubling
+        if self.nutrient_model != DEFAULT_NUTRIENT_MODEL:
+            document["nutrient_model"] = self.nutrient_model
+        if self.soil_nitrogen_initial_kg_ha is not None:
+            document["soil_nitrogen_initial_kg_ha"] = self.soil_nitrogen_initial_kg_ha
         return document
 
 
@@ -85,7 +95,17 @@ def parse_model_options(document: Any, environment: str) -> ModelOptions | None:
         if isinstance(gain, bool) or not isinstance(gain, (int, float)) or not math.isfinite(gain) or not 0.0 <= gain <= 1.0:
             raise ModelOptionsError("co2_gain_per_doubling must be a number between 0 and 1 (relative gain of growth for a doubling of CO2)", "model_options.co2_gain_per_doubling")
         gain = float(gain)
-    options = ModelOptions(method, float(wind), co2, gain)
+    nutrient = str(document.get("nutrient_model", DEFAULT_NUTRIENT_MODEL)).upper()
+    if nutrient not in NUTRIENT_MODELS:
+        raise ModelOptionsError(f"nutrient_model {nutrient!r} is not available; choose one of {', '.join(NUTRIENT_MODELS)}", "model_options.nutrient_model")
+    soil = document.get("soil_nitrogen_initial_kg_ha")
+    if soil is not None:
+        if nutrient != "NITROGEN_DEMAND":
+            raise ModelOptionsError("soil_nitrogen_initial_kg_ha applies to the NITROGEN_DEMAND nutrient model", "model_options.soil_nitrogen_initial_kg_ha", "UNSUPPORTED_ENVIRONMENT")
+        if isinstance(soil, bool) or not isinstance(soil, (int, float)) or not math.isfinite(soil) or not 0.0 <= soil <= 1000.0:
+            raise ModelOptionsError("soil_nitrogen_initial_kg_ha must be a number between 0 and 1000 (kg/ha; a software input guard, not an agronomic limit)", "model_options.soil_nitrogen_initial_kg_ha")
+        soil = float(soil)
+    options = ModelOptions(method, float(wind), co2, gain, nutrient, soil)
     return options if options.to_dict() else None
 
 
@@ -115,6 +135,33 @@ def water_engine_factory(request: Any) -> Callable[[Any, Any], Any] | None:
     site, _ = et0_site(request)
     height = OPEN_METEO_WIND_HEIGHT_M if request.dataset else SYNTHETIC_WIND_HEIGHT_M
     return lambda _scenario, weather: WaterBalanceEngine(et0=PenmanMonteithEt0(site, height, lambda label: weather.generate(label).solar_radiation_w_m2, options.indoor_wind_m_s))
+
+
+def nutrient_engine(request: Any) -> Any | None:
+    """The nutrient model of a run (None: the reduced single-pool model)."""
+    options = request.model_options
+    if options is None or options.nutrient_model == DEFAULT_NUTRIENT_MODEL:
+        return None
+    from agri_twin.domain.nitrogen_demand import NitrogenDemandEngine, NitrogenParameters
+
+    return NitrogenDemandEngine(NitrogenParameters(initial_soil_nitrogen_kg_ha=options.soil_nitrogen_initial_kg_ha))
+
+
+def describe_nutrients(request: Any) -> dict[str, Any]:
+    options = request.model_options
+    if options is None or options.nutrient_model == DEFAULT_NUTRIENT_MODEL:
+        return {"nutrient_model": DEFAULT_NUTRIENT_MODEL, "formula": "one available pool capped at a reserve (200 kg/ha); uptake proportional to the potential growth times a stage factor; the pool over the reserve multiplies the growth",
+                "evidence_status": "ENGINEERING_APPROXIMATION, requires calibration"}
+    from agri_twin.domain.nitrogen_demand import NitrogenParameters
+
+    parameters = NitrogenParameters()
+    return {"nutrient_model": options.nutrient_model, "formula": "critical nitrogen = 10 * a * W^(1-b) kg/ha for W >= 1 t/ha of dry biomass (10 * a * W below that); uptake = min(critical - crop nitrogen, soil pool); the soil pool loses a fraction "
+            "(leaching per mm times the drainage of the step); NNI = crop nitrogen / critical nitrogen (capped at 1) multiplies the growth",
+            "parameters": {"critical_percent_at_one_t_ha": parameters.critical_percent_at_one_t_ha, "critical_exponent": parameters.critical_exponent, "leaching_fraction_per_mm_drainage": parameters.leaching_fraction_per_mm_drainage,
+                           "initial_soil_nitrogen_kg_ha": options.soil_nitrogen_initial_kg_ha if options.soil_nitrogen_initial_kg_ha is not None else "the pool the state starts with (200 kg/ha)"},
+            "evidence_status": parameters.evidence_status, "requires_calibration": True,
+            "limits": ["every parameter is an unsourced placeholder: results are qualitative (sign, order, compensation, timing), never agronomic values", "one nitrogen pool, no mineralisation or volatilisation, no root-depth dependence",
+                       "the index is evaluated against the potential growth of the step", "the crop starts at its critical nitrogen (index 1)"]}
 
 
 def co2_constants() -> Mapping[str, Any]:
@@ -158,4 +205,4 @@ def describe(request: Any) -> dict[str, Any]:
                        "inside a greenhouse the equation is applied with the crop's indoor microclimate and the user's air speed, outside its validated open-field domain"]}
 
 
-__all__ = ["co2_response_function", "describe_co2", "ModelOptions", "ModelOptionsError", "parse_model_options", "water_engine_factory", "describe", "et0_site", "EvapotranspirationError"]
+__all__ = ["nutrient_engine", "describe_nutrients", "co2_response_function", "describe_co2", "ModelOptions", "ModelOptionsError", "parse_model_options", "water_engine_factory", "describe", "et0_site", "EvapotranspirationError"]

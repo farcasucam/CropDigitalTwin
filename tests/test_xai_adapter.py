@@ -34,7 +34,9 @@ def test_every_catalogue_variable_has_exactly_one_declared_role_and_a_reason():
     assert set(roles["variables"]) == set(names) and all(entry["role"] and entry["why"] for entry in roles["variables"].values())
     catalogue = SIM.catalogue()
     not_represented = {variable.name for variable in VARIABLES if variable.scope == "NONE"}
-    assert set(catalogue.variables) == set(names) - not_represented  # variables the twin does not represent are not part of its world
+    nitrogen_only = {variable.name for variable in VARIABLES if variable.scope == "NITROGEN"}  # the crop-nitrogen series exist only with the optional NITROGEN_DEMAND model
+    assert set(catalogue.variables) == set(names) - not_represented - nitrogen_only  # variables the twin does not represent are not part of its world
+    assert set(SIM.catalogue(True).variables) == set(names) - not_represented and nitrogen_only == {"plant_nitrogen_kg_ha", "critical_nitrogen_kg_ha"}
     assert roles["status"] == "PROVISIONAL_DESIGN_CONVENTION" and set(catalogue.default_targets) == set(roles["default_targets"]) == set(catalogue.with_role("target"))
 
 

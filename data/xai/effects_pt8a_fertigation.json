@@ -1,0 +1,314 @@
+{
+ "irrigation_leaches_the_dose": {
+  "seasons_where_the_dose_irrigation_interaction_on_the_biomass_is_negative": "4/4",
+  "seasons_where_the_extra_irrigation_raises_the_leached_nitrogen": "4/4"
+ },
+ "report_hash": "2c6f8a19f4248546d2c85b4d1c2a78dbb1433572f4db96a0b6461d34d3a5dd70",
+ "seasons": {
+  "34": {
+   "biomass_total_end": {
+    "interaction_relative_to_sum_abs_shares": 0.20134400079078213,
+    "leave_one_out": {
+     "extra_irrigation": -0.09452922767763994,
+     "fertiliser": 57.677507528866386,
+     "heat_wave": -74.04179612151063
+    },
+    "material": true,
+    "pairwise_dose_irrigation": -0.6215667928042876,
+    "pairwise_relative_to_sum_abs_shares": -0.004708479071265326,
+    "shapley": {
+     "extra_irrigation": 0.07481487347932139,
+     "fertiliser": 70.99054702496508,
+     "heat_wave": -60.944738050295896
+    },
+    "total_effect": 10.120623848148512
+   },
+   "nitrogen_leached": {
+    "interaction_relative_to_sum_abs_shares": 0.8847997366269055,
+    "leave_one_out": {
+     "extra_irrigation": 1.475897631965259,
+     "fertiliser": 2.696273507442246,
+     "heat_wave": 0.9097644572937427
+    },
+    "material": true,
+    "pairwise_dose_irrigation": 0.9254149642171754,
+    "pairwise_relative_to_sum_abs_shares": 0.3432199892417619,
+    "shapley": {
+     "extra_irrigation": 0.6462017046912822,
+     "fertiliser": 1.6869366853954397,
+     "heat_wave": 0.363135117355524
+    },
+    "total_effect": 2.696273507442246
+   },
+   "nitrogen_status_mean": {
+    "interaction_relative_to_sum_abs_shares": 0.03741316947096774,
+    "leave_one_out": {
+     "extra_irrigation": -0.0012613204987887983,
+     "fertiliser": 0.29270231257008306,
+     "heat_wave": 0.011332955294232172
+    },
+    "material": true,
+    "pairwise_dose_irrigation": -0.0029068608150470965,
+    "pairwise_relative_to_sum_abs_shares": -0.009182190227104014,
+    "shapley": {
+     "extra_irrigation": -0.000978958057888779,
+     "fertiliser": 0.299228806878223,
+     "heat_wave": 0.016368209112717746
+    },
+    "total_effect": 0.314618057933052
+   }
+  },
+  "35": {
+   "biomass_total_end": {
+    "interaction_relative_to_sum_abs_shares": 0.2054706283073993,
+    "leave_one_out": {
+     "extra_irrigation": 0.09028639015593853,
+     "fertiliser": 54.71159328926342,
+     "heat_wave": -75.52133948098958
+    },
+    "material": true,
+    "pairwise_dose_irrigation": -0.5662065226385948,
+    "pairwise_relative_to_sum_abs_shares": -0.004336722668633485,
+    "shapley": {
+     "extra_irrigation": 0.14508559561414813,
+     "fertiliser": 68.18886458759454,
+     "heat_wave": -62.22697471379615
+    },
+    "total_effect": 6.106975469412532
+   },
+   "nitrogen_leached": {
+    "interaction_relative_to_sum_abs_shares": 0.8873556150119327,
+    "leave_one_out": {
+     "extra_irrigation": 1.5609748415100224,
+     "fertiliser": 2.8203870767281893,
+     "heat_wave": 0.9417114675318268
+    },
+    "material": true,
+    "pairwise_dose_irrigation": 0.9972195884296386,
+    "pairwise_relative_to_sum_abs_shares": 0.3535754353216192,
+    "shapley": {
+     "extra_irrigation": 0.6865282119082805,
+     "fertiliser": 1.756962339900726,
+     "heat_wave": 0.3768965249191827
+    },
+    "total_effect": 2.8203870767281893
+   },
+   "nitrogen_status_mean": {
+    "interaction_relative_to_sum_abs_shares": 0.044631430861261666,
+    "leave_one_out": {
+     "extra_irrigation": -0.0006082987663261763,
+     "fertiliser": 0.2878966675888618,
+     "heat_wave": 0.009627026408534411
+    },
+    "material": true,
+    "pairwise_dose_irrigation": -0.00274539241260896,
+    "pairwise_relative_to_sum_abs_shares": -0.008790068473053508,
+    "shapley": {
+     "extra_irrigation": -0.0007369092865109523,
+     "fertiliser": 0.29563773605618804,
+     "heat_wave": 0.015954254144845227
+    },
+    "total_effect": 0.3108550809145223
+   }
+  },
+  "37": {
+   "biomass_total_end": {
+    "interaction_relative_to_sum_abs_shares": 0.2025735125364818,
+    "leave_one_out": {
+     "extra_irrigation": -0.03708149922431403,
+     "fertiliser": 56.23144182680812,
+     "heat_wave": -74.3230055322648
+    },
+    "material": true,
+    "pairwise_dose_irrigation": -0.5778017609982271,
+    "pairwise_relative_to_sum_abs_shares": -0.004415932958693507,
+    "shapley": {
+     "extra_irrigation": 0.1006411515679512,
+     "fertiliser": 69.5102674795589,
+     "heat_wave": -61.23386786411568
+    },
+    "total_effect": 8.37704076701118
+   },
+   "nitrogen_leached": {
+    "interaction_relative_to_sum_abs_shares": 0.9094063312255523,
+    "leave_one_out": {
+     "extra_irrigation": 1.476526042645224,
+     "fertiliser": 2.675930461247701,
+     "heat_wave": 0.956982060732747
+    },
+    "material": true,
+    "pairwise_dose_irrigation": 0.9350637545190207,
+    "pairwise_relative_to_sum_abs_shares": 0.349434997680407,
+    "shapley": {
+     "extra_irrigation": 0.6480193066349114,
+     "fertiliser": 1.6396638389341165,
+     "heat_wave": 0.38824731567867293
+    },
+    "total_effect": 2.675930461247701
+   },
+   "nitrogen_status_mean": {
+    "interaction_relative_to_sum_abs_shares": 0.04006672341924479,
+    "leave_one_out": {
+     "extra_irrigation": -0.0010438070228370178,
+     "fertiliser": 0.2901847466852353,
+     "heat_wave": 0.010434004563975585
+    },
+    "material": true,
+    "pairwise_dose_irrigation": -0.0027150298496186887,
+    "pairwise_relative_to_sum_abs_shares": -0.00864930788983942,
+    "shapley": {
+     "extra_irrigation": -0.0008747272646762264,
+     "fertiliser": 0.2970874184852841,
+     "heat_wave": 0.015939253552532912
+    },
+    "total_effect": 0.3121519447731408
+   }
+  },
+  "38": {
+   "biomass_total_end": {
+    "interaction_relative_to_sum_abs_shares": 0.20456815062266093,
+    "leave_one_out": {
+     "extra_irrigation": -0.025604125012137047,
+     "fertiliser": 56.82040920628424,
+     "heat_wave": -73.95482207243151
+    },
+    "material": true,
+    "pairwise_dose_irrigation": -0.5679767867676446,
+    "pairwise_relative_to_sum_abs_shares": -0.004333097858166749,
+    "shapley": {
+     "extra_irrigation": 0.1154725303029712,
+     "fertiliser": 70.25112600075404,
+     "heat_wave": -60.712090517508535
+    },
+    "total_effect": 9.65450801354848
+   },
+   "nitrogen_leached": {
+    "interaction_relative_to_sum_abs_shares": 0.9147079825218928,
+    "leave_one_out": {
+     "extra_irrigation": 1.4456010740298848,
+     "fertiliser": 2.581558241423782,
+     "heat_wave": 0.9157708567456284
+    },
+    "material": true,
+    "pairwise_dose_irrigation": 0.9007188540063186,
+    "pairwise_relative_to_sum_abs_shares": 0.34890510682786446,
+    "shapley": {
+     "extra_irrigation": 0.6319868336776813,
+     "fertiliser": 1.5824996827105475,
+     "heat_wave": 0.36707172503555313
+    },
+    "total_effect": 2.581558241423782
+   },
+   "nitrogen_status_mean": {
+    "interaction_relative_to_sum_abs_shares": 0.03639391957360751,
+    "leave_one_out": {
+     "extra_irrigation": -0.001245378642274586,
+     "fertiliser": 0.2970123265095853,
+     "heat_wave": 0.01152980639772716
+    },
+    "material": true,
+    "pairwise_dose_irrigation": -0.0029119232249800175,
+    "pairwise_relative_to_sum_abs_shares": -0.009073291391519541,
+    "shapley": {
+     "extra_irrigation": -0.0009783621755664607,
+     "fertiliser": 0.30346608221300664,
+     "heat_wave": 0.016489062464483673
+    },
+    "total_effect": 0.31897678250192385
+   }
+  }
+ },
+ "status": "DEVELOPMENT: tomato outdoor, four DEV seasons, NITROGEN_DEMAND with unsourced placeholder parameters; counts and ranges only",
+ "summary": {
+  "biomass_total_end": {
+   "interaction_range": [
+    0.201,
+    0.205
+   ],
+   "material_cells": 4,
+   "of": 4,
+   "pairwise_dose_irrigation_relative_range": [
+    -0.005,
+    -0.004
+   ],
+   "shapley_range": {
+    "extra_irrigation": [
+     0.075,
+     0.145
+    ],
+    "fertiliser": [
+     68.189,
+     70.991
+    ],
+    "heat_wave": [
+     -62.227,
+     -60.712
+    ]
+   },
+   "total_effect_range": [
+    6.107,
+    10.121
+   ]
+  },
+  "nitrogen_leached": {
+   "interaction_range": [
+    0.885,
+    0.915
+   ],
+   "material_cells": 4,
+   "of": 4,
+   "pairwise_dose_irrigation_relative_range": [
+    0.343,
+    0.354
+   ],
+   "shapley_range": {
+    "extra_irrigation": [
+     0.632,
+     0.687
+    ],
+    "fertiliser": [
+     1.582,
+     1.757
+    ],
+    "heat_wave": [
+     0.363,
+     0.388
+    ]
+   },
+   "total_effect_range": [
+    2.582,
+    2.82
+   ]
+  },
+  "nitrogen_status_mean": {
+   "interaction_range": [
+    0.036,
+    0.045
+   ],
+   "material_cells": 4,
+   "of": 4,
+   "pairwise_dose_irrigation_relative_range": [
+    -0.009,
+    -0.009
+   ],
+   "shapley_range": {
+    "extra_irrigation": [
+     -0.001,
+     -0.001
+    ],
+    "fertiliser": [
+     0.296,
+     0.303
+    ],
+    "heat_wave": [
+     0.016,
+     0.016
+    ]
+   },
+   "total_effect_range": [
+    0.311,
+    0.319
+   ]
+  }
+ }
+}

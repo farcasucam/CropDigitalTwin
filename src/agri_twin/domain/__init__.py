@@ -70,6 +70,7 @@ from agri_twin.domain.nutrient_balance import (
     NutrientBalanceResult,
     NutrientProfile,
 )
+from agri_twin.domain.nitrogen_demand import NitrogenDemandEngine, NitrogenParameters
 from agri_twin.domain.climate_stress import (
     ClimateStressEngine,
     ClimateStressError,
@@ -270,6 +271,8 @@ __all__ = [
     "NutrientBalanceError",
     "NutrientBalanceResult",
     "NutrientProfile",
+    "NitrogenDemandEngine",
+    "NitrogenParameters",
     "ClimateStressEngine",
     "ClimateStressError",
     "ClimateStressProfile",

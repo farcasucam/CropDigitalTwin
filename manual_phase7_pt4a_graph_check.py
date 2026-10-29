@@ -72,14 +72,16 @@ def changed(reference: dict, other: dict) -> set[str]:
 
 
 def main() -> int:
-    crop, season = (sys.argv[1], int(sys.argv[2])) if len(sys.argv) == 3 else ("tomato", 0)
+    crop, season = (sys.argv[1], int(sys.argv[2])) if len(sys.argv) >= 3 else ("tomato", 0)
+    nitrogen = len(sys.argv) == 4 and sys.argv[3] == "nitrogen"  # run the optional NITROGEN_DEMAND nutrient model (graph 0.4)
     start = CROPS_START[crop]
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
     version = graph["version"]  # 0.1 and 0.2 results were written without the version in the name (effects_pt4a_graph_check_<crop><season>.json); from 0.3 on it is part of the name
-    report_path = ROOT / "data" / "xai" / (f"effects_pt4a_graph_check_{crop}{season}.json" if version in ("0.1", "0.2") else f"effects_pt4a_graph_check_v{version.replace('.', '_')}_{crop}{season}.json")
+    report_path = ROOT / "data" / "xai" / (f"effects_pt4a_graph_check_{crop}{season}.json" if version in ("0.1", "0.2") else f"effects_pt4a_graph_check_v{version.replace('.', '_')}_{crop}{season}{'_nitrogen' if nitrogen else ''}.json")
     simulator = TwinSimulator()
     labels = {"crop": crop, "environment": "greenhouse", "control": "on"}
-    desc = ScenarioDescriptor(labels, season, start, 336, simulator.scenario_options(labels, season))
+    options = {**simulator.scenario_options(labels, season), **({"model_options": {"nutrient_model": "NITROGEN_DEMAND"}} if nitrogen else {})}
+    desc = ScenarioDescriptor(labels, season, start, 336, options)
     ref, trace = simulator.run_traced(desc)
     known = set(ref.series)
     declared = set(graph["edges"]) | {p.rstrip("?").split("@")[0] for ps in graph["edges"].values() for p in ps}

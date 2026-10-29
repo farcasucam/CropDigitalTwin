@@ -71,16 +71,18 @@ class TwinSimulator:
         self._units = {variable.name: (variable.unit, variable.scope) for variable in VARIABLES}
 
     # -- the port ---------------------------------------------------------------------------------------------------------------------------------
-    def catalogue(self) -> VariableCatalogue:
-        """Roles of every variable the twin can produce (variables the twin does not represent are not part of its world)."""
-        variables = {name: VariableSpec(self._units[name][0], entry["role"], entry["why"], entry.get("activation", {}).get("fraction")) for name, entry in self._roles["variables"].items() if self._units.get(name, ("", "NONE"))[1] != "NONE"}
+    def catalogue(self, nitrogen_model: bool = False) -> VariableCatalogue:
+        """Roles of every variable the twin can produce (variables the twin does not represent are not part of its world). The crop-nitrogen series exist only with the optional NITROGEN_DEMAND model: they are part of the catalogue of a scenario that runs it."""
+        hidden = ("NONE",) if nitrogen_model else ("NONE", "NITROGEN")
+        variables = {name: VariableSpec(self._units[name][0], entry["role"], entry["why"], entry.get("activation", {}).get("fraction")) for name, entry in self._roles["variables"].items() if self._units.get(name, ("", "NONE"))[1] not in hidden}
         return VariableCatalogue(variables, tuple(self._roles["default_targets"]))
 
     def catalogue_for(self, scenario: ScenarioDescriptor) -> VariableCatalogue:
         """The catalogue with the rated power of the scenario's installation: a device's ON threshold is a fraction of the equipment the scenario runs with (none without the controller: no device, no threshold)."""
         equipment = (scenario.options.get("control") or {}).get("equipment", {})
-        nominal = {name: float(equipment[entry["activation"]["nominal_from"]]) for name, entry in self._roles["variables"].items() if "activation" in entry and name in self.catalogue().variables and entry["activation"]["nominal_from"] in equipment}
-        return self.catalogue().with_nominal(nominal)
+        catalogue = self.catalogue((scenario.options.get("model_options") or {}).get("nutrient_model") == "NITROGEN_DEMAND")
+        nominal = {name: float(equipment[entry["activation"]["nominal_from"]]) for name, entry in self._roles["variables"].items() if "activation" in entry and name in catalogue.variables and entry["activation"]["nominal_from"] in equipment}
+        return catalogue.with_nominal(nominal)
 
     def factors(self) -> Mapping[str, FactorSpec]:
         cfg, probes = self._design["factors"], self._design["probes"]
@@ -129,6 +131,8 @@ class TwinSimulator:
                                           **({"intensity": item.level} if item.level is not None else {})} for item in events]
         if scenario.options.get("greenhouse"):
             request["greenhouse"] = dict(scenario.options["greenhouse"])
+        if scenario.options.get("model_options"):
+            request["model_options"] = dict(scenario.options["model_options"])  # e.g. {"nutrient_model": "NITROGEN_DEMAND"}
         control = scenario.options.get("control")
         if control:
             equipment = dict(control["equipment"])

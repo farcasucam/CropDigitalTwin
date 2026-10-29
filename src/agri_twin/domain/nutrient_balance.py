@@ -72,6 +72,8 @@ class NutrientBalanceResult:
     nutrient_leached_kg_ha: float
     growth_potential_g_m2: float
     growth_actual_g_m2: float
+    plant_nitrogen_kg_ha: float | None = None  # only the NITROGEN_DEMAND model fills these two
+    critical_nitrogen_kg_ha: float | None = None
 
 
 class NutrientBalanceEngine:
