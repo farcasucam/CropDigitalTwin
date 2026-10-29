@@ -215,6 +215,15 @@
 
       <div id="charts" class="charts" hidden></div>
       <div id="delta" class="delta" hidden></div>
+      <section id="explain" class="delta explain" hidden aria-label="Explanation of the what-if">
+        <h3>Explanation</h3>
+        <div class="explain-bar">
+          <span class="seg" id="explain-lang" role="group" aria-label="Language of the explanation"><button type="button" data-lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" aria-pressed="false">Español</button></span>
+          <button id="explain-run" type="button">Explain this what-if</button>
+          <span id="explain-note" class="hint"></span>
+        </div>
+        <div id="explain-body" class="explain-body" aria-live="polite"></div>
+      </section>
       <section id="season" class="delta season" hidden aria-label="Season results"><h3>Season results</h3><div id="season-body"></div></section>
       <details id="info" class="info" hidden><summary>Run information and scientific status</summary><div id="info-body"></div></details>
     </section>

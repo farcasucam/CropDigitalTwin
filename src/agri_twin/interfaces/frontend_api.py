@@ -260,6 +260,13 @@ class InteractiveFrontendAdapter:
     def runtime_what_if(self, document: Any) -> dict[str, Any]:
         return self.runtime.what_if(document)
 
+    def runtime_explain(self, document: Any) -> dict[str, Any]:
+        try:  # the explanation layer lives in the tsxai package; the rest of the server does not need it
+            from twin_explanations.whatif import explain_what_if
+        except ImportError as exc:
+            raise ValueError(f"the explanation layer is not available: {exc}") from None
+        return explain_what_if(self.runtime, document)
+
     def _plot_areas(self) -> dict[str, dict[str, Any]]:
         return {plot.crop_key: {"plot_id": plot.plot_id, "area_ha": plot.area_ha, "area_m2": None if plot.area_ha is None else plot.area_ha * 10000.0, "source": "src/farm_config.json", "typical": bool(plot.provenance)}
                 for plot in self._farm_config.plots}
@@ -385,6 +392,8 @@ class FrontendRequestHandler(BaseHTTPRequestHandler):
                 payload = self.adapter.runtime_preview(body)
             elif path == "/api/runtime/what-if":
                 payload = self.adapter.runtime_what_if(body)
+            elif path == "/api/runtime/explain":
+                payload = self.adapter.runtime_explain(body)
             elif path == "/api/site-resources":
                 payload = self.adapter.save_site_resources(body)
             elif path == "/api/kpis/season":

@@ -1050,6 +1050,7 @@
       if (serial !== bench.serial) return;
       data.seconds = (performance.now() - started) / 1000;
       data.signature = signature;
+      if (bench.events.length) data.explainDocument = { request, checkpoint_time: iso(branchMs()), events: eventDocuments() };
       data.greenhouse = request.greenhouse || null;
       await attachCost(data);
       adopt(data);
@@ -1118,6 +1119,7 @@
     buildCharts();
     drawActuation();
     renderDelta();
+    renderExplain();
     renderSeason();
     renderInfo();
     renderEvents(); renderTimeline();  // plausibility hints depend on the run's own weather
@@ -1425,6 +1427,36 @@
     if (!slice.length) return null;
     return { peak: Math.max(...slice), mean: slice.reduce((a, b) => a + b, 0) / slice.length, final: slice[slice.length - 1] };
   }
+  // ---- explanation of a what-if: the server re-simulates every combination of the events and writes the text (deterministic, no language model) ----
+  const EXPLAIN_LIMIT = 4;
+  function renderExplain() {
+    const host = $("#explain"), run = bench.run;
+    host.hidden = !run || run.kind !== "WHAT_IF";
+    if (host.hidden) return;
+    $("#explain-body").replaceChildren();
+    const blocked = run.backend === "ENERGYPLUS" ? "Not offered with EnergyPlus (each branch takes minutes)." : run.events.length > EXPLAIN_LIMIT ? `At most ${EXPLAIN_LIMIT} events can be explained together.` : "";
+    $("#explain-run").disabled = Boolean(blocked);
+    $("#explain-note").textContent = blocked || `Re-simulates ${1 << run.events.length} branches from the branch point.`;
+  }
+  async function explainRun() {
+    const run = bench.run, body = $("#explain-body"), button = $("#explain-run");
+    if (!run || !run.explainDocument) return;
+    button.disabled = true;
+    body.replaceChildren(el("p", "hint", "Re-simulating the branches…"));
+    try {
+      const out = await api("/api/runtime/explain", { method: "POST", body: JSON.stringify({ ...run.explainDocument, language: bench.explainLanguage || "en" }) });
+      body.replaceChildren();
+      for (const claim of out.claims) body.append(el("p", `claim claim-${claim.kind.toLowerCase()}`, claim.text));
+      if (out.problems.length) body.append(el("p", "warn", `The text checker found ${out.problems.length} problem(s): ${out.problems.join("; ")}`));
+      body.append(el("p", "hint", `Text ${out.narrative_hash.slice(0, 12)} from report ${out.source_report_hash.slice(0, 12)} · ${out.branch_runs} branch runs · deterministic, no language model`));
+    } catch (error) {
+      body.replaceChildren();
+      showError(error);
+    } finally {
+      button.disabled = false;
+    }
+  }
+
   function renderDelta() {
     const host = $("#delta"), run = bench.run;
     host.replaceChildren();
@@ -1495,6 +1527,12 @@
     $("#back").addEventListener("click", () => { stopPlayback(); seek(Math.floor(bench.position) - 1); });
     $("#forward").addEventListener("click", () => { stopPlayback(); seek(Math.floor(bench.position) + 1); });
     bindScrub();
+    $("#explain-run").addEventListener("click", () => void explainRun());
+    for (const button of $$("#explain-lang button")) button.addEventListener("click", () => {
+      bench.explainLanguage = button.dataset.lang;
+      for (const other of $$("#explain-lang button")) other.setAttribute("aria-pressed", String(other === button));
+      if ($("#explain-body").childElementCount) void explainRun();
+    });
     $("#to-branch").addEventListener("click", () => { stopPlayback(); seek(bench.run.branchIndex); });
     $("#to-event").addEventListener("click", () => {
       if (!bench.run.events.length) return;

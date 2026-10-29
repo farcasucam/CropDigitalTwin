@@ -179,3 +179,8 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .scene-box svg .scene-plant .leaves { stroke: none; fill-opacity: .85; }
 .scene-box svg .scene-plot .iso-fill { fill: hsl(30 30% 72%); }
 .scene-box svg .scene-hits circle { fill: transparent; stroke: none; pointer-events: all; }
+
+.explain-bar { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; margin-bottom: .5rem; }
+.explain-body p { margin: .35rem 0; line-height: 1.45; font-size: .85rem; }
+.explain-body .claim-total { margin-top: .8rem; font-weight: 600; }
+.explain-body .warn { color: var(--red); }
