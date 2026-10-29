@@ -1,0 +1,80 @@
+{
+  "contract": "xai_protocol_d25",
+  "version": "0.9",
+  "status": "FREEZE_CANDIDATE: complete except the parameters listed in pilot_fixed, which step F1 (development partition only) fixes; after F1 the document is frozen by tools/freeze (script freeze_protocol_d25.py) and every later change is a dated deviation",
+  "supersedes": "the core questions of docs/xai/PREREGISTRATION.md (draft written under D1-D24); its sections on the LLM arms, the verifier and the expert study are NOT replaced and stay as drafted",
+  "decision": "D25: the explanatory core is interventional re-simulation of the twin; data-based methods are evaluated by their OWN object; the text is deterministic, a language model is an optional renderer",
+  "domains": {
+    "agri": {"simulator": "agri-twin-interactive/1 (simplified greenhouse backend; no EnergyPlus in the confirmatory run)", "benchmark_design": "src/xai_benchmark_design.json (gctsb-1, unchanged)", "unit": "crop and season", "salt": "gctsb-1", "test_share": 0.3, "seasons": 40, "crops": ["tomato", "pepper", "lettuce"]},
+    "tep": {"simulator": "tennessee-eastman-python/1 (third-party tep package, see tep_source)", "unit": "noise seed (season)", "salt": "gctsb-1", "test_share": 0.3, "seasons": 40, "group_label": "plant=tennessee_eastman_base_case"}
+  },
+  "strata": [
+    {"id": "S1", "domain": "agri", "context": "outdoor, no controller", "truth_policies": ["reactive"]},
+    {"id": "S2", "domain": "agri", "context": "greenhouse, controller off", "truth_policies": ["reactive"]},
+    {"id": "S3", "domain": "agri", "context": "greenhouse, controller on (illustrative equipment of the design)", "truth_policies": ["reactive", "replayed_all"]},
+    {"id": "S4", "domain": "tep", "context": "closed loop of the plant", "truth_policies": ["reactive", "replayed_all"]}
+  ],
+  "episode": {
+    "players": "three perturbation players per episode drawn without replacement, by a seeded generator, from the factor pool of the stratum (agri: the design's event factors with intensities inside the design's sampling ranges; tep: the IDV pool fixed in F1)",
+    "reference": "no perturbation",
+    "truth": "exact Shapley over the 8 coalitions, total effect, leave-one-out, interaction gap (tsxai.effects), always called exact INSIDE the simulator",
+    "windows_per_crop_season": 2,
+    "outcomes": "per stratum, the outcome set declared in pilot_fixed.outcomes with its smallest effect that matters",
+    "excluded": ["nutrient and fertilisation players (not in the frozen design; exploratory only)", "set-point as a player (needs a controller injection point)", "EnergyPlus (cost; a secondary study only)"]
+  },
+  "comparators": {
+    "primary": {"id": "TF", "name": "TimesFM", "version": "3.0 through the tsxai service (covariates native); 2.5 with XReg as the secondary variant TF25", "use": "forecast the outcome path from the history before the first intervention with the planned interventions given as known-future covariates (the controller's outputs are past-only covariates); the estimate of an effect is the forecast with the intervention minus the forecast without it; the occlusion Shapley over the same 8 coalitions uses that estimate as its valuation"},
+    "others": [
+      {"id": "SN", "name": "seasonal naive"},
+      {"id": "HW", "name": "Holt-Winters"},
+      {"id": "LR", "name": "lagged regression (tsxai LaggedRegressionBackend)"},
+      {"id": "DS", "name": "domain-trained surrogate of PT-5a (ridge on lagged inputs plus 300 fixed random ReLU features) trained on the development seasons only"}
+    ],
+    "object_rule": "each estimate is compared with BOTH truths available in its stratum (reactive and replayed) and the primary reading is the one the method's information supports: a forecaster that is not told the controller's reaction is read against the replayed truth, one trained on closed-loop data against the reactive truth; this assignment is declared per comparator in pilot_fixed.object_assignment and never chosen after seeing results"
+  },
+  "hypotheses": [
+    {"id": "H1", "family": "recovery", "claim": "For the TimesFM estimate of the total effect of a player set, sign agreement with the truth of its assigned object, per stratum", "metric": "share of material cells with the same sign", "criterion": "reported with a 95 percent cluster bootstrap interval; the provisional reference line of the earlier preregistration is 0.8, a line, not a decision"},
+    {"id": "H2", "family": "recovery", "claim": "Rank agreement of the TimesFM occlusion shares with the exact Shapley shares of the assigned object", "metric": "Spearman across the three players in material episodes", "criterion": "interval; reference line 0.6"},
+    {"id": "H3", "family": "recovery", "claim": "Relative error of the estimated total effect, scaled by the smallest effect that matters", "metric": "median and interval of |estimate - truth| / max(|truth|, materiality)", "criterion": "interval"},
+    {"id": "H4", "family": "closed_loop", "claim": "In S3 and S4 the estimate is closer to the replayed truth than to the reactive truth when the method is not told the controller's reaction, and the converse for the trained surrogate", "metric": "paired difference of the two absolute errors per cell", "criterion": "paired bootstrap interval excludes 0 in either direction or is reported as undetermined"},
+    {"id": "H5", "family": "hidden_net", "claim": "In the truth, the net total effect understates the largest component (compensation) in a measurable share of cells with players of both signs", "metric": "share of cells with |net| < max |share| and shares of both signs", "criterion": "descriptive with interval, no threshold"},
+    {"id": "H6", "family": "contract", "claim": "The engine's own checks hold", "metric": "replaying the source reproduces the source run in 100 percent of replayed queries; efficiency residual below 1e-9 of the total; identical hashes on repetition", "criterion": "any failure is reported and the cell is excluded with the reason"}
+  ],
+  "analysis": {
+    "unit": "episode, clustered by domain, crop and season (seed for tep); never the hour",
+    "intervals": "bootstrap resampling clusters, 10000 resamples, seed 20261030",
+    "pairing": "paired by episode across comparators",
+    "multiplicity": "Holm within each hypothesis family over its strata and comparators",
+    "materiality": "a cell is material when |total effect| reaches the outcome's declared minimum; non-material cells are counted and not scored",
+    "inviable_runs": "reported with the reason; a query whose factual or reference run is inviable is excluded and counted",
+    "negative_results": "reported with the same detail; unplanned analyses are labelled exploratory",
+    "not_claimed": ["validity against a real greenhouse, crop or plant", "calibration or experimental validation of any model", "novelty of combining interventions, Shapley values and re-simulation", "that data-based methods cannot attribute in general: the claim is conditional on the stated information, training variation and stratum", "that the generated text is understood better by people (the comprehension pilot is separate and pending)"]
+  },
+  "pilot_fixed": {
+    "status": "TO_FIX_IN_F1 on the development partition only; each entry is recorded with the date and the development evidence that fixed it",
+    "horizon_hours_agri": null,
+    "context_hours_agri": null,
+    "tep_window_start_seconds": null,
+    "tep_aggregation_seconds": null,
+    "tep_idv_pool": null,
+    "outcomes": null,
+    "materiality": null,
+    "factor_pools": null,
+    "object_assignment": null,
+    "timesfm_service": {"image_digest": null, "model": "3.0", "licence_ack": "non-commercial-research", "quantiles_used": "median for the estimate; 0.1 and 0.9 for the coverage reported as secondary"},
+    "power": "episode count per stratum from a development-partition estimate of the interval width of H1 and H2; the minimum is every test crop-season with 2 windows"
+  },
+  "exposure": {
+    "rule": "every test crop-season, or tep seed, that any development package or pilot generated or evaluated is listed here with the package; an exposed unit stays in the confirmatory set but is flagged and every result is also reported without it",
+    "agri": [
+      {"crop": "tomato", "season": 0, "packages": ["PT-1", "PT-2", "PT-2b", "PT-2c", "PT-3", "PT-3b"]},
+      {"crop": "pepper", "season": 0, "packages": ["PT-2", "PT-2b", "PT-3", "PT-3b"]},
+      {"crop": "lettuce", "season": 0, "packages": ["PT-2", "PT-2b", "PT-3", "PT-3b"]},
+      {"crop": "lettuce", "season": 1, "packages": ["PT-2", "PT-2b"]},
+      {"crop": "tomato", "season": 33, "packages": ["pilot bank gctsb_pilot (one test scenario, content hash de77ab6c, generated; its use to be confirmed)"]}
+    ],
+    "tep": [{"season": 3, "packages": ["PT-10a"]}],
+    "to_verify_at_freeze": "scan the manifests of data/xai/gctsb_*/ and every report in data/xai for seasons in the test partition; the freeze script lists any not in this register and refuses to freeze until it is added"
+  },
+  "tep_source": {"repository": "https://github.com/jkitchin/tennessee-eastman-profbraatz", "commit": "9a6c8e5fcef4a2850778704e7793c87b0a187005", "backend": "python", "licence_note": "University of Illinois notice (the project metadata says BSD-3); the notice must travel with any redistribution"}
+}
