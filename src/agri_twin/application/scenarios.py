@@ -255,7 +255,7 @@ class ScenarioRunner:
                 active = [event for event in scenario.events if event.active(current)]
                 irrigation = self._irrigation(active)
                 actuators = self._actuators(active)
-                fertilization = self._fertilization(active)
+                fertilization = self._fertilization(active, dt)
                 record = None
                 if control is not None:
                     actuators, planned_irrigation, record = control.plan(orchestrator, provider, current, dt, actuators)
@@ -278,11 +278,17 @@ class ScenarioRunner:
         return None
 
     @staticmethod
-    def _fertilization(events: Sequence[ScenarioEvent]) -> FertilizationRequest | None:
-        for event in events:
-            if event.event_type == "fertilization":
-                return FertilizationRequest(event.parameters.get("amount_kg_ha", event.intensity), 1.0, "scheduled")
-        return None
+    def _fertilization(events: Sequence[ScenarioEvent], dt_seconds: float) -> FertilizationRequest | None:
+        # A runtime event (half-open interval) states a TOTAL dose over its interval: every active one adds its share of this step, so events add up. A historical event keeps its old meaning
+        # (the first one gives its amount in every step it is active).
+        runtime = [event for event in events if event.event_type == "fertilization" and event.parameters.get(HALF_OPEN_INTERVAL)]
+        legacy = next((event for event in events if event.event_type == "fertilization" and not event.parameters.get(HALF_OPEN_INTERVAL)), None)
+        if not runtime and legacy is None:
+            return None
+        amount = sum(event.parameters.get("amount_kg_ha", event.intensity) * dt_seconds / (event.end - event.start).total_seconds() for event in runtime)
+        if legacy is not None:
+            amount += legacy.parameters.get("amount_kg_ha", legacy.intensity)
+        return FertilizationRequest(amount, 1.0, "scheduled")
 
     @staticmethod
     def _actuators(events: Sequence[ScenarioEvent]) -> dict[str, ActuatorControl]:

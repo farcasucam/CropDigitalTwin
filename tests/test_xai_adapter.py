@@ -17,7 +17,7 @@ from tsxai.testing import check_simulator  # noqa: E402
 from agri_twin.application.interactive_simulation import VARIABLES  # noqa: E402
 from agri_twin.application.runtime_events import SPEC_INDEX  # noqa: E402
 from agri_twin.interfaces.xai_adapter import DESIGN_FILE, ROLES_FILE, TwinSimulator, benchmark_design, twin_series_source  # noqa: E402
-from agri_twin.interfaces.xai_adapter import CONTROLLER_DRIVEN  # noqa: E402
+from agri_twin.interfaces.xai_adapter import CONTROLLER_DRIVEN, NOT_SET_BY_THE_CONTROLLER  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 SIM = TwinSimulator()
@@ -105,7 +105,7 @@ def test_frames_cover_open_field_greenhouse_controller_and_crop_feedback_with_st
     for environment, control, feedback in (("outdoor", "off", None), ("greenhouse", "off", None), ("greenhouse", "on", None), ("greenhouse", "on", "on")):
         frame = _frame(environment, control, feedback)
         assert len(frame) == 120 and frame.content_hash == _frame(environment, control, feedback).content_hash
-        expected = SIM.catalogue() if control == "off" else SIM.catalogue().with_roles({n: CONTROLLER_DRIVEN for n in SIM.catalogue().with_role("decision_covariate")})  # a controller's outputs are not a plan
+        expected = SIM.catalogue() if control == "off" else SIM.catalogue().with_roles({n: CONTROLLER_DRIVEN for n in SIM.catalogue().with_role("decision_covariate") if n not in NOT_SET_BY_THE_CONTROLLER})  # a controller's outputs are not a plan (the fertiliser dose is the user's)
         assert frame.catalogue.content_hash == expected.content_hash and frame.meta["simulator"] == SIM.name
     assert _frame("greenhouse", "on", "on").content_hash != _frame("greenhouse", "on").content_hash  # the crop's feedback changes the greenhouse air
 

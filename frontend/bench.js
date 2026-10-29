@@ -21,6 +21,7 @@
     soil_water_vwc_m3_m3: "Soil water content", greenhouse_ventilation_fraction: "Vent opening", greenhouse_shading_fraction: "Shade screen",
     greenhouse_heating_kw: "Heating power", greenhouse_cooling_kw: "Cooling power", control_vent_opening: "Vent opening (command)", control_extractor_level: "Extractor speed (command)",
     control_electric_kw: "Electric power (estimate)", control_energy_kwh: "Energy per step (estimate)", control_energy_kwh_cumulative: "Energy, cumulative (estimate)", control_cost: "Energy cost per step (estimate)", control_cost_cumulative: "Energy cost, cumulative (estimate)", transpiration_mm: "Transpiration", irrigation_mm: "Irrigation", precipitation_mm: "Precipitation",
+    nutrient_available_kg_ha: "Available nutrient pool", nutrient_applied_kg_ha: "Fertiliser offered (per step)", nutrient_extracted_kg_ha: "Nutrient uptake (per step)", nutrient_leached_kg_ha: "Nutrient leached (per step)", nutrient_status: "Nutrient status (pool / reserve)",
   };
   // quick events: defaults chosen inside the API limits; the contract still decides what is allowed
   const PRESETS = [
@@ -32,6 +33,7 @@
     { id: "sundown", label: "Overcast ×0.5", type: "LOW_RADIATION", intensity: 0.5, hours: 72 },
     { id: "wind", label: "Windy ×3", type: "WIND", intensity: 3, hours: 48 },
     { id: "irrigate", label: "Irrigate 2 mm/step", type: "IRRIGATION", intensity: 2, hours: 24 },
+    { id: "fertilise", label: "Fertilise 20 kg/ha in total (demo value)", type: "FERTILIZATION", intensity: 20, hours: 24 },
     { id: "vents", label: "Vents fully open", type: "VENTILATION", intensity: 1, hours: 48 },
     { id: "shade", label: "Shade screen 60 %", type: "SHADING", intensity: 0.6, hours: 72 },
     { id: "co2", label: "CO2 boost", type: "CO2", intensity: 0.8, hours: 48 },
@@ -44,7 +46,7 @@
   const BUNDLE_PARTS = { cold_small: { id: "cold_small", label: "Cooling −3 °C", type: "COLD_WAVE", intensity: 3, hours: 48, ramp: 6 } };
 
   const INTENSITY_UNITS = { HEAT_WAVE: "°C added", COLD_WAVE: "°C removed", RAIN: "mm/h", HIGH_RADIATION: "× radiation", LOW_RADIATION: "× radiation", WIND: "× wind",
-    IRRIGATION: "mm per step", VENTILATION: "fraction of max", SHADING: "fraction of max", CO2: "fraction of max" };
+    IRRIGATION: "mm per step", FERTILIZATION: "kg/ha in total, added to the pool", VENTILATION: "fraction of max", SHADING: "fraction of max", CO2: "fraction of max" };
 
   const bench = {
     caps: null, catalogue: null,

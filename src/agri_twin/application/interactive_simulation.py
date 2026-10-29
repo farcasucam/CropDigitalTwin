@@ -278,6 +278,10 @@ def _water(name: str) -> Callable[[CropSimulationSnapshot], float]:
     return lambda s: getattr(s.water_balance, name)
 
 
+def _nutrient(name: str) -> Callable[[CropSimulationSnapshot], float | None]:
+    return lambda s: getattr(s.nutrients, name) if s.nutrients is not None else None
+
+
 VARIABLES: tuple[VariableSpec, ...] = (
     VariableSpec("crop_stage", "-", "crop.current_stage", "phenological stage", getter=lambda s: s.crop.current_stage),
     VariableSpec("maturity_index", "fraction", "crop.maturity_index", "maturity index", getter=lambda s: s.crop.maturity_index),
@@ -292,6 +296,11 @@ VARIABLES: tuple[VariableSpec, ...] = (
     VariableSpec("transpiration_mm", "mm_per_step", "water_balance.transpiration_mm", "crop transpiration in the step", getter=_water("transpiration_mm")),
     VariableSpec("evaporation_mm", "mm_per_step", "water_balance.evaporation_mm", "soil evaporation in the step", getter=_water("evaporation_mm")),
     VariableSpec("et0_mm", "mm_per_step", "water_balance.et0_mm", "reference evapotranspiration in the step", getter=_water("et0_mm")),
+    VariableSpec("nutrient_available_kg_ha", "kg_ha-1", "nutrients.nutrient_available_kg_ha", "available nutrient pool of the reduced single-pool model (uncalibrated)", getter=_nutrient("nutrient_available_kg_ha")),
+    VariableSpec("nutrient_applied_kg_ha", "kg_ha-1_per_step", "nutrients.nutrient_applied_kg_ha", "fertiliser OFFERED to the pool in the step (the pool is capped at the reserve, so not all of it is retained)", getter=_nutrient("nutrient_applied_kg_ha")),
+    VariableSpec("nutrient_extracted_kg_ha", "kg_ha-1_per_step", "nutrients.nutrient_extracted_kg_ha", "nutrient taken up by the crop in the step", getter=_nutrient("nutrient_extracted_kg_ha")),
+    VariableSpec("nutrient_leached_kg_ha", "kg_ha-1_per_step", "nutrients.nutrient_leached_kg_ha", "nutrient leached in the step (fixed fraction of the pool, 0 unless set)", getter=_nutrient("nutrient_leached_kg_ha")),
+    VariableSpec("nutrient_status", "fraction", "nutrients.nutrient_status", "available pool over the reserve; it multiplies the growth (nutrient factor)", getter=_nutrient("nutrient_status")),
     VariableSpec("temperature_c", "degC", "weather.temperature_c", "air temperature experienced by the crop (indoor in greenhouse modes)", getter=lambda s: s.weather.temperature_c),
     VariableSpec("relative_humidity_pct", "%", "weather.relative_humidity_pct", "relative humidity experienced by the crop", getter=lambda s: s.weather.relative_humidity_pct),
     VariableSpec("vpd_kpa", "kPa", "environment.vpd_kpa", "vapour pressure deficit of the crop environment", getter=lambda s: s.environment.vpd_kpa),

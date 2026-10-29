@@ -46,7 +46,7 @@ def what_if(service):
 def test_contract_lists_supported_and_unsupported_events():
     contract = event_contract()
     supported = {item["event_type"] for item in contract["supported"]}
-    assert supported == {"HEAT_WAVE", "COLD_WAVE", "DRYNESS", "RAIN", "HIGH_RADIATION", "LOW_RADIATION", "WIND", "IRRIGATION", "VENTILATION", "SHADING", "CO2"}
+    assert supported == {"HEAT_WAVE", "COLD_WAVE", "DRYNESS", "RAIN", "HIGH_RADIATION", "LOW_RADIATION", "WIND", "IRRIGATION", "FERTILIZATION", "VENTILATION", "SHADING", "CO2"}
     assert [item["event_type"] for item in contract["not_supported"]] == ["WATER_STRESS"]
     assert contract["source"] == "USER_DEFINED_EVENT" and contract["classification"] == "USER_DEFINED_SYNTHETIC_FORCING"
     assert "wall" in contract["time_basis"]

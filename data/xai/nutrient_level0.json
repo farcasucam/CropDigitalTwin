@@ -1,0 +1,76 @@
+{
+ "baseline": {
+  "pool_end": 76.63457633938653,
+  "pool_start": 132.18596359106922,
+  "status_end": 0.38317288169693264
+ },
+ "dose_response": [
+  {
+   "biomass_end_difference_g_m2": 0.0,
+   "dose_kg_ha": 0.0,
+   "offered": 0.0,
+   "pool_end": 76.63457633938653,
+   "pool_maximum": 132.18596359106922,
+   "status_end": 0.38317288169693264
+  },
+  {
+   "biomass_end_difference_g_m2": 11.213789004384807,
+   "dose_kg_ha": 12.0,
+   "offered": 12.0,
+   "pool_end": 88.63457633938633,
+   "pool_maximum": 132.18596359106922,
+   "status_end": 0.44317288169693164
+  },
+  {
+   "biomass_end_difference_g_m2": 22.427578008769387,
+   "dose_kg_ha": 24.0,
+   "offered": 24.0,
+   "pool_end": 100.63457633938617,
+   "pool_maximum": 135.8295249829517,
+   "status_end": 0.5031728816969309
+  },
+  {
+   "biomass_end_difference_g_m2": 44.85515601753923,
+   "dose_kg_ha": 48.0,
+   "offered": 48.0,
+   "pool_end": 124.6345763393862,
+   "pool_maximum": 159.8295249829517,
+   "status_end": 0.623172881696931
+  },
+  {
+   "biomass_end_difference_g_m2": 83.12966077415979,
+   "dose_kg_ha": 100.0,
+   "offered": 100.0,
+   "pool_end": 164.80505135643472,
+   "pool_maximum": 200.0,
+   "status_end": 0.8240252567821735
+  },
+  {
+   "biomass_end_difference_g_m2": 83.8892537685897,
+   "dose_kg_ha": 900.0,
+   "offered": 900.0,
+   "pool_end": 164.8050513564345,
+   "pool_maximum": 200.0,
+   "status_end": 0.8240252567821724
+  }
+ ],
+ "episode": {
+  "crop": "tomato",
+  "environment": "outdoor",
+  "season": 34,
+  "window_hours": 336,
+  "window_start_hour": 1500
+ },
+ "report_hash": "de18cdea9cf2f04fb53069dd41a141b442c1644975bf46cf0b11bd4e40dea36a",
+ "status": "DEVELOPMENT: contract check of the nutrient event and series; the reduced model is uncalibrated, the numbers are responses of the model, not agronomic results",
+ "timing_24_kg_ha": {
+  "early_hour_20": {
+   "biomass_end_difference_g_m2": 29.98772782979097,
+   "pool_end": 100.63457633938611
+  },
+  "late_hour_280": {
+   "biomass_end_difference_g_m2": 4.396742155118773,
+   "pool_end": 100.63457633938637
+  }
+ }
+}

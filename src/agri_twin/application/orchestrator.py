@@ -21,6 +21,7 @@ from agri_twin.domain import (
     GreenhouseMicroclimateState,
     IrrigationRequest,
     NutrientBalanceEngine,
+    NutrientBalanceResult,
     PhenologyEngine,
     RadiationGrowthEngine,
     SoilState,
@@ -50,6 +51,7 @@ class CropSimulationSnapshot:
     co2_factor: float = 1.0
     water_balance: WaterBalanceResult | None = None
     control: object | None = None  # ControlRecord of the step when a climate controller drove the actuators (None otherwise)
+    nutrients: NutrientBalanceResult | None = None  # the nutrient balance of the step (pool, applied, extracted, leached)
 
 
 class CropDigitalTwinOrchestrator:
@@ -125,7 +127,7 @@ class CropDigitalTwinOrchestrator:
         self.crop = replace(actual, soil_water_vwc=water_result.soil.vwc_m3_m3, water_stress=water_result.water_stress, nutrient_status=nutrient_result.nutrient_status, harvest_ready=harvest_ready)
         self.soil = water_result.soil
         self.microclimate = microclimate.indoor_state
-        snapshot = CropSimulationSnapshot(simulation_time, crop_weather, microclimate.environment, microclimate, self.crop, self.soil, potential_growth, actual_growth, combined, harvest_ready, weather, co2_factor, water_result, control)
+        snapshot = CropSimulationSnapshot(simulation_time, crop_weather, microclimate.environment, microclimate, self.crop, self.soil, potential_growth, actual_growth, combined, harvest_ready, weather, co2_factor, water_result, control, nutrient_result)
         self.last_snapshot = snapshot
         return snapshot
 

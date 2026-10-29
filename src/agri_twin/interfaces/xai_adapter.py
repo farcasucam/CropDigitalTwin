@@ -181,13 +181,14 @@ class TwinSimulator:
 
 
 CONTROLLER_DRIVEN = ("past_only_covariate", "set by the climate controller in this scenario (control on): an output of the controller reacting to the state, so not a plan; its future values are never given to a forecaster")
-FACTOR_PLAN = {"IRRIGATION": ("irrigation_mm",), "SHADING": ("greenhouse_shading_fraction",), "VENTILATION": ("control_vent_opening",)}  # the decision variable an intervention itself sets (a stated plan)
+FACTOR_PLAN = {"IRRIGATION": ("irrigation_mm",), "FERTILIZATION": ("nutrient_applied_kg_ha",), "SHADING": ("greenhouse_shading_fraction",), "VENTILATION": ("control_vent_opening",)}  # the decision variable an intervention itself sets (a stated plan)
+NOT_SET_BY_THE_CONTROLLER = ("nutrient_applied_kg_ha",)  # decisions of the user that the climate controller never takes: they stay decisions with the controller on
 
 
 def controller_role_overrides(simulator: TwinSimulator):
     """With the controller on, the decision-role variables (vent opening, extractor, shading, irrigation) are the controller's own outputs: they react to the indoor state, so their future values would hand a
     forecaster the controller's reaction to the very target it predicts. In those scenarios they become past-only covariates; with the controller off they stay decisions (a person's plan)."""
-    decisions = simulator.catalogue().with_role("decision_covariate")
+    decisions = [name for name in simulator.catalogue().with_role("decision_covariate") if name not in NOT_SET_BY_THE_CONTROLLER]
 
     def overrides(scenario):
         return {name: CONTROLLER_DRIVEN for name in decisions} if scenario.labels.get("control") == "on" else {}

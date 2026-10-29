@@ -53,6 +53,26 @@
       "role": "decision_covariate",
       "why": "irrigation is a plan or a controller decision"
     },
+    "nutrient_applied_kg_ha": {
+      "role": "decision_covariate",
+      "why": "fertiliser dose offered to the pool: a plan the user commits to (zero unless a FERTILIZATION event is given); the climate controller never sets it, so it stays a decision even when the controller is on"
+    },
+    "nutrient_available_kg_ha": {
+      "role": "past_only_covariate",
+      "why": "state of the reduced single-pool nutrient model (uncalibrated): a consequence of the doses and the uptake"
+    },
+    "nutrient_extracted_kg_ha": {
+      "role": "past_only_covariate",
+      "why": "uptake of the step: a consequence of the potential growth, the stage and the pool"
+    },
+    "nutrient_leached_kg_ha": {
+      "role": "past_only_covariate",
+      "why": "fixed fraction of the pool (zero unless set): a consequence of the pool"
+    },
+    "nutrient_status": {
+      "role": "past_only_covariate",
+      "why": "pool over the reserve; it is the nutrient factor that multiplies the growth"
+    },
     "precipitation_mm": {
       "role": "known_future_covariate",
       "why": "rain reaching the crop: weather forecast outdoors, zero indoors"
