@@ -31,7 +31,7 @@ from agri_twin.interfaces.xai_adapter import TwinSimulator  # noqa: E402
 
 GRAPH = ROOT / "src" / "xai_declared_graph.json"
 CROPS_START = {"tomato": 960, "pepper": 960, "lettuce": 336}  # the windows of PT-2
-PROBE = {"HEAT_WAVE": 6.0, "COLD_WAVE": 6.0, "LOW_RADIATION": 0.5, "HIGH_RADIATION": 1.3, "WIND": 3.0, "RAIN": 4.0, "IRRIGATION": 2.0, "SHADING": 0.6, "VENTILATION": 1.0, "CO2": 1.0}
+PROBE = {"HEAT_WAVE": 6.0, "COLD_WAVE": 6.0, "LOW_RADIATION": 0.5, "HIGH_RADIATION": 1.3, "WIND": 3.0, "RAIN": 4.0, "IRRIGATION": 2.0, "FERTILIZATION": 20.0, "SHADING": 0.6, "VENTILATION": 1.0, "CO2": 1.0}  # FERTILIZATION: 20 kg/ha in total over the 72 h (graph 0.3; not an agronomic level)
 DECISION = {"IRRIGATION", "SHADING", "VENTILATION"}
 COMMANDS = {"control_vent_opening", "control_extractor_level", "greenhouse_shading_fraction", "greenhouse_heating_kw", "greenhouse_cooling_kw", "irrigation_mm"}
 TOL = 1e-9
@@ -74,8 +74,9 @@ def changed(reference: dict, other: dict) -> set[str]:
 def main() -> int:
     crop, season = (sys.argv[1], int(sys.argv[2])) if len(sys.argv) == 3 else ("tomato", 0)
     start = CROPS_START[crop]
-    report_path = ROOT / "data" / "xai" / f"effects_pt4a_graph_check_{crop}{season}.json"
     graph = json.loads(GRAPH.read_text(encoding="utf-8"))
+    version = graph["version"]  # 0.1 and 0.2 results were written without the version in the name (effects_pt4a_graph_check_<crop><season>.json); from 0.3 on it is part of the name
+    report_path = ROOT / "data" / "xai" / (f"effects_pt4a_graph_check_{crop}{season}.json" if version in ("0.1", "0.2") else f"effects_pt4a_graph_check_v{version.replace('.', '_')}_{crop}{season}.json")
     simulator = TwinSimulator()
     labels = {"crop": crop, "environment": "greenhouse", "control": "on"}
     desc = ScenarioDescriptor(labels, season, start, 336, simulator.scenario_options(labels, season))

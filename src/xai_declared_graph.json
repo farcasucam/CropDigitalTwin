@@ -1,7 +1,7 @@
 {
   "contract": "xai_declared_graph",
-  "version": "0.2",
-  "history": {"0.1": "first declaration, from the orchestrator update order", "0.2": "PT-4a falsified 0.1 on tomato season 0: a heat or cold wave also changes outdoor_relative_humidity_pct (the twin recomputes the outdoor humidity from the shifted temperature), an edge outdoor_temperature_c -> outdoor_relative_humidity_pct that 0.1 had not declared. Added; the test of 0.2 must use other episodes."},
+  "version": "0.3",
+  "history": {"0.1": "first declaration, from the orchestrator update order", "0.2": "PT-4a falsified 0.1 on tomato season 0: a heat or cold wave also changes outdoor_relative_humidity_pct (the twin recomputes the outdoor humidity from the shifted temperature), an edge outdoor_temperature_c -> outdoor_relative_humidity_pct that 0.1 had not declared. Added; the test of 0.2 must use other episodes.", "0.3": "nutrient line, level 0b: the series of the reduced nutrient model (nutrient_applied, available, extracted, leached, status) and the entry point of the FERTILIZATION event, written from nutrient_balance.py and the update order of step_at BEFORE any check; edges read from the code except those marked with a question mark. The same-step cycle between the pool and the leaching is avoided by declaring the leaching as a function of the pool of the previous step, the dose and the uptake."},
   "status": "PROVISIONAL declaration written from the update order of CropDigitalTwinOrchestrator.step_at (weather, greenhouse microclimate, crop environment, phenology, radiation, water, nutrients, climate stress, combined factor, actual growth) and from the controller's contract (stateless, decides at the start of step n from the state of step n-1). Written BEFORE the intervention check of PT-4a; edges marked '?' are assumptions not read from the code. The graph is a hypothesis about the twin, tested by re-simulation, not a fact about real greenhouses.",
   "notation": "child: [parent, ...]; 'parent' is a same-step (lag 0) edge, 'parent@1' an edge from the previous step's value; a trailing '?' marks an assumed edge. Variables not listed are exogenous or not covered.",
   "intervention_entry_points": {
@@ -12,6 +12,7 @@
     "WIND": ["outdoor_wind_speed_m_s"],
     "RAIN": ["outdoor_rain_rate_mm_h"],
     "IRRIGATION": ["irrigation_mm"],
+    "FERTILIZATION": ["nutrient_applied_kg_ha"],
     "SHADING": ["greenhouse_shading_fraction"],
     "VENTILATION": ["control_vent_opening"],
     "CO2": ["co2_ppm"]
@@ -52,8 +53,12 @@
     "frost_damage": ["temperature_c"],
     "vpd_stress": ["vpd_kpa"],
     "radiation_stress": ["radiation_w_m2"],
-    "accumulated_stress": ["heat_stress", "cold_stress", "water_stress", "vpd_stress", "radiation_stress", "accumulated_stress@1"],
-    "growth_factor": ["heat_stress", "cold_stress", "water_stress", "vpd_stress", "radiation_stress", "co2_ppm"],
+    "accumulated_stress": ["heat_stress", "cold_stress", "water_stress", "vpd_stress", "radiation_stress", "nutrient_status?", "accumulated_stress@1"],
+    "nutrient_extracted_kg_ha": ["nutrient_available_kg_ha@1", "nutrient_applied_kg_ha", "radiation_w_m2", "leaf_area_index@1", "crop_stage", "temperature_c?"],
+    "nutrient_leached_kg_ha": ["nutrient_available_kg_ha@1", "nutrient_applied_kg_ha", "nutrient_extracted_kg_ha"],
+    "nutrient_available_kg_ha": ["nutrient_available_kg_ha@1", "nutrient_applied_kg_ha", "nutrient_extracted_kg_ha", "nutrient_leached_kg_ha"],
+    "nutrient_status": ["nutrient_available_kg_ha"],
+    "growth_factor": ["heat_stress", "cold_stress", "water_stress", "vpd_stress", "radiation_stress", "co2_ppm", "nutrient_status"],
     "biomass_total_g_m2": ["radiation_w_m2", "growth_factor", "crop_stage", "biomass_total_g_m2@1"],
     "biomass_fruit_g_m2": ["biomass_total_g_m2", "crop_stage", "biomass_fruit_g_m2@1"],
     "leaf_area_index": ["biomass_total_g_m2@1", "crop_stage"]

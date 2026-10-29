@@ -1,0 +1,526 @@
+{
+ "report_hash": "c6e738b69743df646f666a8909a2a761d1add76ca58c72772563ab0a402123c4",
+ "seasons": {
+  "34": {
+   "climatology_baseline": {
+    "biomass_total_end": {
+     "data_ranks_early_above_late": true,
+     "data_shapley": {
+      "fert_early": 36.00023271973789,
+      "fert_late": 1.7364099388884806,
+      "heat_wave": -31.652879300314925
+     },
+     "data_total": 6.083763358311444,
+     "explained_fraction": -0.30608797402242577,
+     "interaction_relative_to_sum_abs_shares": 0.11628056110762133,
+     "kendall_tau_b": 1.0,
+     "material": true,
+     "normalised_error": 0.22654942709722836,
+     "sign_of": 3,
+     "sign_right": 3,
+     "top_agrees": false,
+     "truth_early_over_late": 5.770353808473213,
+     "truth_shapley": {
+      "fert_early": 25.370757839664112,
+      "fert_late": 4.3967421551187345,
+      "heat_wave": -49.643365349315566
+     },
+     "truth_total": -19.87586535453272
+    },
+    "nutrient_status_mean": {
+     "data_ranks_early_above_late": true,
+     "data_shapley": {
+      "fert_early": 0.10806974955163172,
+      "fert_late": 0.01655068858265385,
+      "heat_wave": 0.0005600114255099875
+     },
+     "data_total": 0.12518044955979557,
+     "explained_fraction": 1.0101016102807805,
+     "interaction_relative_to_sum_abs_shares": 2.6875715869888534e-15,
+     "kendall_tau_b": 1.0,
+     "material": true,
+     "normalised_error": 0.008189994326889896,
+     "sign_of": 2,
+     "sign_right": 2,
+     "top_agrees": true,
+     "truth_early_over_late": 6.977011494252836,
+     "truth_shapley": {
+      "fert_early": 0.10839285714285653,
+      "fert_late": 0.015535714285714281,
+      "heat_wave": -5.366077952354923e-16
+     },
+     "truth_total": 0.12392857142857028
+    }
+   },
+   "oracle_baseline": {
+    "biomass_total_end": {
+     "data_ranks_early_above_late": true,
+     "data_shapley": {
+      "fert_early": 37.99202178283051,
+      "fert_late": 2.3735255390720145,
+      "heat_wave": -32.04366449787399
+     },
+     "data_total": 8.321882824028535,
+     "explained_fraction": -0.41869285566128656,
+     "interaction_relative_to_sum_abs_shares": 0.11628056110762133,
+     "kendall_tau_b": 1.0,
+     "material": true,
+     "normalised_error": 0.22162837258074955,
+     "sign_of": 3,
+     "sign_right": 3,
+     "top_agrees": false,
+     "truth_early_over_late": 5.770353808473213,
+     "truth_shapley": {
+      "fert_early": 25.370757839664112,
+      "fert_late": 4.3967421551187345,
+      "heat_wave": -49.643365349315566
+     },
+     "truth_total": -19.87586535453272
+    },
+    "nutrient_status_mean": {
+     "data_ranks_early_above_late": true,
+     "data_shapley": {
+      "fert_early": 0.1081384996370299,
+      "fert_late": 0.016560569388635295,
+      "heat_wave": 0.0005401064572366591
+     },
+     "data_total": 0.12523917548290187,
+     "explained_fraction": 1.0105754794009467,
+     "interaction_relative_to_sum_abs_shares": 2.6875715869888534e-15,
+     "kendall_tau_b": 1.0,
+     "material": true,
+     "normalised_error": 0.008269724173426052,
+     "sign_of": 2,
+     "sign_right": 2,
+     "top_agrees": true,
+     "truth_early_over_late": 6.977011494252836,
+     "truth_shapley": {
+      "fert_early": 0.10839285714285653,
+      "fert_late": 0.015535714285714281,
+      "heat_wave": -5.366077952354923e-16
+     },
+     "truth_total": 0.12392857142857028
+    }
+   }
+  },
+  "35": {
+   "climatology_baseline": {
+    "biomass_total_end": {
+     "data_ranks_early_above_late": true,
+     "data_shapley": {
+      "fert_early": 73.26474225385428,
+      "fert_late": 5.700862936708376,
+      "heat_wave": -28.8966805349296
+     },
+     "data_total": 50.068924655633054,
+     "explained_fraction": -2.3433285141115507,
+     "interaction_relative_to_sum_abs_shares": 0.11824069280397308,
+     "kendall_tau_b": 1.0,
+     "material": true,
+     "normalised_error": 0.6154521587284446,
+     "sign_of": 3,
+     "sign_right": 3,
+     "top_agrees": false,
+     "truth_early_over_late": 5.92349318633822,
+     "truth_shapley": {
+      "fert_early": 24.650229911527806,
+      "fert_late": 4.161434669728398,
+      "heat_wave": -50.17824820541194
+     },
+     "truth_total": -21.366583624155737
+    },
+    "nutrient_status_mean": {
+     "data_ranks_early_above_late": true,
+     "data_shapley": {
+      "fert_early": 0.10236417329096054,
+      "fert_late": 0.015982081775901102,
+      "heat_wave": 7.609506522848752e-05
+     },
+     "data_total": 0.11842235013209013,
+     "explained_fraction": 0.9555693958785391,
+     "interaction_relative_to_sum_abs_shares": 8.958571956629509e-15,
+     "kendall_tau_b": 1.0,
+     "material": true,
+     "normalised_error": 0.048646440303487436,
+     "sign_of": 2,
+     "sign_right": 2,
+     "top_agrees": true,
+     "truth_early_over_late": 6.977011494252875,
+     "truth_shapley": {
+      "fert_early": 0.10839285714285701,
+      "fert_late": 0.015535714285714264,
+      "heat_wave": -1.1102230246251565e-16
+     },
+     "truth_total": 0.12392857142857117
+    }
+   },
+   "oracle_baseline": {
+    "biomass_total_end": {
+     "data_ranks_early_above_late": true,
+     "data_shapley": {
+      "fert_early": 73.33883608134045,
+      "fert_late": 5.469563552750353,
+      "heat_wave": -30.511332962742888
+     },
+     "data_total": 48.29706667134792,
+     "explained_fraction": -2.2604019210982447,
+     "interaction_relative_to_sum_abs_shares": 0.11824069280397308,
+     "kendall_tau_b": 1.0,
+     "material": true,
+     "normalised_error": 0.616390175050684,
+     "sign_of": 3,
+     "sign_right": 3,
+     "top_agrees": false,
+     "truth_early_over_late": 5.92349318633822,
+     "truth_shapley": {
+      "fert_early": 24.650229911527806,
+      "fert_late": 4.161434669728398,
+      "heat_wave": -50.17824820541194
+     },
+     "truth_total": -21.366583624155737
+    },
+    "nutrient_status_mean": {
+     "data_ranks_early_above_late": true,
+     "data_shapley": {
+      "fert_early": 0.10187515862215513,
+      "fert_late": 0.016071313093638295,
+      "heat_wave": -0.00014985342868478746
+     },
+     "data_total": 0.11779661828710863,
+     "explained_fraction": 0.9505202628354608,
+     "interaction_relative_to_sum_abs_shares": 8.958571956629509e-15,
+     "kendall_tau_b": 1.0,
+     "material": true,
+     "normalised_error": 0.05259237999413628,
+     "sign_of": 2,
+     "sign_right": 2,
+     "top_agrees": true,
+     "truth_early_over_late": 6.977011494252875,
+     "truth_shapley": {
+      "fert_early": 0.10839285714285701,
+      "fert_late": 0.015535714285714264,
+      "heat_wave": -1.1102230246251565e-16
+     },
+     "truth_total": 0.12392857142857117
+    }
+   }
+  },
+  "37": {
+   "climatology_baseline": {
+    "biomass_total_end": {
+     "data_ranks_early_above_late": true,
+     "data_shapley": {
+      "fert_early": 27.952299984794998,
+      "fert_late": 4.7935946111958945,
+      "heat_wave": -26.915615609803144
+     },
+     "data_total": 5.83027898618775,
+     "explained_fraction": -0.3048331907378924,
+     "interaction_relative_to_sum_abs_shares": 0.11867914531421306,
+     "kendall_tau_b": 1.0,
+     "material": true,
+     "normalised_error": 0.2768635693168705,
+     "sign_of": 3,
+     "sign_right": 3,
+     "top_agrees": false,
+     "truth_early_over_late": 5.81082869503939,
+     "truth_shapley": {
+      "fert_early": 25.01527137490058,
+      "fert_late": 4.304940428936703,
+      "heat_wave": -48.44634098968717
+     },
+     "truth_total": -19.12612918584989
+    },
+    "nutrient_status_mean": {
+     "data_ranks_early_above_late": true,
+     "data_shapley": {
+      "fert_early": 0.10271504350337275,
+      "fert_late": 0.015657590985529508,
+      "heat_wave": 0.00043974217477123673
+     },
+     "data_total": 0.1188123766636735,
+     "explained_fraction": 0.9587165840296338,
+     "interaction_relative_to_sum_abs_shares": 7.16685756530354e-15,
+     "kendall_tau_b": 1.0,
+     "material": true,
+     "normalised_error": 0.04581521092380153,
+     "sign_of": 2,
+     "sign_right": 2,
+     "top_agrees": true,
+     "truth_early_over_late": 6.9770114942529355,
+     "truth_shapley": {
+      "fert_early": 0.1083928571428582,
+      "fert_late": 0.0155357142857143,
+      "heat_wave": -1.8503717077085926e-17
+     },
+     "truth_total": 0.1239285714285725
+    }
+   },
+   "oracle_baseline": {
+    "biomass_total_end": {
+     "data_ranks_early_above_late": true,
+     "data_shapley": {
+      "fert_early": 25.263588999273924,
+      "fert_late": 5.568435012631501,
+      "heat_wave": -28.137412634041404
+     },
+     "data_total": 2.694611377864021,
+     "explained_fraction": -0.14088639429757585,
+     "interaction_relative_to_sum_abs_shares": 0.11867914531421306,
+     "kendall_tau_b": 1.0,
+     "material": true,
+     "normalised_error": 0.261152482990565,
+     "sign_of": 3,
+     "sign_right": 3,
+     "top_agrees": true,
+     "truth_early_over_late": 5.81082869503939,
+     "truth_shapley": {
+      "fert_early": 25.01527137490058,
+      "fert_late": 4.304940428936703,
+      "heat_wave": -48.44634098968717
+     },
+     "truth_total": -19.12612918584989
+    },
+    "nutrient_status_mean": {
+     "data_ranks_early_above_late": true,
+     "data_shapley": {
+      "fert_early": 0.10280371394210394,
+      "fert_late": 0.015900023340855197,
+      "heat_wave": 0.0003424909603556384
+     },
+     "data_total": 0.11904622824331479,
+     "explained_fraction": 0.9606035708394194,
+     "interaction_relative_to_sum_abs_shares": 7.16685756530354e-15,
+     "kendall_tau_b": 1.0,
+     "material": true,
+     "normalised_error": 0.04509971458821845,
+     "sign_of": 2,
+     "sign_right": 2,
+     "top_agrees": true,
+     "truth_early_over_late": 6.9770114942529355,
+     "truth_shapley": {
+      "fert_early": 0.1083928571428582,
+      "fert_late": 0.0155357142857143,
+      "heat_wave": -1.8503717077085926e-17
+     },
+     "truth_total": 0.1239285714285725
+    }
+   }
+  },
+  "38": {
+   "climatology_baseline": {
+    "biomass_total_end": {
+     "data_ranks_early_above_late": true,
+     "data_shapley": {
+      "fert_early": 65.99187699054688,
+      "fert_late": 6.486322409524253,
+      "heat_wave": -23.51698204914951
+     },
+     "data_total": 48.96121735092163,
+     "explained_fraction": -2.4103496406179006,
+     "interaction_relative_to_sum_abs_shares": 0.11831452672144258,
+     "kendall_tau_b": 1.0,
+     "material": true,
+     "normalised_error": 0.5293826381388883,
+     "sign_of": 3,
+     "sign_right": 3,
+     "top_agrees": false,
+     "truth_early_over_late": 6.235578619052048,
+     "truth_shapley": {
+      "fert_early": 24.786672503206496,
+      "fert_late": 3.975039690378347,
+      "heat_wave": -49.074623036830914
+     },
+     "truth_total": -20.312910843246073
+    },
+    "nutrient_status_mean": {
+     "data_ranks_early_above_late": true,
+     "data_shapley": {
+      "fert_early": 0.10063089358795042,
+      "fert_late": 0.01634582417369414,
+      "heat_wave": -0.0003080008906353552
+     },
+     "data_total": 0.11666871687100921,
+     "explained_fraction": 0.9414190410340829,
+     "interaction_relative_to_sum_abs_shares": 9.854429152292463e-15,
+     "kendall_tau_b": 1.0,
+     "material": true,
+     "normalised_error": 0.06263255894449002,
+     "sign_of": 2,
+     "sign_right": 2,
+     "top_agrees": true,
+     "truth_early_over_late": 6.9770114942528325,
+     "truth_shapley": {
+      "fert_early": 0.10839285714285686,
+      "fert_late": 0.015535714285714337,
+      "heat_wave": -1.480297366166875e-16
+     },
+     "truth_total": 0.12392857142857105
+    }
+   },
+   "oracle_baseline": {
+    "biomass_total_end": {
+     "data_ranks_early_above_late": true,
+     "data_shapley": {
+      "fert_early": 65.8124125265978,
+      "fert_late": 7.827478000199344,
+      "heat_wave": -28.055425822802064
+     },
+     "data_total": 45.58446470399508,
+     "explained_fraction": -2.2441128726339907,
+     "interaction_relative_to_sum_abs_shares": 0.11831452672144258,
+     "kendall_tau_b": 1.0,
+     "material": true,
+     "normalised_error": 0.5270769737802333,
+     "sign_of": 3,
+     "sign_right": 3,
+     "top_agrees": false,
+     "truth_early_over_late": 6.235578619052048,
+     "truth_shapley": {
+      "fert_early": 24.786672503206496,
+      "fert_late": 3.975039690378347,
+      "heat_wave": -49.074623036830914
+     },
+     "truth_total": -20.312910843246073
+    },
+    "nutrient_status_mean": {
+     "data_ranks_early_above_late": true,
+     "data_shapley": {
+      "fert_early": 0.10107232424529417,
+      "fert_late": 0.016361347549335103,
+      "heat_wave": -0.0005487706966547101
+     },
+     "data_total": 0.11688490109797456,
+     "explained_fraction": 0.9431634670729964,
+     "interaction_relative_to_sum_abs_shares": 9.854429152292463e-15,
+     "kendall_tau_b": 1.0,
+     "material": true,
+     "normalised_error": 0.0590705824587192,
+     "sign_of": 2,
+     "sign_right": 2,
+     "top_agrees": true,
+     "truth_early_over_late": 6.9770114942528325,
+     "truth_shapley": {
+      "fert_early": 0.10839285714285686,
+      "fert_late": 0.015535714285714337,
+      "heat_wave": -1.480297366166875e-16
+     },
+     "truth_total": 0.12392857142857105
+    }
+   }
+  }
+ },
+ "status": "DEVELOPMENT: tomato outdoor, four held-out DEV seasons, two equal doses at different times plus a heat wave, uncalibrated reduced nutrient model, a simple surrogate told the applied dose; counts and ranges only",
+ "summary": {
+  "climatology_baseline/biomass_total_end": {
+   "data_ranks_early_above_late": "4/4",
+   "explained_fraction_range": [
+    -2.41,
+    -0.305
+   ],
+   "false_effects": "0/0",
+   "interaction_range": [
+    0.116,
+    0.119
+   ],
+   "material_cells": 4,
+   "normalised_error_range": [
+    0.227,
+    0.615
+   ],
+   "of": 4,
+   "sign_right": "12/12",
+   "top_agrees": 0,
+   "truth_early_over_late_range": [
+    5.77,
+    6.236
+   ]
+  },
+  "climatology_baseline/nutrient_status_mean": {
+   "data_ranks_early_above_late": "4/4",
+   "explained_fraction_range": [
+    0.941,
+    1.01
+   ],
+   "false_effects": "0/0",
+   "interaction_range": [
+    0.0,
+    0.0
+   ],
+   "material_cells": 4,
+   "normalised_error_range": [
+    0.008,
+    0.063
+   ],
+   "of": 4,
+   "sign_right": "8/8",
+   "top_agrees": 4,
+   "truth_early_over_late_range": [
+    6.977,
+    6.977
+   ]
+  },
+  "oracle_baseline/biomass_total_end": {
+   "data_ranks_early_above_late": "4/4",
+   "explained_fraction_range": [
+    -2.26,
+    -0.141
+   ],
+   "false_effects": "0/0",
+   "interaction_range": [
+    0.116,
+    0.119
+   ],
+   "material_cells": 4,
+   "normalised_error_range": [
+    0.222,
+    0.616
+   ],
+   "of": 4,
+   "sign_right": "12/12",
+   "top_agrees": 1,
+   "truth_early_over_late_range": [
+    5.77,
+    6.236
+   ]
+  },
+  "oracle_baseline/nutrient_status_mean": {
+   "data_ranks_early_above_late": "4/4",
+   "explained_fraction_range": [
+    0.943,
+    1.011
+   ],
+   "false_effects": "0/0",
+   "interaction_range": [
+    0.0,
+    0.0
+   ],
+   "material_cells": 4,
+   "normalised_error_range": [
+    0.008,
+    0.059
+   ],
+   "of": 4,
+   "sign_right": "8/8",
+   "top_agrees": 4,
+   "truth_early_over_late_range": [
+    6.977,
+    6.977
+   ]
+  }
+ },
+ "surrogate_quality": {
+  "end_biomass_error_over_window_growth": [
+   0.137,
+   0.556
+  ],
+  "increment_rmse_over_std": [
+   0.429,
+   0.613
+  ],
+  "status_rmse": [
+   0.006,
+   0.014
+  ]
+ }
+}
