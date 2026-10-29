@@ -1,0 +1,21 @@
+# Phase 7 / product: PT-11, the deterministic narrative (ES and EN) over effect reports
+
+Status: DEVELOPMENT. No language model. Framework code `tsxai/report/effects_narrative.py` (branch `effects-resimulation` of the `tsxai` repository; tests `tests/test_effects_narrative.py`, 11 tests on games with a known answer), application here: `manual_phase7_pt11_narrative.py`, report `data/xai/narrative_pt11.json` (full texts in both languages, hashes, checker findings).
+
+## What it is
+`narrate_effects(report, language, glossary, other, material=...)` turns the result of `ResimulationEngine.evaluate` into sentences from templates. Each sentence is a `Claim` with its kind, the numbers it cites and the D23 evidence dimensions (provenance, claim type, scope, uncertainty, assumptions); the closing lines state the evidence once and the caveats (uncalibrated models when the host says so; effects exact only inside the simulator, no cause shown in a real system).
+
+Claims: scope (simulator, context, season, window, policy); total effect (reference to factual); division among the perturbations (Shapley, stated as the average marginal effect over all orders); compensation (shares of both signs, net smaller than the largest); exactly null or negligible contributions; interaction (material or close to additive, with the declared ratio); no material change (the host declares the smallest effect that matters per outcome, and below it the text does not divide noise); with a second report under another policy, the contrast between the controller acting and its actuation held, and the shares that change sign; inviable combinations and a failed replay check, never omitted.
+
+What it refuses: it never calls a share "the cause", never says "direct" or "indirect" effect, never says the result holds in the real system; `check_narrative` re-reads a narrative and fails on a number that no claim carries (compared numerically at the printed precision) or on forbidden wording in either language.
+
+Conventions declared, not tuned: a share under 5 percent of the largest is negligible; an interaction gap at or above 20 percent of the sum of absolute shares is material; three significant digits in fixed notation, with the reference and the factual value printed at the precision of the effect so that they do not look equal.
+
+## What the first real texts showed (and was fixed)
+Reading the Tennessee Eastman text exposed four faults of my first version, all fixed before the committed report: the checker flagged units and exponent notation (now numeric); "from 120 C to 120 C (+0.004 C)" (precision taken from the effect); a +0.004 C change described as a "compensation" (now "no material change", with a host-declared threshold); a Spanish "de el" (the sentences were rephrased). The materiality thresholds in the script (1 g/m2, 1 kPa, 0.1 C) are mine, declared in the script, not agronomic or process knowledge.
+
+## Cases in the report
+Tomato outdoors, the nutrient design of PT-7a (compensation by the heat wave against the early dose, additive within 12 percent), and Tennessee Eastman (PT-10a design, season 1): no material change of the temperature under the controller, the contrast with the actuation held (+9.83 C against +0.004 C), the pressure shares with a material interaction (57 percent) and the sign change of the condenser disturbance with the policy. Both languages carry the same claims in the same order; the checker finds no problem in either.
+
+## What it does not do
+It adds no analysis: it renders the numbers the report contains. It does not choose which outcome or query matters (the user or a layer above does), it has no comprehension test (pending: people for a pilot), the Spanish and English wording has not been reviewed by anyone but me, and the verifier of the LLM line (phase 6.8) is separate. Next: connect it to the web bench so a re-simulation shows its text, and to the comprehension pilot.

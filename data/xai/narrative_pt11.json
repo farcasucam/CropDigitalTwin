@@ -1,0 +1,84 @@
+{
+ "cases": {
+  "tennessee_eastman": {
+   "en": {
+    "claims": [
+     "SCOPE",
+     "TOTAL",
+     "NO_CHANGE",
+     "TOTAL",
+     "SHARES",
+     "NEGLIGIBLE",
+     "INTERACTION",
+     "POLICY_CONTRAST",
+     "POLICY_CONTRAST",
+     "POLICY_FLIP",
+     "EVIDENCE",
+     "CAVEAT",
+     "CAVEAT"
+    ],
+    "narrative_hash": "04bd16ecaed028900c4448c8478fd17b713d7d1adc12ff4573ff7e1b90c15edd",
+    "problems": [],
+    "source_report_hash": "ded39d81ee7b8fd4c765083bd4f4b93869b1b0260e23ffaadae0d2fbca3a8503",
+    "text": "Scope: simulator tennessee-eastman-python/1, context plant=tennessee_eastman_base_case, season 1, window of 1800 samples from sample 600; policy: the plant's own controller acts in every case.\nIn the simulation, with the other conditions held, applying the A/C feed ratio step (IDV1), the reactor cooling water temperature step (IDV4) and the condenser cooling water temperature step (IDV5) changes the mean reactor temperature from 120.39952 C to 120.40384 C (+0.00433 C).\nNo material change in the mean reactor temperature: every effect is below 0.100 C.\nIn the simulation, with the other conditions held, applying the A/C feed ratio step (IDV1), the reactor cooling water temperature step (IDV4) and the condenser cooling water temperature step (IDV5) changes the maximum reactor pressure from 2706.1 kPa to 2723.9 kPa (+17.9 kPa).\nDivision of that change among the perturbations (Shapley values; each perturbation's average marginal effect over all orders in which they could be applied): the A/C feed ratio step (IDV1) +13.4 kPa; the condenser cooling water temperature step (IDV5) +4.97 kPa; the reactor cooling water temperature step (IDV4) -0.500 kPa.\nThe reactor cooling water temperature step (IDV4): negligible contribution to the maximum reactor pressure (under 5 % of the largest share).\nThe effects do not add up: the sum of the individual removals differs from the total by +10.8 kPa (57 % of the sum of absolute shares), so the perturbations act jointly and each share depends on the division chosen.\nOn the mean reactor temperature, with the controller acting the total effect is +0.00433 C; with its actuation held as in the reference it would be +9.83 C; the difference (-9.83 C) is what the controller's reaction changes.\nOn the maximum reactor pressure, with the controller acting the total effect is +17.9 kPa; with its actuation held as in the reference it would be +9.77 kPa; the difference (+8.11 kPa) is what the controller's reaction changes.\nThe sign of the share changes with the policy: the condenser cooling water temperature step (IDV5) goes from -30.5 kPa with the actuation held to +4.97 kPa with the controller acting.\nEvidence: provenance, re-simulation of the twin (one deterministic run per combination); claim type, effect of an intervention inside the simulator; scope, this scenario and window only; uncertainty, none estimated; assumptions, reference without perturbations, the policy above, and the Shapley valuation.\nThe models are not calibrated to data: signs, order and compensations are properties of their structure, sizes are not agronomic or process figures.\nEffects are exact inside the simulator under the stated query; they are not validated against a real system and show no cause there."
+   },
+   "es": {
+    "claims": [
+     "SCOPE",
+     "TOTAL",
+     "NO_CHANGE",
+     "TOTAL",
+     "SHARES",
+     "NEGLIGIBLE",
+     "INTERACTION",
+     "POLICY_CONTRAST",
+     "POLICY_CONTRAST",
+     "POLICY_FLIP",
+     "EVIDENCE",
+     "CAVEAT",
+     "CAVEAT"
+    ],
+    "narrative_hash": "9bd34525fbd3021055405ba7be9db9a40a6e4f634f1f6909a2b4f1070737c3ba",
+    "problems": [],
+    "source_report_hash": "ded39d81ee7b8fd4c765083bd4f4b93869b1b0260e23ffaadae0d2fbca3a8503",
+    "text": "Ámbito: simulador tennessee-eastman-python/1, contexto plant=tennessee_eastman_base_case, temporada 1, ventana de 1800 muestras desde la muestra 600; política: el controlador propio de la planta actúa en todos los casos.\nEn la simulación, manteniendo las demás condiciones, aplicar el escalón de la relación de alimentación A/C (IDV1), el escalón de temperatura del agua de refrigeración del reactor (IDV4) y el escalón de temperatura del agua del condensador (IDV5) cambia la temperatura media del reactor de 120,39952 C a 120,40384 C (+0,00433 C).\nSin cambio material en la temperatura media del reactor: todos los efectos son menores de 0,100 C.\nEn la simulación, manteniendo las demás condiciones, aplicar el escalón de la relación de alimentación A/C (IDV1), el escalón de temperatura del agua de refrigeración del reactor (IDV4) y el escalón de temperatura del agua del condensador (IDV5) cambia la presión máxima del reactor de 2706,1 kPa a 2723,9 kPa (+17,9 kPa).\nReparto de ese cambio entre las perturbaciones (valores de Shapley; el efecto marginal medio de cada una sobre todos los órdenes en que podrían aplicarse): el escalón de la relación de alimentación A/C (IDV1) +13,4 kPa; el escalón de temperatura del agua del condensador (IDV5) +4,97 kPa; el escalón de temperatura del agua de refrigeración del reactor (IDV4) -0,500 kPa.\nEl escalón de temperatura del agua de refrigeración del reactor (IDV4): contribución despreciable a la presión máxima del reactor (menos de 5 % del mayor reparto).\nLos efectos no suman: la suma de las retiradas individuales difiere del total en +10,8 kPa (57 % de la suma de repartos en valor absoluto), así que las perturbaciones actúan conjuntamente y cada reparto depende de la división elegida.\nEn la temperatura media del reactor, con el controlador actuando el efecto total es +0,00433 C; con su actuación fija como en la referencia sería +9,83 C; la diferencia (-9,83 C) es lo que cambia la reacción del controlador.\nEn la presión máxima del reactor, con el controlador actuando el efecto total es +17,9 kPa; con su actuación fija como en la referencia sería +9,77 kPa; la diferencia (+8,11 kPa) es lo que cambia la reacción del controlador.\nEl signo del reparto cambia con la política: el escalón de temperatura del agua del condensador (IDV5) pasa de -30,5 kPa con la actuación fija a +4,97 kPa con el controlador actuando.\nEvidencia: procedencia, resimulación del gemelo (una ejecución determinista por combinación); tipo de afirmación, efecto de una intervención dentro del simulador; ámbito, solo este escenario y esta ventana; incertidumbre, no estimada; supuestos, referencia sin perturbaciones, la política indicada y la valoración de Shapley.\nLos modelos no están calibrados con datos: los signos, el orden y las compensaciones son propiedades de su estructura; los tamaños no son cifras agronómicas ni de proceso.\nLos efectos son exactos dentro del simulador bajo la consulta indicada; no están validados con un sistema real y no muestran una causa allí."
+   }
+  },
+  "tomato_outdoor_nutrients": {
+   "en": {
+    "claims": [
+     "SCOPE",
+     "TOTAL",
+     "SHARES",
+     "COMPENSATION",
+     "INTERACTION",
+     "EVIDENCE",
+     "CAVEAT",
+     "CAVEAT"
+    ],
+    "narrative_hash": "8cca02f3a1519ddecb5ffc36d06c1d83e8bfd85cde770c967855b32894cad453",
+    "problems": [],
+    "source_report_hash": "34b6f7adb13e892b03fcdf663222dd7b415b38ede9c4f43f232abc299a4481ad",
+    "text": "Scope: simulator agri-twin-interactive/1, context control=off, crop=tomato, environment=outdoor, season 34, window of 336 samples from sample 1500; policy: the plant's own controller acts in every case.\nIn the simulation, with the other conditions held, applying the heat wave, the early dose and the late dose changes the final total biomass from 541.7 g/m2 to 521.8 g/m2 (-19.9 g/m2).\nDivision of that change among the perturbations (Shapley values; each perturbation's average marginal effect over all orders in which they could be applied): the heat wave -49.6 g/m2; the early dose +25.4 g/m2; the late dose +4.40 g/m2.\nThe net effect hides opposite contributions: the early dose contributes +25.4 g/m2 and the heat wave contributes -49.6 g/m2, against a net of -19.9 g/m2.\nThe effects are close to additive (the sum of the individual removals differs from the total by +9.23 g/m2, 12 % of the sum of absolute shares).\nEvidence: provenance, re-simulation of the twin (one deterministic run per combination); claim type, effect of an intervention inside the simulator; scope, this scenario and window only; uncertainty, none estimated; assumptions, reference without perturbations, the policy above, and the Shapley valuation.\nThe models are not calibrated to data: signs, order and compensations are properties of their structure, sizes are not agronomic or process figures.\nEffects are exact inside the simulator under the stated query; they are not validated against a real system and show no cause there."
+   },
+   "es": {
+    "claims": [
+     "SCOPE",
+     "TOTAL",
+     "SHARES",
+     "COMPENSATION",
+     "INTERACTION",
+     "EVIDENCE",
+     "CAVEAT",
+     "CAVEAT"
+    ],
+    "narrative_hash": "4382a717aea620b6294f91b0f302e513d4a2a3ae77058c78e1cdb19758c6e51d",
+    "problems": [],
+    "source_report_hash": "34b6f7adb13e892b03fcdf663222dd7b415b38ede9c4f43f232abc299a4481ad",
+    "text": "Ámbito: simulador agri-twin-interactive/1, contexto control=off, crop=tomato, environment=outdoor, temporada 34, ventana de 336 muestras desde la muestra 1500; política: el controlador propio de la planta actúa en todos los casos.\nEn la simulación, manteniendo las demás condiciones, aplicar la ola de calor, la dosis temprana y la dosis tardía cambia la biomasa total final de 541,7 g/m2 a 521,8 g/m2 (-19,9 g/m2).\nReparto de ese cambio entre las perturbaciones (valores de Shapley; el efecto marginal medio de cada una sobre todos los órdenes en que podrían aplicarse): la ola de calor -49,6 g/m2; la dosis temprana +25,4 g/m2; la dosis tardía +4,40 g/m2.\nEl efecto neto esconde contribuciones opuestas: la dosis temprana aporta +25,4 g/m2 y la ola de calor aporta -49,6 g/m2, frente a un neto de -19,9 g/m2.\nLos efectos son casi aditivos (la suma de las retiradas individuales difiere del total en +9,23 g/m2, 12 % de la suma de repartos en valor absoluto).\nEvidencia: procedencia, resimulación del gemelo (una ejecución determinista por combinación); tipo de afirmación, efecto de una intervención dentro del simulador; ámbito, solo este escenario y esta ventana; incertidumbre, no estimada; supuestos, referencia sin perturbaciones, la política indicada y la valoración de Shapley.\nLos modelos no están calibrados con datos: los signos, el orden y las compensaciones son propiedades de su estructura; los tamaños no son cifras agronómicas ni de proceso.\nLos efectos son exactos dentro del simulador bajo la consulta indicada; no están validados con un sistema real y no muestran una causa allí."
+   }
+  }
+ },
+ "report_hash": "0c8aed9609c09b94626749b094fc8a4009c18cf620fc467d91e59b65fe09d161",
+ "status": "DEVELOPMENT: deterministic rendering of effect reports, no language model"
+}
