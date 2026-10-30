@@ -1,0 +1,2424 @@
+{
+ "context_hours": 336,
+ "crop": "tomato",
+ "episodes": [
+  {
+   "cells": {
+    "biomass_total_end": {
+     "estimate_shapley": {
+      "cold_wave": 2.418429881334305,
+      "high_radiation": 6.004680812358856,
+      "low_radiation": -17.695640116930008
+     },
+     "estimate_total": -9.272529423236847,
+     "players": {
+      "cold_wave": [
+       {
+        "duration": 17,
+        "factor": "COLD_WAVE",
+        "start": 108,
+        "value": 9.611
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 30,
+        "factor": "HIGH_RADIATION",
+        "start": 156,
+        "value": 1.415
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 66,
+        "factor": "LOW_RADIATION",
+        "start": 72,
+        "value": 0.503
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.4565186759260574,
+       "shapley": {
+        "cold_wave": -1.231950561052154,
+        "high_radiation": -4.856619548202284,
+        "low_radiation": -10.972787866636716
+       },
+       "sign_agrees": true,
+       "spearman": 0.5,
+       "total": -17.061357975891156
+      }
+     }
+    }
+   },
+   "season": 34,
+   "stratum": "S1",
+   "window": 0
+  },
+  {
+   "cells": {
+    "biomass_total_end": {
+     "estimate_shapley": {
+      "heat_wave": -12.939858093857763,
+      "high_radiation": 2.079876661300659,
+      "low_radiation": -2.249508321285248
+     },
+     "estimate_total": -13.109489753842354,
+     "players": {
+      "heat_wave": [
+       {
+        "duration": 33,
+        "factor": "HEAT_WAVE",
+        "start": 132,
+        "value": 9.459
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 39,
+        "factor": "HIGH_RADIATION",
+        "start": 72,
+        "value": 1.108
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 17,
+        "factor": "LOW_RADIATION",
+        "start": 0,
+        "value": 0.637
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.08458891966915005,
+       "shapley": {
+        "heat_wave": -9.931132890256396,
+        "high_radiation": -1.3459110931364837,
+        "low_radiation": -0.8100145473556684
+       },
+       "sign_agrees": true,
+       "spearman": 0.5,
+       "total": -12.08705853074855
+      }
+     }
+    }
+   },
+   "season": 34,
+   "stratum": "S1",
+   "window": 1
+  },
+  {
+   "cells": {
+    "biomass_total_end": {
+     "estimate_shapley": {
+      "cold_wave": -2.890319436788559,
+      "heat_wave": 1.1869921833276749,
+      "high_radiation": 15.474720761179922
+     },
+     "estimate_total": 13.77139350771904,
+     "players": {
+      "cold_wave": [
+       {
+        "duration": 44,
+        "factor": "COLD_WAVE",
+        "start": 108,
+        "value": 8.787
+       }
+      ],
+      "heat_wave": [
+       {
+        "duration": 25,
+        "factor": "HEAT_WAVE",
+        "start": 24,
+        "value": 9.256
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 64,
+        "factor": "HIGH_RADIATION",
+        "start": 12,
+        "value": 1.372
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 1.4831469028274293,
+       "shapley": {
+        "cold_wave": -2.340268217376414,
+        "heat_wave": -10.081893121673497,
+        "high_radiation": -16.0813712865911
+       },
+       "sign_agrees": false,
+       "spearman": -1.0,
+       "total": -28.503532625641014
+      }
+     }
+    }
+   },
+   "season": 35,
+   "stratum": "S1",
+   "window": 0
+  },
+  {
+   "cells": {
+    "biomass_total_end": {
+     "estimate_shapley": {
+      "heat_wave": -13.650252789258957,
+      "high_radiation": 1.5105424225330353,
+      "low_radiation": -3.9852005243301387
+     },
+     "estimate_total": -16.12491089105606,
+     "players": {
+      "heat_wave": [
+       {
+        "duration": 33,
+        "factor": "HEAT_WAVE",
+        "start": 108,
+        "value": 8.372
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 16,
+        "factor": "HIGH_RADIATION",
+        "start": 0,
+        "value": 1.243
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 33,
+        "factor": "LOW_RADIATION",
+        "start": 144,
+        "value": 0.794
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.2292325274327171,
+       "shapley": {
+        "heat_wave": -9.87373858606774,
+        "high_radiation": -1.7561802227813055,
+        "low_radiation": -1.4879498866152212
+       },
+       "sign_agrees": true,
+       "spearman": 0.5,
+       "total": -13.117868695464267
+      }
+     }
+    }
+   },
+   "season": 35,
+   "stratum": "S1",
+   "window": 1
+  },
+  {
+   "cells": {
+    "biomass_total_end": {
+     "estimate_shapley": {
+      "heat_wave": -4.251407742500305,
+      "high_radiation": 6.295682340860366,
+      "low_radiation": -5.715593934059143
+     },
+     "estimate_total": -3.6713193356990814,
+     "players": {
+      "heat_wave": [
+       {
+        "duration": 55,
+        "factor": "HEAT_WAVE",
+        "start": 120,
+        "value": 6.456
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 26,
+        "factor": "HIGH_RADIATION",
+        "start": 132,
+        "value": 1.454
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 42,
+        "factor": "LOW_RADIATION",
+        "start": 0,
+        "value": 0.73
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.8676655487296896,
+       "shapley": {
+        "heat_wave": -22.668887299673305,
+        "high_radiation": -2.579415415124705,
+        "low_radiation": -2.494430190029097
+       },
+       "sign_agrees": true,
+       "spearman": -0.5,
+       "total": -27.742732904827108
+      }
+     }
+    }
+   },
+   "season": 37,
+   "stratum": "S1",
+   "window": 0
+  },
+  {
+   "cells": {
+    "biomass_total_end": {
+     "estimate_shapley": {
+      "heat_wave": -16.597225099802017,
+      "high_radiation": 1.9704524874687195,
+      "low_radiation": -20.897397562861443
+     },
+     "estimate_total": -35.52417017519474,
+     "players": {
+      "heat_wave": [
+       {
+        "duration": 49,
+        "factor": "HEAT_WAVE",
+        "start": 24,
+        "value": 4.671
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 17,
+        "factor": "HIGH_RADIATION",
+        "start": 144,
+        "value": 1.307
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 56,
+        "factor": "LOW_RADIATION",
+        "start": 72,
+        "value": 0.369
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.40475044546493727,
+       "shapley": {
+        "heat_wave": -15.88811623418411,
+        "high_radiation": -1.5838144344584748,
+        "low_radiation": -7.8166679503364085
+       },
+       "sign_agrees": true,
+       "spearman": 0.5,
+       "total": -25.288598618978995
+      }
+     }
+    }
+   },
+   "season": 37,
+   "stratum": "S1",
+   "window": 1
+  },
+  {
+   "cells": {
+    "biomass_total_end": {
+     "estimate_shapley": {
+      "heat_wave": 2.5857930183410645,
+      "high_radiation": 9.942887425422668,
+      "low_radiation": -5.5703825652599335
+     },
+     "estimate_total": 6.958297878503799,
+     "players": {
+      "heat_wave": [
+       {
+        "duration": 40,
+        "factor": "HEAT_WAVE",
+        "start": 72,
+        "value": 11.691
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 66,
+        "factor": "HIGH_RADIATION",
+        "start": 144,
+        "value": 1.271
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 35,
+        "factor": "LOW_RADIATION",
+        "start": 36,
+        "value": 0.698
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 1.1915383582785681,
+       "shapley": {
+        "heat_wave": -21.319460931729026,
+        "high_radiation": -11.071654556455144,
+        "low_radiation": -3.937366916284617
+       },
+       "sign_agrees": false,
+       "spearman": -0.5,
+       "total": -36.32848240446879
+      }
+     }
+    }
+   },
+   "season": 38,
+   "stratum": "S1",
+   "window": 0
+  },
+  {
+   "cells": {
+    "biomass_total_end": {
+     "estimate_shapley": {
+      "cold_wave": 4.8354281932115555,
+      "heat_wave": -17.85494738817215,
+      "low_radiation": -3.550671339035034
+     },
+     "estimate_total": -16.57019053399563,
+     "players": {
+      "cold_wave": [
+       {
+        "duration": 19,
+        "factor": "COLD_WAVE",
+        "start": 60,
+        "value": 5.258
+       }
+      ],
+      "heat_wave": [
+       {
+        "duration": 32,
+        "factor": "HEAT_WAVE",
+        "start": 132,
+        "value": 11.9
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 33,
+        "factor": "LOW_RADIATION",
+        "start": 156,
+        "value": 0.784
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.641204607156567,
+       "shapley": {
+        "cold_wave": -0.05945513359836241,
+        "heat_wave": -9.591845724761981,
+        "low_radiation": -0.44505791478735546
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": -10.0963587731477
+      }
+     }
+    }
+   },
+   "season": 38,
+   "stratum": "S1",
+   "window": 1
+  },
+  {
+   "cells": {
+    "temperature_mean": {
+     "estimate_shapley": {
+      "cold_wave": -0.258927567799887,
+      "high_radiation": 0.02064487934112691,
+      "low_radiation": -0.06083994309107509
+     },
+     "estimate_total": -0.2991226315498352,
+     "players": {
+      "cold_wave": [
+       {
+        "duration": 17,
+        "factor": "COLD_WAVE",
+        "start": 108,
+        "value": 9.611
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 30,
+        "factor": "HIGH_RADIATION",
+        "start": 156,
+        "value": 1.415
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 66,
+        "factor": "LOW_RADIATION",
+        "start": 72,
+        "value": 0.503
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.37773065354647845,
+       "shapley": {
+        "cold_wave": -0.3515858450251,
+        "high_radiation": 0.08432687794608698,
+        "low_radiation": -0.2134374279059153
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": -0.48069639498492833
+      }
+     }
+    },
+    "temperature_peak": {
+     "estimate_shapley": {
+      "cold_wave": 0.0,
+      "high_radiation": 0.4479560852050781,
+      "low_radiation": 0.0
+     },
+     "estimate_total": 0.4479560852050781,
+     "players": {
+      "cold_wave": [
+       {
+        "duration": 17,
+        "factor": "COLD_WAVE",
+        "start": 108,
+        "value": 9.611
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 30,
+        "factor": "HIGH_RADIATION",
+        "start": 156,
+        "value": 1.415
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 66,
+        "factor": "LOW_RADIATION",
+        "start": 72,
+        "value": 0.503
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": true,
+       "relative_error": 0.5641414179795665,
+       "shapley": {
+        "cold_wave": -0.002444093262765179,
+        "high_radiation": 1.05626039850576,
+        "low_radiation": -0.02606073569893219
+       },
+       "sign_agrees": true,
+       "spearman": 0.5,
+       "total": 1.0277555695440626
+      }
+     }
+    }
+   },
+   "season": 34,
+   "stratum": "S2",
+   "window": 0
+  },
+  {
+   "cells": {
+    "temperature_mean": {
+     "estimate_shapley": {
+      "heat_wave": 0.9024030049641922,
+      "high_radiation": 0.00504080454508582,
+      "low_radiation": -0.00545191764831543
+     },
+     "estimate_total": 0.9019918918609626,
+     "players": {
+      "heat_wave": [
+       {
+        "duration": 33,
+        "factor": "HEAT_WAVE",
+        "start": 132,
+        "value": 9.459
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 39,
+        "factor": "HIGH_RADIATION",
+        "start": 72,
+        "value": 1.108
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 17,
+        "factor": "LOW_RADIATION",
+        "start": 0,
+        "value": 0.637
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.13405174418727372,
+       "shapley": {
+        "heat_wave": 1.035806451639606,
+        "high_radiation": 0.04108542635874042,
+        "low_radiation": -0.035268564126771075
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 1.0416233138715754
+      }
+     }
+    },
+    "temperature_peak": {
+     "estimate_shapley": {
+      "heat_wave": 6.629106521606445,
+      "high_radiation": 0.0,
+      "low_radiation": 0.0
+     },
+     "estimate_total": 6.629106521606445,
+     "players": {
+      "heat_wave": [
+       {
+        "duration": 33,
+        "factor": "HEAT_WAVE",
+        "start": 132,
+        "value": 9.459
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 39,
+        "factor": "HIGH_RADIATION",
+        "start": 72,
+        "value": 1.108
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 17,
+        "factor": "LOW_RADIATION",
+        "start": 0,
+        "value": 0.637
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.26855209064748226,
+       "shapley": {
+        "heat_wave": 9.062470830364015,
+        "high_radiation": 0.0005211334948403608,
+        "low_radiation": -3.878313374154155e-09
+       },
+       "sign_agrees": true,
+       "spearman": 0.5,
+       "total": 9.062991959980543
+      }
+     }
+    }
+   },
+   "season": 34,
+   "stratum": "S2",
+   "window": 1
+  },
+  {
+   "cells": {
+    "temperature_mean": {
+     "estimate_shapley": {
+      "cold_wave": -1.0536186695098877,
+      "heat_wave": 0.6274477263291676,
+      "high_radiation": 0.036267552773159295
+     },
+     "estimate_total": -0.38990339040756083,
+     "players": {
+      "cold_wave": [
+       {
+        "duration": 44,
+        "factor": "COLD_WAVE",
+        "start": 108,
+        "value": 8.787
+       }
+      ],
+      "heat_wave": [
+       {
+        "duration": 25,
+        "factor": "HEAT_WAVE",
+        "start": 24,
+        "value": 9.256
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 64,
+        "factor": "HIGH_RADIATION",
+        "start": 12,
+        "value": 1.372
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": false,
+       "net_understates_largest": true,
+       "relative_error": 3.992327124903561,
+       "shapley": {
+        "cold_wave": -0.9913249742261812,
+        "heat_wave": 0.7868825469282273,
+        "high_radiation": 0.21377174938074894
+       },
+       "sign_agrees": null,
+       "spearman": 1.0,
+       "total": 0.009329322082795244
+      }
+     }
+    },
+    "temperature_peak": {
+     "estimate_shapley": {
+      "cold_wave": 0.0,
+      "heat_wave": 3.8599920272827144,
+      "high_radiation": 0.1342172622680664
+     },
+     "estimate_total": 3.9942092895507812,
+     "players": {
+      "cold_wave": [
+       {
+        "duration": 44,
+        "factor": "COLD_WAVE",
+        "start": 108,
+        "value": 8.787
+       }
+      ],
+      "heat_wave": [
+       {
+        "duration": 25,
+        "factor": "HEAT_WAVE",
+        "start": 24,
+        "value": 9.256
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 64,
+        "factor": "HIGH_RADIATION",
+        "start": 12,
+        "value": 1.372
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.3665017778043703,
+       "shapley": {
+        "cold_wave": -9.618021188373405e-06,
+        "heat_wave": 5.83003632408076,
+        "high_radiation": 0.4749780273512431
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 6.305004733410815
+      }
+     }
+    }
+   },
+   "season": 35,
+   "stratum": "S2",
+   "window": 0
+  },
+  {
+   "cells": {
+    "temperature_mean": {
+     "estimate_shapley": {
+      "heat_wave": 0.8510508298873903,
+      "high_radiation": 0.0033451159795122956,
+      "low_radiation": -0.008825262387593586
+     },
+     "estimate_total": 0.8455706834793091,
+     "players": {
+      "heat_wave": [
+       {
+        "duration": 33,
+        "factor": "HEAT_WAVE",
+        "start": 108,
+        "value": 8.372
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 16,
+        "factor": "HIGH_RADIATION",
+        "start": 0,
+        "value": 1.243
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 33,
+        "factor": "LOW_RADIATION",
+        "start": 144,
+        "value": 0.794
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": true,
+       "relative_error": 0.0119599299983138,
+       "shapley": {
+        "heat_wave": 0.9069167353993408,
+        "high_radiation": 0.031619420835465796,
+        "low_radiation": -0.08273009213675249
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 0.8558060640980543
+      }
+     }
+    },
+    "temperature_peak": {
+     "estimate_shapley": {
+      "heat_wave": 5.737421989440918,
+      "high_radiation": 0.0,
+      "low_radiation": -0.0662832260131836
+     },
+     "estimate_total": 5.671138763427734,
+     "players": {
+      "heat_wave": [
+       {
+        "duration": 33,
+        "factor": "HEAT_WAVE",
+        "start": 108,
+        "value": 8.372
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 16,
+        "factor": "HIGH_RADIATION",
+        "start": 0,
+        "value": 1.243
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 33,
+        "factor": "LOW_RADIATION",
+        "start": 144,
+        "value": 0.794
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": true,
+       "relative_error": 0.21960509072356246,
+       "shapley": {
+        "heat_wave": 7.535427742867982,
+        "high_radiation": 3.1945534217925335e-08,
+        "low_radiation": -0.268416296373875
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 7.267011478439642
+      }
+     }
+    }
+   },
+   "season": 35,
+   "stratum": "S2",
+   "window": 1
+  },
+  {
+   "cells": {
+    "temperature_mean": {
+     "estimate_shapley": {
+      "heat_wave": 0.7054527978102367,
+      "high_radiation": 0.021988290548325296,
+      "low_radiation": -0.019962231318155332
+     },
+     "estimate_total": 0.7074788570404067,
+     "players": {
+      "heat_wave": [
+       {
+        "duration": 55,
+        "factor": "HEAT_WAVE",
+        "start": 120,
+        "value": 6.456
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 26,
+        "factor": "HIGH_RADIATION",
+        "start": 132,
+        "value": 1.454
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 42,
+        "factor": "LOW_RADIATION",
+        "start": 0,
+        "value": 0.73
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.41424962363505735,
+       "shapley": {
+        "heat_wave": 1.2046727462784759,
+        "high_radiation": 0.06907803422129177,
+        "low_radiation": -0.06593447241493422
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 1.2078163080848334
+      }
+     }
+    },
+    "temperature_peak": {
+     "estimate_shapley": {
+      "heat_wave": 2.8269577026367188,
+      "high_radiation": 0.39784622192382807,
+      "low_radiation": 0.0
+     },
+     "estimate_total": 3.224803924560547,
+     "players": {
+      "heat_wave": [
+       {
+        "duration": 55,
+        "factor": "HEAT_WAVE",
+        "start": 120,
+        "value": 6.456
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 26,
+        "factor": "HIGH_RADIATION",
+        "start": 132,
+        "value": 1.454
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 42,
+        "factor": "LOW_RADIATION",
+        "start": 0,
+        "value": 0.73
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.5454615701438781,
+       "shapley": {
+        "heat_wave": 6.07783258646959,
+        "high_radiation": 1.0270489318060823,
+        "low_radiation": -0.010203240838678813
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 7.094678277436994
+      }
+     }
+    }
+   },
+   "season": 37,
+   "stratum": "S2",
+   "window": 0
+  },
+  {
+   "cells": {
+    "temperature_mean": {
+     "estimate_shapley": {
+      "heat_wave": 0.606592722733815,
+      "high_radiation": 0.006761336326599476,
+      "low_radiation": -0.0717067877451587
+     },
+     "estimate_total": 0.5416472713152558,
+     "players": {
+      "heat_wave": [
+       {
+        "duration": 49,
+        "factor": "HEAT_WAVE",
+        "start": 24,
+        "value": 4.671
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 17,
+        "factor": "HIGH_RADIATION",
+        "start": 144,
+        "value": 1.307
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 56,
+        "factor": "LOW_RADIATION",
+        "start": 72,
+        "value": 0.369
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": true,
+       "relative_error": 0.17740759736934264,
+       "shapley": {
+        "heat_wave": 0.7759761623167686,
+        "high_radiation": 0.037854281179286055,
+        "low_radiation": -0.3537966603563441
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 0.46003378313971055
+      }
+     }
+    },
+    "temperature_peak": {
+     "estimate_shapley": {
+      "heat_wave": 1.5678434371948242,
+      "high_radiation": 0.16607379913330078,
+      "low_radiation": 0.0
+     },
+     "estimate_total": 1.733917236328125,
+     "players": {
+      "heat_wave": [
+       {
+        "duration": 49,
+        "factor": "HEAT_WAVE",
+        "start": 24,
+        "value": 4.671
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 17,
+        "factor": "HIGH_RADIATION",
+        "start": 144,
+        "value": 1.307
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 56,
+        "factor": "LOW_RADIATION",
+        "start": 72,
+        "value": 0.369
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.3329477003189838,
+       "shapley": {
+        "heat_wave": 2.344039517228354,
+        "high_radiation": 0.2921985043586262,
+        "low_radiation": -0.036865772728408665
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 2.5993722488585718
+      }
+     }
+    }
+   },
+   "season": 37,
+   "stratum": "S2",
+   "window": 1
+  },
+  {
+   "cells": {
+    "temperature_mean": {
+     "estimate_shapley": {
+      "heat_wave": 0.979045375188192,
+      "high_radiation": 0.028218960762024754,
+      "low_radiation": -0.015809341271718104
+     },
+     "estimate_total": 0.9914549946784987,
+     "players": {
+      "heat_wave": [
+       {
+        "duration": 40,
+        "factor": "HEAT_WAVE",
+        "start": 72,
+        "value": 11.691
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 66,
+        "factor": "HIGH_RADIATION",
+        "start": 144,
+        "value": 1.271
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 35,
+        "factor": "LOW_RADIATION",
+        "start": 36,
+        "value": 0.698
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.38487114510816844,
+       "shapley": {
+        "heat_wave": 1.5969733114941584,
+        "high_radiation": 0.1263006654563057,
+        "low_radiation": -0.11148973565870611
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 1.6117842412917582
+      }
+     }
+    },
+    "temperature_peak": {
+     "estimate_shapley": {
+      "heat_wave": 4.284710884094238,
+      "high_radiation": 0.13114261627197266,
+      "low_radiation": 0.0
+     },
+     "estimate_total": 4.415853500366211,
+     "players": {
+      "heat_wave": [
+       {
+        "duration": 40,
+        "factor": "HEAT_WAVE",
+        "start": 72,
+        "value": 11.691
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 66,
+        "factor": "HIGH_RADIATION",
+        "start": 144,
+        "value": 1.271
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 35,
+        "factor": "LOW_RADIATION",
+        "start": 36,
+        "value": 0.698
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.48748467100155546,
+       "shapley": {
+        "heat_wave": 8.223815376744131,
+        "high_radiation": 0.3975327194670015,
+        "low_radiation": -0.005306291187164192
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 8.616041805023968
+      }
+     }
+    }
+   },
+   "season": 38,
+   "stratum": "S2",
+   "window": 0
+  },
+  {
+   "cells": {
+    "temperature_mean": {
+     "estimate_shapley": {
+      "cold_wave": -0.2633657058080037,
+      "heat_wave": 1.0609446287155149,
+      "low_radiation": -0.010127528508504586
+     },
+     "estimate_total": 0.7874513943990067,
+     "players": {
+      "cold_wave": [
+       {
+        "duration": 19,
+        "factor": "COLD_WAVE",
+        "start": 60,
+        "value": 5.258
+       }
+      ],
+      "heat_wave": [
+       {
+        "duration": 32,
+        "factor": "HEAT_WAVE",
+        "start": 132,
+        "value": 11.9
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 33,
+        "factor": "LOW_RADIATION",
+        "start": 156,
+        "value": 0.784
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": true,
+       "relative_error": 0.12763624877946947,
+       "shapley": {
+        "cold_wave": -0.3486512100224826,
+        "heat_wave": 1.2974317540353923,
+        "low_radiation": -0.04611649670778324
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 0.9026640473051266
+      }
+     }
+    },
+    "temperature_peak": {
+     "estimate_shapley": {
+      "cold_wave": 0.0,
+      "heat_wave": 6.9195556640625,
+      "low_radiation": 0.0
+     },
+     "estimate_total": 6.9195556640625,
+     "players": {
+      "cold_wave": [
+       {
+        "duration": 19,
+        "factor": "COLD_WAVE",
+        "start": 60,
+        "value": 5.258
+       }
+      ],
+      "heat_wave": [
+       {
+        "duration": 32,
+        "factor": "HEAT_WAVE",
+        "start": 132,
+        "value": 11.9
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 33,
+        "factor": "LOW_RADIATION",
+        "start": 156,
+        "value": 0.784
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": true,
+       "relative_error": 0.33951032227924144,
+       "shapley": {
+        "cold_wave": -0.003462764332295975,
+        "heat_wave": 10.479865193422103,
+        "low_radiation": 0.0
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 10.47640242908981
+      }
+     }
+    }
+   },
+   "season": 38,
+   "stratum": "S2",
+   "window": 1
+  },
+  {
+   "cells": {
+    "temperature_mean": {
+     "estimate_shapley": {
+      "cold_wave": -0.29389749169349777,
+      "high_radiation": 0.047445400555929496,
+      "low_radiation": -0.1398203392823536
+     },
+     "estimate_total": -0.3862724304199219,
+     "players": {
+      "cold_wave": [
+       {
+        "duration": 17,
+        "factor": "COLD_WAVE",
+        "start": 108,
+        "value": 9.611
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 30,
+        "factor": "HIGH_RADIATION",
+        "start": 156,
+        "value": 1.415
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 66,
+        "factor": "LOW_RADIATION",
+        "start": 72,
+        "value": 0.503
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.4532003747003037,
+       "shapley": {
+        "cold_wave": -0.314926522456694,
+        "high_radiation": 0.08533507161010215,
+        "low_radiation": -0.47683264410082
+       },
+       "sign_agrees": true,
+       "spearman": 0.5,
+       "total": -0.7064240949474119
+      },
+      "replayed_all": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.6137712232415019,
+       "shapley": {
+        "cold_wave": -0.5876749040574651,
+        "high_radiation": 0.1697653636226235,
+        "low_radiation": -0.5822034849637063
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": -1.000113025398548
+      }
+     }
+    },
+    "temperature_peak": {
+     "estimate_shapley": {
+      "cold_wave": 0.0,
+      "high_radiation": 1.2830390930175781,
+      "low_radiation": 0.0
+     },
+     "estimate_total": 1.2830390930175781,
+     "players": {
+      "cold_wave": [
+       {
+        "duration": 17,
+        "factor": "COLD_WAVE",
+        "start": 108,
+        "value": 9.611
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 30,
+        "factor": "HIGH_RADIATION",
+        "start": 156,
+        "value": 1.415
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 66,
+        "factor": "LOW_RADIATION",
+        "start": 72,
+        "value": 0.503
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": false,
+       "net_understates_largest": false,
+       "relative_error": 2.5660836699566474,
+       "shapley": {
+        "cold_wave": -9.714187563976868e-07,
+        "high_radiation": -7.188408120602693e-07,
+        "low_radiation": -1.0517011771090286e-06
+       },
+       "sign_agrees": null,
+       "spearman": 0.5,
+       "total": -2.7419607455669848e-06
+      },
+      "replayed_all": {
+       "material": true,
+       "net_understates_largest": true,
+       "relative_error": 0.6020767127744006,
+       "shapley": {
+        "cold_wave": -0.0020603239682183507,
+        "high_radiation": 3.2395260450310994,
+        "low_radiation": -0.013127929818788665
+       },
+       "sign_agrees": true,
+       "spearman": 0.5,
+       "total": 3.2243377912440927
+      }
+     }
+    }
+   },
+   "season": 34,
+   "stratum": "S3",
+   "window": 0
+  },
+  {
+   "cells": {
+    "temperature_mean": {
+     "estimate_shapley": {
+      "heat_wave": 0.5220991134643551,
+      "high_radiation": 0.017914358774820727,
+      "low_radiation": -0.01937542756398436
+     },
+     "estimate_total": 0.5206380446751915,
+     "players": {
+      "heat_wave": [
+       {
+        "duration": 33,
+        "factor": "HEAT_WAVE",
+        "start": 132,
+        "value": 9.459
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 39,
+        "factor": "HIGH_RADIATION",
+        "start": 72,
+        "value": 1.108
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 17,
+        "factor": "LOW_RADIATION",
+        "start": 0,
+        "value": 0.637
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": true,
+       "relative_error": 0.048545639069128295,
+       "shapley": {
+        "heat_wave": 0.5086900574884681,
+        "high_radiation": 0.03420440364078321,
+        "low_radiation": -0.046360952928883016
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 0.49653350820036835
+      },
+      "replayed_all": {
+       "material": true,
+       "net_understates_largest": true,
+       "relative_error": 0.5244609877700623,
+       "shapley": {
+        "heat_wave": 1.1070908719067636,
+        "high_radiation": 0.0647116391762387,
+        "low_radiation": -0.07696479790827955
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 1.094837713174723
+      }
+     }
+    },
+    "temperature_peak": {
+     "estimate_shapley": {
+      "heat_wave": 3.3183555603027344,
+      "high_radiation": 0.0,
+      "low_radiation": 0.0
+     },
+     "estimate_total": 3.3183555603027344,
+     "players": {
+      "heat_wave": [
+       {
+        "duration": 33,
+        "factor": "HEAT_WAVE",
+        "start": 132,
+        "value": 9.459
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 39,
+        "factor": "HIGH_RADIATION",
+        "start": 72,
+        "value": 1.108
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 17,
+        "factor": "LOW_RADIATION",
+        "start": 0,
+        "value": 0.637
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": false,
+       "net_understates_largest": true,
+       "relative_error": 6.636710461255355,
+       "shapley": {
+        "heat_wave": 7.872267400917583e-08,
+        "high_radiation": -2.8057188809308775e-07,
+        "low_radiation": 5.315242711153207e-07
+       },
+       "sign_agrees": null,
+       "spearman": 0.5,
+       "total": 3.2967505703140887e-07
+      },
+      "replayed_all": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.6395869090843226,
+       "shapley": {
+        "heat_wave": 8.743004710393558,
+        "high_radiation": 0.4640888738788321,
+        "low_radiation": -4.152886836787198e-06
+       },
+       "sign_agrees": true,
+       "spearman": 0.5,
+       "total": 9.207089431385555
+      }
+     }
+    }
+   },
+   "season": 34,
+   "stratum": "S3",
+   "window": 1
+  },
+  {
+   "cells": {
+    "temperature_mean": {
+     "estimate_shapley": {
+      "cold_wave": -0.7465339859326665,
+      "heat_wave": 0.4654548227787014,
+      "high_radiation": 0.12725575168927605
+     },
+     "estimate_total": -0.15382341146468903,
+     "players": {
+      "cold_wave": [
+       {
+        "duration": 44,
+        "factor": "COLD_WAVE",
+        "start": 108,
+        "value": 8.787
+       }
+      ],
+      "heat_wave": [
+       {
+        "duration": 25,
+        "factor": "HEAT_WAVE",
+        "start": 24,
+        "value": 9.256
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 64,
+        "factor": "HIGH_RADIATION",
+        "start": 12,
+        "value": 1.372
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": true,
+       "relative_error": 0.022365110402121205,
+       "shapley": {
+        "cold_wave": -0.792820624503727,
+        "heat_wave": 0.3784948801342468,
+        "high_radiation": 0.2569833529497553
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": -0.15734239141972495
+      },
+      "replayed_all": {
+       "material": false,
+       "net_understates_largest": true,
+       "relative_error": 1.6943929665433544,
+       "shapley": {
+        "cold_wave": -1.37837932235524,
+        "heat_wave": 0.8081470487062389,
+        "high_radiation": 0.5858481588386475
+       },
+       "sign_agrees": null,
+       "spearman": 1.0,
+       "total": 0.015615885189646406
+      }
+     }
+    },
+    "temperature_peak": {
+     "estimate_shapley": {
+      "cold_wave": -0.0025545756022135415,
+      "heat_wave": 4.032798131306966,
+      "high_radiation": 0.9881356557210286
+     },
+     "estimate_total": 5.018379211425781,
+     "players": {
+      "cold_wave": [
+       {
+        "duration": 44,
+        "factor": "COLD_WAVE",
+        "start": 108,
+        "value": 8.787
+       }
+      ],
+      "heat_wave": [
+       {
+        "duration": 25,
+        "factor": "HEAT_WAVE",
+        "start": 24,
+        "value": 9.256
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 64,
+        "factor": "HIGH_RADIATION",
+        "start": 12,
+        "value": 1.372
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": false,
+       "net_understates_largest": false,
+       "relative_error": 9.182737607386635,
+       "shapley": {
+        "cold_wave": -6.518700080467472e-07,
+        "heat_wave": 0.21350741352732663,
+        "high_radiation": 0.21350364607514527
+       },
+       "sign_agrees": null,
+       "spearman": 1.0,
+       "total": 0.4270104077324639
+      },
+      "replayed_all": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.5596507830009253,
+       "shapley": {
+        "cold_wave": -6.518700080467472e-07,
+        "heat_wave": 8.088301499993921,
+        "high_radiation": 3.308061442753797
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 11.396362290877711
+      }
+     }
+    }
+   },
+   "season": 35,
+   "stratum": "S3",
+   "window": 0
+  },
+  {
+   "cells": {
+    "temperature_mean": {
+     "estimate_shapley": {
+      "heat_wave": 0.6473589817682891,
+      "high_radiation": 0.01269102891286226,
+      "low_radiation": -0.03348220984141055
+     },
+     "estimate_total": 0.6265678008397408,
+     "players": {
+      "heat_wave": [
+       {
+        "duration": 33,
+        "factor": "HEAT_WAVE",
+        "start": 108,
+        "value": 8.372
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 16,
+        "factor": "HIGH_RADIATION",
+        "start": 0,
+        "value": 1.243
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 33,
+        "factor": "LOW_RADIATION",
+        "start": 144,
+        "value": 0.794
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": true,
+       "relative_error": 0.36417227029948523,
+       "shapley": {
+        "heat_wave": 0.5025045241535981,
+        "high_radiation": 0.024759433559592498,
+        "low_radiation": -0.06796140884801952
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 0.4593025488651712
+      },
+      "replayed_all": {
+       "material": true,
+       "net_understates_largest": true,
+       "relative_error": 0.3059526551086797,
+       "shapley": {
+        "heat_wave": 0.9727411424624848,
+        "high_radiation": 0.04558499167855008,
+        "low_radiation": -0.11555227375280155
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 0.9027738603882334
+      }
+     }
+    },
+    "temperature_peak": {
+     "estimate_shapley": {
+      "heat_wave": 3.4557371139526367,
+      "high_radiation": 0.0,
+      "low_radiation": -0.05142879486083984
+     },
+     "estimate_total": 3.404308319091797,
+     "players": {
+      "heat_wave": [
+       {
+        "duration": 33,
+        "factor": "HEAT_WAVE",
+        "start": 108,
+        "value": 8.372
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 16,
+        "factor": "HIGH_RADIATION",
+        "start": 0,
+        "value": 1.243
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 33,
+        "factor": "LOW_RADIATION",
+        "start": 144,
+        "value": 0.794
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": false,
+       "net_understates_largest": false,
+       "relative_error": 6.808622581887967,
+       "shapley": {
+        "heat_wave": 9.27848026558801e-08,
+        "high_radiation": -2.879067383905938e-06,
+        "low_radiation": -1.855696053117602e-07
+       },
+       "sign_agrees": null,
+       "spearman": 0.5,
+       "total": -2.9718521865618186e-06
+      },
+      "replayed_all": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.5819293598084591,
+       "shapley": {
+        "heat_wave": 7.673430669002588,
+        "high_radiation": 0.46947149110149766,
+        "low_radiation": 0.0
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 8.142902160104086
+      }
+     }
+    }
+   },
+   "season": 35,
+   "stratum": "S3",
+   "window": 1
+  },
+  {
+   "cells": {
+    "temperature_mean": {
+     "estimate_shapley": {
+      "heat_wave": 0.7169619480768846,
+      "high_radiation": 0.04693409204483126,
+      "low_radiation": -0.04260952870051089
+     },
+     "estimate_total": 0.721286511421205,
+     "players": {
+      "heat_wave": [
+       {
+        "duration": 55,
+        "factor": "HEAT_WAVE",
+        "start": 120,
+        "value": 6.456
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 26,
+        "factor": "HIGH_RADIATION",
+        "start": 132,
+        "value": 1.454
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 42,
+        "factor": "LOW_RADIATION",
+        "start": 0,
+        "value": 0.73
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": true,
+       "relative_error": 0.5051780473546641,
+       "shapley": {
+        "heat_wave": 0.5280848806294873,
+        "high_radiation": 0.07685262719689234,
+        "low_radiation": -0.12573405897934187
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 0.4792034488470378
+      },
+      "replayed_all": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.4349937068019704,
+       "shapley": {
+        "heat_wave": 1.2701470128194252,
+        "high_radiation": 0.20655431735230853,
+        "low_radiation": -0.20010225489665423
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 1.2765990752750795
+      }
+     }
+    },
+    "temperature_peak": {
+     "estimate_shapley": {
+      "heat_wave": 2.9766111373901367,
+      "high_radiation": 1.2866296768188477,
+      "low_radiation": 0.0
+     },
+     "estimate_total": 4.263240814208984,
+     "players": {
+      "heat_wave": [
+       {
+        "duration": 55,
+        "factor": "HEAT_WAVE",
+        "start": 120,
+        "value": 6.456
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 26,
+        "factor": "HIGH_RADIATION",
+        "start": 132,
+        "value": 1.454
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 42,
+        "factor": "LOW_RADIATION",
+        "start": 0,
+        "value": 0.73
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": false,
+       "net_understates_largest": true,
+       "relative_error": 8.526477351477894,
+       "shapley": {
+        "heat_wave": -4.031384108908279e-06,
+        "high_radiation": 5.580113831745355e-06,
+        "low_radiation": 5.897403146567134e-07
+       },
+       "sign_agrees": null,
+       "spearman": -0.5,
+       "total": 2.1384700374937893e-06
+      },
+      "replayed_all": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.5221689969682504,
+       "shapley": {
+        "heat_wave": 5.812939964215442,
+        "high_radiation": 3.1091311189181816,
+        "low_radiation": -2.847377661652217e-06
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 8.922068235755962
+      }
+     }
+    }
+   },
+   "season": 37,
+   "stratum": "S3",
+   "window": 0
+  },
+  {
+   "cells": {
+    "temperature_mean": {
+     "estimate_shapley": {
+      "heat_wave": 0.35418727397918853,
+      "high_radiation": 0.016967598597209605,
+      "low_radiation": -0.17994786103566499
+     },
+     "estimate_total": 0.19120701154073316,
+     "players": {
+      "heat_wave": [
+       {
+        "duration": 49,
+        "factor": "HEAT_WAVE",
+        "start": 24,
+        "value": 4.671
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 17,
+        "factor": "HIGH_RADIATION",
+        "start": 144,
+        "value": 1.307
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 56,
+        "factor": "LOW_RADIATION",
+        "start": 72,
+        "value": 0.369
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": false,
+       "net_understates_largest": true,
+       "relative_error": 2.7715295514027005,
+       "shapley": {
+        "heat_wave": 0.37906209585161277,
+        "high_radiation": 0.02765142108283373,
+        "low_radiation": -0.4926594605339834
+       },
+       "sign_agrees": null,
+       "spearman": 1.0,
+       "total": -0.08594594359953689
+      },
+      "replayed_all": {
+       "material": true,
+       "net_understates_largest": true,
+       "relative_error": 0.16303042986891328,
+       "shapley": {
+        "heat_wave": 0.8207561019912373,
+        "high_radiation": 0.04998808743649026,
+        "low_radiation": -0.642292620381094
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 0.22845156904663355
+      }
+     }
+    },
+    "temperature_peak": {
+     "estimate_shapley": {
+      "heat_wave": 0.551325798034668,
+      "high_radiation": 0.49006175994873047,
+      "low_radiation": 0.0
+     },
+     "estimate_total": 1.0413875579833984,
+     "players": {
+      "heat_wave": [
+       {
+        "duration": 49,
+        "factor": "HEAT_WAVE",
+        "start": 24,
+        "value": 4.671
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 17,
+        "factor": "HIGH_RADIATION",
+        "start": 144,
+        "value": 1.307
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 56,
+        "factor": "LOW_RADIATION",
+        "start": 72,
+        "value": 0.369
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": false,
+       "net_understates_largest": false,
+       "relative_error": 2.082784420280639,
+       "shapley": {
+        "heat_wave": -1.8228139744280725e-06,
+        "high_radiation": -1.8483199859531394e-06,
+        "low_radiation": -9.810229606443952e-07
+       },
+       "sign_agrees": null,
+       "spearman": -0.5,
+       "total": -4.6521569210256075e-06
+      },
+      "replayed_all": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.7703799297371104,
+       "shapley": {
+        "heat_wave": 4.039320997712274,
+        "high_radiation": 0.5236783903958072,
+        "low_radiation": -0.027735738065970256
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 4.535263650042111
+      }
+     }
+    }
+   },
+   "season": 37,
+   "stratum": "S3",
+   "window": 1
+  },
+  {
+   "cells": {
+    "temperature_mean": {
+     "estimate_shapley": {
+      "heat_wave": 0.7206895788510643,
+      "high_radiation": 0.08434612353642852,
+      "low_radiation": -0.04725387891133495
+     },
+     "estimate_total": 0.757781823476158,
+     "players": {
+      "heat_wave": [
+       {
+        "duration": 40,
+        "factor": "HEAT_WAVE",
+        "start": 72,
+        "value": 11.691
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 66,
+        "factor": "HIGH_RADIATION",
+        "start": 144,
+        "value": 1.271
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 35,
+        "factor": "LOW_RADIATION",
+        "start": 36,
+        "value": 0.698
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.005037576120010087,
+       "shapley": {
+        "heat_wave": 0.744883830515862,
+        "high_radiation": 0.14600033853347938,
+        "low_radiation": -0.13690059521958808
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 0.7539835738297533
+      },
+      "replayed_all": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.5588722517436259,
+       "shapley": {
+        "heat_wave": 1.6538714422828773,
+        "high_radiation": 0.28102541705323425,
+        "low_radiation": -0.21706834713888945
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 1.7178285121972223
+      }
+     }
+    },
+    "temperature_peak": {
+     "estimate_shapley": {
+      "heat_wave": 2.384185791015625,
+      "high_radiation": 0.45594787597656244,
+      "low_radiation": 0.0
+     },
+     "estimate_total": 2.8401336669921875,
+     "players": {
+      "heat_wave": [
+       {
+        "duration": 40,
+        "factor": "HEAT_WAVE",
+        "start": 72,
+        "value": 11.691
+       }
+      ],
+      "high_radiation": [
+       {
+        "duration": 66,
+        "factor": "HIGH_RADIATION",
+        "start": 144,
+        "value": 1.271
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 35,
+        "factor": "LOW_RADIATION",
+        "start": 36,
+        "value": 0.698
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": true,
+       "relative_error": 0.1250969566447416,
+       "shapley": {
+        "heat_wave": 3.3599391203482707,
+        "high_radiation": 0.0,
+        "low_radiation": -0.11371236578097842
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 3.2462267545672923
+      },
+      "replayed_all": {
+       "material": true,
+       "net_understates_largest": false,
+       "relative_error": 0.7390238477290143,
+       "shapley": {
+        "heat_wave": 9.70622410560565,
+        "high_radiation": 1.1875715066462593,
+        "low_radiation": -0.011063062639012244
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 10.882732549612896
+      }
+     }
+    }
+   },
+   "season": 38,
+   "stratum": "S3",
+   "window": 0
+  },
+  {
+   "cells": {
+    "temperature_mean": {
+     "estimate_shapley": {
+      "cold_wave": -0.10121080478032299,
+      "heat_wave": 0.5688835302988686,
+      "low_radiation": -0.030208404858906114
+     },
+     "estimate_total": 0.4374643206596396,
+     "players": {
+      "cold_wave": [
+       {
+        "duration": 19,
+        "factor": "COLD_WAVE",
+        "start": 60,
+        "value": 5.258
+       }
+      ],
+      "heat_wave": [
+       {
+        "duration": 32,
+        "factor": "HEAT_WAVE",
+        "start": 132,
+        "value": 11.9
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 33,
+        "factor": "LOW_RADIATION",
+        "start": 156,
+        "value": 0.784
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": true,
+       "net_understates_largest": true,
+       "relative_error": 0.1343171417612631,
+       "shapley": {
+        "cold_wave": -0.18408904718270414,
+        "heat_wave": 0.6427468859246925,
+        "low_radiation": -0.0729946899153866
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 0.3856631488266018
+      },
+      "replayed_all": {
+       "material": true,
+       "net_understates_largest": true,
+       "relative_error": 0.4849060971307914,
+       "shapley": {
+        "cold_wave": -0.3665635463836576,
+        "heat_wave": 1.343609586295937,
+        "low_radiation": -0.12775561301565297
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 0.8492904268966264
+      }
+     }
+    },
+    "temperature_peak": {
+     "estimate_shapley": {
+      "cold_wave": 0.0,
+      "heat_wave": 3.441741943359375,
+      "low_radiation": 0.0
+     },
+     "estimate_total": 3.441741943359375,
+     "players": {
+      "cold_wave": [
+       {
+        "duration": 19,
+        "factor": "COLD_WAVE",
+        "start": 60,
+        "value": 5.258
+       }
+      ],
+      "heat_wave": [
+       {
+        "duration": 32,
+        "factor": "HEAT_WAVE",
+        "start": 132,
+        "value": 11.9
+       }
+      ],
+      "low_radiation": [
+       {
+        "duration": 33,
+        "factor": "LOW_RADIATION",
+        "start": 156,
+        "value": 0.784
+       }
+      ]
+     },
+     "truth": {
+      "reactive": {
+       "material": false,
+       "net_understates_largest": false,
+       "relative_error": 6.883487450199787,
+       "shapley": {
+        "cold_wave": 2.5143874241943343e-07,
+        "heat_wave": -1.09088365126316e-06,
+        "low_radiation": -9.422956098366815e-07
+       },
+       "sign_agrees": null,
+       "spearman": -1.0,
+       "total": -1.781740518680408e-06
+      },
+      "replayed_all": {
+       "material": true,
+       "net_understates_largest": true,
+       "relative_error": 0.7023565203662794,
+       "shapley": {
+        "cold_wave": -8.331831624630581e-06,
+        "heat_wave": 11.563314989747633,
+        "low_radiation": -2.9779739030288965e-06
+       },
+       "sign_agrees": true,
+       "spearman": 1.0,
+       "total": 11.563303679942106
+      }
+     }
+    }
+   },
+   "season": 38,
+   "stratum": "S3",
+   "window": 1
+  }
+ ],
+ "horizon_hours": 240,
+ "materiality_used": {
+  "biomass_total_end": 1.0,
+  "temperature_mean": 0.1,
+  "temperature_peak": 0.5
+ },
+ "report_hash": "c02a7b3079c46d882f4312ef005cff5d6a561f8fa57d67288caa28515ef94d4b",
+ "seasons": [
+  34,
+  35,
+  37,
+  38
+ ],
+ "service": {
+  "checkpoint": "google/timesfm-2.5-200m-pytorch",
+  "licence": "Apache-2.0",
+  "max_context": 2048,
+  "max_horizon": 256,
+  "model": "timesfm-2.5",
+  "past_only_covariates": "ignored",
+  "status": "ok",
+  "version": "unknown"
+ },
+ "status": "DEVELOPMENT PILOT F1 (first slice): development seasons only, not confirmatory",
+ "summary": {
+  "S1/biomass_total_end/reactive": {
+   "episodes": 8,
+   "material": 8,
+   "median_relative_error": 0.5488616415413122,
+   "median_spearman": 0.5,
+   "net_understates_largest": 0,
+   "sign_agrees": 6
+  },
+  "S2/temperature_mean/reactive": {
+   "episodes": 8,
+   "material": 7,
+   "median_relative_error": 0.17740759736934264,
+   "median_spearman": 1.0,
+   "net_understates_largest": 4,
+   "sign_agrees": 7
+  },
+  "S2/temperature_peak/reactive": {
+   "episodes": 8,
+   "material": 8,
+   "median_relative_error": 0.35300605004180585,
+   "median_spearman": 1.0,
+   "net_understates_largest": 3,
+   "sign_agrees": 8
+  },
+  "S3/temperature_mean/reactive": {
+   "episodes": 8,
+   "material": 7,
+   "median_relative_error": 0.1343171417612631,
+   "median_spearman": 1.0,
+   "net_understates_largest": 6,
+   "sign_agrees": 7
+  },
+  "S3/temperature_mean/replayed_all": {
+   "episodes": 8,
+   "material": 7,
+   "median_relative_error": 0.4849060971307914,
+   "median_spearman": 1.0,
+   "net_understates_largest": 5,
+   "sign_agrees": 7
+  },
+  "S3/temperature_peak/reactive": {
+   "episodes": 8,
+   "material": 1,
+   "median_relative_error": 0.1250969566447416,
+   "median_spearman": 1.0,
+   "net_understates_largest": 3,
+   "sign_agrees": 1
+  },
+  "S3/temperature_peak/replayed_all": {
+   "episodes": 8,
+   "material": 8,
+   "median_relative_error": 0.6208318109293616,
+   "median_spearman": 1.0,
+   "net_understates_largest": 2,
+   "sign_agrees": 8
+  }
+ }
+}
